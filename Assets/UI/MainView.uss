@@ -1,0 +1,52 @@
+#TopBar {
+	flex-grow: 0;
+	background-color: rgb(21, 22, 36);
+	border-color: rgb(128, 128, 128);
+	border-width: 2px;
+	align-self: stretch;
+	flex-direction: row;
+}
+
+.topContainer {
+	flex-direction: column;
+	margin-left: 1%;
+	margin-right: 1%;
+	flex-shrink: 1;
+	flex-grow: 1;
+}
+
+.topLabel {
+	font-size: 20px;
+	color: rgb(128, 128, 128);
+}
+
+.topReadout {
+	font-size: 40px;
+	color: rgb(255, 255, 255);
+	align-self: auto;
+	flex-grow: 0;
+}
+
+#SideBar {
+	flex-grow: 1;
+	background-color: rgb(21, 22, 36);
+	justify-content: flex-start;
+	align-items: auto;
+	width: 20%;
+	border-color: rgb(128, 128, 128);
+	border-width: 2px;
+}
+
+.sideContainer{
+	flex-grow: 0;
+	align-self: flex-start;
+	background-color: rgb(46, 47, 58);
+	border-color: rgba(128, 128, 128, 255);
+	border-width: 1px;
+	margin: 10px;
+	border-radius: 20px;
+}
+
+.sideTitle{
+
+}

@@ -1,0 +1,44 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainView.uss?fileID=7433441132597879392&amp;guid=06624aac83ca56a40a3f3b5edb99a05c&amp;type=3#MainView" />
+    <ui:VisualElement name="TopBar">
+        <ui:VisualElement name="TimeContainer" class="topContainer" style="left: 0; position: absolute;">
+            <ui:Label tabindex="-1" name="TimeLabel" text="MISSION TIME" class="topLabel" />
+            <ui:Label tabindex="-1" text="T+00:00:00" name="Time" class="topReadout" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VelocityContainer" class="topContainer" style="left: 20%; position: absolute;">
+            <ui:Label tabindex="-1" name="VelocityLabel" text="VELOCITY" class="topLabel" />
+            <ui:Label tabindex="-1" text="7.87 km/s" name="Velocity" class="topReadout" />
+        </ui:VisualElement>
+        <ui:VisualElement name="AltitudeContainer" class="topContainer" style="left: 40%; position: absolute;">
+            <ui:Label tabindex="-1" name="AltitudeLabel" text="ALTITUDE" class="topLabel" />
+            <ui:Label tabindex="-1" text="416.2km" name="Altitude" class="topReadout" />
+        </ui:VisualElement>
+        <ui:VisualElement name="InclinationContainer" class="topContainer" style="left: 60%; position: absolute;">
+            <ui:Label tabindex="-1" name="InclinationLabel" text="INCLINATION" class="topLabel" />
+            <ui:Label tabindex="-1" text="51.6°" name="Altitude" class="topReadout" />
+        </ui:VisualElement>
+        <ui:VisualElement name="EccentricityContainer" class="topContainer" style="left: 80%; position: relative;">
+            <ui:Label tabindex="-1" name="EccentricityLabel" text="ECCENTRICITY" class="topLabel" />
+            <ui:Label tabindex="-1" text="0.13" name="Eccentricity" class="topReadout" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="SideBar">
+        <ui:VisualElement name="ControlsContainer" class="sideContainer">
+            <ui:Label tabindex="-1" text="Simulation Controls" display-tooltip-when-elided="true" enable-rich-text="true" name="ControlsLabel" style="align-self: flex-start; color: rgb(255, 255, 255); font-size: 30px;" />
+            <ui:VisualElement name="TimeRateContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; align-items: auto; align-self: auto; width: auto;">
+                <ui:Label tabindex="-1" text="Time Rate:" display-tooltip-when-elided="true" name="TimeRateLabel" style="color: rgb(255, 255, 255); font-size: 20px; align-self: auto; align-items: auto; flex-shrink: 0; flex-grow: 0;" />
+                <ui:SliderInt picking-mode="Ignore" value="0" high-value="10" low-value="0" page-size="0" show-input-field="true" focusable="true" name="TimeRateSlider" style="width: auto; align-self: stretch; min-height: auto; flex-shrink: 0; flex-grow: 1; margin-left: 4px; align-items: auto; -unity-text-align: upper-left; white-space: normal; -unity-background-image-tint-color: rgb(0, 0, 0); padding-right: 5px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="IterationLengthContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; align-items: auto; align-self: flex-start; width: auto; flex-shrink: 0;">
+                <ui:Label tabindex="-1" text="Iteration Length:" display-tooltip-when-elided="true" name="IterationLengthLabel" style="color: rgb(255, 255, 255); font-size: 20px; align-self: auto; align-items: auto; flex-shrink: 0; flex-grow: 0;" />
+                <ui:IntegerField value="10000" name="IterationLength" style="width: auto; align-items: auto; align-self: auto; justify-content: flex-start; flex-shrink: 1; flex-grow: 1; padding-left: 5px; padding-right: 5px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="ManeuverContainer" class="sideContainer" style="min-width: auto; align-self: stretch;">
+            <ui:Label tabindex="-1" text="Maneuvers" display-tooltip-when-elided="true" enable-rich-text="true" name="ManeuversLabel" style="align-self: flex-start; color: rgb(255, 255, 255); font-size: 30px;" />
+            <ui:ScrollView name="ManeuverScroll" style="flex-grow: 0; align-self: stretch; justify-content: flex-start;" />
+            <ui:Button text="Add maneuver" display-tooltip-when-elided="true" name="AddManeuver" style="background-color: rgb(21, 22, 36); font-size: 20px; color: rgb(255, 255, 255); width: 50%; align-self: center; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px;" />
+        </ui:VisualElement>
+        <ui:Button text="Refresh Trajectory" display-tooltip-when-elided="true" name="RefreshButton" style="background-color: rgb(46, 47, 58); font-size: 20px; color: rgb(255, 255, 255); width: 75%; align-self: center; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px;" />
+    </ui:VisualElement>
+</ui:UXML>

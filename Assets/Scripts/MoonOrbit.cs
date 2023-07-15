@@ -6,7 +6,7 @@ public class MoonOrbit : MonoBehaviour
 {
     public Rigidbody Moon;
     private LineRenderer lr;
-    public int moon_height = 38250;
+    public int moon_height = 2*38250;
     int t = 1;
 
     // Start is called before the first frame update

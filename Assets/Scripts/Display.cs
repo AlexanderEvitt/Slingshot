@@ -25,10 +25,10 @@ public class Display : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vel = (int)(1000*(GameObject.Find("Spacecraft").GetComponent<Propagator>().velocity.magnitude));
+        vel = 1;//(int)(1000*(GameObject.Find("Spacecraft").GetComponent<Propagator>().velocity.magnitude));
         velocityCounter.text = $"{vel} m/s";
 
-        int t = Universe.time_step*GameObject.Find("Spacecraft").GetComponent<Propagator>().t;
+        int t = Universe.time_step*GameObject.Find("Spacecraft").GetComponent<Propagator>().time;
         string min = "" + (t/60) % 60;
         string hr = "" + (t / 3600) % 24;
         string day = "" + t / 86400;
