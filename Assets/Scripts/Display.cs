@@ -10,7 +10,8 @@ public class Display : MonoBehaviour
     private Label altitudeCounter;
     private Label inclinationCounter;
     private Label eccentricityCounter;
-    private int vel;
+    private Vector3 vel;
+    private Vector3 r;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +26,25 @@ public class Display : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vel = 1;//(int)(1000*(GameObject.Find("Spacecraft").GetComponent<Propagator>().velocity.magnitude));
-        velocityCounter.text = $"{vel} m/s";
+        vel = GameObject.Find("Spacecraft").GetComponent<Propagator>().velocity;
+        r = GameObject.Find("MotherEarth").transform.position - GameObject.Find("Spacecraft").transform.position;  // craft to earth
 
-        int t = Universe.time_step*GameObject.Find("Spacecraft").GetComponent<Propagator>().time;
-        string min = "" + (t/60) % 60;
+        // update velocity
+        velocityCounter.text = $"{(int)(1000 * vel.magnitude)} m/s";
+
+        ChangeTimeCounter();
+
+        ChangeAltitude(r);
+
+        ChangeInclination(vel, r);
+
+        ChangeEccentricity(vel, r);
+    }
+
+    void ChangeTimeCounter()
+    {
+        int t = Universe.time_step * GameObject.Find("Spacecraft").GetComponent<Propagator>().time;
+        string min = "" + (t / 60) % 60;
         string hr = "" + (t / 3600) % 24;
         string day = "" + t / 86400;
         if (min.Length < 2)
@@ -47,7 +62,28 @@ public class Display : MonoBehaviour
             day = "0" + day;
         }
         timeCounter.text = $"T+{day}:{hr}:{min}";
+    }
 
+    void ChangeAltitude(Vector3 r)
+    {
+        int altitude = (int)(r.magnitude) - 6371;  // km
+        altitudeCounter.text = $"{altitude} km";
+    }
 
+    void ChangeInclination(Vector3 r, Vector3 vel)
+    {
+        // instantaneous inclination
+        Vector3 movingNorm = Vector3.Cross(vel, r);
+        int inclination = (int)Vector3.Angle(movingNorm, Vector3.down);
+        inclinationCounter.text = $"{inclination} degrees";
+
+    }
+
+    void ChangeEccentricity(Vector3 r, Vector3 vel)
+    {
+        Vector3 h = Vector3.Cross(r, vel);
+        float mu = Universe.G * -1;  // km^3 / s^2
+        Vector3 e = (Vector3.Cross(vel, h) / mu) - (r / r.magnitude);
+        eccentricityCounter.text = $"{e.magnitude}";
     }
 }

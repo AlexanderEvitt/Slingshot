@@ -15,7 +15,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="InclinationContainer" class="topContainer" style="left: 60%; position: absolute;">
             <ui:Label tabindex="-1" name="InclinationLabel" text="INCLINATION" class="topLabel" />
-            <ui:Label tabindex="-1" text="51.6°" name="Altitude" class="topReadout" />
+            <ui:Label tabindex="-1" text="51.6°" name="Inclination" class="topReadout" />
         </ui:VisualElement>
         <ui:VisualElement name="EccentricityContainer" class="topContainer" style="left: 80%; position: relative;">
             <ui:Label tabindex="-1" name="EccentricityLabel" text="ECCENTRICITY" class="topLabel" />
