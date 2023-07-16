@@ -6,13 +6,13 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
-    [SerializeField] private float distanceToTarget = 10;
+    [SerializeField] private float distanceToTarget = 15;
 
     private Vector3 previousPosition;
 
     private void Update()
     {
-        distanceToTarget = distanceToTarget - 700*Input.mouseScrollDelta.y;
+        distanceToTarget = distanceToTarget - 0.1f*Input.mouseScrollDelta.y*distanceToTarget;
         if (Input.GetKey("x"))
         {
             distanceToTarget = distanceToTarget + 100;

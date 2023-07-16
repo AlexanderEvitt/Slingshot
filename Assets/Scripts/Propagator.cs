@@ -36,11 +36,11 @@ public class Propagator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("."))
+        if (Input.GetKeyDown("'"))
         {
             skip = skip + 1;
         }
-        if (Input.GetKeyDown(","))
+        if (Input.GetKeyDown(";"))
         {
             skip = skip - 1;
             if (skip <= 0)

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor;
 
 public class Maneuver : MonoBehaviour
 {
@@ -45,7 +44,7 @@ public class Maneuver : MonoBehaviour
     {
         // Get location to add new maneuver and maneuver
         VisualElement insertLocation = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ManeuverContainer").Q<VisualElement>("ManeuverScroll");
-        var maneuverBlock = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI/ManeuverBlock.uxml");
+        var maneuverBlock = Resources.Load<VisualTreeAsset>("ManeuverBlock");
         VisualElement newBlock = maneuverBlock.Instantiate();
         // Change text and name to maneuver name
         Label newBlockText = newBlock.Q<VisualElement>("Maneuver").Q<VisualElement>("PlaceContainer").Q<Label>("PlaceLabel");
