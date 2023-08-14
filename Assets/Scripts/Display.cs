@@ -43,7 +43,7 @@ public class Display : MonoBehaviour
 
     void ChangeTimeCounter()
     {
-        int t = Universe.time_step * GameObject.Find("Spacecraft").GetComponent<Propagator>().time;
+        int t = (int)GameObject.Find("Spacecraft").GetComponent<Propagator>().currentTime;
         string min = "" + (t / 60) % 60;
         string hr = "" + (t / 3600) % 24;
         string day = "" + t / 86400;

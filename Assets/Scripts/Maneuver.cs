@@ -27,7 +27,7 @@ public class Maneuver : MonoBehaviour
         {
             
             IntegerField placeInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ManeuverContainer").Q<ScrollView>("ManeuverScroll").Q<VisualElement>(counter.ToString()).Q<VisualElement>("PlaceContainer").Q<IntegerField>("Place");
-            int place = placeInput.value;
+            int place = 60*placeInput.value;
             FloatField progradeInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ManeuverContainer").Q<ScrollView>("ManeuverScroll").Q<VisualElement>(counter.ToString()).Q<VisualElement>("DeltaVContainer").Q<FloatField>("Prograde");
             float prograde = progradeInput.value;
             FloatField normalInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ManeuverContainer").Q<ScrollView>("ManeuverScroll").Q<VisualElement>(counter.ToString()).Q<VisualElement>("DeltaVContainer").Q<FloatField>("Normal");

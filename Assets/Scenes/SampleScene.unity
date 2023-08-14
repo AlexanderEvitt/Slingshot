@@ -155,6 +155,7 @@ MonoBehaviour:
   cam: {fileID: 963194227}
   target: {fileID: 1002656904}
   distanceToTarget: 5000
+  objects: []
 --- !u!4 &3853315
 Transform:
   m_ObjectHideFlags: 0
@@ -322,7 +323,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 100000000
+  far clip plane: 1e+12
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -367,7 +368,6 @@ GameObject:
   - component: {fileID: 1002656904}
   - component: {fileID: 1002656903}
   - component: {fileID: 1002656902}
-  - component: {fileID: 1002656901}
   - component: {fileID: 1002656900}
   - component: {fileID: 1002656899}
   - component: {fileID: 1002656905}
@@ -20394,12 +20394,10 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  t: 1
-  time: 0
-  skip: 1
-  velocity: {x: 0, y: 0, z: -7.546}
+  times: []
+  velocity: {x: 0, y: 0, z: -7.654}
   iteration_length: 10000
-  time_step: 20
+  currentTime: 0
 --- !u!54 &1002656900
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20427,27 +20425,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &1002656901
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1002656898}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1002656902
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20705,7 +20682,6 @@ GameObject:
   - component: {fileID: 1414219545}
   - component: {fileID: 1414219544}
   - component: {fileID: 1414219543}
-  - component: {fileID: 1414219542}
   - component: {fileID: 1414219546}
   - component: {fileID: 1414219547}
   m_Layer: 0
@@ -20715,27 +20691,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &1414219542
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414219541}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1414219543
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20852,7 +20807,6 @@ GameObject:
   - component: {fileID: 1459241475}
   - component: {fileID: 1459241474}
   - component: {fileID: 1459241473}
-  - component: {fileID: 1459241472}
   m_Layer: 0
   m_Name: MotherEarth
   m_TagString: Untagged
@@ -20860,27 +20814,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &1459241472
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459241471}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1459241473
 MeshRenderer:
   m_ObjectHideFlags: 0
