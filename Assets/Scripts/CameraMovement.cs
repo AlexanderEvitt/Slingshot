@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
-    [SerializeField] private float distanceToTarget = 15;
+    [SerializeField] private float distanceToTarget = 0.2f;
     int index = 0;
     public string[] objects;
     private Vector3 previousPosition;
@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Spacecraft").transform;
-        objects = new string[] { "Spacecraft", "MotherEarth" , "Moon" };
+        objects = new string[] { "Spacecraft", "Earth" , "Moon" , "Sun"};
     }
 
 
@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKeyDown("v"))
         {
-            index = (index + 1) % 3;
+            index = (index + 1) % 4;
             target = GameObject.Find(objects[index]).transform;
         }
         distanceToTarget = distanceToTarget - 0.1f*Input.mouseScrollDelta.y*distanceToTarget;

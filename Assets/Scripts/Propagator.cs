@@ -1,5 +1,8 @@
+using OpenCover.Framework.Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,20 +10,19 @@ public class Propagator : MonoBehaviour
 {
     public Rigidbody Spacecraft;
     public Rigidbody Moon;
-    private LineRenderer lr;
-    float M = 1f;
-    float m = 0.012345f;
     public Vector3[] positions;
     public Vector3[] velocities;
     public float[] times;
     int t = 0;
-    int trailer;
     int skip = 1;
-    public Vector3 velocity;
     private Button refreshButton;
     private VisualElement rootVisualElement;
     public int iteration_length = Universe.iteration_length;
     public float currentTime = 0;
+    public Vector3 offset = Vector3.zero;
+    public Vector3 currentPosition;
+    public Vector3 currentVelocity;
+    
 
     void Start()
     {
@@ -29,6 +31,8 @@ public class Propagator : MonoBehaviour
 
         refreshButton = rootVisualElement.Q<VisualElement>("SideBar").Q<Button>("RefreshButton");
         refreshButton.clicked += () => Refresh();
+
+        Spacecraft.position = Vector3.zero;
     }
 
     void Update()
@@ -52,48 +56,62 @@ public class Propagator : MonoBehaviour
         
         if (skip > 0)
         {
-            Spacecraft.position = positions[t % iteration_length];
-            velocity = velocities[t % iteration_length];
+            offset = positions[t % iteration_length];
+            currentVelocity = velocities[t % iteration_length];
             currentTime = times[t % iteration_length];
             Spacecraft.rotation = Quaternion.LookRotation(velocities[t % iteration_length].normalized) * Quaternion.Euler(90,0,0);
+
+            currentPosition = offset;
         }
 
-        while (trailer <= t)
-        {
-            int tr = (trailer) % iteration_length;
-        
-            (Vector3 dv, Vector3 dr, float dt) = StepRK4(trailer);
-            velocities[tr] = dv;
-            positions[tr] = dr;
-            times[tr] = dt;
-            if (positions[tr].magnitude > 1e10)
-            {
-                int trm = (tr - 1) % iteration_length;
-                if (trm < 0)
-                {
-                    trm = iteration_length - 1;
-                }
-                positions[tr] = positions[trm];
-                velocities[tr] = velocities[trm];
-                times[tr] = times[trm];
-            }
+        //while (trailer <= t)
+        //{
+        //    int tr = (trailer) % iteration_length;
+        //
+        //    (Vector3 dv, Vector3 dr, float dt) = StepRK4(trailer);
+        //    velocities[tr] = dv;
+        //    positions[tr] = dr;
+        //    times[tr] = dt;
+        //    if (positions[tr].magnitude > 1e10)
+        //    {
+        //        int trm = (tr - 1) % iteration_length;
+        //        if (trm < 0)
+        //        {
+        //            trm = iteration_length - 1;
+        //        }
+        //        positions[tr] = positions[trm];
+         //       velocities[tr] = velocities[trm];
+        //        times[tr] = times[trm];
+        //    }
+        //
+        //    lr.positionCount = lr.positionCount + 1;
+        //    lr.SetPosition(lr.positionCount - 1, positions[tr]);
+        //
+        //    trailer = trailer + 1;
+        //}
 
-            lr.positionCount = lr.positionCount + 1;
-            lr.SetPosition(lr.positionCount - 1, positions[tr]);
-        
-            trailer = trailer + 1;
+        if (t > iteration_length/2)
+        {
+            Refresh();
         }
 
         t = t + skip;
+
     }
 
-    Vector3 acceleration(Vector3 position, Vector3 moon_position)
+    Vector3 acceleration(Vector3 position, int index)
     {
-        Vector3 r_moon = position - moon_position;
-        float sqrtDist = (position).sqrMagnitude;
-        float sqrtDistMoon = r_moon.sqrMagnitude;
-        Vector3 accel = position.normalized * (Universe.G * M / sqrtDist) + r_moon.normalized * (Universe.G * m / sqrtDistMoon);
+        var celestials = FindObjectsOfType<Celestial>();
+        Vector3 accel = Vector3.zero;
+        
+        foreach (var c in celestials)
+        {
+            Vector3 r_to = position - c.place_wrtGlobal(times[index]);
+            float sqrDist = r_to.sqrMagnitude;
+            accel = accel + r_to.normalized * (Universe.G * c.mass / sqrDist);
+        }
         return accel;
+        
     }
 
     (Vector3 dv, Vector3 dr, float dt) StepRK4(int i)
@@ -104,26 +122,27 @@ public class Propagator : MonoBehaviour
             im = iteration_length - 1;
         }
 
-        Vector3 moon_position = GameObject.Find("Moon").GetComponent<MoonOrbit>().moon_place(times[im]);
-        float dt = 2.0f / Mathf.Sqrt(acceleration(positions[im], moon_position).magnitude);
+        
+        float dt = 1.0f / Mathf.Sqrt(acceleration(positions[im], im).magnitude);
         float h2 = (float)(dt) / 2;
         float h6 = (float)(dt) / 6;
 
-        Vector3 k1v = acceleration(positions[im], moon_position);
+        Vector3 k1v = acceleration(positions[im], im);
         Vector3 k1r = velocities[im];
 
-        Vector3 k2v = acceleration(positions[im] + k1r * h2, moon_position);
+        Vector3 k2v = acceleration(positions[im] + k1r * h2, im);
         Vector3 k2r = velocities[im] + k1v * h2;
 
-        Vector3 k3v = acceleration(positions[im] + k2r * h2, moon_position);
+        Vector3 k3v = acceleration(positions[im] + k2r * h2, im);
         Vector3 k3r = velocities[im] + k2v * h2;
 
-        Vector3 k4v = acceleration(positions[im] + k3r * dt, moon_position);
+        Vector3 k4v = acceleration(positions[im] + k3r * dt, im);
         Vector3 k4r = velocities[im] + k3v * dt;
-        
-        Vector3 dv = velocities[im] + h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, velocities[im], acceleration(positions[im], moon_position));
+
+        Vector3 dv = velocities[im] + h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, velocities[im], acceleration(positions[im], im));
         Vector3 dr = positions[im] + h6 * (k1r + 2 * k2r + 2 * k3r + k4r);
         dt = times[im] + dt;
+
 
         return (dv, dr, dt);
     }
@@ -133,18 +152,15 @@ public class Propagator : MonoBehaviour
         IntegerField iterationInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ControlsContainer").Q<VisualElement>("IterationLengthContainer").Q<IntegerField>("IterationLength");
         iteration_length = iterationInput.value;
         t = 1;
-        trailer = 0;
 
         positions = new Vector3[iteration_length];
         velocities = new Vector3[iteration_length];
         times = new float[iteration_length];
 
-        positions[0] = Spacecraft.position;
-        velocities[0] = velocity;
+        positions[0] = currentPosition;
+        velocities[0] = currentVelocity;
         times[0] = currentTime;
-        lr = GetComponent<LineRenderer>();
-        lr.positionCount = iteration_length;
-        lr.SetPosition(0, positions[0]);
+        
 
 
         for (int i = 1; i < iteration_length; i++)
@@ -166,7 +182,7 @@ public class Propagator : MonoBehaviour
                 times[i] = times[im];
             }
 
-            lr.SetPosition(i, positions[i]);
+            
         }
 
         
@@ -194,4 +210,5 @@ public class Propagator : MonoBehaviour
         }
         return deltaV;
     }
+
 }

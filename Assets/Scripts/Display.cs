@@ -26,8 +26,8 @@ public class Display : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vel = GameObject.Find("Spacecraft").GetComponent<Propagator>().velocity;
-        r = GameObject.Find("MotherEarth").transform.position - GameObject.Find("Spacecraft").transform.position;  // craft to earth
+        vel = GameObject.Find("Spacecraft").GetComponent<Propagator>().currentVelocity;
+        r = GameObject.Find("Earth").transform.position - GameObject.Find("Spacecraft").transform.position;  // craft to earth
 
         // update velocity
         velocityCounter.text = $"{(int)(1000 * vel.magnitude)} m/s";
