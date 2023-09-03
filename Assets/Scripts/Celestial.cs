@@ -22,7 +22,7 @@ public class Celestial : MonoBehaviour
     void Update()
     {
         float time = GameObject.Find("Spacecraft").GetComponent<Propagator>().currentTime;
-        rb.position = place_wrtCraft(time) / 100000;
+        rb.position = place_wrtCraft(time) / 1000;
     }
 
     public Vector3 place_wrtCraft(float t)
@@ -33,16 +33,16 @@ public class Celestial : MonoBehaviour
         pos = pos - GameObject.Find("Spacecraft").GetComponent<Propagator>().offset;
         if (moonOf != "None")
         {
-            pos = pos + GameObject.Find(moonOf).GetComponent<Celestial>().place_wrtGlobal(t);
+            pos = pos + GameObject.Find(moonOf).GetComponent<Celestial>().place_wrtGlobal(t).backToVec;
         }
         return pos;
     }
 
-    public Vector3 place_wrtGlobal(float t)
+    public Vector3d place_wrtGlobal(float t)
     {
         float mean_anomaly = (t / period) * 2 * Mathf.PI + start_angle;
 
-        Vector3 pos = new Vector3(SMA * Mathf.Cos(mean_anomaly), 0, SMA * Mathf.Sin(mean_anomaly));
+        Vector3d pos = new Vector3d(SMA * Mathd.Cos(mean_anomaly), 0, SMA * Mathd.Sin(mean_anomaly));
         if (moonOf != "None")
         {
             pos = pos + GameObject.Find(moonOf).GetComponent<Celestial>().place_wrtGlobal(t);

@@ -24,32 +24,27 @@ public class Trajectory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3[] positions = GameObject.Find("Spacecraft").GetComponent<Propagator>().positions;
+        Vector3d[] positions = GameObject.Find("Spacecraft").GetComponent<Propagator>().positions;
         float[] times = GameObject.Find("Spacecraft").GetComponent<Propagator>().times;
+        float dist = GameObject.Find("InputController").GetComponent<CameraMovement>().distanceToTarget;
         IntegerField iterationInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ControlsContainer").Q<VisualElement>("IterationLengthContainer").Q<IntegerField>("IterationLength");
         int iteration_length = iterationInput.value;
 
         if (Input.GetKeyDown("r"))
         {
             index = (index + 1) % 3;
-
-            lr = GetComponent<LineRenderer>();
-            lr.positionCount = iteration_length;
-
-            for (int i = 0; i < iteration_length; i++)
-            {
-                lr.SetPosition(i, positions[i] - GameObject.Find(objects[index]).GetComponent<Celestial>().place_wrtGlobal(times[i]));
-            }
         }
 
         if (counter > 20)
         {
             lr = GetComponent<LineRenderer>();
             lr.positionCount = iteration_length;
+            lr.startWidth = dist/250;
+            lr.endWidth = dist/250;
 
             for (int i = 0; i < iteration_length; i++)
             {
-                lr.SetPosition(i, (positions[i] - GameObject.Find(objects[index]).GetComponent<Celestial>().place_wrtGlobal(times[i]))/100000 );
+                lr.SetPosition(i, ((positions[i] - GameObject.Find(objects[index]).GetComponent<Celestial>().place_wrtGlobal(times[i]))/1000).backToVec);
             }
             counter = 0;
         }
