@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,9 +13,12 @@ public class Propagator : MonoBehaviour
     public Rigidbody Moon;
     public Vector3d[] positions;
     public Vector3d[] velocities;
-    public Vector3d[] accelerations;
+    public Vector3[] gamePositions;
+    public Vector3[] gameVelocities;
     public float[] times;
+    string[] objects;
     int t = 0;
+    int bodyIndex = 0;
     int skip = 1;
     private Button refreshButton;
     private VisualElement rootVisualElement;
@@ -22,11 +26,13 @@ public class Propagator : MonoBehaviour
     public float currentTime = 0;
     public Vector3 offset = Vector3.zero;
     Vector3d currentPosition = new Vector3d(149604900d,0d,0d);
-    public Vector3d currentVelocity = new Vector3d(0d, 0d, 38.3307d);
+    public Vector3d currentVelocity = new Vector3d(0d, 0d, 37.3307d);
+    public Vector3 currentGameVelocity = new Vector3(0f, 0f, 0f);
     
 
     void Start()
     {
+        objects = new string[] { "Earth", "Moon", "Sun" };
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
         Refresh();
 
@@ -59,11 +65,13 @@ public class Propagator : MonoBehaviour
         {
             offset = positions[t % iteration_length].backToVec;
             currentVelocity = velocities[t % iteration_length];
+            currentGameVelocity = gameVelocities[t % iteration_length];
             currentTime = times[t % iteration_length];
-            Spacecraft.rotation = Quaternion.LookRotation(velocities[t % iteration_length].backToVec.normalized) * Quaternion.Euler(90,0,0);
+            
 
             currentPosition = positions[t % iteration_length];
         }
+        Spacecraft.rotation = Quaternion.LookRotation(gamePositions[t % iteration_length].normalized) * Quaternion.Euler(90, 0, 0);
 
         //while (trailer <= t)
         //{
@@ -81,7 +89,7 @@ public class Propagator : MonoBehaviour
         //            trm = iteration_length - 1;
         //        }
         //        positions[tr] = positions[trm];
-         //       velocities[tr] = velocities[trm];
+        //       velocities[tr] = velocities[trm];
         //        times[tr] = times[trm];
         //    }
         //
@@ -94,6 +102,13 @@ public class Propagator : MonoBehaviour
         if (t > iteration_length/2)
         {
             Refresh();
+        }
+
+        if (Input.GetKeyDown("r"))
+        {
+            bodyIndex = (bodyIndex + 1) % 3;
+
+            (gamePositions, gameVelocities) = toGamePos(positions, objects[bodyIndex]);
         }
 
         t = t + skip;
@@ -115,7 +130,7 @@ public class Propagator : MonoBehaviour
         
     }
 
-    (Vector3d dv, Vector3d dr, Vector3d da, float dt) StepRK4(int i)
+    (Vector3d dv, Vector3d dr, float dt) StepRK4(int i)
     {
         int im = (i - 1) % iteration_length;
         if (im < 0)
@@ -140,14 +155,14 @@ public class Propagator : MonoBehaviour
         Vector3d k4v = acceleration(positions[im] + k3r * dt, im);
         Vector3d k4r = velocities[im] + k3v * dt;
 
-        Vector3d dv = velocities[im] + h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, velocities[im], acceleration(positions[im], im));
+        Vector3d dv = velocities[im] + h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, positions[im], velocities[im]);
         Vector3d dr = positions[im] + h6 * (k1r + 2 * k2r + 2 * k3r + k4r);
         dt = times[im] + dt;
 
         Vector3d da = h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, velocities[im], acceleration(positions[im], im));
 
 
-        return (dv, dr, da, dt);
+        return (dv, dr, dt);
     }
 
     void Refresh()
@@ -158,7 +173,6 @@ public class Propagator : MonoBehaviour
 
         positions = new Vector3d[iteration_length];
         velocities = new Vector3d[iteration_length];
-        accelerations = new Vector3d[iteration_length];
         times = new float[iteration_length];
 
         positions[0] = currentPosition;
@@ -170,11 +184,10 @@ public class Propagator : MonoBehaviour
         for (int i = 1; i < iteration_length; i++)
         {
 
-            (Vector3d dv, Vector3d dr, Vector3d da, float dt) = StepRK4(i);
+            (Vector3d dv, Vector3d dr, float dt) = StepRK4(i);
             positions[i] = dr;
             velocities[i] = dv;
             times[i] = dt;
-            accelerations[i] = da;
             if (positions[i].magnitude > 1e10)
             {
                 int im = (i - 1) % iteration_length;
@@ -185,16 +198,16 @@ public class Propagator : MonoBehaviour
                 positions[i] = positions[im];
                 velocities[i] = velocities[im];
                 times[i] = times[im];
-                accelerations[i] = accelerations[im];
             }
 
             
         }
 
+        (gamePositions, gameVelocities) = toGamePos(positions, objects[bodyIndex]);
         
     }
 
-    Vector3d maneuverDeltaV(int index,float dt,Vector3d velocity,Vector3d acceleration)
+    Vector3d maneuverDeltaV(int index,float dt,Vector3d position,Vector3d velocity)
     {
         int im = (index - 1) % iteration_length;
         if (im < 0)
@@ -202,19 +215,36 @@ public class Propagator : MonoBehaviour
             im = iteration_length - 1;
         }
         Vector4[] maneuvers = GameObject.Find("UIDocument").GetComponent<Maneuver>().maneuvers;
-        Vector3d ahat = acceleration.normalized;
-        Vector3d vhat = velocity.normalized;
-        Vector3d nhat = Vector3d.Cross(vhat,ahat);
-        Vector3d rhat = Vector3d.Cross(vhat,nhat);
+        string[] references = GameObject.Find("UIDocument").GetComponent<Maneuver>().references;
         Vector3d deltaV = new Vector3d();
         for (int i = 0; i < maneuvers.Length; i++)
         {
             if ((dt + times[im]) - maneuvers[i].x < 1.1f*dt && (dt + times[im]) - maneuvers[i].x > 0)
             {
+                Vector3d chat = (position - GameObject.Find(references[i]).GetComponent<Celestial>().place_wrtGlobal(times[i])).normalized;
+                Vector3d vhat = (velocity - GameObject.Find(references[i]).GetComponent<Celestial>().vel_wrtGlobal(times[i])).normalized;
+                Vector3d nhat = Vector3d.Cross(vhat, chat).normalized;
+                Vector3d rhat = Vector3d.Cross(vhat, nhat).normalized;
                 deltaV = maneuvers[i].y * vhat + maneuvers[i].z * nhat + maneuvers[i].w * rhat;
             }
         }
         return deltaV;
+    }
+
+    (Vector3[], Vector3[]) toGamePos(Vector3d[] positions, string body)
+    {
+        gamePositions = new Vector3[positions.Length];
+        gameVelocities = new Vector3[positions.Length];
+        for (int i = 0; i < positions.Length; i++)
+        {
+            gamePositions[i] = ((positions[i] - GameObject.Find(body).GetComponent<Celestial>().place_wrtGlobal(times[i])) / 1000).backToVec;
+        }
+        for (int i = 0; i < positions.Length - 1; i++)
+        { 
+            gameVelocities[i] = 1000*(gamePositions[i+1] - gamePositions[i]) / (times[i+1] - times[i]);
+        }
+        gameVelocities[positions.Length - 1] = gameVelocities[positions.Length - 2];
+        return (gamePositions, gameVelocities);
     }
 
 }

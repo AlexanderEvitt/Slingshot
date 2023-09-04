@@ -7,13 +7,18 @@ Slingshot aims to provide a user-friendly astrodynamics experience to those look
 
 ## Current Features
 
-- Basic Runge-Kutta4 trajectory propagation in the Earth-Moon system with _N_-body effects
+- Framework for a full solar system of bodies "on rails" - planets move in circular orbits
+- Adaptive-time Runge-Kutta4 trajectory propagation with _N_-body effects
 - Basic simulation controls, including time interval and integration length
 - Maneuver nodes that allow instantaneous changes in velocity
+- Switching between references frames for both maneuvers and trajectory plotting
 - A slick UI
 
 ## Planned Features
 
-- Multiple planets, all influencing the trajectory
-- Plots to allow design of trajectory
-- Reference frames
+- Performance improvements
+- More minor solar system bodies
+- Solar system body visuals
+- Solar system physics improvements (add inclined elliptical orbits)
+- Maneuver node design tools
+- Maneuver node visualization

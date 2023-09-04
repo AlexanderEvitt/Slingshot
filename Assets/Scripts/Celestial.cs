@@ -49,4 +49,15 @@ public class Celestial : MonoBehaviour
         }
         return pos;
     }
+    public Vector3d vel_wrtGlobal(float t)
+    {
+        float mean_anomaly = (t / period) * 2 * Mathf.PI + start_angle;
+
+        Vector3d pos = new Vector3d(-1* SMA * (2*Mathf.PI/period) * Mathd.Sin(mean_anomaly), 0, SMA * (2 * Mathf.PI / period) * Mathd.Cos(mean_anomaly));
+        if (moonOf != "None")
+        {
+            pos = pos + GameObject.Find(moonOf).GetComponent<Celestial>().vel_wrtGlobal(t);
+        }
+        return pos;
+    }
 }

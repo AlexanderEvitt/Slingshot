@@ -12,7 +12,7 @@ public class Trajectory : MonoBehaviour
     private LineRenderer lr;
     private VisualElement rootVisualElement;
     string[] objects;
-    int index = 0;
+    int bodyIndex = 0;
     int counter = 0;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class Trajectory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3d[] positions = GameObject.Find("Spacecraft").GetComponent<Propagator>().positions;
+        Vector3[] positions = GameObject.Find("Spacecraft").GetComponent<Propagator>().gamePositions;
         float[] times = GameObject.Find("Spacecraft").GetComponent<Propagator>().times;
         float dist = GameObject.Find("InputController").GetComponent<CameraMovement>().distanceToTarget;
         IntegerField iterationInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ControlsContainer").Q<VisualElement>("IterationLengthContainer").Q<IntegerField>("IterationLength");
@@ -32,7 +32,7 @@ public class Trajectory : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-            index = (index + 1) % 3;
+            bodyIndex = (bodyIndex + 1) % 3;
         }
 
         if (counter > 20)
@@ -44,13 +44,13 @@ public class Trajectory : MonoBehaviour
 
             for (int i = 0; i < iteration_length; i++)
             {
-                lr.SetPosition(i, ((positions[i] - GameObject.Find(objects[index]).GetComponent<Celestial>().place_wrtGlobal(times[i]))/1000).backToVec);
+                lr.SetPosition(i, positions[i]);
             }
             counter = 0;
         }
 
         counter = counter + 1;
-        Vector3 target = GameObject.Find(objects[index]).transform.position;
+        Vector3 target = GameObject.Find(objects[bodyIndex]).transform.position;
         transform.position = target;
 
         

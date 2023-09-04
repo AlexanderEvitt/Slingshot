@@ -8,6 +8,7 @@ public class Maneuver : MonoBehaviour
     public VisualElement rootVisualElement;
     public Button addButton;
     public Vector4[] maneuvers;
+    public string[] references;
     public char maneuverCount = 'A';
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class Maneuver : MonoBehaviour
     {
         int numManeuvers = (int)maneuverCount - 'A';
         maneuvers = new Vector4[numManeuvers];
+        references = new string[numManeuvers];
         char counter = 'A';
         for (int i = 0; i < numManeuvers; i++)
         {
@@ -36,6 +38,7 @@ public class Maneuver : MonoBehaviour
             float radial = radialInput.value;
 
             maneuvers[i] = new Vector4(place, prograde, normal, radial);
+            references[i] = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ManeuverContainer").Q<ScrollView>("ManeuverScroll").Q<VisualElement>(counter.ToString()).Q<DropdownField>("ReferenceField").value;
 
             counter++;
         }
