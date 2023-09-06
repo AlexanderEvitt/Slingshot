@@ -3,7 +3,7 @@
 
 Slingshot aims to provide a user-friendly astrodynamics experience to those looking to design spacecraft trajectories. Currently in the early phase with basic features.
 
-![Screenshot](screenshot1.png)
+![Screenshot](lunar_orbit.png)
 
 ## Current Features
 

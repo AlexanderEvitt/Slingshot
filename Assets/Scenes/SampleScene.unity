@@ -397,6 +397,7 @@ MonoBehaviour:
   iteration_length: 10000
   currentTime: 0
   offset: {x: 0, y: 0, z: 0}
+  currentGameVelocity: {x: 0, y: 0, z: 0}
 --- !u!54 &1002656900
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -566,6 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maneuvers: []
+  references: []
   maneuverCount: 65
 --- !u!1 &1247700231
 GameObject:
@@ -1104,5 +1106,5 @@ MonoBehaviour:
   SMA: 384400
   start_angle: 0
   period: 2358720
-  mass: 0
+  mass: 0.01234
   moonOf: Earth
