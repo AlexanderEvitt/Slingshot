@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Spacecraft").transform;
-        objects = new string[] { "Spacecraft", "Earth" , "Moon" , "Sun"};
+        objects = new string[] { "Sun", "Mercury", "Venus", "Spacecraft", "Earth" , "Moon" , "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
     }
 
 
@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKeyDown("v"))
         {
-            index = (index + 1) % 4;
+            index = (index + 1) % 11;
             target = GameObject.Find(objects[index]).transform;
         }
         distanceToTarget = distanceToTarget - 0.1f*Input.mouseScrollDelta.y*distanceToTarget;

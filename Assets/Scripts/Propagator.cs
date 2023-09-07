@@ -17,21 +17,21 @@ public class Propagator : MonoBehaviour
     public float[] times;
     string[] objects;
     int t = 0;
-    int bodyIndex = 0;
+    int bodyIndex = 3;
     int skip = 1;
     private Button refreshButton;
     private VisualElement rootVisualElement;
     public int iteration_length = Universe.iteration_length;
     public float currentTime = 0;
     public Vector3 offset = Vector3.zero;
-    Vector3d currentPosition = new Vector3d(149604900d,0d,0d);
-    public Vector3d currentVelocity = new Vector3d(0d, 0d, 37.3307d);
+    Vector3d currentPosition = new Vector3d(147105000d,0d,0d);
+    public Vector3d currentVelocity = new Vector3d(0d, 0d, 37.20d);
     public Vector3 currentGameVelocity = new Vector3(0f, 0f, 0f);
     
 
     void Start()
     {
-        objects = new string[] { "Earth", "Moon", "Sun" };
+        objects = new string[] { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
         Refresh();
 
@@ -105,7 +105,7 @@ public class Propagator : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-            bodyIndex = (bodyIndex + 1) % 3;
+            bodyIndex = (bodyIndex + 1) % 11;
 
             (gamePositions, gameVelocities) = toGamePos(positions, objects[bodyIndex]);
         }
@@ -236,11 +236,11 @@ public class Propagator : MonoBehaviour
         gameVelocities = new Vector3[positions.Length];
         for (int i = 0; i < positions.Length; i++)
         {
-            gamePositions[i] = ((positions[i] - GameObject.Find(body).GetComponent<Celestial>().place_wrtGlobal(times[i])) / 1000).backToVec;
+            gamePositions[i] = ((positions[i] - GameObject.Find(body).GetComponent<Celestial>().place_wrtGlobal(times[i])) / Universe.scaleDown).backToVec;
         }
         for (int i = 0; i < positions.Length - 1; i++)
         { 
-            gameVelocities[i] = 1000*(gamePositions[i+1] - gamePositions[i]) / (times[i+1] - times[i]);
+            gameVelocities[i] = Universe.scaleDown*(gamePositions[i+1] - gamePositions[i]) / (times[i+1] - times[i]);
         }
         gameVelocities[positions.Length - 1] = gameVelocities[positions.Length - 2];
         return (gamePositions, gameVelocities);

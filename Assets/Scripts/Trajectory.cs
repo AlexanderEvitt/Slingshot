@@ -12,12 +12,12 @@ public class Trajectory : MonoBehaviour
     private LineRenderer lr;
     private VisualElement rootVisualElement;
     string[] objects;
-    int bodyIndex = 0;
+    int bodyIndex = 3;
     int counter = 0;
     // Start is called before the first frame update
     void Start()
     {
-        objects = new string[] { "Earth", "Moon" , "Sun"};
+        objects = new string[] { "Sun", "Mercury", "Venus", "Spacecraft", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
     }
 
@@ -32,7 +32,7 @@ public class Trajectory : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-            bodyIndex = (bodyIndex + 1) % 3;
+            bodyIndex = (bodyIndex + 1) % 11;
         }
 
         if (counter > 20)
