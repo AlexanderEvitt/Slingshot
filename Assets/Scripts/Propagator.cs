@@ -105,7 +105,7 @@ public class Propagator : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-            bodyIndex = (bodyIndex + 1) % 11;
+            bodyIndex = (bodyIndex + 1) % 10;
 
             (gamePositions, gameVelocities) = toGamePos(positions, objects[bodyIndex]);
         }

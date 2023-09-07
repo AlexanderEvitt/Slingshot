@@ -17,7 +17,7 @@ public class Trajectory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        objects = new string[] { "Sun", "Mercury", "Venus", "Spacecraft", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
+        objects = new string[] { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
     }
 
@@ -32,7 +32,7 @@ public class Trajectory : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-            bodyIndex = (bodyIndex + 1) % 11;
+            bodyIndex = (bodyIndex + 1) % 10;
         }
 
         if (counter > 20)

@@ -26,8 +26,8 @@ public class Celestial : MonoBehaviour
 
         for (int i = 0; i < 100; i++)
         {
-            Vector3 spot = new Vector3(SMA * Mathf.Cos(2 * Mathf.PI * i / 100) + SMA, 0f, SMA * Mathf.Sin(2 * Mathf.PI * i / 100));
-            lr.SetPosition(i, spot);
+            Vector3 spot = new Vector3(-1*SMA * Mathf.Cos(2 * Mathf.PI * i / 99) + SMA, 0f, SMA * Mathf.Sin(2 * Mathf.PI * i / 99));
+            lr.SetPosition(i, spot/10000);
         }
     }
 
@@ -35,7 +35,7 @@ public class Celestial : MonoBehaviour
     void Update()
     {
         float dist = GameObject.Find("InputController").GetComponent<CameraMovement>().distanceToTarget;
-        float linesize = (dist - 4000) / 250;
+        float linesize = (dist - 3000) / 250;
         if (linesize < 0)
         {
             linesize = 0;
@@ -45,6 +45,7 @@ public class Celestial : MonoBehaviour
 
         float time = GameObject.Find("Spacecraft").GetComponent<Propagator>().currentTime;
         rb.position = place_wrtCraft(time) / Universe.scaleDown;
+        rb.rotation = Quaternion.LookRotation(place_wrtGlobal(time).backToVec.normalized) * Quaternion.Euler(0, 90, 0);
     }
 
     public Vector3 place_wrtCraft(float t)
