@@ -27,6 +27,7 @@ public class Propagator : MonoBehaviour
     Vector3d currentPosition = new Vector3d(147105000d,0d,0d);
     public Vector3d currentVelocity = new Vector3d(0d, 0d, 37.20d);
     public Vector3 currentGameVelocity = new Vector3(0f, 0f, 0f);
+    public Vector3 currentGamePosition = new Vector3(0f, 0f, 0f);
     
 
     void Start()
@@ -65,6 +66,7 @@ public class Propagator : MonoBehaviour
             offset = positions[t % iteration_length].backToVec;
             currentVelocity = velocities[t % iteration_length];
             currentGameVelocity = gameVelocities[t % iteration_length];
+            currentGamePosition = gamePositions[t % iteration_length];
             currentTime = times[t % iteration_length];
             
 
@@ -232,6 +234,7 @@ public class Propagator : MonoBehaviour
 
     (Vector3[], Vector3[]) toGamePos(Vector3d[] positions, string body)
     {
+        // Puts coordinates into scaled-down and relative to a given body
         gamePositions = new Vector3[positions.Length];
         gameVelocities = new Vector3[positions.Length];
         for (int i = 0; i < positions.Length; i++)

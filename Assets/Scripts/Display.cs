@@ -26,8 +26,8 @@ public class Display : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vel = (Vector3)GameObject.Find("Spacecraft").GetComponent<Propagator>().currentGameVelocity;
-        r = GameObject.Find("Earth").transform.position - GameObject.Find("Spacecraft").transform.position;  // craft to earth
+        vel = GameObject.Find("Spacecraft").GetComponent<Propagator>().currentGameVelocity;
+        r = Universe.scaleDown * GameObject.Find("Spacecraft").GetComponent<Propagator>().currentGamePosition;
 
         // update velocity
         velocityCounter.text = $"{(int)(1000 * vel.magnitude)} m/s";
@@ -66,7 +66,7 @@ public class Display : MonoBehaviour
 
     void ChangeAltitude(Vector3 r)
     {
-        int altitude = (int)(r.magnitude) - 6371;  // km
+        int altitude = (int)(r.magnitude);// - 6371;  // km
         altitudeCounter.text = $"{altitude} km";
     }
 
@@ -81,9 +81,9 @@ public class Display : MonoBehaviour
 
     void ChangeEccentricity(Vector3 r, Vector3 vel)
     {
-        Vector3 h = Vector3.Cross(r, vel);
-        float mu = Universe.G * -1;  // km^3 / s^2
-        Vector3 e = (Vector3.Cross(vel, h) / mu) - (r / r.magnitude);
-        eccentricityCounter.text = $"{e.magnitude}";
+        Vector3 h = Vector3.Cross(vel, r);
+        float mu = Universe.G * -1000;  // km^3 / s^2, could not tell you why this works but it seems to
+        Vector3 e = (Vector3.Cross(h, vel) / mu) - (r.normalized);
+        eccentricityCounter.text = $"{e.magnitude.ToString("F2")}";
     }
 }

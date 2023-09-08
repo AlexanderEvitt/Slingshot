@@ -3,7 +3,9 @@
 
 Slingshot aims to provide a user-friendly astrodynamics experience to those looking to design spacecraft trajectories. Currently in the early phase with basic features.
 
-![Screenshot](lunar_orbit.png)
+![High Orbit Around the Moon](lunar_orbit.png)
+![Solar System and an Escape from Earth](solar_system.png)
+![The Long Journey to Luna](enroute_to_luna.png)
 
 ## Current Features
 
@@ -20,3 +22,4 @@ Slingshot aims to provide a user-friendly astrodynamics experience to those look
 - More minor solar system bodies
 - Maneuver node design tools
 - Maneuver node visualization
+- Finally fixing the eccentricity readout

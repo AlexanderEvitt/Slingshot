@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
     [SerializeField] public float distanceToTarget = 0.2f;
-    int index = 0;
+    int index = 3;
     public string[] objects;
     private Vector3 previousPosition;
 

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class Celestial : MonoBehaviour
 {
@@ -19,15 +18,17 @@ public class Celestial : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Transform transf = GetComponent<Transform>();
         inclination = inclination * (Mathf.PI / 180f);
 
         lr = GetComponent<LineRenderer>();
-        lr.positionCount = 100;
+        lr.positionCount = 400;
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 400; i++)
         {
-            Vector3 spot = new Vector3(-1*SMA * Mathf.Cos(2 * Mathf.PI * i / 99) + SMA, 0f, SMA * Mathf.Sin(2 * Mathf.PI * i / 99));
-            lr.SetPosition(i, spot/10000);
+            float mean_anomaly = 2 * Mathf.PI * i / 399;
+            Vector3 spot = new Vector3(SMA * Mathf.Cos(mean_anomaly) + SMA, 0f, SMA * Mathf.Sin(mean_anomaly));
+            lr.SetPosition(i, spot/(Universe.scaleDown*transf.localScale.x));
         }
     }
 
@@ -35,7 +36,7 @@ public class Celestial : MonoBehaviour
     void Update()
     {
         float dist = GameObject.Find("InputController").GetComponent<CameraMovement>().distanceToTarget;
-        float linesize = (dist - 3000) / 250;
+        float linesize = (dist - 10) / 250;
         if (linesize < 0)
         {
             linesize = 0;
@@ -45,7 +46,10 @@ public class Celestial : MonoBehaviour
 
         float time = GameObject.Find("Spacecraft").GetComponent<Propagator>().currentTime;
         rb.position = place_wrtCraft(time) / Universe.scaleDown;
-        rb.rotation = Quaternion.LookRotation(place_wrtGlobal(time).backToVec.normalized) * Quaternion.Euler(0, 90, 0);
+        if (SMA > 0)
+        {
+            rb.rotation = Quaternion.LookRotation(place_wrtGlobal(time).backToVec.normalized) * Quaternion.Euler(0, 90, 0);
+        }
     }
 
     public Vector3 place_wrtCraft(float t)
