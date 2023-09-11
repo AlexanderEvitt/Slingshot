@@ -27,10 +27,11 @@ public class Propagator : MonoBehaviour
     public Vector3d currentVelocity = new Vector3d(0d, 0d, 37.20d);
     public Vector3 currentGameVelocity = new Vector3(0f, 0f, 0f);
     public Vector3 currentGamePosition = new Vector3(0f, 0f, 0f);
-    
+    public Celestial[] celestials;
 
     void Start()
     {
+        celestials = FindObjectsOfType<Celestial>();
         Spacecraft = gameObject.transform;
         objects = new string[] { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
@@ -118,7 +119,6 @@ public class Propagator : MonoBehaviour
 
     Vector3d acceleration(Vector3d position, int index)
     {
-        var celestials = FindObjectsOfType<Celestial>();
         Vector3d accel = Vector3d.zero;
         
         foreach (var c in celestials)
