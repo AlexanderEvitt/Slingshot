@@ -19,7 +19,7 @@ Slingshot aims to provide a user-friendly astrodynamics experience to those look
 ## Planned Features
 
 - Performance improvements, lots and lots of performance improvements
-- More minor solar system bodies
+- More minor solar system bodies, moons, rings, etc
 - Maneuver node design tools
 - Maneuver node visualization
 - Finally fixing the eccentricity readout
