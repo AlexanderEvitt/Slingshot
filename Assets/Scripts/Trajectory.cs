@@ -14,20 +14,28 @@ public class Trajectory : MonoBehaviour
     string[] objects;
     int bodyIndex = 3;
     int counter = 0;
+    Propagator Propagator;
+    CameraMovement Camera;
+    IntegerField iterationInput;
+
     // Start is called before the first frame update
     void Start()
     {
         objects = new string[] { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
+
+        Propagator = GameObject.Find("Spacecraft").GetComponent<Propagator>();
+        Camera = GameObject.Find("InputController").GetComponent<CameraMovement>();
+        iterationInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ControlsContainer").Q<VisualElement>("IterationLengthContainer").Q<IntegerField>("IterationLength");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3[] positions = GameObject.Find("Spacecraft").GetComponent<Propagator>().gamePositions;
-        float[] times = GameObject.Find("Spacecraft").GetComponent<Propagator>().times;
-        float dist = GameObject.Find("InputController").GetComponent<CameraMovement>().distanceToTarget;
-        IntegerField iterationInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ControlsContainer").Q<VisualElement>("IterationLengthContainer").Q<IntegerField>("IterationLength");
+        Vector3[] positions = Propagator.gamePositions;
+        float[] times = Propagator.times;
+        float dist = Camera.distanceToTarget;
         int iteration_length = iterationInput.value;
 
         if (Input.GetKeyDown("r"))
@@ -38,11 +46,11 @@ public class Trajectory : MonoBehaviour
         if (counter > 20)
         {
             lr = GetComponent<LineRenderer>();
-            lr.positionCount = iteration_length;
+            lr.positionCount = positions.Length;
             lr.startWidth = dist/250;
             lr.endWidth = dist/250;
 
-            for (int i = 0; i < iteration_length; i++)
+            for (int i = 0; i < positions.Length; i++)
             {
                 lr.SetPosition(i, positions[i]);
             }

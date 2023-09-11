@@ -10,6 +10,7 @@ public class Display : MonoBehaviour
     private Label altitudeCounter;
     private Label inclinationCounter;
     private Label eccentricityCounter;
+    Propagator Propagator;
     private Vector3 vel;
     private Vector3 r;
     // Start is called before the first frame update
@@ -21,13 +22,14 @@ public class Display : MonoBehaviour
         altitudeCounter = rootVisualElement.Q<VisualElement>("TopBar").Q<VisualElement>("AltitudeContainer").Q<Label>("Altitude");
         inclinationCounter = rootVisualElement.Q<VisualElement>("TopBar").Q<VisualElement>("InclinationContainer").Q<Label>("Inclination");
         eccentricityCounter = rootVisualElement.Q<VisualElement>("TopBar").Q<VisualElement>("EccentricityContainer").Q<Label>("Eccentricity");
+        Propagator = GameObject.Find("Spacecraft").GetComponent<Propagator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        vel = GameObject.Find("Spacecraft").GetComponent<Propagator>().currentGameVelocity;
-        r = Universe.scaleDown * GameObject.Find("Spacecraft").GetComponent<Propagator>().currentGamePosition;
+        vel = Propagator.currentGameVelocity;
+        r = Universe.scaleDown * Propagator.currentGamePosition;
 
         // update velocity
         velocityCounter.text = $"{(int)(1000 * vel.magnitude)} m/s";
@@ -43,7 +45,7 @@ public class Display : MonoBehaviour
 
     void ChangeTimeCounter()
     {
-        int t = (int)GameObject.Find("Spacecraft").GetComponent<Propagator>().currentTime;
+        int t = (int)Propagator.currentTime;
         string min = "" + (t / 60) % 60;
         string hr = "" + (t / 3600) % 24;
         string day = "" + t / 86400;

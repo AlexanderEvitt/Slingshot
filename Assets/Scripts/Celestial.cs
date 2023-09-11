@@ -13,38 +13,44 @@ public class Celestial : MonoBehaviour
     public float e = 0.0549f;
     public float inclination = 5.1f;
     public string moonOf = "Sun";
+    Propagator Propagator;
+    CameraMovement Camera;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        Propagator = GameObject.Find("Spacecraft").GetComponent<Propagator>();
+        Camera = GameObject.Find("InputController").GetComponent<CameraMovement>();
+
         rb = GetComponent<Rigidbody>();
         Transform transf = GetComponent<Transform>();
         inclination = inclination * (Mathf.PI / 180f);
 
         lr = GetComponent<LineRenderer>();
-        lr.positionCount = 400;
+        lr.positionCount = 390;
 
-        for (int i = 0; i < 400; i++)
+        for (int i = 5; i < 395; i++)
         {
             float mean_anomaly = 2 * Mathf.PI * i / 399;
             Vector3 spot = new Vector3(SMA * Mathf.Cos(mean_anomaly) + SMA, 0f, SMA * Mathf.Sin(mean_anomaly));
-            lr.SetPosition(i, spot/(Universe.scaleDown*transf.localScale.x));
+            lr.SetPosition(i - 5, spot/(Universe.scaleDown*transf.localScale.x));
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        float dist = GameObject.Find("InputController").GetComponent<CameraMovement>().distanceToTarget;
-        float linesize = (dist - 10) / 250;
-        if (linesize < 0)
-        {
-            linesize = 0;
-        }
+        float dist = Camera.distanceToTarget;
+        float linesize = (dist) / 250;
+        //if (linesize < 0)
+        //{
+        //    linesize = 0;
+        //}
         lr.startWidth = linesize;
         lr.endWidth = linesize;
 
-        float time = GameObject.Find("Spacecraft").GetComponent<Propagator>().currentTime;
+        float time = Propagator.currentTime;
         rb.position = place_wrtCraft(time) / Universe.scaleDown;
         if (SMA > 0)
         {
@@ -65,7 +71,7 @@ public class Celestial : MonoBehaviour
         {
             transform_pos = transform_pos + GameObject.Find(moonOf).GetComponent<Celestial>().place_wrtGlobal(t);
         }
-        Vector3 position = transform_pos.backToVec - GameObject.Find("Spacecraft").GetComponent<Propagator>().offset;
+        Vector3 position = transform_pos.backToVec - Propagator.offset;
         return position;
     }
     public Vector3d place_wrtGlobal(float t)
