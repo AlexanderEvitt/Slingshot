@@ -182,7 +182,6 @@ GameObject:
   - component: {fileID: 626057358}
   - component: {fileID: 626057357}
   - component: {fileID: 626057356}
-  - component: {fileID: 626057355}
   - component: {fileID: 626057354}
   - component: {fileID: 626057359}
   m_Layer: 0
@@ -204,7 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 107710000
   start_angle: 0.2443461
   period: 19552000
@@ -212,33 +210,6 @@ MonoBehaviour:
   e: 0.007
   inclination: 3.39
   moonOf: None
---- !u!54 &626057355
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626057353}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &626057356
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -511,7 +482,6 @@ GameObject:
   - component: {fileID: 1002656904}
   - component: {fileID: 1002656903}
   - component: {fileID: 1002656902}
-  - component: {fileID: 1002656900}
   - component: {fileID: 1002656899}
   m_Layer: 0
   m_Name: Spacecraft
@@ -532,8 +502,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587d359808ff34648ad85a64d60f2968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spacecraft: {fileID: 1002656900}
-  Moon: {fileID: 1414219546}
   gamePositions: []
   gameVelocities: []
   times: []
@@ -542,33 +510,6 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   currentGameVelocity: {x: 0, y: 0, z: 0}
   currentGamePosition: {x: 0, y: 0, z: 0}
---- !u!54 &1002656900
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1002656898}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1002656902
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -818,7 +759,6 @@ GameObject:
   - component: {fileID: 1197178951}
   - component: {fileID: 1197178950}
   - component: {fileID: 1197178949}
-  - component: {fileID: 1197178948}
   - component: {fileID: 1197178947}
   - component: {fileID: 1197178952}
   m_Layer: 0
@@ -840,7 +780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 58343000
   start_angle: 0.02617994
   period: 7568640
@@ -848,33 +787,6 @@ MonoBehaviour:
   e: 0.206
   inclination: 0
   moonOf: None
---- !u!54 &1197178948
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197178946}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1197178949
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1204,7 +1116,6 @@ GameObject:
   - component: {fileID: 1341667228}
   - component: {fileID: 1341667227}
   - component: {fileID: 1341667226}
-  - component: {fileID: 1341667225}
   - component: {fileID: 1341667224}
   - component: {fileID: 1341667229}
   m_Layer: 0
@@ -1226,7 +1137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 149597900
   start_angle: 0
   period: 31558120
@@ -1234,33 +1144,6 @@ MonoBehaviour:
   e: 0.01671
   inclination: 0
   moonOf: None
---- !u!54 &1341667225
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341667223}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1341667226
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1441,7 +1324,6 @@ GameObject:
   - component: {fileID: 1344370025}
   - component: {fileID: 1344370024}
   - component: {fileID: 1344370023}
-  - component: {fileID: 1344370022}
   - component: {fileID: 1344370021}
   - component: {fileID: 1344370026}
   m_Layer: 0
@@ -1463,7 +1345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 0
   start_angle: 0
   period: 1
@@ -1471,33 +1352,6 @@ MonoBehaviour:
   e: 0.0549
   inclination: 7
   moonOf: None
---- !u!54 &1344370022
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344370020}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1344370023
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1679,7 +1533,6 @@ GameObject:
   - component: {fileID: 1414219545}
   - component: {fileID: 1414219544}
   - component: {fileID: 1414219543}
-  - component: {fileID: 1414219546}
   - component: {fileID: 1414219547}
   - component: {fileID: 1414219548}
   m_Layer: 0
@@ -1754,33 +1607,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1414219546
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414219541}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &1414219547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,7 +1619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 384400
   start_angle: 0
   period: 2358720
@@ -1916,7 +1741,6 @@ GameObject:
   - component: {fileID: 1506272560}
   - component: {fileID: 1506272559}
   - component: {fileID: 1506272558}
-  - component: {fileID: 1506272557}
   - component: {fileID: 1506272556}
   - component: {fileID: 1506272561}
   m_Layer: 0
@@ -1938,7 +1762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 227390000
   start_angle: 3.7524579
   period: 59288000
@@ -1946,33 +1769,6 @@ MonoBehaviour:
   e: 0.093
   inclination: 1.85
   moonOf: None
---- !u!54 &1506272557
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506272555}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1506272558
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2153,7 +1949,6 @@ GameObject:
   - component: {fileID: 1543769588}
   - component: {fileID: 1543769587}
   - component: {fileID: 1543769586}
-  - component: {fileID: 1543769585}
   - component: {fileID: 1543769584}
   - component: {fileID: 1543769589}
   m_Layer: 0
@@ -2175,7 +1970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 2.87078e+9
   start_angle: 1.134464
   period: 2.64965e+9
@@ -2183,33 +1977,6 @@ MonoBehaviour:
   e: 0.047
   inclination: 0.773
   moonOf: None
---- !u!54 &1543769585
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543769583}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1543769586
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2390,7 +2157,6 @@ GameObject:
   - component: {fileID: 1792555924}
   - component: {fileID: 1792555923}
   - component: {fileID: 1792555922}
-  - component: {fileID: 1792555921}
   - component: {fileID: 1792555920}
   - component: {fileID: 1792555925}
   m_Layer: 0
@@ -2412,7 +2178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 4.49841e+9
   start_angle: 0.19198622
   period: 5.196817e+9
@@ -2420,33 +2185,6 @@ MonoBehaviour:
   e: 0.009
   inclination: 1.77
   moonOf: None
---- !u!54 &1792555921
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792555919}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1792555922
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2627,7 +2365,6 @@ GameObject:
   - component: {fileID: 1895984497}
   - component: {fileID: 1895984496}
   - component: {fileID: 1895984495}
-  - component: {fileID: 1895984494}
   - component: {fileID: 1895984493}
   - component: {fileID: 1895984498}
   m_Layer: 0
@@ -2649,7 +2386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 1.4272e+9
   start_angle: 6.143559
   period: 928735000
@@ -2657,33 +2393,6 @@ MonoBehaviour:
   e: 0.054
   inclination: 2.49
   moonOf: None
---- !u!54 &1895984494
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895984492}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1895984495
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2864,7 +2573,6 @@ GameObject:
   - component: {fileID: 1919462575}
   - component: {fileID: 1919462574}
   - component: {fileID: 1919462573}
-  - component: {fileID: 1919462572}
   - component: {fileID: 1919462571}
   - component: {fileID: 1919462576}
   m_Layer: 0
@@ -2886,7 +2594,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634eb1a4334aa9d479e5851b8df8a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   SMA: 777900000
   start_angle: 0.87266463
   period: 374017000
@@ -2894,33 +2601,6 @@ MonoBehaviour:
   e: 0.048
   inclination: 1.3
   moonOf: None
---- !u!54 &1919462572
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919462570}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &1919462573
 MeshRenderer:
   m_ObjectHideFlags: 0

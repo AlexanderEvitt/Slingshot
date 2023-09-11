@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Celestial : MonoBehaviour
 {
-    public Rigidbody rb;
-    private LineRenderer lr;
+    Transform Planet;
+    LineRenderer lr;
     public float SMA = 384400;
     public float start_angle = 0.0f;
     public float period = 2358720.0f;
@@ -23,8 +23,7 @@ public class Celestial : MonoBehaviour
         Propagator = GameObject.Find("Spacecraft").GetComponent<Propagator>();
         Camera = GameObject.Find("InputController").GetComponent<CameraMovement>();
 
-        rb = GetComponent<Rigidbody>();
-        Transform transf = GetComponent<Transform>();
+        Planet = gameObject.transform;
         inclination = inclination * (Mathf.PI / 180f);
 
         lr = GetComponent<LineRenderer>();
@@ -32,9 +31,9 @@ public class Celestial : MonoBehaviour
 
         for (int i = 5; i < 395; i++)
         {
-            float mean_anomaly = 2 * Mathf.PI * i / 399;
+            float mean_anomaly = (2 * Mathf.PI * i / 399) + Mathf.PI;
             Vector3 spot = new Vector3(SMA * Mathf.Cos(mean_anomaly) + SMA, 0f, SMA * Mathf.Sin(mean_anomaly));
-            lr.SetPosition(i - 5, spot/(Universe.scaleDown*transf.localScale.x));
+            lr.SetPosition(i - 5, spot/(Universe.scaleDown*Planet.localScale.x));
         }
     }
 
@@ -51,10 +50,10 @@ public class Celestial : MonoBehaviour
         lr.endWidth = linesize;
 
         float time = Propagator.currentTime;
-        rb.position = place_wrtCraft(time) / Universe.scaleDown;
+        Planet.position = place_wrtCraft(time) / Universe.scaleDown;
         if (SMA > 0)
         {
-            rb.rotation = Quaternion.LookRotation(place_wrtGlobal(time).backToVec.normalized) * Quaternion.Euler(0, 90, 0);
+            Planet.rotation = Quaternion.LookRotation(place_wrtGlobal(time).backToVec.normalized) * Quaternion.Euler(0, 90, 0);
         }
     }
 

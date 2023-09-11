@@ -8,8 +8,7 @@ using UnityEngine.UIElements;
 
 public class Propagator : MonoBehaviour
 {
-    public Rigidbody Spacecraft;
-    public Rigidbody Moon;
+    Transform Spacecraft;
     public Vector3d[] positions;
     public Vector3d[] velocities;
     public Vector3[] gamePositions;
@@ -32,6 +31,7 @@ public class Propagator : MonoBehaviour
 
     void Start()
     {
+        Spacecraft = gameObject.transform;
         objects = new string[] { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
         Refresh();
