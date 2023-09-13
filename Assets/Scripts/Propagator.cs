@@ -27,10 +27,12 @@ public class Propagator : MonoBehaviour
     public Vector3 currentGameVelocity = new Vector3(0f, 0f, 0f);
     public Vector3 currentGamePosition = new Vector3(0f, 0f, 0f);
     public Celestial[] celestials;
+    CameraMovement Camera;
 
     void Start()
     {
         celestials = FindObjectsOfType<Celestial>();
+        Camera = GameObject.Find("InputController").GetComponent<CameraMovement>();
         Spacecraft = gameObject.transform;
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
         Refresh();
@@ -71,7 +73,9 @@ public class Propagator : MonoBehaviour
 
             currentPosition = positions[t % iteration_length];
         }
-        Spacecraft.rotation = Quaternion.LookRotation(gamePositions[t % iteration_length].normalized) * Quaternion.Euler(90, 0, 0);
+        Spacecraft.rotation = Quaternion.LookRotation(gameVelocities[t % iteration_length].normalized) * Quaternion.Euler(0, 90, 0);
+        float dist = Camera.distanceToTarget;
+        Spacecraft.localScale = new Vector3(dist/65, dist/100, dist/100);
 
         //while (trailer <= t)
         //{
