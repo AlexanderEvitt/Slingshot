@@ -18,7 +18,7 @@
             <ui:Label tabindex="-1" text="51.6°" name="Inclination" class="topReadout" />
         </ui:VisualElement>
         <ui:VisualElement name="EccentricityContainer" class="topContainer" style="left: 80%; position: relative;">
-            <ui:Label tabindex="-1" name="EccentricityLabel" text="ECCENTRICITY" class="topLabel" />
+            <ui:Label tabindex="-1" name="EccentricityLabel" text="REFERENCE" class="topLabel" />
             <ui:Label tabindex="-1" text="0.13" name="Eccentricity" class="topReadout" />
         </ui:VisualElement>
     </ui:VisualElement>

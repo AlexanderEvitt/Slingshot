@@ -14,9 +14,8 @@ public class Propagator : MonoBehaviour
     public Vector3[] gamePositions;
     public Vector3[] gameVelocities;
     public float[] times;
-    string[] objects;
     int t = 0;
-    int bodyIndex = 3;
+    public int bodyIndex = 3;
     int skip = 1;
     private Button refreshButton;
     private VisualElement rootVisualElement;
@@ -33,7 +32,6 @@ public class Propagator : MonoBehaviour
     {
         celestials = FindObjectsOfType<Celestial>();
         Spacecraft = gameObject.transform;
-        objects = new string[] { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
         Refresh();
 
@@ -110,7 +108,7 @@ public class Propagator : MonoBehaviour
         {
             bodyIndex = (bodyIndex + 1) % 10;
 
-            (gamePositions, gameVelocities) = toGamePos(positions, objects[bodyIndex]);
+            (gamePositions, gameVelocities) = toGamePos(positions, Universe.objects[bodyIndex]);
         }
 
         t = t + skip;
@@ -160,9 +158,6 @@ public class Propagator : MonoBehaviour
         Vector3d dr = positions[im] + h6 * (k1r + 2 * k2r + 2 * k3r + k4r);
         dt = times[im] + dt;
 
-        Vector3d da = h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, velocities[im], acceleration(positions[im], im));
-
-
         return (dv, dr, dt);
     }
 
@@ -204,7 +199,7 @@ public class Propagator : MonoBehaviour
             
         }
 
-        (gamePositions, gameVelocities) = toGamePos(positions, objects[bodyIndex]);
+        (gamePositions, gameVelocities) = toGamePos(positions, Universe.objects[bodyIndex]);
         
     }
 

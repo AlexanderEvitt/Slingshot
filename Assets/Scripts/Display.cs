@@ -83,9 +83,9 @@ public class Display : MonoBehaviour
 
     void ChangeEccentricity(Vector3 r, Vector3 vel)
     {
-        Vector3 h = Vector3.Cross(vel, r);
-        float mu = Universe.G * -1000;  // km^3 / s^2, could not tell you why this works but it seems to
-        Vector3 e = (Vector3.Cross(h, vel) / mu) - (r.normalized);
-        eccentricityCounter.text = $"{e.magnitude.ToString("F2")}";
+        //Vector3 h = Vector3.Cross(vel, r);
+        //float mu = Universe.G * -1000;  // km^3 / s^2, could not tell you why this works but it seems to
+        //Vector3 e = (Vector3.Cross(h, vel) / mu) - (r.normalized);
+        eccentricityCounter.text = $"{Universe.objects[Propagator.bodyIndex]}";
     }
 }

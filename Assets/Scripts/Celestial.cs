@@ -46,8 +46,7 @@ public class Celestial : MonoBehaviour
         //{
         //    linesize = 0;
         //}
-        lr.startWidth = linesize;
-        lr.endWidth = linesize;
+        lr.widthMultiplier = linesize;
 
         float time = Propagator.currentTime;
         Planet.position = place_wrtCraft(time) / Universe.scaleDown;

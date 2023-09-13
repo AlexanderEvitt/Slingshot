@@ -11,7 +11,6 @@ public class Trajectory : MonoBehaviour
 
     private LineRenderer lr;
     private VisualElement rootVisualElement;
-    string[] objects;
     int bodyIndex = 3;
     int counter = 0;
     Propagator Propagator;
@@ -21,7 +20,6 @@ public class Trajectory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        objects = new string[] { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
 
         Propagator = GameObject.Find("Spacecraft").GetComponent<Propagator>();
@@ -58,7 +56,7 @@ public class Trajectory : MonoBehaviour
         }
 
         counter = counter + 1;
-        Vector3 target = GameObject.Find(objects[bodyIndex]).transform.position;
+        Vector3 target = GameObject.Find(Universe.objects[bodyIndex]).transform.position;
         transform.position = target;
 
         
