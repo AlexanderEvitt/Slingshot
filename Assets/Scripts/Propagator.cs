@@ -14,7 +14,8 @@ public class Propagator : MonoBehaviour
     public Vector3[] gamePositions;
     public Vector3[] gameVelocities;
     public float[] times;
-    int t = 0;
+    int t = 1;
+    int trailer = 0;
     public int bodyIndex = 3;
     int skip = 1;
     private Button refreshButton;
@@ -35,10 +36,10 @@ public class Propagator : MonoBehaviour
         Camera = GameObject.Find("InputController").GetComponent<CameraMovement>();
         Spacecraft = gameObject.transform;
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
-        Refresh();
+        StartCoroutine(Refresh());
 
         refreshButton = rootVisualElement.Q<VisualElement>("SideBar").Q<Button>("RefreshButton");
-        refreshButton.clicked += () => Refresh();
+        refreshButton.clicked += () => StartCoroutine(Refresh());
 
         Spacecraft.position = Vector3.zero;
     }
@@ -77,33 +78,37 @@ public class Propagator : MonoBehaviour
         float dist = Camera.distanceToTarget;
         Spacecraft.localScale = new Vector3(dist/65, dist/100, dist/100);
 
-        //while (trailer <= t)
-        //{
-        //    int tr = (trailer) % iteration_length;
-        //
-        //    (Vector3 dv, Vector3 dr, float dt) = StepRK4(trailer);
-        //    velocities[tr] = dv;
-        //    positions[tr] = dr;
-        //    times[tr] = dt;
-        //    if (positions[tr].magnitude > 1e10)
-        //    {
-        //        int trm = (tr - 1) % iteration_length;
-        //        if (trm < 0)
-        //        {
-        //            trm = iteration_length - 1;
-        //        }
-        //        positions[tr] = positions[trm];
-        //       velocities[tr] = velocities[trm];
-        //        times[tr] = times[trm];
-        //    }
-        //
-        //    lr.positionCount = lr.positionCount + 1;
-        //    lr.SetPosition(lr.positionCount - 1, positions[tr]);
-        //
-        //    trailer = trailer + 1;
-        //}
+        bool updateCont = false;
+        if (updateCont == true)
+        {
+            while (trailer <= t)
+            {
+                int tr = (trailer) % iteration_length;
+            
+                (Vector3d dv, Vector3d dr, float dt) = StepRK4(trailer);
+                velocities[tr] = dv;
+                positions[tr] = dr;
+                times[tr] = dt;
+                if (positions[tr].magnitude > 1e10)
+                {
+                    int trm = (tr - 1) % iteration_length;
+                    if (trm < 0)
+                    {
+                        trm = iteration_length - 1;
+                    }
+                    positions[tr] = positions[trm];
+                    velocities[tr] = velocities[trm];
+                    times[tr] = times[trm];
+                }
+            
+                trailer = trailer + 1;
+            }
 
-        if (t > iteration_length/2)
+            gamePositions[trailer] = ((positions[trailer] - GameObject.Find(Universe.objects[bodyIndex]).GetComponent<Celestial>().place_wrtGlobal(times[trailer])) / Universe.scaleDown).backToVec;
+        }
+
+
+        if (t > iteration_length/20)
         {
             Refresh();
         }
@@ -165,7 +170,7 @@ public class Propagator : MonoBehaviour
         return (dv, dr, dt);
     }
 
-    void Refresh()
+    IEnumerator Refresh()
     {
         IntegerField iterationInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ControlsContainer").Q<VisualElement>("IterationLengthContainer").Q<IntegerField>("IterationLength");
         iteration_length = iterationInput.value;
@@ -174,20 +179,24 @@ public class Propagator : MonoBehaviour
         positions = new Vector3d[iteration_length];
         velocities = new Vector3d[iteration_length];
         times = new float[iteration_length];
+        gamePositions = new Vector3[positions.Length];
+        gameVelocities = new Vector3[positions.Length];
 
         positions[0] = currentPosition;
         velocities[0] = currentVelocity;
         times[0] = currentTime;
-        
+
 
 
         for (int i = 1; i < iteration_length; i++)
         {
-
+            Celestial refCelest = GameObject.Find(Universe.objects[bodyIndex]).GetComponent<Celestial>();
             (Vector3d dv, Vector3d dr, float dt) = StepRK4(i);
             positions[i] = dr;
             velocities[i] = dv;
             times[i] = dt;
+            gamePositions[i] = ((positions[i] - refCelest.place_wrtGlobal(times[i])) / Universe.scaleDown).backToVec;
+            gameVelocities[i] = velocities[i].backToVec - refCelest.vel_wrtGlobal(times[i]).backToVec;
             if (positions[i].magnitude > 1e10)
             {
                 int im = (i - 1) % iteration_length;
@@ -198,8 +207,14 @@ public class Propagator : MonoBehaviour
                 positions[i] = positions[im];
                 velocities[i] = velocities[im];
                 times[i] = times[im];
+                gamePositions[i] = gamePositions[im];
+                gameVelocities[i] = gameVelocities[im];
             }
 
+            if (i % 1000 == 0)
+            {
+                yield return null;
+            }
             
         }
 
