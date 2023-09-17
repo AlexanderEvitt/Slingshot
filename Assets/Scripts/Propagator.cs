@@ -29,6 +29,8 @@ public class Propagator : MonoBehaviour
     public Vector3 currentGamePosition = new Vector3(0f, 0f, 0f);
     public Celestial[] celestials;
     CameraMovement Camera;
+    public Vector4[] maneuvers;
+    public string[] references;
 
     void Start()
     {
@@ -147,7 +149,7 @@ public class Propagator : MonoBehaviour
         }
 
         
-        float dt = 0.1f / Mathf.Sqrt(acceleration(positions[im], im).backToVec.magnitude);
+        float dt = 0.05f / acceleration(positions[im], im).backToVec.magnitude;
         float h2 = (float)(dt) / 2;
         float h6 = (float)(dt) / 6;
 
@@ -163,7 +165,7 @@ public class Propagator : MonoBehaviour
         Vector3d k4v = acceleration(positions[im] + k3r * dt, im);
         Vector3d k4r = velocities[im] + k3v * dt;
 
-        Vector3d dv = velocities[im] + h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, positions[im], velocities[im]);
+        Vector3d dv = velocities[im] + h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, positions[im], velocities[im], maneuvers, references);
         Vector3d dr = positions[im] + h6 * (k1r + 2 * k2r + 2 * k3r + k4r);
         dt = times[im] + dt;
 
@@ -186,7 +188,8 @@ public class Propagator : MonoBehaviour
         velocities[0] = currentVelocity;
         times[0] = currentTime;
 
-
+        maneuvers = GameObject.Find("UIDocument").GetComponent<Maneuver>().maneuvers;
+        references = GameObject.Find("UIDocument").GetComponent<Maneuver>().references;
 
         for (int i = 1; i < iteration_length; i++)
         {
@@ -222,15 +225,14 @@ public class Propagator : MonoBehaviour
         
     }
 
-    Vector3d maneuverDeltaV(int index,float dt,Vector3d position,Vector3d velocity)
+    Vector3d maneuverDeltaV(int index,float dt,Vector3d position,Vector3d velocity, Vector4[] maneuvers, string[] references)
     {
         int im = (index - 1) % iteration_length;
         if (im < 0)
         {
             im = iteration_length - 1;
         }
-        Vector4[] maneuvers = GameObject.Find("UIDocument").GetComponent<Maneuver>().maneuvers;
-        string[] references = GameObject.Find("UIDocument").GetComponent<Maneuver>().references;
+
         Vector3d deltaV = new Vector3d();
         for (int i = 0; i < maneuvers.Length; i++)
         {
@@ -241,6 +243,9 @@ public class Propagator : MonoBehaviour
                 Vector3d nhat = Vector3d.Cross(vhat, chat).normalized;
                 Vector3d rhat = Vector3d.Cross(vhat, nhat).normalized;
                 deltaV = maneuvers[i].y * vhat + maneuvers[i].z * nhat + maneuvers[i].w * rhat;
+                maneuvers[i].y = 0;
+                maneuvers[i].z = 0;
+                maneuvers[i].w = 0;
             }
         }
         return deltaV;

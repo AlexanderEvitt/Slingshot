@@ -41,7 +41,7 @@ public class Trajectory : MonoBehaviour
             bodyIndex = (bodyIndex + 1) % 10;
         }
 
-        if (counter > 20)
+        if (counter > 0)
         {
             lr = GetComponent<LineRenderer>();
             lr.positionCount = positions.Length;
