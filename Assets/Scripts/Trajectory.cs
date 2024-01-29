@@ -36,10 +36,25 @@ public class Trajectory : MonoBehaviour
         float dist = Camera.distanceToTarget;
         int iteration_length = iterationInput.value;
 
+        // This bit moves the reference frame to the next planet if r is pressed, or to the previous if shift+R is pressed
         if (Input.GetKeyDown("r"))
         {
-            bodyIndex = (bodyIndex + 1) % 10;
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                bodyIndex = (bodyIndex - 1);
+                if (bodyIndex <= 0)
+                {
+                    bodyIndex = 9;
+                }
+            }
+            else
+            {
+                bodyIndex = (bodyIndex + 1) % 10;
+            }
+            Debug.Log(bodyIndex);
         }
+
+        
 
         if (counter > 0)
         {

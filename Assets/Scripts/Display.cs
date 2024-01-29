@@ -9,7 +9,7 @@ public class Display : MonoBehaviour
     private Label timeCounter;
     private Label altitudeCounter;
     private Label inclinationCounter;
-    private Label eccentricityCounter;
+    private Label refCounter;
     Propagator Propagator;
     private Vector3 vel;
     private Vector3 r;
@@ -21,7 +21,7 @@ public class Display : MonoBehaviour
         timeCounter = rootVisualElement.Q<VisualElement>("TopBar").Q<VisualElement>("TimeContainer").Q<Label>("Time");
         altitudeCounter = rootVisualElement.Q<VisualElement>("TopBar").Q<VisualElement>("AltitudeContainer").Q<Label>("Altitude");
         inclinationCounter = rootVisualElement.Q<VisualElement>("TopBar").Q<VisualElement>("InclinationContainer").Q<Label>("Inclination");
-        eccentricityCounter = rootVisualElement.Q<VisualElement>("TopBar").Q<VisualElement>("EccentricityContainer").Q<Label>("Eccentricity");
+        refCounter = rootVisualElement.Q<VisualElement>("TopBar").Q<VisualElement>("EccentricityContainer").Q<Label>("Eccentricity");
         Propagator = GameObject.Find("Spacecraft").GetComponent<Propagator>();
     }
 
@@ -40,7 +40,7 @@ public class Display : MonoBehaviour
 
         ChangeInclination(vel, r);
 
-        ChangeEccentricity(vel, r);
+        ChangeRef(vel, r);
     }
 
     void ChangeTimeCounter()
@@ -81,11 +81,8 @@ public class Display : MonoBehaviour
 
     }
 
-    void ChangeEccentricity(Vector3 r, Vector3 vel)
+    void ChangeRef(Vector3 r, Vector3 vel)
     {
-        //Vector3 h = Vector3.Cross(vel, r);
-        //float mu = Universe.G * -1000;  // km^3 / s^2, could not tell you why this works but it seems to
-        //Vector3 e = (Vector3.Cross(h, vel) / mu) - (r.normalized);
-        eccentricityCounter.text = $"{Universe.objects[Propagator.bodyIndex]}";
+        refCounter.text = $"{Universe.objects[Propagator.bodyIndex]}";
     }
 }

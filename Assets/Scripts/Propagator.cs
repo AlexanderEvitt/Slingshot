@@ -14,7 +14,7 @@ public class Propagator : MonoBehaviour
     public Vector3[] gamePositions;
     public Vector3[] gameVelocities;
     public float[] times;
-    int t = 1;
+    public int t = 1;
     int trailer = 0;
     public int bodyIndex = 3;
     int skip = 1;
@@ -34,20 +34,24 @@ public class Propagator : MonoBehaviour
 
     void Start()
     {
+        // Gathers all the relevant objects that affect the spacecraft
         celestials = FindObjectsOfType<Celestial>();
         Camera = GameObject.Find("InputController").GetComponent<CameraMovement>();
         Spacecraft = gameObject.transform;
         rootVisualElement = GameObject.Find("UIDocument").GetComponent<UIDocument>().rootVisualElement;
-        StartCoroutine(Refresh());
 
+        // Refresh the trajectory whenver the refresh button is pushed
+        StartCoroutine(Refresh());
         refreshButton = rootVisualElement.Q<VisualElement>("SideBar").Q<Button>("RefreshButton");
         refreshButton.clicked += () => StartCoroutine(Refresh());
 
+        // Spacecraft is fixed to the origin of the system, planets move around it
         Spacecraft.position = Vector3.zero;
     }
 
     void Update()
     {
+        // Accelerate time by 2x whenever ' is pressed, decelerate by 1/2x whenever ; is pressed, pause if small
         if (Input.GetKeyDown("'"))
         {
             skip = skip*2;
@@ -115,11 +119,22 @@ public class Propagator : MonoBehaviour
             Refresh();
         }
 
+        // This bit moves the reference frame to the next planet if r is pressed, or to the previous if shift+R is pressed
         if (Input.GetKeyDown("r"))
         {
-            bodyIndex = (bodyIndex + 1) % 10;
-
-            (gamePositions, gameVelocities) = toGamePos(positions, Universe.objects[bodyIndex]);
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                bodyIndex = (bodyIndex - 1);
+                if (bodyIndex <= 0)
+                {
+                    bodyIndex = 9;
+                }
+            }
+            else
+            {
+                bodyIndex = (bodyIndex + 1) % 10;
+            }
+            Debug.Log(bodyIndex);
         }
 
         t = t + skip;
@@ -140,7 +155,7 @@ public class Propagator : MonoBehaviour
         
     }
 
-    (Vector3d dv, Vector3d dr, float dt) StepRK4(int i)
+    (Vector3d vn, Vector3d rn, float tn) StepRK4(int i)
     {
         int im = (i - 1) % iteration_length;
         if (im < 0)
@@ -148,7 +163,7 @@ public class Propagator : MonoBehaviour
             im = iteration_length - 1;
         }
 
-        
+        // Time step scales with acceleration, providing higher fidelity close to bodies
         float dt = 0.05f / acceleration(positions[im], im).backToVec.magnitude;
         float h2 = (float)(dt) / 2;
         float h6 = (float)(dt) / 6;
@@ -165,19 +180,50 @@ public class Propagator : MonoBehaviour
         Vector3d k4v = acceleration(positions[im] + k3r * dt, im);
         Vector3d k4r = velocities[im] + k3v * dt;
 
-        Vector3d dv = velocities[im] + h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, positions[im], velocities[im], maneuvers, references);
-        Vector3d dr = positions[im] + h6 * (k1r + 2 * k2r + 2 * k3r + k4r);
-        dt = times[im] + dt;
+        Vector3d vn = velocities[im] + h6 * (k1v + 2 * k2v + 2 * k3v + k4v) + maneuverDeltaV(i, dt, positions[im], velocities[im], maneuvers, references);
+        Vector3d rn = positions[im] + h6 * (k1r + 2 * k2r + 2 * k3r + k4r);
+        float tn = times[im] + dt;
 
-        return (dv, dr, dt);
+        return (vn, rn, tn);
+    }
+
+    (Vector3d vn, Vector3d rn, float tn) StepForestRuth(int i)
+    {
+        /*
+        Forest-Ruth numerical integration algorithm as described in https://etda.libraries.psu.edu/files/final_submissions/11742
+        */
+
+        int im = (i - 1) % iteration_length;
+        if (im < 0)
+        {
+            im = iteration_length - 1;
+        }
+
+        // Time step scales with acceleration, providing higher fidelity close to bodies
+        float dt = 0.05f / acceleration(positions[im], im).backToVec.magnitude;
+        float theta = 1.35120719196f;
+
+        Vector3d r1 = positions[im] + theta * velocities[im] * (dt / 2);
+        Vector3d v1 = velocities[im] + theta * acceleration(r1, im) * dt;
+
+        Vector3d r2 = r1 + (1 - theta) * v1 * (dt / 2);
+        Vector3d v2 = v1 + (1- 2*theta)*acceleration(r2,im) * dt;
+
+        Vector3d rn = r2 + theta * v2 * (dt / 2);
+        Vector3d vn = v2 + theta * acceleration(rn, im) * dt;
+        float tn = times[im] + dt;
+
+        return (vn, rn, tn);
     }
 
     IEnumerator Refresh()
     {
+        // Get how many iterations to do
         IntegerField iterationInput = rootVisualElement.Q<VisualElement>("SideBar").Q<VisualElement>("ControlsContainer").Q<VisualElement>("IterationLengthContainer").Q<IntegerField>("IterationLength");
         iteration_length = iterationInput.value;
+        
+        // Initialize, game prefix indicates that the variable refers to a reference frame centered on the reference celestial body (to plot trajectory in other frames)
         t = 1;
-
         positions = new Vector3d[iteration_length];
         velocities = new Vector3d[iteration_length];
         times = new float[iteration_length];
@@ -188,18 +234,21 @@ public class Propagator : MonoBehaviour
         velocities[0] = currentVelocity;
         times[0] = currentTime;
 
+        // Pull the maneuver velocities and what frame they're in
         maneuvers = GameObject.Find("UIDocument").GetComponent<Maneuver>().maneuvers;
         references = GameObject.Find("UIDocument").GetComponent<Maneuver>().references;
+        Celestial refCelest = GameObject.Find(Universe.objects[bodyIndex]).GetComponent<Celestial>();
 
+        // Iterate through the time steps
         for (int i = 1; i < iteration_length; i++)
         {
-            Celestial refCelest = GameObject.Find(Universe.objects[bodyIndex]).GetComponent<Celestial>();
-            (Vector3d dv, Vector3d dr, float dt) = StepRK4(i);
-            positions[i] = dr;
-            velocities[i] = dv;
-            times[i] = dt;
+            (velocities[i], positions[i], times[i]) = StepForestRuth(i);
+            
             gamePositions[i] = ((positions[i] - refCelest.place_wrtGlobal(times[i])) / Universe.scaleDown).backToVec;
             gameVelocities[i] = velocities[i].backToVec - refCelest.vel_wrtGlobal(times[i]).backToVec;
+            Debug.Log(velocities[i]);
+
+            // Handle shooting off into infinity
             if (positions[i].magnitude > 1e10)
             {
                 int im = (i - 1) % iteration_length;
@@ -221,7 +270,8 @@ public class Propagator : MonoBehaviour
             
         }
 
-        (gamePositions, gameVelocities) = toGamePos(positions, Universe.objects[bodyIndex]);
+        // Check if this is necessary
+        //(gamePositions, gameVelocities) = toGamePos(positions, Universe.objects[bodyIndex]);
         
     }
 
