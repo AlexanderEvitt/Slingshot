@@ -14,7 +14,7 @@ public class Propagator : MonoBehaviour
     public Vector3[] gamePositions;
     public Vector3[] gameVelocities;
     public float[] times;
-    public int t = 1;
+    int t = 1;
     int trailer = 0;
     public int bodyIndex = 3;
     int skip = 1;
@@ -201,7 +201,7 @@ public class Propagator : MonoBehaviour
 
         // Time step scales with acceleration, providing higher fidelity close to bodies
         float dt = 0.05f / acceleration(positions[im], im).backToVec.magnitude;
-        float theta = 1.35120719196f;
+        float theta = 0.982f;//1.35120719196f;
 
         Vector3d r1 = positions[im] + theta * velocities[im] * (dt / 2);
         Vector3d v1 = velocities[im] + theta * acceleration(r1, im) * dt;
@@ -242,11 +242,10 @@ public class Propagator : MonoBehaviour
         // Iterate through the time steps
         for (int i = 1; i < iteration_length; i++)
         {
-            (velocities[i], positions[i], times[i]) = StepForestRuth(i);
+            (velocities[i], positions[i], times[i]) = StepRK4(i);
             
             gamePositions[i] = ((positions[i] - refCelest.place_wrtGlobal(times[i])) / Universe.scaleDown).backToVec;
             gameVelocities[i] = velocities[i].backToVec - refCelest.vel_wrtGlobal(times[i]).backToVec;
-            Debug.Log(velocities[i]);
 
             // Handle shooting off into infinity
             if (positions[i].magnitude > 1e10)
@@ -271,7 +270,7 @@ public class Propagator : MonoBehaviour
         }
 
         // Check if this is necessary
-        //(gamePositions, gameVelocities) = toGamePos(positions, Universe.objects[bodyIndex]);
+        (gamePositions, gameVelocities) = toGamePos(positions, Universe.objects[bodyIndex]);
         
     }
 
