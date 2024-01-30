@@ -512,6 +512,8 @@ MonoBehaviour:
   currentGameVelocity: {x: 0, y: 0, z: 0}
   currentGamePosition: {x: 0, y: 0, z: 0}
   celestials: []
+  maneuvers: []
+  references: []
 --- !u!23 &1002656902
 MeshRenderer:
   m_ObjectHideFlags: 0

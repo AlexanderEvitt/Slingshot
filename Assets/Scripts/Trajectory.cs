@@ -51,7 +51,6 @@ public class Trajectory : MonoBehaviour
             {
                 bodyIndex = (bodyIndex + 1) % 10;
             }
-            Debug.Log(bodyIndex);
         }
 
         

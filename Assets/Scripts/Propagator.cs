@@ -24,7 +24,7 @@ public class Propagator : MonoBehaviour
     public float currentTime = 0;
     public Vector3 offset = Vector3.zero;
     Vector3d currentPosition = new Vector3d(147105000d,0d,0d);
-    public Vector3d currentVelocity = new Vector3d(0d, 0d, 37.20d);
+    public Vector3d currentVelocity = new Vector3d(0d, 0d, 39.20d);
     public Vector3 currentGameVelocity = new Vector3(0f, 0f, 0f);
     public Vector3 currentGamePosition = new Vector3(0f, 0f, 0f);
     public Celestial[] celestials;
@@ -134,7 +134,6 @@ public class Propagator : MonoBehaviour
             {
                 bodyIndex = (bodyIndex + 1) % 10;
             }
-            Debug.Log(bodyIndex);
         }
 
         t = t + skip;
@@ -163,8 +162,8 @@ public class Propagator : MonoBehaviour
             im = iteration_length - 1;
         }
 
-        // Time step scales with acceleration, providing higher fidelity close to bodies
-        float dt = 0.05f / acceleration(positions[im], im).backToVec.magnitude;
+        // Time step scales with acceleration, providing higher fidelity close to bodies. Adaptive time stepping is currently unstable. Future work will fix this.
+        float dt = 0.01f / acceleration(positions[im], im).backToVec.magnitude;
         float h2 = (float)(dt) / 2;
         float h6 = (float)(dt) / 6;
 
@@ -199,9 +198,8 @@ public class Propagator : MonoBehaviour
             im = iteration_length - 1;
         }
 
-        // Time step scales with acceleration, providing higher fidelity close to bodies
-        float dt = 0.05f / acceleration(positions[im], im).backToVec.magnitude;
-        float theta = 0.982f;//1.35120719196f;
+        float dt = 60f;
+        float theta = 1.0f;
 
         Vector3d r1 = positions[im] + theta * velocities[im] * (dt / 2);
         Vector3d v1 = velocities[im] + theta * acceleration(r1, im) * dt;
@@ -210,7 +208,7 @@ public class Propagator : MonoBehaviour
         Vector3d v2 = v1 + (1- 2*theta)*acceleration(r2,im) * dt;
 
         Vector3d rn = r2 + theta * v2 * (dt / 2);
-        Vector3d vn = v2 + theta * acceleration(rn, im) * dt;
+        Vector3d vn = v2 + theta * acceleration(rn, im) * dt + maneuverDeltaV(i, dt, positions[im], velocities[im], maneuvers, references);
         float tn = times[im] + dt;
 
         return (vn, rn, tn);
@@ -242,7 +240,7 @@ public class Propagator : MonoBehaviour
         // Iterate through the time steps
         for (int i = 1; i < iteration_length; i++)
         {
-            (velocities[i], positions[i], times[i]) = StepRK4(i);
+            (velocities[i], positions[i], times[i]) = StepForestRuth(i);
             
             gamePositions[i] = ((positions[i] - refCelest.place_wrtGlobal(times[i])) / Universe.scaleDown).backToVec;
             gameVelocities[i] = velocities[i].backToVec - refCelest.vel_wrtGlobal(times[i]).backToVec;
