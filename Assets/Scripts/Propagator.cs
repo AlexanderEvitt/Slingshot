@@ -91,7 +91,7 @@ public class Propagator : MonoBehaviour
             {
                 int tr = (trailer) % iteration_length;
             
-                (Vector3d dv, Vector3d dr, float dt) = StepRK4(trailer);
+                (Vector3d dv, Vector3d dr, float dt) = StepForestRuth(trailer);
                 velocities[tr] = dv;
                 positions[tr] = dr;
                 times[tr] = dt;
@@ -114,9 +114,9 @@ public class Propagator : MonoBehaviour
         }
 
 
-        if (t > iteration_length/20)
+        if (t > iteration_length/5)
         {
-            Refresh();
+            StartCoroutine(Refresh());
         }
 
         // This bit moves the reference frame to the next planet if r is pressed, or to the previous if shift+R is pressed
@@ -190,25 +190,35 @@ public class Propagator : MonoBehaviour
     {
         /*
         Forest-Ruth numerical integration algorithm as described in https://etda.libraries.psu.edu/files/final_submissions/11742
+        Except there's some modifications, plus a pseudo-adaptive time step algorithm
         */
 
+        // Calculate the index of the last timestep
         int im = (i - 1) % iteration_length;
         if (im < 0)
         {
             im = iteration_length - 1;
         }
 
-        float dt = 60f;
-        float theta = 1.0f;
+        // Use a gigantic timestep OR a much smaller one if the spacecraft is closer to any body than that body's "fence" (defined roughly as the distance to the L1 point)
+        float dt = 6000f;
+        for (int j = 0; j < celestials.Length; j++)
+        {
+            double distance = (positions[im] - celestials[j].place_wrtGlobal(times[im])).magnitude;
+            if (distance < Universe.fence[j])
+            {
+                dt = 60f;
+            }
+        }
 
-        Vector3d r1 = positions[im] + theta * velocities[im] * (dt / 2);
-        Vector3d v1 = velocities[im] + theta * acceleration(r1, im) * dt;
+        Vector3d r1 = positions[im] + velocities[im] * (dt / 2);
+        Vector3d v1 = velocities[im] + acceleration(r1, im) * dt;
 
-        Vector3d r2 = r1 + (1 - theta) * v1 * (dt / 2);
-        Vector3d v2 = v1 + (1- 2*theta)*acceleration(r2,im) * dt;
+        Vector3d r2 = r1;
+        Vector3d v2 = v1 - acceleration(r2,im) * dt;
 
-        Vector3d rn = r2 + theta * v2 * (dt / 2);
-        Vector3d vn = v2 + theta * acceleration(rn, im) * dt + maneuverDeltaV(i, dt, positions[im], velocities[im], maneuvers, references);
+        Vector3d rn = r2 + v2 * (dt / 2);
+        Vector3d vn = v2 + acceleration(rn, im) * dt + maneuverDeltaV(i, dt, positions[im], velocities[im], maneuvers, references);
         float tn = times[im] + dt;
 
         return (vn, rn, tn);
@@ -260,7 +270,7 @@ public class Propagator : MonoBehaviour
                 gameVelocities[i] = gameVelocities[im];
             }
 
-            if (i % 1000 == 0)
+            if (i % 500 == 0)
             {
                 yield return null;
             }
