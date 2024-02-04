@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Xml.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,16 +16,16 @@ public class Propagator : MonoBehaviour
     public Vector3[] gameVelocities;
     public float[] times;
     int t = 1;
-    int trailer = 0;
     public int bodyIndex = 3;
-    int skip = 1;
+    int rateTime = 1;
     private Button refreshButton;
     private VisualElement rootVisualElement;
     public int iteration_length = Universe.iteration_length;
     public float currentTime = 0;
     public Vector3 offset = Vector3.zero;
-    Vector3d currentPosition = new Vector3d(147105000d,0d,0d);
-    public Vector3d currentVelocity = new Vector3d(0d, 0d, 39.20d);
+    Vector3d lastPosition = new Vector3d(147105000d,0d,0d);
+    public Vector3d lastVelocity = new Vector3d(0d, 0d, 39.20d);
+    public float lastTime = 0;
     public Vector3 currentGameVelocity = new Vector3(0f, 0f, 0f);
     public Vector3 currentGamePosition = new Vector3(0f, 0f, 0f);
     public Celestial[] celestials;
@@ -54,66 +55,52 @@ public class Propagator : MonoBehaviour
         // Accelerate time by 2x whenever ' is pressed, decelerate by 1/2x whenever ; is pressed, pause if small
         if (Input.GetKeyDown("'"))
         {
-            skip = skip*2;
-            if (skip == 0)
+            rateTime = rateTime*2;
+            if (rateTime == 0)
             {
-                skip = 1;
+                rateTime = 1;
             }
         }
         if (Input.GetKeyDown(";"))
         {
-            skip = skip/2;
-            if (skip < 1)
+            rateTime = rateTime /2;
+            if (rateTime < 1)
             {
-                skip = 0;
+                rateTime = 0;
             }
         }
-        
-        if (skip > 0)
-        {
-            offset = positions[t % iteration_length].backToVec;
-            currentVelocity = velocities[t % iteration_length];
-            currentGameVelocity = gameVelocities[t % iteration_length];
-            currentGamePosition = gamePositions[t % iteration_length];
-            currentTime = times[t % iteration_length];
-            
 
-            currentPosition = positions[t % iteration_length];
+        // Advance the current index by this quantity
+        currentTime = currentTime + 0.02f * rateTime;
+        float stepTime = times[t + 1] - times[t];
+        if (currentTime > times[t] + stepTime)
+        {
+            t = t + (int)((currentTime - times[t]) / stepTime);
         }
-        Spacecraft.rotation = Quaternion.LookRotation(gameVelocities[t % iteration_length].normalized) * Quaternion.Euler(0, 90, 0);
+
+        if (rateTime > 0)
+        {
+            // Offset tells the other planets how to move
+            offset = interpolate(positions[t].backToVec, positions[t + 1].backToVec, times[t], currentTime, times[t + 1]);
+            
+            // These tell the displays how to display altitude and velocity
+            currentGameVelocity = interpolate(gameVelocities[t], gameVelocities[t + 1], times[t], currentTime, times[t + 1]);
+            currentGamePosition = interpolate(gamePositions[t], gamePositions[t + 1], times[t], currentTime, times[t + 1]);
+            
+            // These instantiate the next refresh cycle
+            lastPosition = positions[t];
+            lastVelocity = velocities[t];
+            lastTime = times[t];
+        }
+        
+
+        // Point the spacecraft in the prograde direction and scale it with the camera
+        Spacecraft.rotation = Quaternion.LookRotation(currentGameVelocity.normalized) * Quaternion.Euler(0, 90, 0);
         float dist = Camera.distanceToTarget;
         Spacecraft.localScale = new Vector3(dist/65, dist/100, dist/100);
 
-        bool updateCont = false;
-        if (updateCont == true)
-        {
-            while (trailer <= t)
-            {
-                int tr = (trailer) % iteration_length;
-            
-                (Vector3d dv, Vector3d dr, float dt) = StepForestRuth(trailer);
-                velocities[tr] = dv;
-                positions[tr] = dr;
-                times[tr] = dt;
-                if (positions[tr].magnitude > 1e10)
-                {
-                    int trm = (tr - 1) % iteration_length;
-                    if (trm < 0)
-                    {
-                        trm = iteration_length - 1;
-                    }
-                    positions[tr] = positions[trm];
-                    velocities[tr] = velocities[trm];
-                    times[tr] = times[trm];
-                }
-            
-                trailer = trailer + 1;
-            }
 
-            gamePositions[trailer] = ((positions[trailer] - GameObject.Find(Universe.objects[bodyIndex]).GetComponent<Celestial>().place_wrtGlobal(times[trailer])) / Universe.scaleDown).backToVec;
-        }
-
-
+        // Refresh the trajectory if the spacecraft is more than 1/5th along the route
         if (t > iteration_length/5)
         {
             StartCoroutine(Refresh());
@@ -125,7 +112,7 @@ public class Propagator : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftControl))
             {
                 bodyIndex = (bodyIndex - 1);
-                if (bodyIndex <= 0)
+                if (bodyIndex < 0)
                 {
                     bodyIndex = 9;
                 }
@@ -135,9 +122,6 @@ public class Propagator : MonoBehaviour
                 bodyIndex = (bodyIndex + 1) % 10;
             }
         }
-
-        t = t + skip;
-
     }
 
     Vector3d acceleration(Vector3d position, int index)
@@ -238,9 +222,9 @@ public class Propagator : MonoBehaviour
         gamePositions = new Vector3[positions.Length];
         gameVelocities = new Vector3[positions.Length];
 
-        positions[0] = currentPosition;
-        velocities[0] = currentVelocity;
-        times[0] = currentTime;
+        positions[0] = lastPosition;
+        velocities[0] = lastVelocity;
+        times[0] = lastTime;
 
         // Pull the maneuver velocities and what frame they're in
         maneuvers = GameObject.Find("UIDocument").GetComponent<Maneuver>().maneuvers;
@@ -323,6 +307,11 @@ public class Propagator : MonoBehaviour
         }
         gameVelocities[positions.Length - 1] = gameVelocities[positions.Length - 2];
         return (gamePositions, gameVelocities);
+    }
+
+    Vector3 interpolate(Vector3 startVal, Vector3 endVal, float startTime, float currentTime, float endTime) 
+    {
+        return (startVal + (currentTime-startTime)*((endVal-startVal)/(endTime-startTime)));
     }
 
 }
