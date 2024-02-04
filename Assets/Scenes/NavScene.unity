@@ -509,6 +509,7 @@ MonoBehaviour:
   iteration_length: 10000
   currentTime: 0
   offset: {x: 0, y: 0, z: 0}
+  lastTime: 0
   currentGameVelocity: {x: 0, y: 0, z: 0}
   currentGamePosition: {x: 0, y: 0, z: 0}
   celestials: []
