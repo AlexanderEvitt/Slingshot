@@ -3,7 +3,7 @@ extends Drawer
 @export var period: float # days
 @export var color: Color
 var c = 0
-var n = 100.0
+var n = 64.0
 var indent = 0.02
 var tc = 0
 

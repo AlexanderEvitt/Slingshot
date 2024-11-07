@@ -258,7 +258,7 @@ color = Color(0.145, 0.254342, 0.760636, 1)
 script = ExtResource("13_p8nnc")
 start_position = Vector3(6371, 6371, 0)
 start_velocity = Vector3(-29.8, -2, 4)
-n = 20000
+n = 5000
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft"]
 mesh = SubResource("CylinderMesh_b1c6p")
@@ -268,6 +268,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
 top_level = true
 script = ExtResource("14_g31x3")
 color = Color(1, 1, 1, 1)
+
+[node name="Spacecraft2" type="Node3D" parent="."]
+script = ExtResource("13_p8nnc")
+start_position = Vector3(6000, 6000, 0)
+start_velocity = Vector3(-29.8, -2, 4)
+n = 5000
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft2"]
+mesh = SubResource("CylinderMesh_b1c6p")
+
+[node name="CraftPlotter" type="Node3D" parent="Spacecraft2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
+top_level = true
+script = ExtResource("14_g31x3")
+color = Color(0.572988, 0.572988, 0.572988, 1)
 
 [node name="OrbitUI" type="Control" parent="."]
 layout_mode = 3
