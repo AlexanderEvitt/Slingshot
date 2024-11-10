@@ -17,7 +17,7 @@ public partial class SystemTime : Node
 		t = 0;
 		Instance = this;
 
-		steps = new double[] {0.0d,1.0d,10.0d,100.0d,1000.0d,10000.0d,100000.0d};
+		steps = new double[] {0.0d,1.0d,10.0d,100.0d,1000.0d,10000.0d,100000.0d,1000000.0d,10000000.0d};
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

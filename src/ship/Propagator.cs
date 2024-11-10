@@ -99,7 +99,5 @@ public partial class Propagator : Node3D
 		{
 			(positions[i+1],velocities[i+1],times[i+1]) = StepVerlet(positions[i],velocities[i],times[i]);
 		}
-
-		GD.Print(times[500]);
 	}
 }
