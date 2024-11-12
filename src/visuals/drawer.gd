@@ -25,7 +25,7 @@ func line(pos: Array, color = Color.WHITE_SMOKE, persist_ms = 0):
 ## >1 -> Lasts X time duration.
 ## <1 -> Stays indefinitely
 func final_cleanup(mesh_instance: MeshInstance3D, persist_ms: float):
-	get_tree().get_root().add_child(mesh_instance)
+	get_viewport().add_child(mesh_instance)
 	if persist_ms == 1:
 		await get_tree().physics_frame
 		mesh_instance.queue_free()

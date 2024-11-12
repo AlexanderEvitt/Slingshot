@@ -30,6 +30,7 @@ public partial class Propagator : Node3D
 		bodies = GetTree().GetNodesInGroup("Bodies");
 
 		start_position = Conversions.Instance.ToUniversal(start_position);
+		start_velocity = Conversions.Instance.VelToFrame(start_velocity);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

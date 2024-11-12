@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0x7vyc4qrrc2"]
+
+[ext_resource type="Texture2D" uid="uid://da6km1fbq3qbf" path="res://visuals/tycho_skymap_highres.jpg" id="1_nfics"]
+[ext_resource type="Script" path="res://ship/attitude.gd" id="2_rjecn"]
+[ext_resource type="PackedScene" uid="uid://bwwdgkhhphu7b" path="res://ship/OSC.glb" id="3_uoivw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wdgxy"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mg7c"]
+cull_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_nfics")
+
+[node name="AttitudeRoot" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_wdgxy")
+surface_material_override/0 = SubResource("StandardMaterial3D_7mg7c")
+
+[node name="Spacecraft" type="RigidBody3D" parent="."]
+gravity_scale = 0.0
+inertia = Vector3(1, 1, 1)
+can_sleep = false
+script = ExtResource("2_rjecn")
+
+[node name="OSC" parent="Spacecraft" instance=ExtResource("3_uoivw")]
+
+[node name="Camera3D" type="Camera3D" parent="Spacecraft/OSC"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
+fov = 10.0
+size = 2.0

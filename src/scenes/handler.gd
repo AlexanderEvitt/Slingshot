@@ -20,7 +20,6 @@ func _on_nav_button_pressed():
 func _on_con_button_pressed():
 	set_huds(1)
 
-
 func _on_att_button_pressed():
 	set_huds(2)
 	

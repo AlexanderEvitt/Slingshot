@@ -1,27 +1,23 @@
-[gd_scene load_steps=35 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=30 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="2_awidn"]
 [ext_resource type="Texture2D" uid="uid://c0uxclbtphkoa" path="res://visuals/grid.png" id="3_ueufi"]
-[ext_resource type="Material" uid="uid://dy2okmf8n23tj" path="res://scenes/MercuryMat.tres" id="4_vwo00"]
+[ext_resource type="Material" uid="uid://dy2okmf8n23tj" path="res://bodies/MercuryMat.tres" id="4_vwo00"]
 [ext_resource type="Script" path="res://bodies/draw_planet_orbit.gd" id="5_vmpxk"]
-[ext_resource type="Material" uid="uid://bsm4dahp7hpwo" path="res://scenes/VenusMat.tres" id="6_j6fe5"]
-[ext_resource type="Material" uid="uid://ch7lr34sun76y" path="res://scenes/EarthMat.tres" id="7_0th8o"]
-[ext_resource type="Material" uid="uid://c2ham8mio6kqu" path="res://scenes/MarsMat.tres" id="8_x532c"]
-[ext_resource type="Material" uid="uid://3ao1la4uijl5" path="res://scenes/JupiterMat.tres" id="9_4nlwx"]
-[ext_resource type="Material" uid="uid://c6ao8d12msn7e" path="res://scenes/SaturnMat.tres" id="10_dj0lq"]
-[ext_resource type="Material" uid="uid://cvcneo6e8o7ol" path="res://scenes/UranusMat.tres" id="11_t4h44"]
-[ext_resource type="Material" uid="uid://c3tr66nhpon6k" path="res://scenes/NeptuneMat.tres" id="12_3x3y7"]
+[ext_resource type="Material" uid="uid://bsm4dahp7hpwo" path="res://bodies/VenusMat.tres" id="6_j6fe5"]
+[ext_resource type="Material" uid="uid://ch7lr34sun76y" path="res://bodies/EarthMat.tres" id="7_0th8o"]
+[ext_resource type="Material" uid="uid://c2ham8mio6kqu" path="res://bodies/MarsMat.tres" id="8_x532c"]
+[ext_resource type="Material" uid="uid://3ao1la4uijl5" path="res://bodies/JupiterMat.tres" id="9_4nlwx"]
+[ext_resource type="Material" uid="uid://c6ao8d12msn7e" path="res://bodies/SaturnMat.tres" id="10_dj0lq"]
+[ext_resource type="Material" uid="uid://cvcneo6e8o7ol" path="res://bodies/UranusMat.tres" id="11_t4h44"]
+[ext_resource type="Material" uid="uid://c3tr66nhpon6k" path="res://bodies/NeptuneMat.tres" id="12_3x3y7"]
 [ext_resource type="Script" path="res://ship/Propagator.cs" id="13_p8nnc"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="14_g31x3"]
-[ext_resource type="Script" path="res://scenes/handler.gd" id="15_dqdge"]
-[ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/basic_ui_theme.tres" id="15_wjx6d"]
-[ext_resource type="PackedScene" uid="uid://j7weec3kdnqh" path="res://scenes/AttitudeScene.tscn" id="16_qg5ph"]
-[ext_resource type="Script" path="res://ui/quat_getter.gd" id="16_tkou3"]
 
 [sub_resource type="Environment" id="Environment_aovhe"]
 background_mode = 1
-background_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+background_color = Color(0.117647, 0.117647, 0.156863, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_fskp6"]
 radius = 700.0
@@ -79,11 +75,7 @@ height = 49.528
 [sub_resource type="CylinderMesh" id="CylinderMesh_b1c6p"]
 top_radius = 0.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jtqtd"]
-bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
-border_width_top = 2
-
-[node name="Barycenter" type="Node3D"]
+[node name="OrbitRoot" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aovhe")
@@ -265,7 +257,7 @@ color = Color(0.145, 0.254342, 0.760636, 1)
 [node name="Spacecraft" type="Node3D" parent="."]
 script = ExtResource("13_p8nnc")
 start_position = Vector3(6371, 6371, 0)
-start_velocity = Vector3(-29.8, -2, 4)
+start_velocity = Vector3(0, 0, -8)
 n = 5000
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft"]
@@ -276,165 +268,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
 top_level = true
 script = ExtResource("14_g31x3")
 color = Color(1, 1, 1, 1)
-
-[node name="Spacecraft2" type="Node3D" parent="."]
-script = ExtResource("13_p8nnc")
-start_position = Vector3(6000, 6000, 0)
-start_velocity = Vector3(-29.8, -2, 4)
-n = 5000
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft2"]
-mesh = SubResource("CylinderMesh_b1c6p")
-
-[node name="CraftPlotter" type="Node3D" parent="Spacecraft2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
-top_level = true
-script = ExtResource("14_g31x3")
-color = Color(0.572988, 0.572988, 0.572988, 1)
-
-[node name="OrbitUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="Screen" type="VBoxContainer" parent="OrbitUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("15_dqdge")
-
-[node name="OrbitSceneHUD" type="ColorRect" parent="OrbitUI/Screen" groups=["HUDs"]]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-color = Color(0.0745098, 0.0745098, 0.0980392, 0)
-
-[node name="Label" type="Label" parent="OrbitUI/Screen/OrbitSceneHUD"]
-layout_mode = 2
-offset_top = 8.0
-offset_right = 189.0
-offset_bottom = 31.0
-text = "DEVELOPMENT VERSION"
-
-[node name="ControlSceneHUD" type="Panel" parent="OrbitUI/Screen" groups=["HUDs"]]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="AttitudeSceneHUD" type="Panel" parent="OrbitUI/Screen" groups=["HUDs"]]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("15_wjx6d")
-
-[node name="MarginContainer" type="MarginContainer" parent="OrbitUI/Screen/AttitudeSceneHUD"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OrbitUI/Screen/AttitudeSceneHUD/MarginContainer"]
-layout_mode = 2
-script = ExtResource("16_tkou3")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OrbitUI/Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="OrbitUI/Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Atittude quaternion:"
-
-[node name="Label2" type="Label" parent="OrbitUI/Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label3" type="Label" parent="OrbitUI/Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Angular velocity (rad/s):"
-
-[node name="Label4" type="Label" parent="OrbitUI/Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="OrbitUI/Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="OrbitUI/Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/SubViewportContainer"]
-own_world_3d = true
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
-
-[node name="AttitudeRoot" parent="OrbitUI/Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("16_qg5ph")]
-
-[node name="ModeSelectorPanel" type="Panel" parent="OrbitUI/Screen"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
-theme_override_styles/panel = SubResource("StyleBoxFlat_jtqtd")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OrbitUI/Screen/ModeSelectorPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
-
-[node name="NavButtonContainer" type="MarginContainer" parent="OrbitUI/Screen/ModeSelectorPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 3
-
-[node name="Button" type="Button" parent="OrbitUI/Screen/ModeSelectorPanel/HBoxContainer/NavButtonContainer"]
-layout_mode = 2
-theme = ExtResource("15_wjx6d")
-text = "NAV"
-
-[node name="ConButtonContainer2" type="MarginContainer" parent="OrbitUI/Screen/ModeSelectorPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 3
-
-[node name="Button" type="Button" parent="OrbitUI/Screen/ModeSelectorPanel/HBoxContainer/ConButtonContainer2"]
-layout_mode = 2
-theme = ExtResource("15_wjx6d")
-text = "CON"
-
-[node name="AttButtonContainer3" type="MarginContainer" parent="OrbitUI/Screen/ModeSelectorPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 3
-
-[node name="Button" type="Button" parent="OrbitUI/Screen/ModeSelectorPanel/HBoxContainer/AttButtonContainer3"]
-layout_mode = 2
-theme = ExtResource("15_wjx6d")
-text = "ATT"
-
-[connection signal="pressed" from="OrbitUI/Screen/ModeSelectorPanel/HBoxContainer/NavButtonContainer/Button" to="OrbitUI/Screen" method="_on_nav_button_pressed"]
-[connection signal="pressed" from="OrbitUI/Screen/ModeSelectorPanel/HBoxContainer/ConButtonContainer2/Button" to="OrbitUI/Screen" method="_on_con_button_pressed"]
-[connection signal="pressed" from="OrbitUI/Screen/ModeSelectorPanel/HBoxContainer/AttButtonContainer3/Button" to="OrbitUI/Screen" method="_on_att_button_pressed"]

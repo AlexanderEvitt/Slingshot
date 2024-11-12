@@ -31,6 +31,7 @@ public partial class Conversions : Node
 
 	public List<Vector3> SubtractBodyMotion(List<Vector3> positions, List<double> times)
 	{
+		// Place the positions into the frame listed
 		List<Vector3> new_positions = new List<Vector3> ( new Vector3[positions.Count] );
 		Node body_node = bodies[f];
 		planet body = (planet)body_node;
@@ -43,11 +44,20 @@ public partial class Conversions : Node
 
 	public Vector3 ToUniversal(Vector3 positions)
 	{
+		// Convert the start position, given in relative to the start frame, to universal position
+		Node body_node = bodies[f];
+		planet body = (planet)body_node;
+		Vector3 new_positions = positions + body.fetch(t);
+		return new_positions;
+	}
+
+	public Vector3 VelToFrame(Vector3 v)
+	{
+		// Convert the start position, given in relative to the start frame, to universal velocity
 		Node body_node = bodies[f];
 		planet body = (planet)body_node;
 		Vector3 vel = body.fetch(1d) - body.fetch(0d);
-		GD.Print(vel);
-		Vector3 new_positions = positions + body.fetch(t);
-		return new_positions;
+		Vector3 new_v = v + vel;
+		return new_v;
 	}
 }

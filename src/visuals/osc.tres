@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bxhsni6fugu2"]
+
+[ext_resource type="Shader" path="res://visuals/osc.gdshader" id="1_v2esg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_v2esg")
+shader_parameter/line_color = Color(0.222785, 0.372339, 0.48806, 1)
+shader_parameter/line_width = 0.001
+shader_parameter/line_blur = 0.43
+shader_parameter/line_speed = 0.01
+shader_parameter/straight_lines = true
+shader_parameter/interrupt_width = 0.0
+shader_parameter/interrupt_blur = 0.25
+shader_parameter/interrupt_speed = 0.2
+shader_parameter/glow_color = Color(0.775462, 0.885508, 1, 1)
+shader_parameter/glow_itensity = 6.522
+shader_parameter/glow_amount = 4.5
+shader_parameter/flickering = 0.792
