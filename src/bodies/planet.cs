@@ -24,7 +24,7 @@ public partial class planet : Node3D
 		{
 
 			// Initialize SPICE kernel
-			var metaFilePath = System.Environment.ExpandEnvironmentVariables(@"%appdata%\SPICE\de440.bsp");
+			string metaFilePath = System.Environment.ExpandEnvironmentVariables(@"%appdata%\SPICE\de440.bsp");
 			fixed (byte* pathChars = Encoding.ASCII.GetBytes(metaFilePath))
 			{
 				Spice.FURNSH_C(pathChars);

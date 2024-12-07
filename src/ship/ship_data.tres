@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ct24xwols0vwg"]
+
+[ext_resource type="Script" path="res://ship/ship_data_handler.cs" id="1_8wbd2"]
+
+[resource]
+script = ExtResource("1_8wbd2")

@@ -149,7 +149,7 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Earth/CameraRig/CameraRotator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
-fov = 90.0
+fov = 60.0
 far = 1e+10
 script = ExtResource("2_awidn")
 
