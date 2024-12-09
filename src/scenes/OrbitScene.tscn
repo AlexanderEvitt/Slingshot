@@ -259,9 +259,7 @@ color = Color(0.145, 0.254342, 0.760636, 1)
 
 [node name="Spacecraft" type="Node3D" parent="."]
 script = ExtResource("13_p8nnc")
-start_position = Vector3(6371, 6371, 0)
-start_velocity = Vector3(0, 0, -8)
-n = 5000
+n = 1000
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft"]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)

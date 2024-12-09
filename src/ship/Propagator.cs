@@ -14,9 +14,7 @@ public partial class Propagator : Node3D
 	public List<Vector3> controls;
 
 	// Initial conditions
-	[Export]
 	public Vector3 start_position;
-	[Export]
 	public Vector3 start_velocity;
 	[Export]
 	public int n;
@@ -31,9 +29,6 @@ public partial class Propagator : Node3D
 		// Get planets
 		bodies = GetTree().GetNodesInGroup("Bodies");
 
-		start_position = Conversions.Instance.ToUniversal(start_position);
-		start_velocity = Conversions.Instance.VelToFrame(start_velocity);
-
 		// Get singleton for OwnShip (written in GDScript so this is necessary)
 		OwnShip = GetNode("/root/OwnShip");
 	}
@@ -41,11 +36,19 @@ public partial class Propagator : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		c = c + 1;
-		if (c == 1)
+		
+		if (c == 0)
 		{
+			// Reset starting point to current point
+			start_position = (Vector3)OwnShip.Get("position");
+			start_velocity = (Vector3)OwnShip.Get("velocity");
+
+			// Refresh trajectory
 			Refresh();
+			c = 100;
+			
 		}
+		c = c - 1;
 
 		double t = SystemTime.Instance.t;
 

@@ -1,7 +1,7 @@
 class_name Drawer
 extends Node
 
-func line(pos: Array, color = Color.WHITE_SMOKE, persist_ms = 0):
+func line(pos: Array, color = Color.WHITE_SMOKE):
 	var mesh_instance := MeshInstance3D.new()
 	var immediate_mesh := ImmediateMesh.new()
 	var material := ORMMaterial3D.new()
@@ -18,19 +18,14 @@ func line(pos: Array, color = Color.WHITE_SMOKE, persist_ms = 0):
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	material.albedo_color = color
 
-	return await final_cleanup(mesh_instance, persist_ms)
+	return mesh_instance
 
 
 ## 1 -> Lasts ONLY for current physics frame
 ## >1 -> Lasts X time duration.
 ## <1 -> Stays indefinitely
-func final_cleanup(mesh_instance: MeshInstance3D, persist_ms: float):
+func draw(mesh_instance: MeshInstance3D):
 	get_viewport().add_child(mesh_instance)
-	if persist_ms == 1:
-		await get_tree().physics_frame
-		mesh_instance.queue_free()
-	elif persist_ms > 0:
-		await get_tree().create_timer(persist_ms).timeout
-		mesh_instance.queue_free()
-	else:
-		return mesh_instance
+
+func undraw(mesh_instance: MeshInstance3D):
+	mesh_instance.queue_free()

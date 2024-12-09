@@ -119,7 +119,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/OrbitSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1536, 874)
 render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="Screen/OrbitSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
@@ -199,7 +199,6 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
 own_world_3d = true
-transparent_bg = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0

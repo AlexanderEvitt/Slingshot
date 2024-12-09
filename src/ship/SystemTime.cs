@@ -9,7 +9,7 @@ public partial class SystemTime : Node
 	public double t { get; set; }
 	public double step = 0.0f;
 	public double[] steps;
-	public int i = 0;
+	public int i = 1;
 
 
 	public override void _Ready()

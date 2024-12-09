@@ -4,6 +4,8 @@ var position
 var velocity
 var attitude
 
+var thrust = 0
+
 @export var start_position : Vector3
 @export var start_velocity : Vector3
 
@@ -19,11 +21,30 @@ func _ready():
 	attitude = attitude_calculator.transform.basis
 	position = Conversions.ToUniversal(start_position)
 	velocity = Conversions.VelToFrame(start_velocity)
+	print(velocity)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(delta):
+	# Change throttle setting
+	if Input.is_action_just_pressed("full_throttle"):
+		thrust = 20
+	if Input.is_action_just_pressed("cut_throttle"):
+		thrust = 0
+		
+	# Somehow get the acceleration from gravity in here
+	var gravity = get_node("/root/GameRoot/")
+	
+	
+	var dt = delta*SystemTime.step;
+	
 	# Update values
 	attitude = attitude_calculator.transform.basis
-	position = position + Vector3(0,0,1)
-	velocity = Vector3(0,0,0)
+	
+	# Calculate acceleration on vehicle
+	var acceleration = thrust*attitude.x
+	
+	# Calculate updated position and velocity through numerical integration
+	position = position + velocity*dt
+	velocity = velocity + acceleration*dt
+	

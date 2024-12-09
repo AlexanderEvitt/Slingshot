@@ -21,4 +21,5 @@ start_velocity = Vector3(0, 0, -7)
 gravity_scale = 0.0
 inertia = Vector3(1, 1, 1)
 can_sleep = false
+angular_damp = 1.0
 script = ExtResource("3_kr225")
