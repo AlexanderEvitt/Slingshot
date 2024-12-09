@@ -56,6 +56,11 @@ public partial class Propagator : Node3D
 
 		// Set spacecraft position
 		Position = (Vector3)OwnShip.Get("position")/1000d;
+
+		// Set spacecraft pointer attitude
+		Transform3D transform = Transform;
+		transform.Basis = (Basis)OwnShip.Get("attitude");
+		Transform = transform;
 	}
 
 	public Vector3 Acceleration(Vector3 r, double t)
