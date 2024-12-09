@@ -21,6 +21,8 @@ public partial class Propagator : Node3D
 	[Export]
 	public int n;
 
+	private Node OwnShip;
+
 	public int c = 0;
 	public double timescale = 0.01d;
 
@@ -31,6 +33,9 @@ public partial class Propagator : Node3D
 
 		start_position = Conversions.Instance.ToUniversal(start_position);
 		start_velocity = Conversions.Instance.VelToFrame(start_velocity);
+
+		// Get singleton for OwnShip (written in GDScript so this is necessary)
+		OwnShip = GetNode("/root/OwnShip");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,6 +53,9 @@ public partial class Propagator : Node3D
 		List<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
 		Godot.Collections.Array<Vector3> plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
 		GetNode("CraftPlotter").Set("positions",plotted_positions);
+
+		// Set spacecraft position
+		Position = (Vector3)OwnShip.Get("position")/1000d;
 	}
 
 	public Vector3 Acceleration(Vector3 r, double t)

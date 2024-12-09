@@ -1,11 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://n78uivx6mb2"]
+[gd_scene load_steps=4 format=3 uid="uid://n78uivx6mb2"]
 
 [ext_resource type="PackedScene" uid="uid://231jhr4hx8d6" path="res://scenes/UIScene.tscn" id="1_yhthj"]
+[ext_resource type="Script" path="res://ship/ship_calculator.gd" id="2_11ed2"]
+[ext_resource type="Script" path="res://ship/attitude.gd" id="3_kr225"]
 
-[node name="Node" type="Node"]
+[node name="GameRoot" type="Node"]
 
 [node name="Control" parent="." instance=ExtResource("1_yhthj")]
 
 [node name="Planets" type="Node" parent="."]
 
 [node name="Ships" type="Node" parent="."]
+
+[node name="OwnShip" type="Node" parent="Ships"]
+script = ExtResource("2_11ed2")
+start_position = Vector3(6371, 6371, 0)
+start_velocity = Vector3(0, 0, -7)
+
+[node name="AttitudeCalculator" type="RigidBody3D" parent="Ships/OwnShip"]
+gravity_scale = 0.0
+inertia = Vector3(1, 1, 1)
+can_sleep = false
+script = ExtResource("3_kr225")

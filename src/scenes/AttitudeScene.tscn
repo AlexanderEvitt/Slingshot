@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://j7weec3kdnqh"]
 
 [ext_resource type="Texture2D" uid="uid://c8weqi6q7wmp4" path="res://visuals/tycho_grid.jpg" id="1_w04rn"]
-[ext_resource type="Script" path="res://ship/attitude.gd" id="2_una17"]
+[ext_resource type="Script" path="res://scenes/attitude_inheritor.gd" id="2_dpa3u"]
 [ext_resource type="PackedScene" uid="uid://bwwdgkhhphu7b" path="res://ship/OSC.glb" id="3_4w8b1"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_wdgxy"]
@@ -14,14 +14,14 @@ shading_mode = 0
 albedo_texture = ExtResource("1_w04rn")
 uv1_scale = Vector3(-1, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hykkf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8xrs"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1, 0.345098, 0.298039, 0.054902)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_66n1w"]
-material = SubResource("StandardMaterial3D_hykkf")
+material = SubResource("StandardMaterial3D_q8xrs")
 top_radius = 0.3
 bottom_radius = 0.1
 height = 0.8
@@ -42,11 +42,8 @@ transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -3, 0, 0
 projection = 1
 size = 2.0
 
-[node name="Spacecraft" type="RigidBody3D" parent="."]
-gravity_scale = 0.0
-inertia = Vector3(1, 1, 1)
-can_sleep = false
-script = ExtResource("2_una17")
+[node name="Spacecraft" type="Node3D" parent="."]
+script = ExtResource("2_dpa3u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft"]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0.520653, 0, 0)
