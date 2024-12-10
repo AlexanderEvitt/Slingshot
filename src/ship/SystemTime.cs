@@ -25,7 +25,6 @@ public partial class SystemTime : Node
 	{
 		step = steps[i];
 		t = t + step*delta;
-
 		if (Input.IsActionJustPressed("time_speed_up"))
 		{
 			i = (i + 1);

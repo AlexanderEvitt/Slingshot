@@ -13,6 +13,8 @@ public partial class Propagator : Node3D
 	public List<double> times;
 	public List<Vector3> controls;
 
+	public Godot.Collections.Array<Vector3> plotted_positions;
+
 	// Initial conditions
 	public Vector3 start_position;
 	public Vector3 start_velocity;
@@ -44,26 +46,16 @@ public partial class Propagator : Node3D
 			start_velocity = (Vector3)OwnShip.Get("velocity");
 
 			// Refresh trajectory
-			Refresh();
-			c = 100;
+			double t = SystemTime.Instance.t;
+			Refresh(t);
+			c = 30;
 			
 		}
 		c = c - 1;
 
-		double t = SystemTime.Instance.t;
-
-		// pass positions to child plotter for plotting
+		// expose positions for plotting
 		List<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
-		Godot.Collections.Array<Vector3> plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
-		GetNode("CraftPlotter").Set("positions",plotted_positions);
-
-		// Set spacecraft position
-		Position = (Vector3)OwnShip.Get("position")/1000d;
-
-		// Set spacecraft pointer attitude
-		Transform3D transform = Transform;
-		transform.Basis = (Basis)OwnShip.Get("attitude");
-		Transform = transform;
+		plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
 	}
 
 	public Vector3 Acceleration(Vector3 r, double t)
@@ -100,14 +92,14 @@ public partial class Propagator : Node3D
 		return (rp,vp,tp);
     }
 
-	public void Refresh()
+	public void Refresh(double t)
 	{
 		// Initialize lists of size n to hold data
 		positions = new List<Vector3> ( new Vector3[n] );
 		velocities = new List<Vector3> ( new Vector3[n] );
 		times = new List<double> ( new double[n] );
 
-		times[0] = 0d;
+		times[0] = t;
 		positions[0] = start_position;
 		velocities[0] = start_velocity;
 

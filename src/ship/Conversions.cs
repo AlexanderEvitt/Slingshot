@@ -37,7 +37,7 @@ public partial class Conversions : Node
 		planet body = (planet)body_node;
 		for (int i = 0; i < positions.Count; i++)
 		{
-			new_positions[i] = positions[i] - body.fetch(times[i]) + body.fetch(t);
+			new_positions[i] = positions[i] - positions[0] - body.fetch(times[i]) + body.fetch(times[0]);
 		}
 		return new_positions;
 	}

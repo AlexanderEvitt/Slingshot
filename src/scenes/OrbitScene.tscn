@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=33 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="2_awidn"]
@@ -7,12 +7,13 @@
 [ext_resource type="Script" path="res://bodies/draw_planet_orbit.gd" id="5_vmpxk"]
 [ext_resource type="Material" uid="uid://bsm4dahp7hpwo" path="res://bodies/VenusMat.tres" id="6_j6fe5"]
 [ext_resource type="Material" uid="uid://ch7lr34sun76y" path="res://bodies/EarthMat.tres" id="7_0th8o"]
+[ext_resource type="Material" uid="uid://cwynf2mvmnr0i" path="res://bodies/LunaMat.tres" id="8_n3ymp"]
 [ext_resource type="Material" uid="uid://c2ham8mio6kqu" path="res://bodies/MarsMat.tres" id="8_x532c"]
 [ext_resource type="Material" uid="uid://3ao1la4uijl5" path="res://bodies/JupiterMat.tres" id="9_4nlwx"]
 [ext_resource type="Material" uid="uid://c6ao8d12msn7e" path="res://bodies/SaturnMat.tres" id="10_dj0lq"]
 [ext_resource type="Material" uid="uid://cvcneo6e8o7ol" path="res://bodies/UranusMat.tres" id="11_t4h44"]
 [ext_resource type="Material" uid="uid://c3tr66nhpon6k" path="res://bodies/NeptuneMat.tres" id="12_3x3y7"]
-[ext_resource type="Script" path="res://ship/Propagator.cs" id="13_p8nnc"]
+[ext_resource type="Script" path="res://scenes/pointer_inheritor.gd" id="13_xts1l"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="14_g31x3"]
 
 [sub_resource type="Environment" id="Environment_aovhe"]
@@ -46,6 +47,10 @@ transparency = 1
 cull_mode = 2
 shading_mode = 0
 albedo_texture = ExtResource("3_ueufi")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cjis1"]
+radius = 1.74
+height = 3.48
 
 [sub_resource type="SphereMesh" id="SphereMesh_wk5ry"]
 radius = 3.396
@@ -162,6 +167,17 @@ mesh = SubResource("PlaneMesh_nmgpm")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_btsaf")
 
+[node name="Luna" type="Node3D" parent="." groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 0)
+script = ExtResource("1_xfjlq")
+body = "MOON"
+GM = 4904.87
+
+[node name="LunaMesh" type="MeshInstance3D" parent="Luna"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_cjis1")
+surface_material_override/0 = ExtResource("8_n3ymp")
+
 [node name="Mars" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 788.163, 0, 0)
 script = ExtResource("1_xfjlq")
@@ -258,10 +274,9 @@ period = 59800.0
 color = Color(0.145, 0.254342, 0.760636, 1)
 
 [node name="Spacecraft" type="Node3D" parent="."]
-script = ExtResource("13_p8nnc")
-n = 1000
+script = ExtResource("13_xts1l")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft"]
+[node name="Pointer" type="MeshInstance3D" parent="Spacecraft"]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_b1c6p")
 surface_material_override/0 = SubResource("StandardMaterial3D_ij6p6")

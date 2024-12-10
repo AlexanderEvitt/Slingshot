@@ -59,7 +59,7 @@ public partial class planet : Node3D
 		unsafe
 		{
 			// Calc position and velocity
-			time = time + t; // make times relative to starting time
+			//time = time + t; // make times relative to starting time
 			double* state = stackalloc double[6]; // (x, y, z, vx, vy, vz)
 			for (int i = 0; i < 6; i++)
 			{
