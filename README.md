@@ -3,7 +3,7 @@
 
 Slingshot aims to provide a user-friendly astrodynamics UI to flight operations teams. NEW: Converted to Godot, awaiting full feature migration.
 
-![High Orbit Around the Moon](lunar_orbit.png)
+![High Orbit Around the Moon](looking_back.png)
 ![Solar System and an Escape from Earth](solar_system.png)
 ![The Long Journey to Luna](enroute_to_luna.png)
 
@@ -27,3 +27,17 @@ Slingshot aims to provide a user-friendly astrodynamics UI to flight operations 
 - 2D plots to aid trajectory design
 - Visual additions - Lagrange points, manifolds, gravitational potential plots, and more
 - Attitude control simulation
+
+## Setup Instructions
+
+1. Clone the repo somewhere safe
+2. Download the SPICE data required, place it at /AppData/Roaming/SPICE/ (currently only works on Windows)
+3. Download the .NET library 8.0
+4. Configure NuGet to use the local source stored in the repo at /editor/MyLocalNugetSource/
+```
+dotnet nuget add source <repo_location/editor/MyLocalNugetSource> --name MyLocalNugetSource
+```
+5. Clear the NuGet cache
+```
+dotnet nuget locals --clear all
+```
