@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0e1osx21d7u2"]
+
+[ext_resource type="Texture2D" uid="uid://cukx8vn2asoxf" path="res://scenes/attitude/balltexture.png" id="1_lao4o"]
+[ext_resource type="Script" path="res://scenes/attitude/navball.gd" id="2_3fwbi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_cdjrc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fbac"]
+shading_mode = 0
+albedo_texture = ExtResource("1_lao4o")
+
+[node name="NavballRoot" type="Node3D"]
+
+[node name="Navball" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_cdjrc")
+surface_material_override/0 = SubResource("StandardMaterial3D_4fbac")
+script = ExtResource("2_3fwbi")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+projection = 1
+far = 10.0

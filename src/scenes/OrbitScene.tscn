@@ -91,6 +91,7 @@ environment = SubResource("Environment_aovhe")
 [node name="Sun" type="Node3D" parent="." groups=["Bodies"]]
 script = ExtResource("1_xfjlq")
 body = "SUN"
+GM = 1.32712e+11
 
 [node name="SunMesh" type="MeshInstance3D" parent="Sun"]
 mesh = SubResource("SphereMesh_fskp6")

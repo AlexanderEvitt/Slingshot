@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=17 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
 [ext_resource type="Texture2D" uid="uid://da6km1fbq3qbf" path="res://visuals/tycho_skymap_highres.jpg" id="1_nfics"]
@@ -16,6 +16,7 @@ sky_material = SubResource("PanoramaSkyMaterial_en2db")
 
 [sub_resource type="Environment" id="Environment_utubi"]
 background_mode = 2
+background_energy_multiplier = 0.1
 sky = SubResource("Sky_gn8ki")
 
 [sub_resource type="SphereMesh" id="SphereMesh_aom7d"]
@@ -34,6 +35,13 @@ height = 3.48
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qq6b"]
 albedo_texture = ExtResource("7_iivlg")
 
+[sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
+radius = 700.0
+height = 1400.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmlgr"]
+shading_mode = 0
+
 [node name="CamRoot" type="Node3D"]
 
 [node name="Spacecraft" type="Node3D" parent="."]
@@ -41,16 +49,21 @@ script = ExtResource("1_bkkxk")
 
 [node name="OSC" parent="Spacecraft" instance=ExtResource("3_uoivw")]
 
-[node name="Camera3D" type="Camera3D" parent="Spacecraft/OSC"]
+[node name="NarrowCam" type="Camera3D" parent="Spacecraft/OSC"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
 fov = 10.0
+size = 2.0
+
+[node name="WideCam" type="Camera3D" parent="Spacecraft/OSC"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
+fov = 60.0
 size = 2.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_utubi")
 
 [node name="Earth" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2791, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.8649, 0, 0)
 script = ExtResource("4_xwbd5")
 body = "EARTH"
 
@@ -58,17 +71,13 @@ body = "EARTH"
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 planet_radius = 6.0
 atmosphere_height = 0.1
-sun_path = NodePath("../../Sunlight")
+sun_path = NodePath("../../Sun/SunLight")
 shader_params/u_density = 4.0
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
 mesh = SubResource("SphereMesh_aom7d")
 surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
-
-[node name="Sunlight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 41409.4)
-light_energy = 1.838
 
 [node name="Luna" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.656, 14.9547, 0)
@@ -80,3 +89,17 @@ GM = 4904.87
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -32.046, 0, 0)
 mesh = SubResource("SphereMesh_6xnwu")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
+
+[node name="Sun" type="Node3D" parent="." groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.6421, 0, 20.1614)
+script = ExtResource("4_xwbd5")
+body = "SUN"
+
+[node name="SunMesh" type="MeshInstance3D" parent="Sun"]
+mesh = SubResource("SphereMesh_v7y0l")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_hmlgr")
+
+[node name="SunLight" type="OmniLight3D" parent="Sun"]
+omni_range = 1e+20
+omni_attenuation = 0.0

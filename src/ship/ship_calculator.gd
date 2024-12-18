@@ -30,7 +30,7 @@ func _process(delta):
 	
 	# Change throttle setting
 	if Input.is_action_just_pressed("full_throttle"):
-		thrust = 1
+		thrust = 0.05
 	if Input.is_action_just_pressed("cut_throttle"):
 		thrust = 0
 		
