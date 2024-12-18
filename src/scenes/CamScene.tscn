@@ -53,11 +53,13 @@ script = ExtResource("1_bkkxk")
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
 fov = 10.0
 size = 2.0
+far = 1e+10
 
 [node name="WideCam" type="Camera3D" parent="Spacecraft/OSC"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
 fov = 60.0
 size = 2.0
+far = 1e+10
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_utubi")
