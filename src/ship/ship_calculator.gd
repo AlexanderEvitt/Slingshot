@@ -27,25 +27,25 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# Update values
+	attitude = attitude_calculator.transform.basis
 	
 	# Change throttle setting
 	if Input.is_action_just_pressed("full_throttle"):
 		thrust = 0.05
 	if Input.is_action_just_pressed("cut_throttle"):
 		thrust = 0
-		
-	# Somehow get the acceleration from gravity in here
-	var gravity = get_node("Propagator").Acceleration(position,SystemTime.t)
-	
 	
 	var dt = delta*SystemTime.step;
-	# Update values
-	attitude = attitude_calculator.transform.basis
+	
+	# Somehow get the acceleration from gravity in here
+	var gravity = get_node("Propagator").Acceleration(position,SystemTime.t)
+	var next_gravity = get_node("Propagator").Acceleration(position,SystemTime.t + dt)
 	
 	# Calculate acceleration on vehicle
 	var acceleration = thrust*attitude.x + gravity
+	var next_acceleration = thrust*attitude.x + next_gravity
 	
-	# Calculate updated position and velocity through numerical integration
-	position = position + velocity*dt
-	velocity = velocity + acceleration*dt
-	
+	# Calculate updated position and velocity through Verlet integration
+	position = position + velocity*dt + 0.5*acceleration*dt**2
+	velocity = velocity + 0.5*(acceleration+next_acceleration)*dt

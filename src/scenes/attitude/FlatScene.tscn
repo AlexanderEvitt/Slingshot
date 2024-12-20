@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=3 uid="uid://byw6fvc2md8io"]
+
+[ext_resource type="Script" path="res://bodies/planet.cs" id="1_i6ud7"]
+[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="2_4r606"]
+[ext_resource type="Texture2D" uid="uid://28jcg8fyahxx" path="res://visuals/tycho_skymap.jpg" id="4_gksr2"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_sjm2q"]
+radius = 700.0
+height = 1400.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tpx3"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_kn8bt"]
+radius = 6.371
+height = 12.742
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tu7a6"]
+shading_mode = 0
+albedo_color = Color(0.1081, 0.1081, 0.47, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qrvex"]
+radius = 1.74
+height = 3.48
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8a22"]
+shading_mode = 0
+albedo_color = Color(0.417896, 0.417896, 0.417896, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ttkxx"]
+radius = 3.396
+height = 6.792
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kcs4x"]
+shading_mode = 0
+albedo_color = Color(0.240183, 0, 0.027149, 1)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_h67et"]
+panorama = ExtResource("4_gksr2")
+
+[sub_resource type="Sky" id="Sky_m8r4i"]
+sky_material = SubResource("PanoramaSkyMaterial_h67et")
+
+[sub_resource type="Environment" id="Environment_p8a6c"]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_m8r4i")
+
+[node name="FlatRoot" type="Node3D"]
+
+[node name="Sun" type="Node3D" parent="." groups=["Bodies"]]
+script = ExtResource("1_i6ud7")
+body = "SUN"
+GM = 1.32712e+11
+
+[node name="SunMesh" type="MeshInstance3D" parent="Sun"]
+mesh = SubResource("SphereMesh_sjm2q")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_3tpx3")
+
+[node name="SunLabel" type="Label3D" parent="Sun"]
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "SUN"
+font = ExtResource("2_4r606")
+font_size = 64
+outline_size = 6
+
+[node name="Earth" type="Node3D" parent="." groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+script = ExtResource("1_i6ud7")
+body = "EARTH"
+GM = 398600.0
+
+[node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_kn8bt")
+surface_material_override/0 = SubResource("StandardMaterial3D_tu7a6")
+
+[node name="EarthLabel" type="Label3D" parent="Earth"]
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "EARTH"
+font = ExtResource("2_4r606")
+font_size = 64
+outline_size = 6
+
+[node name="Luna" type="Node3D" parent="." groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 0)
+script = ExtResource("1_i6ud7")
+body = "MOON"
+GM = 4904.87
+
+[node name="LunaMesh" type="MeshInstance3D" parent="Luna"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_qrvex")
+surface_material_override/0 = SubResource("StandardMaterial3D_y8a22")
+
+[node name="LunaLabel" type="Label3D" parent="Luna"]
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "LUNA"
+font = ExtResource("2_4r606")
+font_size = 64
+outline_size = 6
+
+[node name="Mars" type="Node3D" parent="." groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 788.163, 0, 0)
+script = ExtResource("1_i6ud7")
+body = "MARS BARYCENTER"
+GM = 42828.4
+
+[node name="MarsMesh" type="MeshInstance3D" parent="Mars"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_ttkxx")
+surface_material_override/0 = SubResource("StandardMaterial3D_kcs4x")
+
+[node name="MarsLabel" type="Label3D" parent="Mars"]
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "MARS"
+font = ExtResource("2_4r606")
+font_size = 64
+outline_size = 6
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p8a6c")

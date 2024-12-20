@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=14 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://scenes/handler.gd" id="1_at06d"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
+[ext_resource type="Script" path="res://scenes/orbit_labeller.gd" id="3_6i2os"]
 [ext_resource type="FontFile" uid="uid://do6qxwpxanaih" path="res://ui/fonts/JetBrainsMonoNL-Bold.ttf" id="3_dthfh"]
 [ext_resource type="PackedScene" uid="uid://1sgfn61bmfrt" path="res://scenes/OrbitScene.tscn" id="4_5661e"]
 [ext_resource type="Script" path="res://ui/quat_getter.gd" id="5_5uxu7"]
@@ -40,7 +41,6 @@ grow_vertical = 2
 script = ExtResource("1_at06d")
 
 [node name="OrbitSceneHUD" type="Panel" parent="Screen" groups=["HUDs"]]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -65,6 +65,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
+script = ExtResource("3_6i2os")
 
 [node name="PageTitle" type="Label" parent="Screen/OrbitSceneHUD/MarginContainer/HBoxContainer/OrbitLabelHolder"]
 layout_mode = 2
@@ -122,8 +123,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/OrbitSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
+size = Vector2i(1536, 874)
+render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="Screen/OrbitSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
 
@@ -133,6 +134,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="AttitudeSceneHUD" type="Panel" parent="Screen" groups=["HUDs"]]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_bmshc")
@@ -206,7 +208,7 @@ own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(712, 698)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="NavballRoot" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_mguog")]
 
@@ -224,10 +226,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginContainer2/Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.02
-anchor_top = 0.1
-anchor_right = 0.98
-anchor_bottom = 0.9
+anchor_left = 0.01
+anchor_top = 0.01
+anchor_right = 0.99
+anchor_bottom = 0.99
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -235,10 +237,9 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginContainer2/Panel/SubViewportContainer"]
 own_world_3d = true
-transparent_bg = true
 handle_input_locally = false
-size = Vector2i(716, 702)
-render_target_update_mode = 4
+size = Vector2i(731, 860)
+render_target_update_mode = 0
 
 [node name="AttitudeRoot" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginContainer2/Panel/SubViewportContainer/SubViewport" instance=ExtResource("7_gsnns")]
 

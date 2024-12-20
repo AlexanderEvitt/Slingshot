@@ -1,6 +1,9 @@
 extends Camera3D
 
-var zoom_distance := 30.0
+@export var zoomable : bool
+@export var reparentable : bool
+
+@export var zoom_distance := 30.0
 var zoom_speed := 1.2
 var zoom_min := 7.0
 var zoom_max := 2000000.0
@@ -16,17 +19,19 @@ var i = 3
 func _process(_delta):
 	get_parent().get_parent().get_node("Grid").scale = 4*zoom_distance*Vector3(1,1,1)
 	
-	if Input.is_action_pressed("zoom_out"):
-		zoom_distance = zoom_speed*zoom_distance
-	if Input.is_action_pressed("zoom_in"):
-		zoom_distance = zoom_distance/zoom_speed
-	zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
-	position = Vector3(0, 0, zoom_distance)
-		
-	if Input.is_action_pressed("switch_planet"):
-			i = (i + 1) % 9
-			get_parent().get_parent().reparent(get_parent().get_parent().get_parent().get_parent().get_node(bodies[i]))
-			get_parent().get_parent().position = Vector3(0,0,0)
+	if zoomable:
+		if Input.is_action_pressed("zoom_out"):
+			zoom_distance = zoom_speed*zoom_distance
+		if Input.is_action_pressed("zoom_in"):
+			zoom_distance = zoom_distance/zoom_speed
+		zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
+		position = Vector3(0, 0, zoom_distance)
+	
+	if reparentable:
+		if Input.is_action_pressed("switch_planet"):
+				i = (i + 1) % 9
+				get_parent().get_parent().reparent(get_parent().get_parent().get_parent().get_parent().get_node(bodies[i]))
+				get_parent().get_parent().position = Vector3(0,0,0)
 
 func _unhandled_input(event):
 	# Right-click rotate

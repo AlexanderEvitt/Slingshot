@@ -161,6 +161,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
 fov = 60.0
 far = 1e+10
 script = ExtResource("2_awidn")
+zoomable = true
+reparentable = true
 
 [node name="Grid" type="MeshInstance3D" parent="Earth/CameraRig"]
 visible = false

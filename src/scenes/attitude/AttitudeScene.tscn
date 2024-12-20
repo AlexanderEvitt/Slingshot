@@ -1,18 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://j7weec3kdnqh"]
+[gd_scene load_steps=23 format=3 uid="uid://j7weec3kdnqh"]
 
-[ext_resource type="Texture2D" uid="uid://c8weqi6q7wmp4" path="res://visuals/tycho_grid.jpg" id="1_w04rn"]
-[ext_resource type="Script" path="res://scenes/attitude_inheritor.gd" id="2_dpa3u"]
+[ext_resource type="Script" path="res://scenes/attitude/full_inheritor.gd" id="1_uh5lo"]
 [ext_resource type="PackedScene" uid="uid://bwwdgkhhphu7b" path="res://ship/OSC.glb" id="3_4w8b1"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_wdgxy"]
-radius = 1.0
-height = 2.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mg7c"]
-cull_mode = 1
-shading_mode = 0
-albedo_texture = ExtResource("1_w04rn")
-uv1_scale = Vector3(-1, 1, 1)
+[ext_resource type="Script" path="res://bodies/planet.cs" id="3_hefpj"]
+[ext_resource type="Script" path="res://visuals/camera_controller.gd" id="3_snx6t"]
+[ext_resource type="Texture2D" uid="uid://c0uxclbtphkoa" path="res://visuals/grid.png" id="4_dbjvn"]
+[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="4_vsl4q"]
+[ext_resource type="Texture2D" uid="uid://28jcg8fyahxx" path="res://visuals/tycho_skymap.jpg" id="5_hbv15"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8xrs"]
 transparency = 1
@@ -28,25 +22,174 @@ height = 0.8
 cap_top = false
 cap_bottom = false
 
-[node name="AttitudeRoot" type="Node3D"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_w5rw4"]
+size = Vector2(1, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_wdgxy")
-surface_material_override/0 = SubResource("StandardMaterial3D_7mg7c")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xldi6"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("4_dbjvn")
+
+[sub_resource type="SphereMesh" id="SphereMesh_nyefy"]
+radius = 700.0
+height = 1400.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqs4l"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_2aoqw"]
+radius = 6.371
+height = 12.742
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_puryv"]
+shading_mode = 0
+albedo_color = Color(0.1081, 0.1081, 0.47, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_55l57"]
+radius = 1.74
+height = 3.48
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n5ps6"]
+shading_mode = 0
+albedo_color = Color(0.417896, 0.417896, 0.417896, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ff6as"]
+radius = 3.396
+height = 6.792
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eanf2"]
+shading_mode = 0
+albedo_color = Color(0.240183, 0, 0.027149, 1)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_to5oi"]
+panorama = ExtResource("5_hbv15")
+
+[sub_resource type="Sky" id="Sky_k6xhb"]
+sky_material = SubResource("PanoramaSkyMaterial_to5oi")
+
+[sub_resource type="Environment" id="Environment_ovhi2"]
+background_mode = 2
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_k6xhb")
+
+[node name="AttitudeRoot" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.646031, 0, -0.763311, 0, 1, 0, 0.763311, 0, 0.646031, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -3, 0, 0)
-projection = 1
-size = 2.0
-
 [node name="Spacecraft" type="Node3D" parent="."]
-script = ExtResource("2_dpa3u")
+script = ExtResource("1_uh5lo")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft"]
+[node name="Body" type="Node3D" parent="Spacecraft"]
+
+[node name="Beam" type="MeshInstance3D" parent="Spacecraft/Body"]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0.520653, 0, 0)
 mesh = SubResource("CylinderMesh_66n1w")
+skeleton = NodePath("../..")
 
-[node name="OSC" parent="Spacecraft" instance=ExtResource("3_4w8b1")]
+[node name="OSC" parent="Spacecraft/Body" instance=ExtResource("3_4w8b1")]
+
+[node name="CameraRig" type="Node3D" parent="Spacecraft"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+
+[node name="CameraRotator" type="Node3D" parent="Spacecraft/CameraRig"]
+
+[node name="Camera3D" type="Camera3D" parent="Spacecraft/CameraRig/CameraRotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+fov = 60.0
+far = 1e+10
+script = ExtResource("3_snx6t")
+zoom_distance = 2.0
+
+[node name="Grid" type="MeshInstance3D" parent="Spacecraft/CameraRig"]
+visible = false
+mesh = SubResource("PlaneMesh_w5rw4")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_xldi6")
+
+[node name="Sun" type="Node3D" parent="."]
+script = ExtResource("3_hefpj")
+body = "SUN"
+GM = 1.32712e+11
+
+[node name="SunMesh" type="MeshInstance3D" parent="Sun"]
+mesh = SubResource("SphereMesh_nyefy")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_sqs4l")
+
+[node name="SunLabel" type="Label3D" parent="Sun"]
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "SUN"
+font = ExtResource("4_vsl4q")
+font_size = 64
+outline_size = 6
+
+[node name="Earth" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+script = ExtResource("3_hefpj")
+body = "EARTH"
+GM = 398600.0
+
+[node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_2aoqw")
+surface_material_override/0 = SubResource("StandardMaterial3D_puryv")
+
+[node name="EarthLabel" type="Label3D" parent="Earth"]
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "EARTH"
+font = ExtResource("4_vsl4q")
+font_size = 64
+outline_size = 6
+
+[node name="Luna" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 0)
+script = ExtResource("3_hefpj")
+body = "MOON"
+GM = 4904.87
+
+[node name="LunaMesh" type="MeshInstance3D" parent="Luna"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_55l57")
+surface_material_override/0 = SubResource("StandardMaterial3D_n5ps6")
+
+[node name="LunaLabel" type="Label3D" parent="Luna"]
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "LUNA"
+font = ExtResource("4_vsl4q")
+font_size = 64
+outline_size = 6
+
+[node name="Mars" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 788.163, 0, 0)
+script = ExtResource("3_hefpj")
+body = "MARS BARYCENTER"
+GM = 42828.4
+
+[node name="MarsMesh" type="MeshInstance3D" parent="Mars"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_ff6as")
+surface_material_override/0 = SubResource("StandardMaterial3D_eanf2")
+
+[node name="MarsLabel" type="Label3D" parent="Mars"]
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "MARS"
+font = ExtResource("4_vsl4q")
+font_size = 64
+outline_size = 6
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ovhi2")
