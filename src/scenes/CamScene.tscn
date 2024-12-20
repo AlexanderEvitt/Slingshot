@@ -1,5 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=21 format=3 uid="uid://d0x7vyc4qrrc2"]
 
+[ext_resource type="Script" path="res://scenes/resetter.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
 [ext_resource type="Texture2D" uid="uid://da6km1fbq3qbf" path="res://visuals/tycho_skymap_highres.jpg" id="1_nfics"]
 [ext_resource type="PackedScene" uid="uid://bwwdgkhhphu7b" path="res://ship/OSC.glb" id="3_uoivw"]
@@ -19,6 +20,11 @@ sky_material = SubResource("PanoramaSkyMaterial_en2db")
 background_mode = 2
 background_energy_multiplier = 0.1
 sky = SubResource("Sky_em73h")
+glow_enabled = true
+glow_intensity = 8.0
+glow_bloom = 1.0
+adjustment_brightness = 0.75
+adjustment_saturation = 0.2
 
 [sub_resource type="SphereMesh" id="SphereMesh_aom7d"]
 radius = 6.37
@@ -51,10 +57,13 @@ albedo_texture = ExtResource("7_iivlg")
 radius = 700.0
 height = 1400.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmlgr"]
-shading_mode = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkpof"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
 
 [node name="CamRoot" type="Node3D"]
+script = ExtResource("1_5ri2s")
 
 [node name="Spacecraft" type="Node3D" parent="."]
 script = ExtResource("1_bkkxk")
@@ -77,7 +86,6 @@ far = 1e+10
 environment = SubResource("Environment_utubi")
 
 [node name="Earth" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.8649, 0, 1.28668)
 script = ExtResource("4_xwbd5")
 body = "EARTH"
 
@@ -117,7 +125,7 @@ body = "SUN"
 [node name="SunMesh" type="MeshInstance3D" parent="Sun"]
 mesh = SubResource("SphereMesh_v7y0l")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_hmlgr")
+surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
 
 [node name="SunLight" type="OmniLight3D" parent="Sun"]
 omni_range = 1e+20
