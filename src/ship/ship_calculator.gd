@@ -22,7 +22,7 @@ func _ready():
 	# Initialize values
 	attitude = attitude_calculator.transform.basis
 	position = Conversions.ToUniversal(start_position)
-	velocity = Conversions.VelToFrame(start_velocity)
+	velocity = Conversions.VelFromFrame(start_velocity)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

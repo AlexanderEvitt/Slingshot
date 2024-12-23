@@ -25,12 +25,6 @@ mesh = SubResource("SphereMesh_cdjrc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_4fbac")
 
-[node name="ProgradeMarker" type="Sprite3D" parent="Node3D"]
-pixel_size = 0.002
-axis = 0
-texture = ExtResource("3_mdtrp")
-script = ExtResource("4_gmmfj")
-
 [node name="Viewpoint" type="Node3D" parent="."]
 script = ExtResource("5_n4w1u")
 
@@ -38,3 +32,11 @@ script = ExtResource("5_n4w1u")
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -2, 0, 0)
 projection = 1
 far = 10.0
+
+[node name="ProgradeMarker" type="Sprite3D" parent="."]
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+render_priority = 2
+texture = ExtResource("3_mdtrp")
+script = ExtResource("4_gmmfj")

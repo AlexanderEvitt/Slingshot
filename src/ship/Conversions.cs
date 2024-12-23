@@ -51,13 +51,23 @@ public partial class Conversions : Node
 		return new_positions;
 	}
 
-	public Vector3 VelToFrame(Vector3 v)
+	public Vector3 VelFromFrame(Vector3 v)
 	{
 		// Convert the start position, given in relative to the start frame, to universal velocity
 		Node body_node = bodies[f];
 		planet body = (planet)body_node;
 		Vector3 vel = body.fetch(1d) - body.fetch(0d);
 		Vector3 new_v = v + vel;
+		return new_v;
+	}
+
+	public Vector3 VelToFrame(Vector3 v)
+	{
+		// Convert a universal velocity to a frame velocity
+		Node body_node = bodies[f];
+		planet body = (planet)body_node;
+		Vector3 vel = body.fetch(1d) - body.fetch(0d);
+		Vector3 new_v = v - vel;
 		return new_v;
 	}
 
