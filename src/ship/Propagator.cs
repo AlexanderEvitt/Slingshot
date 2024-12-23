@@ -48,7 +48,7 @@ public partial class Propagator : Node3D
 			// Refresh trajectory
 			double t = SystemTime.Instance.t;
 			Refresh(t);
-			c = 10;
+			c = 60;
 			
 		}
 		c = c - 1;

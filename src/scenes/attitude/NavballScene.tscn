@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0e1osx21d7u2"]
+[gd_scene load_steps=11 format=3 uid="uid://d0e1osx21d7u2"]
 
 [ext_resource type="Script" path="res://scenes/attitude/navball.gd" id="2_3fwbi"]
 [ext_resource type="Texture2D" uid="uid://17dclcol0avn" path="res://scenes/attitude/navball_texture.png" id="2_s886u"]
 [ext_resource type="Texture2D" uid="uid://djyppx76cf4t5" path="res://scenes/attitude/prograde.png" id="3_mdtrp"]
 [ext_resource type="Texture2D" uid="uid://v2arkm3xh0km" path="res://scenes/attitude/ballbacking.png" id="4_dswt3"]
 [ext_resource type="Script" path="res://scenes/attitude/prograde_marker.gd" id="4_gmmfj"]
+[ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="5_1wtd5"]
 [ext_resource type="Script" path="res://scenes/attitude/viewpoint.gd" id="5_n4w1u"]
+[ext_resource type="Texture2D" uid="uid://d28isjwqdor3u" path="res://scenes/attitude/retrograde.png" id="8_63yb2"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_cdjrc"]
 
@@ -32,7 +34,7 @@ script = ExtResource("5_n4w1u")
 [node name="Camera3D" type="Camera3D" parent="Viewpoint"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -2, 0, 0)
 projection = 1
-size = 1.2
+size = 1.1
 far = 10.0
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewpoint"]
@@ -42,6 +44,11 @@ axis = 0
 render_priority = 2
 texture = ExtResource("4_dswt3")
 
+[node name="CenterMarker" type="Sprite3D" parent="Viewpoint"]
+pixel_size = 0.002
+axis = 0
+texture = ExtResource("5_1wtd5")
+
 [node name="ProgradeMarker" type="Sprite3D" parent="."]
 pixel_size = 0.002
 billboard = 1
@@ -49,3 +56,13 @@ no_depth_test = true
 render_priority = 2
 texture = ExtResource("3_mdtrp")
 script = ExtResource("4_gmmfj")
+retro = 1
+
+[node name="RetroMarker" type="Sprite3D" parent="."]
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+render_priority = 2
+texture = ExtResource("8_63yb2")
+script = ExtResource("4_gmmfj")
+retro = -1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=27 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/resetter.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="5_2nae2"]
 [ext_resource type="Texture2D" uid="uid://16sjbapb4kht" path="res://bodies/models/moon.jpg" id="7_iivlg"]
 [ext_resource type="Texture2D" uid="uid://46s3bcs5voeb" path="res://bodies/models/clouds.jpg" id="7_w4ah3"]
+[ext_resource type="Texture2D" uid="uid://dgl8wj4mkimt3" path="res://bodies/models/MarsTrue.jpg" id="10_mv0q4"]
+[ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/models/JupiterTrue.jpg" id="11_74p1c"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_en2db"]
 panorama = ExtResource("1_nfics")
@@ -62,6 +64,20 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 16.0
 
+[sub_resource type="SphereMesh" id="SphereMesh_61v7t"]
+radius = 3.396
+height = 6.792
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_563sj"]
+albedo_texture = ExtResource("10_mv0q4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ke1qx"]
+radius = 71.492
+height = 142.984
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnura"]
+albedo_texture = ExtResource("11_74p1c")
+
 [node name="CamRoot" type="Node3D"]
 script = ExtResource("1_5ri2s")
 
@@ -99,6 +115,7 @@ shader_params/u_scattering_strength = 0.3
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("SphereMesh_aom7d")
 surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
 
@@ -113,12 +130,12 @@ body = "MOON"
 GM = 4904.87
 
 [node name="LunaMesh" type="MeshInstance3D" parent="Luna"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -32.046, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("SphereMesh_6xnwu")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
 
 [node name="Sun" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.7426, 0, -290.223)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.7426, 122.738, -290.223)
 script = ExtResource("4_xwbd5")
 body = "SUN"
 
@@ -130,3 +147,25 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
 [node name="SunLight" type="OmniLight3D" parent="Sun"]
 omni_range = 1e+20
 omni_attenuation = 0.0
+
+[node name="Mars" type="Node3D" parent="." groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5654, 0, 0)
+script = ExtResource("4_xwbd5")
+body = "MARS BARYCENTER"
+GM = 42828.4
+
+[node name="MarsMesh" type="MeshInstance3D" parent="Mars"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_61v7t")
+surface_material_override/0 = SubResource("StandardMaterial3D_563sj")
+
+[node name="Jupiter" type="Node3D" parent="." groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 104.63)
+script = ExtResource("4_xwbd5")
+body = "JUPITER BARYCENTER"
+GM = 1.26687e+08
+
+[node name="JupiterMesh" type="MeshInstance3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_ke1qx")
+surface_material_override/0 = SubResource("StandardMaterial3D_lnura")

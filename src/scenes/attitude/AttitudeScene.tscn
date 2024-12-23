@@ -82,7 +82,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_sqs4l")
 
 [node name="SunLabel" type="Label3D" parent="Sun"]
-pixel_size = 0.001
+pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
 fixed_size = true
@@ -107,7 +107,7 @@ mesh = SubResource("SphereMesh_2aoqw")
 surface_material_override/0 = SubResource("StandardMaterial3D_puryv")
 
 [node name="EarthLabel" type="Label3D" parent="Earth"]
-pixel_size = 0.001
+pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
 fixed_size = true
@@ -128,7 +128,7 @@ mesh = SubResource("SphereMesh_55l57")
 surface_material_override/0 = SubResource("StandardMaterial3D_n5ps6")
 
 [node name="LunaLabel" type="Label3D" parent="Luna"]
-pixel_size = 0.001
+pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
 fixed_size = true
@@ -149,7 +149,7 @@ mesh = SubResource("SphereMesh_ff6as")
 surface_material_override/0 = SubResource("StandardMaterial3D_eanf2")
 
 [node name="MarsLabel" type="Label3D" parent="Mars"]
-pixel_size = 0.001
+pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
 fixed_size = true
