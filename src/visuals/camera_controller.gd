@@ -17,8 +17,6 @@ var bodies = ["Sun","Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus"
 var i = 3
 
 func _process(_delta):
-	get_parent().get_parent().get_node("Grid").scale = 4*zoom_distance*Vector3(1,1,1)
-	
 	if zoomable:
 		if Input.is_action_pressed("zoom_out"):
 			zoom_distance = zoom_speed*zoom_distance

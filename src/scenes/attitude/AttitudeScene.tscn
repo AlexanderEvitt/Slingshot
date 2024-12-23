@@ -1,23 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://j7weec3kdnqh"]
+[gd_scene load_steps=18 format=3 uid="uid://j7weec3kdnqh"]
 
 [ext_resource type="Script" path="res://scenes/attitude/full_inheritor.gd" id="1_uh5lo"]
-[ext_resource type="PackedScene" uid="uid://doqdvm0pgkbd7" path="res://ship/placeholder.glb" id="2_w8etb"]
+[ext_resource type="PackedScene" uid="uid://bpgdg48hj5e2d" path="res://ship/placeholder.tscn" id="3_5ctib"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="3_hefpj"]
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="3_snx6t"]
-[ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="3_tmyfc"]
-[ext_resource type="Texture2D" uid="uid://c0uxclbtphkoa" path="res://visuals/grid.png" id="4_dbjvn"]
-[ext_resource type="Script" path="res://visuals/plume_controller.gd" id="4_lbixs"]
 [ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="4_vsl4q"]
 [ext_resource type="Texture2D" uid="uid://c8weqi6q7wmp4" path="res://visuals/tycho_grid.jpg" id="9_kvnry"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_w5rw4"]
-size = Vector2(1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xldi6"]
-transparency = 1
-cull_mode = 2
-shading_mode = 0
-albedo_texture = ExtResource("4_dbjvn")
 
 [sub_resource type="SphereMesh" id="SphereMesh_nyefy"]
 radius = 700.0
@@ -69,42 +57,19 @@ script = ExtResource("1_uh5lo")
 
 [node name="Body" type="Node3D" parent="Spacecraft"]
 
-[node name="placeholder" parent="Spacecraft/Body" instance=ExtResource("2_w8etb")]
-transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
-
-[node name="Plume" parent="Spacecraft/Body/placeholder" instance=ExtResource("3_tmyfc")]
-transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -237.661, 3.11213, 33.7351)
-script = ExtResource("4_lbixs")
-
-[node name="Plume2" parent="Spacecraft/Body/placeholder" instance=ExtResource("3_tmyfc")]
-transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -237.661, 0, -59.669)
-script = ExtResource("4_lbixs")
-
-[node name="Plume3" parent="Spacecraft/Body/placeholder" instance=ExtResource("3_tmyfc")]
-transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -237.661, 50.6777, -13.8848)
-script = ExtResource("4_lbixs")
-
-[node name="Plume4" parent="Spacecraft/Body/placeholder" instance=ExtResource("3_tmyfc")]
-transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -237.661, -39.6335, -13.8848)
-script = ExtResource("4_lbixs")
-
 [node name="CameraRig" type="Node3D" parent="Spacecraft/Body"]
 transform = Transform3D(6.12323e-17, 1, 6.12323e-17, 0, 6.12323e-17, -1, -1, 6.12323e-17, 3.7494e-33, 0, 0, 0)
 
 [node name="CameraRotator" type="Node3D" parent="Spacecraft/Body/CameraRig"]
 
 [node name="Camera3D" type="Camera3D" parent="Spacecraft/Body/CameraRig/CameraRotator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
 fov = 60.0
 far = 1e+10
 script = ExtResource("3_snx6t")
 zoom_distance = 0.5
 
-[node name="Grid" type="MeshInstance3D" parent="Spacecraft/Body/CameraRig"]
-visible = false
-mesh = SubResource("PlaneMesh_w5rw4")
-skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_xldi6")
+[node name="placeholder" parent="Spacecraft/Body" instance=ExtResource("3_5ctib")]
 
 [node name="Sun" type="Node3D" parent="."]
 script = ExtResource("3_hefpj")

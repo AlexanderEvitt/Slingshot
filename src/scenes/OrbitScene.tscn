@@ -1,8 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=30 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="2_awidn"]
-[ext_resource type="Texture2D" uid="uid://c0uxclbtphkoa" path="res://visuals/grid.png" id="3_ueufi"]
 [ext_resource type="Material" uid="uid://dy2okmf8n23tj" path="res://bodies/MercuryMat.tres" id="4_vwo00"]
 [ext_resource type="Script" path="res://bodies/draw_planet_orbit.gd" id="5_vmpxk"]
 [ext_resource type="Material" uid="uid://bsm4dahp7hpwo" path="res://bodies/VenusMat.tres" id="6_j6fe5"]
@@ -38,15 +37,6 @@ height = 12.104
 [sub_resource type="SphereMesh" id="SphereMesh_glhmb"]
 radius = 6.371
 height = 12.742
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_nmgpm"]
-size = Vector2(1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btsaf"]
-transparency = 1
-cull_mode = 2
-shading_mode = 0
-albedo_texture = ExtResource("3_ueufi")
 
 [sub_resource type="SphereMesh" id="SphereMesh_cjis1"]
 radius = 1.74
@@ -163,12 +153,6 @@ far = 1e+10
 script = ExtResource("2_awidn")
 zoomable = true
 reparentable = true
-
-[node name="Grid" type="MeshInstance3D" parent="Earth/CameraRig"]
-visible = false
-mesh = SubResource("PlaneMesh_nmgpm")
-skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_btsaf")
 
 [node name="Luna" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 0)
