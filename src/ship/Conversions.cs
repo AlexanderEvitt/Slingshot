@@ -25,7 +25,7 @@ public partial class Conversions : Node
 		}
 		if (f > bodies.Count - 1)
 		{
-			f = 1;
+			f = 0;
 		}
 	}
 

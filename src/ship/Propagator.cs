@@ -24,7 +24,7 @@ public partial class Propagator : Node3D
 	private Node OwnShip;
 
 	public int c = 0;
-	public double timescale = 0.01d;
+	public double timescale = 0.03d;
 
 	public override void _Ready()
 	{
