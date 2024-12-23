@@ -1,10 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpgdg48hj5e2d"]
+[gd_scene load_steps=9 format=3 uid="uid://bpgdg48hj5e2d"]
 
 [ext_resource type="PackedScene" uid="uid://doqdvm0pgkbd7" path="res://ship/placeholder.glb" id="1_7hlxl"]
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="2_teuh0"]
 [ext_resource type="Script" path="res://visuals/plume_controller.gd" id="3_sff6v"]
 [ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="4_at7as"]
 [ext_resource type="Script" path="res://visuals/thruster.gd" id="5_mih0u"]
+[ext_resource type="Script" path="res://ship/missile.gd" id="6_pn3wt"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d6nke"]
+top_radius = 0.003
+bottom_radius = 0.003
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfahs"]
+albedo_color = Color(0.329158, 0.329158, 0.329158, 1)
+metallic = 1.0
+roughness = 0.8
 
 [node name="placeholder" instance=ExtResource("1_7hlxl")]
 
@@ -95,3 +106,18 @@ transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 2.46519e-32, 0, 2.
 script = ExtResource("5_mih0u")
 down = true
 roll_left = true
+
+[node name="Missile" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.247082, 0.0232704, 0)
+script = ExtResource("6_pn3wt")
+
+[node name="MissileMesh" type="MeshInstance3D" parent="Missile" index="0"]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_d6nke")
+skeleton = NodePath("../../Thrusters")
+surface_material_override/0 = SubResource("StandardMaterial3D_mfahs")
+
+[node name="Plume" parent="Missile" index="1" instance=ExtResource("2_teuh0")]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, -0.00971537, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Missile" index="2"]

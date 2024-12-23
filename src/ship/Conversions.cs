@@ -60,4 +60,12 @@ public partial class Conversions : Node
 		Vector3 new_v = v + vel;
 		return new_v;
 	}
+
+	public Vector3 FindFrame(double t)
+	{
+		// Returns position of current frame origin
+		Node frame_body = bodies[f];
+		planet body = (planet)frame_body;
+		return body.fetch(t);
+	}
 }

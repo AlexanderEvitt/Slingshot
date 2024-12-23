@@ -9,7 +9,7 @@ extends MeshInstance3D
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	visible = false
 	if up:
 		if Input.is_action_pressed("up"):

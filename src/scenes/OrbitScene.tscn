@@ -141,19 +141,6 @@ script = ExtResource("5_vmpxk")
 period = 365.25
 color = Color(0.181977, 0.313911, 0.600695, 1)
 
-[node name="CameraRig" type="Node3D" parent="Earth"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
-
-[node name="CameraRotator" type="Node3D" parent="Earth/CameraRig"]
-
-[node name="Camera3D" type="Camera3D" parent="Earth/CameraRig/CameraRotator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
-fov = 60.0
-far = 1e+10
-script = ExtResource("2_awidn")
-zoomable = true
-reparentable = true
-
 [node name="Luna" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 0)
 script = ExtResource("1_xfjlq")
@@ -263,13 +250,28 @@ color = Color(0.145, 0.254342, 0.760636, 1)
 [node name="Spacecraft" type="Node3D" parent="."]
 script = ExtResource("13_xts1l")
 
-[node name="Pointer" type="MeshInstance3D" parent="Spacecraft"]
-transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_b1c6p")
-surface_material_override/0 = SubResource("StandardMaterial3D_ij6p6")
-
 [node name="CraftPlotter" type="Node3D" parent="Spacecraft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
 top_level = true
 script = ExtResource("14_g31x3")
 color = Color(1, 1, 1, 1)
+
+[node name="Pointer" type="Node3D" parent="Spacecraft"]
+
+[node name="PointerMesh" type="MeshInstance3D" parent="Spacecraft/Pointer"]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_b1c6p")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ij6p6")
+
+[node name="CameraRig" type="Node3D" parent="Spacecraft"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+
+[node name="CameraRotator" type="Node3D" parent="Spacecraft/CameraRig"]
+
+[node name="Camera3D" type="Camera3D" parent="Spacecraft/CameraRig/CameraRotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+fov = 60.0
+far = 1e+10
+script = ExtResource("2_awidn")
+zoomable = true

@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0e1osx21d7u2"]
+[gd_scene load_steps=8 format=3 uid="uid://d0e1osx21d7u2"]
 
 [ext_resource type="Script" path="res://scenes/attitude/navball.gd" id="2_3fwbi"]
 [ext_resource type="Texture2D" uid="uid://17dclcol0avn" path="res://scenes/attitude/navball_texture.png" id="2_s886u"]
+[ext_resource type="Texture2D" uid="uid://djyppx76cf4t5" path="res://scenes/attitude/prograde.png" id="3_mdtrp"]
+[ext_resource type="Script" path="res://scenes/attitude/prograde_marker.gd" id="4_gmmfj"]
+[ext_resource type="Script" path="res://scenes/attitude/viewpoint.gd" id="5_n4w1u"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_cdjrc"]
 
@@ -13,16 +16,25 @@ uv1_scale = Vector3(-1, 1, 1)
 
 [node name="NavballRoot" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -2, 0, 0)
-projection = 1
-far = 10.0
-
 [node name="Node3D" type="Node3D" parent="."]
 script = ExtResource("2_3fwbi")
 
 [node name="Navball" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+transform = Transform3D(1, -1.11022e-16, -8.32667e-17, -8.32667e-17, -6.12323e-17, -1, 1.11022e-16, 1, -6.12323e-17, 0, 0, 0)
 mesh = SubResource("SphereMesh_cdjrc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_4fbac")
+
+[node name="ProgradeMarker" type="Sprite3D" parent="Node3D"]
+pixel_size = 0.002
+axis = 0
+texture = ExtResource("3_mdtrp")
+script = ExtResource("4_gmmfj")
+
+[node name="Viewpoint" type="Node3D" parent="."]
+script = ExtResource("5_n4w1u")
+
+[node name="Camera3D" type="Camera3D" parent="Viewpoint"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -2, 0, 0)
+projection = 1
+far = 10.0

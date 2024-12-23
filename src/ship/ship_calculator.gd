@@ -36,7 +36,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("cut_throttle"):
 		thrust = 0
 	
-	var dt = delta*SystemTime.step;
+	var dt = SystemTime.step*delta; # multiply by SystemTime.step if Engine.timescale isn't scaled
 	
 	# Somehow get the acceleration from gravity in here
 	var gravity = get_node("Propagator").Acceleration(position,SystemTime.t)
