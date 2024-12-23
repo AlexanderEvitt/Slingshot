@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0e1osx21d7u2"]
 
-[ext_resource type="Texture2D" uid="uid://cukx8vn2asoxf" path="res://scenes/attitude/balltexture.png" id="1_lao4o"]
 [ext_resource type="Script" path="res://scenes/attitude/navball.gd" id="2_3fwbi"]
+[ext_resource type="Texture2D" uid="uid://17dclcol0avn" path="res://scenes/attitude/navball_texture.png" id="2_s886u"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_cdjrc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fbac"]
 cull_mode = 1
 shading_mode = 0
-albedo_texture = ExtResource("1_lao4o")
+albedo_texture = ExtResource("2_s886u")
 uv1_scale = Vector3(-1, 1, 1)
 
 [node name="NavballRoot" type="Node3D"]

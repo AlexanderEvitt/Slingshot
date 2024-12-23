@@ -1,0 +1,3 @@
+Colors: (out of 255)
+middle = RGB(30,30,40)
+dark = RGB(19,19,25)

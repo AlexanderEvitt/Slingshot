@@ -3,6 +3,7 @@ extends Node
 var position
 var velocity
 var attitude
+var thrust
 
 var plotted_positions = [Vector3(0,0,0),Vector3(0,0,0)]
 
@@ -18,5 +19,6 @@ func _process(_delta):
 	position = ship.position
 	velocity = ship.velocity
 	attitude = ship.attitude
+	thrust = ship.thrust
 	
 	plotted_positions = ship.get_node("Propagator").plotted_positions

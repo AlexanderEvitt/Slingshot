@@ -5,6 +5,7 @@
 [sub_resource type="CylinderMesh" id="CylinderMesh_n1q1i"]
 lightmap_size_hint = Vector2i(17, 19)
 top_radius = 0.2
+height = 4.0
 cap_top = false
 cap_bottom = false
 
@@ -37,6 +38,6 @@ shader_parameter/enable_fresnel = true
 [node name="Plume" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -2, 0, 0)
 mesh = SubResource("CylinderMesh_n1q1i")
 surface_material_override/0 = SubResource("ShaderMaterial_yust4")
