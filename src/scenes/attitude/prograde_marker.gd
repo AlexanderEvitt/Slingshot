@@ -9,7 +9,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	v = Conversions.VelToFrame(OwnShip.velocity)
 	position = v.normalized()/2
 	
