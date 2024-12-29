@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://82lkfc2imx26"
-path.s3tc="res://.godot/imported/PlanetOutline.png-a0045cf4343f287289ac4f28c549a3b0.s3tc.ctex"
+uid="uid://b15fig8tkggfw"
+path="res://.godot/imported/LunaWireframe.png-e863d03cd47af3cae25ccf319335e505.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://bodies/wireframe/PlanetOutline.png"
-dest_files=["res://.godot/imported/PlanetOutline.png-a0045cf4343f287289ac4f28c549a3b0.s3tc.ctex"]
+source_file="res://bodies/wireframe/LunaWireframe.png"
+dest_files=["res://.godot/imported/LunaWireframe.png-e863d03cd47af3cae25ccf319335e505.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

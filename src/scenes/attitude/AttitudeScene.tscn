@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://j7weec3kdnqh"]
+[gd_scene load_steps=22 format=3 uid="uid://j7weec3kdnqh"]
 
 [ext_resource type="Script" path="res://scenes/orbit/pointer_inheritor.gd" id="1_e5gy2"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/ShipWireframe.tscn" id="3_0dbvy"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="4_vsl4q"]
 [ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="6_gcf0i"]
 [ext_resource type="Texture2D" uid="uid://c1ntvlohm28h3" path="res://bodies/wireframe/EarthWireframe.png" id="7_0lsho"]
+[ext_resource type="Texture2D" uid="uid://b15fig8tkggfw" path="res://bodies/wireframe/LunaWireframe.png" id="9_m1lf3"]
 [ext_resource type="Texture2D" uid="uid://cf6b6qnsq8liu" path="res://scenes/attitude/CelestialGrid.png" id="9_mgcw4"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_nyefy"]
@@ -33,9 +34,13 @@ shader_parameter/textured = ExtResource("7_0lsho")
 radius = 1.74
 height = 3.48
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n5ps6"]
-shading_mode = 0
-albedo_color = Color(0.417896, 0.417896, 0.417896, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rl5ox"]
+render_priority = 0
+shader = ExtResource("6_gcf0i")
+shader_parameter/colored = Color(1, 1, 1, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("9_m1lf3")
 
 [sub_resource type="SphereMesh" id="SphereMesh_ff6as"]
 radius = 3.396
@@ -85,6 +90,7 @@ script = ExtResource("4_bhv7d")
 color = Color(1, 0.690196, 0, 1)
 
 [node name="Sun" type="Node3D" parent="."]
+visible = false
 script = ExtResource("3_hefpj")
 body = "SUN"
 GM = 1.32712e+11
@@ -138,7 +144,7 @@ GM = 4904.87
 [node name="LunaMesh" type="MeshInstance3D" parent="Luna"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("SphereMesh_55l57")
-surface_material_override/0 = SubResource("StandardMaterial3D_n5ps6")
+surface_material_override/0 = SubResource("ShaderMaterial_rl5ox")
 
 [node name="LunaLabel" type="Label3D" parent="Luna"]
 pixel_size = 0.0005

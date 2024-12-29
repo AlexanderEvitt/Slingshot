@@ -110,8 +110,8 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 planet_radius = 6.37
 atmosphere_height = 0.1
 sun_path = NodePath("../../Sun/SunLight")
-shader_params/u_density = 5.0
-shader_params/u_scattering_strength = 0.3
+shader_params/u_density = 4.0
+shader_params/u_scattering_strength = 1.0
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
