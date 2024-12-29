@@ -3,6 +3,7 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 public partial class Propagator : Node3D
 {
@@ -24,7 +25,7 @@ public partial class Propagator : Node3D
 	private Node OwnShip;
 
 	public int c = 0;
-	public double timescale = 0.03d;
+	public double timescale = 0.06d;
 
 	public override void _Ready()
 	{
@@ -48,8 +49,7 @@ public partial class Propagator : Node3D
 			// Refresh trajectory
 			double t = SystemTime.Instance.t;
 			Refresh(t);
-			c = 60;
-			
+			c = 10;
 		}
 		c = c - 1;
 

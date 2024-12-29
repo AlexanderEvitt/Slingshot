@@ -43,7 +43,7 @@ func _unhandled_input(event):
 
 	if r:
 		yaw -= Input.get_last_mouse_velocity().x * rotation_speed
-		pitch = clamp(pitch - Input.get_last_mouse_velocity().y * rotation_speed, -1.2, 1.2)
+		pitch = clamp(pitch - Input.get_last_mouse_velocity().y * rotation_speed, -1.57, 1.57)
 		
 		# Set rotation on the parent, CameraRig
 		get_parent().rotation = Vector3(pitch, yaw, 0)

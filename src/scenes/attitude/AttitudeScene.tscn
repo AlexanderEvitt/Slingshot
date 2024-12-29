@@ -1,11 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://j7weec3kdnqh"]
+[gd_scene load_steps=21 format=3 uid="uid://j7weec3kdnqh"]
 
-[ext_resource type="Script" path="res://scenes/attitude/full_inheritor.gd" id="1_uh5lo"]
-[ext_resource type="PackedScene" uid="uid://bpgdg48hj5e2d" path="res://ship/placeholder.tscn" id="3_5ctib"]
+[ext_resource type="Script" path="res://scenes/orbit/pointer_inheritor.gd" id="1_e5gy2"]
+[ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/ShipWireframe.tscn" id="3_0dbvy"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="3_hefpj"]
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="3_snx6t"]
+[ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="4_bhv7d"]
 [ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="4_vsl4q"]
-[ext_resource type="Texture2D" uid="uid://c8weqi6q7wmp4" path="res://visuals/tycho_grid.jpg" id="9_kvnry"]
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="6_gcf0i"]
+[ext_resource type="Texture2D" uid="uid://c1ntvlohm28h3" path="res://bodies/wireframe/EarthWireframe.png" id="7_0lsho"]
+[ext_resource type="Texture2D" uid="uid://cf6b6qnsq8liu" path="res://scenes/attitude/CelestialGrid.png" id="9_mgcw4"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_nyefy"]
 radius = 700.0
@@ -18,9 +21,13 @@ shading_mode = 0
 radius = 6.371
 height = 12.742
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_puryv"]
-shading_mode = 0
-albedo_color = Color(0.1081, 0.1081, 0.47, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_otisn"]
+render_priority = 0
+shader = ExtResource("6_gcf0i")
+shader_parameter/colored = Color(0.392157, 0.392157, 0.784314, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("7_0lsho")
 
 [sub_resource type="SphereMesh" id="SphereMesh_55l57"]
 radius = 1.74
@@ -39,37 +46,43 @@ shading_mode = 0
 albedo_color = Color(0.240183, 0, 0.027149, 1)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_to5oi"]
-panorama = ExtResource("9_kvnry")
+panorama = ExtResource("9_mgcw4")
 
 [sub_resource type="Sky" id="Sky_k6xhb"]
 sky_material = SubResource("PanoramaSkyMaterial_to5oi")
 
 [sub_resource type="Environment" id="Environment_ovhi2"]
 background_mode = 2
-background_energy_multiplier = 0.49
+background_color = Color(0.117647, 0.117647, 0.156863, 1)
 sky = SubResource("Sky_k6xhb")
 
 [node name="AttitudeRoot" type="Node3D"]
 
 [node name="Spacecraft" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.380531, 0, 0.891081)
-script = ExtResource("1_uh5lo")
+script = ExtResource("1_e5gy2")
 
-[node name="Body" type="Node3D" parent="Spacecraft"]
+[node name="Pointer" type="Node3D" parent="Spacecraft"]
 
-[node name="CameraRig" type="Node3D" parent="Spacecraft/Body"]
-transform = Transform3D(6.12323e-17, 1, 6.12323e-17, 0, 6.12323e-17, -1, -1, 6.12323e-17, 3.7494e-33, 0, 0, 0)
+[node name="CameraRig" type="Node3D" parent="Spacecraft/Pointer"]
+transform = Transform3D(6.12323e-17, 1, -6.12323e-17, 0, 6.12323e-17, 1, 1, -6.12323e-17, 3.7494e-33, 0, 0, 0)
 
-[node name="CameraRotator" type="Node3D" parent="Spacecraft/Body/CameraRig"]
+[node name="CameraRotator" type="Node3D" parent="Spacecraft/Pointer/CameraRig"]
 
-[node name="Camera3D" type="Camera3D" parent="Spacecraft/Body/CameraRig/CameraRotator"]
+[node name="Camera3D" type="Camera3D" parent="Spacecraft/Pointer/CameraRig/CameraRotator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
-fov = 60.0
+fov = 90.0
 far = 1e+10
 script = ExtResource("3_snx6t")
 zoom_distance = 0.5
 
-[node name="placeholder" parent="Spacecraft/Body" instance=ExtResource("3_5ctib")]
+[node name="placeholder" parent="Spacecraft/Pointer" instance=ExtResource("3_0dbvy")]
+
+[node name="Plotter" type="Node3D" parent="Spacecraft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
+top_level = true
+script = ExtResource("4_bhv7d")
+color = Color(1, 0.690196, 0, 1)
 
 [node name="Sun" type="Node3D" parent="."]
 script = ExtResource("3_hefpj")
@@ -102,9 +115,9 @@ body = "EARTH"
 GM = 398600.0
 
 [node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, -3.99574e-23, 0, 3.99574e-23, 1, 0, 0, 0)
 mesh = SubResource("SphereMesh_2aoqw")
-surface_material_override/0 = SubResource("StandardMaterial3D_puryv")
+surface_material_override/0 = SubResource("ShaderMaterial_otisn")
 
 [node name="EarthLabel" type="Label3D" parent="Earth"]
 pixel_size = 0.0005

@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://17dclcol0avn"
-path="res://.godot/imported/navball_texture.png-54c0751162c6803e0fec0d4ae611590e.ctex"
+uid="uid://3v33sgac5ygh"
+path.s3tc="res://.godot/imported/UranusMap.jpg-9669b507ffef71fd3b2c11cc286d2bc0.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://scenes/attitude/navball_texture.png"
-dest_files=["res://.godot/imported/navball_texture.png-54c0751162c6803e0fec0d4ae611590e.ctex"]
+source_file="res://bodies/holograms/UranusMap.jpg"
+dest_files=["res://.godot/imported/UranusMap.jpg-9669b507ffef71fd3b2c11cc286d2bc0.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

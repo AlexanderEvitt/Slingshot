@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bsm4dahp7hpwo"]
-
-[ext_resource type="Shader" uid="uid://dd4yg3iyipys8" path="res://bodies/models/VenusShader.tres" id="1_p7oa5"]
-[ext_resource type="Texture2D" uid="uid://fndhop7b738p" path="res://bodies/models/VenusMap.jpg" id="2_dr3es"]
-
-[resource]
-render_priority = 0
-shader = ExtResource("1_p7oa5")
-shader_parameter/Texture2DParameter = ExtResource("2_dr3es")

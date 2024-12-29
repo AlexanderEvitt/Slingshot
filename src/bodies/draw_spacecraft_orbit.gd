@@ -11,7 +11,7 @@ func _process(_delta):
 	# Only update when new positions are provided
 	if old_positions != positions:
 		
-		var slicer = positions.size()/1000
+		var slicer = positions.size()/500
 		undraw(line_instance)
 		
 		line_instance = line(positions.slice(0,positions.size(),slicer), color)

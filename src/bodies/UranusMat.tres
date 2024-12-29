@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cvcneo6e8o7ol"]
-
-[ext_resource type="Shader" uid="uid://cmvaakp1vjf6q" path="res://bodies/models/PlanetHologram.tres" id="1_fnmgv"]
-[ext_resource type="Texture2D" uid="uid://3v33sgac5ygh" path="res://bodies/models/UranusMap.jpg" id="2_xyu1r"]
-
-[resource]
-render_priority = 0
-shader = ExtResource("1_fnmgv")
-shader_parameter/Texture2DParameter = ExtResource("2_xyu1r")

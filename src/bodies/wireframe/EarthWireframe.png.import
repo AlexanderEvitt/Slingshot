@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://17dclcol0avn"
-path="res://.godot/imported/navball_texture.png-54c0751162c6803e0fec0d4ae611590e.ctex"
+uid="uid://c1ntvlohm28h3"
+path="res://.godot/imported/EarthWireframe.png-520de1cacacdd8dbc8c236a038c646b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/attitude/navball_texture.png"
-dest_files=["res://.godot/imported/navball_texture.png-54c0751162c6803e0fec0d4ae611590e.ctex"]
+source_file="res://bodies/wireframe/EarthWireframe.png"
+dest_files=["res://.godot/imported/EarthWireframe.png-520de1cacacdd8dbc8c236a038c646b7.ctex"]
 
 [params]
 

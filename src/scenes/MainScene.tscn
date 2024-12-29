@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://n78uivx6mb2"]
 
-[ext_resource type="PackedScene" uid="uid://231jhr4hx8d6" path="res://scenes/UIScene.tscn" id="1_yhthj"]
+[ext_resource type="PackedScene" uid="uid://231jhr4hx8d6" path="res://ui/UIScene.tscn" id="1_yhthj"]
 [ext_resource type="Script" path="res://ship/ship_calculator.gd" id="2_11ed2"]
 [ext_resource type="Script" path="res://ship/attitude.gd" id="3_kr225"]
 [ext_resource type="Script" path="res://ship/Propagator.cs" id="4_1p6cq"]
@@ -27,4 +27,4 @@ script = ExtResource("3_kr225")
 
 [node name="Propagator" type="Node3D" parent="Ships/OwnShip"]
 script = ExtResource("4_1p6cq")
-n = 1000
+n = 500
