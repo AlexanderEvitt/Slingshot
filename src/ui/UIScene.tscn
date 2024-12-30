@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=16 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://ui/handler.gd" id="1_at06d"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://j7weec3kdnqh" path="res://scenes/attitude/AttitudeScene.tscn" id="7_gsnns"]
 [ext_resource type="Texture2D" uid="uid://dwuoceh81gph6" path="res://visuals/Logo.png" id="8_05j2h"]
 [ext_resource type="Script" path="res://scenes/camera_setter.gd" id="8_pyaw7"]
+[ext_resource type="PackedScene" uid="uid://co1ql607hc2v5" path="res://ui/gauge.tscn" id="8_qhpct"]
+[ext_resource type="Script" path="res://ui/gauge_writer.gd" id="8_ua3ya"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -187,30 +189,51 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.02
-anchor_top = 0.1
-anchor_right = 0.98
-anchor_bottom = 0.9
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/SubViewportContainer"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(712, 698)
+size = Vector2i(666, 558)
 render_target_update_mode = 4
 
-[node name="NavballRoot" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_mguog")]
+[node name="NavballRoot" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("6_mguog")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.55
+script = ExtResource("8_ua3ya")
+
+[node name="ExcessVelocityGauge" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_qhpct")]
+layout_mode = 2
+size_flags_horizontal = 3
+variable_name = "vinf"
+
+[node name="EccentricityGauge" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_qhpct")]
+layout_mode = 2
+size_flags_horizontal = 3
+variable_name = "e"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer"]
 layout_mode = 2

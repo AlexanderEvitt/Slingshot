@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://co1ql607hc2v5"]
+
+[ext_resource type="Script" path="res://ui/gauge.gd" id="1_qvx8i"]
+[ext_resource type="Texture2D" uid="uid://cr1s13724iqli" path="res://ui/gauge1.png" id="2_x506o"]
+[ext_resource type="Texture2D" uid="uid://brdeyiuesg2lp" path="res://ui/gauge2.png" id="3_r64wq"]
+[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="4_0b16u"]
+[ext_resource type="Texture2D" uid="uid://c5pcx02th5mkk" path="res://ui/gauge3.png" id="5_a2bjb"]
+[ext_resource type="FontFile" uid="uid://do6qxwpxanaih" path="res://ui/fonts/JetBrainsMonoNL-Bold.ttf" id="5_l3wae"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mathc"]
+font = ExtResource("4_0b16u")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_vm61q"]
+font = ExtResource("5_l3wae")
+font_size = 24
+font_color = Color(0.0253638, 0.0253638, 0.0253638, 1)
+
+[node name="Node2D" type="Panel"]
+custom_minimum_size = Vector2(300, 300)
+offset_right = 300.0
+offset_bottom = 300.0
+script = ExtResource("1_qvx8i")
+
+[node name="Back" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_x506o")
+
+[node name="Front" type="TextureRect" parent="."]
+z_index = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_r64wq")
+
+[node name="Label" type="Label" parent="Front"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = 100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "150km"
+label_settings = SubResource("LabelSettings_mathc")
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Front"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "r"
+label_settings = SubResource("LabelSettings_vm61q")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Red" type="Sprite2D" parent="."]
+modulate = Color(0.501961, 0, 0, 1)
+position = Vector2(150, 150)
+rotation = 3.14159
+texture = ExtResource("5_a2bjb")
+
+[node name="Green" type="Sprite2D" parent="."]
+modulate = Color(4.39193e-07, 0.368984, 0.00874906, 1)
+position = Vector2(150, 150)
+rotation = 1.74533
+scale = Vector2(1, 1)
+texture = ExtResource("5_a2bjb")
+
+[node name="Yellow" type="Sprite2D" parent="."]
+modulate = Color(1, 0.690196, 0, 1)
+position = Vector2(150, 150)
+rotation = 1.39626
+scale = Vector2(1, 1)
+texture = ExtResource("5_a2bjb")
+
+[node name="Cover" type="Sprite2D" parent="."]
+self_modulate = Color(0.117647, 0.117647, 0.156863, 1)
+position = Vector2(150, 150)
+rotation = -3.03338
+texture = ExtResource("5_a2bjb")
+
+[node name="Polygon2D" type="Polygon2D" parent="Cover"]
+z_index = 3
+polygon = PackedVector2Array(-2, 0, -2, -145, 2, -145, 2, 0)

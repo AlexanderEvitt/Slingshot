@@ -3,9 +3,9 @@
 
 Slingshot aims to provide a user-friendly astrodynamics UI to flight operations teams. NEW: Converted to Godot, awaiting full feature migration.
 
-![High Orbit Around the Moon](looking_back.png)
-![Solar System and an Escape from Earth](solar_system.png)
-![The Long Journey to Luna](enroute_to_luna.png)
+![Ejecting from Earth, Looking Back](looking_back.png)
+![Chaotic Orbit Around Luna](perturbed.png)
+![Attitude Visualization](meo.png)
 
 ## Current Features
 

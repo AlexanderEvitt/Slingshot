@@ -42,31 +42,41 @@ public partial class Conversions : Node
 		return new_positions;
 	}
 
-	public Vector3 ToUniversal(Vector3 positions)
+	public Vector3 ToUniversal(Vector3 position, double t)
 	{
 		// Convert the start position, given in relative to the start frame, to universal position
 		Node body_node = bodies[f];
 		planet body = (planet)body_node;
-		Vector3 new_positions = positions + body.fetch(t);
+		Vector3 new_positions = position + body.fetch(t);
 		return new_positions;
 	}
 
-	public Vector3 VelFromFrame(Vector3 v)
+	public Vector3 ToFrame(Vector3 position, double t)
+	{
+		// Convert the start position, given in relative to the start frame, to universal position
+		Node body_node = bodies[f];
+		planet body = (planet)body_node;
+		Vector3 new_positions = position - body.fetch(t);
+		return new_positions;
+	}
+
+	public Vector3 VelFromFrame(Vector3 v, double t)
 	{
 		// Convert the start position, given in relative to the start frame, to universal velocity
 		Node body_node = bodies[f];
 		planet body = (planet)body_node;
-		Vector3 vel = body.fetch(1d) - body.fetch(0d);
+		Vector3 vel = body.fetch(1d + t) - body.fetch(t);
 		Vector3 new_v = v + vel;
 		return new_v;
 	}
 
-	public Vector3 VelToFrame(Vector3 v)
+	public Vector3 VelToFrame(Vector3 v, double t)
 	{
 		// Convert a universal velocity to a frame velocity
+		// Only works at initial timestep
 		Node body_node = bodies[f];
 		planet body = (planet)body_node;
-		Vector3 vel = body.fetch(1d) - body.fetch(0d);
+		Vector3 vel = body.fetch(t + 1d) - body.fetch(t);
 		Vector3 new_v = v - vel;
 		return new_v;
 	}
@@ -77,5 +87,22 @@ public partial class Conversions : Node
 		Node frame_body = bodies[f];
 		planet body = (planet)frame_body;
 		return body.fetch(t);
+	}
+
+	public Vector3 CalcEccentricity(Vector3 r, Vector3 v, double t)
+	{
+		// Calculates the eccentricity vector
+		// Get the planet's mu
+		Node body_node = bodies[f];
+		planet body = (planet)body_node;
+		double mu = (double)body.Get("GM");
+
+		Vector3 r_frame = ToFrame(r,t);
+		Vector3 v_frame = VelToFrame(v,t);
+
+		Vector3 h_frame = r_frame.Cross(v_frame);
+		Vector3 e = (1/mu)*(v_frame.Cross(h_frame) - mu*r_frame/r_frame.Length());
+
+		return e;
 	}
 }
