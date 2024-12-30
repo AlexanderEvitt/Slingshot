@@ -228,7 +228,8 @@ script = ExtResource("8_ua3ya")
 [node name="ExcessVelocityGauge" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_qhpct")]
 layout_mode = 2
 size_flags_horizontal = 3
-variable_name = "vinf"
+variable_name = "∞"
+flipped = true
 
 [node name="EccentricityGauge" parent="Screen/AttitudeSceneHUD/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_qhpct")]
 layout_mode = 2

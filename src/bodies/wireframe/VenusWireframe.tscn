@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://p6o5a3n7q5yl"]
+
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="1_nv0wl"]
+[ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="2_afjsw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t6ay8"]
+radius = 6.052
+height = 12.104
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t80lo"]
+render_priority = 0
+shader = ExtResource("1_nv0wl")
+shader_parameter/colored = Color(0.88, 0.809013, 0.4928, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("2_afjsw")
+
+[node name="VenusMesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_t6ay8")
+surface_material_override/0 = SubResource("ShaderMaterial_t80lo")

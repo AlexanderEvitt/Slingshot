@@ -15,4 +15,10 @@ func _process(_delta):
 	
 	# Calculate eccentricity
 	var e = Conversions.CalcEccentricity(OwnShip.position,OwnShip.velocity,SystemTime.t)
-	EGauge.value = clamp(pow(e.length(),0.5),0,1)
+	EGauge.value = clamp(pow(e.length(),0.5)/2,0,1)
+	EGauge.text = str(snapped(e.length(), 0.01))
+	
+	# Calculate excess velocity
+	var v = Conversions.CalcExcess(OwnShip.position,OwnShip.velocity,SystemTime.t)
+	VGauge.value = clamp((v/3)+0.5,0,1)
+	VGauge.text = str(snapped(v, 0.01))

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmc8fp2kenecv"]
+
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="1_dmnhj"]
+[ext_resource type="Texture2D" uid="uid://bscwehof7srnc" path="res://bodies/wireframe/JupiterWireframe.png" id="2_ek1dq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qa28d"]
+radius = 71.492
+height = 142.984
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ywtfn"]
+render_priority = 0
+shader = ExtResource("1_dmnhj")
+shader_parameter/colored = Color(0.477453, 0.403184, 0.295429, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("2_ek1dq")
+
+[node name="JupiterMesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_qa28d")
+surface_material_override/0 = SubResource("ShaderMaterial_ywtfn")

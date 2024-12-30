@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://d386uc0phqab7"]
+
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="1_fjbqc"]
+[ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="2_0o6l6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_j27v8"]
+radius = 24.764
+height = 49.528
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4v0li"]
+render_priority = 0
+shader = ExtResource("1_fjbqc")
+shader_parameter/colored = Color(0.164706, 0.333333, 0.721569, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("2_0o6l6")
+
+[node name="NeptuneMesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_j27v8")
+surface_material_override/0 = SubResource("ShaderMaterial_4v0li")

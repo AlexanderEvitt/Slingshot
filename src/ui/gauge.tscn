@@ -23,12 +23,14 @@ offset_bottom = 300.0
 script = ExtResource("1_qvx8i")
 
 [node name="Back" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_x506o")
 
 [node name="Front" type="TextureRect" parent="."]
 z_index = 2
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_r64wq")
@@ -48,6 +50,7 @@ label_settings = SubResource("LabelSettings_mathc")
 vertical_alignment = 1
 
 [node name="Title" type="Label" parent="Front"]
+z_index = 6
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -71,20 +74,17 @@ texture = ExtResource("5_a2bjb")
 modulate = Color(4.39193e-07, 0.368984, 0.00874906, 1)
 position = Vector2(150, 150)
 rotation = 1.74533
-scale = Vector2(1, 1)
 texture = ExtResource("5_a2bjb")
 
 [node name="Yellow" type="Sprite2D" parent="."]
 modulate = Color(1, 0.690196, 0, 1)
 position = Vector2(150, 150)
 rotation = 1.39626
-scale = Vector2(1, 1)
 texture = ExtResource("5_a2bjb")
 
 [node name="Cover" type="Sprite2D" parent="."]
 self_modulate = Color(0.117647, 0.117647, 0.156863, 1)
 position = Vector2(150, 150)
-rotation = -3.03338
 texture = ExtResource("5_a2bjb")
 
 [node name="Polygon2D" type="Polygon2D" parent="Cover"]

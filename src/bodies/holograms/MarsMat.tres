@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c2ham8mio6kqu"]
-
-[ext_resource type="Shader" uid="uid://cmvaakp1vjf6q" path="res://bodies/holograms/PlanetHologram.tres" id="1_aqmr7"]
-[ext_resource type="Texture2D" uid="uid://dqrqntexm7jdl" path="res://bodies/holograms/MarsMap.jpg" id="2_scnda"]
-
-[resource]
-render_priority = 0
-shader = ExtResource("1_aqmr7")
-shader_parameter/Texture2DParameter = ExtResource("2_scnda")

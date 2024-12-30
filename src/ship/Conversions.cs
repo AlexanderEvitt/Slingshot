@@ -105,4 +105,21 @@ public partial class Conversions : Node
 
 		return e;
 	}
+
+	public double CalcExcess(Vector3 r, Vector3 v, double t)
+	{
+		// Calculates the hyperbolic excess velocity
+		// Get the planet's mu
+		Node body_node = bodies[f];
+		planet body = (planet)body_node;
+		double mu = (double)body.Get("GM");
+
+		Vector3 r_frame = ToFrame(r,t);
+		Vector3 v_frame = VelToFrame(v,t);
+
+		double v_esc = (double)Mathf.Sqrt(2f*mu/r_frame.Length());
+		double v_exc = v_frame.Length() - v_esc;
+
+		return v_exc;
+	}
 }

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://rg5pq75kxwxo"]
+
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="1_8q0u6"]
+[ext_resource type="Texture2D" uid="uid://bejuc23sb6x5" path="res://bodies/wireframe/MercuryWireframe.png" id="2_l5qsr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8fy0r"]
+radius = 2.44
+height = 4.88
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gj30m"]
+render_priority = 0
+shader = ExtResource("1_8q0u6")
+shader_parameter/colored = Color(0.788235, 0.784314, 0.780392, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("2_l5qsr")
+
+[node name="MercuryMesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_8fy0r")
+surface_material_override/0 = SubResource("ShaderMaterial_gj30m")

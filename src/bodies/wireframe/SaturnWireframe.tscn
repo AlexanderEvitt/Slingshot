@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgifrw1p56y10"]
+
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="1_51s45"]
+[ext_resource type="Texture2D" uid="uid://bdxgbfmljh581" path="res://bodies/wireframe/SaturnWireframe.png" id="2_f1dgr"]
+[ext_resource type="Shader" path="res://ship/Sobel.gdshader" id="3_teebj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_p4pre"]
+radius = 60.268
+height = 120.536
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x66m2"]
+render_priority = 0
+shader = ExtResource("1_51s45")
+shader_parameter/colored = Color(0.956863, 0.839216, 0.647059, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("2_f1dgr")
+
+[sub_resource type="TorusMesh" id="TorusMesh_ehbfc"]
+inner_radius = 67.3
+outer_radius = 140.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogf38"]
+render_priority = 0
+shader = ExtResource("3_teebj")
+shader_parameter/outline_threshold = 0.2
+shader_parameter/outline_color = Color(0.945098, 0.839216, 0.647059, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7cep"]
+next_pass = SubResource("ShaderMaterial_ogf38")
+shading_mode = 0
+albedo_color = Color(0.117647, 0.117647, 0.156863, 1)
+
+[node name="SaturnMesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_p4pre")
+surface_material_override/0 = SubResource("ShaderMaterial_x66m2")
+
+[node name="SaturnRings" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.01, 3.99574e-23, 0, -3.99574e-25, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_ehbfc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_v7cep")

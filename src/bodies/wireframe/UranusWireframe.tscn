@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://2q27idy8fbkr"]
+
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="1_yapxi"]
+[ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="2_kq1xt"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t3fbd"]
+radius = 25.559
+height = 51.118
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f32hx"]
+render_priority = 0
+shader = ExtResource("1_yapxi")
+shader_parameter/colored = Color(0.584314, 0.886275, 0.909804, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("2_kq1xt")
+
+[node name="UranusMesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_t3fbd")
+surface_material_override/0 = SubResource("ShaderMaterial_f32hx")

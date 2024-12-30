@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlxcptlilq2sf"]
+
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="1_yqbqv"]
+[ext_resource type="Texture2D" uid="uid://c1ntvlohm28h3" path="res://bodies/wireframe/EarthWireframe.png" id="2_yg1wc"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_2aoqw"]
+radius = 6.371
+height = 12.742
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_otisn"]
+render_priority = 0
+shader = ExtResource("1_yqbqv")
+shader_parameter/colored = Color(0.392157, 0.392157, 0.784314, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("2_yg1wc")
+
+[node name="EarthMesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.99574e-23, 0, 3.99574e-23, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_2aoqw")
+surface_material_override/0 = SubResource("ShaderMaterial_otisn")

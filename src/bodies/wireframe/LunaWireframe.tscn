@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhbrnbjd5ry01"]
+
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="1_vxmqf"]
+[ext_resource type="Texture2D" uid="uid://b15fig8tkggfw" path="res://bodies/wireframe/LunaWireframe.png" id="2_d2w4h"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_55l57"]
+radius = 1.74
+height = 3.48
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rl5ox"]
+render_priority = 0
+shader = ExtResource("1_vxmqf")
+shader_parameter/colored = Color(1, 1, 1, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("2_d2w4h")
+
+[node name="LunaMesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_55l57")
+surface_material_override/0 = SubResource("ShaderMaterial_rl5ox")

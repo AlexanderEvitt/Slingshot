@@ -4,13 +4,13 @@
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
 [ext_resource type="Texture2D" uid="uid://da6km1fbq3qbf" path="res://visuals/tycho_skymap_highres.jpg" id="1_nfics"]
 [ext_resource type="PackedScene" uid="uid://bwwdgkhhphu7b" path="res://ship/OSC.glb" id="3_uoivw"]
-[ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/earth_tex.png" id="4_eafgx"]
+[ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="4_xwbd5"]
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="5_2nae2"]
-[ext_resource type="Texture2D" uid="uid://16sjbapb4kht" path="res://bodies/photo/moon.jpg" id="7_iivlg"]
-[ext_resource type="Texture2D" uid="uid://46s3bcs5voeb" path="res://bodies/photo/clouds.jpg" id="7_w4ah3"]
+[ext_resource type="Texture2D" uid="uid://16sjbapb4kht" path="res://bodies/photo/LunaTrue.jpg" id="7_iivlg"]
+[ext_resource type="Texture2D" uid="uid://46s3bcs5voeb" path="res://bodies/photo/EarthClouds.jpg" id="7_w4ah3"]
 [ext_resource type="Texture2D" uid="uid://dgl8wj4mkimt3" path="res://bodies/photo/MarsTrue.jpg" id="10_mv0q4"]
-[ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/holograms/JupiterTrue.jpg" id="11_74p1c"]
+[ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/photo/JupiterTrue.jpg" id="11_74p1c"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_en2db"]
 panorama = ExtResource("1_nfics")

@@ -12,7 +12,7 @@
 render_priority = 0
 shader = ExtResource("2_3xuav")
 shader_parameter/outline_threshold = 0.5
-shader_parameter/outline_color = Color(0.552941, 0, 0.552941, 1)
+shader_parameter/outline_color = Color(1, 0, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_875cf"]
 next_pass = SubResource("ShaderMaterial_mhx8v")

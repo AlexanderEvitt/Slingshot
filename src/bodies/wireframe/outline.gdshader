@@ -12,7 +12,7 @@ void fragment() {
     vec2 uv = UV;
     vec4 color = texture(textured, uv);
     ALBEDO = color.rgb;
-	
+
 	    // Calculate the Fresnel effect
     vec3 view_dir = normalize(VIEW); // Direction from the fragment to the camera
     float fresnel = pow(1.0 - abs(dot(NORMAL, view_dir)), fresnel_power);
