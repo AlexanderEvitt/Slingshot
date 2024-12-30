@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://br774l8co4lju"]
+
+[ext_resource type="PackedScene" uid="uid://uoervxfhmjkh" path="res://bodies/photo/rings.glb" id="1_iflt6"]
+[ext_resource type="Texture2D" uid="uid://dqdd4yccdopj" path="res://bodies/photo/SaturnRings.png" id="2_mlj36"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pnc64"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("2_mlj36")
+
+[node name="rings" instance=ExtResource("1_iflt6")]
+
+[node name="Circle" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_pnc64")
