@@ -166,6 +166,7 @@ GM = 22032.0
 
 [node name="MercuryMesh" type="MeshInstance3D" parent="Mercury"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_8fy0r")
 surface_material_override/0 = SubResource("StandardMaterial3D_gmmuk")
 
@@ -177,6 +178,7 @@ GM = 324859.0
 
 [node name="VenusMesh" type="MeshInstance3D" parent="Venus"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_t6ay8")
 surface_material_override/0 = SubResource("StandardMaterial3D_oivmx")
 
@@ -184,22 +186,26 @@ surface_material_override/0 = SubResource("StandardMaterial3D_oivmx")
 script = ExtResource("4_xwbd5")
 body = "EARTH"
 
-[node name="EarthAtmosphere" parent="Earth" instance=ExtResource("5_2nae2")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+[node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_aom7d")
+surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
+
+[node name="EarthAtmosphere" parent="Earth/EarthMesh" instance=ExtResource("5_2nae2")]
+transform = Transform3D(2, 0, 0, 0, 1.22465e-16, 2, 0, -2, 1.22465e-16, 0, 0, 0)
 planet_radius = 6.37
 atmosphere_height = 0.1
-sun_path = NodePath("../../Sun/SunLight")
+sun_path = NodePath("../../../Sun/SunLight")
 shader_params/u_density = 4.0
 shader_params/u_scattering_strength = 1.0
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
-[node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
-mesh = SubResource("SphereMesh_aom7d")
-surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
-
-[node name="Clouds" type="MeshInstance3D" parent="Earth"]
+[node name="Clouds" type="MeshInstance3D" parent="Earth/EarthMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_282r8")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
 
 [node name="Luna" type="Node3D" parent="."]
@@ -210,6 +216,7 @@ GM = 4904.87
 
 [node name="LunaMesh" type="MeshInstance3D" parent="Luna"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_6xnwu")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
 
@@ -221,12 +228,14 @@ GM = 42828.4
 
 [node name="MarsMesh" type="MeshInstance3D" parent="Mars"]
 transform = Transform3D(1, 0, 0, 0, 1, -3.99574e-23, 0, 3.99574e-23, 1, 0, 0, 0)
+visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_61v7t")
 surface_material_override/0 = SubResource("StandardMaterial3D_563sj")
 
-[node name="MarsAtmosphere" parent="Mars" instance=ExtResource("5_2nae2")]
+[node name="MarsAtmosphere" parent="Mars/MarsMesh" instance=ExtResource("5_2nae2")]
+transform = Transform3D(1, 0, 0, 0, 1, 3.99574e-23, 0, -3.99574e-23, 1, 0, 0, 0)
 planet_radius = 3.396
-sun_path = NodePath("../../Sun/SunLight")
+sun_path = NodePath("../../../Sun/SunLight")
 shader_params/u_density = 1.5
 shader_params/u_scattering_strength = 0.1
 shader_params/u_atmosphere_modulate = Color(0.704034, 0.398832, 0.348735, 1)
@@ -240,6 +249,7 @@ GM = 1.26687e+08
 
 [node name="JupiterMesh" type="MeshInstance3D" parent="Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_ke1qx")
 surface_material_override/0 = SubResource("StandardMaterial3D_lnura")
 
@@ -251,6 +261,7 @@ GM = 3.79312e+07
 
 [node name="SaturnMesh" type="MeshInstance3D" parent="Saturn"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_p4pre")
 surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
 
@@ -265,6 +276,7 @@ GM = 5.79394e+06
 
 [node name="UranusMesh" type="MeshInstance3D" parent="Uranus"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_t3fbd")
 surface_material_override/0 = SubResource("StandardMaterial3D_fqvh8")
 
@@ -276,5 +288,6 @@ GM = 6.83653e+06
 
 [node name="NeptuneMesh" type="MeshInstance3D" parent="Neptune"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_j27v8")
 surface_material_override/0 = SubResource("StandardMaterial3D_nnkww")

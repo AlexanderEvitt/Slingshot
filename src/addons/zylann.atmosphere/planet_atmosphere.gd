@@ -283,6 +283,9 @@ func _set_mode(mode: int):
 
 
 func _process(_delta):
+	# make visible only if parent is visible
+	visible = get_parent().visible
+	
 	var cam_pos := Vector3()
 	var cam_near := 0.1
 	

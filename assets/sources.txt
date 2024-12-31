@@ -1,0 +1,2 @@
+planet textures: https://www.solarsystemscope.com/textures/
+Jupiter texture: https://planetary.s3.amazonaws.com/web/assets/pictures/20180511_jupiter_map_css_plus_juno_bj.jpg

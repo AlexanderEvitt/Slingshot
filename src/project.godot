@@ -14,6 +14,8 @@ config/name="Slingshot"
 run/main_scene="res://scenes/MainScene.tscn"
 config/features=PackedStringArray("4.3", "C#", "Double Precision", "Forward Plus")
 run/max_fps=30
+boot_splash/bg_color=Color(0.0745098, 0.0745098, 0.0980392, 1)
+boot_splash/image="res://visuals/Logo.png"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -24,10 +26,10 @@ OwnShip="*res://ship/own_ship.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/size/mode=2
-window/stretch/mode="viewport"
+window/size/viewport_width=3840
+window/size/viewport_height=2160
+window/size/mode=3
+window/stretch/mode="canvas_items"
 
 [dotnet]
 

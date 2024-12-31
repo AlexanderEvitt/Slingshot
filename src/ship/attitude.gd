@@ -19,3 +19,8 @@ func _process(_delta):
 		apply_torque(-transform.basis.x)
 	if Input.is_action_pressed("roll_right"):
 		apply_torque(transform.basis.x)
+		
+	if SystemTime.step != 1:
+		lock_rotation = true
+	else:
+		lock_rotation = false
