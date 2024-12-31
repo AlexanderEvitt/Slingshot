@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=43 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/resetter.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
@@ -15,9 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://b4elvmsivv3oa" path="res://bodies/photo/SaturnTrue.jpg" id="14_eha35"]
 [ext_resource type="Texture2D" uid="uid://bn8rqk76ahe07" path="res://bodies/photo/VenusTrue.jpg" id="15_k1fbk"]
 [ext_resource type="PackedScene" uid="uid://br774l8co4lju" path="res://bodies/photo/rings.tscn" id="15_qf8i2"]
-[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="16_ylme6"]
-[ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="17_y1roa"]
-[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="18_sesnr"]
+[ext_resource type="Texture2D" uid="uid://blf5ecvkcenvs" path="res://bodies/photo/UranusTrue.jpg" id="16_uf3kr"]
+[ext_resource type="Texture2D" uid="uid://bh21nouyh0k42" path="res://bodies/photo/NeptuneTrue.jpg" id="17_n5xr7"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_en2db"]
 panorama = ExtResource("1_nfics")
@@ -35,6 +34,29 @@ glow_bloom = 1.0
 adjustment_brightness = 0.75
 adjustment_saturation = 0.2
 
+[sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
+radius = 700.0
+height = 1400.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkpof"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_8fy0r"]
+radius = 2.44
+height = 4.88
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmmuk"]
+albedo_texture = ExtResource("13_4pb4k")
+
+[sub_resource type="SphereMesh" id="SphereMesh_t6ay8"]
+radius = 6.052
+height = 12.104
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oivmx"]
+albedo_texture = ExtResource("15_k1fbk")
+
 [sub_resource type="SphereMesh" id="SphereMesh_aom7d"]
 radius = 6.37
 height = 12.74
@@ -43,6 +65,7 @@ rings = 128
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imlac"]
 albedo_texture = ExtResource("4_eafgx")
+roughness = 0.34
 
 [sub_resource type="SphereMesh" id="SphereMesh_282r8"]
 radius = 6.38
@@ -62,15 +85,6 @@ height = 3.48
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qq6b"]
 albedo_texture = ExtResource("7_iivlg")
 
-[sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
-radius = 700.0
-height = 1400.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkpof"]
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 16.0
-
 [sub_resource type="SphereMesh" id="SphereMesh_61v7t"]
 radius = 3.396
 height = 6.792
@@ -85,20 +99,6 @@ height = 142.984
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnura"]
 albedo_texture = ExtResource("11_74p1c")
 
-[sub_resource type="SphereMesh" id="SphereMesh_8fy0r"]
-radius = 2.44
-height = 4.88
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmmuk"]
-albedo_texture = ExtResource("13_4pb4k")
-
-[sub_resource type="SphereMesh" id="SphereMesh_t6ay8"]
-radius = 6.052
-height = 12.104
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oivmx"]
-albedo_texture = ExtResource("15_k1fbk")
-
 [sub_resource type="SphereMesh" id="SphereMesh_p4pre"]
 radius = 60.268
 height = 120.536
@@ -110,25 +110,15 @@ albedo_texture = ExtResource("14_eha35")
 radius = 25.559
 height = 51.118
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f32hx"]
-render_priority = 0
-shader = ExtResource("16_ylme6")
-shader_parameter/colored = Color(0.584314, 0.886275, 0.909804, 1)
-shader_parameter/fresnel_threshold = 0.8
-shader_parameter/fresnel_power = 2.0
-shader_parameter/textured = ExtResource("17_y1roa")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqvh8"]
+albedo_texture = ExtResource("16_uf3kr")
 
 [sub_resource type="SphereMesh" id="SphereMesh_j27v8"]
 radius = 24.764
 height = 49.528
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4v0li"]
-render_priority = 0
-shader = ExtResource("16_ylme6")
-shader_parameter/colored = Color(0.164706, 0.333333, 0.721569, 1)
-shader_parameter/fresnel_threshold = 0.8
-shader_parameter/fresnel_power = 2.0
-shader_parameter/textured = ExtResource("17_y1roa")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnkww"]
+albedo_texture = ExtResource("17_n5xr7")
 
 [node name="CamRoot" type="Node3D"]
 script = ExtResource("1_5ri2s")
@@ -153,11 +143,48 @@ far = 1e+10
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_utubi")
 
+[node name="Sun" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.7426, 122.738, -1886.51)
+script = ExtResource("4_xwbd5")
+body = "SUN"
+
+[node name="SunMesh" type="MeshInstance3D" parent="Sun"]
+mesh = SubResource("SphereMesh_v7y0l")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
+
+[node name="SunLight" type="OmniLight3D" parent="Sun"]
+shadow_enabled = true
+omni_range = 5e+11
+omni_attenuation = 0.0
+
+[node name="Mercury" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1106, 0, 0)
+script = ExtResource("4_xwbd5")
+body = "MERCURY"
+GM = 22032.0
+
+[node name="MercuryMesh" type="MeshInstance3D" parent="Mercury"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_8fy0r")
+surface_material_override/0 = SubResource("StandardMaterial3D_gmmuk")
+
+[node name="Venus" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8274, 0, 0)
+script = ExtResource("4_xwbd5")
+body = "VENUS"
+GM = 324859.0
+
+[node name="VenusMesh" type="MeshInstance3D" parent="Venus"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_t6ay8")
+surface_material_override/0 = SubResource("StandardMaterial3D_oivmx")
+
 [node name="Earth" type="Node3D" parent="."]
 script = ExtResource("4_xwbd5")
 body = "EARTH"
 
-[node name="PlanetAthmosphere" parent="Earth" instance=ExtResource("5_2nae2")]
+[node name="EarthAtmosphere" parent="Earth" instance=ExtResource("5_2nae2")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 planet_radius = 6.37
 atmosphere_height = 0.1
@@ -186,22 +213,7 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("SphereMesh_6xnwu")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
 
-[node name="Sun" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.7426, 122.738, -1886.51)
-script = ExtResource("4_xwbd5")
-body = "SUN"
-
-[node name="SunMesh" type="MeshInstance3D" parent="Sun"]
-mesh = SubResource("SphereMesh_v7y0l")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
-
-[node name="SunLight" type="OmniLight3D" parent="Sun"]
-shadow_enabled = true
-omni_range = 5e+11
-omni_attenuation = 0.0
-
-[node name="Mars" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Mars" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5654, 0, 0)
 script = ExtResource("4_xwbd5")
 body = "MARS BARYCENTER"
@@ -212,38 +224,24 @@ transform = Transform3D(1, 0, 0, 0, 1, -3.99574e-23, 0, 3.99574e-23, 1, 0, 0, 0)
 mesh = SubResource("SphereMesh_61v7t")
 surface_material_override/0 = SubResource("StandardMaterial3D_563sj")
 
-[node name="Jupiter" type="Node3D" parent="." groups=["Bodies"]]
+[node name="MarsAtmosphere" parent="Mars" instance=ExtResource("5_2nae2")]
+planet_radius = 3.396
+sun_path = NodePath("../../Sun/SunLight")
+shader_params/u_density = 1.5
+shader_params/u_scattering_strength = 0.1
+shader_params/u_atmosphere_modulate = Color(0.704034, 0.398832, 0.348735, 1)
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
+
+[node name="Jupiter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 104.63)
 script = ExtResource("4_xwbd5")
 body = "JUPITER BARYCENTER"
 GM = 1.26687e+08
 
 [node name="JupiterMesh" type="MeshInstance3D" parent="Jupiter"]
-transform = Transform3D(1, 0, 0, 0, 1, -3.99574e-23, 0, 3.99574e-23, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("SphereMesh_ke1qx")
 surface_material_override/0 = SubResource("StandardMaterial3D_lnura")
-
-[node name="Mercury" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1106, 0, 0)
-script = ExtResource("4_xwbd5")
-body = "MERCURY"
-GM = 22032.0
-
-[node name="MercuryMesh" type="MeshInstance3D" parent="Mercury"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
-mesh = SubResource("SphereMesh_8fy0r")
-surface_material_override/0 = SubResource("StandardMaterial3D_gmmuk")
-
-[node name="Venus" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8274, 0, 0)
-script = ExtResource("4_xwbd5")
-body = "VENUS"
-GM = 324859.0
-
-[node name="VenusMesh" type="MeshInstance3D" parent="Venus"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
-mesh = SubResource("SphereMesh_t6ay8")
-surface_material_override/0 = SubResource("StandardMaterial3D_oivmx")
 
 [node name="Saturn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 262.026, -191.709, 0)
@@ -268,17 +266,7 @@ GM = 5.79394e+06
 [node name="UranusMesh" type="MeshInstance3D" parent="Uranus"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("SphereMesh_t3fbd")
-surface_material_override/0 = SubResource("ShaderMaterial_f32hx")
-
-[node name="UranusLabel" type="Label3D" parent="Uranus"]
-pixel_size = 0.0005
-billboard = 1
-no_depth_test = true
-fixed_size = true
-text = "URANUS"
-font = ExtResource("18_sesnr")
-font_size = 64
-outline_size = 6
+surface_material_override/0 = SubResource("StandardMaterial3D_fqvh8")
 
 [node name="Neptune" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 411.095, 0, 0)
@@ -289,14 +277,4 @@ GM = 6.83653e+06
 [node name="NeptuneMesh" type="MeshInstance3D" parent="Neptune"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("SphereMesh_j27v8")
-surface_material_override/0 = SubResource("ShaderMaterial_4v0li")
-
-[node name="NeptuneLabel" type="Label3D" parent="Neptune"]
-pixel_size = 0.0005
-billboard = 1
-no_depth_test = true
-fixed_size = true
-text = "NEPTUNE"
-font = ExtResource("18_sesnr")
-font_size = 64
-outline_size = 6
+surface_material_override/0 = SubResource("StandardMaterial3D_nnkww")
