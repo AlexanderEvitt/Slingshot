@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dvd52f5nadxfl"]
+
+[ext_resource type="FontFile" uid="uid://ct8juool8o5th" path="res://ui/fonts/JetBrainsMonoNL-SemiBold.ttf" id="1_0k1do"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3arxn"]
+bg_color = Color(0.117647, 0.117647, 0.156863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ius82"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uue3l"]
+bg_color = Color(1, 1, 1, 1)
+
+[resource]
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_0k1do")
+Button/styles/normal = SubResource("StyleBoxFlat_3arxn")
+Button/styles/pressed = SubResource("StyleBoxFlat_ius82")
+Label/colors/font_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_0k1do")
+Panel/styles/panel = SubResource("StyleBoxFlat_uue3l")

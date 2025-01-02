@@ -5,7 +5,8 @@ Slingshot aims to provide a user-friendly astrodynamics UI to flight operations 
 
 ![Ejecting from Earth, Looking Back](looking_back.png)
 ![Chaotic Orbit Around Luna](perturbed.png)
-![Attitude Visualization](meo.png)
+![Flight Instruments in MEO](meo.png)
+![Arrival at Saturn](saturn_arrival.png)
 
 ## Current Features
 

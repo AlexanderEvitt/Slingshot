@@ -91,6 +91,7 @@ period = 365.25
 color = Color(0.181977, 0.313911, 0.600695, 1)
 
 [node name="EarthMesh" parent="Earth" instance=ExtResource("5_wg1iu")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 
 [node name="Luna" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 0)
