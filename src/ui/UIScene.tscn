@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=24 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://ui/handler.gd" id="1_at06d"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
+[ext_resource type="Theme" uid="uid://bhtmuml4efphk" path="res://ui/themes/medium_panel.tres" id="3_p6n5d"]
 [ext_resource type="PackedScene" uid="uid://1sgfn61bmfrt" path="res://scenes/orbit/OrbitScene.tscn" id="4_5661e"]
 [ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="6_mdjyt"]
 [ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="6_mguog"]
@@ -11,6 +12,8 @@
 [ext_resource type="Script" path="res://ui/gauge_writer.gd" id="8_ua3ya"]
 [ext_resource type="Shader" path="res://scenes/external/lens_flare.gdshader" id="8_vsulk"]
 [ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="8_xpkhs"]
+[ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="9_adiw3"]
+[ext_resource type="Script" path="res://ui/planner.gd" id="9_ot80y"]
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="10_xhv8f"]
 [ext_resource type="Script" path="res://ui/data_grid.gd" id="11_enivj"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="14_k3rsk"]
@@ -63,6 +66,7 @@ size_flags_horizontal = 3
 script = ExtResource("1_at06d")
 
 [node name="HUD1" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -93,7 +97,7 @@ theme_override_constants/margin_right = 20
 [node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
+theme = ExtResource("3_p6n5d")
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel"]
 layout_mode = 1
@@ -114,8 +118,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1452, 945)
-render_target_update_mode = 4
+size = Vector2i(2, 2)
+render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
 
@@ -240,9 +244,88 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="HUD5" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Planner" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("9_ot80y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("9_adiw3")
+text = "PLANNER"
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("9_adiw3")
+
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAN"
+
+[node name="Autopilot" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("9_adiw3")
+text = "AUTOPILOT"
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("9_adiw3")
+
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+text = "NAV"
 
 [node name="HUD6" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
 visible = false
@@ -659,6 +742,7 @@ texture = ExtResource("8_05j2h")
 expand_mode = 2
 stretch_mode = 4
 
+[connection signal="pressed" from="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/Panel/Button" to="HBoxContainer/Screen/HUD5/VBoxContainer/Planner" method="_on_plan"]
 [connection signal="pressed" from="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton1/Button" to="HBoxContainer/Screen" method="_on_button1_pressed"]
 [connection signal="pressed" from="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton2/Button" to="HBoxContainer/Screen" method="_on_button2_pressed"]
 [connection signal="pressed" from="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton3/Button" to="HBoxContainer/Screen" method="_on_button3_pressed"]

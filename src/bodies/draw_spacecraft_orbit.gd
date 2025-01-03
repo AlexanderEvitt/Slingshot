@@ -1,6 +1,7 @@
 extends Drawer
 
 @export var color: Color
+@export var slice: bool
 var c = 0
 var n = 100.0
 var positions
@@ -14,9 +15,13 @@ func _process(_delta):
 		var slicer = positions.size()/500
 		undraw(line_instance)
 		
-		line_instance = line(positions.slice(0,positions.size(),slicer), color)
+		if slice:
+			line_instance = line(positions.slice(0,positions.size(),slicer), color)
+		else:
+			line_instance = line(positions, color)
 		draw(line_instance)
 		
 		old_positions = positions
-		
+	
+	# Move with the spacecraft
 	line_instance.position = get_parent().position
