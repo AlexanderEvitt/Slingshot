@@ -4,6 +4,7 @@ var label1
 var label2
 var label3
 var label4
+var label5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +13,7 @@ func _ready():
 	label2 = $"Data2"
 	label3 = $"Data3"
 	label4 = $"Data4"
+	label5 = $"Data5"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,3 +33,6 @@ func _process(_delta):
 	# Calculate and set eccentricity
 	var e = Conversions.CalcEccentricity(OwnShip.position,OwnShip.velocity,SystemTime.t)
 	label4.text = str(snapped(e.length(), 0.001))
+	
+	# Get and set time step
+	label5.text = str(SystemTime.step)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=21 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://ui/handler.gd" id="1_at06d"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dwuoceh81gph6" path="res://visuals/Logo.png" id="8_05j2h"]
 [ext_resource type="PackedScene" uid="uid://co1ql607hc2v5" path="res://ui/gauge.tscn" id="8_qhpct"]
 [ext_resource type="Script" path="res://ui/gauge_writer.gd" id="8_ua3ya"]
+[ext_resource type="Shader" path="res://scenes/external/lens_flare.gdshader" id="8_vsulk"]
 [ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="8_xpkhs"]
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="10_xhv8f"]
 [ext_resource type="Script" path="res://ui/data_grid.gd" id="11_enivj"]
@@ -20,6 +21,17 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v83e3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kueen"]
+noise = SubResource("FastNoiseLite_v83e3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wn3xp"]
+shader = ExtResource("8_vsulk")
+shader_parameter/sun_position = Vector2(500, 500)
+shader_parameter/tint = Vector3(1.4, 1.2, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_kueen")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d77aa"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -51,7 +63,6 @@ size_flags_horizontal = 3
 script = ExtResource("1_at06d")
 
 [node name="HUD1" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -103,8 +114,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
+size = Vector2i(1452, 945)
+render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
 
@@ -234,6 +245,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="HUD6" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_bmshc")
@@ -265,6 +277,7 @@ size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel"]
+material = SubResource("ShaderMaterial_wn3xp")
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -283,7 +296,7 @@ script = ExtResource("8_xpkhs")
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(1452, 945)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="CamRoot" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_mdjyt")]
 
@@ -568,6 +581,19 @@ theme = ExtResource("14_k3rsk")
 text = "ECC"
 
 [node name="Data4" type="Label" parent="HBoxContainer/Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.324"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Title5" type="Label" parent="HBoxContainer/Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_k3rsk")
+text = "STP"
+
+[node name="Data5" type="Label" parent="HBoxContainer/Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0.324"
