@@ -10,18 +10,19 @@ func _ready():
 	huds = get_tree().get_nodes_in_group("HUDs")
 	butts = get_tree().get_nodes_in_group("Buttons")
 
-func _input(_event):
+func _input(event):
 	# Handle arrow keys switching HUD
-	if Input.is_action_just_pressed("arrow_up"):
-		h = h - 4
-	elif Input.is_action_just_pressed("arrow_down"):
-		h = h + 4
-	elif Input.is_action_just_pressed("arrow_left"):
-		h = h - 1
-	elif Input.is_action_just_pressed("arrow_right"):
-		h = h + 1
-	h = clamp(h,0,7)
-	set_huds(h)
+	if !event.shift_pressed:
+		if Input.is_action_just_pressed("arrow_up"):
+			h = h - 4
+		elif Input.is_action_just_pressed("arrow_down"):
+			h = h + 4
+		elif Input.is_action_just_pressed("arrow_left"):
+			h = h - 1
+		elif Input.is_action_just_pressed("arrow_right"):
+			h = h + 1
+		h = clamp(h,0,7)
+		set_huds(h)
 
 func set_huds(i):
 	h = i # used for keeping track of which HUD is active

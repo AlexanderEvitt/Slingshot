@@ -11,15 +11,15 @@ func _ready():
 	fov_label = get_node("ScreenText/Label3")
 	sun = get_node("SubViewport/CamRoot/Sun/SunSprite")
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_pressed("zoom_out"):
-		cam.fov = (1+rate)*cam.fov
-	if Input.is_action_pressed("zoom_in"):
-		cam.fov = (1-rate)*cam.fov
-	cam.fov = clamp(cam.fov,5,100)
-	fov_label.text = "FOV" + str(snapped(cam.fov,1))
+	if is_visible_in_tree():
+		if Input.is_action_pressed("zoom_out"):
+			cam.fov = (1+rate)*cam.fov
+		if Input.is_action_pressed("zoom_in"):
+			cam.fov = (1-rate)*cam.fov
+		cam.fov = clamp(cam.fov,5,100)
+		fov_label.text = "FOV" + str(snapped(cam.fov,1))
 	
 	# Set the sun position in the lens flare shader
 	var sun_point = cam.unproject_position(-OwnShip.position)
