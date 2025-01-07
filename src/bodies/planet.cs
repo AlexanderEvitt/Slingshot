@@ -14,6 +14,7 @@ public partial class planet : Node3D
 	[Export]
 	public double GM;
 	double scaledown = 1e3d;
+	public double time_initial;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -39,11 +40,11 @@ public partial class planet : Node3D
 
 			// Get initial ephemeris time
 			double tdb;
-			fixed (byte* timeChars = Encoding.ASCII.GetBytes("2024 OCTOBER 29 23:59:59.9"))
+			fixed (byte* timeChars = Encoding.ASCII.GetBytes("2025 JANUARY 01 23:59:59.9"))
 			{
 				Spice.STR2ET_C(timeChars, &tdb);
 			}
-			t = 0;
+			time_initial = tdb;
 		}
 	}
 
@@ -71,7 +72,7 @@ public partial class planet : Node3D
 			fixed (byte* frame = Encoding.ASCII.GetBytes("J2000"))
 			fixed (byte* corr = Encoding.ASCII.GetBytes("NONE"))
 			{
-				Spice.SPKPOS_C(target, time, frame, corr, obs, state, &lt);
+				Spice.SPKPOS_C(target, time + time_initial, frame, corr, obs, state, &lt);
 			}
 			
 			var pos = new Vector3(state[0],state[1],state[2]);

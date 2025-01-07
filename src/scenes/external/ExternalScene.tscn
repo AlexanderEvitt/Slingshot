@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=43 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/resetter.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
@@ -92,6 +92,10 @@ height = 120.536
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0p12"]
 albedo_texture = ExtResource("14_eha35")
 
+[sub_resource type="SphereMesh" id="SphereMesh_uj08c"]
+radius = 2.575
+height = 5.15
+
 [sub_resource type="SphereMesh" id="SphereMesh_t3fbd"]
 radius = 25.559
 height = 51.118
@@ -145,7 +149,7 @@ texture = ExtResource("6_78yin")
 [node name="SunLight" type="DirectionalLight3D" parent="Sun"]
 transform = Transform3D(-0.977783, 0, 0.209619, 0, 1, 0, -0.209619, 0, -0.977783, 0, 0, 0)
 shadow_enabled = true
-directional_shadow_max_distance = 1000.0
+directional_shadow_max_distance = 5000.0
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
@@ -257,6 +261,27 @@ surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
 
 [node name="rings" parent="Saturn/SaturnMesh" instance=ExtResource("15_qf8i2")]
 transform = Transform3D(67.3, 0, 0, 0, 67.3, 0, 0, 0, 67.3, 0, 0, 0)
+
+[node name="Titan" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 305.419, -191.709, 146.573)
+script = ExtResource("4_xwbd5")
+body = "TITAN"
+
+[node name="TitanMesh" type="MeshInstance3D" parent="Titan"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, -257.01)
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_uj08c")
+surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
+
+[node name="EarthAtmosphere" parent="Titan/TitanMesh" instance=ExtResource("5_2nae2")]
+transform = Transform3D(2, 0, 0, 0, 1.22465e-16, 2, 0, -2, 1.22465e-16, 0, 0, 0)
+planet_radius = 2.575
+atmosphere_height = 0.25
+sun_path = NodePath("../../../Sun/SunLight")
+shader_params/u_density = 5.0
+shader_params/u_scattering_strength = 5.0
+shader_params/u_atmosphere_modulate = Color(0.905882, 0.772549, 0.388235, 1)
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="Uranus" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 353.559, 0, 0)
