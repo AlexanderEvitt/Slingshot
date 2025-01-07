@@ -66,6 +66,7 @@ size_flags_horizontal = 3
 script = ExtResource("1_at06d")
 
 [node name="HUD1" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -117,8 +118,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1452, 945)
-render_target_update_mode = 4
+size = Vector2i(2, 2)
+render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
 
@@ -243,7 +244,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="HUD5" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 

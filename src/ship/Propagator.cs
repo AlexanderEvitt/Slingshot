@@ -33,7 +33,7 @@ public partial class Propagator : Node3D
 	private Node OwnShip;
 
 	public int c = 0;
-	public double timescale = 0.06d;
+	public double timescale = 0.07d;
 
 	public override void _Ready()
 	{
