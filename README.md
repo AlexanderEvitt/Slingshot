@@ -1,7 +1,7 @@
 # Slingshot
-## Orbital Dynamics Solver
+## Astrodynamics Simulator
 
-Slingshot aims to provide a user-friendly astrodynamics UI to flight operations teams. NEW: Converted to Godot, awaiting full feature migration.
+Slingshot is a full-up, 6DOF astrodynamics simulation with a cool UI. Aimed at being somewhere between a video game and a display for flight operations teams, it presents a complete sandbox for spacecraft navigation and control.
 
 ![Ejecting from Earth, Looking Back](looking_back.png)
 ![Chaotic Orbit Around Luna](perturbed.png)
@@ -11,25 +11,22 @@ Slingshot aims to provide a user-friendly astrodynamics UI to flight operations 
 ## Current Features
 
 - Full solar system of planets with data taken from SPICE
-- Multiple numerical integration models, including Runge-Kutta, Forest-Ruth, and Verlet
-- Pseudo-adaptive step control allows high fidelity when close to bodies and low fidelity in deep space
-- Basic simulation controls, including integration length and time rate
-- Maneuver nodes that allow instantaneous changes in velocity
-- Switching between references frames for both maneuvers and trajectory plotting
-- A slick UI
+- n-body physics providing a numerically-integrated trajectory (with symplectic integrators and adaptive step size control)
+- Flight instruments to allow "eyeballing" trajectories, allowing the user to get familiar with n-body motion
+- Autopilot capable of plotting "flip-and-burn" trajectories between planets
+- Cool graphics that belong on the big screen in a control room
 
 ## Planned Features
 
-- More control over the propagation algorithms
-- More minor solar system bodies, moons, rings, etc
-- Maneuver node design tools
-- Maneuver node visualization
-- Rotating reference frames
+- More minor solar system bodies, moons, asteroids, etc
+- More autopilot algorithms to assist in trajectory creation
+- Numerical trajectory optimizaiton algorithms
+- Full rendezvous and docking simulation
+- Power and propulsion simulation
 - 2D plots to aid trajectory design
 - Visual additions - Lagrange points, manifolds, gravitational potential plots, and more
-- Attitude control simulation
 
-## Setup Instructions
+## Dev Environment Setup Instructions
 
 1. Clone the repo somewhere safe
 2. Download the SPICE data required, place it at /AppData/Roaming/SPICE/ (currently only works on Windows)
