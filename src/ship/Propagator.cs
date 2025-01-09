@@ -183,4 +183,9 @@ public partial class Propagator : Node3D
 		List<Vector3> converted_planned_positions = Conversions.Instance.SubtractBodyMotion(planned_positions, planned_times);
 		passed_planned_positions = new Godot.Collections.Array<Vector3>(converted_planned_positions);
 	}
+
+	public void ClearPlan()
+	{
+		passed_planned_positions = null;
+	}
 }

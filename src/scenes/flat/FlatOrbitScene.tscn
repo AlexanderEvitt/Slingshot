@@ -268,11 +268,14 @@ top_level = true
 script = ExtResource("14_j4d0r")
 color = Color(1, 0.690196, 0, 1)
 slice = true
+squashed = true
 
 [node name="Planner" type="Node3D" parent="Spacecraft"]
 top_level = true
 script = ExtResource("14_j4d0r")
 color = Color(0.552941, 0, 0.552941, 1)
+slice = true
+squashed = true
 
 [node name="Pointer" type="Node3D" parent="Spacecraft"]
 

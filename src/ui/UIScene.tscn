@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=37 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://ui/handler.gd" id="1_at06d"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
@@ -13,14 +13,16 @@
 [ext_resource type="Shader" path="res://scenes/external/lens_flare.gdshader" id="8_vsulk"]
 [ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="8_xpkhs"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="9_adiw3"]
-[ext_resource type="Script" path="res://ui/planner.gd" id="9_ot80y"]
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="10_xhv8f"]
 [ext_resource type="Script" path="res://ui/data_grid.gd" id="11_enivj"]
+[ext_resource type="Script" path="res://ui/trajectory_planning.gd" id="12_d4i4u"]
 [ext_resource type="FontFile" uid="uid://do6qxwpxanaih" path="res://ui/fonts/JetBrainsMonoNL-Bold.ttf" id="12_psl1w"]
 [ext_resource type="PackedScene" uid="uid://bqeqlwsenu6hl" path="res://ui/knob/knob.tscn" id="13_wtdk7"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="14_k3rsk"]
 [ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="14_lble6"]
 [ext_resource type="PackedScene" uid="uid://ci0m8qqbyhlyn" path="res://scenes/flat/FlatOrbitScene.tscn" id="14_ofm8v"]
+[ext_resource type="Script" path="res://ui/button_light.gd" id="17_5ocmo"]
+[ext_resource type="ButtonGroup" uid="uid://444nnqo6ich8" path="res://ui/attitude_button_group.tres" id="17_41jv6"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="17_adpiv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
@@ -30,16 +32,19 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eotxf"]
-bg_color = Color(0.2, 1, 0.2, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yam83"]
+bg_color = Color(0.501961, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
 texture = ExtResource("17_adpiv")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_howla"]
-bg_color = Color(0.2, 1, 0.2, 1)
+bg_color = Color(0.501961, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsc67"]
+bg_color = Color(0.501961, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hp22"]
 bg_color = Color(0.501961, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8abg"]
@@ -282,7 +287,6 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
-script = ExtResource("9_ot80y")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner"]
 layout_mode = 2
@@ -301,6 +305,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("14_k3rsk")
+script = ExtResource("12_d4i4u")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel"]
 layout_mode = 1
@@ -378,7 +383,6 @@ size_flags_horizontal = 3
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 50
@@ -540,7 +544,6 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-toggle_mode = true
 text = "CALCULATE"
 
 [node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
@@ -567,7 +570,6 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-toggle_mode = true
 text = "CLR"
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
@@ -579,19 +581,19 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer"]
+[node name="CalcStatusBox" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_eotxf")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yam83")
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer/Panel"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer/CalcStatusBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CALCULATED"
+text = "NO DATA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -674,7 +676,6 @@ size_flags_horizontal = 3
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 50
@@ -687,7 +688,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(610, 589)
+size = Vector2i(630, 589)
 render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("14_ofm8v")]
@@ -858,7 +859,9 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
+button_group = ExtResource("17_41jv6")
 text = "HDG"
+script = ExtResource("17_5ocmo")
 
 [node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button"]
 layout_mode = 1
@@ -895,9 +898,11 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
+button_group = ExtResource("17_41jv6")
 text = "CRS"
+script = ExtResource("17_5ocmo")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -932,9 +937,11 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
+button_group = ExtResource("17_41jv6")
 text = "TRG"
+script = ExtResource("17_5ocmo")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -969,9 +976,11 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
+button_group = ExtResource("17_41jv6")
 text = "INV"
+script = ExtResource("17_5ocmo")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -1023,6 +1032,7 @@ grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
 text = "INV"
+script = ExtResource("17_5ocmo")
 
 [node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer/Panel/Button"]
 layout_mode = 1
@@ -1061,8 +1071,9 @@ grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
 text = "STAB"
+script = ExtResource("17_5ocmo")
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -1099,7 +1110,7 @@ theme_override_constants/margin_bottom = 8
 [node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_eotxf")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hp22")
 
 [node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/MarginContainer/Panel"]
 layout_mode = 1
@@ -1108,7 +1119,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "ENGAGED"
+text = "IDLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1670,6 +1681,8 @@ texture = ExtResource("8_05j2h")
 expand_mode = 2
 stretch_mode = 4
 
+[connection signal="pressed" from="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2/Panel/Button" to="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel" method="_on_calculate"]
+[connection signal="pressed" from="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3/Panel/Button" to="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel" method="_on_clear"]
 [connection signal="pressed" from="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton1/Button" to="HBoxContainer/Screen" method="_on_button1_pressed"]
 [connection signal="pressed" from="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton2/Button" to="HBoxContainer/Screen" method="_on_button2_pressed"]
 [connection signal="pressed" from="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton3/Button" to="HBoxContainer/Screen" method="_on_button3_pressed"]

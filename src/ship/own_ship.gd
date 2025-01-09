@@ -7,8 +7,8 @@ var thrust
 
 var propagator
 
-var plotted_positions = [Vector3(0,0,0),Vector3(0,0,0)]
-var planned_positions = [Vector3(0,0,0),Vector3(0,0,0)]
+var plotted_positions
+var planned_positions
 
 var ship
 

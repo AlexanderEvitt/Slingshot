@@ -1,7 +1,7 @@
 class_name Drawer
 extends Node
 
-func line(pos: Array, color = Color.WHITE_SMOKE):
+func line(pos: Array, color = Color.WHITE_SMOKE, squashed = false):
 	if pos == null:
 		pos = [Vector3(0,0,0),Vector3(0,0,0)]
 		
@@ -14,6 +14,8 @@ func line(pos: Array, color = Color.WHITE_SMOKE):
 
 	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP, material)
 	for i in pos:
+		if squashed:
+			i.z = 0
 		immediate_mesh.surface_add_vertex(i/1000)
 		
 	immediate_mesh.surface_end()
