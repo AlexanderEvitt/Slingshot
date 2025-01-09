@@ -5,6 +5,7 @@ shader_type canvas_item;
 render_mode blend_mix;
 
 uniform vec2 sun_position = vec2(0.0);
+uniform bool show_sun = false;
 uniform vec3 tint = vec3(1.4,1.2,1.0);
 uniform sampler2D noise_texture;
 
@@ -83,9 +84,10 @@ float spike(vec2 d) {
 }
 float spikes(vec2 p) {
     float d = length(p);
-    if(d > 1.) return 0.;
+    float falloff = 1.0 - d;
+	falloff = clamp(falloff,0.0,1.0);
     
-    return 0.3/spike(p.yx) + 1.0/spike(p) 
+    return falloff*0.3/spike(p.yx) + 1.0/spike(p) 
     + 1.0/spike(rot1*p) + 1.0/spike(rot2*p);
 
 }
@@ -101,19 +103,21 @@ void fragment()
 	vec4 previousColor = texture(TEXTURE, UV);
 	
 	vec3 color = previousColor.rgb;
-	
-	color += tint * lensflare(UV, mouse.xy, texResolution);
-	color -= noise_vec2(FRAGCOORD.xy, texResolution)*.015;
-	color = cc(color,.5,.1);
 
+	if (show_sun) {
+		// Do lens flare
+		color += tint * lensflare(UV, mouse.xy, texResolution);
+		color -= noise_vec2(FRAGCOORD.xy, texResolution)*.015;
+		color = cc(color,.5,.1);
 
-	// Blend with diffraction spike
-	vec2 uv = UV - sun_position/texResolution;
-	vec3 col = vec3(spikes(uv));
-	for(float i = 0.0; i < 64.0; i++) {
-		col += 0.005*spikes(uv + 0.5*sin(vec2(i, i+5.0) + 0.01*TIME));
+		// Do diffraction spikes
+		vec2 uv = UV - sun_position/texResolution;
+		vec3 col = vec3(spikes(uv));
+		for(float i = 0.0; i < 64.0; i++) {
+			col += 0.01*spikes(uv + 0.5*sin(vec2(i, i+5.0) + 0.01*TIME));
+		}
+		color += col;
 	}
-	color += col;
 
 	COLOR = vec4(color,1.0);
 }

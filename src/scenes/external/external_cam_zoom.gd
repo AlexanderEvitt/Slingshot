@@ -25,5 +25,8 @@ func _process(_delta):
 	var sun_point = cam.unproject_position(sun.global_position)
 	material.set_shader_parameter("sun_position",sun_point)
 	
+	var render_spikes = cam.is_position_behind(sun.global_position)
+	material.set_shader_parameter("show_sun",!render_spikes)
+	
 	# Scale the sun with zoom
 	sun.pixel_size = 0.3*cam.fov
