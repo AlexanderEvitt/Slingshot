@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://y6tdkpsu24sm"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://y6tdkpsu24sm"]
 
 [ext_resource type="FontFile" uid="uid://ct8juool8o5th" path="res://ui/fonts/JetBrainsMonoNL-SemiBold.ttf" id="1_2rsge"]
 
@@ -8,8 +8,13 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g07wm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bx42g"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 0)
 border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvw5m"]
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2op5"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -17,6 +22,7 @@ border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
 
 [resource]
 Button/colors/font_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -26,8 +32,10 @@ Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_2rsge")
 Button/styles/normal = SubResource("StyleBoxFlat_i76ea")
 Button/styles/pressed = SubResource("StyleBoxFlat_g07wm")
+Label/colors/font_color = Color(1, 1, 1, 1)
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_2rsge")
 LightBorderSidePanel/base_type = &"Panel"
 LightBorderSidePanel/styles/panel = SubResource("StyleBoxFlat_bx42g")
+OverwritePanel/styles/panel = SubResource("StyleBoxFlat_fvw5m")
 Panel/styles/panel = SubResource("StyleBoxFlat_p2op5")

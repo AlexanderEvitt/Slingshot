@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=33 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://ui/handler.gd" id="1_at06d"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
@@ -16,7 +16,10 @@
 [ext_resource type="Script" path="res://ui/planner.gd" id="9_ot80y"]
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="10_xhv8f"]
 [ext_resource type="Script" path="res://ui/data_grid.gd" id="11_enivj"]
+[ext_resource type="FontFile" uid="uid://do6qxwpxanaih" path="res://ui/fonts/JetBrainsMonoNL-Bold.ttf" id="12_psl1w"]
+[ext_resource type="PackedScene" uid="uid://bqeqlwsenu6hl" path="res://ui/knob/knob.tscn" id="13_wtdk7"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="14_k3rsk"]
+[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="14_lble6"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="17_adpiv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
@@ -26,6 +29,9 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eotxf"]
+bg_color = Color(0.2, 1, 0.2, 1)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
 texture = ExtResource("17_adpiv")
 
@@ -34,9 +40,6 @@ bg_color = Color(0.2, 1, 0.2, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsc67"]
 bg_color = Color(0.501961, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eotxf"]
-bg_color = Color(0.2, 1, 0.2, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8abg"]
 bg_color = Color(0.501961, 0, 0, 1)
@@ -283,11 +286,11 @@ script = ExtResource("9_ot80y")
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer"]
+[node name="TitleMargin" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/MarginContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/TitleMargin"]
 layout_mode = 2
 theme = ExtResource("9_adiw3")
 text = "TRAJECTORY PLANNER"
@@ -298,7 +301,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("14_k3rsk")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -306,12 +309,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonHolder" type="GridContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/VBoxContainer"]
+[node name="ButtonPanel" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonHolder" type="GridContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 
-[node name="ModeButton1" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/VBoxContainer/ButtonHolder"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 20
+
+[node name="ModesTitle" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_psl1w")
+text = "FLIGHT MODES"
+horizontal_alignment = 1
+
+[node name="ModeButton1" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
@@ -319,27 +336,27 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/VBoxContainer/ButtonHolder/ModeButton1"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton1"]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_pressed = true
-text = "SLIDING MODE"
+text = "FLIP-AND-BURN"
 
-[node name="ModeButton2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/VBoxContainer/ButtonHolder"]
+[node name="ModeButton2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/VBoxContainer/ButtonHolder/ModeButton2"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton2"]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 text = "BALLISTIC"
 
-[node name="ModeButton4" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/VBoxContainer/ButtonHolder"]
+[node name="ModeButton4" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
@@ -347,11 +364,338 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/VBoxContainer/ButtonHolder/ModeButton4"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton4"]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 text = "RENDEZVOUS"
+
+[node name="Centerfold" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer"]
+layout_mode = 2
+
+[node name="CenterPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+theme = ExtResource("9_adiw3")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="CenterPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme = ExtResource("9_adiw3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="InputPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="LabelContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="StartSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "START T+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect/VBoxContainer"]
+layout_mode = 2
+text = "120s"
+horizontal_alignment = 1
+
+[node name="Knob" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect/VBoxContainer" instance=ExtResource("13_wtdk7")]
+layout_mode = 2
+
+[node name="FrameLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="TargetSelect" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel/TargetSelect"]
+layout_mode = 2
+theme = ExtResource("9_adiw3")
+theme_override_font_sizes/font_size = 24
+text = "FUEL INDEX"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel/TargetSelect"]
+layout_mode = 2
+text = "0.9"
+horizontal_alignment = 1
+
+[node name="Knob" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel/TargetSelect" instance=ExtResource("13_wtdk7")]
+layout_mode = 2
+
+[node name="FuelSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SHUTOFF DIST"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect/VBoxContainer"]
+layout_mode = 2
+text = "10R"
+horizontal_alignment = 1
+
+[node name="Knob" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect/VBoxContainer" instance=ExtResource("13_wtdk7")]
+layout_mode = 2
+
+[node name="ExecutionPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("9_adiw3")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+text = "CALCULATE"
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+text = "CLR"
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_eotxf")
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CALCULATED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultsPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="LabelContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="StartSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/StartSelect"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/StartSelect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "TOTAL TIME"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/StartSelect/VBoxContainer"]
+layout_mode = 2
+text = "13days"
+horizontal_alignment = 1
+
+[node name="FrameLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="TargetSelect" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FrameLabel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FrameLabel/TargetSelect"]
+layout_mode = 2
+theme = ExtResource("9_adiw3")
+theme_override_font_sizes/font_size = 24
+text = "FUEL BURN"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FrameLabel/TargetSelect"]
+layout_mode = 2
+text = "23%"
+horizontal_alignment = 1
+
+[node name="FuelSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FuelSelect"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FuelSelect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "FINAL DIST"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FuelSelect/VBoxContainer"]
+layout_mode = 2
+text = "9.87R"
+horizontal_alignment = 1
+
+[node name="MapPanel" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 50
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(610, 589)
+render_target_update_mode = 4
+
+[node name="OrbitRoot" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
+
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("14_lble6")
+text = " MAP"
 
 [node name="TriangleCutout" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel"]
 layout_mode = 1
@@ -1174,7 +1518,7 @@ script = ExtResource("11_enivj")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("14_k3rsk")
-text = "Ref"
+text = "REF"
 
 [node name="Data1" type="Label" parent="HBoxContainer/Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
 layout_mode = 2
