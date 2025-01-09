@@ -16,7 +16,10 @@ func _process(_delta):
 		if positions != null:
 			var slicer = positions.size()/500.0 # look for 500 data points roughly
 			slicer = ceil(slicer) # don't the step be zero though
-			undraw(line_instance)
+			
+			# Delete previous line if it exists
+			if line_instance != null:
+				undraw(line_instance)
 			
 			if slice:
 				line_instance = line(positions.slice(0,positions.size(),slicer), color, squashed)
@@ -25,9 +28,12 @@ func _process(_delta):
 			draw(line_instance)
 			
 			old_positions = positions
-		else:
+		elif line_instance != null:
 			# If positions become null, remove the line
-			line_instance.queue_free()
+			undraw(line_instance)
 	
 	# Move with the spacecraft
-	line_instance.position = get_parent().position
+	if line_instance != null:
+		line_instance.position = get_parent().position
+		
+	# Refactor this to add children to spacecraft node instead of under the viewport?
