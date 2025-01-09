@@ -4,7 +4,7 @@ extends Drawer
 @export var color: Color
 var c = 0
 var n = 64.0
-var indent = 0.02
+var indent = 0.01
 var tc = 0
 var line_instance = MeshInstance3D.new()
 
@@ -17,7 +17,7 @@ func _process(_delta):
 	var planet = get_parent()
 	var traj = []
 	for i in range(0,n):
-		var t = tc + (indent)*period + ((1 - 2*indent)*period*i/n)
+		var t = tc + (indent)*period + ((1 - indent)*period*i/n)
 		
 		traj.append(planet.fetch(t))
 	

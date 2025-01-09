@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=21 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
+[ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="2_awidn"]
 [ext_resource type="PackedScene" uid="uid://rg5pq75kxwxo" path="res://bodies/wireframe/MercuryWireframe.tscn" id="3_orujh"]
 [ext_resource type="PackedScene" uid="uid://p6o5a3n7q5yl" path="res://bodies/wireframe/VenusWireframe.tscn" id="4_klp4m"]
@@ -47,6 +48,12 @@ mesh = SubResource("SphereMesh_fskp6")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_tj412")
 
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Sun"]
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
 [node name="Mercury" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
 script = ExtResource("1_xfjlq")
@@ -62,6 +69,13 @@ color = Color(0.45, 0.28305, 0.2115, 1)
 
 [node name="MercuryMesh" parent="Mercury" instance=ExtResource("3_orujh")]
 
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Mercury"]
+modulate = Color(0.45098, 0.282353, 0.211765, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
 [node name="Venus" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 756.163, 0, 0)
 script = ExtResource("1_xfjlq")
@@ -76,6 +90,13 @@ period = 224.7
 color = Color(0.67, 0.482512, 0.1809, 1)
 
 [node name="VenusMesh" parent="Venus" instance=ExtResource("4_klp4m")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Venus"]
+modulate = Color(0.670588, 0.482353, 0.180392, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
 
 [node name="Earth" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 0, 0)
@@ -93,6 +114,13 @@ color = Color(0.181977, 0.313911, 0.600695, 1)
 [node name="EarthMesh" parent="Earth" instance=ExtResource("5_wg1iu")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Earth"]
+modulate = Color(0.180392, 0.313726, 0.6, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
 [node name="Luna" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 0)
 script = ExtResource("1_xfjlq")
@@ -100,6 +128,13 @@ body = "MOON"
 GM = 4904.87
 
 [node name="LunaMesh" parent="Luna" instance=ExtResource("6_bom1w")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Luna"]
+modulate = Color(0.589096, 0.589096, 0.589096, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
 
 [node name="Mars" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 788.163, 0, 0)
@@ -116,6 +151,13 @@ color = Color(0.539592, 0.205864, 0.196268, 1)
 
 [node name="MarsMesh" parent="Mars" instance=ExtResource("7_ug63k")]
 
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Mars"]
+modulate = Color(0.541176, 0.203922, 0.196078, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
 [node name="Jupiter" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 870.629, 0, 0)
 script = ExtResource("1_xfjlq")
@@ -130,6 +172,13 @@ period = 4331.0
 color = Color(0.607, 0.0604174, 0.245852, 1)
 
 [node name="JupiterMesh" parent="Jupiter" instance=ExtResource("8_hosp8")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Jupiter"]
+modulate = Color(0.607843, 0.0588235, 0.247059, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
 
 [node name="Saturn" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1051.44, 0, 0)
@@ -146,6 +195,13 @@ color = Color(0.405878, 0.319402, 0, 1)
 
 [node name="SaturnMesh" parent="Saturn" instance=ExtResource("9_1qyms")]
 
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Saturn"]
+modulate = Color(0.403922, 0.317647, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
 [node name="Uranus" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1173.93, 0, 0)
 script = ExtResource("1_xfjlq")
@@ -161,6 +217,13 @@ color = Color(0.354396, 0.696462, 0.973375, 1)
 
 [node name="UranusMesh" parent="Uranus" instance=ExtResource("10_girv0")]
 
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Uranus"]
+modulate = Color(0.352941, 0.698039, 0.972549, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
 [node name="Neptune" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1247.62, 0, 0)
 script = ExtResource("1_xfjlq")
@@ -175,6 +238,13 @@ period = 59800.0
 color = Color(0.145, 0.254342, 0.760636, 1)
 
 [node name="NeptuneMesh" parent="Neptune" instance=ExtResource("11_ciut5")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Neptune"]
+modulate = Color(0.145098, 0.254902, 0.760784, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
 
 [node name="Spacecraft" type="Node3D" parent="."]
 script = ExtResource("13_xts1l")
