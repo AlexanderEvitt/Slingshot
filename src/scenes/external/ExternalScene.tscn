@@ -114,7 +114,7 @@ albedo_texture = ExtResource("17_n5xr7")
 script = ExtResource("1_5ri2s")
 
 [node name="Spacecraft" type="Node3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -200.95, 0, -24.1337)
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, -88.7469)
 script = ExtResource("1_bkkxk")
 
 [node name="OSC" parent="Spacecraft" instance=ExtResource("3_uoivw")]
@@ -122,6 +122,7 @@ visible = false
 
 [node name="NarrowCam" type="Camera3D" parent="Spacecraft"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
+keep_aspect = 0
 current = true
 fov = 30.0
 size = 2.0

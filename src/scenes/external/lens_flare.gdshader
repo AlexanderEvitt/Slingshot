@@ -1,4 +1,5 @@
 // TRANSLATED & MODIFIED FROM: https://www.shadertoy.com/view/4sX3Rs
+// AND ALSO FROM https://www.shadertoy.com/view/dtKSDV
 
 shader_type canvas_item;
 render_mode blend_mix;
@@ -72,23 +73,47 @@ vec3 cc(vec3 color, float factor,float factor2) // color modifier
 	return mix(color,vec3(w)*factor,w*factor2);
 }
 
+const float R32 = 0.8660254;
+const mat2 rot1 = mat2(vec2(0.5, -R32), vec2(R32, 0.5));	
+const mat2 rot2 = mat2(vec2(0.5, R32), vec2(-R32, 0.5));	
+
+float spike(vec2 d) {
+    vec2 s = abs(d) * vec2(8,1);
+    return 16.*(dot(s,s) + sqrt(s.x) + s.y);
+}
+float spikes(vec2 p) {
+    float d = length(p);
+    if(d > 1.) return 0.;
+    
+    return 0.3/spike(p.yx) + 1.0/spike(p) 
+    + 1.0/spike(rot1*p) + 1.0/spike(rot2*p);
+
+}
+
 void fragment()
 {
 	vec2 texResolution = 1.0 / TEXTURE_PIXEL_SIZE;
 	vec2 resolution = 1.0 / SCREEN_PIXEL_SIZE;
 	
-	vec2 uv = FRAGCOORD.xy / resolution.xy - 0.5;
-	uv.x *= resolution.x/resolution.y; //fix aspect ratio
-	//uv.y *= -1.0;
 	vec2 mouse = (sun_position.xy / resolution.xy) - vec2(0.5, 0.5);
 	mouse.x *= resolution.x / resolution.y; //fix aspect ratio
 	
-	vec4 previousColor = texture(TEXTURE, SCREEN_UV);
+	vec4 previousColor = texture(TEXTURE, UV);
 	
 	vec3 color = previousColor.rgb;
 	
-	color += tint * lensflare(uv, mouse.xy, texResolution);
+	color += tint * lensflare(UV, mouse.xy, texResolution);
 	color -= noise_vec2(FRAGCOORD.xy, texResolution)*.015;
 	color = cc(color,.5,.1);
+
+
+	// Blend with diffraction spike
+	vec2 uv = UV - sun_position/texResolution;
+	vec3 col = vec3(spikes(uv));
+	for(float i = 0.0; i < 64.0; i++) {
+		col += 0.005*spikes(uv + 0.5*sin(vec2(i, i+5.0) + 0.01*TIME));
+	}
+	color += col;
+
 	COLOR = vec4(color,1.0);
 }

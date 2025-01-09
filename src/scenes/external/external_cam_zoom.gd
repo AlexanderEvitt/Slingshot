@@ -22,8 +22,8 @@ func _process(_delta):
 		fov_label.text = "FOV" + str(snapped(cam.fov,1))
 	
 	# Set the sun position in the lens flare shader
-	var sun_point = cam.unproject_position(-OwnShip.position)
+	var sun_point = cam.unproject_position(sun.global_position)
 	material.set_shader_parameter("sun_position",sun_point)
 	
 	# Scale the sun with zoom
-	sun.pixel_size = 0.5*cam.fov
+	sun.pixel_size = 0.3*cam.fov
