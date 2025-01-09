@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=38 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://ui/handler.gd" id="1_at06d"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://ui/button_light.gd" id="17_5ocmo"]
 [ext_resource type="ButtonGroup" uid="uid://444nnqo6ich8" path="res://ui/attitude_button_group.tres" id="17_41jv6"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="17_adpiv"]
+[ext_resource type="Script" path="res://ui/autopilot_handler.gd" id="17_x73oh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -763,6 +764,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("9_adiw3")
+script = ExtResource("17_x73oh")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel"]
 layout_mode = 1
@@ -847,7 +849,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Attitude Modes"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -886,7 +888,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel" groups=["Attitude Modes"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -925,7 +927,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel" groups=["Attitude Modes"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -964,7 +966,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel" groups=["Attitude Modes"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -977,7 +979,7 @@ grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
 button_group = ExtResource("17_41jv6")
-text = "INV"
+text = "NRM"
 script = ExtResource("17_5ocmo")
 
 [node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel/Button"]
@@ -1019,7 +1021,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer/Panel" groups=["Autopilot Keys"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1058,7 +1060,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel" groups=["Autopilot Keys"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1139,7 +1141,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Attitude Modes", "Autopilot Keys"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1151,6 +1153,7 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
+button_group = ExtResource("17_41jv6")
 text = "NAV"
 
 [node name="AutoPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
@@ -1208,7 +1211,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Autopilot Keys"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0

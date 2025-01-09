@@ -1,26 +1,75 @@
 extends RigidBody3D
 
+var ship
+
+func _ready():
+	ship = get_parent()
+
 func _process(_delta):
 	# Change time scale to system time step
 	# accelerate rotational dynamics with time scaling
 	#Engine.time_scale = SystemTime.step
 	
+	var torque = Vector3(0,0,0)
+	
 	if Input.is_action_pressed("down"):
-		apply_torque(-transform.basis.z)
+		torque = torque + (-transform.basis.z)
 	if Input.is_action_pressed("up"):
-		apply_torque(transform.basis.z)
+		torque = torque + (transform.basis.z)
 		
 	if Input.is_action_pressed("left"):
-		apply_torque(transform.basis.y)
+		torque = torque + (transform.basis.y)
 	if Input.is_action_pressed("right"):
-		apply_torque(-transform.basis.y)
+		torque = torque + (-transform.basis.y)
 		
 	if Input.is_action_pressed("roll_left"):
-		apply_torque(-transform.basis.x)
+		torque = torque + (-transform.basis.x)
 	if Input.is_action_pressed("roll_right"):
-		apply_torque(transform.basis.x)
+		torque = torque + (transform.basis.x)
 		
 	if SystemTime.step != 1:
 		lock_rotation = true
 	else:
 		lock_rotation = false
+		
+	# Calculate autopilot response
+	if ship.autopilot_flag:
+		# Calculate target attitude
+		var target
+		match ship.current_mode:
+			"HDG":
+				# HDG is component of velocity normal to radius
+				var v = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
+				var r = Conversions.FindFrame(SystemTime.t) - OwnShip.position
+				var v_along_r = (r.dot(v)/r.length_squared())*r.normalized()
+				target = v - v_along_r
+			"CRS":
+				target = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
+			"TRG":
+				target = Conversions.FindFrame(SystemTime.t) - OwnShip.position
+			"NRM":
+				var v = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
+				var r = Conversions.FindFrame(SystemTime.t) - OwnShip.position
+				target = r.cross(v)
+			"NAV":
+				pass
+		
+		# Calculate torque
+		if target != null:
+			# Normalize
+			target = target.normalized()
+			# Invert if invert key is depressed
+			if ship.inv_flag:
+				target = -target
+			# Cross product for torque
+			torque = torque + -target.cross(ship.attitude.x)
+			
+	# Calculate damping if stabilizers OR autopilot is enabled
+	# TO DO: manually implement damping torque
+	if ship.stab_flag or ship.autopilot_flag:
+		angular_damp = 1
+	else:
+		angular_damp = 0.2
+		
+	# Apply torque
+	apply_torque(torque)

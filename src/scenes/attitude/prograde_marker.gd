@@ -12,7 +12,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if retro != 0:
-		v = Conversions.VelToFrame(OwnShip.velocity,0)
+		v = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
 		position = retro*v.normalized()/2
 	
 	if (global_position.dot(cam.global_position)) > 0:

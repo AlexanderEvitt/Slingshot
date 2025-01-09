@@ -10,6 +10,7 @@ var propagator
 var plotted_positions
 var planned_positions
 
+
 var ship
 
 # Called when the node enters the scene tree for the first time.

@@ -10,7 +10,7 @@ func _ready():
 	huds = get_tree().get_nodes_in_group("HUDs")
 	butts = get_tree().get_nodes_in_group("Buttons")
 
-func _input(event):
+func _input(_event):
 	# Check if player is moving around the view with the shfit key
 	var is_shift = Input.is_action_just_pressed("mod_up") or Input.is_action_just_pressed("mod_down") or Input.is_action_just_pressed("mod_left") or Input.is_action_just_pressed("mod_right")
 	# Handle arrow keys switching HUD

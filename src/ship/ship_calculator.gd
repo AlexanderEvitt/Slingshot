@@ -13,6 +13,13 @@ var thrust = 0
 
 var attitude_calculator
 
+# Autopilot modes
+var current_mode
+var inv_flag
+var stab_flag
+var autopilot_flag
+var nav_flag
+
 
 # this module moves data from the master scene an autoload where others can access it
 
