@@ -5,6 +5,7 @@ var pointer
 var planner
 
 @export var plan : bool
+@export var smashed : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,6 +19,8 @@ func _ready():
 func _process(_delta):
 	pointer.transform.basis = OwnShip.attitude
 	position = OwnShip.position/1000
+	if smashed:
+		position.z = 0
 	
 	plotter.positions = OwnShip.plotted_positions
 	if plan:

@@ -2,9 +2,10 @@ extends Drawer
 
 @export var period: float # days
 @export var color: Color
+@export var smashed: bool
 var c = 0
 var n = 64.0
-var indent = 0.01
+var indent = 0.0
 var tc = 0
 var line_instance = MeshInstance3D.new()
 
@@ -18,8 +19,10 @@ func _process(_delta):
 	var traj = []
 	for i in range(0,n):
 		var t = tc + (indent)*period + ((1 - indent)*period*i/n)
-		
-		traj.append(planet.fetch(t))
+		var p = planet.fetch(t)
+		if smashed:
+			p.z = 0
+		traj.append(p)
 	
 	# Remove previous line, create new line, draw new line
 	undraw(line_instance)

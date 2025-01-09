@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=34 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://ui/handler.gd" id="1_at06d"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bqeqlwsenu6hl" path="res://ui/knob/knob.tscn" id="13_wtdk7"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="14_k3rsk"]
 [ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="14_lble6"]
+[ext_resource type="PackedScene" uid="uid://ci0m8qqbyhlyn" path="res://scenes/flat/FlatOrbitScene.tscn" id="14_ofm8v"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="17_adpiv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
@@ -689,7 +690,7 @@ handle_input_locally = false
 size = Vector2i(610, 589)
 render_target_update_mode = 4
 
-[node name="OrbitRoot" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
+[node name="OrbitRoot" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("14_ofm8v")]
 
 [node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
 layout_mode = 2

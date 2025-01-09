@@ -2,6 +2,9 @@ class_name Drawer
 extends Node
 
 func line(pos: Array, color = Color.WHITE_SMOKE):
+	if pos == null:
+		pos = [Vector3(0,0,0),Vector3(0,0,0)]
+		
 	var mesh_instance := MeshInstance3D.new()
 	var immediate_mesh := ImmediateMesh.new()
 	var material := ORMMaterial3D.new()

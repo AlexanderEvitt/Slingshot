@@ -12,7 +12,8 @@ func _process(_delta):
 	# Only update when new positions are provided
 	if old_positions != positions:
 		
-		var slicer = positions.size()/500
+		var slicer = positions.size()/500.0 # look for 500 data points roughly
+		slicer = ceil(slicer) # don't the step be zero though
 		undraw(line_instance)
 		
 		if slice:

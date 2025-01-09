@@ -138,7 +138,7 @@ public partial class Propagator : Node3D
 		Vector3 previous_distance = Vector3.Zero;
 		Vector3 distance = Vector3.Zero;
 
-		int flip = 1;
+		int flip = 1; // whether to burn prograde or retrograde
 		int i = 0;
 		bool disallow_stop = true;
 		while (distance.LengthSquared() < previous_distance.LengthSquared() || disallow_stop)
