@@ -6,11 +6,14 @@
 bg_color = Color(0.117647, 0.117647, 0.156863, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ius82"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uue3l"]
 bg_color = Color(1, 1, 1, 1)
 
 [resource]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_pressed_color = Color(0.25, 0.217542, 0.2025, 1)
 Button/font_sizes/font_size = 30
 Button/fonts/font = ExtResource("1_0k1do")
 Button/styles/normal = SubResource("StyleBoxFlat_3arxn")
