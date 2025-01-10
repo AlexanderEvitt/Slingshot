@@ -9,16 +9,16 @@ public partial class Propagator : Node3D
 {
 	// Initialize times, positions, velocities, and controls lists
 	public Godot.Collections.Array<Node> bodies;
-	public List<Vector3> positions;
-	public List<Vector3> velocities;
-	public List<double> times;
-	public List<Vector3> controls;
+	public Godot.Collections.Array<Vector3> positions;
+	public Godot.Collections.Array<Vector3> velocities;
+	public Godot.Collections.Array<double> times;
+	public Godot.Collections.Array<Vector3> controls;
 
 	// Initialize planned lists (for trajectory planning)
-	public List<Vector3> planned_positions;
-	public List<Vector3> planned_velocities;
-	public List<double> planned_times;
-	public List<Vector3> planned_controls;
+	public Godot.Collections.Array<Vector3> planned_positions;
+	public Godot.Collections.Array<Vector3> planned_velocities;
+	public Godot.Collections.Array<double> planned_times;
+	public Godot.Collections.Array<Vector3> planned_controls;
 
 	// Initialize arrays for passing up
 	public Godot.Collections.Array<Vector3> plotted_positions;
@@ -62,7 +62,7 @@ public partial class Propagator : Node3D
 		c = c - 1;
 
 		// expose positions for plotting
-		List<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
+		Godot.Collections.Array<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
 		plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
 	}
 
@@ -104,9 +104,9 @@ public partial class Propagator : Node3D
 	public void Refresh(double t)
 	{
 		// Initialize lists of size n to hold data
-		positions = new List<Vector3> ( new Vector3[n] );
-		velocities = new List<Vector3> ( new Vector3[n] );
-		times = new List<double> ( new double[n] );
+		positions = new Godot.Collections.Array<Vector3> ( new Vector3[n] );
+		velocities = new Godot.Collections.Array<Vector3> ( new Vector3[n] );
+		times = new Godot.Collections.Array<double> ( new double[n] );
 
 		times[0] = t;
 		positions[0] = start_position;
@@ -125,10 +125,10 @@ public partial class Propagator : Node3D
 	public void SMC(Vector3 initial_position, Vector3 target_position, Vector3 initial_velocity, double t)
 	{
 		// Initialize lists of size n to hold data
-		planned_positions = new List<Vector3>();
-		planned_velocities = new List<Vector3>();
-		planned_times = new List<double>();
-		planned_controls = new List<Vector3>();
+		planned_positions = new Godot.Collections.Array<Vector3>();
+		planned_velocities = new Godot.Collections.Array<Vector3>();
+		planned_times = new Godot.Collections.Array<double>();
+		planned_controls = new Godot.Collections.Array<Vector3>();
 
 		planned_times.Add(t);
 		planned_positions.Add(initial_position);
@@ -180,7 +180,7 @@ public partial class Propagator : Node3D
 
 		planned_controls.Add(new Vector3(0d,0d,0d));
 
-		List<Vector3> converted_planned_positions = Conversions.Instance.SubtractBodyMotion(planned_positions, planned_times);
+		Godot.Collections.Array<Vector3> converted_planned_positions = Conversions.Instance.SubtractBodyMotion(planned_positions, planned_times);
 		passed_planned_positions = new Godot.Collections.Array<Vector3>(converted_planned_positions);
 	}
 

@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class Conversions : Node
@@ -29,10 +28,10 @@ public partial class Conversions : Node
 		}
 	}
 
-	public List<Vector3> SubtractBodyMotion(List<Vector3> positions, List<double> times)
+	public Godot.Collections.Array<Vector3> SubtractBodyMotion(Godot.Collections.Array<Vector3> positions, Godot.Collections.Array<double> times)
 	{
 		// Place the positions into the frame listed
-		List<Vector3> new_positions = new List<Vector3> ( new Vector3[positions.Count] );
+		Godot.Collections.Array<Vector3> new_positions = new Godot.Collections.Array<Vector3> ( new Vector3[positions.Count] );
 		Node body_node = bodies[f];
 		planet body = (planet)body_node;
 		for (int i = 0; i < positions.Count; i++)
