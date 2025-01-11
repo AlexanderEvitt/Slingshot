@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=37 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://ui/handler.gd" id="1_at06d"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="17_adpiv"]
 [ext_resource type="Script" path="res://ui/autopilot_handler.gd" id="17_x73oh"]
 [ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="20_8neim"]
+[ext_resource type="Script" path="res://ui/alert_handler.gd" id="25_0qaij"]
+[ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="25_hjwfr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -81,15 +83,14 @@ size_flags_horizontal = 3
 script = ExtResource("1_at06d")
 
 [node name="HUD1" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("2_bmshc")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD1"]
+[node name="Shifter" type="MarginContainer" parent="HBoxContainer/Screen/HUD1"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -99,22 +100,22 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD1/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD1/Shifter"]
 layout_mode = 2
 
-[node name="MarginCam" type="MarginContainer" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer"]
+[node name="MarginCam" type="MarginContainer" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer/MarginCam"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p6n5d")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer/MarginCam/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,17 +127,17 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer"]
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
+size = Vector2i(1452, 945)
+render_target_update_mode = 4
 
-[node name="OrbitRoot" parent="HBoxContainer/Screen/HUD1/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
+[node name="OrbitRoot" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
 
 [node name="HUD2" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
 visible = false
@@ -144,7 +145,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_bmshc")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD2"]
+[node name="Shifter" type="MarginContainer" parent="HBoxContainer/Screen/HUD2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -156,21 +157,21 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD2/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD2/Shifter"]
 layout_mode = 2
 
-[node name="MarginCam" type="MarginContainer" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer"]
+[node name="MarginCam" type="MarginContainer" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginCam"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginCam"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginCam/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginCam/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -182,53 +183,53 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/SubViewportContainer"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="NavballRoot" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("6_mguog")]
+[node name="NavballRoot" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("6_mguog")]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.55
 script = ExtResource("8_ua3ya")
 
-[node name="ExcessVelocityGauge" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_qhpct")]
+[node name="ExcessVelocityGauge" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_qhpct")]
 layout_mode = 2
 size_flags_horizontal = 3
 variable_name = "∞"
 flipped = true
 
-[node name="EccentricityGauge" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_qhpct")]
+[node name="EccentricityGauge" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_qhpct")]
 layout_mode = 2
 size_flags_horizontal = 3
 variable_name = "e"
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginContainer2"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginContainer2/Panel"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginContainer2/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01
@@ -240,30 +241,40 @@ grow_vertical = 2
 size_flags_horizontal = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginContainer2/Panel/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginContainer2/Panel/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="AttitudeRoot" parent="HBoxContainer/Screen/HUD2/MarginContainer/HBoxContainer/MarginContainer2/Panel/SubViewportContainer/SubViewport" instance=ExtResource("7_gsnns")]
+[node name="AttitudeRoot" parent="HBoxContainer/Screen/HUD2/Shifter/HBoxContainer/MarginContainer2/Panel/SubViewportContainer/SubViewport" instance=ExtResource("7_gsnns")]
 
 [node name="HUD3" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Shifter" type="MarginContainer" parent="HBoxContainer/Screen/HUD3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="HUD4" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Shifter" type="MarginContainer" parent="HBoxContainer/Screen/HUD4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="HUD5" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5"]
+[node name="Shifter" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -271,7 +282,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Planner" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer"]
+[node name="Planner" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -279,26 +290,26 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner"]
 layout_mode = 2
 
-[node name="TitleMargin" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer"]
+[node name="TitleMargin" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/TitleMargin"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/TitleMargin"]
 layout_mode = 2
 theme = ExtResource("9_adiw3")
 text = "TRAJECTORY PLANNER"
 horizontal_alignment = 1
 
-[node name="ButtonPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer"]
+[node name="ButtonPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("14_k3rsk")
 script = ExtResource("12_d4i4u")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -306,26 +317,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonPanel" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer"]
+[node name="ButtonPanel" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer"]
 layout_mode = 2
 
-[node name="ButtonHolder" type="GridContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel"]
+[node name="ButtonHolder" type="GridContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 20
 
-[node name="ModesTitle" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/MarginContainer"]
+[node name="ModesTitle" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/MarginContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_psl1w")
 text = "FLIGHT MODES"
 horizontal_alignment = 1
 
-[node name="ModeButton1" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
+[node name="ModeButton1" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
@@ -333,27 +344,27 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton1"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton1"]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_pressed = true
 text = "FLIP-AND-BURN"
 
-[node name="ModeButton2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
+[node name="ModeButton2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton2"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton2"]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 text = "BALLISTIC"
 
-[node name="ModeButton4" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
+[node name="ModeButton4" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
@@ -361,34 +372,34 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton4"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton4"]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 text = "RENDEZVOUS"
 
-[node name="Centerfold" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer"]
+[node name="Centerfold" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer"]
 layout_mode = 2
 
-[node name="CenterPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer"]
+[node name="CenterPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
 theme = ExtResource("9_adiw3")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -400,13 +411,13 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="CenterPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer"]
+[node name="CenterPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 theme = ExtResource("9_adiw3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -415,12 +426,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="InputPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer"]
+[node name="InputPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"LightBorderSidePanel"
 
-[node name="LabelContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel"]
+[node name="LabelContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -429,74 +440,74 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="StartSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer"]
+[node name="StartSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "START T+"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect/VBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect/VBoxContainer"]
 layout_mode = 2
 text = "120s"
 horizontal_alignment = 1
 
-[node name="Knob" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect/VBoxContainer" instance=ExtResource("13_wtdk7")]
+[node name="Knob" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/StartSelect/VBoxContainer" instance=ExtResource("13_wtdk7")]
 layout_mode = 2
 
-[node name="FrameLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer"]
+[node name="FrameLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 16
 
-[node name="TargetSelect" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel"]
+[node name="TargetSelect" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel/TargetSelect"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel/TargetSelect"]
 layout_mode = 2
 theme = ExtResource("9_adiw3")
 theme_override_font_sizes/font_size = 24
 text = "FUEL INDEX"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel/TargetSelect"]
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel/TargetSelect"]
 layout_mode = 2
 text = "0.9"
 horizontal_alignment = 1
 
-[node name="Knob" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel/TargetSelect" instance=ExtResource("13_wtdk7")]
+[node name="Knob" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FrameLabel/TargetSelect" instance=ExtResource("13_wtdk7")]
 layout_mode = 2
 
-[node name="FuelSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer"]
+[node name="FuelSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "SHUTOFF DIST"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect/VBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect/VBoxContainer"]
 layout_mode = 2
 text = "10R"
 horizontal_alignment = 1
 
-[node name="Knob" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect/VBoxContainer" instance=ExtResource("13_wtdk7")]
+[node name="Knob" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/InputPanel/LabelContainer/FuelSelect/VBoxContainer" instance=ExtResource("13_wtdk7")]
 layout_mode = 2
 
-[node name="ExecutionPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer"]
+[node name="ExecutionPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -504,7 +515,7 @@ size_flags_stretch_ratio = 0.5
 theme = ExtResource("9_adiw3")
 theme_type_variation = &"LightBorderSidePanel"
 
-[node name="VBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel"]
+[node name="VBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -512,7 +523,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -520,11 +531,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -537,7 +548,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "CALCULATE"
 
-[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
@@ -546,11 +557,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3/Panel"]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -563,7 +574,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "CLR"
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -572,12 +583,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="CalcStatusBox" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer"]
+[node name="CalcStatusBox" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_yam83")
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer/CalcStatusBox"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer/CalcStatusBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -588,12 +599,12 @@ text = "NO DATA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResultsPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer"]
+[node name="ResultsPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"LightBorderSidePanel"
 
-[node name="LabelContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel"]
+[node name="LabelContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -602,95 +613,95 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="StartSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer"]
+[node name="StartSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/StartSelect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/StartSelect"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/StartSelect/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/StartSelect/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "TOTAL TIME"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/StartSelect/VBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/StartSelect/VBoxContainer"]
 layout_mode = 2
 text = "13days"
 horizontal_alignment = 1
 
-[node name="FrameLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer"]
+[node name="FrameLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 16
 
-[node name="TargetSelect" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FrameLabel"]
+[node name="TargetSelect" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FrameLabel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FrameLabel/TargetSelect"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FrameLabel/TargetSelect"]
 layout_mode = 2
 theme = ExtResource("9_adiw3")
 theme_override_font_sizes/font_size = 24
 text = "FUEL BURN"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FrameLabel/TargetSelect"]
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FrameLabel/TargetSelect"]
 layout_mode = 2
 text = "23%"
 horizontal_alignment = 1
 
-[node name="FuelSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer"]
+[node name="FuelSelect" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FuelSelect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FuelSelect"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FuelSelect/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FuelSelect/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "FINAL DIST"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FuelSelect/VBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ResultsPanel/LabelContainer/FuelSelect/VBoxContainer"]
 layout_mode = 2
 text = "9.87R"
 horizontal_alignment = 1
 
-[node name="MapPanel" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer"]
+[node name="MapPanel" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 50
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(630, 589)
 render_target_update_mode = 0
 
-[node name="OrbitRoot" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("14_ofm8v")]
+[node name="OrbitRoot" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("14_ofm8v")]
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("14_lble6")
 text = " MAP"
 
-[node name="TriangleCutout" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel"]
+[node name="TriangleCutout" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -703,7 +714,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
 
-[node name="Autopilot" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer"]
+[node name="Autopilot" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
@@ -712,51 +723,51 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot"]
 layout_mode = 2
 
-[node name="Titles" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer"]
+[node name="Titles" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/Titles"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/Titles"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/Titles/MarginContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/Titles/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("9_adiw3")
 text = "ATTITUDE"
 horizontal_alignment = 1
 
-[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/Titles"]
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/Titles"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/Titles/MarginContainer3"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/Titles/MarginContainer3"]
 layout_mode = 2
 theme = ExtResource("9_adiw3")
 text = "NAVIGATION"
 horizontal_alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/Titles"]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/Titles"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/Titles/MarginContainer2"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/Titles/MarginContainer2"]
 layout_mode = 2
 theme = ExtResource("9_adiw3")
 text = "AUTOPILOT"
 horizontal_alignment = 1
 
-[node name="MainPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer"]
+[node name="MainPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("9_adiw3")
 script = ExtResource("17_x73oh")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -766,14 +777,14 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="AttitudePanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
+[node name="AttitudePanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 theme = ExtResource("9_adiw3")
 theme_type_variation = &"LightBorderSidePanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -781,53 +792,53 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LabelContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer"]
+[node name="LabelContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="FrameLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer"]
+[node name="FrameLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/FrameLabel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/FrameLabel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "TARGET"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
 layout_mode = 2
 text = "EARTH"
 horizontal_alignment = 1
 
-[node name="GainLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer"]
+[node name="GainLabel" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/GainLabel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/GainLabel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "GAIN"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
 layout_mode = 2
 text = "112%"
 horizontal_alignment = 1
 
-[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -835,11 +846,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Attitude Modes"]]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Attitude Modes"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -855,7 +866,7 @@ button_group = ExtResource("17_41jv6")
 text = "HDG"
 script = ExtResource("17_5ocmo")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -866,7 +877,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_howla")
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -874,11 +885,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel" groups=["Attitude Modes"]]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel" groups=["Attitude Modes"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -894,7 +905,7 @@ button_group = ExtResource("17_41jv6")
 text = "CRS"
 script = ExtResource("17_5ocmo")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -905,7 +916,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fsc67")
 
-[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -913,11 +924,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel" groups=["Attitude Modes"]]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel" groups=["Attitude Modes"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -933,7 +944,7 @@ button_group = ExtResource("17_41jv6")
 text = "TRG"
 script = ExtResource("17_5ocmo")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -944,7 +955,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fsc67")
 
-[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -952,11 +963,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel" groups=["Attitude Modes"]]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel" groups=["Attitude Modes"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -972,7 +983,7 @@ button_group = ExtResource("17_41jv6")
 text = "NRM"
 script = ExtResource("17_5ocmo")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -983,14 +994,14 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fsc67")
 
-[node name="AttitudePanel2" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
+[node name="AttitudePanel2" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
 theme = ExtResource("9_adiw3")
 theme_type_variation = &"LightBorderSidePanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -998,7 +1009,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1007,11 +1018,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer/Panel" groups=["Autopilot Keys"]]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer/Panel" groups=["Autopilot Keys"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1026,7 +1037,7 @@ toggle_mode = true
 text = "INV"
 script = ExtResource("17_5ocmo")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -1037,7 +1048,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_howla")
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1046,11 +1057,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel" groups=["Autopilot Keys"]]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel" groups=["Autopilot Keys"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1065,7 +1076,7 @@ toggle_mode = true
 text = "STAB"
 script = ExtResource("17_5ocmo")
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel/Button"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel/Button"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9
@@ -1076,14 +1087,14 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fsc67")
 
-[node name="NavPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
+[node name="NavPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("9_adiw3")
 theme_type_variation = &"LightBorderSidePanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1091,7 +1102,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
@@ -1099,12 +1110,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_3hp22")
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/MarginContainer/Panel"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/MarginContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1115,11 +1126,11 @@ text = "IDLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -1127,11 +1138,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Attitude Modes", "Autopilot Keys"]]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Attitude Modes", "Autopilot Keys"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1146,14 +1157,14 @@ toggle_mode = true
 button_group = ExtResource("17_41jv6")
 text = "NAV"
 
-[node name="AutoPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
+[node name="AutoPanel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("9_adiw3")
 theme_type_variation = &"LightBorderSidePanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1161,7 +1172,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
@@ -1169,12 +1180,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_j8abg")
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer/Panel"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1185,11 +1196,11 @@ text = "IDLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -1197,11 +1208,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/VBoxContainer/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Autopilot Keys"]]
+[node name="Button" type="Button" parent="HBoxContainer/Screen/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Autopilot Keys"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1216,11 +1227,12 @@ toggle_mode = true
 text = "AUTO"
 
 [node name="HUD6" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_bmshc")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Screen/HUD6"]
+[node name="Shifter" type="MarginContainer" parent="HBoxContainer/Screen/HUD6"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1232,21 +1244,21 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD6/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Screen/HUD6/Shifter"]
 layout_mode = 2
 
-[node name="MarginCam" type="MarginContainer" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer"]
+[node name="MarginCam" type="MarginContainer" parent="HBoxContainer/Screen/HUD6/Shifter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam"]
+[node name="Panel" type="Panel" parent="HBoxContainer/Screen/HUD6/Shifter/HBoxContainer/MarginCam"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel"]
 material = ExtResource("20_8neim")
 layout_mode = 1
 anchors_preset = -1
@@ -1262,28 +1274,28 @@ size_flags_horizontal = 3
 stretch = true
 script = ExtResource("8_xpkhs")
 
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(2, 2)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
-[node name="CamRoot" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_mdjyt")]
+[node name="CamRoot" parent="HBoxContainer/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_mdjyt")]
 
-[node name="ScreenText" type="VBoxContainer" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
+[node name="ScreenText" type="VBoxContainer" parent="HBoxContainer/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
+[node name="Label" type="Label" parent="HBoxContainer/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
 layout_mode = 2
 theme = ExtResource("10_xhv8f")
 text = "BORESIGHT +X"
 
-[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
+[node name="Label2" type="Label" parent="HBoxContainer/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
 layout_mode = 2
 theme = ExtResource("10_xhv8f")
 text = "AUTO"
 
-[node name="Label3" type="Label" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
+[node name="Label3" type="Label" parent="HBoxContainer/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
 layout_mode = 2
 theme = ExtResource("10_xhv8f")
 text = "FOV45"
@@ -1293,10 +1305,20 @@ visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Shifter" type="MarginContainer" parent="HBoxContainer/Screen/HUD7"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="HUD8" type="Panel" parent="HBoxContainer/Screen" groups=["HUDs"]]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Shifter" type="MarginContainer" parent="HBoxContainer/Screen/HUD8"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="ModeSelectorPanel" type="Panel" parent="HBoxContainer/Screen"]
 layout_mode = 2
@@ -1626,21 +1648,43 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("14_k3rsk")
-text = "FAULTS"
+text = "ALERTS"
 
 [node name="Panel" type="Panel" parent="HBoxContainer/Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("9_adiw3")
 theme_override_styles/panel = SubResource("StyleBoxFlat_1unmv")
 
-[node name="Label" type="Label" parent="HBoxContainer/Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 43.0
-theme = ExtResource("14_k3rsk")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 16
-text = "NONE"
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("25_0qaij")
+
+[node name="Label" type="Label" parent="HBoxContainer/Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "AVI_START: Avionics startup complete."
+label_settings = ExtResource("25_hjwfr")
+autowrap_mode = 2
 
 [node name="Spacer" type="Panel" parent="HBoxContainer/Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -1673,8 +1717,8 @@ texture = ExtResource("8_05j2h")
 expand_mode = 2
 stretch_mode = 4
 
-[connection signal="pressed" from="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2/Panel/Button" to="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel" method="_on_calculate"]
-[connection signal="pressed" from="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3/Panel/Button" to="HBoxContainer/Screen/HUD5/VBoxContainer/Planner/VBoxContainer/ButtonPanel" method="_on_clear"]
+[connection signal="pressed" from="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2/Panel/Button" to="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel" method="_on_calculate"]
+[connection signal="pressed" from="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3/Panel/Button" to="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel" method="_on_clear"]
 [connection signal="pressed" from="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton1/Button" to="HBoxContainer/Screen" method="_on_button1_pressed"]
 [connection signal="pressed" from="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton2/Button" to="HBoxContainer/Screen" method="_on_button2_pressed"]
 [connection signal="pressed" from="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton3/Button" to="HBoxContainer/Screen" method="_on_button3_pressed"]

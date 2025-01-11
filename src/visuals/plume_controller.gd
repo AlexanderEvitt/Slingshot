@@ -10,5 +10,6 @@ func _ready():
 func _process(_delta):
 	if OwnShip.thrust > 0:
 		visible = true
+		scale.x = 3*OwnShip.thrust/0.01
 	else:
 		visible = false

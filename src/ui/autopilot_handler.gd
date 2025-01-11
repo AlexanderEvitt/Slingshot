@@ -17,12 +17,15 @@ func _ready():
 		i.pressed.connect(set_modes)
 		
 	for i in keys:
-		if i.text != "NAV": # nav is already connected as a mdoe
+		if i.text != "NAV": # nav is already connected as a mode
 			i.pressed.connect(set_modes)
 		
 	# Get status boxes
 	autopilot_status_box = get_node("HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer/Panel")
 	navigation_status_box = get_node("HBoxContainer2/NavPanel/VBoxContainer/MarginContainer/Panel")
+	
+	OwnShip.ship.auto_disc.connect(autopilot_disconnect)
+	OwnShip.ship.nav_disc.connect(navigation_disconnect)
 	
 func set_modes():
 	## Function that reads in the state of the autopilot panel
@@ -66,3 +69,21 @@ func set_modes():
 		new_style.bg_color = Color8(128, 0, 0, 255)
 		navigation_status_box.add_theme_stylebox_override("panel",new_style)
 		navigation_status_box.get_node("Label").text = "IDLE"
+
+func autopilot_disconnect():
+	for i in keys:
+		match i.text:
+			"AUTO":
+				i.button_pressed = false
+				
+	set_modes()
+	
+	SystemTime.i = 1;
+	
+func navigation_disconnect():
+	for i in keys:
+		match i.text:
+			"NAV":
+				i.button_pressed = false
+				
+	set_modes()

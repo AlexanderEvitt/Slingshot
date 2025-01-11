@@ -93,7 +93,17 @@ public partial class Propagator : Node3D
     {
 		Vector3 a = Acceleration(r,t);
         double dt = timescale/a.Length();
-		dt = Math.Clamp(dt,1,100000);
+
+		// Only allow very short times if the engine is firing
+		if (c.Length() > 0d)
+		{
+			dt = Math.Clamp(dt,1,600);
+		}
+		else
+		{
+			dt = Math.Clamp(dt,1,100000);
+		}
+		
 		double tp = t + dt;
 		a = a + c; // add control acc
 		Vector3 rp = r + v*dt + 0.5d*a*Math.Pow(dt,2d);
@@ -138,6 +148,8 @@ public partial class Propagator : Node3D
 		Vector3 previous_distance = Vector3.Zero;
 		Vector3 distance = Vector3.Zero;
 
+		Vector3 course = target_position - initial_position;
+
 		int flip = 1; // whether to burn prograde or retrograde
 		int i = 0;
 		bool disallow_stop = true;
@@ -146,9 +158,12 @@ public partial class Propagator : Node3D
 			// Calculate acceleration -> to counter it
 			Vector3 a = Acceleration(planned_positions[i],planned_times[i]);
 
+			// Calculate velocity normal to trajectory and counter it
+			//planned_velocities[i];
+
 			// Calculate control as antigravity + in direction or opposite if more than halfway
-			Vector3 flight_direction = target_position - initial_position;
-			planned_controls.Add(flip*0.05d*flight_direction.Normalized() - a);
+			Vector3 flight_direction = target_position - planned_positions[i];
+			planned_controls.Add(flip*0.01d*flight_direction.Normalized() - a);
 			
 			// Propagate to next timestep
 			(Vector3 np,Vector3 nv,double nt) = StepVerlet(planned_positions[i],planned_velocities[i],planned_controls[i],planned_times[i]);
@@ -160,7 +175,7 @@ public partial class Propagator : Node3D
 			previous_distance = distance;
 			distance = target_position - planned_positions[i+1];
 
-			if (distance.Length() < flight_direction.Length()*0.5d)
+			if (distance.Length() < course.Length()*0.5d)
 			{
 				flip = -1;
 			}
@@ -171,7 +186,7 @@ public partial class Propagator : Node3D
 					disallow_stop = false;
 				}
 			}
-			if (i > 1000)
+			if (i > 10000)
 			{
 				break;
 			}

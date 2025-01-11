@@ -6,6 +6,7 @@ var attitude
 
 var torque
 
+var propagator
 var plotted_positions
 
 var thrust = 0
@@ -22,11 +23,21 @@ var stab_flag
 var autopilot_flag
 var nav_flag
 
+# Planned stuff
+var planned_positions
+var planned_velocities
+var planned_acceleration
+
+# Signals
+signal auto_disc
+signal nav_disc
+
 
 # this module moves data from the master scene an autoload where others can access it
 
 func _ready():
 	attitude_calculator = get_node("AttitudeCalculator")
+	propagator = get_node("Propagator")
 	
 	# Initialize values
 	attitude = attitude_calculator.transform.basis
@@ -36,10 +47,38 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# Update values
+	# Update attitude values
 	attitude = attitude_calculator.transform.basis
 	torque = attitude_calculator.torque
 	
+	# If navigation mode and autopilot are engaged, fly along precalculated trajectory
+	if propagator.planned_positions != null and nav_flag and autopilot_flag:
+		# Find current index in the planned trajectory
+		var i = find_time_index(propagator.planned_times,SystemTime.t)
+		if i+2 > propagator.planned_times.size():
+			# Disconnect autopilot and reset thrust
+			integrate_normally(delta)
+			auto_disc.emit()
+			nav_disc.emit()
+			thrust = 0
+		else:
+			# Linearly interpolate between points
+			var dt = propagator.planned_times[i+1] - propagator.planned_times[i]
+			var frac = (SystemTime.t - propagator.planned_times[i])/dt
+			position = (1 - frac)*propagator.planned_positions[i] + frac*propagator.planned_positions[i+1]
+			velocity = (1 - frac)*propagator.planned_velocities[i] + frac*propagator.planned_velocities[i+1]
+			
+			# Guess at acceleration
+			planned_acceleration = (propagator.planned_velocities[i+1] - propagator.planned_velocities[i])/dt
+			thrust = planned_acceleration.length()
+		
+	# Otherwise, integrate regularly
+	else:
+		integrate_normally(delta)
+		
+	
+	
+func integrate_normally(delta):
 	# Change throttle setting
 	if Input.is_action_just_pressed("full_throttle"):
 		thrust = 0.05
@@ -49,8 +88,8 @@ func _process(delta):
 	var dt = SystemTime.step*delta; # multiply by SystemTime.step if Engine.timescale isn't scaled
 	
 	# Somehow get the acceleration from gravity in here
-	var gravity = get_node("Propagator").Acceleration(position,SystemTime.t)
-	var next_gravity = get_node("Propagator").Acceleration(position,SystemTime.t + dt)
+	var gravity = propagator.Acceleration(position,SystemTime.t)
+	var next_gravity = propagator.Acceleration(position,SystemTime.t + dt)
 	
 	# Calculate acceleration on vehicle
 	var acceleration = thrust*attitude.x + gravity
@@ -59,3 +98,10 @@ func _process(delta):
 	# Calculate updated position and velocity through Verlet integration
 	position = position + velocity*dt + 0.5*acceleration*dt**2
 	velocity = velocity + 0.5*(acceleration+next_acceleration)*dt
+
+func find_time_index(times,time):
+	var index = 0
+	for i in range(0,times.size()):
+		if times[i] < time:
+			index = i
+	return index
