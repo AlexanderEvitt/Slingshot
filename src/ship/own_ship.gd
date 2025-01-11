@@ -4,12 +4,12 @@ var position
 var velocity
 var attitude
 var thrust
+var torque = Vector3(0,0,0)
 
 var propagator
 
 var plotted_positions
 var planned_positions
-
 
 var ship
 
@@ -25,6 +25,7 @@ func _process(_delta):
 	velocity = ship.velocity
 	attitude = ship.attitude
 	thrust = ship.thrust
+	torque = ship.torque
 	
 	plotted_positions = propagator.plotted_positions
 	planned_positions = propagator.passed_planned_positions

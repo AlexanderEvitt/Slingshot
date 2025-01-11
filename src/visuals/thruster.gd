@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends Node3D
 
 @export var up : bool
 @export var down : bool
@@ -7,25 +7,33 @@ extends MeshInstance3D
 @export var roll_left : bool
 @export var roll_right : bool
 
+var cutoff = 0.01
+var torque
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	visible = false
+	torque = OwnShip.torque
+	
+	if torque == null:
+		torque = Vector3(0,0,0)
+	
 	if up:
-		if Input.is_action_pressed("up"):
-			visible = true
+		call_thruster(torque.z)
 	if down:
-		if Input.is_action_pressed("down"):
-			visible = true
+		call_thruster(-torque.z)
 	if left:
-		if Input.is_action_pressed("left"):
-			visible = true
+		call_thruster(torque.y)
 	if right:
-		if Input.is_action_pressed("right"):
-			visible = true
+		call_thruster(-torque.y)
 	if roll_left:
-		if Input.is_action_pressed("roll_left"):
-			visible = true
+		call_thruster(-torque.x)
 	if roll_right:
-		if Input.is_action_pressed("roll_right"):
-			visible = true
+		call_thruster(torque.x)
+			
+func call_thruster(t):
+	var unit = 2*Vector3(1,1,1)
+	if t > cutoff:
+		visible = true
+		scale = abs(t)*unit

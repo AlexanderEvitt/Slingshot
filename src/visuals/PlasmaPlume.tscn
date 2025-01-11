@@ -19,20 +19,20 @@ noise = SubResource("FastNoiseLite_j80rw")
 render_priority = 0
 shader = ExtResource("1_eo5p0")
 shader_parameter/model_height = 3.0
-shader_parameter/dissolve_start = 0.109
+shader_parameter/dissolve_start = 0.0
 shader_parameter/dissolve_length = 1.0
-shader_parameter/gradient_bias = 1.268
+shader_parameter/gradient_bias = 1.0
 shader_parameter/noise_direction = Vector2(0, 1)
 shader_parameter/noise_speed = 1.0
 shader_parameter/noise_strength = 0.1
 shader_parameter/stretch_factor = 0.6
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_xas2e")
-shader_parameter/_color = Color(0.117647, 0.588235, 0.784314, 1)
+shader_parameter/_color = Color(0.117, 0.1833, 0.78, 1)
 shader_parameter/power_factor = 1.0
 shader_parameter/alpha_intensity_factor = 2.0
 shader_parameter/fresnel_factor = 1.0
 shader_parameter/fresnel_amplification = 2.0
-shader_parameter/fresnel_power = 2.0
+shader_parameter/fresnel_power = 1.0
 shader_parameter/enable_fresnel = true
 
 [node name="Plume" type="Node3D"]

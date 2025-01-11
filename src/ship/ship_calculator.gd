@@ -4,6 +4,8 @@ var position
 var velocity
 var attitude
 
+var torque
+
 var plotted_positions
 
 var thrust = 0
@@ -36,6 +38,7 @@ func _ready():
 func _process(delta):
 	# Update values
 	attitude = attitude_calculator.transform.basis
+	torque = attitude_calculator.torque
 	
 	# Change throttle setting
 	if Input.is_action_just_pressed("full_throttle"):

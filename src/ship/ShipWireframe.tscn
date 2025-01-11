@@ -1,136 +1,120 @@
-[gd_scene load_steps=12 format=3 uid="uid://dyuel0delkcqp"]
+[gd_scene load_steps=9 format=4 uid="uid://dyuel0delkcqp"]
 
-[ext_resource type="PackedScene" uid="uid://doqdvm0pgkbd7" path="res://ship/placeholder.glb" id="1_cxsoj"]
-[ext_resource type="Shader" path="res://ship/Sobel.gdshader" id="2_3xuav"]
 [ext_resource type="Script" path="res://visuals/plume_controller.gd" id="2_dhm7m"]
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="3_jmg24"]
+[ext_resource type="Texture2D" uid="uid://krncwxq8xgyl" path="res://ship/player_ship_HullTex.png" id="4_627ak"]
 [ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="4_viuyv"]
-[ext_resource type="Script" path="res://visuals/thruster.gd" id="5_bakwy"]
-[ext_resource type="Script" path="res://ship/missile.gd" id="6_uxeb8"]
+[ext_resource type="Material" uid="uid://c8q7ioeg374gn" path="res://ship/ShipWireframe.tres" id="5_hwq8b"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhx8v"]
-render_priority = 0
-shader = ExtResource("2_3xuav")
-shader_parameter/outline_threshold = 0.5
-shader_parameter/outline_color = Color(1, 0, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjjo4"]
+resource_name = "HullPaint"
+cull_mode = 2
+albedo_texture = ExtResource("4_627ak")
+metallic = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_875cf"]
-next_pass = SubResource("ShaderMaterial_mhx8v")
-shading_mode = 0
-albedo_color = Color(0.117647, 0.117647, 0.156863, 1)
+[sub_resource type="ArrayMesh" id="ArrayMesh_krljf"]
+_surfaces = [{
+"aabb": AABB(-73.876, -25.861, -25.861, 143.855, 35.0338, 51.722),
+"format": 34896613377,
+"index_count": 276,
+"index_data": PackedByteArray("AQAKAAAAAQALAAoABAAIAA4ACAAFAA4ABgAJABEAEQAQAAYADwAOAAUADwAGABAADwAFAAYACQAHABEABwAKABEABwAAAAoAAgALAAEAAgAMAAsABAANAAMABAAOAA0AAwAMAAIAAwANAAwAJgAYACcAGAAiACEAIgAkACMAJAAmACUAJgAiABgAIgAmACQAEgAVABMAEgAUABUAKQAFACsAKQAGAAUALwAsAC4ALwAtACwAKAAcABoAKAAqABwAFQAcABMAFQAaABwAAQAUABcAAQAAABQAFAAaABUAGQAAAAcAFAAZABoAGQAUAAAAHAAFAAgABQAqACsABQAcACoAFwASABYAFwAUABIAFgADAAIAFgASAAMAHAASABMAEgAEAAMAGwASABwAEgAbAAQAGwAIAAQAGwAcAAgAFgABABcAFgACAAEAEAAlAA8AEAAmACUAJQAOAA8AJQAkAA4AJAANAA4AJAAjAA0AIwAMAA0AIwAiAAwAIgALAAwAIgAhAAsAIQAKAAsAIQAYAAoAGAARAAoAGAAnABEAJwAQABEAJwAmABAAKQAJAAYACQAoABoACQApACgAGgAHAAkAGgAZAAcAHQApAB8AHQAoACkAIAAqAB4AIAArACoAHwArACAAHwApACsAHgAoAB0AHgAqACgAHQAuACwAHQAfAC4ALgAgAC8ALgAfACAALwAeAC0ALwAgAB4ALQAdACwALQAeAB0A"),
+"name": "HullPaint",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("d4OlygAAAAB/g/7/mm4AAH+D///QlAAAd4Olyv//AAB3g0qv//8AAHeDAAAEtQAAd4MAAPpKAAB3g0qvAAAAAHeDSq+B2gAAd4NKr30lAADvBqXKAAAAAPcG/v+abgAA9wb//9CUAADvBqXK/v8AAO8GSq/+/wAA7wYAAAS1AADvBgAA+koAAO8GSq8AAAAA//+lyiiTAAD//0qvKJMAAP//pcrWbAAA//9Kr9ZsAAD///LQbY4AAP//8tCRcQAAAAClytINAAD5rEqvRyQAAHzWSq+OSAAA+axKr7fbAAB81kqvcLcAAHrIDX16TgAAesgNfYSxAAB6yDpQek4AAHrIOlCEsQAACACZ9ZpuAAAIAJn10JQAAAAApcos8gAAAABKryzyAAAAAOgOBLUAAAAA6A76SgAAAABKr9INAAB6yMmFjkgAAHrIfUeOSAAAesjJhXC3AAB6yH1HcLcAANeeDX16TgAA154NfYSxAADXnjpQek4AANeeOlCEsQAA")
+}]
+blend_shape_mode = 0
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_d6nke"]
-top_radius = 0.003
-bottom_radius = 0.003
-height = 0.02
+[sub_resource type="ArrayMesh" id="ArrayMesh_3djpn"]
+resource_name = "player_ship_Circle"
+_surfaces = [{
+"aabb": AABB(-73.876, -25.861, -25.861, 143.855, 35.0338, 51.722),
+"attribute_data": PackedByteArray("igVncYoFZ3GKBWdxigVncYsq8W2LKvFtiyrxbYsq8W33NfNs9zXzbPc182z3NfNst1mWabdZlmm3WZZpt1mWaYdj/Y8mX1BoJl9QaG2QEpxtkBKcbZASnG2QEpxtkBKc8qt/m/Krf5vyq3+b8qt/m/Krf5vs2LaNCQAccQkAHHFOblqSTm5akk5uWpInzmiQJ85okCfOaJAOGOrTDhjq0w4Y6tMOGOrTfzNbzH8zW8x/M1vMfzNbzJI9bsuSPW7Lkj1uy5I9bsvfWLvO31i7zt9Yu87fWLvOJl++0yZfvtM4X//8OF///CZfvtM4X//8W01F/ltNRf4cjvX/HI71/3Io9f9yKPX/y7D1/8uw9f/8EmLZ/BJi2Sbgx/sm4Mf7/BJi2Sbgx/uXLAASlywAEpcsABJ5l4s+8C6gDPAuoAz+IhQT/iIUE/4iFBPdoU4+uh8aDbofGg0VKz4TFSs+ExUrPhOrJAYUqyQGFKskBhStHQfXrR0H160dB9eCwWJ0VgoVT2ysY11srGNdjhRCL2ysY139eeN14E48SFqOFF5ajhReKT9+KlqOFF444ImjOOCJoyequ2sd49v1HePb9c+RFWz1/4mj9f+Joxaoh3Ia/PX/Gvz1/zGUF3MlNLzRJTS80SU0vNHlPdfQ5T3X0OU919BMVNHSTFTR0kxU0dLtVTjX7VU41+1VONf0Sbz29Em89vRJvPb6Ku/4+irv+Poq7/gyHOPbMhzj2zIc49smrFxqJqxcaiasXGrvqKxz76isc++orHNVj4dqVY+HalWPh2o+k490PpOPdD6Tj3Qt7n7YLe5+2C3uftj68V7R+vFe0frxXtGK7HjXiux414rseNe18EzMtfBMzLXwTMw="),
+"format": 34896613399,
+"index_count": 276,
+"index_data": PackedByteArray("BAApAAEABAAsACkAEAAgADgAIQAVADsAGgAkAEkARwBDABkAPwA5ABQAPgAYAEIAPgATABgAIwAdAEYAHgAoAEgAHgAAACgACQAtAAUACQAxAC0AEQA0AAwAEQA6ADQADQAwAAgADQA1ADAAiABeAIsAXgB8AHkAfACCAH8AggCIAIUAiAB8AF4AfACIAIIATABVAE8ATABSAFUAkAAXAJYAkAAcABcAowCaAKAAowCdAJoAjQBqAGQAjQCTAGoAUwBnAE0AUwBhAGcABwBQAFoABwACAFAAUQBjAFQAYAADAB8AUQBgAGMAYABRAAMAaAAWACIAFgCSAJUAFgBoAJIAWwBMAFgAWwBSAEwAVwAOAAsAVwBKAA4AaQBLAE4ASwASAA8AZgBLAGkASwBmABIAZQAgABAAZQBnACAAVgAGAFkAVgAKAAYAQACDADwAQACGAIMAhAA3AD0AhACBADcAgAAyADYAgAB9ADIAfgAvADMAfgB7AC8AegAqAC4AegB3ACoAeAAnACsAeABdACcAXABEACYAXACJAEQAigBBAEUAigCHAEEAjwAlABsAJQCMAGIAJQCPAIwAYQAdACMAYQBfAB0AbQCRAHMAbQCOAJEAdgCUAHAAdgCXAJQAcwCXAHYAcwCRAJcAcACOAG0AcACUAI4AbACeAJkAbABxAJ4AnwB1AKIAnwByAHUAoQBvAJwAoQB0AG8AmwBrAJgAmwBuAGsA"),
+"material": SubResource("StandardMaterial3D_wjjo4"),
+"name": "HullPaint",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 164,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_krljf")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfahs"]
-albedo_color = Color(0.329158, 0.329158, 0.329158, 1)
-metallic = 1.0
-roughness = 0.8
+[node name="placeholder" type="Node3D"]
 
-[node name="placeholder" instance=ExtResource("1_cxsoj")]
-
-[node name="assault_ship" parent="." index="0"]
-transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
-surface_material_override/0 = SubResource("StandardMaterial3D_875cf")
-
-[node name="Plumes" type="Node3D" parent="." index="1"]
+[node name="Plumes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.368825, 0, 0)
 script = ExtResource("2_dhm7m")
 
-[node name="Plume" parent="Plumes" index="0" instance=ExtResource("3_jmg24")]
-transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, -0.234158, 0.00364358, 0.032549)
+[node name="Plume" parent="Plumes" instance=ExtResource("3_jmg24")]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, -0.072964, 0)
 
-[node name="Plume2" parent="Plumes" index="1" instance=ExtResource("3_jmg24")]
-transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, -0.234, 0.004, -0.0598205)
+[node name="Plume2" parent="Plumes" instance=ExtResource("3_jmg24")]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, -0.0460045)
 
-[node name="Plume3" parent="Plumes" index="2" instance=ExtResource("3_jmg24")]
-transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, -0.234158, 0.0500136, -0.013603)
+[node name="Plume3" parent="Plumes" instance=ExtResource("3_jmg24")]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0.046)
 
-[node name="Plume4" parent="Plumes" index="3" instance=ExtResource("3_jmg24")]
-transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, -0.234158, -0.042621, -0.013603)
+[node name="Thrusters" type="Node3D" parent="."]
 
-[node name="Thrusters" type="Node3D" parent="." index="2"]
-
-[node name="Thruster1" parent="Thrusters" index="0" instance=ExtResource("4_viuyv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.189817, 0.062633, -0.0480069)
-script = ExtResource("5_bakwy")
+[node name="Thruster1" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33702, 0.0127849, -0.0121743)
 down = true
-roll_left = true
 
-[node name="Thruster2" parent="Thrusters" index="1" instance=ExtResource("4_viuyv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.189817, 0.0630569, 0.020059)
-script = ExtResource("5_bakwy")
+[node name="Thruster2" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.337, 0.013, 0.012)
 down = true
-roll_right = true
 
-[node name="Thruster3" parent="Thrusters" index="2" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0.189817, -0.0683817, -0.0480069)
-script = ExtResource("5_bakwy")
+[node name="Thruster3" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0.337, -0.00788913, 0.012)
 up = true
-roll_right = true
 
-[node name="Thruster4" parent="Thrusters" index="3" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0.189817, -0.0688612, 0.0202956)
-script = ExtResource("5_bakwy")
+[node name="Thruster4" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0.337, -0.008, -0.012)
 up = true
-roll_left = true
 
-[node name="Thruster5" parent="Thrusters" index="4" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, 7.4988e-33, -6.12323e-17, 1, -1.22465e-16, 1, 6.12323e-17, 0.189817, -0.00835981, 0.0777028)
-script = ExtResource("5_bakwy")
-left = true
-
-[node name="Thruster6" parent="Thrusters" index="5" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, -2.24964e-32, 1.83697e-16, -1, 1.22465e-16, -1, -1.83697e-16, 0.189817, -0.00835981, -0.105907)
-script = ExtResource("5_bakwy")
+[node name="Thruster5" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0.337, -0.00528752, -0.0186955)
 right = true
 
-[node name="Thruster7" parent="Thrusters" index="6" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, -2.24964e-32, 1.83697e-16, -1, 1.22465e-16, -1, -1.83697e-16, -0.21595, 0.00290854, -0.110893)
-script = ExtResource("5_bakwy")
+[node name="Thruster6" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0.337, -0.005, 0.019)
 left = true
 
-[node name="Thruster8" parent="Thrusters" index="7" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, -1.22465e-16, 1, 1.22465e-16, -1.49976e-32, 1.22465e-16, -1, -0.21595, 0.0467694, -0.0741418)
-script = ExtResource("5_bakwy")
+[node name="Thruster7" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.344467, 0.00817415, 0.125551)
 up = true
-roll_left = true
-
-[node name="Thruster9" parent="Thrusters" index="8" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 2.46519e-32, 0, 2.46519e-32, 1, -0.21595, -0.040526, -0.0741418)
-script = ExtResource("5_bakwy")
-down = true
 roll_right = true
 
-[node name="Thruster10" parent="Thrusters" index="9" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, 3.7494e-32, -3.06162e-16, 1, -1.22465e-16, 1, 3.06162e-16, -0.21595, 0.00290854, 0.0831712)
-script = ExtResource("5_bakwy")
+[node name="Thruster8" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -0.344467, 0.000315401, 0.127656)
 right = true
 
-[node name="Thruster11" parent="Thrusters" index="10" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, -1.22465e-16, 1, 1.22465e-16, -1.49976e-32, 1.22465e-16, -1, -0.21595, 0.0464246, 0.0458807)
-script = ExtResource("5_bakwy")
-up = true
-roll_right = true
-
-[node name="Thruster12" parent="Thrusters" index="11" instance=ExtResource("4_viuyv")]
-transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 2.46519e-32, 0, 2.46519e-32, 1, -0.21595, -0.0397728, 0.046767)
-script = ExtResource("5_bakwy")
+[node name="Thruster9" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, -0.344467, -0.00624638, 0.123171)
 down = true
 roll_left = true
 
-[node name="Missile" type="Node3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.247082, 0.0232704, 0)
-script = ExtResource("6_uxeb8")
+[node name="Thruster10" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.344, 0.008, -0.126)
+up = true
+roll_left = true
 
-[node name="MissileMesh" type="MeshInstance3D" parent="Missile" index="0"]
-transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_d6nke")
-skeleton = NodePath("../../Thrusters")
-surface_material_override/0 = SubResource("StandardMaterial3D_mfahs")
+[node name="Thruster11" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, -0.344, 0, -0.128)
+left = true
 
-[node name="Plume" parent="Missile" index="1" instance=ExtResource("3_jmg24")]
-transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, -0.00971537, 0, 0)
+[node name="Thruster12" parent="Thrusters" instance=ExtResource("4_viuyv")]
+transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, -0.344, -0.006, -0.123)
+down = true
+roll_right = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Missile" index="2"]
+[node name="Hull" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+mesh = SubResource("ArrayMesh_3djpn")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_hwq8b")

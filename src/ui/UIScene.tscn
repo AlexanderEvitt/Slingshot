@@ -1265,7 +1265,7 @@ script = ExtResource("8_xpkhs")
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1452, 945)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="CamRoot" parent="HBoxContainer/Screen/HUD6/MarginContainer/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_mdjyt")]

@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c8q7ioeg374gn"]
+
+[ext_resource type="Shader" path="res://ship/Sobel.gdshader" id="1_e5hnk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhx8v"]
+render_priority = 0
+shader = ExtResource("1_e5hnk")
+shader_parameter/outline_threshold = 0.1
+shader_parameter/outline_color = Color(1, 0, 1, 1)
+
+[resource]
+next_pass = SubResource("ShaderMaterial_mhx8v")
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.117647, 0.117647, 0.156863, 1)

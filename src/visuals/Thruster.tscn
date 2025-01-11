@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://drs7rf6n0y5ok"]
+[gd_scene load_steps=6 format=3 uid="uid://drs7rf6n0y5ok"]
 
 [ext_resource type="Texture2D" uid="uid://cnmcxhf1m3d0f" path="res://visuals/thruster_plume.png" id="1_c4cgl"]
 [ext_resource type="Shader" path="res://visuals/thruster.gdshader" id="1_splox"]
+[ext_resource type="Script" path="res://visuals/thruster.gd" id="3_0ighr"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0tnad"]
 lightmap_size_hint = Vector2i(4, 4)
@@ -21,6 +22,11 @@ shader_parameter/fresnel_amplification = 1.0
 shader_parameter/fresnel_power = 4.0
 shader_parameter/textured = ExtResource("1_c4cgl")
 
-[node name="MeshInstance3D" type="MeshInstance3D"]
+[node name="Thruster1" type="Node3D"]
+script = ExtResource("3_0ighr")
+
+[node name="Thruster" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
 mesh = SubResource("CylinderMesh_0tnad")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_7htbn")

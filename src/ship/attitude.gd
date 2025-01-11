@@ -1,16 +1,13 @@
 extends RigidBody3D
 
 var ship
+var torque = Vector3(0,0,0)
 
 func _ready():
 	ship = get_parent()
 
 func _process(_delta):
-	# Change time scale to system time step
-	# accelerate rotational dynamics with time scaling
-	#Engine.time_scale = SystemTime.step
-	
-	var torque = Vector3(0,0,0)
+	torque = Vector3(0,0,0)
 	
 	if Input.is_action_pressed("down"):
 		torque = torque + (-transform.basis.z)
@@ -65,11 +62,10 @@ func _process(_delta):
 			torque = torque + -target.cross(ship.attitude.x)
 			
 	# Calculate damping if stabilizers OR autopilot is enabled
-	# TO DO: manually implement damping torque
 	if ship.stab_flag or ship.autopilot_flag:
-		angular_damp = 1
+		torque -= angular_velocity
 	else:
-		angular_damp = 0.2
+		torque -= 0.1*angular_velocity
 		
 	# Apply torque
 	apply_torque(torque)
