@@ -15,7 +15,7 @@
 
 [node name="OwnShip" type="Node" parent="Ships"]
 script = ExtResource("2_11ed2")
-start_position = Vector3(6371, 6371, 0)
+start_position = Vector3(-6371, -6371, 0)
 start_velocity = Vector3(0, 0, 8)
 
 [node name="AttitudeCalculator" type="RigidBody3D" parent="Ships/OwnShip"]

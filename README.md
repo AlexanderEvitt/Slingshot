@@ -7,6 +7,7 @@ Slingshot is a full-up, 6DOF astrodynamics simulation with a cool UI. Aimed at b
 ![Chaotic Orbit Around Luna](perturbed.png)
 ![Flight Instruments in MEO](meo.png)
 ![Arrival at Saturn](saturn_arrival.png)
+![Autopilot Panel](trajectory_planner.png)
 
 ## Current Features
 
