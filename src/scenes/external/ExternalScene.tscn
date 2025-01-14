@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=58 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/resetter.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
@@ -9,11 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="5_2nae2"]
 [ext_resource type="Texture2D" uid="uid://dugkf54dlpwri" path="res://scenes/external/sun_sprite.png" id="6_78yin"]
 [ext_resource type="Script" path="res://scenes/external/sun_light.gd" id="7_6u2xr"]
-[ext_resource type="Texture2D" uid="uid://16sjbapb4kht" path="res://bodies/photo/LunaTrue.jpg" id="7_iivlg"]
 [ext_resource type="Texture2D" uid="uid://46s3bcs5voeb" path="res://bodies/photo/EarthClouds.jpg" id="7_w4ah3"]
 [ext_resource type="Texture2D" uid="uid://dgl8wj4mkimt3" path="res://bodies/photo/MarsTrue.jpg" id="10_mv0q4"]
 [ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/photo/JupiterTrue.jpg" id="11_74p1c"]
+[ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="13_4jafp"]
 [ext_resource type="Texture2D" uid="uid://le10flv78rjl" path="res://bodies/photo/MercuryTrue.jpg" id="13_4pb4k"]
+[ext_resource type="Texture2D" uid="uid://s4i4jbyto3n4" path="res://bodies/photo/LunaNorm.png" id="14_0kyry"]
 [ext_resource type="Texture2D" uid="uid://b4elvmsivv3oa" path="res://bodies/photo/SaturnTrue.jpg" id="14_eha35"]
 [ext_resource type="Texture2D" uid="uid://bn8rqk76ahe07" path="res://bodies/photo/VenusTrue.jpg" id="15_k1fbk"]
 [ext_resource type="PackedScene" uid="uid://br774l8co4lju" path="res://bodies/photo/rings.tscn" id="15_qf8i2"]
@@ -76,7 +77,10 @@ radius = 1.74
 height = 3.48
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qq6b"]
-albedo_texture = ExtResource("7_iivlg")
+albedo_texture = ExtResource("13_4jafp")
+normal_enabled = true
+normal_scale = 0.05
+normal_texture = ExtResource("14_0kyry")
 
 [sub_resource type="SphereMesh" id="SphereMesh_61v7t"]
 radius = 3.396

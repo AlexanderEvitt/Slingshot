@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://16sjbapb4kht"
-path.s3tc="res://.godot/imported/LunaTrue.jpg-b02d8dc854c821b0fd8a6d79db0554c7.s3tc.ctex"
+uid="uid://b7xgdj3pwc6c7"
+path.s3tc="res://.godot/imported/LunaTrue.png-f0948d056dfef7a1f3c88b1db9f2540d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://bodies/photo/LunaTrue.jpg"
-dest_files=["res://.godot/imported/LunaTrue.jpg-b02d8dc854c821b0fd8a6d79db0554c7.s3tc.ctex"]
+source_file="res://bodies/photo/LunaTrue.png"
+dest_files=["res://.godot/imported/LunaTrue.png-f0948d056dfef7a1f3c88b1db9f2540d.s3tc.ctex"]
 
 [params]
 
