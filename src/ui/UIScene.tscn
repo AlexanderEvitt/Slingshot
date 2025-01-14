@@ -134,7 +134,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1452, 945)
+size = Vector2i(1452, 839)
 render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
@@ -690,7 +690,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(630, 589)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="HBoxContainer/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("14_ofm8v")]
@@ -1335,9 +1335,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_bottom = 16
 
 [node name="ButtonPanel" type="Panel" parent="HBoxContainer/Screen/ModeSelectorPanel/MarginContainer"]
 layout_mode = 2
@@ -1551,7 +1551,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Earth"
 horizontal_alignment = 2
-clip_text = true
 
 [node name="Title2" type="Label" parent="HBoxContainer/Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
 layout_mode = 2

@@ -24,9 +24,9 @@ func _ready():
 func _process(_delta):
 	if viewer.is_visible_in_tree():
 		if zoomable:
-			if Input.is_action_pressed("zoom_out"):
+			if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
 				zoom_distance = zoom_speed*zoom_distance
-			if Input.is_action_pressed("zoom_in"):
+			if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):
 				zoom_distance = zoom_distance/zoom_speed
 			zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
 			position = Vector3(0, 0, zoom_distance)

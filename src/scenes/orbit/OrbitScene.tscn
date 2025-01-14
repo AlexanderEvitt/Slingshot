@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=34 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bgifrw1p56y10" path="res://bodies/wireframe/SaturnWireframe.tscn" id="9_1qyms"]
 [ext_resource type="PackedScene" uid="uid://2q27idy8fbkr" path="res://bodies/wireframe/UranusWireframe.tscn" id="10_girv0"]
 [ext_resource type="PackedScene" uid="uid://d386uc0phqab7" path="res://bodies/wireframe/NeptuneWireframe.tscn" id="11_ciut5"]
+[ext_resource type="Script" path="res://bodies/moon.gd" id="11_jnixu"]
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="12_oiuin"]
+[ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="13_kuxx4"]
 [ext_resource type="Script" path="res://scenes/orbit/pointer_inheritor.gd" id="13_xts1l"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="14_g31x3"]
 
@@ -26,6 +29,66 @@ height = 1400.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tj412"]
 shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_385ak"]
+radius = 1.822
+height = 3.643
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e0jq5"]
+render_priority = 0
+shader = ExtResource("12_oiuin")
+shader_parameter/colored = Color(1, 0.6, 0, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("13_kuxx4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_kxpab"]
+radius = 2.41
+height = 4.821
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h4gya"]
+render_priority = 0
+shader = ExtResource("12_oiuin")
+shader_parameter/colored = Color(0.527308, 0.238355, 0.289012, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("13_kuxx4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_p12ly"]
+radius = 1.561
+height = 3.122
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4g1t"]
+render_priority = 0
+shader = ExtResource("12_oiuin")
+shader_parameter/colored = Color(0, 0.37, 0, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("13_kuxx4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_2a7sc"]
+radius = 2.634
+height = 5.268
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37qg8"]
+render_priority = 0
+shader = ExtResource("12_oiuin")
+shader_parameter/colored = Color(0.56, 0.56, 0.56, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("13_kuxx4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_o4sno"]
+radius = 2.575
+height = 5.15
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m08ws"]
+render_priority = 0
+shader = ExtResource("12_oiuin")
+shader_parameter/colored = Color(0.89, 0.64436, 0.2492, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("13_kuxx4")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_b1c6p"]
 top_radius = 0.0
@@ -130,11 +193,22 @@ GM = 4904.87
 [node name="LunaMesh" parent="Luna" instance=ExtResource("6_bom1w")]
 
 [node name="FlatPlanetSprite" type="Sprite3D" parent="Luna"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
 modulate = Color(0.589096, 0.589096, 0.589096, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
+
+[node name="Plotter" type="Node3D" parent="Luna" node_paths=PackedStringArray("relative_to")]
+top_level = true
+script = ExtResource("5_vmpxk")
+period = 27.3
+color = Color(1, 1, 1, 1)
+visible_distance = 2000
+relative_to = NodePath("../../Earth")
 
 [node name="Mars" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 788.163, 0, 0)
@@ -180,6 +254,126 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
+[node name="Io" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, -91.9123)
+script = ExtResource("11_jnixu")
+period = 152854.0
+SMA = 421700.0
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Io"]
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_385ak")
+surface_material_override/0 = SubResource("ShaderMaterial_e0jq5")
+
+[node name="Plotter" type="Node3D" parent="Jupiter/Io" node_paths=PackedStringArray("relative_to")]
+top_level = true
+script = ExtResource("5_vmpxk")
+period = 1.769
+color = Color(1, 0.6, 0, 1)
+visible_distance = 2000
+relative_to = NodePath("../..")
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Io"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(1, 0.6, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
+[node name="Callisto" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6831, 0, -91.9123)
+script = ExtResource("11_jnixu")
+period = 1.44193e+06
+true_anomaly = 1.0
+SMA = 1.8827e+06
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Callisto"]
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_kxpab")
+surface_material_override/0 = SubResource("ShaderMaterial_h4gya")
+
+[node name="Plotter" type="Node3D" parent="Jupiter/Callisto" node_paths=PackedStringArray("relative_to")]
+top_level = true
+script = ExtResource("5_vmpxk")
+period = 16.689
+color = Color(0.52549, 0.239216, 0.290196, 1)
+visible_distance = 2000
+relative_to = NodePath("../..")
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Callisto"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(0.52549, 0.239216, 0.290196, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
+[node name="Europa" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6801, 0, -91.9123)
+script = ExtResource("11_jnixu")
+period = 306806.0
+true_anomaly = 4.0
+SMA = 670900.0
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Europa"]
+visibility_range_end = 5000.0
+mesh = SubResource("SphereMesh_p12ly")
+surface_material_override/0 = SubResource("ShaderMaterial_j4g1t")
+
+[node name="Plotter" type="Node3D" parent="Jupiter/Europa" node_paths=PackedStringArray("relative_to")]
+top_level = true
+script = ExtResource("5_vmpxk")
+period = 3.551
+color = Color(0, 0.368627, 0, 1)
+visible_distance = 2000
+relative_to = NodePath("../..")
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Europa"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(0, 0.368627, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
+[node name="Ganymede" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2215, 0, -91.9123)
+script = ExtResource("11_jnixu")
+period = 618106.0
+true_anomaly = 3.0
+SMA = 1.0704e+06
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Ganymede"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70714, 0, 0)
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_2a7sc")
+surface_material_override/0 = SubResource("ShaderMaterial_37qg8")
+
+[node name="Plotter" type="Node3D" parent="Jupiter/Ganymede" node_paths=PackedStringArray("relative_to")]
+top_level = true
+script = ExtResource("5_vmpxk")
+period = 7.154
+color = Color(0.560784, 0.560784, 0.560784, 1)
+visible_distance = 2000
+relative_to = NodePath("../..")
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Ganymede"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(0.560784, 0.560784, 0.560784, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
 [node name="Saturn" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1051.44, 0, 0)
 script = ExtResource("1_xfjlq")
@@ -196,6 +390,37 @@ color = Color(0.405878, 0.319402, 0, 1)
 [node name="SaturnMesh" parent="Saturn" instance=ExtResource("9_1qyms")]
 
 [node name="FlatPlanetSprite" type="Sprite3D" parent="Saturn"]
+modulate = Color(0.403922, 0.317647, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
+[node name="Titan" type="Node3D" parent="Saturn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.393, 0, -117.505)
+script = ExtResource("11_jnixu")
+period = 1.37765e+06
+true_anomaly = 0.5
+SMA = 1.22187e+06
+
+[node name="TitanMesh" type="MeshInstance3D" parent="Saturn/Titan"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_o4sno")
+surface_material_override/0 = SubResource("ShaderMaterial_m08ws")
+
+[node name="Plotter" type="Node3D" parent="Saturn/Titan" node_paths=PackedStringArray("relative_to")]
+top_level = true
+script = ExtResource("5_vmpxk")
+period = 15.945
+color = Color(0.890196, 0.643137, 0.25098, 1)
+visible_distance = 2000
+relative_to = NodePath("../..")
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="Saturn/Titan"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
 modulate = Color(0.403922, 0.317647, 0, 1)
 pixel_size = 0.0001
 billboard = 1

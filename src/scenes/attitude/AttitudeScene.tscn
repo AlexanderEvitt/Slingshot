@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://j7weec3kdnqh"]
+[gd_scene load_steps=35 format=3 uid="uid://j7weec3kdnqh"]
 
 [ext_resource type="Script" path="res://scenes/orbit/pointer_inheritor.gd" id="1_e5gy2"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/ShipWireframe.tscn" id="3_0dbvy"]
@@ -14,8 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://olsok6qpjvew" path="res://bodies/wireframe/MarsWireframe.tscn" id="11_kqfx1"]
 [ext_resource type="PackedScene" uid="uid://bmc8fp2kenecv" path="res://bodies/wireframe/JupiterWireframe.tscn" id="13_fhluh"]
 [ext_resource type="PackedScene" uid="uid://bgifrw1p56y10" path="res://bodies/wireframe/SaturnWireframe.tscn" id="14_irmvr"]
+[ext_resource type="Script" path="res://bodies/moon.gd" id="14_tlxi5"]
 [ext_resource type="PackedScene" uid="uid://2q27idy8fbkr" path="res://bodies/wireframe/UranusWireframe.tscn" id="15_vbnda"]
+[ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="15_xwnb6"]
 [ext_resource type="PackedScene" uid="uid://d386uc0phqab7" path="res://bodies/wireframe/NeptuneWireframe.tscn" id="16_a3jc4"]
+[ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="16_qeqbd"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_nyefy"]
 radius = 700.0
@@ -34,6 +37,66 @@ sky_material = SubResource("PanoramaSkyMaterial_to5oi")
 background_mode = 2
 background_color = Color(0.117647, 0.117647, 0.156863, 1)
 sky = SubResource("Sky_k6xhb")
+
+[sub_resource type="SphereMesh" id="SphereMesh_us2s1"]
+radius = 1.822
+height = 3.643
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wrow"]
+render_priority = 0
+shader = ExtResource("15_xwnb6")
+shader_parameter/colored = Color(1, 0.6, 0, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("16_qeqbd")
+
+[sub_resource type="SphereMesh" id="SphereMesh_lw563"]
+radius = 2.41
+height = 4.821
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_es61p"]
+render_priority = 0
+shader = ExtResource("15_xwnb6")
+shader_parameter/colored = Color(0.527308, 0.238355, 0.289012, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("16_qeqbd")
+
+[sub_resource type="SphereMesh" id="SphereMesh_dj3cd"]
+radius = 1.561
+height = 3.122
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vg6cs"]
+render_priority = 0
+shader = ExtResource("15_xwnb6")
+shader_parameter/colored = Color(0, 0.37, 0, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("16_qeqbd")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ntjfr"]
+radius = 2.634
+height = 5.268
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvpe4"]
+render_priority = 0
+shader = ExtResource("15_xwnb6")
+shader_parameter/colored = Color(0.56, 0.56, 0.56, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("16_qeqbd")
+
+[sub_resource type="SphereMesh" id="SphereMesh_5tvb5"]
+radius = 2.575
+height = 5.15
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b17ef"]
+render_priority = 0
+shader = ExtResource("15_xwnb6")
+shader_parameter/colored = Color(0.89, 0.64436, 0.2492, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("16_qeqbd")
 
 [node name="AttitudeRoot" type="Node3D"]
 
@@ -74,7 +137,7 @@ mesh = SubResource("SphereMesh_nyefy")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_sqs4l")
 
-[node name="SunLabel" type="Label3D" parent="Sun"]
+[node name="Label" type="Label3D" parent="Sun"]
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
@@ -96,7 +159,7 @@ GM = 22032.0
 
 [node name="MercuryMesh" parent="Mercury" instance=ExtResource("7_ddt6d")]
 
-[node name="MercuryLabel" type="Label3D" parent="Mercury"]
+[node name="Label" type="Label3D" parent="Mercury"]
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
@@ -114,7 +177,7 @@ GM = 324859.0
 
 [node name="VenusMesh" parent="Venus" instance=ExtResource("8_bkt6y")]
 
-[node name="VenusLabel" type="Label3D" parent="Venus"]
+[node name="Label" type="Label3D" parent="Venus"]
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
@@ -132,7 +195,7 @@ GM = 398600.0
 [node name="EarthMesh" parent="Earth" instance=ExtResource("7_ripii")]
 transform = Transform3D(1, 0, 0, 0, 6.12324e-17, 1, 0, -1, 6.12324e-17, 0, 0, 0)
 
-[node name="EarthLabel" type="Label3D" parent="Earth"]
+[node name="Label" type="Label3D" parent="Earth"]
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
@@ -151,7 +214,10 @@ GM = 4904.87
 [node name="LunaMesh" parent="Luna" instance=ExtResource("8_nv5pm")]
 transform = Transform3D(1, 0, 0, 0, 1, -3.99574e-23, 0, 3.99574e-23, 1, 0, 0, 0)
 
-[node name="LunaLabel" type="Label3D" parent="Luna"]
+[node name="Label" type="Label3D" parent="Luna"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
@@ -169,7 +235,7 @@ GM = 42828.4
 
 [node name="MarsMesh" parent="Mars" instance=ExtResource("11_kqfx1")]
 
-[node name="MarsLabel" type="Label3D" parent="Mars"]
+[node name="Label" type="Label3D" parent="Mars"]
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
@@ -190,12 +256,112 @@ GM = 1.26687e+08
 
 [node name="JupiterMesh" parent="Jupiter" instance=ExtResource("13_fhluh")]
 
-[node name="JupiterLabel" type="Label3D" parent="Jupiter"]
+[node name="Label" type="Label3D" parent="Jupiter"]
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
 fixed_size = true
 text = "JUPITER"
+font = ExtResource("4_vsl4q")
+font_size = 64
+outline_size = 6
+
+[node name="Io" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, -91.9123)
+script = ExtResource("14_tlxi5")
+period = 152854.0
+SMA = 421700.0
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Io"]
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_us2s1")
+surface_material_override/0 = SubResource("ShaderMaterial_2wrow")
+
+[node name="MoonLabel" type="Label3D" parent="Jupiter/Io/BodyMesh"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "IO"
+font = ExtResource("4_vsl4q")
+font_size = 64
+outline_size = 6
+
+[node name="Callisto" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6831, 0, -91.9123)
+script = ExtResource("14_tlxi5")
+period = 1.44193e+06
+true_anomaly = 1.0
+SMA = 1.8827e+06
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Callisto"]
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_lw563")
+surface_material_override/0 = SubResource("ShaderMaterial_es61p")
+
+[node name="MoonLabel" type="Label3D" parent="Jupiter/Callisto/BodyMesh"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "CALLISTO"
+font = ExtResource("4_vsl4q")
+font_size = 64
+outline_size = 6
+
+[node name="Europa" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6801, 0, -91.9123)
+script = ExtResource("14_tlxi5")
+period = 306806.0
+true_anomaly = 4.0
+SMA = 670900.0
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Europa"]
+visibility_range_end = 5000.0
+mesh = SubResource("SphereMesh_dj3cd")
+surface_material_override/0 = SubResource("ShaderMaterial_vg6cs")
+
+[node name="MoonLabel" type="Label3D" parent="Jupiter/Europa/BodyMesh"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "EUROPA"
+font = ExtResource("4_vsl4q")
+font_size = 64
+outline_size = 6
+
+[node name="Ganymede" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2215, 0, -91.9123)
+script = ExtResource("14_tlxi5")
+period = 618106.0
+true_anomaly = 3.0
+SMA = 1.0704e+06
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Ganymede"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70714, 0, 0)
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_ntjfr")
+surface_material_override/0 = SubResource("ShaderMaterial_tvpe4")
+
+[node name="MoonLabel" type="Label3D" parent="Jupiter/Ganymede/BodyMesh"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "GANYMEDE"
 font = ExtResource("4_vsl4q")
 font_size = 64
 outline_size = 6
@@ -208,12 +374,38 @@ GM = 3.79312e+07
 
 [node name="SaturnMesh" parent="Saturn" instance=ExtResource("14_irmvr")]
 
-[node name="SaturnLabel" type="Label3D" parent="Saturn"]
+[node name="Label" type="Label3D" parent="Saturn"]
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
 fixed_size = true
 text = "SATURN"
+font = ExtResource("4_vsl4q")
+font_size = 64
+outline_size = 6
+
+[node name="Titan" type="Node3D" parent="Saturn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.393, 0, -117.505)
+script = ExtResource("14_tlxi5")
+period = 1.37765e+06
+true_anomaly = 0.5
+SMA = 1.22187e+06
+
+[node name="TitanMesh" type="MeshInstance3D" parent="Saturn/Titan"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_5tvb5")
+surface_material_override/0 = SubResource("ShaderMaterial_b17ef")
+
+[node name="MoonLabel" type="Label3D" parent="Saturn/Titan/TitanMesh"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+text = "TITAN"
 font = ExtResource("4_vsl4q")
 font_size = 64
 outline_size = 6
@@ -226,7 +418,7 @@ GM = 5.79394e+06
 
 [node name="UranusMesh" parent="Uranus" instance=ExtResource("15_vbnda")]
 
-[node name="UranusLabel" type="Label3D" parent="Uranus"]
+[node name="Label" type="Label3D" parent="Uranus"]
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
@@ -244,7 +436,7 @@ GM = 6.83653e+06
 
 [node name="NeptuneMesh" parent="Neptune" instance=ExtResource("16_a3jc4")]
 
-[node name="NeptuneLabel" type="Label3D" parent="Neptune"]
+[node name="Label" type="Label3D" parent="Neptune"]
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true

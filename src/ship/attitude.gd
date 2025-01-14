@@ -71,7 +71,7 @@ func _process(_delta):
 		lock_rotation = false
 	# Just point at target otherwise
 	else:
-		lock_rotation = false
+		lock_rotation = true
 		
 		if target != null:
 			look_at(target)

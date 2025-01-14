@@ -30,13 +30,6 @@ public partial class planet : Node3D
 			{
 				Spice.FURNSH_C(pathChars);
 			}
-
-			// Load saturnian moons kernel
-			string metaFilePath2 = System.Environment.ExpandEnvironmentVariables(@"%appdata%\SPICE\sat441.bsp");
-			fixed (byte* pathChars = Encoding.ASCII.GetBytes(metaFilePath2))
-			{
-				Spice.FURNSH_C(pathChars);
-			}
 			
 			// Furnish leap second kernel
 			var LSKFilePath = System.Environment.ExpandEnvironmentVariables(@"%appdata%\SPICE\naif0012.tls");

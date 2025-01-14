@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=57 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/resetter.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
@@ -18,7 +18,14 @@
 [ext_resource type="Texture2D" uid="uid://bn8rqk76ahe07" path="res://bodies/photo/VenusTrue.jpg" id="15_k1fbk"]
 [ext_resource type="PackedScene" uid="uid://br774l8co4lju" path="res://bodies/photo/rings.tscn" id="15_qf8i2"]
 [ext_resource type="Texture2D" uid="uid://blf5ecvkcenvs" path="res://bodies/photo/UranusTrue.jpg" id="16_uf3kr"]
+[ext_resource type="Texture2D" uid="uid://0mbuhbs1qkqu" path="res://bodies/photo/IoTrue.jpg" id="17_gcb48"]
 [ext_resource type="Texture2D" uid="uid://bh21nouyh0k42" path="res://bodies/photo/NeptuneTrue.jpg" id="17_n5xr7"]
+[ext_resource type="Script" path="res://bodies/moon.gd" id="18_acntg"]
+[ext_resource type="Texture2D" uid="uid://bf0o1r3dwo25y" path="res://bodies/photo/CallistoTrue.jpg" id="18_ufqw4"]
+[ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="19_7nri8"]
+[ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_me3ap"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
 radius = 700.0
@@ -85,6 +92,34 @@ height = 142.984
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnura"]
 albedo_texture = ExtResource("11_74p1c")
 
+[sub_resource type="SphereMesh" id="SphereMesh_fh4a2"]
+radius = 1.822
+height = 3.643
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thbh0"]
+albedo_texture = ExtResource("17_gcb48")
+
+[sub_resource type="SphereMesh" id="SphereMesh_w33s7"]
+radius = 2.41
+height = 4.821
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6oicq"]
+albedo_texture = ExtResource("18_ufqw4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_jcfjd"]
+radius = 1.561
+height = 3.122
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wqeu"]
+albedo_texture = ExtResource("19_7nri8")
+
+[sub_resource type="SphereMesh" id="SphereMesh_34wev"]
+radius = 2.634
+height = 5.268
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3g57a"]
+albedo_texture = ExtResource("20_a6jdv")
+
 [sub_resource type="SphereMesh" id="SphereMesh_p4pre"]
 radius = 60.268
 height = 120.536
@@ -126,7 +161,11 @@ keep_aspect = 0
 current = true
 fov = 30.0
 size = 2.0
-far = 1e+10
+far = 10000.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft/NarrowCam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4702, 0, 0)
+mesh = SubResource("ArrayMesh_me3ap")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_n8kbm")
@@ -237,7 +276,7 @@ shader_params/u_atmosphere_modulate = Color(0.704034, 0.398832, 0.348735, 1)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="Jupiter" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 104.63)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -179.643, 0, 76.6756)
 script = ExtResource("4_xwbd5")
 body = "JUPITER BARYCENTER"
 GM = 1.26687e+08
@@ -248,6 +287,54 @@ visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_ke1qx")
 surface_material_override/0 = SubResource("StandardMaterial3D_lnura")
 
+[node name="Io" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, -91.9123)
+script = ExtResource("18_acntg")
+period = 152854.0
+SMA = 421700.0
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Io"]
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_fh4a2")
+surface_material_override/0 = SubResource("StandardMaterial3D_thbh0")
+
+[node name="Callisto" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6831, 0, -91.9123)
+script = ExtResource("18_acntg")
+period = 1.44193e+06
+true_anomaly = 1.0
+SMA = 1.8827e+06
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Callisto"]
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_w33s7")
+surface_material_override/0 = SubResource("StandardMaterial3D_6oicq")
+
+[node name="Europa" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6801, 0, -91.9123)
+script = ExtResource("18_acntg")
+period = 306806.0
+true_anomaly = 4.0
+SMA = 670900.0
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Europa"]
+visibility_range_end = 5000.0
+mesh = SubResource("SphereMesh_jcfjd")
+surface_material_override/0 = SubResource("StandardMaterial3D_4wqeu")
+
+[node name="Ganymede" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2215, 0, -91.9123)
+script = ExtResource("18_acntg")
+period = 618106.0
+true_anomaly = 3.0
+SMA = 1.0704e+06
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Ganymede"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70714, 0, 0)
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_34wev")
+surface_material_override/0 = SubResource("StandardMaterial3D_3g57a")
+
 [node name="Saturn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 262.026, -191.709, 0)
 script = ExtResource("4_xwbd5")
@@ -257,28 +344,31 @@ GM = 3.79312e+07
 [node name="SaturnMesh" type="MeshInstance3D" parent="Saturn"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 10000.0
+visibility_range_end_margin = 100.0
 mesh = SubResource("SphereMesh_p4pre")
 surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
 
 [node name="rings" parent="Saturn/SaturnMesh" instance=ExtResource("15_qf8i2")]
 transform = Transform3D(67.3, 0, 0, 0, 67.3, 0, 0, 0, 67.3, 0, 0, 0)
 
-[node name="Titan" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 305.419, -191.709, 146.573)
-script = ExtResource("4_xwbd5")
-body = "TITAN"
+[node name="Titan" type="Node3D" parent="Saturn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.393, 0, -117.505)
+script = ExtResource("18_acntg")
+period = 1.37765e+06
+true_anomaly = 0.5
+SMA = 1.22187e+06
 
-[node name="TitanMesh" type="MeshInstance3D" parent="Titan"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, -257.01)
+[node name="TitanMesh" type="MeshInstance3D" parent="Saturn/Titan"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_uj08c")
 surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
 
-[node name="EarthAtmosphere" parent="Titan/TitanMesh" instance=ExtResource("5_2nae2")]
+[node name="EarthAtmosphere" parent="Saturn/Titan/TitanMesh" instance=ExtResource("5_2nae2")]
 transform = Transform3D(2, 0, 0, 0, 1.22465e-16, 2, 0, -2, 1.22465e-16, 0, 0, 0)
 planet_radius = 2.575
 atmosphere_height = 0.25
-sun_path = NodePath("../../../Sun/SunLight")
+sun_path = NodePath("../../../../Sun/SunLight")
 shader_params/u_density = 5.0
 shader_params/u_scattering_strength = 5.0
 shader_params/u_atmosphere_modulate = Color(0.905882, 0.772549, 0.388235, 1)

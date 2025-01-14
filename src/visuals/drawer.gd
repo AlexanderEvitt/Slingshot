@@ -22,6 +22,7 @@ func line(pos: Array, color = Color.WHITE_SMOKE, squashed = false):
 
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	material.albedo_color = color
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 
 	return mesh_instance
 
