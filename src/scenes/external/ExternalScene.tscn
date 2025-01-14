@@ -157,11 +157,9 @@ visible = false
 
 [node name="NarrowCam" type="Camera3D" parent="Spacecraft"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
-keep_aspect = 0
 current = true
-fov = 30.0
+fov = 37.8493
 size = 2.0
-far = 10000.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft/NarrowCam"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4702, 0, 0)
@@ -336,7 +334,7 @@ mesh = SubResource("SphereMesh_34wev")
 surface_material_override/0 = SubResource("StandardMaterial3D_3g57a")
 
 [node name="Saturn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 262.026, -191.709, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -335.66, 0, 147.853)
 script = ExtResource("4_xwbd5")
 body = "SATURN BARYCENTER"
 GM = 3.79312e+07
