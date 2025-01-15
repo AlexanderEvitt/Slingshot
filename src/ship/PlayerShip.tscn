@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvuwcyu3chwr1"]
+
+[ext_resource type="PackedScene" uid="uid://bv178rd4kr5kv" path="res://ship/player_ship.glb" id="1_hw7xc"]
+[ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="3_nm6au"]
+[ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="4_d04ea"]
+
+[node name="player_ship" instance=ExtResource("1_hw7xc")]
+
+[node name="Plumes" type="Node3D" parent="." index="1"]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, -73.8, 0, 0)
+
+[node name="Plume" parent="Plumes" index="0" instance=ExtResource("3_nm6au")]
+transform = Transform3D(0.048, 0, 0, 0, 0.048, 0, 0, 0, 0.048, -0.0432011, -0.0439232, 0)
+
+[node name="Plume2" parent="Plumes" index="1" instance=ExtResource("3_nm6au")]
+transform = Transform3D(0.048, 0, 0, 0, 0.048, 0, 0, 0, 0.048, -0.0432011, 0.0217956, 0.0372547)
+
+[node name="Plume3" parent="Plumes" index="2" instance=ExtResource("3_nm6au")]
+transform = Transform3D(0.048, 0, 0, 0, 0.048, 0, 0, 0, 0.048, -0.043, 0.022, -0.037)
+
+[node name="Thrusters" type="Node3D" parent="." index="2"]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0)
+
+[node name="Thruster1" parent="Thrusters" index="0" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.437208, 0.0426548, -0.00556774)
+down = true
+
+[node name="Thruster2" parent="Thrusters" index="1" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.437, 0.043, 0.006)
+down = true
+
+[node name="Thruster3" parent="Thrusters" index="2" instance=ExtResource("4_d04ea")]
+transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0.4326, 0.0283604, 0.012)
+up = true
+
+[node name="Thruster4" parent="Thrusters" index="3" instance=ExtResource("4_d04ea")]
+transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0.433922, 0.0270752, -0.00785322)
+up = true
+
+[node name="Thruster5" parent="Thrusters" index="4" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0.437263, 0.0335636, -0.0129562)
+right = true
+
+[node name="Thruster6" parent="Thrusters" index="5" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0.436029, 0.0338826, 0.019)
+left = true
+
+[node name="Thruster7" parent="Thrusters" index="6" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.344467, 0.041347, 0.103282)
+up = true
+roll_right = true
+
+[node name="Thruster8" parent="Thrusters" index="7" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -0.344467, 0.0332059, 0.10606)
+right = true
+
+[node name="Thruster9" parent="Thrusters" index="8" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, -0.344467, 0.0193668, 0.103888)
+down = true
+roll_left = true
+
+[node name="Thruster10" parent="Thrusters" index="9" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.344, 0.0416147, -0.101683)
+up = true
+roll_left = true
+
+[node name="Thruster11" parent="Thrusters" index="10" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, -0.344, 0.0364393, -0.101422)
+left = true
+
+[node name="Thruster12" parent="Thrusters" index="11" instance=ExtResource("4_d04ea")]
+transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, -0.344, 0.019544, -0.101185)
+down = true
+roll_right = true

@@ -1,7 +1,7 @@
 
 shader_type spatial;
 
-render_mode blend_mix, unshaded, cull_back;
+render_mode blend_mix, unshaded, cull_disabled;
 
 group_uniforms Basic_Effects;
 uniform float model_height = 3.0;
@@ -71,6 +71,6 @@ void fragment() {
         float fresnel_effect = 1.0 - fresnel(fresnel_factor, NORMAL, VIEW);
         fresnel_effect = pow(fresnel_effect * fresnel_amplification, fresnel_power);
 
-        ALPHA *= fresnel_effect;
+        ALPHA *= clamp(fresnel_effect,0.0,1.0);
     }
 }

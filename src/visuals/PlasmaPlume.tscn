@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bu2j4yalwn3ks"]
+[gd_scene load_steps=9 format=3 uid="uid://bu2j4yalwn3ks"]
 
 [ext_resource type="Shader" path="res://visuals/PlasmaPlume.gdshader" id="1_eo5p0"]
+[ext_resource type="Script" path="res://visuals/plume_controller.gd" id="2_y04ml"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_n1q1i"]
 lightmap_size_hint = Vector2i(17, 19)
-top_radius = 0.2
+top_radius = 2.0
 height = 4.0
 cap_top = false
-cap_bottom = false
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_j80rw"]
 
@@ -18,26 +18,40 @@ noise = SubResource("FastNoiseLite_j80rw")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yust4"]
 render_priority = 0
 shader = ExtResource("1_eo5p0")
-shader_parameter/model_height = 3.0
-shader_parameter/dissolve_start = 0.0
+shader_parameter/model_height = 4.0
+shader_parameter/dissolve_start = 0.001
 shader_parameter/dissolve_length = 1.0
 shader_parameter/gradient_bias = 1.0
 shader_parameter/noise_direction = Vector2(0, 1)
-shader_parameter/noise_speed = 1.0
-shader_parameter/noise_strength = 0.1
+shader_parameter/noise_speed = 2.0
+shader_parameter/noise_strength = 0.05
 shader_parameter/stretch_factor = 0.6
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_xas2e")
-shader_parameter/_color = Color(0.117, 0.1833, 0.78, 1)
-shader_parameter/power_factor = 1.0
-shader_parameter/alpha_intensity_factor = 2.0
-shader_parameter/fresnel_factor = 1.0
+shader_parameter/_color = Color(0.63036, 0.1224, 0.72, 1)
+shader_parameter/power_factor = 0.5
+shader_parameter/alpha_intensity_factor = 1.0
+shader_parameter/fresnel_factor = 0.3
 shader_parameter/fresnel_amplification = 2.0
-shader_parameter/fresnel_power = 1.0
+shader_parameter/fresnel_power = 5.0
 shader_parameter/enable_fresnel = true
 
-[node name="Plume" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixdov"]
+cull_mode = 1
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[sub_resource type="CylinderMesh" id="CylinderMesh_1mc53"]
+material = SubResource("StandardMaterial3D_ixdov")
+top_radius = 0.0
+
+[node name="Plume" type="Node3D"]
+script = ExtResource("2_y04ml")
+
+[node name="Tail" type="MeshInstance3D" parent="."]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -2, 0, 0)
 mesh = SubResource("CylinderMesh_n1q1i")
 surface_material_override/0 = SubResource("ShaderMaterial_yust4")
+
+[node name="ThrustChamber" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("CylinderMesh_1mc53")

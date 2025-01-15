@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/resetter.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
-[ext_resource type="PackedScene" uid="uid://bwwdgkhhphu7b" path="res://ship/OSC.glb" id="3_uoivw"]
+[ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/PlayerShip.tscn" id="3_r7nlu"]
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="4_n8kbm"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="4_xwbd5"]
@@ -156,18 +156,19 @@ script = ExtResource("1_5ri2s")
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, -88.7469)
 script = ExtResource("1_bkkxk")
 
-[node name="OSC" parent="Spacecraft" instance=ExtResource("3_uoivw")]
-visible = false
-
 [node name="NarrowCam" type="Camera3D" parent="Spacecraft"]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0.0192825, 0)
 current = true
 fov = 37.8493
 size = 2.0
+near = 0.001
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft/NarrowCam"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4702, 0, 0)
 mesh = SubResource("ArrayMesh_me3ap")
+
+[node name="player_ship" parent="Spacecraft" instance=ExtResource("3_r7nlu")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_n8kbm")
