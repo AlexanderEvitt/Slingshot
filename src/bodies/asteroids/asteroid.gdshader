@@ -48,9 +48,14 @@ void vertex() {
 	
 
 	// Add normal maps
-	//NORMAL = NORMAL + intensity3*texture(normal_noise, UV.xy).rgb;
-	//NORMAL = texture(normal_noise, UV.xy).rgb;
-	NORMAL = normalize(VERTEX);
+	float height_scale = 100.0;
+	float texelSize = 1.0 / float(textureSize(noise1, 0).x);
+	float t = texture(noise1, UV + vec2(texelSize * vec2(0.0, -1.0))).r * height_scale;
+	float r = texture(noise1, UV + vec2(texelSize * vec2(1.0, 0.0))).r * height_scale;
+	float l = texture(noise1, UV + vec2(texelSize * vec2(-1.0, 0.0))).r * height_scale;
+	float b = texture(noise1, UV + vec2(texelSize * vec2(0.0, 1.0))).r * height_scale;
+
+	NORMAL = -normalize(vec3(2.0 * (r - l), 2.0 * (b - t), -4.0));
 }
 
 void fragment() {
