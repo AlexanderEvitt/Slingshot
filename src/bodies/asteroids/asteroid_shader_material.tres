@@ -1,0 +1,47 @@
+[gd_resource type="ShaderMaterial" load_steps=11 format=3 uid="uid://5tnmi7cufisf"]
+
+[ext_resource type="Shader" path="res://bodies/asteroids/asteroid.gdshader" id="1_5v6io"]
+
+[sub_resource type="Gradient" id="Gradient_iyxke"]
+colors = PackedColorArray(0, 0, 0, 1, 0.721569, 0.721569, 0.721569, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wfk6w"]
+noise_type = 2
+frequency = 0.0311
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0fj4d"]
+color_ramp = SubResource("Gradient_iyxke")
+noise = SubResource("FastNoiseLite_wfk6w")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ci0y0"]
+frequency = 0.002
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2he7o"]
+seamless = true
+noise = SubResource("FastNoiseLite_ci0y0")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fxrop"]
+frequency = 0.004
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yqt4y"]
+seamless = true
+noise = SubResource("FastNoiseLite_fxrop")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q7b3o"]
+noise_type = 3
+frequency = 0.052
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t02ii"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_q7b3o")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5v6io")
+shader_parameter/intensity1 = 0.5
+shader_parameter/intensity2 = 0.2
+shader_parameter/intensity3 = 0.1
+shader_parameter/main_texture = SubResource("NoiseTexture2D_0fj4d")
+shader_parameter/noise1 = SubResource("NoiseTexture2D_2he7o")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_yqt4y")
+shader_parameter/normal_noise = SubResource("NoiseTexture2D_t02ii")
