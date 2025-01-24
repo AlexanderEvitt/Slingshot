@@ -168,6 +168,7 @@ near = 0.001
 
 [node name="Starfield" type="MeshInstance3D" parent="Spacecraft/NarrowCam"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5000)
+visible = false
 mesh = SubResource("QuadMesh_ors1q")
 
 [node name="player_ship" parent="Spacecraft" instance=ExtResource("3_r7nlu")]
@@ -177,7 +178,7 @@ transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 environment = ExtResource("4_n8kbm")
 
 [node name="Sun" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 122.738, -18295.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10000)
 script = ExtResource("4_xwbd5")
 body = "SUN"
 
