@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://u2ftip315spg"]
+
+[ext_resource type="Shader" path="res://scenes/external/starfield.gdshader" id="1_erejg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_erejg")
+shader_parameter/grid_density = 1.0
+shader_parameter/cutoff = 0.05
+shader_parameter/star_bias = 1.33
+shader_parameter/debug = false

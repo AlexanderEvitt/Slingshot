@@ -1,7 +1,8 @@
-[gd_scene load_steps=58 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=59 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/resetter.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/spacecraft_inheritor.gd" id="1_bkkxk"]
+[ext_resource type="Material" uid="uid://u2ftip315spg" path="res://scenes/external/starfield_material.tres" id="3_hi125"]
 [ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/PlayerShip.tscn" id="3_r7nlu"]
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="4_n8kbm"]
@@ -26,7 +27,9 @@
 [ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="19_7nri8"]
 [ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_me3ap"]
+[sub_resource type="QuadMesh" id="QuadMesh_ors1q"]
+material = ExtResource("3_hi125")
+size = Vector2(20000, 20000)
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
 radius = 700.0
@@ -153,7 +156,7 @@ albedo_texture = ExtResource("17_n5xr7")
 script = ExtResource("1_5ri2s")
 
 [node name="Spacecraft" type="Node3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, -88.7469)
+transform = Transform3D(0.21303, 0, -0.977046, 0, 1, 0, 0.977046, 0, 0.21303, 0, 0, -88.7469)
 script = ExtResource("1_bkkxk")
 
 [node name="NarrowCam" type="Camera3D" parent="Spacecraft"]
@@ -163,9 +166,9 @@ fov = 37.8493
 size = 2.0
 near = 0.001
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Spacecraft/NarrowCam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4702, 0, 0)
-mesh = SubResource("ArrayMesh_me3ap")
+[node name="Starfield" type="MeshInstance3D" parent="Spacecraft/NarrowCam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5000)
+mesh = SubResource("QuadMesh_ors1q")
 
 [node name="player_ship" parent="Spacecraft" instance=ExtResource("3_r7nlu")]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
