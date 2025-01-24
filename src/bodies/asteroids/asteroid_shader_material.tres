@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://5tnmi7cufisf"]
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://5tnmi7cufisf"]
 
 [ext_resource type="Shader" path="res://bodies/asteroids/asteroid.gdshader" id="1_5v6io"]
 [ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="2_swfl3"]
@@ -17,17 +17,24 @@ frequency = 0.004
 seamless = true
 noise = SubResource("FastNoiseLite_fxrop")
 
+[sub_resource type="Gradient" id="Gradient_ucdfj"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8gy3a"]
+gradient = SubResource("Gradient_ucdfj")
+
 [resource]
 render_priority = 0
 shader = ExtResource("1_5v6io")
 shader_parameter/intensity1 = 0.5
 shader_parameter/intensity2 = 0.2
 shader_parameter/intensity3 = 0.0
-shader_parameter/crater_seed = 1.0
+shader_parameter/crater_seed = 5.0
 shader_parameter/crater_wall_width = 0.01
-shader_parameter/crater_depth = 0.97
-shader_parameter/num_craters = 200
-shader_parameter/crater_bias = 4.0
+shader_parameter/crater_depth = 0.98
+shader_parameter/num_craters = 20
+shader_parameter/crater_bias = 1.0
+shader_parameter/pole_margin = 0.1
 shader_parameter/main_texture = ExtResource("2_swfl3")
 shader_parameter/noise1 = SubResource("NoiseTexture2D_2he7o")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_yqt4y")
+shader_parameter/palette = SubResource("GradientTexture1D_8gy3a")
