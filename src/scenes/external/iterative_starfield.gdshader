@@ -21,7 +21,7 @@ void sky() {
 
         // Complex color calculation
 		vec2 grid_coords = fract(SKY_COORDS*grid_density);
-		
+
 		for (int i = 0; i < num_stars; i++)
 		{
 			float seed = rand(float(i));
@@ -30,10 +30,10 @@ void sky() {
 				col = vec4(bias(seed,pow(10.0,star_bias)));
 			}
 		}
-		
+
 		//col = vec4(bias(rand(grid_coords.x + grid_coords.y),pow(10.0,star_bias)));
-        
-		
+
+
 		if (debug) {
 			COLOR.xy = grid_coords;
 			ALPHA = 1.0;

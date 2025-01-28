@@ -156,11 +156,11 @@ albedo_texture = ExtResource("17_n5xr7")
 script = ExtResource("1_5ri2s")
 
 [node name="Spacecraft" type="Node3D" parent="."]
-transform = Transform3D(0.21303, 0, -0.977046, 0, 1, 0, 0.977046, 0, 0.21303, 0, 0, -88.7469)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -88.7469)
 script = ExtResource("1_bkkxk")
 
 [node name="NarrowCam" type="Camera3D" parent="Spacecraft"]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0.0192825, 0)
+transform = Transform3D(-0.486335, -0.298848, 0.821077, 0, 0.939693, 0.34202, -0.873772, 0.166337, -0.457006, 0.100431, 0.0486755, -0.0440385)
 current = true
 fov = 37.8493
 size = 2.0

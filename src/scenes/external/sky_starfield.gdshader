@@ -20,10 +20,10 @@ void sky() {
         // Complex color calculation
 		vec2 grid_coords = fract(SKY_COORDS*grid_density);
 		//grid_coords = round(n*grid_coords)/n;
-		
+
 		col = vec4(bias(rand(grid_coords.x + grid_coords.y),pow(10.0,star_bias)));
-        
-		
+
+
 		if (debug) {
 			COLOR.xy = grid_coords;
 			ALPHA = 1.0;

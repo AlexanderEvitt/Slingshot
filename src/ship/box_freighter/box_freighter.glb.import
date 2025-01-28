@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bv178rd4kr5kv"
-path="res://.godot/imported/player_ship.glb-f13e653ae80245c587357fb3dbc04298.scn"
+uid="uid://ck1ar75bhh6"
+path="res://.godot/imported/box_freighter.glb-f1097426f0ca0211b2626f19ec7cf705.scn"
 
 [deps]
 
-source_file="res://ship/player_ship.glb"
-dest_files=["res://.godot/imported/player_ship.glb-f13e653ae80245c587357fb3dbc04298.scn"]
+source_file="res://ship/box_freighter/box_freighter.glb"
+dest_files=["res://.godot/imported/box_freighter.glb-f1097426f0ca0211b2626f19ec7cf705.scn"]
 
 [params]
 

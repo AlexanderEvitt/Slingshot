@@ -36,4 +36,4 @@ func call_thruster(t):
 	var unit = 2*Vector3(1,1,1)
 	if t > cutoff:
 		visible = true
-		scale = sqrt(abs(t))*unit
+		#scale = sqrt(abs(t))*unit
