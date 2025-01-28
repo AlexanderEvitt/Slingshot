@@ -112,13 +112,14 @@ transform = Transform3D(6.12323e-17, 1, -6.12323e-17, 0, 6.12323e-17, 1, 1, -6.1
 [node name="CameraRotator" type="Node3D" parent="Spacecraft/Pointer/CameraRig"]
 
 [node name="Camera3D" type="Camera3D" parent="Spacecraft/Pointer/CameraRig/CameraRotator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 fov = 90.0
 far = 1e+10
 script = ExtResource("3_snx6t")
 zoom_distance = 0.5
 
 [node name="placeholder" parent="Spacecraft/Pointer" instance=ExtResource("3_0dbvy")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
 [node name="Plotter" type="Node3D" parent="Spacecraft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)

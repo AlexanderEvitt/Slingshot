@@ -22,10 +22,10 @@ void fragment() {
 		vec4 world = INV_VIEW_MATRIX*vec4(normalize(VIEW),0.0);
 		vec2 grid_coords = fract(-world.xy*grid_density);
 		//grid_coords = world.xy;
-		
+
 		col = vec4(bias(rand(grid_coords.x + grid_coords.y),pow(10.0,star_bias)));
-        
-		
+
+
 		if (debug) {
 			ALBEDO.xy = grid_coords;
 			ALPHA = 1.0;
