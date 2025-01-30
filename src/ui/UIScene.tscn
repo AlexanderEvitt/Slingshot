@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="6_mdjyt"]
 [ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="6_mguog"]
 [ext_resource type="PackedScene" uid="uid://j7weec3kdnqh" path="res://scenes/attitude/AttitudeScene.tscn" id="7_gsnns"]
-[ext_resource type="Texture2D" uid="uid://dwuoceh81gph6" path="res://visuals/Logo.png" id="8_05j2h"]
 [ext_resource type="PackedScene" uid="uid://co1ql607hc2v5" path="res://ui/gauge.tscn" id="8_qhpct"]
 [ext_resource type="Script" path="res://ui/gauge_writer.gd" id="8_ua3ya"]
 [ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="8_xpkhs"]
@@ -27,6 +26,7 @@
 [ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="20_8neim"]
 [ext_resource type="Script" path="res://ui/alert_handler.gd" id="25_0qaij"]
 [ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="25_hjwfr"]
+[ext_resource type="Texture2D" uid="uid://7hgrhmpmxd2r" path="res://visuals/logo/compact.png" id="27_4kbmg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -134,7 +134,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1452, 839)
 render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="HBoxContainer/Screen/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
@@ -1706,13 +1706,13 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
 [node name="Spacer" type="Panel" parent="HBoxContainer/Sidebar"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
+size_flags_stretch_ratio = 0.4
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Sidebar"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
-texture = ExtResource("8_05j2h")
+texture = ExtResource("27_4kbmg")
 expand_mode = 2
 stretch_mode = 4
 
