@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://drs7rf6n0y5ok"]
+[gd_scene load_steps=8 format=3 uid="uid://drs7rf6n0y5ok"]
 
 [ext_resource type="Texture2D" uid="uid://cnmcxhf1m3d0f" path="res://visuals/thruster_plume.png" id="1_c4cgl"]
 [ext_resource type="Shader" path="res://visuals/thruster.gdshader" id="1_splox"]
@@ -10,9 +10,14 @@ top_radius = 0.02
 bottom_radius = 0.0
 height = 0.05
 radial_segments = 32
-rings = 0
+rings = 8
 cap_top = false
 cap_bottom = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7a7bl"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uhois"]
+noise = SubResource("FastNoiseLite_7a7bl")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7htbn"]
 render_priority = 0
@@ -20,6 +25,7 @@ shader = ExtResource("1_splox")
 shader_parameter/fresnel_factor = 1.0
 shader_parameter/fresnel_amplification = 1.0
 shader_parameter/fresnel_power = 4.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_uhois")
 shader_parameter/textured = ExtResource("1_c4cgl")
 
 [node name="Thruster1" type="Node3D"]
