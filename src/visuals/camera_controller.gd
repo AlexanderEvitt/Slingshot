@@ -5,8 +5,10 @@ extends Camera3D
 
 @export var zoom_distance := 30.0
 var zoom_speed := 1.2
-var zoom_min := 7.0
+@export var zoom_min := 7.0
 var zoom_max := 2000000.0
+
+@export var super_zoom := false
 
 var rotation_speed := 0.0001
 var r := false
@@ -20,6 +22,12 @@ var i = 3
 
 func _ready():
 	viewer = get_viewport().get_parent()
+	
+	# editor doesn't let you set really small values
+	if super_zoom:
+		near = near/1000
+		zoom_min = zoom_min/1000
+		
 
 func _process(_delta):
 	if viewer.is_visible_in_tree():
