@@ -1735,7 +1735,7 @@ cam_index = 1
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(1920, 1080)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="CamRoot" parent="FPVUI/FPVUI/SubViewport" instance=ExtResource("6_mdjyt")]
 

@@ -63,7 +63,7 @@ rings = 128
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imlac"]
 albedo_texture = ExtResource("4_eafgx")
-roughness = 0.34
+roughness = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_282r8"]
 radius = 6.38
@@ -183,10 +183,10 @@ transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 fov = 60.0
 near = 0.01
-far = 1000.0
+far = 10000.0
 script = ExtResource("5_17hwb")
 zoomable = true
-zoom_distance = 1.0
+zoom_distance = 0.1
 zoom_min = 0.01
 super_zoom = true
 
@@ -255,12 +255,11 @@ transform = Transform3D(2, 0, 0, 0, 1.22465e-16, 2, 0, -2, 1.22465e-16, 0, 0, 0)
 planet_radius = 6.37
 atmosphere_height = 0.1
 sun_path = NodePath("../../../Sun/SunLight")
-shader_params/u_density = 4.0
-shader_params/u_scattering_strength = 1.0
+shader_params/u_density = 2.0
+shader_params/u_scattering_strength = 2.0
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="Clouds" type="MeshInstance3D" parent="Earth/EarthMesh"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_282r8")
 skeleton = NodePath("../..")
