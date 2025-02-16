@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=64 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
@@ -21,11 +21,13 @@
 [ext_resource type="Texture2D" uid="uid://dggsu48bwuw4l" path="res://bodies/photo/EarthClouds.png" id="14_t6djw"]
 [ext_resource type="Texture2D" uid="uid://bn8rqk76ahe07" path="res://bodies/photo/VenusTrue.jpg" id="15_k1fbk"]
 [ext_resource type="PackedScene" uid="uid://br774l8co4lju" path="res://bodies/photo/rings.tscn" id="15_qf8i2"]
+[ext_resource type="Shader" path="res://scenes/external/nightlights.gdshader" id="16_dj8m5"]
 [ext_resource type="Texture2D" uid="uid://df6jgthy17fmr" path="res://bodies/photo/EarthLights.png" id="16_q5465"]
 [ext_resource type="Texture2D" uid="uid://blf5ecvkcenvs" path="res://bodies/photo/UranusTrue.jpg" id="16_uf3kr"]
 [ext_resource type="Texture2D" uid="uid://0mbuhbs1qkqu" path="res://bodies/photo/IoTrue.jpg" id="17_gcb48"]
 [ext_resource type="Texture2D" uid="uid://bh21nouyh0k42" path="res://bodies/photo/NeptuneTrue.jpg" id="17_n5xr7"]
 [ext_resource type="Script" path="res://bodies/moon.gd" id="18_acntg"]
+[ext_resource type="Script" path="res://scenes/external/nightlights.gd" id="18_elqqx"]
 [ext_resource type="Texture2D" uid="uid://bf0o1r3dwo25y" path="res://bodies/photo/CallistoTrue.jpg" id="18_ufqw4"]
 [ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="19_7nri8"]
 [ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
@@ -76,15 +78,12 @@ transparency = 1
 blend_mode = 1
 albedo_texture = ExtResource("14_t6djw")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_unyvo"]
-transparency = 1
-blend_mode = 1
-albedo_texture = ExtResource("16_q5465")
-emission_enabled = true
-emission = Color(1, 0.74902, 0, 1)
-emission_energy_multiplier = 0.2
-emission_operator = 1
-emission_texture = ExtResource("16_q5465")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ptrw"]
+render_priority = 0
+shader = ExtResource("16_dj8m5")
+shader_parameter/emission_color = Color(1, 0.74902, 0, 1)
+shader_parameter/sun_dir = Vector3(0, 0, -1)
+shader_parameter/lights_texture = ExtResource("16_q5465")
 
 [sub_resource type="SphereMesh" id="SphereMesh_6xnwu"]
 radius = 1740.0
@@ -287,10 +286,12 @@ mesh = SubResource("SphereMesh_282r8")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
 
-[node name="Lights" type="MeshInstance3D" parent="Earth/EarthMesh"]
+[node name="Lights" type="MeshInstance3D" parent="Earth/EarthMesh" node_paths=PackedStringArray("sun_path")]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_282r8")
-surface_material_override/0 = SubResource("StandardMaterial3D_unyvo")
+surface_material_override/0 = SubResource("ShaderMaterial_1ptrw")
+script = ExtResource("18_elqqx")
+sun_path = NodePath("../../../Sun")
 
 [node name="Earthshine" type="OmniLight3D" parent="Earth"]
 light_color = Color(0.764073, 0.840415, 1, 1)
