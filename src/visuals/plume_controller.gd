@@ -5,7 +5,7 @@ var tail
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tail = get_node("Tail")
+	tail = get_node("Tail").get_active_material(0)
 	chamber = get_node("ThrustChamber")
 
 
@@ -13,6 +13,6 @@ func _ready():
 func _process(_delta):
 	if OwnShip.thrust > 0:
 		visible = true
-		tail.scale.x = OwnShip.thrust/0.05
+		tail.set_shader_parameter("alpha_intensity_factor",0.05/OwnShip.thrust)
 	else:
 		visible = false

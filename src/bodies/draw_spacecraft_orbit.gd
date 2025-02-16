@@ -13,7 +13,7 @@ var line_instance = MeshInstance3D.new()
 var initial_planet_pos : Vector3
 var original_traj_pos : Vector3
 
-func _process(_delta):
+func _process(delta):
 	# Only update when new positions are provided
 	if old_positions != positions:
 		if positions != null:
@@ -31,7 +31,8 @@ func _process(_delta):
 			draw(self,line_instance)
 			
 			# Set position to spacecraft's position
-			original_traj_pos = get_parent().position
+			original_traj_pos = OwnShip.position
+			line_instance.position = Vector3(0,0,0)
 			
 			# Record position of planet
 			initial_planet_pos = Conversions.FindFrame(SystemTime.t)
@@ -43,4 +44,4 @@ func _process(_delta):
 	
 	# Move by how much the ref frame has moved since traj drawn
 	if line_instance != null:
-		line_instance.position = -(OwnShip.position - original_traj_pos) + (Conversions.FindFrame(SystemTime.t) - initial_planet_pos)
+		line_instance.position -= Conversions.VelToFrame(OwnShip.velocity, SystemTime.t)*delta*SystemTime.step

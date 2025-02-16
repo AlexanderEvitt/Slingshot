@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://n78uivx6mb2"]
+[gd_scene load_steps=6 format=3 uid="uid://n78uivx6mb2"]
 
 [ext_resource type="PackedScene" uid="uid://231jhr4hx8d6" path="res://ui/UIScene.tscn" id="1_yhthj"]
 [ext_resource type="Script" path="res://ship/ship_calculator.gd" id="2_11ed2"]
+[ext_resource type="Script" path="res://bodies/planet.cs" id="2_56nas"]
 [ext_resource type="Script" path="res://ship/attitude.gd" id="3_kr225"]
 [ext_resource type="Script" path="res://ship/Propagator.cs" id="4_1p6cq"]
 
@@ -10,6 +11,65 @@
 [node name="Control" parent="." instance=ExtResource("1_yhthj")]
 
 [node name="Planets" type="Node" parent="."]
+
+[node name="Sun" type="Node3D" parent="Planets" groups=["Bodies"]]
+script = ExtResource("2_56nas")
+body = "SUN"
+GM = 1.32712e+11
+
+[node name="Mercury" type="Node3D" parent="Planets" groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
+script = ExtResource("2_56nas")
+body = "MERCURY"
+GM = 22032.0
+
+[node name="Venus" type="Node3D" parent="Planets" groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
+script = ExtResource("2_56nas")
+body = "VENUS"
+GM = 324859.0
+
+[node name="Earth" type="Node3D" parent="Planets" groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 0, 0)
+script = ExtResource("2_56nas")
+body = "EARTH"
+GM = 398600.0
+
+[node name="Luna" type="Node3D" parent="Planets" groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 12989.3)
+script = ExtResource("2_56nas")
+body = "MOON"
+GM = 4904.87
+
+[node name="Mars" type="Node3D" parent="Planets" groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
+script = ExtResource("2_56nas")
+body = "MARS BARYCENTER"
+GM = 42828.4
+
+[node name="Jupiter" type="Node3D" parent="Planets" groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
+script = ExtResource("2_56nas")
+body = "JUPITER BARYCENTER"
+GM = 1.26687e+08
+
+[node name="Saturn" type="Node3D" parent="Planets" groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
+script = ExtResource("2_56nas")
+body = "SATURN BARYCENTER"
+GM = 3.79312e+07
+
+[node name="Uranus" type="Node3D" parent="Planets" groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 580869, 0, 0)
+script = ExtResource("2_56nas")
+body = "URANUS BARYCENTER"
+GM = 5.79394e+06
+
+[node name="Neptune" type="Node3D" parent="Planets" groups=["Bodies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
+script = ExtResource("2_56nas")
+body = "NEPTUNE BARYCENTER"
+GM = 6.83653e+06
 
 [node name="Ships" type="Node" parent="."]
 

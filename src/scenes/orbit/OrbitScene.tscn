@@ -99,7 +99,7 @@ script = ExtResource("1_sj5o8")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aovhe")
 
-[node name="Sun" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Sun" type="Node3D" parent="."]
 script = ExtResource("1_xfjlq")
 body = "SUN"
 GM = 1.32712e+11
@@ -126,7 +126,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Mercury" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Mercury" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "MERCURY"
@@ -156,7 +156,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Venus" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Venus" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "VENUS"
@@ -186,7 +186,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Earth" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Earth" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "EARTH"
@@ -217,7 +217,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Luna" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Luna" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 12989.3)
 script = ExtResource("1_xfjlq")
 body = "MOON"
@@ -255,7 +255,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Mars" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Mars" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "MARS BARYCENTER"
@@ -285,7 +285,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Jupiter" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Jupiter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "JUPITER BARYCENTER"
@@ -483,7 +483,7 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Saturn" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Saturn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "SATURN BARYCENTER"
@@ -556,7 +556,7 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Uranus" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Uranus" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 580869, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "URANUS BARYCENTER"
@@ -586,7 +586,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Neptune" type="Node3D" parent="." groups=["Bodies"]]
+[node name="Neptune" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "NEPTUNE BARYCENTER"

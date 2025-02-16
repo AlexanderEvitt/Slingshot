@@ -182,7 +182,7 @@ near = 0.01
 far = 1e+07
 
 [node name="CameraRig" type="Node3D" parent="Spacecraft"]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
+transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
 
 [node name="CameraRotator" type="Node3D" parent="Spacecraft/CameraRig"]
 
