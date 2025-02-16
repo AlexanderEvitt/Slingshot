@@ -278,7 +278,7 @@ planet_radius = 6371.0
 atmosphere_height = 50.0
 sun_path = NodePath("../../../Sun/SunLight")
 shader_params/u_density = 0.1
-shader_params/u_scattering_strength = 1.0
+shader_params/u_scattering_strength = 2.0
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="Clouds" type="MeshInstance3D" parent="Earth/EarthMesh"]

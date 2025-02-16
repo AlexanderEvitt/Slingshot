@@ -53,3 +53,10 @@ r = 10; % m
 h = 30; % m
 v_tank = pi*(r^2)*h + (4/3)*pi*r^3;
 v_tank/v_deuterium
+
+%% Brightness and thermals
+percent_emmitted = 0.05;
+wattage = percent_emmitted*E*m_fuel / tb;
+dist = 74000000;
+flux = wattage/(4*pi*dist^2);
+flux/1400 % in percent of solar irradiance at 1AU

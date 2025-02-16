@@ -12,12 +12,15 @@ func _ready():
 	
 	var cam = spacecraft.get_node("CameraRig/CameraRotator/Camera3D")
 	cam.zoomable = zoomable
+	if !zoomable:
+		cam.get_parent().get_parent().rotation.z = 0 # changes orientation for attitude view
 	# zoomable and unzoomable dist is set in the camera settings
 	
-	if !planet_orbits:
-		var orbits = get_tree().get_nodes_in_group("BodyOrbit")
-		for o in orbits:
-			o.visible = false
+	# Set orbits on or off
+	#if !planet_orbits:
+	#	var orbits = self.get_nodes_in_group("BodyOrbit")
+	#	for o in orbits:
+	#		o.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
