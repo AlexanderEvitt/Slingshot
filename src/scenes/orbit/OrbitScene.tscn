@@ -343,7 +343,7 @@ horizontal_alignment = 0
 script = ExtResource("5_vmpxk")
 period = 1.769
 color = Color(1, 0.6, 0, 1)
-visible_distance = 2000
+visible_distance = 2000000
 relative_to = NodePath("../..")
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Io"]
@@ -385,7 +385,7 @@ horizontal_alignment = 0
 script = ExtResource("5_vmpxk")
 period = 16.689
 color = Color(0.52549, 0.239216, 0.290196, 1)
-visible_distance = 2000
+visible_distance = 2000000
 relative_to = NodePath("../..")
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Callisto"]
@@ -427,7 +427,7 @@ horizontal_alignment = 0
 script = ExtResource("5_vmpxk")
 period = 3.551
 color = Color(0, 0.368627, 0, 1)
-visible_distance = 2000
+visible_distance = 2000000
 relative_to = NodePath("../..")
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Europa"]
@@ -470,7 +470,7 @@ horizontal_alignment = 0
 script = ExtResource("5_vmpxk")
 period = 7.154
 color = Color(0.560784, 0.560784, 0.560784, 1)
-visible_distance = 2000
+visible_distance = 2000000
 relative_to = NodePath("../..")
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Ganymede"]
@@ -543,7 +543,7 @@ horizontal_alignment = 0
 script = ExtResource("5_vmpxk")
 period = 15.945
 color = Color(0.890196, 0.643137, 0.25098, 1)
-visible_distance = 2000
+visible_distance = 2000000
 relative_to = NodePath("../..")
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="Saturn/Titan"]

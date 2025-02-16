@@ -25,8 +25,3 @@ void fragment() {
 	float c = star_bloom*bias(rand(UV.x),star_bias);
 	ALBEDO = vec3(c);
 }
-
-//void light() {
-	// Called for every pixel for every light affecting the material.
-	// Uncomment to replace the default light processing function with this one.
-//}

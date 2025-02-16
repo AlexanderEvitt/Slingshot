@@ -12,7 +12,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	position = calculate_self_position(SystemTime.t)/1000
+	position = calculate_self_position(SystemTime.t)
 
 func fetch(time):
 	return parent_body.fetch(time) + calculate_self_position(time)
