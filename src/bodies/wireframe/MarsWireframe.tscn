@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cqyvfyk7jx1io" path="res://bodies/wireframe/MarsWireframe.png" id="2_4pith"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_ff6as"]
-radius = 3.396
-height = 6.792
+radius = 3396.0
+height = 6792.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj3da"]
 render_priority = 0

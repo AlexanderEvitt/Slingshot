@@ -9,6 +9,9 @@ var positions
 var old_positions = positions
 var line_instance = MeshInstance3D.new()
 
+# Variables for shifting traj
+var initial_planet_pos : Vector3
+var original_traj_pos : Vector3
 
 func _process(_delta):
 	# Only update when new positions are provided
@@ -25,15 +28,19 @@ func _process(_delta):
 				line_instance = line(positions.slice(0,positions.size(),slicer), color, squashed)
 			else:
 				line_instance = line(positions, color, squashed)
-			draw(line_instance)
+			draw(self,line_instance)
+			
+			# Set position to spacecraft's position
+			original_traj_pos = get_parent().position
+			
+			# Record position of planet
+			initial_planet_pos = Conversions.FindFrame(SystemTime.t)
 			
 			old_positions = positions
 		elif line_instance != null:
 			# If positions become null, remove the line
 			undraw(line_instance)
 	
-	# Move with the spacecraft
+	# Move by how much the ref frame has moved since traj drawn
 	if line_instance != null:
-		line_instance.position = get_parent().position
-		
-	# Refactor this to add children to spacecraft node instead of under the viewport?
+		line_instance.position = -(OwnShip.position - original_traj_pos) + (Conversions.FindFrame(SystemTime.t) - initial_planet_pos)

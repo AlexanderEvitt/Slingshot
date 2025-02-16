@@ -36,6 +36,7 @@ public partial class Conversions : Node
 		planet body = (planet)body_node;
 		for (int i = 0; i < positions.Count; i++)
 		{
+			// Subtract how much the ref body moves between the start of the array and the current time step
 			new_positions[i] = positions[i] - positions[0] - body.fetch(times[i]) + body.fetch(times[0]);
 		}
 		return new_positions;

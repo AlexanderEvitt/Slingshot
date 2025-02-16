@@ -5,8 +5,8 @@
 [ext_resource type="Shader" path="res://ship/Sobel.gdshader" id="3_teebj"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_p4pre"]
-radius = 60.268
-height = 120.536
+radius = 60268.0
+height = 120536.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x66m2"]
 render_priority = 0
@@ -17,8 +17,8 @@ shader_parameter/fresnel_power = 2.0
 shader_parameter/textured = ExtResource("2_f1dgr")
 
 [sub_resource type="TorusMesh" id="TorusMesh_ehbfc"]
-inner_radius = 67.3
-outer_radius = 140.3
+inner_radius = 67300.0
+outer_radius = 140300.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ogf38"]
 render_priority = 0

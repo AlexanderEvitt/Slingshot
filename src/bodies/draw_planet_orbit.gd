@@ -21,9 +21,13 @@ func _process(_delta):
 	
 	
 	var traj = []
+	
+	# Subtract start position of planet
+	var p0 = planet.fetch(SystemTime.t)
+	
 	for i in range(0,n):
 		var t = tc + (indent)*period + ((1 - indent)*period*i/n)
-		var p = planet.fetch(t)
+		var p = planet.fetch(t) - p0
 		
 		# If relative_to exists, subtract its velocity
 		if relative_to != null:
@@ -48,5 +52,5 @@ func _process(_delta):
 			color = Color(color, 0)
 	
 	line_instance = line(traj, color)
-	draw(line_instance)
+	draw(self,line_instance)
  

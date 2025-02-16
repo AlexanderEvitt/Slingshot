@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bscwehof7srnc" path="res://bodies/wireframe/JupiterWireframe.png" id="2_ek1dq"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_qa28d"]
-radius = 71.492
-height = 142.984
+radius = 71492.0
+height = 142984.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ywtfn"]
 render_priority = 0

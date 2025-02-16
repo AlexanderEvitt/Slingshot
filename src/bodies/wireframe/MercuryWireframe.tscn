@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bejuc23sb6x5" path="res://bodies/wireframe/MercuryWireframe.png" id="2_l5qsr"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_8fy0r"]
-radius = 2.44
-height = 4.88
+radius = 2440.0
+height = 4880.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gj30m"]
 render_priority = 0

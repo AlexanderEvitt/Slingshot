@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bgifrw1p56y10" path="res://bodies/wireframe/SaturnWireframe.tscn" id="10_knyqn"]
 [ext_resource type="PackedScene" uid="uid://2q27idy8fbkr" path="res://bodies/wireframe/UranusWireframe.tscn" id="11_nfbts"]
 [ext_resource type="PackedScene" uid="uid://d386uc0phqab7" path="res://bodies/wireframe/NeptuneWireframe.tscn" id="12_cao6q"]
-[ext_resource type="Script" path="res://scenes/orbit/pointer_inheritor.gd" id="13_5liqb"]
+[ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="13_5liqb"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="14_j4d0r"]
 [ext_resource type="Script" path="res://scenes/flat/flat_cam.gd" id="15_cesv4"]
 

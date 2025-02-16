@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=34 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="2_awidn"]
 [ext_resource type="PackedScene" uid="uid://rg5pq75kxwxo" path="res://bodies/wireframe/MercuryWireframe.tscn" id="3_orujh"]
 [ext_resource type="PackedScene" uid="uid://p6o5a3n7q5yl" path="res://bodies/wireframe/VenusWireframe.tscn" id="4_klp4m"]
-[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="4_rnk7r"]
 [ext_resource type="Script" path="res://bodies/draw_planet_orbit.gd" id="5_vmpxk"]
 [ext_resource type="PackedScene" uid="uid://dlxcptlilq2sf" path="res://bodies/wireframe/EarthWireframe.tscn" id="5_wg1iu"]
 [ext_resource type="PackedScene" uid="uid://dhbrnbjd5ry01" path="res://bodies/wireframe/LunaWireframe.tscn" id="6_bom1w"]
@@ -116,28 +115,21 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Sun"]
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " SUN"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
 [node name="Mercury" type="Node3D" parent="." groups=["Bodies"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "MERCURY"
 GM = 22032.0
 
-[node name="MercuryPlotter" type="Node3D" parent="Mercury" groups=["BodyOrbit"]]
+[node name="MercuryPlotter" type="Node3D" parent="Mercury"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 88.0
 color = Color(0.45, 0.28305, 0.2115, 1)
 
 [node name="MercuryMesh" parent="Mercury" instance=ExtResource("3_orujh")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -30501.9, 0, 0)
 
 [node name="FlatPlanetSprite" type="Sprite3D" parent="Mercury"]
 modulate = Color(0.45098, 0.282353, 0.211765, 1)
@@ -146,28 +138,21 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Mercury"]
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " MERCURY"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
 [node name="Venus" type="Node3D" parent="." groups=["Bodies"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 756.163, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "VENUS"
 GM = 324859.0
 
-[node name="VenusPlotter" type="Node3D" parent="Venus" groups=["BodyOrbit"]]
+[node name="VenusPlotter" type="Node3D" parent="Venus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 224.7
 color = Color(0.67, 0.482512, 0.1809, 1)
 
 [node name="VenusMesh" parent="Venus" instance=ExtResource("4_klp4m")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -17299.4, 0, 0)
 
 [node name="FlatPlanetSprite" type="Sprite3D" parent="Venus"]
 modulate = Color(0.670588, 0.482353, 0.180392, 1)
@@ -176,23 +161,14 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Venus"]
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " VENUS"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
 [node name="Earth" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "EARTH"
 GM = 398600.0
 
-[node name="EarthPlotter" type="Node3D" parent="Earth" groups=["BodyOrbit"]]
+[node name="EarthPlotter" type="Node3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.417, 0, 0)
 script = ExtResource("5_vmpxk")
 period = 365.25
 color = Color(0.181977, 0.313911, 0.600695, 1)
@@ -206,16 +182,6 @@ pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
-
-[node name="Label" type="Label3D" parent="Earth"]
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " EARTH"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
 
 [node name="Luna" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 12989.3)
@@ -235,25 +201,13 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Plotter" type="Node3D" parent="Luna" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Luna" node_paths=PackedStringArray("relative_to")]
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 27.3
 color = Color(1, 1, 1, 1)
-visible_distance = 2000000
+visible_distance = 2000
 relative_to = NodePath("../../Earth")
-
-[node name="Label" type="Label3D" parent="Luna"]
-visibility_range_end = 2e+06
-visibility_range_end_margin = 2e+06
-visibility_range_fade_mode = 1
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " LUNA"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
 
 [node name="Mars" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
@@ -261,7 +215,9 @@ script = ExtResource("1_xfjlq")
 body = "MARS BARYCENTER"
 GM = 42828.4
 
-[node name="MarsPlotter" type="Node3D" parent="Mars" groups=["BodyOrbit"]]
+[node name="MarsPlotter" type="Node3D" parent="Mars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 687.0
 color = Color(0.539592, 0.205864, 0.196268, 1)
@@ -275,23 +231,15 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Mars"]
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " MARS"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
 [node name="Jupiter" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "JUPITER BARYCENTER"
 GM = 1.26687e+08
 
-[node name="JupiterPlotter" type="Node3D" parent="Jupiter" groups=["BodyOrbit"]]
+[node name="JupiterPlotter" type="Node3D" parent="Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 4331.0
 color = Color(0.607, 0.0604174, 0.245852, 1)
@@ -305,16 +253,6 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Jupiter"]
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " JUPITER"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
 [node name="Io" type="Node3D" parent="Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.6)
 script = ExtResource("11_jnixu")
@@ -326,20 +264,8 @@ visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_385ak")
 surface_material_override/0 = SubResource("ShaderMaterial_e0jq5")
 
-[node name="MoonLabel" type="Label3D" parent="Jupiter/Io/BodyMesh"]
-visibility_range_end = 2e+06
-visibility_range_end_margin = 2e+06
-visibility_range_fade_mode = 1
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " IO"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
-[node name="Plotter" type="Node3D" parent="Jupiter/Io" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Jupiter/Io" node_paths=PackedStringArray("relative_to")]
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 1.769
 color = Color(1, 0.6, 0, 1)
@@ -368,20 +294,8 @@ visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_kxpab")
 surface_material_override/0 = SubResource("ShaderMaterial_h4gya")
 
-[node name="MoonLabel" type="Label3D" parent="Jupiter/Callisto/BodyMesh"]
-visibility_range_end = 2e+06
-visibility_range_end_margin = 2e+06
-visibility_range_fade_mode = 1
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " CALLISTO"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
-[node name="Plotter" type="Node3D" parent="Jupiter/Callisto" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Jupiter/Callisto" node_paths=PackedStringArray("relative_to")]
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 16.689
 color = Color(0.52549, 0.239216, 0.290196, 1)
@@ -410,20 +324,8 @@ visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_p12ly")
 surface_material_override/0 = SubResource("ShaderMaterial_j4g1t")
 
-[node name="MoonLabel" type="Label3D" parent="Jupiter/Europa/BodyMesh"]
-visibility_range_end = 2e+06
-visibility_range_end_margin = 2e+06
-visibility_range_fade_mode = 1
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " EUROPA"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
-[node name="Plotter" type="Node3D" parent="Jupiter/Europa" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Jupiter/Europa" node_paths=PackedStringArray("relative_to")]
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 3.551
 color = Color(0, 0.368627, 0, 1)
@@ -453,20 +355,8 @@ visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_2a7sc")
 surface_material_override/0 = SubResource("ShaderMaterial_37qg8")
 
-[node name="MoonLabel" type="Label3D" parent="Jupiter/Ganymede/BodyMesh"]
-visibility_range_end = 2e+06
-visibility_range_end_margin = 2e+06
-visibility_range_fade_mode = 1
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " GANYMEDE"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
-[node name="Plotter" type="Node3D" parent="Jupiter/Ganymede" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Jupiter/Ganymede" node_paths=PackedStringArray("relative_to")]
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 7.154
 color = Color(0.560784, 0.560784, 0.560784, 1)
@@ -484,17 +374,20 @@ fixed_size = true
 texture = ExtResource("2_3t7g4")
 
 [node name="Saturn" type="Node3D" parent="." groups=["Bodies"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266996, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "SATURN BARYCENTER"
 GM = 3.79312e+07
 
-[node name="SaturnPlotter" type="Node3D" parent="Saturn" groups=["BodyOrbit"]]
+[node name="SaturnPlotter" type="Node3D" parent="Saturn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 10747.0
 color = Color(0.405878, 0.319402, 0, 1)
 
 [node name="SaturnMesh" parent="Saturn" instance=ExtResource("9_1qyms")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 82514.8, 0, 0)
 
 [node name="FlatPlanetSprite" type="Sprite3D" parent="Saturn"]
 modulate = Color(0.403922, 0.317647, 0, 1)
@@ -502,16 +395,6 @@ pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
-
-[node name="Label" type="Label3D" parent="Saturn"]
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " SATURN"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
 
 [node name="Titan" type="Node3D" parent="Saturn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.393, 0, 33535.6)
@@ -526,20 +409,8 @@ visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_o4sno")
 surface_material_override/0 = SubResource("ShaderMaterial_m08ws")
 
-[node name="MoonLabel" type="Label3D" parent="Saturn/Titan/TitanMesh"]
-visibility_range_end = 2e+06
-visibility_range_end_margin = 2e+06
-visibility_range_fade_mode = 1
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " TITAN"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
-[node name="Plotter" type="Node3D" parent="Saturn/Titan" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Saturn/Titan" node_paths=PackedStringArray("relative_to")]
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 15.945
 color = Color(0.890196, 0.643137, 0.25098, 1)
@@ -562,7 +433,9 @@ script = ExtResource("1_xfjlq")
 body = "URANUS BARYCENTER"
 GM = 5.79394e+06
 
-[node name="UranusPlotter" type="Node3D" parent="Uranus" groups=["BodyOrbit"]]
+[node name="UranusPlotter" type="Node3D" parent="Uranus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 30589.0
 color = Color(0.354396, 0.696462, 0.973375, 1)
@@ -576,23 +449,15 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Uranus"]
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " URANUS"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
 [node name="Neptune" type="Node3D" parent="." groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
 script = ExtResource("1_xfjlq")
 body = "NEPTUNE BARYCENTER"
 GM = 6.83653e+06
 
-[node name="NeptunePlotter" type="Node3D" parent="Neptune" groups=["BodyOrbit"]]
+[node name="NeptunePlotter" type="Node3D" parent="Neptune"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 741.873, 0, 0)
+top_level = true
 script = ExtResource("5_vmpxk")
 period = 59800.0
 color = Color(0.145, 0.254342, 0.760636, 1)
@@ -606,27 +471,18 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Neptune"]
-pixel_size = 0.0003
-billboard = 1
-fixed_size = true
-text = " NEPTUNE"
-font = ExtResource("4_rnk7r")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
-
 [node name="Spacecraft" type="Node3D" parent="."]
 script = ExtResource("13_xts1l")
 plan = true
-camera_mode = true
 
 [node name="Plotter" type="Node3D" parent="Spacecraft"]
+top_level = true
 script = ExtResource("14_g31x3")
 color = Color(1, 0.690196, 0, 1)
 slice = true
 
 [node name="Planner" type="Node3D" parent="Spacecraft"]
+top_level = true
 script = ExtResource("14_g31x3")
 color = Color(0.552941, 0, 0.552941, 1)
 
@@ -635,14 +491,14 @@ color = Color(0.552941, 0, 0.552941, 1)
 [node name="Ship" parent="Spacecraft/Pointer" instance=ExtResource("18_lxife")]
 
 [node name="CameraRig" type="Node3D" parent="Spacecraft"]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 
 [node name="CameraRotator" type="Node3D" parent="Spacecraft/CameraRig"]
 
 [node name="Camera3D" type="Camera3D" parent="Spacecraft/CameraRig/CameraRotator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
 fov = 60.0
-near = 1.0
+near = 5.0
 far = 1e+10
 script = ExtResource("2_awidn")
 zoomable = true

@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c1ntvlohm28h3" path="res://bodies/wireframe/EarthWireframe.png" id="2_yg1wc"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_2aoqw"]
-radius = 6.371
-height = 12.742
+radius = 6371.0
+height = 12742.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_otisn"]
 render_priority = 0

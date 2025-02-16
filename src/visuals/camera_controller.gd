@@ -3,10 +3,10 @@ extends Camera3D
 @export var zoomable : bool
 @export var reparentable : bool
 
-@export var zoom_distance := 30.0
-var zoom_speed := 1.2
+@export var zoom_distance := 200.0
+var zoom_speed := 1.4
 @export var zoom_min := 7.0
-var zoom_max := 2000000.0
+var zoom_max := 2000000000.0
 
 @export var super_zoom := false
 
@@ -58,7 +58,6 @@ func _process(_delta):
 		if Input.is_action_pressed("mod_right"):
 			yaw = yaw + 100*rotation_speed
 			set_orientation()
-	
 
 
 func _unhandled_input(event):

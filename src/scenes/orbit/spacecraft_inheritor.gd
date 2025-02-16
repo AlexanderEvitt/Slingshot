@@ -4,8 +4,11 @@ var plotter
 var pointer
 var planner
 
+var scaledown = 1
+
 @export var plan : bool
 @export var smashed : bool
+@export var camera_mode : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,8 +20,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pointer.transform.basis = OwnShip.attitude
-	position = OwnShip.position/1000
+	# Use camera mode to determine whether camera is included in rotation
+	if camera_mode:
+		pointer.transform.basis = OwnShip.attitude
+	else:
+		transform.basis = OwnShip.attitude
+	position = OwnShip.position/scaledown
 	if smashed:
 		position.z = 0
 	

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://46s3bcs5voeb"
-path.s3tc="res://.godot/imported/EarthClouds.jpg-660af0a8e491d558b41858e1b00a692e.s3tc.ctex"
+uid="uid://dggsu48bwuw4l"
+path.s3tc="res://.godot/imported/EarthClouds.png-ee7e7f5fd052510f793f44d5690cd6c2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://bodies/photo/EarthClouds.jpg"
-dest_files=["res://.godot/imported/EarthClouds.jpg-660af0a8e491d558b41858e1b00a692e.s3tc.ctex"]
+source_file="res://bodies/photo/EarthClouds.png"
+dest_files=["res://.godot/imported/EarthClouds.png-ee7e7f5fd052510f793f44d5690cd6c2.s3tc.ctex"]
 
 [params]
 

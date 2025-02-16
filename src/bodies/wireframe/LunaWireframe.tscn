@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b15fig8tkggfw" path="res://bodies/wireframe/LunaWireframe.png" id="2_d2w4h"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_55l57"]
-radius = 1.74
-height = 3.48
+radius = 1740.0
+height = 3480.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rl5ox"]
 render_priority = 0

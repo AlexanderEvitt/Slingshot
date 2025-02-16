@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="2_kq1xt"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_t3fbd"]
-radius = 25.559
-height = 51.118
+radius = 25559.0
+height = 51118.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f32hx"]
 render_priority = 0

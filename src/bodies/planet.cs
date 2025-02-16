@@ -13,7 +13,7 @@ public partial class planet : Node3D
 	public string body;
 	[Export]
 	public double GM;
-	double scaledown = 1e3d;
+	double scaledown = 1d;
 	public double time_initial;
 
 
@@ -52,7 +52,7 @@ public partial class planet : Node3D
 	public override void _Process(double delta)
 	{
 		t = SystemTime.Instance.t;
-		Position = fetch(t)/1000d;
+		Position = fetch(t)/scaledown;
 	}
 
 	public Vector3 fetch(double time)
