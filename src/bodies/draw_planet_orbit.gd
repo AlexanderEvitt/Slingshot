@@ -5,20 +5,29 @@ extends Drawer
 @export var smashed: bool
 @export var visible_distance = 0
 var c = 0
-var n = 64.0
+var n = 48
 var indent = 0.0
 var tc = 0
 var line_instance = MeshInstance3D.new()
 var planet
 @export var relative_to: Node3D
 
+var accumulator = 1e99 # so that all orbits are calculated in the first frame
+
 func _ready():
 	period = period*24*60*60
 	planet = get_parent()
 
 func _process(_delta):
+	# Only refresh when more time has elapsed than 1/1e6 of a period
+	accumulator += SystemTime.step*0.03333;
+	if accumulator > period/1e6: # <= how many times the orbit is redrawn per orbit
+		refresh_traj()
+		accumulator = 0
+		
+
+func refresh_traj():
 	tc = SystemTime.t;
-	
 	
 	var traj = []
 	

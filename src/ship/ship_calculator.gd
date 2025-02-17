@@ -81,7 +81,7 @@ func _process(delta):
 		
 	
 	
-func integrate_normally(delta):
+func integrate_normally(_delta):
 	# Change throttle setting
 	if Input.is_action_just_pressed("full_throttle"):
 		thrust = 0.05
@@ -98,12 +98,9 @@ func integrate_normally(delta):
 	var prev_acceleration = thrust*attitude.x + prev_gravity
 	var acceleration = thrust*attitude.x + gravity
 	
-	var planet = get_parent().get_parent().get_node("Planets/Earth")
 	# Calculate updated position and velocity through Verlet integration
 	position = position + velocity*dt# + 0.5*prev_acceleration*previous_dt**2
 	velocity = velocity + 1*(0*acceleration+prev_acceleration)*dt
-	
-	print(SystemTime.t,",",(position - planet.position).x)
 
 func find_time_index(times,time):
 	var index = 0

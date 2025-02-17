@@ -86,4 +86,4 @@ script = ExtResource("3_kr225")
 
 [node name="Propagator" type="Node3D" parent="Ships/OwnShip"]
 script = ExtResource("4_1p6cq")
-n = 800
+n = 400
