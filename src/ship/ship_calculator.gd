@@ -88,7 +88,7 @@ func integrate_normally(delta):
 	if Input.is_action_just_pressed("cut_throttle"):
 		thrust = 0
 	
-	var dt = SystemTime.step*delta; # assumes 30 fps, replace with delta
+	var dt = SystemTime.step*0.03333; # assumes 30 fps, replace with delta
 	
 	# Somehow get the acceleration from gravity in here
 	var prev_gravity = propagator.Acceleration(position,SystemTime.prev_t)
