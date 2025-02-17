@@ -32,6 +32,9 @@ var planned_acceleration
 signal auto_disc
 signal nav_disc
 
+var previous_dt = 0.03333
+var previous_t = 0
+
 
 # this module moves data from the master scene an autoload where others can access it
 
@@ -85,19 +88,22 @@ func integrate_normally(delta):
 	if Input.is_action_just_pressed("cut_throttle"):
 		thrust = 0
 	
-	var dt = SystemTime.step*delta; # multiply by SystemTime.step if Engine.timescale isn't scaled
+	var dt = SystemTime.step*delta; # assumes 30 fps, replace with delta
 	
 	# Somehow get the acceleration from gravity in here
+	var prev_gravity = propagator.Acceleration(position,SystemTime.prev_t)
 	var gravity = propagator.Acceleration(position,SystemTime.t)
-	var next_gravity = propagator.Acceleration(position,SystemTime.t + dt)
 	
 	# Calculate acceleration on vehicle
+	var prev_acceleration = thrust*attitude.x + prev_gravity
 	var acceleration = thrust*attitude.x + gravity
-	var next_acceleration = thrust*attitude.x + next_gravity
 	
+	var planet = get_parent().get_parent().get_node("Planets/Earth")
 	# Calculate updated position and velocity through Verlet integration
-	position = position + velocity*dt + 0.5*acceleration*dt**2
-	velocity = velocity + 0.5*(acceleration+next_acceleration)*dt
+	position = position + velocity*dt# + 0.5*prev_acceleration*previous_dt**2
+	velocity = velocity + 1*(0*acceleration+prev_acceleration)*dt
+	
+	print(SystemTime.t,",",(position - planet.position).x)
 
 func find_time_index(times,time):
 	var index = 0

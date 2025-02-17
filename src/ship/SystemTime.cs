@@ -7,6 +7,7 @@ public partial class SystemTime : Node
 
 	public int t0 = 0;
 	public double t { get; set; }
+	public double prev_t {get; set; }
 	public double step = 0.0f;
 	public double[] steps;
 	public int i = 1;
@@ -15,6 +16,7 @@ public partial class SystemTime : Node
 	public override void _Ready()
 	{
 		t = 0;
+		prev_t = 0;
 		Instance = this;
 
 		steps = new double[] {0.0d,1.0d,10.0d,100.0d,1000.0d,10000.0d,100000.0d,1000000.0d,10000000.0d};
@@ -23,8 +25,10 @@ public partial class SystemTime : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		prev_t = t;
 		step = steps[i];
-		t = t + step*delta;
+		t = t + step*0.03333; // assumes 30 fps, replace with delta
+		
 		if (Input.IsActionJustPressed("time_speed_up"))
 		{
 			i = (i + 1);

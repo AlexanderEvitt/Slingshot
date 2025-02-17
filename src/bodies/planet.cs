@@ -3,6 +3,7 @@ using System;
 using System.Text;
 using NaifSpiceSharp;
 using System.Linq;
+using System.ComponentModel;
 
 
 
@@ -51,7 +52,10 @@ public partial class planet : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		t = SystemTime.Instance.t;
+		// uses previous time to avoid a leapfrogging error
+		// because this calculates too early in comparison to the ship
+		t = SystemTime.Instance.prev_t;
+		
 		Position = fetch(t)/scaledown;
 	}
 
