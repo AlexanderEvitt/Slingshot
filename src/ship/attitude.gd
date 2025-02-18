@@ -2,6 +2,7 @@ extends RigidBody3D
 
 var ship
 var torque = Vector3(0,0,0)
+var max_torque = 0.5
 
 func _ready():
 	ship = get_parent()
@@ -10,19 +11,19 @@ func _process(_delta):
 	torque = Vector3(0,0,0)
 	
 	if Input.is_action_pressed("down"):
-		torque = torque + (-transform.basis.z)
+		torque = torque + max_torque*(-transform.basis.z)
 	if Input.is_action_pressed("up"):
-		torque = torque + (transform.basis.z)
+		torque = torque + max_torque*(transform.basis.z)
 		
 	if Input.is_action_pressed("left"):
-		torque = torque + (transform.basis.y)
+		torque = torque + max_torque*(transform.basis.y)
 	if Input.is_action_pressed("right"):
-		torque = torque + (-transform.basis.y)
+		torque = torque + max_torque*(-transform.basis.y)
 		
 	if Input.is_action_pressed("roll_left"):
-		torque = torque + (-transform.basis.x)
+		torque = torque + max_torque*(-transform.basis.x)
 	if Input.is_action_pressed("roll_right"):
-		torque = torque + (transform.basis.x)
+		torque = torque + max_torque*(transform.basis.x)
 		
 	
 	# Calculate autopilot response

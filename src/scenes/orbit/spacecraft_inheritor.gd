@@ -25,6 +25,7 @@ func _process(_delta):
 		pointer.transform.basis = OwnShip.attitude
 	else:
 		transform.basis = OwnShip.attitude
+		plotter.transform.basis = OwnShip.attitude.inverse() # plotter needs to stay in the right frame
 	position = OwnShip.position/scaledown
 	if smashed:
 		position.z = 0
