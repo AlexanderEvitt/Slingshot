@@ -14,10 +14,14 @@ var torque
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	visible = false
+	
 	torque = OwnShip.torque
 	
 	if torque == null:
 		torque = Vector3(0,0,0)
+		
+	# Place in ship frame
+	torque = OwnShip.attitude.inverse()*torque
 	
 	if up:
 		call_thruster(torque.z)
