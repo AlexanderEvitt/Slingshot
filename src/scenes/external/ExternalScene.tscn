@@ -305,7 +305,7 @@ body = "MOON"
 GM = 4904.87
 
 [node name="LunaMesh" type="MeshInstance3D" parent="Luna"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, -10567.6)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_6xnwu")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
