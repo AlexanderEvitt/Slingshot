@@ -8,7 +8,7 @@ extends Node3D
 
 const MODE_NEAR = 0
 const MODE_FAR = 1
-const SWITCH_MARGIN_RATIO = 1.1
+const SWITCH_MARGIN_RATIO = 2
 
 const AtmosphereShader = preload("./shaders/planet_atmosphere_no_clouds.gdshader")
 const DefaultShader = AtmosphereShader
