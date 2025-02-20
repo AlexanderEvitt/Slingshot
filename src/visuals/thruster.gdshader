@@ -18,7 +18,7 @@ float fresnel(float amount, vec3 normal, vec3 view) {
 
 void vertex() {
 	float along = UV.y;
-	VERTEX.xz *= (1.0 + texture(noise_texture, UV + vec2(TIME)).x*along);
+	VERTEX.xz *= (1.0 + texture(noise_texture, UV + 1.0*vec2(TIME)).x*along);
 }
 
 void fragment() {

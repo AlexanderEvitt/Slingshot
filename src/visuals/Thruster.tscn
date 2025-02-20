@@ -6,7 +6,7 @@
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0tnad"]
 lightmap_size_hint = Vector2i(4, 4)
-top_radius = 0.02
+top_radius = 0.018
 bottom_radius = 0.0
 height = 0.05
 radial_segments = 32

@@ -173,7 +173,7 @@ script = ExtResource("2_dogxd")
 camera_mode = true
 
 [node name="NarrowCam" type="Camera3D" parent="Spacecraft"]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.00400245, 0.0102501, 0)
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.00400245, 0.0200054, 0)
 current = true
 fov = 37.8493
 size = 2.0
@@ -295,8 +295,8 @@ sun_path = NodePath("../../../Sun")
 
 [node name="Earthshine" type="OmniLight3D" parent="Earth"]
 light_color = Color(0.764073, 0.840415, 1, 1)
-light_energy = 0.05
 omni_range = 15000.0
+omni_attenuation = 0.25
 
 [node name="Luna" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5956.87, 0.322938, 15744.7)
@@ -305,7 +305,7 @@ body = "MOON"
 GM = 4904.87
 
 [node name="LunaMesh" type="MeshInstance3D" parent="Luna"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, -10567.6)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_6xnwu")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
