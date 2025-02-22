@@ -110,13 +110,19 @@ transform = Transform3D(9.18485e-15, -150, 0, 150, 9.18485e-15, 0, 0, 0, 150, -3
 [node name="SpotLight3D" type="SpotLight3D" parent="scaledown/Lights"]
 transform = Transform3D(0.828549, -3.4285e-17, -0.559916, 0.559916, 5.0734e-17, 0.828549, 0, -1, 6.12323e-17, -20.7461, 39.3941, 0)
 light_color = Color(1, 0.864, 0.76, 1)
-spot_range = 50.0
+spot_range = 0.04
 spot_attenuation = 0.1
 spot_angle = 15.0
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="scaledown/Lights"]
 transform = Transform3D(0.828549, -3.4285e-17, -0.559916, -0.559916, -1.73199e-16, -0.828549, -6.857e-17, 1, -1.627e-16, -20.746, -39.394, 0)
 light_color = Color(1, 0.864, 0.76, 1)
-spot_range = 50.0
+spot_range = 0.04
+spot_attenuation = 0.1
+spot_angle = 15.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="scaledown/Lights"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 65.6632, 0, 0)
+light_color = Color(1, 0.864, 0.76, 1)
 spot_attenuation = 0.1
 spot_angle = 15.0

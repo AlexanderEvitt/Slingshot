@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=65 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" path="res://scenes/external/nightlights.gd" id="18_elqqx"]
 [ext_resource type="Texture2D" uid="uid://bf0o1r3dwo25y" path="res://bodies/photo/CallistoTrue.jpg" id="18_ufqw4"]
 [ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="19_7nri8"]
+[ext_resource type="PackedScene" uid="uid://d0nudijdf1bts" path="res://bodies/asteroids/asteroid.tscn" id="19_8qfgt"]
 [ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
@@ -214,7 +215,7 @@ color = Color(0.552941, 0, 0.552941, 1)
 environment = ExtResource("4_n8kbm")
 
 [node name="Sun" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25947e+06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78635.4)
 script = ExtResource("4_xwbd5")
 body = "SUN"
 
@@ -233,6 +234,9 @@ texture = ExtResource("6_78yin")
 [node name="SunLight" type="DirectionalLight3D" parent="Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 shadow_enabled = true
+directional_shadow_split_1 = 0.001
+directional_shadow_split_2 = 0.01
+directional_shadow_split_3 = 0.1
 directional_shadow_max_distance = 1e+06
 sky_mode = 1
 script = ExtResource("7_6u2xr")
@@ -297,6 +301,12 @@ sun_path = NodePath("../../../Sun")
 light_color = Color(0.764073, 0.840415, 1, 1)
 omni_range = 15000.0
 omni_attenuation = 0.25
+
+[node name="Node3D" parent="Earth" instance=ExtResource("19_8qfgt")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 42164, 0, 0)
+script = ExtResource("18_acntg")
+period = 86400.0
+SMA = 42164.0
 
 [node name="Luna" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5956.87, 0.322938, 15744.7)

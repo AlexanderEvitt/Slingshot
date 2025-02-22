@@ -5,7 +5,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mhx8v"]
 render_priority = 0
 shader = ExtResource("1_e5hnk")
-shader_parameter/outline_threshold = 0.1
+shader_parameter/outline_threshold = 0.2
 shader_parameter/outline_color = Color(1, 0, 1, 1)
 
 [resource]

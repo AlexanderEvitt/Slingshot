@@ -1,9 +1,10 @@
 shader_type spatial;
+render_mode cull_front;
 
 uniform sampler2D main_texture;
 uniform sampler2D noise1;
 uniform sampler2D noise2;
-uniform sampler2D normal_noise;
+uniform sampler2D norm_noise;
 
 uniform float intensity1;
 uniform float intensity2;
@@ -18,6 +19,8 @@ uniform float crater_bias;
 uniform float pole_margin;
 
 uniform sampler2D palette;
+
+varying vec3 vert;
 
 float crater(float radius, vec2 relative_position) {
 	if (length(relative_position) < radius) {
@@ -70,27 +73,12 @@ vec3 getHeight(vec2 uv) {
 }
 
 void vertex() {
-	VERTEX = getHeight(UV);
-
-	// Calculate normal using finite differences
-    float delta = 0.01; // Small step for finite differences
-    vec3 p1 = VERTEX;
-    vec3 p2 = getHeight(UV + vec2(delta,0));
-    vec3 p3 = getHeight(UV + vec2(0,delta));
-    vec3 tangent = p2 - p1;
-    vec3 bitangent = p3 - p1;
-    NORMAL = normalize(-cross(tangent, bitangent));
-
+	vert = VERTEX;
 }
 
 void fragment() {
-	float flatness = length(cross(normalize(VERTEX),NORMAL));
-	ALBEDO = texture(palette,vec2(flatness,0)).rgb;
+	float height = length(vert)/2.2;
+	ALBEDO = texture(palette,vec2(height,0)).rgb;
+
+	NORMAL += 0.1*texture(norm_noise,UV).xyz;
 }
-
-
-
-//void light() {
-	// Called for every pixel for every light affecting the material.
-	// Uncomment to replace the default light processing function with this one.
-//}

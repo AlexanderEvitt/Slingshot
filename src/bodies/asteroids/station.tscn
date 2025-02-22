@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dctsdmrx5vrvw"]
+
+[ext_resource type="PackedScene" uid="uid://6b0k1yt7sewb" path="res://bodies/asteroids/station.glb" id="1_387el"]
+[ext_resource type="Script" path="res://bodies/asteroids/station.gd" id="2_dmd6w"]
+
+[node name="station" instance=ExtResource("1_387el")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Cylinder" index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.32623, 0)
+light_color = Color(0.914278, 0.44814, 0, 1)
+
+[node name="Ring1" parent="." index="1"]
+script = ExtResource("2_dmd6w")
+
+[node name="Ring2" parent="." index="2"]
+script = ExtResource("2_dmd6w")
+dir = -1
