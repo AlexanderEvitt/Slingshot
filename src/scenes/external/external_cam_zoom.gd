@@ -20,4 +20,5 @@ func _process(_delta):
 		cam.fov = clamp(cam.fov,5,100)
 		fov_label.text = "FOV" + str(snapped(cam.fov,1))
 	
+	get_node("SubViewport/CamRoot/Spacecraft/CameraRig/CameraRotator/Camera3D").current = false
 	cam.current = true

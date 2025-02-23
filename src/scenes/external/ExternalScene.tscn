@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=69 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="5_17hwb"]
 [ext_resource type="Script" path="res://ui/external_shader_settings.gd" id="5_hwbsh"]
 [ext_resource type="Script" path="res://scenes/external/sun_light.gd" id="7_6u2xr"]
+[ext_resource type="PackedScene" uid="uid://bpfrq18j1sk54" path="res://scenes/external/stars/stars.tscn" id="8_wqcie"]
+[ext_resource type="Script" path="res://scenes/external/stars/starblur_controller.gd" id="9_licgw"]
 [ext_resource type="Texture2D" uid="uid://dgl8wj4mkimt3" path="res://bodies/photo/MarsTrue.jpg" id="10_mv0q4"]
 [ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/photo/JupiterTrue.jpg" id="11_74p1c"]
 [ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="13_4jafp"]
@@ -194,7 +196,7 @@ transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323
 [node name="Camera3D" type="Camera3D" parent="Spacecraft/CameraRig/CameraRotator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 current = true
-fov = 60.0
+fov = 50.0
 near = 0.001
 far = 1e+07
 script = ExtResource("5_17hwb")
@@ -207,6 +209,10 @@ extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_dewes")
 skeleton = NodePath("../../../../..")
 script = ExtResource("5_hwbsh")
+
+[node name="Starfield" parent="Spacecraft/CameraRig/CameraRotator/Camera3D" instance=ExtResource("8_wqcie")]
+transform = Transform3D(3.06162e-16, -5, 3.06162e-16, 0, 3.06162e-16, 5, -5, -3.06162e-16, 1.8747e-32, 0, 0, -0.1)
+script = ExtResource("9_licgw")
 
 [node name="Pointer" type="Node3D" parent="Spacecraft"]
 
