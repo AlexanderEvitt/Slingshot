@@ -1,15 +1,16 @@
-[gd_scene load_steps=65 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=67 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
 [ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/PlayerShip.tscn" id="3_r7nlu"]
+[ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="4_bholp"]
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="4_n8kbm"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="4_xwbd5"]
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="5_2nae2"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="5_8bt3m"]
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="5_17hwb"]
-[ext_resource type="Texture2D" uid="uid://dugkf54dlpwri" path="res://scenes/external/sun_sprite.png" id="6_78yin"]
+[ext_resource type="Script" path="res://ui/external_shader_settings.gd" id="5_hwbsh"]
 [ext_resource type="Script" path="res://scenes/external/sun_light.gd" id="7_6u2xr"]
 [ext_resource type="Texture2D" uid="uid://dgl8wj4mkimt3" path="res://bodies/photo/MarsTrue.jpg" id="10_mv0q4"]
 [ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/photo/JupiterTrue.jpg" id="11_74p1c"]
@@ -32,6 +33,11 @@
 [ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="19_7nri8"]
 [ext_resource type="PackedScene" uid="uid://d0nudijdf1bts" path="res://bodies/asteroids/asteroid.tscn" id="19_8qfgt"]
 [ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_dewes"]
+material = ExtResource("4_bholp")
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
 radius = 700000.0
@@ -169,13 +175,12 @@ albedo_texture = ExtResource("17_n5xr7")
 script = ExtResource("1_5ri2s")
 
 [node name="Spacecraft" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 606.497, 0, -9788.97)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9788.97)
 script = ExtResource("2_dogxd")
 camera_mode = true
 
 [node name="NarrowCam" type="Camera3D" parent="Spacecraft"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.00400245, 0.0200054, 0)
-current = true
 fov = 37.8493
 size = 2.0
 near = 0.01
@@ -188,6 +193,7 @@ transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323
 
 [node name="Camera3D" type="Camera3D" parent="Spacecraft/CameraRig/CameraRotator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+current = true
 fov = 60.0
 near = 0.001
 far = 1e+07
@@ -195,6 +201,12 @@ script = ExtResource("5_17hwb")
 zoomable = true
 zoom_distance = 0.1
 zoom_min = 0.01
+
+[node name="ShaderQuad" type="MeshInstance3D" parent="Spacecraft/CameraRig/CameraRotator/Camera3D"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_dewes")
+skeleton = NodePath("../../../../..")
+script = ExtResource("5_hwbsh")
 
 [node name="Pointer" type="Node3D" parent="Spacecraft"]
 
@@ -215,7 +227,7 @@ color = Color(0.552941, 0, 0.552941, 1)
 environment = ExtResource("4_n8kbm")
 
 [node name="Sun" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78635.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1e+06)
 script = ExtResource("4_xwbd5")
 body = "SUN"
 
@@ -225,11 +237,6 @@ layers = 0
 mesh = SubResource("SphereMesh_v7y0l")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
-
-[node name="SunSprite" type="Sprite3D" parent="Sun"]
-pixel_size = 10.0
-billboard = 1
-texture = ExtResource("6_78yin")
 
 [node name="SunLight" type="DirectionalLight3D" parent="Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
@@ -242,7 +249,7 @@ sky_mode = 1
 script = ExtResource("7_6u2xr")
 
 [node name="Mercury" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29965.7, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1e+06, 0, 0)
 script = ExtResource("4_xwbd5")
 body = "MERCURY"
 GM = 22032.0
@@ -276,12 +283,11 @@ mesh = SubResource("SphereMesh_aom7d")
 surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
 
 [node name="EarthAtmosphere" parent="Earth/EarthMesh" instance=ExtResource("5_2nae2")]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
 planet_radius = 6371.0
-atmosphere_height = 50.0
+atmosphere_height = 40.0
 sun_path = NodePath("../../../Sun/SunLight")
-shader_params/u_density = 0.1
-shader_params/u_scattering_strength = 2.0
+shader_params/u_density = 0.15
+shader_params/u_scattering_strength = 0.4
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="Clouds" type="MeshInstance3D" parent="Earth/EarthMesh"]

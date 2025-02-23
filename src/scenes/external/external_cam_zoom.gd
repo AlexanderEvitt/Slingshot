@@ -9,7 +9,6 @@ var rate = 0.05
 func _ready():
 	cam = get_node("SubViewport/CamRoot/Spacecraft/NarrowCam")
 	fov_label = get_node("ScreenText/Label3")
-	sun = get_node("SubViewport/CamRoot/Sun/SunSprite")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -21,12 +20,4 @@ func _process(_delta):
 		cam.fov = clamp(cam.fov,5,100)
 		fov_label.text = "FOV" + str(snapped(cam.fov,1))
 	
-	# Set the sun position in the lens flare shader
-	var sun_point = cam.unproject_position(sun.global_position)
-	material.set_shader_parameter("sun_position",sun_point)
-	
-	var render_spikes = cam.is_position_behind(sun.global_position)
-	material.set_shader_parameter("show_sun",!render_spikes)
-	
-	# Scale the sun with zoom
-	sun.pixel_size = 0.3*cam.fov
+	cam.current = true
