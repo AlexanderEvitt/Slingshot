@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=70 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://blf5ecvkcenvs" path="res://bodies/photo/UranusTrue.jpg" id="16_uf3kr"]
 [ext_resource type="Texture2D" uid="uid://0mbuhbs1qkqu" path="res://bodies/photo/IoTrue.jpg" id="17_gcb48"]
 [ext_resource type="Texture2D" uid="uid://bh21nouyh0k42" path="res://bodies/photo/NeptuneTrue.jpg" id="17_n5xr7"]
+[ext_resource type="Script" path="res://bodies/rotator.gd" id="17_wir2g"]
 [ext_resource type="Script" path="res://bodies/moon.gd" id="18_acntg"]
 [ext_resource type="Script" path="res://scenes/external/nightlights.gd" id="18_elqqx"]
 [ext_resource type="Texture2D" uid="uid://bf0o1r3dwo25y" path="res://bodies/photo/CallistoTrue.jpg" id="18_ufqw4"]
@@ -246,6 +247,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
 
 [node name="SunLight" type="DirectionalLight3D" parent="Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+light_energy = 0.7
 shadow_enabled = true
 directional_shadow_split_1 = 0.001
 directional_shadow_split_2 = 0.01
@@ -287,6 +289,7 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_aom7d")
 surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
+script = ExtResource("17_wir2g")
 
 [node name="EarthAtmosphere" parent="Earth/EarthMesh" instance=ExtResource("5_2nae2")]
 planet_radius = 6371.0
@@ -314,8 +317,7 @@ light_color = Color(0.764073, 0.840415, 1, 1)
 omni_range = 15000.0
 omni_attenuation = 0.25
 
-[node name="Node3D" parent="Earth" instance=ExtResource("19_8qfgt")]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 42164, 0, 0)
+[node name="AsteroidStation" parent="Earth" instance=ExtResource("19_8qfgt")]
 script = ExtResource("18_acntg")
 period = 86400.0
 SMA = 42164.0

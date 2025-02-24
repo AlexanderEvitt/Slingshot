@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=36 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
@@ -33,9 +33,7 @@ height = 1.4e+06
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tj412"]
 shading_mode = 0
 
-[sub_resource type="SphereMesh" id="SphereMesh_385ak"]
-radius = 1822.0
-height = 3643.0
+[sub_resource type="PointMesh" id="PointMesh_ywapt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e0jq5"]
 render_priority = 0
@@ -44,6 +42,10 @@ shader_parameter/colored = Color(1, 0.6, 0, 1)
 shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 shader_parameter/textured = ExtResource("13_kuxx4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_385ak"]
+radius = 1822.0
+height = 3643.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_kxpab"]
 radius = 2410.0
@@ -216,6 +218,47 @@ font = ExtResource("4_rnk7r")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
+
+[node name="AsteroidStation" type="Node3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.3)
+script = ExtResource("11_jnixu")
+period = 86400.0
+SMA = 42164.0
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Earth/AsteroidStation"]
+visibility_range_end = 1e+07
+mesh = SubResource("PointMesh_ywapt")
+surface_material_override/0 = SubResource("ShaderMaterial_e0jq5")
+
+[node name="MoonLabel" type="Label3D" parent="Earth/AsteroidStation/BodyMesh"]
+visibility_range_end = 2e+06
+visibility_range_end_margin = 2e+06
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+billboard = 1
+fixed_size = true
+text = " PORT"
+font = ExtResource("4_rnk7r")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Plotter" type="Node3D" parent="Earth/AsteroidStation" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+script = ExtResource("5_vmpxk")
+period = 1.0
+color = Color(1, 0.6, 0, 1)
+visible_distance = 2000000
+relative_to = NodePath("../..")
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="Earth/AsteroidStation"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(1, 0.6, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
 
 [node name="Luna" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 12989.3)

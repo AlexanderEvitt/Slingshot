@@ -14,7 +14,7 @@ func _ready() -> void:
 	prev_basis = cam.global_transform.basis  # Initialize previous basis
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var current_basis = cam.global_transform.basis
 	var rotation_change = current_basis * prev_basis.inverse()
 	
