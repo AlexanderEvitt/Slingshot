@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvuwcyu3chwr1"]
+
+[ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="1_bs7i2"]
+[ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="2_nl3g8"]
+[ext_resource type="PackedScene" uid="uid://bfwsgcbvelo0t" path="res://ship/frigate/frigate.tscn" id="3_5u4ba"]
+
+[node name="player_ship" type="Node3D"]
+
+[node name="scaledown" type="Node3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Plumes" type="Node3D" parent="scaledown"]
+transform = Transform3D(138.79, 0, 0, 0, 138.79, 0, 0, 0, 138.79, -25.4396, 0, 0)
+
+[node name="Plume" parent="scaledown/Plumes" instance=ExtResource("1_bs7i2")]
+transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, -0.0147828, 0, 0)
+
+[node name="Thrusters" type="Node3D" parent="scaledown"]
+
+[node name="Thruster19" parent="scaledown/Thrusters" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, 9.18485e-15, 150, 0, -150, 9.18485e-15, -37.972, -8.128, -1.743)
+left = true
+roll_left = true
+
+[node name="Lights" type="Node3D" parent="scaledown"]
+
+[node name="frigate" parent="scaledown" instance=ExtResource("3_5u4ba")]

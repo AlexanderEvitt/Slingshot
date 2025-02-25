@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1pexe1ehy7o7"
-path.s3tc="res://.godot/imported/box_freighter_HullTexture.png-39b0a50af395108effb6ac77844f4da3.s3tc.ctex"
+uid="uid://byk3n8kgox5xg"
+path.s3tc="res://.godot/imported/conksat.png-803c1d6e61d3e14fd1f89dc4db371a6f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "26dd0ee60f9c6746cddfbc41831fd92c"
-}
 
 [deps]
 
-source_file="res://ship/box_freighter/box_freighter_HullTexture.png"
-dest_files=["res://.godot/imported/box_freighter_HullTexture.png-39b0a50af395108effb6ac77844f4da3.s3tc.ctex"]
+source_file="res://visuals/logo/conksat.png"
+dest_files=["res://.godot/imported/conksat.png-803c1d6e61d3e14fd1f89dc4db371a6f.s3tc.ctex"]
 
 [params]
 

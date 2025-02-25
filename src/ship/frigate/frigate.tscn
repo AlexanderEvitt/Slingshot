@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfwsgcbvelo0t"]
+
+[ext_resource type="PackedScene" uid="uid://c723tonvicthq" path="res://ship/frigate/frigate.glb" id="1_p2xcd"]
+[ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="2_k8wt2"]
+
+[node name="frigate" instance=ExtResource("1_p2xcd")]
+
+[node name="ConkLogo" type="Sprite3D" parent="." index="10"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.56628, 7.26432, 0)
+pixel_size = 0.003
+axis = 1
+texture = ExtResource("2_k8wt2")

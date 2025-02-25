@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dl561oirj2h47"]
+
+[resource]
+resource_name = "LightPaint"
+cull_mode = 2
+albedo_color = Color(0.689863, 0.562808, 0.299632, 1)
+metallic = 1.0
+roughness = 0.5

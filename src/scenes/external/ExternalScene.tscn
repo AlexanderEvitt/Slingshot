@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
-[ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/PlayerShip.tscn" id="3_r7nlu"]
+[ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/frigate/PlayerShip.tscn" id="3_r7nlu"]
 [ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="4_bholp"]
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="4_n8kbm"]

@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://co23m58vpbhpi"]
+
+[resource]
+resource_name = "RadarPaint"
+cull_mode = 2
+albedo_color = Color(0.430374, 0.430374, 0.430374, 1)
+roughness = 0.5

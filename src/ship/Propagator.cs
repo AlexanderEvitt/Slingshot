@@ -163,7 +163,7 @@ public partial class Propagator : Node3D
 
 			// Calculate control as antigravity + in direction or opposite if more than halfway
 			Vector3 flight_direction = target_position - planned_positions[i];
-			planned_controls.Add(flip*0.01d*flight_direction.Normalized() - a + correction ); asdf
+			planned_controls.Add(flip*0.01d*flight_direction.Normalized() - a);
 			
 			// Propagate to next timestep
 			(Vector3 np,Vector3 nv,double nt) = StepVerlet(planned_positions[i],planned_velocities[i],planned_controls[i],planned_times[i]);
