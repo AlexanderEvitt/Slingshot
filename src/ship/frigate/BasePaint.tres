@@ -4,3 +4,4 @@
 resource_name = "BasePaint"
 cull_mode = 2
 albedo_color = Color(0.17721, 0.17721, 0.17721, 1)
+roughness = 0.5

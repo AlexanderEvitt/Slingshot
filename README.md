@@ -1,13 +1,17 @@
 # Slingshot
 ## Astrodynamics Simulator
 
+![Flying Past Stars](streaks.png)
+![Logo](src/visuals/logo/wide.png)
+
 Slingshot is a full-up, 6DOF astrodynamics simulation with a cool UI. Aimed at being somewhere between a video game and a display for flight operations teams, it presents a complete sandbox for spacecraft navigation and control.
 
 ![Ejecting from Earth, Looking Back](looking_back.png)
-![Chaotic Orbit Around Luna](perturbed.png)
-![Flight Instruments in MEO](meo.png)
-![Arrival at Saturn](saturn_arrival.png)
-![Autopilot Panel](trajectory_planner.png)
+![Planning a Luna Transfer](planning.png)
+![Burning Hard for Ejection](burning_hard.png)
+![Interplanetary Transfer](transfer.png)
+![Arrival in Luna Orbit](luna_orbit.png)
+
 
 ## Current Features
 
