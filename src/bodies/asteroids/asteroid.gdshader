@@ -1,84 +1,85 @@
 shader_type spatial;
 render_mode cull_front;
 
-uniform sampler2D main_texture;
-uniform sampler2D noise1;
-uniform sampler2D noise2;
-uniform sampler2D norm_noise;
+uniform sampler3D low_noise;
+uniform sampler3D cell_noise;
 
-uniform float intensity1;
-uniform float intensity2;
-uniform float intensity3;
+uniform float bump = 1.0;
 
-uniform float crater_seed;
-uniform float crater_wall_width;
-uniform float crater_depth;
-uniform int num_craters;
-uniform float crater_bias;
+uniform sampler2D color_palette : repeat_disable;
+uniform sampler2D roughness_palette : repeat_disable;
 
-uniform float pole_margin;
+varying vec3 coord;
 
-uniform sampler2D palette;
-
-varying vec3 vert;
-
-float crater(float radius, vec2 relative_position) {
-	if (length(relative_position) < radius) {
-		return crater_depth;
-	}
-	else if (length(relative_position) - radius < crater_wall_width) {
-		return (1.0 - crater_depth)*(length(relative_position) - radius)/crater_wall_width + crater_depth;
-	}
-	else {
-		return 1.0;
-	}
+float multiply(float a, float b, float fac) {
+	return fac*a + (1.0-fac*b);
 }
 
-float bias(float x, float bias) {
-	return pow(x,bias);
+
+float get_value(vec3 spot) {
+	// Sample all the 3D noises
+	float ln = texture(low_noise,0.3*coord).r;
+	float mn = texture(low_noise,coord).r;
+	float hn = texture(low_noise,5.0*coord).r;
+	float cn = texture(cell_noise,coord).r;
+
+	// Mix together results
+	float multiply1 = mix(ln,ln*mn,0.2);
+	float multiply2 = mix(multiply1,cn * multiply1,0.5);
+	float multiply3 = mix(multiply2,hn * multiply2,0.5);
+	multiply3 = clamp(multiply3,0.0,1.0);
+
+	// Color ramp brightness
+	float brightness = texture(color_palette,vec2(multiply3,0.0)).r;
+
+	return brightness;
 }
 
-float rand(float seed) {
-	return fract(sin(dot(vec2(seed), vec2(12.9898, 4.1414))) * 43758.5453);
+float get_height(vec3 spot) {
+	// Sample all the 3D noises
+	float ln = texture(low_noise,0.5*spot).r;
+	float mn = texture(low_noise,spot).r;
+	float hn = texture(low_noise,5.0*spot).r;
+	float cn = texture(cell_noise,spot).r;
+
+	// Mix together results
+	float multiply1 = mix(ln,ln*mn,0.2);
+	float multiply2 = mix(multiply1,cn * multiply1,1.0);
+
+	// Return height
+	float height = mix(multiply2,hn,0.1);
+	return height;
 }
 
-vec3 getHeight(vec2 uv) {
-	float theta = uv.x * 2.0 * PI;
-	float phi = uv.y * PI;
-	vec3 x = vec3(cos(theta)*sin(phi), sin(theta)*sin(phi), cos(phi));
-	vec3 y = x*(1.0 + intensity1*texture(noise1, uv.xy).r) * (1.0 + intensity2*texture(noise2, uv.xy).r);
+vec3 calculate_normal(vec3 center, float delta, vec3 n) {
+	// Calculate normal in latitude and longitude directions
+	vec3 lon = cross(center, vec3(0.0,1.0,0.0));
+	vec3 lat = cross(lon, center);
+	lon = normalize(lon);
+	lat = normalize(lat);
 
-	// Add cratering
-	for (int i = 0; i < num_craters; i++) {
-		vec2 center = vec2(2.0*rand(crater_seed + float(i)),rand(crater_seed - float(i)));
-		vec2 relative = vec2(2.0*uv.x, uv.y) - center;
-		float size = 0.05*bias(rand(crater_seed + 2.0*float(i)),crater_bias);
-		y *= (0.0 + crater(size, relative));
-	}
+	// Calculate heights along deltas in those directions
+	float height_pu = get_height(center + delta*lon);
+	float height_mu = get_height(center - delta*lon);
+	float height_pv = get_height(center + delta*lat);
+	float height_mv = get_height(center - delta*lat);
 
-	// blend to unit length around poles
-	if (uv.y > 1.0 - pole_margin) {
-		float combine = (1.0/pole_margin)*(uv.y - (1.0 - pole_margin));
-		vec3 pole = x*(1.0 + intensity1*texture(noise1, vec2(0,1)).r) * (1.0 + intensity2*texture(noise2, vec2(0,1)).r);
-		y = combine*pole + (1.0-combine)*y;
-	}
-
-	if (uv.y < pole_margin) {
-		float combine = 1.0 - (1.0/pole_margin)*(uv.y);
-		vec3 pole = x*(1.0 + intensity1*texture(noise1, vec2(0,1)).r) * (1.0 + intensity2*texture(noise2, vec2(0,1)).r);
-		y = combine*pole + (1.0-combine)*y;
-	}
-
-	return y;
+	// Sobel operator
+	float du = height_mu - height_pu;
+	float dv = height_mv - height_pv;
+	  n = normalize(du * lon + dv * lat + n * bump);
+	return n;
 }
 
 void vertex() {
-	vert = VERTEX;
+	coord = VERTEX;
 }
 
 void fragment() {
-	float height = length(vert)/2.2;
-	ALBEDO = texture(palette,vec2(height,0)).rgb;
+	// Map to result
+	ALBEDO = vec3(get_value(coord));
+	ROUGHNESS = texture(roughness_palette,vec2(get_value(coord),0.0)).r;
 
-	NORMAL += 0.1*texture(norm_noise,UV).xyz;
+	// Mix my normal and generated normal
+	NORMAL = mix(NORMAL, calculate_normal(coord, 0.0001, NORMAL), 0.5);
 }

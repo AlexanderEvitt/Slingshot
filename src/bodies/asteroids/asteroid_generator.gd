@@ -18,7 +18,7 @@ var count = 0
 func _process(_delta):
 	if count == 0:
 		mesh = generate_icosphere()
-	if count == 6000 and Engine.is_editor_hint():
+	if count == 20000 and Engine.is_editor_hint():
 		count = -1
 		print("refreshing")
 	count += 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bu2j4yalwn3ks"]
+[gd_scene load_steps=7 format=3 uid="uid://bu2j4yalwn3ks"]
 
 [ext_resource type="Shader" path="res://visuals/PlasmaPlume.gdshader" id="1_eo5p0"]
 [ext_resource type="Script" path="res://visuals/plume_controller.gd" id="2_y04ml"]
@@ -35,16 +35,6 @@ shader_parameter/fresnel_amplification = 2.0
 shader_parameter/fresnel_power = 5.0
 shader_parameter/enable_fresnel = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixdov"]
-cull_mode = 1
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_1mc53"]
-material = SubResource("StandardMaterial3D_ixdov")
-top_radius = 0.0
-height = 1.0
-
 [node name="Plume" type="Node3D"]
 script = ExtResource("2_y04ml")
 
@@ -53,6 +43,11 @@ transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -2, 0, 0
 mesh = SubResource("CylinderMesh_n1q1i")
 surface_material_override/0 = SubResource("ShaderMaterial_yust4")
 
-[node name="ThrustChamber" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0.5, 0, 0)
-mesh = SubResource("CylinderMesh_1mc53")
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34969, 0, 0)
+layers = 2
+light_energy = 11.465
+shadow_enabled = true
+shadow_bias = 2.726
+omni_range = 0.01
+omni_shadow_mode = 0

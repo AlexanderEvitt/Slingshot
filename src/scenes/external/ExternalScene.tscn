@@ -327,7 +327,7 @@ omni_range = 15000.0
 omni_attenuation = 0.25
 
 [node name="AsteroidStation" parent="Earth" instance=ExtResource("19_8qfgt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6441, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 6441, 0, 0)
 script = ExtResource("18_acntg")
 period = 86400.0
 SMA = 42164.0
