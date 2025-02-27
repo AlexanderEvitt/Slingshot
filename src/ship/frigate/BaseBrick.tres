@@ -6,7 +6,8 @@
 resource_name = "BaseBrick"
 cull_mode = 2
 albedo_color = Color(0.17721, 0.17721, 0.17721, 1)
-roughness = 0.5
+roughness = 0.7
+roughness_texture = ExtResource("1_ru3m7")
 normal_enabled = true
 normal_scale = 3.0
 normal_texture = ExtResource("1_ru3m7")

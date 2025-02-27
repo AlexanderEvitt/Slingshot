@@ -1,0 +1,240 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckg801jn7baa1"]
+
+[ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_bgvoi"]
+[ext_resource type="Texture2D" uid="uid://bme2b5166kd8k" path="res://visuals/logo/wide.png" id="3_qn4d0"]
+[ext_resource type="Script" path="res://ui/menu/code.gd" id="6_aybfq"]
+[ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="9_1tlqv"]
+[ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="10_nthiu"]
+[ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="16_g0tso"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0qci"]
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
+texture = ExtResource("16_g0tso")
+
+[node name="MenuUI" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_bgvoi")
+
+[node name="MarginContainer" type="Panel" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.4
+anchor_right = 0.7
+anchor_bottom = 0.6
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a0qci")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+offset_right = 768.0
+offset_bottom = 216.0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+texture = ExtResource("3_qn4d0")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MainPanel" type="Panel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("10_nthiu")
+
+[node name="TriangleCutout" type="Panel" parent="MarginContainer/VBoxContainer/MainPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_nthiu")
+text = "START SIMULATION"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_1tlqv")
+text = "v0.0.1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Code" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_1tlqv")
+theme_override_font_sizes/font_size = 20
+text = "================================================================================
+  Slingshot Astrodynamics System v0.0.1 - Boot Sequence
+  © 1996-2025, ConkSat Industries | Property of 12th Fleet, FFC
+================================================================================
+
+[SYS] Initializing Power & Avionics Systems...
+      > Primary Bus Power ............... [ ONLINE ]
+      > Secondary Bus Power ............. [ ONLINE ]
+      > Tertiary Redundant Power ........ [ STANDBY ]
+      > Avionics Processing Network ..... [ SYNCHRONIZING ]
+      > Flight Director Data Link ....... [ RECEIVED ]
+      > Orbital Debris Tracking ......... [ ONLINE ]
+
+[MISSION] Status: HARD DOCKED @ BERTH-4A | Relative Vel: 0.0000 m/s
+[MISSION] Docking Interface Active | Awaiting Undock Command...
+
+--------------------------------------------------------------------------------
+ IMU ALIGNMENT & NAVIGATION CALIBRATION
+--------------------------------------------------------------------------------
+[IMU] Phase 1/6 - Gyro Spin-Up .......... [ SPINNING UP ]
+      > RPM: 42,000  | Status: STABILIZING
+      > Result: STABLE .................. [ COMPLETE ]
+
+[IMU] Phase 2/6 - Gyro Bias Calibration..
+      > Sensitivity Offset .............. [ CALCULATING ]
+      > Rotation Comp ............. [ APPLIED ]
+      > Bias Drift: ±0.00003 rad/s ...... [ STABILIZED ]
+
+[IMU] Phase 3/6 - Accelerometer Drift Correction
+      > Inertial Frame Lock ............. [ ENGAGED ]
+      > Grav. Field Comp ................. [ APPLIED ]
+      > Vector Drift: ±0.0002 m/s² ....... [ CORRECTED ]
+
+[IMU] Phase 4/6 - Star Tracker Integration
+      > Star Tracker 1 - Field Capture... [ ACQUIRED ]
+      > Star Tracker 2 - Map Validation.. [ COMPLETE ]
+      > Position Offset: 0.0021° ........ [ ADJUSTED ]
+
+[IMU] Phase 5/6 - Radar Calibration
+      > LIDAR System .................... [ ACTIVE ]
+      > Rendezvous Radar ................ [ SYNCHRONIZED ]
+      > Relative Range: 14.222m [ LOCKED ]
+
+[IMU] Phase 6/6 - Position Matrix Sync
+      > Finalizing Nav Solution ......... [ COMPLETE ]
+
+--------------------------------------------------------------------------------
+ PROPULSION SYSTEM DIAGNOSTICS
+--------------------------------------------------------------------------------
+[RCS] Reaction Control System Check
+      > Thruster Valve Cycling .......... [ PASS ]
+      > Helium Pressurization ........... [ NOMINAL ]
+      > Attitude Control ...............  [ READY ]
+
+[OMS] Orbital Maneuvering System Prep
+      > Tank Isolation Valves ........... [ OPEN ]
+      > He3-D Fuel Lines ........... [ PRESSURIZED ]
+      > Ignition Test Cycle ............. [ PASS ]
+
+[MAIN ENG] Main Engine Diagnostics
+      > Throttle Actuation .............. [ NOMINAL ]
+      > Hydraulic Feedback .............. [ NOMINAL ]
+      > Reactor Mix Ratio: 5.88:1 ...... [ OPTIMAL ]
+      > Ignition Circuit ................ [ ARMED ]
+
+--------------------------------------------------------------------------------
+ ENVIRONMENTAL CONTROL & LIFE SUPPORT (ECLS) STARTUP
+--------------------------------------------------------------------------------
+[ECLS] Cabin Pressure Regulation
+      > O₂ Partial Pressure ............. [ 21.3 kPa ]
+      > CO₂ Scrubber Efficiency ......... [ 98.6% ]
+      > N₂ Balance ...................... [ STABLE ]
+
+[ECLS] Thermal Regulation
+      > Radiator Loop A ................. [ NOMINAL ]
+      > Radiator Loop B ................. [ NOMINAL ]
+      > Coolant Pump Rate ............... [ 0.92 L/s ]
+
+[ECLS] Water Recycling System
+      > Electrolysis System ............. [ ONLINE ]
+      > Water Vapor Recovery ............ [ 89.4% ]
+
+[ECLS] Redundancy Check
+      > Backup Cabin O₂ Tanks ........... [ PRESSURIZED ]
+      > Emergency CO₂ Filter ............ [ STANDBY ]
+
+--------------------------------------------------------------------------------
+ REACTOR CHILL-DOWN & MAGNET STARTUP
+--------------------------------------------------------------------------------
+[REACTOR] Primary Reactor
+      > Status: STANDBY
+      > Coolant Loop Pre-Chill .......... [ ENGAGED ]
+      > Reactor Core Temp ............... [ 83.2K ]
+      > Target Chill Temp ............... [ 40.0K ]
+      > Est. Time to Target ............. [ 2.3 min ]
+
+[MAGNETS] Superconducting Magnet Startup
+      > Induction Coils ................. [ CHARGING ]
+      > Magnetic Containment Field ...... [ STABILIZING ]
+      > Gauss Field Strength ............ [ 5.1T (nominal) ]
+
+--------------------------------------------------------------------------------
+ FLIGHT CONTROL & AVIONICS CHECKOUT
+--------------------------------------------------------------------------------
+[AVIONICS] Network Status
+      > Primary Guidance Computer ....... [ ONLINE ]
+      > Backup GNC Computer ............. [ STANDBY ]
+      > Flight Control Interface ........ [ SYNCHRONIZED ]
+      > Redundant Bus Status ............ [ NORMAL ]
+
+[SENSORS] Navigation & Guidance
+      > Star Tracker .................... [ CALIBRATED ]
+      > Radar System .................... [ ACTIVE ]
+      > LIDAR Array ..................... [ ONLINE ]
+      > Rendezvous Trajectory ........... [ COMPUTED ]
+      > Relative Velocity to Station ........ [ 0.0001 m/s ]
+
+[FLIGHT CONTROL] Surface Actuation Test
+      > Elevon Cycling .................. [ PASS ]
+      > Rudder Deflection ............... [ PASS ]
+      > Body Flap Test .................. [ PASS ]
+
+--------------------------------------------------------------------------------
+ FINAL SYSTEM READINESS CHECK
+--------------------------------------------------------------------------------
+[DOCK] Berth-4A Docking Clamps .......... [ SECURE ]
+[DOCK] Umbilical Power Transfer ......... [ NOMINAL ]
+[DOCK] Fuel Line Purge .................. [ INITIATED ]
+[DOCK] Hard Dock Release ................ [ INHIBITED – AWAITING CREW COMMAND ]
+
+================================================================================
+ ALL SYSTEMS NOMINAL – STANDING BY FOR UNDOCK SEQUENCE
+================================================================================
+"
+script = ExtResource("6_aybfq")

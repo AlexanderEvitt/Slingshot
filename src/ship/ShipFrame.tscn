@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c71thxnvwh37i"]
+
+[ext_resource type="Script" path="res://ship/ship_calculator.gd" id="1_ols0f"]
+[ext_resource type="Script" path="res://ship/attitude.gd" id="2_88nqh"]
+[ext_resource type="Script" path="res://ship/Propagator.cs" id="3_h654o"]
+
+[node name="OwnShip" type="Node"]
+script = ExtResource("1_ols0f")
+start_position = Vector3(42164, -50, 0)
+start_velocity = Vector3(0, 3.075, 0)
+
+[node name="AttitudeCalculator" type="RigidBody3D" parent="."]
+gravity_scale = 0.0
+inertia = Vector3(1, 1, 1)
+can_sleep = false
+script = ExtResource("2_88nqh")
+
+[node name="Propagator" type="Node3D" parent="."]
+script = ExtResource("3_h654o")
+n = 400

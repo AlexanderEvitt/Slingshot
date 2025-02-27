@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://n78uivx6mb2"]
+[gd_scene load_steps=5 format=3 uid="uid://n78uivx6mb2"]
 
-[ext_resource type="PackedScene" uid="uid://231jhr4hx8d6" path="res://ui/UIScene.tscn" id="1_yhthj"]
-[ext_resource type="Script" path="res://ship/ship_calculator.gd" id="2_11ed2"]
+[ext_resource type="Script" path="res://ui/menu/menu_handler.gd" id="1_tywdm"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="2_56nas"]
-[ext_resource type="Script" path="res://ship/attitude.gd" id="3_kr225"]
-[ext_resource type="Script" path="res://ship/Propagator.cs" id="4_1p6cq"]
+[ext_resource type="PackedScene" uid="uid://ckg801jn7baa1" path="res://ui/menu/MenuScene.tscn" id="2_f6v6y"]
+[ext_resource type="Script" path="res://ship/ships_handler.gd" id="4_cahyk"]
 
 [node name="GameRoot" type="Node"]
 
-[node name="Control" parent="." instance=ExtResource("1_yhthj")]
+[node name="UI" type="Node" parent="."]
+script = ExtResource("1_tywdm")
+
+[node name="MenuUI" parent="UI" instance=ExtResource("2_f6v6y")]
 
 [node name="Planets" type="Node" parent="."]
 
@@ -72,18 +74,4 @@ body = "NEPTUNE BARYCENTER"
 GM = 6.83653e+06
 
 [node name="Ships" type="Node" parent="."]
-
-[node name="OwnShip" type="Node" parent="Ships"]
-script = ExtResource("2_11ed2")
-start_position = Vector3(42164, -50, 0)
-start_velocity = Vector3(0, 3.075, 0)
-
-[node name="AttitudeCalculator" type="RigidBody3D" parent="Ships/OwnShip"]
-gravity_scale = 0.0
-inertia = Vector3(1, 1, 1)
-can_sleep = false
-script = ExtResource("3_kr225")
-
-[node name="Propagator" type="Node3D" parent="Ships/OwnShip"]
-script = ExtResource("4_1p6cq")
-n = 400
+script = ExtResource("4_cahyk")

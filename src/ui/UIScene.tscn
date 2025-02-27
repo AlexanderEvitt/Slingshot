@@ -58,7 +58,7 @@ bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1unmv"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 
-[node name="Control" type="Panel"]
+[node name="ShipUI" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

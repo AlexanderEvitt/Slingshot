@@ -6,6 +6,8 @@
 
 Slingshot is a full-up, 6DOF astrodynamics simulation with a cool UI. Aimed at being somewhere between a video game and a display for flight operations teams, it presents a complete sandbox for spacecraft navigation and control.
 
+Demo footage: [YouTube Link](https://youtu.be/0PLd5gBSCrM)
+
 ![Ejecting from Earth, Looking Back](looking_back.png)
 ![Planning a Luna Transfer](planning.png)
 ![Burning Hard for Ejection](burning_hard.png)
