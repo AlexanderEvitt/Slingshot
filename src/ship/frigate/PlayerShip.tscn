@@ -1,8 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvuwcyu3chwr1"]
+[gd_scene load_steps=9 format=3 uid="uid://dvuwcyu3chwr1"]
 
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="1_bs7i2"]
 [ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="2_nl3g8"]
 [ext_resource type="PackedScene" uid="uid://bfwsgcbvelo0t" path="res://ship/frigate/FrigateConfig.tscn" id="3_5u4ba"]
+[ext_resource type="Script" path="res://visuals/blinking_light.gd" id="3_wxm7r"]
+[ext_resource type="Material" uid="uid://d3306785am850" path="res://ship/frigate/BasePaint.tres" id="4_rm61y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhx50"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ulwg0"]
+material = SubResource("StandardMaterial3D_jhx50")
+top_radius = 0.3
+bottom_radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xrp77"]
+material = ExtResource("4_rm61y")
+top_radius = 0.3
+bottom_radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 2
 
 [node name="player_ship" type="Node3D"]
 
@@ -112,7 +134,6 @@ transform = Transform3D(9.18485e-15, 150, 0, -150, 9.18485e-15, 0, 0, 0, 150, -1
 transform = Transform3D(-2.75546e-14, -150, 0, 150, -2.75546e-14, 0, 0, 0, 150, -20.9412, 9.05106, 0)
 
 [node name="Pod2NR" type="Node3D" parent="scaledown/Thrusters"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Thruster1" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
 transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -16.37, -6.50648, 6.50648)
@@ -145,7 +166,6 @@ transform = Transform3D(9.18485e-15, 150, 0, 106.066, -6.49467e-15, -106.066, -1
 transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, -106.066, 106.066, -1.9484e-14, -106.066, -20.9412, -6.40007, 6.40007)
 
 [node name="Pod3NR" type="Node3D" parent="scaledown/Thrusters"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Thruster1" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
 transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -16.37, -6.50648, -6.50648)
@@ -179,9 +199,20 @@ transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, 106.066, -1
 
 [node name="Lights" type="Node3D" parent="scaledown"]
 
-[node name="frigate" parent="scaledown" instance=ExtResource("3_5u4ba")]
+[node name="Beacon" type="Node3D" parent="scaledown/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.92943, -7.23529, 0)
+script = ExtResource("3_wxm7r")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.0301644, 0, 0)
-visible = false
-spot_angle = 30.0
+[node name="Light" type="OmniLight3D" parent="scaledown/Lights/Beacon"]
+layers = 2
+light_color = Color(1, 0.03, 0.03, 1)
+light_energy = 0.05
+omni_range = 0.005
+
+[node name="Emit" type="MeshInstance3D" parent="scaledown/Lights/Beacon"]
+mesh = SubResource("CylinderMesh_ulwg0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="scaledown/Lights/Beacon"]
+mesh = SubResource("CylinderMesh_xrp77")
+
+[node name="frigate" parent="scaledown" instance=ExtResource("3_5u4ba")]

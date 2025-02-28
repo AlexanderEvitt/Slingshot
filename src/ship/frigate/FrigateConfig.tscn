@@ -42,6 +42,9 @@ layers = 2
 [node name="FinalHull" parent="." index="9"]
 layers = 2
 
+[node name="Cube" parent="." index="11"]
+layers = 2
+
 [node name="ConkLogo" type="Sprite3D" parent="." index="12"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.56628, 7.26432, 0)
 layers = 2
