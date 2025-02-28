@@ -111,71 +111,71 @@ transform = Transform3D(9.18485e-15, 150, 0, -150, 9.18485e-15, 0, 0, 0, 150, -1
 [node name="Thruster8" parent="scaledown/Thrusters/Pod1" instance=ExtResource("2_nl3g8")]
 transform = Transform3D(-2.75546e-14, -150, 0, 150, -2.75546e-14, 0, 0, 0, 150, -20.9412, 9.05106, 0)
 
-[node name="Pod2" type="Node3D" parent="scaledown/Thrusters"]
-transform = Transform3D(1, 0, 0, 0, -0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0)
+[node name="Pod2NR" type="Node3D" parent="scaledown/Thrusters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Thruster1" parent="scaledown/Thrusters/Pod2" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -16.37, 9.20155, 0)
+[node name="Thruster1" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -16.37, -6.50648, 6.50648)
 down = true
 
-[node name="Thruster2" parent="scaledown/Thrusters/Pod2" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, -16.368, 9.04997, 0.144937)
+[node name="Thruster2" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -16.368, -6.50178, 6.29681)
 roll_left = true
 
-[node name="Thruster3" parent="scaledown/Thrusters/Pod2" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, -16.368, 9.05, -0.145)
+[node name="Thruster3" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, 106.066, -106.066, 0, 106.066, 106.066, -16.368, -6.29679, 6.50185)
 roll_right = true
 
-[node name="Thruster4" parent="scaledown/Thrusters/Pod2" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -19.5736, 9.20155, 0)
+[node name="Thruster4" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -19.5736, -6.50648, 6.50648)
 down = true
 
-[node name="Thruster5" parent="scaledown/Thrusters/Pod2" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, -19.5716, 9.04997, 0.144937)
+[node name="Thruster5" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -19.5716, -6.50178, 6.29681)
 roll_left = true
 
-[node name="Thruster6" parent="scaledown/Thrusters/Pod2" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, -19.5716, 9.05, -0.145)
+[node name="Thruster6" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, 106.066, -106.066, 0, 106.066, 106.066, -19.5716, -6.29679, 6.50185)
 roll_right = true
 
-[node name="Thruster7" parent="scaledown/Thrusters/Pod2" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(9.18485e-15, 150, 0, -150, 9.18485e-15, 0, 0, 0, 150, -14.9866, 9.05106, 0)
+[node name="Thruster7" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(9.18485e-15, 150, 0, 106.066, -6.49467e-15, -106.066, -106.066, 6.49467e-15, -106.066, -14.9866, -6.40007, 6.40007)
 
-[node name="Thruster8" parent="scaledown/Thrusters/Pod2" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(-2.75546e-14, -150, 0, 150, -2.75546e-14, 0, 0, 0, 150, -20.9412, 9.05106, 0)
+[node name="Thruster8" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, -106.066, 106.066, -1.9484e-14, -106.066, -20.9412, -6.40007, 6.40007)
 
-[node name="Pod3" type="Node3D" parent="scaledown/Thrusters"]
-transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0)
+[node name="Pod3NR" type="Node3D" parent="scaledown/Thrusters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Thruster1" parent="scaledown/Thrusters/Pod3" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -16.37, 9.20155, 0)
+[node name="Thruster1" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -16.37, -6.50648, -6.50648)
 down = true
 
-[node name="Thruster2" parent="scaledown/Thrusters/Pod3" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, -16.368, 9.04997, 0.144937)
+[node name="Thruster2" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, 106.066, 106.066, 0, -106.066, 106.066, -16.368, -6.29681, -6.50178)
 roll_left = true
 
-[node name="Thruster3" parent="scaledown/Thrusters/Pod3" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, -16.368, 9.05, -0.145)
+[node name="Thruster3" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -16.368, -6.50185, -6.29679)
 roll_right = true
 
-[node name="Thruster4" parent="scaledown/Thrusters/Pod3" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -19.5736, 9.20155, 0)
+[node name="Thruster4" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -19.5736, -6.50648, -6.50648)
 down = true
 
-[node name="Thruster5" parent="scaledown/Thrusters/Pod3" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, -19.5716, 9.04997, 0.144937)
+[node name="Thruster5" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, 106.066, 106.066, 0, -106.066, 106.066, -19.5716, -6.29681, -6.50178)
 roll_left = true
 
-[node name="Thruster6" parent="scaledown/Thrusters/Pod3" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, -19.5716, 9.05, -0.145)
+[node name="Thruster6" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -19.5716, -6.50185, -6.29679)
 roll_right = true
 
-[node name="Thruster7" parent="scaledown/Thrusters/Pod3" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(9.18485e-15, 150, 0, -150, 9.18485e-15, 0, 0, 0, 150, -14.9866, 9.05106, 0)
+[node name="Thruster7" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(9.18485e-15, 150, 0, 106.066, -6.49467e-15, 106.066, 106.066, -6.49467e-15, -106.066, -14.9866, -6.40007, -6.40007)
 
-[node name="Thruster8" parent="scaledown/Thrusters/Pod3" instance=ExtResource("2_nl3g8")]
-transform = Transform3D(-2.75546e-14, -150, 0, 150, -2.75546e-14, 0, 0, 0, 150, -20.9412, 9.05106, 0)
+[node name="Thruster8" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
+transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, 106.066, -106.066, 1.9484e-14, -106.066, -20.9412, -6.40007, -6.40007)
 
 [node name="Lights" type="Node3D" parent="scaledown"]
 

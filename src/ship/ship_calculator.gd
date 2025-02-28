@@ -69,7 +69,7 @@ func _process(delta):
 			integrate_normally(delta)
 			auto_disc.emit()
 			nav_disc.emit()
-			thrust = 0
+			thrust = Vector3(0,0,0)
 		else:
 			# Linearly interpolate between points
 			var dt = propagator.planned_times[i+1] - propagator.planned_times[i]
