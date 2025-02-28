@@ -12,6 +12,6 @@ light_color = Color(0.914278, 0.44814, 0, 1)
 [node name="Ring1" parent="." index="1"]
 script = ExtResource("2_dmd6w")
 
-[node name="Ring2" parent="." index="2"]
+[node name="Ring1_001" parent="." index="7"]
 script = ExtResource("2_dmd6w")
 dir = -1

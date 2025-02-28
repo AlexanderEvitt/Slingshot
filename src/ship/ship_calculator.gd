@@ -5,16 +5,17 @@ var velocity
 var attitude
 
 var torque
+var thrust = Vector3(0,0,0)
+var throttle = 0
 
 var propagator
 var plotted_positions
-
-var thrust = 0
 
 @export var start_position : Vector3
 @export var start_velocity : Vector3
 
 var attitude_calculator
+var thrust_calculator
 
 # Autopilot modes
 var current_mode
@@ -40,6 +41,7 @@ var previous_t = 0
 
 func _ready():
 	attitude_calculator = get_node("AttitudeCalculator")
+	thrust_calculator = get_node("Thrusters")
 	propagator = get_node("Propagator")
 	
 	# Initialize values
@@ -53,6 +55,10 @@ func _process(delta):
 	# Update attitude values
 	attitude = attitude_calculator.transform.basis
 	torque = attitude_calculator.torque
+	
+	# Update thrust
+	thrust = thrust_calculator.thrust
+	throttle = thrust_calculator.throttle
 	
 	# If navigation mode and autopilot are engaged, fly along precalculated trajectory
 	if propagator.planned_positions != null and nav_flag and autopilot_flag:
@@ -73,20 +79,13 @@ func _process(delta):
 			
 			# Guess at acceleration
 			planned_acceleration = (propagator.planned_velocities[i+1] - propagator.planned_velocities[i])/dt
-			thrust = planned_acceleration.length()
+			thrust = attitude.inverse()*planned_acceleration.length()
 		
 	# Otherwise, integrate regularly
 	else:
 		integrate_normally(delta)
-		
-	
-	
+
 func integrate_normally(_delta):
-	# Change throttle setting
-	if Input.is_action_just_pressed("full_throttle"):
-		thrust = 0.05
-	if Input.is_action_just_pressed("cut_throttle"):
-		thrust = 0
 	
 	var dt = SystemTime.step*0.03333; # assumes 30 fps, replace with delta
 	
@@ -95,8 +94,8 @@ func integrate_normally(_delta):
 	var gravity = propagator.Acceleration(position,SystemTime.t)
 	
 	# Calculate acceleration on vehicle
-	var prev_acceleration = thrust*attitude.x + prev_gravity
-	var acceleration = thrust*attitude.x + gravity
+	var prev_acceleration = attitude*thrust + prev_gravity
+	var acceleration = attitude*thrust + gravity
 	
 	# Calculate updated position and velocity through Verlet integration
 	position = position + velocity*dt# + 0.5*prev_acceleration*previous_dt**2

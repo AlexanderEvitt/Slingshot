@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c71thxnvwh37i"]
+[gd_scene load_steps=5 format=3 uid="uid://c71thxnvwh37i"]
 
 [ext_resource type="Script" path="res://ship/ship_calculator.gd" id="1_ols0f"]
 [ext_resource type="Script" path="res://ship/attitude.gd" id="2_88nqh"]
 [ext_resource type="Script" path="res://ship/Propagator.cs" id="3_h654o"]
+[ext_resource type="Script" path="res://ship/thrust_calculator.gd" id="4_107xu"]
 
 [node name="OwnShip" type="Node"]
 script = ExtResource("1_ols0f")
@@ -18,3 +19,6 @@ script = ExtResource("2_88nqh")
 [node name="Propagator" type="Node3D" parent="."]
 script = ExtResource("3_h654o")
 n = 400
+
+[node name="Thrusters" type="Node" parent="."]
+script = ExtResource("4_107xu")

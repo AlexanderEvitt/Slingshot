@@ -21,8 +21,8 @@ color_ramp = SubResource("Gradient_iiano")
 noise = SubResource("FastNoiseLite_v3uty")
 
 [sub_resource type="Gradient" id="Gradient_c0u3y"]
-offsets = PackedFloat32Array(0, 0.180328, 0.606557)
-colors = PackedColorArray(0, 0, 0, 1, 0.380392, 0.380392, 0.380392, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0.155738, 0.418033, 0.606557)
+colors = PackedColorArray(0.0475577, 0.0475576, 0.0475576, 1, 0.380392, 0.380392, 0.380392, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_46qho"]
 gradient = SubResource("Gradient_c0u3y")

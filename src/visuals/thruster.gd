@@ -14,27 +14,36 @@ var torque
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	visible = false
-	
 	torque = OwnShip.torque
+	
+	var thrusters = OwnShip.thrust - OwnShip.throttle*Vector3(1,0,0)
+	var my_thrust_vector = transform.basis.y
+	# For some reason flip the fore/aft thrusters
+	if abs(my_thrust_vector.x) == 1:
+		my_thrust_vector.x = -my_thrust_vector.x
+	var likeness = thrusters.dot(my_thrust_vector)
+	likeness = clamp(likeness,0,1)
 	
 	if torque == null:
 		torque = Vector3(0,0,0)
 		
 	# Place in ship frame
 	torque = OwnShip.attitude.inverse()*torque
-	
+	var total_torque = 0
 	if up:
-		call_thruster(torque.z)
+		total_torque = total_torque + (torque.z)
 	if down:
-		call_thruster(-torque.z)
+		total_torque = total_torque + (-torque.z)
 	if left:
-		call_thruster(torque.y)
+		total_torque = total_torque + (torque.y)
 	if right:
-		call_thruster(-torque.y)
+		total_torque = total_torque + (-torque.y)
 	if roll_left:
-		call_thruster(-torque.x)
+		total_torque = total_torque + (-torque.x)
 	if roll_right:
-		call_thruster(torque.x)
+		total_torque = total_torque + (torque.x)
+		
+	call_thruster(total_torque + likeness)
 			
 func call_thruster(t):
 	var unit = 200*Vector3(1,1,1)

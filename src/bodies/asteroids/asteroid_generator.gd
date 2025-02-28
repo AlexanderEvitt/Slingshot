@@ -18,7 +18,7 @@ var count = 0
 func _process(_delta):
 	if count == 0:
 		mesh = generate_icosphere()
-	if count == 20000 and Engine.is_editor_hint():
+	if count == 2000 and Engine.is_editor_hint():
 		count = -1
 		print("refreshing")
 	count += 1
@@ -120,6 +120,7 @@ func _get_middle_point(p1: int, p2: int, vertices: Array, vertex_map: Dictionary
 
 func _compute_uv(v: Vector3) -> Vector2:
 	# Spherical mapping to UV coordinates
+	v = v / ((1 + terrain_height1)*(1 + terrain_height2))
 	var u = 0.5 + atan2(v.z, v.x) / (2.0 * PI)
 	var v_coord = 0.5 - asin(v.y) / PI
 	return Vector2(u, v_coord)
