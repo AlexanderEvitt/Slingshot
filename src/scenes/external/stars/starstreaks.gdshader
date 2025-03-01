@@ -4,6 +4,7 @@ render_mode unshaded;
 uniform vec3 rotation_axis = vec3(1.0,0.0,0.0);
 uniform float rotation_angle = 1.0;
 uniform bool rotate = true;
+uniform float brightness = 1.0;
 
 varying float v;
 
@@ -51,7 +52,7 @@ void vertex() {
 		}
 		v = v + 1.0;
 	}
-	COLOR = vec4(rand(v));
+	COLOR = brightness*vec4(rand(v));
 }
 
 void fragment() {

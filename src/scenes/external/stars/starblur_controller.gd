@@ -31,8 +31,14 @@ func _process(_delta: float) -> void:
 	# Send values to shader
 	mat.set_shader_parameter("rotation_axis", damped_axis)
 	mat.set_shader_parameter("rotation_angle", damped_angle)
+	mat.set_shader_parameter("brightness", bright(damped_angle))
 
 	# Update previous basis for next frame
 	prev_basis = current_basis
 	
 	global_transform.basis = Basis()
+
+func bright(angle):
+	var lim = PI/16
+	var b = (lim - angle)/lim
+	return clamp(b,0,1)
