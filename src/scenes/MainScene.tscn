@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://n78uivx6mb2"]
+[gd_scene load_steps=7 format=3 uid="uid://n78uivx6mb2"]
 
 [ext_resource type="Script" path="res://ui/menu/menu_handler.gd" id="1_tywdm"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="2_56nas"]
 [ext_resource type="PackedScene" uid="uid://ckg801jn7baa1" path="res://ui/menu/MenuScene.tscn" id="2_f6v6y"]
 [ext_resource type="Script" path="res://ship/ships_handler.gd" id="4_cahyk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jcvw1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fvy80"]
+margin = 1.0
+radius = 6371.0
 
 [node name="GameRoot" type="Node"]
 
@@ -12,7 +18,7 @@ script = ExtResource("1_tywdm")
 
 [node name="MenuUI" parent="UI" instance=ExtResource("2_f6v6y")]
 
-[node name="Planets" type="Node" parent="."]
+[node name="Planets" type="Node3D" parent="."]
 
 [node name="Sun" type="Node3D" parent="Planets" groups=["Bodies"]]
 script = ExtResource("2_56nas")
@@ -32,10 +38,15 @@ body = "VENUS"
 GM = 324859.0
 
 [node name="Earth" type="Node3D" parent="Planets" groups=["Bodies"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 0, 0)
 script = ExtResource("2_56nas")
 body = "EARTH"
 GM = 398600.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Planets/Earth"]
+physics_material_override = SubResource("PhysicsMaterial_jcvw1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Earth/StaticBody3D"]
+shape = SubResource("SphereShape3D_fvy80")
 
 [node name="Luna" type="Node3D" parent="Planets" groups=["Bodies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 12989.3)
@@ -73,5 +84,5 @@ script = ExtResource("2_56nas")
 body = "NEPTUNE BARYCENTER"
 GM = 6.83653e+06
 
-[node name="Ships" type="Node" parent="."]
+[node name="Ships" type="Node3D" parent="."]
 script = ExtResource("4_cahyk")

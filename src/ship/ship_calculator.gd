@@ -1,6 +1,5 @@
-extends Node
+extends Node3D
 
-var position
 var velocity
 var attitude
 
@@ -52,7 +51,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# Update attitude values
+	# Update values for this iteration
 	attitude = attitude_calculator.transform.basis
 	torque = attitude_calculator.torque
 	
@@ -71,15 +70,7 @@ func _process(delta):
 			nav_disc.emit()
 			thrust = Vector3(0,0,0)
 		else:
-			# Linearly interpolate between points
-			var dt = propagator.planned_times[i+1] - propagator.planned_times[i]
-			var frac = (SystemTime.t - propagator.planned_times[i])/dt
-			position = (1 - frac)*propagator.planned_positions[i] + frac*propagator.planned_positions[i+1]
-			velocity = (1 - frac)*propagator.planned_velocities[i] + frac*propagator.planned_velocities[i+1]
-			
-			# Guess at acceleration
-			planned_acceleration = (propagator.planned_velocities[i+1] - propagator.planned_velocities[i])/dt
-			thrust = attitude.inverse()*planned_acceleration.length()
+			move_by_plan()
 		
 	# Otherwise, integrate regularly
 	else:
@@ -101,9 +92,28 @@ func integrate_normally(_delta):
 	position = position + velocity*dt# + 0.5*prev_acceleration*previous_dt**2
 	velocity = velocity + 1*(0*acceleration+prev_acceleration)*dt
 
+func move_by_plan():
+	var i = find_time_index(propagator.planned_times,SystemTime.t)
+	# Linearly interpolate between points
+	var dt = propagator.planned_times[i+1] - propagator.planned_times[i]
+	var frac = (SystemTime.t - propagator.planned_times[i])/dt
+	position = (1 - frac)*propagator.planned_positions[i] + frac*propagator.planned_positions[i+1]
+	velocity = (1 - frac)*propagator.planned_velocities[i] + frac*propagator.planned_velocities[i+1]
+	
+	# Guess at acceleration
+	planned_acceleration = (propagator.planned_velocities[i+1] - propagator.planned_velocities[i])/dt
+	throttle = planned_acceleration.length()
+	thrust = planned_acceleration
+
+
 func find_time_index(times,time):
 	var index = 0
 	for i in range(0,times.size()):
 		if times[i] < time:
 			index = i
 	return index
+
+
+func _on_collision(body: Node) -> void:
+	print("Collided with:")
+	print(body.name)

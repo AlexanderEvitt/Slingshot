@@ -1,15 +1,22 @@
-extends RigidBody3D
+extends Node3D
 
 var ship
 var torque = Vector3(0,0,0)
 var max_torque = 0.5
+var angular_velocity = Vector3(0,0,0)
+
+# Moment of inertia tensor (assuming diagonal for simplicity)
+var inertia: Vector3 = Vector3(1, 1, 1)  # Modify based on spacecraft geometry
+var inv_inertia: Vector3 = Vector3(1.0 / inertia.x, 1.0 / inertia.y, 1.0 / inertia.z)
 
 func _ready():
 	ship = get_parent()
 
 func _process(_delta):
+	# Initialize zero torque
 	torque = Vector3(0,0,0)
 	
+	# Add up torques from input
 	if Input.is_action_pressed("down"):
 		torque = torque + max_torque*(-transform.basis.z)
 	if Input.is_action_pressed("up"):
@@ -48,7 +55,7 @@ func _process(_delta):
 			"NAV":
 				target = ship.planned_acceleration
 		
-		# Calculate torque
+		# Calculate torque from autopilot
 		if target != null:
 			# Normalize
 			target = target.normalized()
@@ -65,16 +72,32 @@ func _process(_delta):
 		torque -= 0.1*angular_velocity
 		
 	# Apply torque
-	apply_torque(torque)
+	integrate_rotation(torque)
 		
 	# Allow rotation if timestep is 1
-	if SystemTime.step == 1:
-		lock_rotation = false
-	# Just point at target otherwise
-	else:
-		lock_rotation = true
+	if SystemTime.step != 1:
+		angular_velocity = Vector3(0,0,0)
 		
+		# Point at target attitude
 		if target != null:
 			look_at(target)
 			rotate_object_local(Vector3(0, 1, 0), PI/2)
-		
+
+func integrate_rotation(applied_torque):
+	# Compute angular acceleration using Euler's equations
+	var dt = 0.03333
+	var inertia_cross_omega = Vector3(
+		(inertia.y - inertia.z) * angular_velocity.y * angular_velocity.z,
+		(inertia.z - inertia.x) * angular_velocity.z * angular_velocity.x,
+		(inertia.x - inertia.y) * angular_velocity.x * angular_velocity.y)
+
+	var angular_acceleration = (applied_torque - inertia_cross_omega) * inv_inertia
+
+	# Integrate angular velocity using explicit Euler method
+	angular_velocity += angular_acceleration * dt
+
+	# Convert local angular velocity to a rotation quaternion
+	# Apply rotation using Godot's built-in method
+	rotate_object_local(Vector3.RIGHT, angular_velocity.x * dt)
+	rotate_object_local(Vector3.UP, angular_velocity.y * dt)
+	rotate_object_local(Vector3.BACK, angular_velocity.z * dt)

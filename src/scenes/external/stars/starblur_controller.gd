@@ -39,6 +39,6 @@ func _process(_delta: float) -> void:
 	global_transform.basis = Basis()
 
 func bright(angle):
-	var lim = PI/16
+	var lim = PI/12
 	var b = (lim - angle)/lim
 	return clamp(b,0,1)

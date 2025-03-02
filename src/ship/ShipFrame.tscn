@@ -1,24 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://c71thxnvwh37i"]
+[gd_scene load_steps=7 format=3 uid="uid://c71thxnvwh37i"]
 
 [ext_resource type="Script" path="res://ship/ship_calculator.gd" id="1_ols0f"]
 [ext_resource type="Script" path="res://ship/attitude.gd" id="2_88nqh"]
 [ext_resource type="Script" path="res://ship/Propagator.cs" id="3_h654o"]
 [ext_resource type="Script" path="res://ship/thrust_calculator.gd" id="4_107xu"]
 
-[node name="OwnShip" type="Node"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qcdir"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
+size = Vector3(0.05, 0.015, 0.015)
+
+[node name="OwnShip" type="Node3D"]
 script = ExtResource("1_ols0f")
 start_position = Vector3(42164, -50, 0)
 start_velocity = Vector3(0, 3.075, 0)
 
-[node name="AttitudeCalculator" type="RigidBody3D" parent="."]
+[node name="AttitudeCalculator" type="Node3D" parent="."]
+script = ExtResource("2_88nqh")
+
+[node name="CollisionDetector" type="RigidBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_qcdir")
 gravity_scale = 0.0
 inertia = Vector3(1, 1, 1)
 can_sleep = false
-script = ExtResource("2_88nqh")
+freeze_mode = 1
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionDetector"]
+shape = SubResource("BoxShape3D_fdpi8")
 
 [node name="Propagator" type="Node3D" parent="."]
 script = ExtResource("3_h654o")
 n = 400
 
-[node name="Thrusters" type="Node" parent="."]
+[node name="Thrusters" type="Node3D" parent="."]
 script = ExtResource("4_107xu")
+
+[connection signal="body_entered" from="CollisionDetector" to="." method="_on_collision"]
