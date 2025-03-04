@@ -72,7 +72,7 @@ func _process(_delta):
 		torque -= 0.1*angular_velocity
 		
 	# Apply torque
-	integrate_rotation(torque)
+	integrate_rotation(transform.basis.inverse()*torque)
 		
 	# Allow rotation if timestep is 1
 	if SystemTime.step != 1:
@@ -101,3 +101,4 @@ func integrate_rotation(applied_torque):
 	rotate_object_local(Vector3.RIGHT, angular_velocity.x * dt)
 	rotate_object_local(Vector3.UP, angular_velocity.y * dt)
 	rotate_object_local(Vector3.BACK, angular_velocity.z * dt)
+	transform = transform.orthonormalized()

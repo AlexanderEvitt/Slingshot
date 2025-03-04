@@ -15,6 +15,7 @@ var plotted_positions
 
 var attitude_calculator
 var thrust_calculator
+var collision_calculator
 
 # Autopilot modes
 var current_mode
@@ -35,12 +36,15 @@ signal nav_disc
 var previous_dt = 0.03333
 var previous_t = 0
 
+var mass = 1
+
 
 # this module moves data from the master scene an autoload where others can access it
 
 func _ready():
 	attitude_calculator = get_node("AttitudeCalculator")
 	thrust_calculator = get_node("Thrusters")
+	collision_calculator = get_node("CollisionDetector")
 	propagator = get_node("Propagator")
 	
 	# Initialize values
@@ -91,6 +95,9 @@ func integrate_normally(_delta):
 	# Calculate updated position and velocity through Verlet integration
 	position = position + velocity*dt# + 0.5*prev_acceleration*previous_dt**2
 	velocity = velocity + 1*(0*acceleration+prev_acceleration)*dt
+	
+	# Change the velociity by the impulse
+	velocity += collision_calculator.impulse/mass
 
 func move_by_plan():
 	var i = find_time_index(propagator.planned_times,SystemTime.t)
@@ -112,8 +119,3 @@ func find_time_index(times,time):
 		if times[i] < time:
 			index = i
 	return index
-
-
-func _on_collision(body: Node) -> void:
-	print("Collided with:")
-	print(body.name)
