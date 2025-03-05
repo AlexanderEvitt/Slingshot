@@ -67,12 +67,12 @@ func _process(_delta):
 			
 	# Calculate damping if stabilizers OR autopilot is enabled
 	if ship.stab_flag or ship.autopilot_flag:
-		torque -= 2*angular_velocity
+		torque -= 2*(angular_velocity)
 	else:
-		torque -= 0.1*angular_velocity
+		torque -= 0.1*(angular_velocity)
 		
 	# Apply torque
-	integrate_rotation(transform.basis.inverse()*torque)
+	integrate_rotation(torque)
 		
 	# Allow rotation if timestep is 1
 	if SystemTime.step != 1:
@@ -85,6 +85,7 @@ func _process(_delta):
 
 func integrate_rotation(applied_torque):
 	# Compute angular acceleration using Euler's equations
+	#applied_torque = transform.basis.inverse()*applied_torque
 	var dt = 0.03333
 	var inertia_cross_omega = Vector3(
 		(inertia.y - inertia.z) * angular_velocity.y * angular_velocity.z,
@@ -98,7 +99,9 @@ func integrate_rotation(applied_torque):
 
 	# Convert local angular velocity to a rotation quaternion
 	# Apply rotation using Godot's built-in method
-	rotate_object_local(Vector3.RIGHT, angular_velocity.x * dt)
-	rotate_object_local(Vector3.UP, angular_velocity.y * dt)
-	rotate_object_local(Vector3.BACK, angular_velocity.z * dt)
-	transform = transform.orthonormalized()
+	var ang_speed = angular_velocity.length()
+	if ang_speed > 0.0:
+		var rotation_axis = angular_velocity.normalized()
+		var ang_vel_quat = Quaternion(rotation_axis, ang_speed * dt)  # Axis-angle representation
+		transform.basis = Basis(ang_vel_quat) * transform.basis
+		transform = transform.orthonormalized()
