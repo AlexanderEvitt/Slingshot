@@ -60,3 +60,12 @@ wattage = percent_emmitted*E*m_fuel / tb;
 dist = 74000000;
 flux = wattage/(4*pi*dist^2);
 flux/1400 % in percent of solar irradiance at 1AU
+
+%% Centrifugal ring sizing
+clear; clc;
+w = 0.03; % rad /s
+r = 10000;
+a = (w^2)*r
+
+rpm = (w/(2*pi))*(60)
+hpr = (1/rpm)/60

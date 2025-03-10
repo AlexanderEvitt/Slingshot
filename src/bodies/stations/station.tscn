@@ -1,23 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://dctsdmrx5vrvw"]
+[gd_scene load_steps=3 format=3 uid="uid://dctsdmrx5vrvw"]
 
 [ext_resource type="PackedScene" uid="uid://6b0k1yt7sewb" path="res://bodies/stations/station.glb" id="1_387el"]
+[ext_resource type="Material" uid="uid://j7740yqrta6u" path="res://bodies/stations/DottedWindows.tres" id="2_1n4mf"]
 
 [node name="station" instance=ExtResource("1_387el")]
 
+[node name="Station" parent="." index="0"]
+layers = 2
+
+[node name="Docks" parent="." index="1"]
+layers = 2
+
+[node name="DockE" parent="Docks" index="0"]
+layers = 2
+
+[node name="Clamps1" parent="Docks/DockE" index="0"]
+layers = 2
+
+[node name="Springs" parent="Docks/DockE/Clamps1" index="0"]
+layers = 2
+
+[node name="Clamps2" parent="Docks/DockE" index="1"]
+layers = 2
+
 [node name="OmniLight3D" type="OmniLight3D" parent="Docks/DockE" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04926, 0, -0.00485168)
+layers = 2
 light_color = Color(1, 0.854333, 0.62, 1)
 light_energy = 0.01
 omni_range = 0.1
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Docks/DockE" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00153184, 0, -0.000150873)
+layers = 2
 light_color = Color(1, 0.854333, 0.62, 1)
 light_energy = 0.01
 omni_range = 0.1
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Docks/DockE" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034532, 0, 0.0034011)
+layers = 2
 light_color = Color(1, 0.854333, 0.62, 1)
 light_energy = 0.01
 omni_range = 0.1
+
+[node name="Ring1" parent="." index="2"]
+layers = 2
+
+[node name="FuelAssembly" parent="." index="3"]
+layers = 2
+
+[node name="Ring2" parent="." index="4"]
+layers = 2
+surface_material_override/1 = ExtResource("2_1n4mf")
+
+[node name="Engines" parent="." index="5"]
+layers = 2
+
+[node name="Lights" type="Node3D" parent="." index="6"]

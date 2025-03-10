@@ -37,6 +37,10 @@ _subresources={
 "use_external/enabled": true,
 "use_external/path": "res://bodies/stations/BlackPaint.tres"
 },
+"DottedWindows": {
+"use_external/enabled": true,
+"use_external/path": "res://bodies/stations/DottedWindows.tres"
+},
 "Floodlights": {
 "use_external/enabled": true,
 "use_external/path": "res://bodies/stations/Floodlights.tres"
