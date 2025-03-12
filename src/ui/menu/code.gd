@@ -15,7 +15,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if !done:
-		await get_tree().create_timer(200*randf()).timeout
+		var t = 200*randf()
+		if i < 5:
+			t = 0
+		await get_tree().create_timer(t).timeout
 	
 	if !done:
 		text = text + snippets[i] + "\n"

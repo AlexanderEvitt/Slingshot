@@ -38,20 +38,16 @@ _subresources={
 "use_external/path": "res://bodies/stations/BlackPaint.tres"
 },
 "DottedWindows": {
-"use_external/enabled": true,
+"use_external/enabled": false,
 "use_external/path": "res://bodies/stations/DottedWindows.tres"
 },
 "Floodlights": {
 "use_external/enabled": true,
 "use_external/path": "res://bodies/stations/Floodlights.tres"
 },
-"HangarPaint": {
+"WhitePaint": {
 "use_external/enabled": true,
-"use_external/path": "res://bodies/stations/HangarPaint.tres"
-},
-"LightPaint": {
-"use_external/enabled": true,
-"use_external/path": "res://bodies/stations/LightPaint.tres"
+"use_external/path": "res://bodies/stations/WhitePaint.tres"
 },
 "Windows": {
 "use_external/enabled": true,
