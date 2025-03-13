@@ -1,8 +1,8 @@
 # Slingshot
 ## Astrodynamics Simulator
 
-![Flying Past Stars](streaks.png)
 ![Logo](src/visuals/logo/patch.png)
+![Flying Past Stars](streaks.png)
 
 Slingshot is a full-up, 6DOF astrodynamics simulation with a cool UI. Aimed at being somewhere between a video game and a display for flight operations teams, it presents a complete sandbox for spacecraft navigation and control.
 
@@ -21,6 +21,7 @@ Demo footage: [YouTube Link](https://youtu.be/0PLd5gBSCrM)
 - n-body physics providing a numerically-integrated trajectory (with symplectic integrators and adaptive step size control)
 - Flight instruments to allow "eyeballing" trajectories, allowing the user to get familiar with n-body motion
 - Autopilot capable of plotting "flip-and-burn" trajectories between planets
+- Translation and docking simulation
 - Cool graphics that belong on the big screen in a control room
 
 ## Planned Features
@@ -28,7 +29,6 @@ Demo footage: [YouTube Link](https://youtu.be/0PLd5gBSCrM)
 - More minor solar system bodies, moons, asteroids, etc
 - More autopilot algorithms to assist in trajectory creation
 - Numerical trajectory optimizaiton algorithms
-- Full rendezvous and docking simulation
 - Power and propulsion simulation
 - 2D plots to aid trajectory design
 - Visual additions - Lagrange points, manifolds, gravitational potential plots, and more
