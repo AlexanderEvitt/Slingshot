@@ -2,7 +2,7 @@
 ## Astrodynamics Simulator
 
 ![Flying Past Stars](streaks.png)
-![Logo](src/visuals/logo/wide.png)
+![Logo](src/visuals/logo/patch.png)
 
 Slingshot is a full-up, 6DOF astrodynamics simulation with a cool UI. Aimed at being somewhere between a video game and a display for flight operations teams, it presents a complete sandbox for spacecraft navigation and control.
 
