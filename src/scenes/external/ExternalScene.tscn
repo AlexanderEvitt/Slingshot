@@ -210,7 +210,7 @@ skeleton = NodePath("../../../../..")
 script = ExtResource("5_hwbsh")
 
 [node name="Starfield" parent="Spacecraft/CameraRig/CameraRotator/Camera3D" instance=ExtResource("8_wqcie")]
-transform = Transform3D(6.12323e-16, -10, 6.12323e-16, 0, 6.12323e-16, 10, -10, -6.12323e-16, 3.7494e-32, 0, 0, -0.1)
+transform = Transform3D(6.12323e-16, -10, 6.12323e-16, 0, 6.12323e-16, 10, -10, -6.12323e-16, 3.7494e-32, 0, 0, 0)
 script = ExtResource("9_licgw")
 
 [node name="Pointer" type="Node3D" parent="Spacecraft"]

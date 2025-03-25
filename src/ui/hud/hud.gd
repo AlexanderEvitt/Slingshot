@@ -15,7 +15,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 		# Get and set frame
-	frame_label.text = "FRAME" + Conversions.bodies[Conversions.f].name
+	frame_label.text = "FRAME " + Conversions.bodies[Conversions.f].name
 	
 	# Calculate and set altitude
 	var r = Conversions.ToFrame(OwnShip.position,SystemTime.t)

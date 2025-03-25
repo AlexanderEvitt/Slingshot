@@ -15,16 +15,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	# Update camera (as it changes during ready)
+	cam = get_viewport().get_camera_3d()
+	
 	var current_basis = cam.global_transform.basis
 	var rotation_change = current_basis * prev_basis.inverse()
 	
 	# Extract rotation axis and angle
 	var rotation_axis = rotation_change.get_rotation_quaternion().get_axis()
 	var rotation_angle =  rotation_change.get_rotation_quaternion().get_angle()  # The rotation angle (float, in radians)
-	
+
 	# Damp angle so it winds up and winds down
 	# Only change axis if there's actual rotation
-	if rotation_angle > 0.01:
+	if rotation_angle > 0.001:
 		damped_axis = rotation_axis
 	damped_angle = (w*damped_angle + (1-w)*rotation_angle)
 

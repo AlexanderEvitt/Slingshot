@@ -2,6 +2,9 @@ extends RigidBody3D
 
 var impulse = Vector3(0,0,0)
 
+func _process(_delta):
+	transform.basis = OwnShip.attitude
+
 func _integrate_forces(state):
 	impulse = Vector3(0,0,0)
 	for i in range(state.get_contact_count()):

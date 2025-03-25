@@ -81,7 +81,6 @@ theme = ExtResource("2_bmshc")
 script = ExtResource("2_bh7rb")
 
 [node name="MainUI" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1292,7 +1291,7 @@ script = ExtResource("8_xpkhs")
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(1452, 839)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="CamRoot" parent="MainUI/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_mdjyt")]
 
@@ -1740,6 +1739,7 @@ expand_mode = 2
 stretch_mode = 4
 
 [node name="FPVUI" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1760,7 +1760,7 @@ set_fov = false
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(1916, 1080)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="CamRoot" parent="FPVUI/SubViewportContainer/SubViewport" instance=ExtResource("6_mdjyt")]
 camera_mode = true

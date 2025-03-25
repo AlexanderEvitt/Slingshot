@@ -71,17 +71,21 @@ func _process(_delta):
 	else:
 		torque -= 0.1*(angular_velocity)
 		
-	# Apply torque
-	integrate_rotation(torque)
+	# Apply torque if in real time
+	if SystemTime.step == 1:
+		integrate_rotation(torque)
 		
-	# Allow rotation if timestep is 1
-	if SystemTime.step != 1:
+	# Disallow rotation if timestep is not 1
+	elif SystemTime.step != 1:
 		angular_velocity = Vector3(0,0,0)
 		
 		# Point at target attitude
 		if target != null:
-			look_at(target)
-			rotate_object_local(Vector3(0, 1, 0), PI/2)
+			print(get_parent().transform.basis)
+			look_at(target, Vector3.UP, true)
+			
+			
+			#rotate_object_local(Vector3(0, 1, 0), PI/2)
 
 func integrate_rotation(applied_torque):
 	# Compute angular acceleration using Euler's equations
