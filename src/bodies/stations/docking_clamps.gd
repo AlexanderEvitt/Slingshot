@@ -2,7 +2,7 @@ extends MeshInstance3D
 
 var station
 var center
-var range = 0.005
+var drange = 0.005
 @export var clamp_pos = Vector3(22.29,0,-7.4468)
 
 # Called when the node enters the scene tree for the first time.
@@ -20,5 +20,5 @@ func _process(_delta: float) -> void:
 	global_position = ship_global + OwnShip.attitude*clamp_pos
 	
 	# Clamp to a small range of motion
-	position = position.clamp(Vector3(-range,-range,-3*range),Vector3(range,range,3*range))
+	position = position.clamp(Vector3(-drange,-drange,-3*drange),Vector3(drange,drange,3*drange))
 	

@@ -10,7 +10,7 @@ func _ready() -> void:
 	# Start resource loader
 	ResourceLoader.load_threaded_request(UI_SCENE_PATH)
 	# Connect start button signal
-	start_button = get_node("MenuUI/Panel/VBoxContainer/MainPanel/Button")
+	start_button = get_node("MenuUI/VBoxContainer/MainPanel/Button")
 	start_button.pressed.connect(_on_startup)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

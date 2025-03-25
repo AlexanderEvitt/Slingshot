@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckg801jn7baa1"]
+[gd_scene load_steps=8 format=3 uid="uid://ckg801jn7baa1"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_bgvoi"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="2_tlo2w"]
@@ -6,9 +6,6 @@
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="9_1tlqv"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="10_nthiu"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="16_g0tso"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0qci"]
-bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
 texture = ExtResource("16_g0tso")
@@ -23,68 +20,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_bgvoi")
 
-[node name="Panel" type="Panel" parent="."]
-z_index = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.3
-anchor_right = 0.7
-anchor_bottom = 0.7
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_a0qci")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 3.22
-texture = ExtResource("2_tlo2w")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="MainPanel" type="Panel" parent="Panel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("10_nthiu")
-
-[node name="TriangleCutout" type="Panel" parent="Panel/VBoxContainer/MainPanel"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
-
-[node name="Button" type="Button" parent="Panel/VBoxContainer/MainPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("10_nthiu")
-text = "START SIMULATION"
-
-[node name="Label" type="Label" parent="."]
+[node name="Version" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,3 +172,55 @@ text = "========================================================================
 ================================================================================
 "
 script = ExtResource("6_aybfq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.22
+texture = ExtResource("2_tlo2w")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MainPanel" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("10_nthiu")
+
+[node name="TriangleCutout" type="Panel" parent="VBoxContainer/MainPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
+
+[node name="Button" type="Button" parent="VBoxContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_nthiu")
+text = "START SIMULATION"

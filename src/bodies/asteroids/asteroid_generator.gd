@@ -10,7 +10,7 @@ extends MeshInstance3D
 @export var noise2: NoiseTexture2D
 @export var terrain_height1 = 0.1
 @export var terrain_height2 = 0.1
-var refresh = true
+@export var refresh = true
 
 var count = 0
 	
@@ -18,7 +18,7 @@ var count = 0
 func _process(_delta):
 	if count == 0:
 		mesh = generate_icosphere()
-	if count == 2000 and Engine.is_editor_hint():
+	if count == 2000 and Engine.is_editor_hint() and refresh:
 		count = -1
 		print("refreshing")
 	count += 1
