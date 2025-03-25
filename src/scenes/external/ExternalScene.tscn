@@ -219,9 +219,9 @@ script = ExtResource("9_licgw")
 
 [node name="NarrowCam" type="Camera3D" parent="Spacecraft/Pointer"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
-fov = 37.8493
+fov = 50.0
 size = 2.0
-near = 0.01
+near = 0.001
 far = 1e+07
 
 [node name="CenterMarker" type="Sprite3D" parent="Spacecraft/Pointer/NarrowCam"]
