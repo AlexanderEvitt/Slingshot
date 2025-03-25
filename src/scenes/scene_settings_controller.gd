@@ -7,6 +7,7 @@ var cam
 @export var camera_mode : bool
 @export var planet_orbits : bool
 @export var zoomable : bool
+@export var hud_enable = false
 
 func _ready():
 	var spacecraft = get_node("Spacecraft")

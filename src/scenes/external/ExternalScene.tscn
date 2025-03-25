@@ -1,18 +1,23 @@
-[gd_scene load_steps=70 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=75 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
+[ext_resource type="Texture2D" uid="uid://djyppx76cf4t5" path="res://scenes/attitude/prograde.png" id="3_ehpfi"]
+[ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="3_p1375"]
 [ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/frigate/PlayerShip.tscn" id="3_r7nlu"]
 [ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="4_bholp"]
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="4_n8kbm"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="4_xwbd5"]
+[ext_resource type="Script" path="res://scenes/attitude/prograde_marker.gd" id="4_y4k4s"]
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="5_2nae2"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="5_8bt3m"]
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="5_17hwb"]
+[ext_resource type="Texture2D" uid="uid://d28isjwqdor3u" path="res://scenes/attitude/retrograde.png" id="5_a7blp"]
 [ext_resource type="Script" path="res://ui/external_shader_settings.gd" id="5_hwbsh"]
 [ext_resource type="Script" path="res://scenes/external/sun_light.gd" id="7_6u2xr"]
 [ext_resource type="PackedScene" uid="uid://bpfrq18j1sk54" path="res://scenes/external/stars/stars.tscn" id="8_wqcie"]
+[ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="9_j0ace"]
 [ext_resource type="Script" path="res://scenes/external/stars/starblur_controller.gd" id="9_licgw"]
 [ext_resource type="Texture2D" uid="uid://dgl8wj4mkimt3" path="res://bodies/photo/MarsTrue.jpg" id="10_mv0q4"]
 [ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/photo/JupiterTrue.jpg" id="11_74p1c"]
@@ -182,13 +187,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9788.97)
 script = ExtResource("2_dogxd")
 camera_mode = true
 
-[node name="NarrowCam" type="Camera3D" parent="Spacecraft"]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
-fov = 37.8493
-size = 2.0
-near = 0.01
-far = 1e+07
-
 [node name="CameraRig" type="Node3D" parent="Spacecraft"]
 transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
 
@@ -219,6 +217,22 @@ script = ExtResource("9_licgw")
 
 [node name="player_ship" parent="Spacecraft/Pointer" instance=ExtResource("3_r7nlu")]
 
+[node name="NarrowCam" type="Camera3D" parent="Spacecraft/Pointer"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
+fov = 37.8493
+size = 2.0
+near = 0.01
+far = 1e+07
+
+[node name="CenterMarker" type="Sprite3D" parent="Spacecraft/Pointer/NarrowCam"]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.0639505)
+pixel_size = 0.0005
+axis = 0
+no_depth_test = true
+fixed_size = true
+texture = ExtResource("9_j0ace")
+script = ExtResource("3_p1375")
+
 [node name="Plotter" type="Node3D" parent="Spacecraft"]
 visible = false
 script = ExtResource("5_8bt3m")
@@ -229,6 +243,32 @@ slice = true
 visible = false
 script = ExtResource("5_8bt3m")
 color = Color(0.552941, 0, 0.552941, 1)
+
+[node name="HUD" type="Node3D" parent="Spacecraft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00408274, 0.00811089, 0)
+script = ExtResource("3_p1375")
+
+[node name="ProgradeMarker" type="Sprite3D" parent="Spacecraft/HUD"]
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+render_priority = 2
+texture = ExtResource("3_ehpfi")
+script = ExtResource("4_y4k4s")
+retro = 1
+side_check = false
+
+[node name="RetroMarker" type="Sprite3D" parent="Spacecraft/HUD"]
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+render_priority = 2
+texture = ExtResource("5_a7blp")
+script = ExtResource("4_y4k4s")
+retro = -1
+side_check = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_n8kbm")

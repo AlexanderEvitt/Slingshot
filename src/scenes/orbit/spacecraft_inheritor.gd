@@ -21,7 +21,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	# Use camera mode to determine whether camera is included in rotation
-	if camera_mode:
+	if true:
 		pointer.transform.basis = OwnShip.attitude
 	else:
 		transform.basis = OwnShip.attitude

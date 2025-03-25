@@ -429,11 +429,13 @@ font_size = 24
 outline_size = 0
 
 [node name="CenterMarker" type="Sprite3D" parent="Viewpoint"]
+modulate = Color(0.552941, 0, 0.552941, 1)
 pixel_size = 0.002
 axis = 0
 texture = ExtResource("5_1wtd5")
 
 [node name="ProgradeMarker" type="Sprite3D" parent="."]
+modulate = Color(0.552941, 0, 0.552941, 1)
 pixel_size = 0.002
 billboard = 1
 no_depth_test = true
@@ -443,6 +445,7 @@ script = ExtResource("4_gmmfj")
 retro = 1
 
 [node name="RetroMarker" type="Sprite3D" parent="."]
+modulate = Color(0.552941, 0, 0.552941, 1)
 pixel_size = 0.002
 billboard = 1
 no_depth_test = true
