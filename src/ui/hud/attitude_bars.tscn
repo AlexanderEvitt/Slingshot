@@ -1,0 +1,451 @@
+[gd_scene load_steps=6 format=3 uid="uid://4vjxamh38dkk"]
+
+[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="1_3wmld"]
+[ext_resource type="Script" path="res://ui/hud/bar_controller.gd" id="1_hj8xr"]
+[ext_resource type="Texture2D" uid="uid://cslsed55c4a5m" path="res://ui/hud/attitude_bar.png" id="2_jxtlg"]
+[ext_resource type="Script" path="res://ui/hud/bar.gd" id="3_xbpjj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2205c"]
+font = ExtResource("1_3wmld")
+font_size = 12
+
+[node name="AttitudeBars" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BarController" type="Node2D" parent="."]
+script = ExtResource("1_hj8xr")
+
+[node name="Bar" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar2" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = 15.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar2"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar2"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar2"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar3" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = 30.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar3"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar3"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar3"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar4" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = 45.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar4"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar4"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar4"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar5" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = 60.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar5"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar5"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar5"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar6" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = 75.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar6"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar6"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar6"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar7" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = -15.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar7"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar7"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar7"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar8" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = -30.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar8"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar8"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar8"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar9" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = -45.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar9"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar9"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar9"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar10" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = -60.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar10"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar10"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar10"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Bar11" type="Sprite2D" parent="BarController"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jxtlg")
+script = ExtResource("3_xbpjj")
+pos = -75.0
+
+[node name="Otherside" type="Sprite2D" parent="BarController/Bar11"]
+rotation = 3.14159
+texture = ExtResource("2_jxtlg")
+
+[node name="Label1" type="Label" parent="BarController/Bar11"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="BarController/Bar11"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -16.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2205c")
+horizontal_alignment = 2
+vertical_alignment = 1

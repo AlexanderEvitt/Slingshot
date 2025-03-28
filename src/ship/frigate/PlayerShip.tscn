@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvuwcyu3chwr1"]
+[gd_scene load_steps=11 format=3 uid="uid://dvuwcyu3chwr1"]
 
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="1_bs7i2"]
 [ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="2_nl3g8"]
 [ext_resource type="PackedScene" uid="uid://bfwsgcbvelo0t" path="res://ship/frigate/FrigateConfig.tscn" id="3_5u4ba"]
 [ext_resource type="Script" path="res://visuals/blinking_light.gd" id="3_wxm7r"]
 [ext_resource type="Material" uid="uid://d3306785am850" path="res://ship/frigate/BasePaint.tres" id="4_rm61y"]
+[ext_resource type="Script" path="res://ship/launcher.gd" id="6_yjjj6"]
+[ext_resource type="PackedScene" uid="uid://chnut585ne3g" path="res://ship/missile.tscn" id="7_fvwei"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhx50"]
 emission_enabled = true
@@ -216,3 +218,18 @@ mesh = SubResource("CylinderMesh_ulwg0")
 mesh = SubResource("CylinderMesh_xrp77")
 
 [node name="frigate" parent="scaledown" instance=ExtResource("3_5u4ba")]
+
+[node name="LaunchBay" type="Node3D" parent="scaledown"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.3303, 3.4993, 0)
+script = ExtResource("6_yjjj6")
+
+[node name="Missile1" parent="scaledown/LaunchBay" instance=ExtResource("7_fvwei")]
+
+[node name="Missile2" parent="scaledown/LaunchBay" instance=ExtResource("7_fvwei")]
+visible = false
+
+[node name="Missile3" parent="scaledown/LaunchBay" instance=ExtResource("7_fvwei")]
+visible = false
+
+[node name="Missile4" parent="scaledown/LaunchBay" instance=ExtResource("7_fvwei")]
+visible = false
