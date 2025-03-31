@@ -32,7 +32,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -46,7 +46,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -71,7 +71,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar2"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -85,7 +85,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar2"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -110,7 +110,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar3"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -124,7 +124,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar3"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -149,7 +149,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar4"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -163,7 +163,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar4"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -188,7 +188,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar5"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -202,7 +202,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar5"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -227,7 +227,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar6"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -241,7 +241,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar6"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -266,7 +266,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar7"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -280,7 +280,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar7"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -305,7 +305,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar8"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -319,7 +319,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar8"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -344,7 +344,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar9"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -358,7 +358,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar9"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -383,7 +383,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar10"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -397,7 +397,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar10"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -422,7 +422,7 @@ rotation = 3.14159
 texture = ExtResource("2_jxtlg")
 
 [node name="Label1" type="Label" parent="BarController/Bar11"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0
@@ -436,7 +436,7 @@ label_settings = SubResource("LabelSettings_2205c")
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="BarController/Bar11"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -144.0

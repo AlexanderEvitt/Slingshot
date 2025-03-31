@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=38 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
@@ -21,6 +21,8 @@
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="13_xts1l"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="14_g31x3"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/ShipWireframe.tscn" id="18_lxife"]
+[ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="22_66qh8"]
+[ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="23_vt6nb"]
 
 [sub_resource type="Environment" id="Environment_aovhe"]
 background_mode = 1
@@ -677,6 +679,22 @@ color = Color(0.552941, 0, 0.552941, 1)
 
 [node name="Ship" parent="Spacecraft/Pointer" instance=ExtResource("18_lxife")]
 
+[node name="FirstCam" type="Camera3D" parent="Spacecraft/Pointer"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
+fov = 50.0
+size = 2.0
+near = 0.001
+far = 1e+07
+
+[node name="CenterMarker" type="Sprite3D" parent="Spacecraft/Pointer/FirstCam"]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.0639505)
+pixel_size = 0.0005
+axis = 0
+no_depth_test = true
+fixed_size = true
+texture = ExtResource("22_66qh8")
+script = ExtResource("23_vt6nb")
+
 [node name="CameraRig" type="Node3D" parent="Spacecraft"]
 transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
 
@@ -690,3 +708,5 @@ far = 1e+10
 script = ExtResource("2_awidn")
 zoomable = true
 zoom_distance = 3000.0
+
+[node name="CinemaCam" type="Camera3D" parent="."]

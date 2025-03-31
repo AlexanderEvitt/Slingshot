@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=76 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="19_7nri8"]
 [ext_resource type="PackedScene" uid="uid://d0nudijdf1bts" path="res://bodies/asteroids/asteroid.tscn" id="19_8qfgt"]
 [ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
+[ext_resource type="Script" path="res://scenes/external/cinema_cam.gd" id="42_ktyp3"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_dewes"]
 material = ExtResource("4_bholp")
@@ -217,14 +218,14 @@ script = ExtResource("9_licgw")
 
 [node name="player_ship" parent="Spacecraft/Pointer" instance=ExtResource("3_r7nlu")]
 
-[node name="NarrowCam" type="Camera3D" parent="Spacecraft/Pointer"]
+[node name="FirstCam" type="Camera3D" parent="Spacecraft/Pointer"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
 fov = 50.0
 size = 2.0
 near = 0.001
 far = 1e+07
 
-[node name="CenterMarker" type="Sprite3D" parent="Spacecraft/Pointer/NarrowCam"]
+[node name="CenterMarker" type="Sprite3D" parent="Spacecraft/Pointer/FirstCam"]
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.0639505)
 pixel_size = 0.0005
 axis = 0
@@ -536,3 +537,10 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_j27v8")
 surface_material_override/0 = SubResource("StandardMaterial3D_nnkww")
+
+[node name="CinemaCam" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15638.1)
+fov = 30.0
+near = 0.001
+far = 1e+07
+script = ExtResource("42_ktyp3")

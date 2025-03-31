@@ -6,7 +6,7 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("switch_camera"):
 		# Increment by 1, looping to zero
 		i += 1
-		i = i % 3
+		i = i % 4
 		
 		# Set visibility of children
 		var n = 0

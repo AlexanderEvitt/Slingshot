@@ -7,7 +7,7 @@ func _ready() -> void:
 	$Label1.text = str(pos)
 	$Label2.text = str(pos)
 	
-	position.y = -(1920/50)*pos/2
+	position.y = -(1920.0/50.0)*pos/2
 	
 	if pos != 0:
 		$Otherside.visible = false

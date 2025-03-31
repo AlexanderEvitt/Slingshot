@@ -82,7 +82,6 @@ theme = ExtResource("2_bmshc")
 script = ExtResource("2_bh7rb")
 
 [node name="MainUI" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -212,8 +211,8 @@ stretch = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
+size = Vector2i(626, 531)
+render_target_update_mode = 4
 
 [node name="NavballRoot" parent="MainUI/Screen/HUD2/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("6_mguog")]
 
@@ -260,8 +259,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="MainUI/Screen/HUD2/Shifter/HBoxContainer/MarginContainer2/Panel/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
+size = Vector2i(691, 826)
+render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="MainUI/Screen/HUD2/Shifter/HBoxContainer/MarginContainer2/Panel/SubViewportContainer/SubViewport" instance=ExtResource("4_5661e")]
 
@@ -1296,6 +1295,7 @@ size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="CamRoot" parent="MainUI/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_mdjyt")]
+camera_select = 1
 
 [node name="ScreenText" type="VBoxContainer" parent="MainUI/Screen/HUD6/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
 layout_mode = 2
@@ -1741,6 +1741,7 @@ expand_mode = 2
 stretch_mode = 4
 
 [node name="FPVUI" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1761,10 +1762,11 @@ set_fov = false
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(1916, 1080)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="CamRoot" parent="FPVUI/SubViewportContainer/SubViewport" instance=ExtResource("6_mdjyt")]
 camera_mode = true
+camera_select = 1
 zoomable = true
 hud_enable = true
 
@@ -1871,11 +1873,12 @@ own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(350, 350)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="NavballRoot" parent="FPVUI/HUD/SubViewportContainer/SubViewport" instance=ExtResource("6_mguog")]
 
 [node name="AttitudeBars" parent="FPVUI/HUD" instance=ExtResource("28_ubmve")]
+visible = false
 layout_mode = 1
 
 [node name="3PVUI" type="HBoxContainer" parent="."]
@@ -1896,6 +1899,25 @@ render_target_update_mode = 0
 [node name="CamRoot" parent="3PVUI/FPVUI/SubViewport" instance=ExtResource("6_mdjyt")]
 camera_mode = true
 zoomable = true
+
+[node name="Cinematic" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FPVUI" type="SubViewportContainer" parent="Cinematic"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="Cinematic/FPVUI"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 0
+
+[node name="CamRoot" parent="Cinematic/FPVUI/SubViewport" instance=ExtResource("6_mdjyt")]
+camera_mode = true
+camera_select = 2
 
 [connection signal="pressed" from="MainUI/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer2/Panel/Button" to="MainUI/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel" method="_on_calculate"]
 [connection signal="pressed" from="MainUI/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/MarginContainer/CenterPanel/VBoxContainer/ExecutionPanel/VBoxContainer/MarginContainer3/Panel/Button" to="MainUI/Screen/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel" method="_on_clear"]
