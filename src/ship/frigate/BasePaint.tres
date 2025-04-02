@@ -1,7 +1,17 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://d3306785am850"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://d3306785am850"]
+
+[sub_resource type="Gradient" id="Gradient_q0jip"]
+colors = PackedColorArray(0.5, 0.5, 0.5, 1, 0.4, 0.4, 0.4, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vqlqm"]
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_17ct5"]
+color_ramp = SubResource("Gradient_q0jip")
+noise = SubResource("FastNoiseLite_vqlqm")
 
 [resource]
 resource_name = "BasePaint"
 cull_mode = 2
 albedo_color = Color(0.17721, 0.17721, 0.17721, 1)
-roughness = 0.5
+roughness_texture = SubResource("NoiseTexture2D_17ct5")

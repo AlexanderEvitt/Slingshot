@@ -44,10 +44,10 @@ mesh = SubResource("CylinderMesh_n1q1i")
 surface_material_override/0 = SubResource("ShaderMaterial_yust4")
 
 [node name="Light" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34969, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.527216, 0, 0)
 layers = 2
-light_energy = 11.465
+light_energy = 5.0
 shadow_enabled = true
-shadow_bias = 2.726
-omni_range = 0.01
+shadow_bias = 10.0
+omni_range = 0.005
 omni_shadow_mode = 0
