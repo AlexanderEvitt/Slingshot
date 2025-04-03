@@ -53,10 +53,6 @@ _subresources={
 "use_external/enabled": true,
 "use_external/path": "res://ship/frigate/LightPaint.tres"
 },
-"NozzleMaterial": {
-"use_external/enabled": true,
-"use_external/path": "res://ship/frigate/NozzleMaterial.tres"
-},
 "RadarPaint": {
 "use_external/enabled": true,
 "use_external/path": "res://ship/frigate/RadarPaint.tres"

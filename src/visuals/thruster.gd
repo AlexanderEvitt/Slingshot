@@ -48,7 +48,7 @@ func _process(_delta):
 	# Turn on thruster
 	var fire = (my_torque + 0.5*my_thrust)
 
-	var unit = 100*Vector3(1,1,1)
+	var unit = 150*Vector3(1,1,1)
 	if fire > cutoff:
 		visible = true
 		scale = fire*unit

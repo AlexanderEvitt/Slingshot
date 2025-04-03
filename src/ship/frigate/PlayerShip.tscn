@@ -37,7 +37,7 @@ transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 transform = Transform3D(138.79, 0, 0, 0, 138.79, 0, 0, 0, 138.79, -31.1913, 0, 0)
 
 [node name="Plume" parent="scaledown/Plumes" instance=ExtResource("1_bs7i2")]
-transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, -0.000703708, 0, 0)
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, -0.00170921, 0, 0)
 
 [node name="Thrusters" type="Node3D" parent="scaledown"]
 

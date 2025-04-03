@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfwsgcbvelo0t"]
+[gd_scene load_steps=5 format=3 uid="uid://bfwsgcbvelo0t"]
 
 [ext_resource type="PackedScene" uid="uid://c723tonvicthq" path="res://ship/frigate/frigate.glb" id="1_p2xcd"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="2_k8wt2"]
 [ext_resource type="FontFile" uid="uid://do6qxwpxanaih" path="res://ui/fonts/JetBrainsMonoNL-Bold.ttf" id="3_pu8au"]
+[ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="4_vw5qa"]
 
 [node name="frigate" instance=ExtResource("1_p2xcd")]
 
@@ -43,7 +44,7 @@ layers = 2
 layers = 2
 
 [node name="ConkLogo" type="Sprite3D" parent="." index="12"]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.56628, 7.26432, 0)
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.56628, 7.1934, 0)
 layers = 2
 pixel_size = 0.003
 axis = 1
@@ -92,3 +93,19 @@ layers = 2
 
 [node name="TVC_001" parent="." index="19"]
 layers = 2
+
+[node name="EngineLogo" type="Sprite3D" parent="." index="20"]
+transform = Transform3D(-0.5, 6.12323e-17, 3.7494e-33, 0, 3.06162e-17, -0.5, -6.12323e-17, -0.5, -3.06162e-17, -15.89, 0, -5.1654)
+layers = 2
+pixel_size = 0.003
+axis = 1
+shaded = true
+texture = ExtResource("4_vw5qa")
+
+[node name="EngineLogo2" type="Sprite3D" parent="." index="21"]
+transform = Transform3D(0.5, 0, 0, 0, 3.06162e-17, -0.5, 0, 0.5, 3.06162e-17, -15.89, 0, 5.165)
+layers = 2
+pixel_size = 0.003
+axis = 1
+shaded = true
+texture = ExtResource("4_vw5qa")

@@ -15,6 +15,6 @@ func _process(_delta):
 	if power > 0:
 		visible = true
 		tail.set_shader_parameter("alpha_intensity_factor",0.05/power)
-		chamber.light_energy = 10*power/0.05
+		chamber.light_energy = 0.5*power/0.05
 	else:
 		visible = false

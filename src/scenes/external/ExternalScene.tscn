@@ -183,8 +183,11 @@ albedo_texture = ExtResource("17_n5xr7")
 [node name="CamRoot" type="Node3D"]
 script = ExtResource("1_5ri2s")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_n8kbm")
+
 [node name="Spacecraft" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9788.97)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2129.53, 0, -14835.1)
 script = ExtResource("2_dogxd")
 camera_mode = true
 
@@ -271,9 +274,6 @@ script = ExtResource("4_y4k4s")
 retro = -1
 side_check = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("4_n8kbm")
-
 [node name="Sun" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1e+06)
 script = ExtResource("4_xwbd5")
@@ -355,8 +355,7 @@ script = ExtResource("17_wir2g")
 planet_radius = 6371.0
 atmosphere_height = 40.0
 sun_path = NodePath("../../../Sun/BigSunLight")
-shader_params/u_density = 0.15
-shader_params/u_scattering_strength = 0.4
+shader_params/u_density = 0.2
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="Clouds" type="MeshInstance3D" parent="Earth/EarthMesh"]
