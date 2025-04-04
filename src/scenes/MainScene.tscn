@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://n78uivx6mb2"]
+[gd_scene load_steps=9 format=3 uid="uid://n78uivx6mb2"]
 
 [ext_resource type="Script" path="res://ui/menu/menu_handler.gd" id="1_tywdm"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="2_56nas"]
 [ext_resource type="PackedScene" uid="uid://ckg801jn7baa1" path="res://ui/menu/MenuScene.tscn" id="2_f6v6y"]
 [ext_resource type="Script" path="res://ship/ships_handler.gd" id="4_cahyk"]
 [ext_resource type="Script" path="res://bodies/planet_collider.gd" id="4_g1v5r"]
+[ext_resource type="Script" path="res://bodies/moon.gd" id="5_xfsep"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jcvw1"]
 
@@ -14,73 +15,92 @@ radius = 6371.0
 
 [node name="GameRoot" type="Node"]
 
-[node name="UI" type="Node" parent="."]
-script = ExtResource("1_tywdm")
-
-[node name="MenuUI" parent="UI" instance=ExtResource("2_f6v6y")]
-
 [node name="Planets" type="Node3D" parent="."]
+process_priority = 13
 
 [node name="Sun" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 script = ExtResource("2_56nas")
 body = "SUN"
 GM = 1.32712e+11
 
 [node name="Mercury" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
 script = ExtResource("2_56nas")
 body = "MERCURY"
 GM = 22032.0
 
 [node name="Venus" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
 script = ExtResource("2_56nas")
 body = "VENUS"
 GM = 324859.0
 
 [node name="Earth" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 script = ExtResource("2_56nas")
 body = "EARTH"
 GM = 398600.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Planets/Earth"]
+process_priority = 13
 physics_material_override = SubResource("PhysicsMaterial_jcvw1")
 script = ExtResource("4_g1v5r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Earth/StaticBody3D"]
+process_priority = 13
 shape = SubResource("SphereShape3D_fvy80")
 
+[node name="ZephyrStationMain" type="Node3D" parent="Planets/Earth"]
+process_priority = 13
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+script = ExtResource("5_xfsep")
+period = 86400.0
+SMA = 42164.0
+
+[node name="DockCenter" type="Node3D" parent="Planets/Earth/ZephyrStationMain"]
+process_priority = 13
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.86778, 53.2291, 0.0872049)
+
 [node name="Luna" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 12989.3)
 script = ExtResource("2_56nas")
 body = "MOON"
 GM = 4904.87
 
 [node name="Mars" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
 script = ExtResource("2_56nas")
 body = "MARS BARYCENTER"
 GM = 42828.4
 
 [node name="Jupiter" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
 script = ExtResource("2_56nas")
 body = "JUPITER BARYCENTER"
 GM = 1.26687e+08
 
 [node name="Saturn" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
 script = ExtResource("2_56nas")
 body = "SATURN BARYCENTER"
 GM = 3.79312e+07
 
 [node name="Uranus" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 580869, 0, 0)
 script = ExtResource("2_56nas")
 body = "URANUS BARYCENTER"
 GM = 5.79394e+06
 
 [node name="Neptune" type="Node3D" parent="Planets" groups=["Bodies"]]
+process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
 script = ExtResource("2_56nas")
 body = "NEPTUNE BARYCENTER"
@@ -88,3 +108,8 @@ GM = 6.83653e+06
 
 [node name="Ships" type="Node3D" parent="."]
 script = ExtResource("4_cahyk")
+
+[node name="UI" type="Node" parent="."]
+script = ExtResource("1_tywdm")
+
+[node name="MenuUI" parent="UI" instance=ExtResource("2_f6v6y")]

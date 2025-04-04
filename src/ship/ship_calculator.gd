@@ -38,8 +38,10 @@ var previous_t = 0
 
 var mass = 1
 
+var docked = true
+@onready var dock = get_node("../../Planets/Earth/ZephyrStationMain/DockCenter")
 
-# this module moves data from the master scene an autoload where others can access it
+# this module moves data from the master scene to an autoload where others can access it
 
 func _ready():
 	attitude_calculator = get_node("AttitudeCalculator")
@@ -79,6 +81,15 @@ func _process(delta):
 	# Otherwise, integrate regularly
 	else:
 		integrate_normally(delta)
+		
+	# Fix to start position if still docked
+	if docked:
+		# dumb hacky solution. basically there's an off by 1 timestep error somewhere in the station
+		# so changing timestep causes havoc
+		position = dock.get_parent().fetch(SystemTime.t) + dock.get_parent().transform.basis*dock.position + Vector3(-0.02229,0.102566,0)
+		velocity = (dock.get_parent().fetch(SystemTime.t) - dock.get_parent().fetch(SystemTime.t - SystemTime.step))
+	if Input.is_action_just_pressed("translate_aft"):
+		docked = false
 
 func integrate_normally(_delta):
 	

@@ -379,7 +379,7 @@ light_color = Color(0.764073, 0.840415, 1, 1)
 omni_range = 15000.0
 omni_attenuation = 0.25
 
-[node name="AsteroidStation" parent="Earth" instance=ExtResource("19_8qfgt")]
+[node name="ZephyrStation" parent="Earth" instance=ExtResource("19_8qfgt")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 6441, 0, 0)
 script = ExtResource("18_acntg")
 period = 86400.0

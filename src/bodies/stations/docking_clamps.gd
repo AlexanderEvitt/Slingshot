@@ -2,8 +2,8 @@ extends MeshInstance3D
 
 var station
 var center
-var drange = 0.005
-@export var clamp_pos = Vector3(22.29,0,-7.4468)
+var drange = 0.003
+@export var clamp_pos = Vector3(22.29,0,-7.4468) # in m
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

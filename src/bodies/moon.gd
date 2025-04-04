@@ -15,9 +15,11 @@ func _process(_delta: float) -> void:
 	position = calculate_self_position(SystemTime.t)
 
 func fetch(time):
+	# Global ref frame
 	return parent_body.fetch(time) + calculate_self_position(time)
 	
 func calculate_self_position(time):
+	# Relative to parent
 	var theta = (time/period)*2*PI + true_anomaly
 	var pos = SMA*Vector3(cos(theta), sin(theta), 0)
 	return pos
