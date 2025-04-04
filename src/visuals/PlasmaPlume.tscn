@@ -49,5 +49,5 @@ layers = 2
 light_energy = 0.5
 shadow_enabled = true
 shadow_bias = 10.0
-omni_range = 0.005
+omni_range = 0.008
 omni_shadow_mode = 0

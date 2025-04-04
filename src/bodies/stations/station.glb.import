@@ -48,10 +48,6 @@ _subresources={
 "WhitePaint": {
 "use_external/enabled": true,
 "use_external/path": "res://bodies/stations/WhitePaint.tres"
-},
-"Windows": {
-"use_external/enabled": true,
-"use_external/path": "res://bodies/stations/Windows.tres"
 }
 }
 }

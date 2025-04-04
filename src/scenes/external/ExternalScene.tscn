@@ -90,6 +90,7 @@ radial_segments = 128
 rings = 64
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhh2d"]
+render_priority = 1
 transparency = 1
 blend_mode = 1
 albedo_texture = ExtResource("14_t6djw")
@@ -298,7 +299,6 @@ script = ExtResource("7_6u2xr")
 
 [node name="SmallSunLight" type="DirectionalLight3D" parent="Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
-light_energy = 0.7
 light_cull_mask = 4294967290
 shadow_enabled = true
 shadow_bias = 0.001
@@ -310,9 +310,12 @@ script = ExtResource("7_6u2xr")
 
 [node name="MediumSunLight" type="DirectionalLight3D" parent="Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
-light_energy = 0.7
+light_energy = 0.8
 light_cull_mask = 4294967292
 shadow_enabled = true
+shadow_blur = 1.808
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 500.0
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
@@ -351,18 +354,18 @@ mesh = SubResource("SphereMesh_aom7d")
 surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
 script = ExtResource("17_wir2g")
 
-[node name="EarthAtmosphere" parent="Earth/EarthMesh" instance=ExtResource("5_2nae2")]
-planet_radius = 6371.0
-atmosphere_height = 40.0
-sun_path = NodePath("../../../Sun/BigSunLight")
-shader_params/u_density = 0.2
-shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
-
 [node name="Clouds" type="MeshInstance3D" parent="Earth/EarthMesh"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_282r8")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
+
+[node name="EarthAtmosphere" parent="Earth/EarthMesh" instance=ExtResource("5_2nae2")]
+planet_radius = 6371.0
+atmosphere_height = 70.0
+sun_path = NodePath("../../../Sun/BigSunLight")
+shader_params/u_density = 0.13
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="Lights" type="MeshInstance3D" parent="Earth/EarthMesh" node_paths=PackedStringArray("sun_path")]
 visibility_range_end = 1e+07

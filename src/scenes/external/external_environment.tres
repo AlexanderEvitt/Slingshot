@@ -1,11 +1,11 @@
 [gd_resource type="Environment" format=3 uid="uid://bv1aqa2gbpa6t"]
 
 [resource]
-background_mode = 2
+background_energy_multiplier = 0.0
 tonemap_mode = 2
 glow_enabled = true
 glow_mix = 0.239
-glow_bloom = 0.1
+glow_bloom = 0.15
 glow_blend_mode = 1
 adjustment_enabled = true
-adjustment_brightness = 1.3
+adjustment_brightness = 1.1
