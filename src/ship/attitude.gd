@@ -47,7 +47,7 @@ func _process(_delta):
 			"CRS":
 				target = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
 			"TRG":
-				target = Conversions.FindFrame(SystemTime.t) - OwnShip.position
+				target = Conversions.FindFrame(SystemTime.prev_t) - OwnShip.position
 			"NRM":
 				var v = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
 				var r = Conversions.FindFrame(SystemTime.t) - OwnShip.position
@@ -81,11 +81,9 @@ func _process(_delta):
 		
 		# Point at target attitude
 		if target != null:
-			print(get_parent().transform.basis)
-			look_at(target, Vector3.UP, true)
+			transform.basis = transform_at(target, Vector3.UP)
+			rotate_object_local(Vector3(0, 1, 0), -PI/2)
 			
-			
-			#rotate_object_local(Vector3(0, 1, 0), PI/2)
 
 func integrate_rotation(applied_torque):
 	# Compute angular acceleration using Euler's equations
@@ -109,3 +107,10 @@ func integrate_rotation(applied_torque):
 		var ang_vel_quat = Quaternion(rotation_axis, ang_speed * dt)  # Axis-angle representation
 		transform.basis = Basis(ang_vel_quat) * transform.basis
 		transform = transform.orthonormalized()
+		
+func transform_at(forward: Vector3, up: Vector3) -> Basis:
+	var f = forward.normalized()
+	var r = up.cross(f).normalized()
+	var u = f.cross(r).normalized()
+
+	return Basis(r, u, f)
