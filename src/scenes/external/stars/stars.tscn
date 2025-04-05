@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/external/stars/startracks.gd" id="4_jwuqs"]
 [ext_resource type="Shader" path="res://scenes/external/stars/starstreaks.gdshader" id="4_tbgki"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_b2dv0"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_oqfl8"]
 _surfaces = [{
 "aabb": AABB(-99935.2, -99980.4, -99698.5, 199771, 199957, 199648),
 "format": 34359738369,
@@ -23,7 +23,7 @@ shader_parameter/rotation_angle = 0.003
 shader_parameter/rotate = true
 shader_parameter/brightness = 1.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_xxv3p"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ncysw"]
 _surfaces = [{
 "aabb": AABB(-99935.2, -99980.4, -99698.5, 199771, 199957, 199648),
 "format": 34359738369,
@@ -35,7 +35,7 @@ _surfaces = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fm00g"]
 resource_local_to_scene = true
-render_priority = 0
+render_priority = -128
 shader = ExtResource("4_tbgki")
 shader_parameter/rotation_axis = Vector3(1, 0, 0)
 shader_parameter/rotation_angle = 0.0
@@ -45,17 +45,18 @@ shader_parameter/brightness = 1.0
 [node name="Starfield" type="Node3D"]
 
 [node name="StarTracks" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_b2dv0")
+visible = false
+mesh = SubResource("ArrayMesh_oqfl8")
 surface_material_override/0 = SubResource("ShaderMaterial_qelgr")
 script = ExtResource("4_jwuqs")
 radius = 100000.0
 subdivisions = 4
 
 [node name="StarPoints" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_xxv3p")
+mesh = SubResource("ArrayMesh_ncysw")
 surface_material_override/0 = SubResource("ShaderMaterial_fm00g")
 script = ExtResource("4_jwuqs")
-radius = 100000.0
+radius = 10000.0
 subdivisions = 4
 primitive = 0
 

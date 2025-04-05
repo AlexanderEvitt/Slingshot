@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, depth_draw_never;
 
 uniform vec3 rotation_axis = vec3(1.0,0.0,0.0);
 uniform float rotation_angle = 1.0;
@@ -52,10 +52,9 @@ void vertex() {
 		}
 		v = v + 1.0;
 	}
-	COLOR = brightness*vec4(rand(v));
+	COLOR.rgb = brightness*vec3(rand(v));
 }
 
 void fragment() {
     ALBEDO = COLOR.rgb;
-    ALPHA = COLOR.a; // Use vertex color alpha for transparency
 }

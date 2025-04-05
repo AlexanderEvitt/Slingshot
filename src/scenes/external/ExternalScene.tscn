@@ -281,7 +281,6 @@ script = ExtResource("4_xwbd5")
 body = "SUN"
 
 [node name="SunMesh" type="MeshInstance3D" parent="Sun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -216686)
 layers = 0
 mesh = SubResource("SphereMesh_v7y0l")
 skeleton = NodePath("../..")
