@@ -1,0 +1,161 @@
+{
+	"connections": [
+		{
+			"from": "bricks",
+			"from_port": 0,
+			"to": "normal_map2",
+			"to_port": 0
+		},
+		{
+			"from": "perlin",
+			"from_port": 0,
+			"to": "colorize",
+			"to_port": 0
+		},
+		{
+			"from": "colorize",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 2
+		},
+		{
+			"from": "normal_map2",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 4
+		},
+		{
+			"from": "bricks",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 0
+		}
+	],
+	"label": "Graph",
+	"longdesc": "",
+	"name": "@Node@491",
+	"node_position": {
+		"x": 0.0,
+		"y": 0.0
+	},
+	"nodes": [
+		{
+			"export_last_target": "Godot/Godot 4 Standard",
+			"export_paths": {
+				"Godot/Godot 4 Standard": "C:/Users/alexa/Downloads/material_maker_1_4a3_windows/MakedBrick"
+			},
+			"name": "Material",
+			"node_position": {
+				"x": 0.0,
+				"y": 0.0
+			},
+			"parameters": {
+				"albedo_color": {
+					"a": 1.0,
+					"b": 0.180000007152557,
+					"g": 0.180000007152557,
+					"r": 0.180000007152557,
+					"type": "Color"
+				},
+				"ao": 1.0,
+				"depth_scale": 0.5,
+				"emission_energy": 1.0,
+				"flags_transparent": false,
+				"metallic": 0.0,
+				"normal": 1.0,
+				"roughness": 1.0,
+				"size": 11,
+				"sss": 0.0
+			},
+			"seed_int": 0,
+			"type": "material"
+		},
+		{
+			"name": "bricks",
+			"node_position": {
+				"x": -832.253295898438,
+				"y": -286.963684082031
+			},
+			"parameters": {
+				"bevel": 0.0,
+				"columns": 3.0,
+				"corner": 0.3,
+				"mortar": 0.02,
+				"pattern": 0,
+				"repeat": 2.0,
+				"round": 0.0,
+				"row_offset": 0.5,
+				"rows": 6.0
+			},
+			"seed_int": 0,
+			"type": "bricks3"
+		},
+		{
+			"name": "normal_map2",
+			"node_position": {
+				"x": -583.363586425781,
+				"y": -154.145797729492
+			},
+			"parameters": {
+				"buffer": 1.0,
+				"param2": 0.0,
+				"size": 9,
+				"strength": 1.0
+			},
+			"seed_int": 0,
+			"type": "normal_map2"
+		},
+		{
+			"name": "perlin",
+			"node_position": {
+				"x": -606.039184570313,
+				"y": 143.754470825195
+			},
+			"parameters": {
+				"iterations": 3.0,
+				"persistence": 1.0,
+				"scale_x": 4.0,
+				"scale_y": 4.0
+			},
+			"seed_int": 0,
+			"type": "perlin"
+		},
+		{
+			"name": "colorize",
+			"node_position": {
+				"x": -339.675537109375,
+				"y": 105.572639465332
+			},
+			"parameters": {
+				"gradient": {
+					"interpolation": 1,
+					"points": [
+						{
+							"a": 1.0,
+							"b": 0.360000014305115,
+							"g": 0.360000014305115,
+							"pos": 0.0,
+							"r": 0.360000014305115
+						},
+						{
+							"a": 1.0,
+							"b": 0.759999990463257,
+							"g": 0.759999990463257,
+							"pos": 0.984287591628086,
+							"r": 0.759999990463257
+						}
+					],
+					"type": "Gradient"
+				}
+			},
+			"seed_int": 0,
+			"type": "colorize"
+		}
+	],
+	"parameters": {
+
+	},
+	"seed_int": 0,
+	"shortdesc": "",
+	"type": "graph"
+}

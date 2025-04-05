@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfwsgcbvelo0t"]
+[gd_scene load_steps=6 format=3 uid="uid://bfwsgcbvelo0t"]
 
 [ext_resource type="PackedScene" uid="uid://c723tonvicthq" path="res://ship/frigate/frigate.glb" id="1_p2xcd"]
+[ext_resource type="Material" uid="uid://ddobmiq0l53c" path="res://ship/frigate/external_material/MakedBrick.tres" id="2_gb527"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="2_k8wt2"]
 [ext_resource type="FontFile" uid="uid://do6qxwpxanaih" path="res://ui/fonts/JetBrainsMonoNL-Bold.ttf" id="3_pu8au"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="4_vw5qa"]
@@ -36,6 +37,7 @@ layers = 2
 
 [node name="FinalHull" parent="." index="7"]
 layers = 2
+surface_material_override/5 = ExtResource("2_gb527")
 
 [node name="Cube" parent="." index="9"]
 layers = 2

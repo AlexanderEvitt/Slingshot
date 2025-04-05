@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtgovqhswyv4n"
-path.s3tc="res://.godot/imported/BrickNorms.png-bb84efdf7120857db32ae5dd01245ce9.s3tc.ctex"
+uid="uid://dfp5lpn48nk0d"
+path.s3tc="res://.godot/imported/MakedBrick_normal.png-35ad4aadafcdf24ccbe11aeca7e2860e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://ship/frigate/BrickNorms.png"
-dest_files=["res://.godot/imported/BrickNorms.png-bb84efdf7120857db32ae5dd01245ce9.s3tc.ctex"]
+source_file="res://ship/frigate/external_material/MakedBrick_normal.png"
+dest_files=["res://.godot/imported/MakedBrick_normal.png-35ad4aadafcdf24ccbe11aeca7e2860e.s3tc.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://ship/frigate/BrickNorms.png"
+roughness/src_normal="res://ship/frigate/external_material/MakedBrick_normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
