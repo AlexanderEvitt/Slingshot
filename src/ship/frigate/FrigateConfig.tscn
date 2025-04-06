@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfwsgcbvelo0t"]
+[gd_scene load_steps=10 format=3 uid="uid://bfwsgcbvelo0t"]
 
 [ext_resource type="PackedScene" uid="uid://c723tonvicthq" path="res://ship/frigate/frigate.glb" id="1_p2xcd"]
+[ext_resource type="Texture2D" uid="uid://drvl7m6jpple6" path="res://ship/frigate/external_material/MakedBrick_albedo.png" id="2_c712i"]
 [ext_resource type="Material" uid="uid://ddobmiq0l53c" path="res://ship/frigate/external_material/MakedBrick.tres" id="2_gb527"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="2_k8wt2"]
 [ext_resource type="FontFile" uid="uid://do6qxwpxanaih" path="res://ui/fonts/JetBrainsMonoNL-Bold.ttf" id="3_pu8au"]
+[ext_resource type="Texture2D" uid="uid://dfp5lpn48nk0d" path="res://ship/frigate/external_material/MakedBrick_normal.png" id="3_r1umb"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="4_vw5qa"]
+[ext_resource type="Texture2D" uid="uid://bwvdv60c7w7lx" path="res://ship/frigate/external_material/MakedBrick_orm.png" id="4_y1dru"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylmgo"]
+albedo_color = Color(0.18, 0.18, 0.18, 1)
+albedo_texture = ExtResource("2_c712i")
+roughness_texture = ExtResource("4_y1dru")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("3_r1umb")
+uv1_scale = Vector3(5, 5, 5)
 
 [node name="frigate" instance=ExtResource("1_p2xcd")]
 
@@ -16,6 +29,7 @@ layers = 2
 
 [node name="Pods" parent="." index="1"]
 layers = 2
+surface_material_override/0 = SubResource("StandardMaterial3D_ylmgo")
 
 [node name="Antenna" parent="." index="2"]
 layers = 2

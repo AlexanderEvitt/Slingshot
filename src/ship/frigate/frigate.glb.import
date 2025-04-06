@@ -38,7 +38,7 @@ _subresources={
 "use_external/path": "res://ship/frigate/AccentPaint.tres"
 },
 "BaseBrick": {
-"use_external/enabled": true,
+"use_external/enabled": false,
 "use_external/path": "res://ship/frigate/BaseBrick.tres"
 },
 "BasePaint": {

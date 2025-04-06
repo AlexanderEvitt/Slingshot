@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://o7dtbv1yqscr"]
+
+[ext_resource type="Texture2D" uid="uid://uahyxy1es7vk" path="res://bodies/stations/station_basic_concrete_albedo.png" id="1_nvdqj"]
+
+[resource]
+resource_name = "SmoothConcrete"
+cull_mode = 2
+albedo_texture = ExtResource("1_nvdqj")
+roughness = 0.5
+uv1_scale = Vector3(5, 5, 5)
