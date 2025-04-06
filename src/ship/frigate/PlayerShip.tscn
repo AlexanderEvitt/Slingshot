@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://visuals/blinking_light.gd" id="3_wxm7r"]
 [ext_resource type="Material" uid="uid://d3306785am850" path="res://ship/frigate/BasePaint.tres" id="4_rm61y"]
 [ext_resource type="Script" path="res://ship/launcher.gd" id="6_yjjj6"]
-[ext_resource type="PackedScene" path="res://ship/missile.tscn" id="7_fvwei"]
+[ext_resource type="PackedScene" uid="uid://duncb2lf44vea" path="res://ship/missile.tscn" id="7_fvwei"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhx50"]
 emission_enabled = true
@@ -227,6 +227,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.3303, 3.4993, 0)
 script = ExtResource("6_yjjj6")
 
 [node name="Missile1" parent="scaledown/LaunchBay" instance=ExtResource("7_fvwei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 
 [node name="Missile2" parent="scaledown/LaunchBay" instance=ExtResource("7_fvwei")]

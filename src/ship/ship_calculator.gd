@@ -88,7 +88,7 @@ func _process(delta):
 		# so changing timestep causes havoc
 		position = dock.get_parent().fetch(SystemTime.t) + dock.get_parent().transform.basis*dock.position + Vector3(-0.02229,0.102566,0)
 		velocity = (dock.get_parent().fetch(SystemTime.t) - dock.get_parent().fetch(SystemTime.t - SystemTime.step))
-	if Input.is_action_just_pressed("translate_aft"):
+	if Input.is_action_just_pressed("dock"):
 		docked = false
 
 func integrate_normally(_delta):

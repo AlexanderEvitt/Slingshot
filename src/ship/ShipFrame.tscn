@@ -17,6 +17,7 @@ start_position = Vector3(42164, -50, 0)
 start_velocity = Vector3(0, 3.075, 0)
 
 [node name="AttitudeCalculator" type="Node3D" parent="."]
+transform = Transform3D(0.995227, -2.92237e-19, 0.0975829, 0.0975829, 5.97523e-18, -0.995227, -2.92237e-19, 1, 5.97523e-18, 0, 0, 0)
 script = ExtResource("2_88nqh")
 
 [node name="CollisionDetector" type="RigidBody3D" parent="."]

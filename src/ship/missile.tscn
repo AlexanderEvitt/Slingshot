@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://chnut585ne3g"]
+[gd_scene load_steps=6 format=4 uid="uid://duncb2lf44vea"]
 
 [ext_resource type="Material" uid="uid://brn1ecxyjrf0n" path="res://ship/frigate/AccentPaint.tres" id="1_o0h05"]
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="2_p4xqk"]
@@ -37,12 +37,24 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2b0lc")
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_w72bq"]
+height = 0.05
+
 [node name="Missile" type="Node3D"]
 
 [node name="Missile" type="MeshInstance3D" parent="."]
 transform = Transform3D(8.1439e-18, 0.737, 0, -0.133, 4.51282e-17, 0, 0, 0, 0.133, 0, 0, 0)
 mesh = SubResource("ArrayMesh_u8clk")
 skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Missile"]
+transform = Transform3D(1, -1.63935e-33, 0, 1.63935e-33, 1, 0, 0, 0, 1, -2.16768e-16, -0.63885, 0)
+light_energy = 16.0
+omni_range = 0.005
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Missile"]
+transform = Transform3D(1, 4.93038e-32, 0, 1.54074e-33, 1, 0, 0, 0, 1, -1.88824e-16, -0.556494, 0)
+mesh = SubResource("CylinderMesh_w72bq")
 
 [node name="Plume" parent="." instance=ExtResource("2_p4xqk")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.403588, 0.00196611, 0)

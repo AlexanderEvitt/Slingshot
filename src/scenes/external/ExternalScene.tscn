@@ -126,6 +126,7 @@ radius = 71492.0
 height = 142984.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnura"]
+transparency = 4
 albedo_texture = ExtResource("11_74p1c")
 
 [sub_resource type="SphereMesh" id="SphereMesh_fh4a2"]
@@ -161,6 +162,7 @@ radius = 60268.0
 height = 120536.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0p12"]
+transparency = 4
 albedo_texture = ExtResource("14_eha35")
 
 [sub_resource type="SphereMesh" id="SphereMesh_uj08c"]
@@ -172,6 +174,7 @@ radius = 25559.0
 height = 51118.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqvh8"]
+transparency = 4
 albedo_texture = ExtResource("16_uf3kr")
 
 [sub_resource type="SphereMesh" id="SphereMesh_j27v8"]
@@ -179,6 +182,7 @@ radius = 24764.0
 height = 49528.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnkww"]
+transparency = 4
 albedo_texture = ExtResource("17_n5xr7")
 
 [node name="CamRoot" type="Node3D"]
