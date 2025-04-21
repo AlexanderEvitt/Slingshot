@@ -20,7 +20,6 @@ varying float vert_height;
 varying vec2 v_uv;
 
 group_uniforms Misc_Effects;
-uniform vec3 _color : source_color;
 uniform float power_factor = 1.0;
 uniform float alpha_intensity_factor = 2.0;
 
@@ -29,6 +28,8 @@ uniform float fresnel_factor = 1.0;
 uniform float fresnel_amplification = 2.0; // Corrected typo
 uniform float fresnel_power = 2.0;
 uniform bool enable_fresnel = true;
+
+uniform sampler2D gradient;
 
 vec3 neon(float value, vec3 color) {
     float ramp = clamp(value, 0.0, 1.0);
@@ -61,8 +62,14 @@ void fragment() {
     gradient_height *= 1.0 / dissolve_length;
     gradient_height = clamp(pow(gradient_height, gradient_bias) + noise_value, 0.0, 1.0);
 
+    
+
+
     ALPHA = mix(1.0, 0.0, gradient_height);
     ALPHA = pow(ALPHA, power_factor);
+
+    // Pick color based on gradient
+    vec3 _color = texture(gradient, vec2(ALPHA,0.5)).rgb;
     ALBEDO = neon(pow(ALPHA, power_factor), _color);
 
     ALPHA = pow(ALPHA, alpha_intensity_factor);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bu2j4yalwn3ks"]
+[gd_scene load_steps=9 format=3 uid="uid://bu2j4yalwn3ks"]
 
 [ext_resource type="Shader" path="res://visuals/PlasmaPlume.gdshader" id="1_eo5p0"]
 [ext_resource type="Script" path="res://visuals/plume_controller.gd" id="2_y04ml"]
@@ -8,6 +8,13 @@ lightmap_size_hint = Vector2i(17, 19)
 top_radius = 2.0
 height = 6.0
 cap_top = false
+
+[sub_resource type="Gradient" id="Gradient_uhggj"]
+offsets = PackedFloat32Array(0, 0.139344, 0.532787)
+colors = PackedColorArray(0.1224, 0.29172, 0.72, 1, 0.214385, 0.122292, 0.720203, 1, 0.631373, 0.121569, 0.721569, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4m3j0"]
+gradient = SubResource("Gradient_uhggj")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_j80rw"]
 
@@ -27,13 +34,13 @@ shader_parameter/noise_speed = 2.0
 shader_parameter/noise_strength = 0.25
 shader_parameter/stretch_factor = 0.4
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_xas2e")
-shader_parameter/_color = Color(0.63036, 0.1224, 0.72, 1)
 shader_parameter/power_factor = 0.5
 shader_parameter/alpha_intensity_factor = 1.0
 shader_parameter/fresnel_factor = 0.4
 shader_parameter/fresnel_amplification = 2.0
 shader_parameter/fresnel_power = 5.0
 shader_parameter/enable_fresnel = true
+shader_parameter/gradient = SubResource("GradientTexture1D_4m3j0")
 
 [node name="Plume" type="Node3D"]
 script = ExtResource("2_y04ml")
