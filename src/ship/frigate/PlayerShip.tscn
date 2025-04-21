@@ -227,7 +227,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.3303, 3.4993, 0)
 script = ExtResource("6_yjjj6")
 
 [node name="Missile1" parent="scaledown/LaunchBay" instance=ExtResource("7_fvwei")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 
 [node name="Missile2" parent="scaledown/LaunchBay" instance=ExtResource("7_fvwei")]

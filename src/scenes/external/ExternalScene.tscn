@@ -547,7 +547,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nnkww")
 
 [node name="CinemaCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15638.1)
-fov = 30.0
+fov = 10.0
 near = 0.001
 far = 1e+07
 script = ExtResource("42_ktyp3")

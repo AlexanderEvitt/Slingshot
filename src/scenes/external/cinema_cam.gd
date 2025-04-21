@@ -11,11 +11,11 @@ func _process(_delta: float) -> void:
 		position = OwnShip.position + offset + thrust_offset
 		
 		var dt = SystemTime.step*0.03333
-		offset_vel += OwnShip.attitude*OwnShip.thrust*dt
+		offset_vel += OwnShip.attitude*(OwnShip.thrust - OwnShip.throttle*Vector3(1,0,0))*dt
 		thrust_offset -= offset_vel*dt
 		
 		if Input.is_action_just_pressed("view"):
-			offset = get_offset(0.1)
+			offset = get_offset(0.5)
 			thrust_offset = Vector3(0,0,0)
 			offset_vel = Vector3(0,0,0)
 	
