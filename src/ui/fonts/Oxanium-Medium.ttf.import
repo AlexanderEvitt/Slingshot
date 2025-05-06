@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://j8spfhnn6x23"
-path="res://.godot/imported/JetBrainsMonoNL-ExtraLight.ttf-6730105d020aaf343f2132b1bbd7f6fd.fontdata"
+uid="uid://bxr305u2huy84"
+path="res://.godot/imported/Oxanium-Medium.ttf-3529d54177e42cda17bc95d6f4c6ea39.fontdata"
 
 [deps]
 
-source_file="res://ui/fonts/JetBrainsMonoNL-ExtraLight.ttf"
-dest_files=["res://.godot/imported/JetBrainsMonoNL-ExtraLight.ttf-6730105d020aaf343f2132b1bbd7f6fd.fontdata"]
+source_file="res://ui/fonts/Oxanium-Medium.ttf"
+dest_files=["res://.godot/imported/Oxanium-Medium.ttf-3529d54177e42cda17bc95d6f4c6ea39.fontdata"]
 
 [params]
 

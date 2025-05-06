@@ -1,6 +1,8 @@
 extends Node
 
 var start_button
+var progress_bar
+var done_light
 const UI_SCENE_PATH : String = "res://ui/UIScene.tscn"
 
 signal startup
@@ -10,7 +12,9 @@ func _ready() -> void:
 	# Start resource loader
 	ResourceLoader.load_threaded_request(UI_SCENE_PATH)
 	# Connect start button signal
-	start_button = get_node("MenuUI/VBoxContainer/MainPanel/Button")
+	start_button = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button")
+	progress_bar = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/LoadingBack/TextureRect")
+	done_light = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/Panel")
 	start_button.pressed.connect(_on_startup)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,8 +22,10 @@ func _process(_delta: float) -> void:
 	# Get status of resource loader
 	var a = []
 	ResourceLoader.load_threaded_get_status(UI_SCENE_PATH,a)
-	var progress = round(100*a[0])
-	start_button.text = "START AVIONICS - " + str(progress) + "% LOADED"
+	progress_bar.anchor_right = a[0] # send to progress bar
+	if a[0] == 1: # send to done light
+		done_light.toggled = true
+	
 
 func _on_startup():
 	# Emit signal (for creating player ship)

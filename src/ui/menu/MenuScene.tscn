@@ -1,13 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckg801jn7baa1"]
+[gd_scene load_steps=15 format=3 uid="uid://ckg801jn7baa1"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_bgvoi"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="2_tlo2w"]
-[ext_resource type="Script" path="res://ui/menu/code.gd" id="6_aybfq"]
+[ext_resource type="Script" path="res://ui/panel_switch.gd" id="5_nxqce"]
+[ext_resource type="Script" path="res://ui/menu/terminal_code.gd" id="6_aybfq"]
+[ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="6_b1svf"]
+[ext_resource type="Script" path="res://ui/button_light.gd" id="8_lenix"]
+[ext_resource type="Script" path="res://ui/status_light.gd" id="8_yb1pt"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="9_1tlqv"]
+[ext_resource type="Texture2D" uid="uid://cf4yhwi23x8o1" path="res://ui/stripes.png" id="9_h2atm"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="10_nthiu"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="16_g0tso"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5l1na"]
+bg_color = Color(0.501961, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aib7h"]
+bg_color = Color(0.501961, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vgwr0"]
 texture = ExtResource("16_g0tso")
 
 [node name="MenuUI" type="Panel"]
@@ -173,17 +184,99 @@ text = "========================================================================
 "
 script = ExtResource("6_aybfq")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="StartupPanel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.3
+anchor_left = 0.2
 anchor_top = 0.3
-anchor_right = 0.7
+anchor_right = 0.8
 anchor_bottom = 0.7
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("10_nthiu")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="StartupPanel" node_paths=PackedStringArray("buttons_parent", "panels_parent")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_nxqce")
+buttons_parent = NodePath("ButtonPanel/ButtonHolder")
+panels_parent = NodePath("Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder")
+
+[node name="ButtonPanel" type="VBoxContainer" parent="StartupPanel/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 20
+
+[node name="ModesTitle" type="Label" parent="StartupPanel/HBoxContainer/ButtonPanel/MarginContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_b1svf")
+text = "AVI STARTUP"
+horizontal_alignment = 1
+
+[node name="ButtonHolder" type="GridContainer" parent="StartupPanel/HBoxContainer/ButtonPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ModeButton1" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="Button" type="Button" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton1"]
+layout_mode = 2
+theme = ExtResource("10_nthiu")
+toggle_mode = true
+button_pressed = true
+text = "NEW SIM"
+
+[node name="ModeButton2" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+
+[node name="Button" type="Button" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton2"]
+layout_mode = 2
+theme = ExtResource("10_nthiu")
+toggle_mode = true
+text = "LOAD SIM"
+
+[node name="ModeButton3" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Button" type="Button" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton3"]
+layout_mode = 2
+theme = ExtResource("10_nthiu")
+toggle_mode = true
+text = "CONFIG"
+
+[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="StartupPanel/HBoxContainer/ButtonPanel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -192,13 +285,277 @@ texture = ExtResource("2_tlo2w")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="MainPanel" type="Panel" parent="VBoxContainer"]
+[node name="Centerfold" type="VBoxContainer" parent="StartupPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("10_nthiu")
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 70
 
-[node name="TriangleCutout" type="Panel" parent="VBoxContainer/MainPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer"]
+layout_mode = 2
+
+[node name="CenterPanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+theme = ExtResource("9_1tlqv")
+
+[node name="PanelsHolder" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="NewSimConfig" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder"]
+layout_mode = 2
+
+[node name="NewSimConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("9_1tlqv")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="StatePanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme = ExtResource("9_1tlqv")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FrameLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "START DOCK"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+layout_mode = 2
+text = "ZEPHYR-E7"
+horizontal_alignment = 1
+
+[node name="GainLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/GainLabel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "VESSEL"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
+layout_mode = 2
+text = "FV JUNIPER"
+horizontal_alignment = 1
+
+[node name="LabelContainer2" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FrameLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/FrameLabel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/FrameLabel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "STATE"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/FrameLabel/VBoxContainer"]
+layout_mode = 2
+text = "COLD & DARK"
+horizontal_alignment = 1
+
+[node name="GainLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/GainLabel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/GainLabel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "MISSION"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/GainLabel/VBoxContainer"]
+layout_mode = 2
+text = "SPACE CONTROL"
+horizontal_alignment = 1
+
+[node name="StartPanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("9_1tlqv")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5l1na")
+script = ExtResource("8_yb1pt")
+on_text = "READY"
+off_text = "IDLE"
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "IDLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+text = "INITIALIZE"
+script = ExtResource("8_lenix")
+
+[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.15
+anchor_right = 0.95
+anchor_bottom = 0.85
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aib7h")
+
+[node name="LoadingBack" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+theme = ExtResource("9_1tlqv")
+
+[node name="TextureRect" type="TextureRect" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/LoadingBack"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_h2atm")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="LoadSimConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder"]
 visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme = ExtResource("9_1tlqv")
+
+[node name="ConfigConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme = ExtResource("9_1tlqv")
+
+[node name="TriangleCutout" type="Panel" parent="StartupPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -209,18 +566,4 @@ offset_left = -100.0
 offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
-
-[node name="Button" type="Button" parent="VBoxContainer/MainPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("10_nthiu")
-text = "START SIMULATION"
+theme_override_styles/panel = SubResource("StyleBoxTexture_vgwr0")

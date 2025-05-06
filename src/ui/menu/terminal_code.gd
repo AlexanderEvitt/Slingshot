@@ -3,7 +3,8 @@ extends Label
 var snippets
 var i = 0
 var done = false
-var max_lines = 35
+# Controls how many lines are visible on screen
+var max_lines = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
