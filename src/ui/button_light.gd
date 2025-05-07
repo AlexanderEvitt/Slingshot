@@ -6,9 +6,9 @@ func _ready():
 	light = get_node("Panel")
 	
 	# send toggled signal to self
-	self.toggled.connect(_on_toggled)
+	self.button_down.connect(_on_toggled)
 
-func _on_toggled(_toggled_on):
+func _on_toggled():
 	if button_pressed:
 		# Set the status box to green
 		var new_style = StyleBoxFlat.new()

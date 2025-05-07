@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://cq4okyn8x44n7"]
 
-[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="1_bvxoa"]
+[ext_resource type="FontFile" uid="uid://1tccf66eoucs" path="res://ui/fonts/Oxanium-SemiBold.ttf" id="1_hvnww"]
 
 [resource]
 Label/font_sizes/font_size = 32
-Label/fonts/font = ExtResource("1_bvxoa")
+Label/fonts/font = ExtResource("1_hvnww")

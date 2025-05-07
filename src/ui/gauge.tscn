@@ -1,18 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://co1ql607hc2v5"]
+[gd_scene load_steps=8 format=3 uid="uid://co1ql607hc2v5"]
 
 [ext_resource type="Script" path="res://ui/gauge.gd" id="1_qvx8i"]
 [ext_resource type="Texture2D" uid="uid://cr1s13724iqli" path="res://ui/gauge1.png" id="2_x506o"]
 [ext_resource type="Texture2D" uid="uid://brdeyiuesg2lp" path="res://ui/gauge2.png" id="3_r64wq"]
-[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="4_0b16u"]
+[ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="4_luycm"]
 [ext_resource type="Texture2D" uid="uid://c5pcx02th5mkk" path="res://ui/gauge3.png" id="5_a2bjb"]
-[ext_resource type="FontFile" uid="uid://do6qxwpxanaih" path="res://ui/fonts/JetBrainsMonoNL-Bold.ttf" id="5_l3wae"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mathc"]
-font = ExtResource("4_0b16u")
+font = ExtResource("4_luycm")
 font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_vm61q"]
-font = ExtResource("5_l3wae")
+font = ExtResource("4_luycm")
 font_size = 24
 font_color = Color(0.0253638, 0.0253638, 0.0253638, 1)
 

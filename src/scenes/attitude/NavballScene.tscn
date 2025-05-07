@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/attitude/navball.gd" id="2_3fwbi"]
 [ext_resource type="Texture2D" uid="uid://17dclcol0avn" path="res://scenes/attitude/navball_texture.png" id="2_s886u"]
-[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="3_l8mjs"]
+[ext_resource type="FontFile" uid="uid://dqyy4mogwg27l" path="res://ui/fonts/Oxanium-Regular.ttf" id="3_01gpn"]
 [ext_resource type="Texture2D" uid="uid://djyppx76cf4t5" path="res://scenes/attitude/prograde.png" id="3_mdtrp"]
 [ext_resource type="Texture2D" uid="uid://v2arkm3xh0km" path="res://scenes/attitude/ballbacking.png" id="4_dswt3"]
 [ext_resource type="Script" path="res://scenes/attitude/prograde_marker.gd" id="4_gmmfj"]
@@ -42,7 +42,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "0"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -57,7 +57,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "0"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -72,7 +72,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "0"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -87,7 +87,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "0"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -105,7 +105,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "90"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -120,7 +120,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "90"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -135,7 +135,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "90"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -150,7 +150,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "90"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -168,7 +168,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "180"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -183,7 +183,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "180"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -198,7 +198,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "180"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -213,7 +213,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "180"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -231,7 +231,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "270"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -246,7 +246,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "270"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -261,7 +261,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "270"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -276,7 +276,7 @@ no_depth_test = true
 render_priority = -1
 outline_render_priority = -2
 text = "270"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
@@ -303,7 +303,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "0"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -314,7 +314,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "27"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -325,7 +325,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "18"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -336,7 +336,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "9"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -347,7 +347,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "33"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -358,7 +358,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "30"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -369,7 +369,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "3"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -380,7 +380,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "6"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -391,7 +391,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "12"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -402,7 +402,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "15"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -413,7 +413,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "21"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
@@ -424,7 +424,7 @@ billboard = 1
 no_depth_test = true
 render_priority = 3
 text = "24"
-font = ExtResource("3_l8mjs")
+font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 

@@ -15,7 +15,7 @@ func _ready() -> void:
 	start_button = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button")
 	progress_bar = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/LoadingBack/TextureRect")
 	done_light = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/Panel")
-	start_button.pressed.connect(_on_startup)
+	start_button.button_up.connect(_on_startup)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -34,6 +34,10 @@ func _on_startup():
 	# Load UI and associated subscenes
 	var ui = ResourceLoader.load_threaded_get(UI_SCENE_PATH).instantiate()
 	add_child(ui)
+	
+	# Wait a tiny amount of time
+	# This lets the button light have time to turn green
+	# await get_tree().create_timer(1).timeout
 	
 	# Delete menu
 	self.remove_child(get_node("MenuUI"))

@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://b084uen2ev7hx"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://b084uen2ev7hx"]
 
-[ext_resource type="FontFile" uid="uid://ct8juool8o5th" path="res://ui/fonts/JetBrainsMonoNL-SemiBold.ttf" id="1_07xtd"]
+[ext_resource type="FontFile" uid="uid://1tccf66eoucs" path="res://ui/fonts/Oxanium-SemiBold.ttf" id="1_s5tp7"]
+[ext_resource type="FontFile" uid="uid://dqyy4mogwg27l" path="res://ui/fonts/Oxanium-Regular.ttf" id="2_i14gj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gq85c"]
 content_margin_left = 10.0
@@ -15,7 +16,8 @@ corner_radius_bottom_left = 4
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 
 [resource]
+default_font = ExtResource("2_i14gj")
 Button/font_sizes/font_size = 36
-Button/fonts/font = ExtResource("1_07xtd")
+Button/fonts/font = ExtResource("1_s5tp7")
 Button/styles/normal = SubResource("StyleBoxFlat_gq85c")
 Panel/styles/panel = SubResource("StyleBoxFlat_2pl0v")

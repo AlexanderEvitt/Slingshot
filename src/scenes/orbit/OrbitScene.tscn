@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="2_awidn"]
 [ext_resource type="PackedScene" uid="uid://rg5pq75kxwxo" path="res://bodies/wireframe/MercuryWireframe.tscn" id="3_orujh"]
 [ext_resource type="PackedScene" uid="uid://p6o5a3n7q5yl" path="res://bodies/wireframe/VenusWireframe.tscn" id="4_klp4m"]
-[ext_resource type="FontFile" uid="uid://bjxjxeg3bd73q" path="res://ui/fonts/JetBrainsMonoNL-Regular.ttf" id="4_rnk7r"]
+[ext_resource type="FontFile" uid="uid://dqyy4mogwg27l" path="res://ui/fonts/Oxanium-Regular.ttf" id="4_uugyr"]
 [ext_resource type="Script" path="res://bodies/draw_planet_orbit.gd" id="5_vmpxk"]
 [ext_resource type="PackedScene" uid="uid://dlxcptlilq2sf" path="res://bodies/wireframe/EarthWireframe.tscn" id="5_wg1iu"]
 [ext_resource type="PackedScene" uid="uid://dhbrnbjd5ry01" path="res://bodies/wireframe/LunaWireframe.tscn" id="6_bom1w"]
@@ -122,10 +122,11 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Label" type="Label3D" parent="Sun"]
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " SUN"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -152,10 +153,11 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Label" type="Label3D" parent="Mercury"]
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " MERCURY"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -182,10 +184,11 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Label" type="Label3D" parent="Venus"]
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " VENUS"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -213,10 +216,11 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Label" type="Label3D" parent="Earth"]
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " EARTH"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -237,10 +241,11 @@ visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " PORT"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -292,10 +297,11 @@ visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " LUNA"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -322,10 +328,11 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Label" type="Label3D" parent="Mars"]
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " MARS"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -352,10 +359,11 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Label" type="Label3D" parent="Jupiter"]
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " JUPITER"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -376,10 +384,11 @@ visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " IO"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -418,10 +427,11 @@ visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " CALLISTO"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -460,10 +470,11 @@ visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " EUROPA"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -503,10 +514,11 @@ visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " GANYMEDE"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -550,10 +562,11 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Label" type="Label3D" parent="Saturn"]
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " SATURN"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -576,10 +589,11 @@ visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " TITAN"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -623,10 +637,11 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Label" type="Label3D" parent="Uranus"]
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " URANUS"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
@@ -653,10 +668,11 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Label" type="Label3D" parent="Neptune"]
 pixel_size = 0.0003
+offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
 text = " NEPTUNE"
-font = ExtResource("4_rnk7r")
+font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0

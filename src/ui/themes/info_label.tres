@@ -1,3 +1,6 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://b5j6mwf5fenb7"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b5j6mwf5fenb7"]
+
+[ext_resource type="FontFile" uid="uid://1tccf66eoucs" path="res://ui/fonts/Oxanium-SemiBold.ttf" id="1_4f5bl"]
 
 [resource]
+font = ExtResource("1_4f5bl")

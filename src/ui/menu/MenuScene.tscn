@@ -504,7 +504,6 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-toggle_mode = true
 text = "INITIALIZE"
 script = ExtResource("8_lenix")
 
@@ -541,12 +540,168 @@ texture = ExtResource("9_h2atm")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="LoadSimConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder"]
+[node name="LoadSimConfig" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder"]
 visible = false
+layout_mode = 2
+
+[node name="NewSimConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("9_1tlqv")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="StatePanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 theme = ExtResource("9_1tlqv")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FrameLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "CHOOSE SAVE"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+layout_mode = 2
+text = "FILE01"
+horizontal_alignment = 1
+
+[node name="StartPanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("9_1tlqv")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5l1na")
+script = ExtResource("8_yb1pt")
+on_text = "READY"
+off_text = "IDLE"
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "IDLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+text = "INITIALIZE"
+script = ExtResource("8_lenix")
+
+[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.15
+anchor_right = 0.95
+anchor_bottom = 0.85
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aib7h")
+
+[node name="LoadingBack" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+theme = ExtResource("9_1tlqv")
+
+[node name="TextureRect" type="TextureRect" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/LoadingBack"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_h2atm")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="ConfigConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder"]
 visible = false
