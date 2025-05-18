@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://ckg801jn7baa1"]
+[gd_scene load_steps=16 format=3 uid="uid://ckg801jn7baa1"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_bgvoi"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="2_tlo2w"]
 [ext_resource type="Script" path="res://ui/panel_switch.gd" id="5_nxqce"]
 [ext_resource type="Script" path="res://ui/menu/terminal_code.gd" id="6_aybfq"]
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="6_b1svf"]
+[ext_resource type="ButtonGroup" uid="uid://b7ltikwsb6n48" path="res://ui/menu/menu_button_group.tres" id="7_ix6vk"]
 [ext_resource type="Script" path="res://ui/button_light.gd" id="8_lenix"]
 [ext_resource type="Script" path="res://ui/status_light.gd" id="8_yb1pt"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="9_1tlqv"]
@@ -238,6 +239,7 @@ layout_mode = 2
 theme = ExtResource("10_nthiu")
 toggle_mode = true
 button_pressed = true
+button_group = ExtResource("7_ix6vk")
 text = "NEW SIM"
 
 [node name="ModeButton2" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
@@ -251,6 +253,7 @@ theme_override_constants/margin_right = 5
 layout_mode = 2
 theme = ExtResource("10_nthiu")
 toggle_mode = true
+button_group = ExtResource("7_ix6vk")
 text = "LOAD SIM"
 
 [node name="ModeButton3" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
@@ -265,6 +268,7 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 theme = ExtResource("10_nthiu")
 toggle_mode = true
+button_group = ExtResource("7_ix6vk")
 text = "CONFIG"
 
 [node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel"]

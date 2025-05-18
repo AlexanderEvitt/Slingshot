@@ -1,0 +1,626 @@
+[gd_scene load_steps=17 format=3 uid="uid://dpcripo2vb6ip"]
+
+[ext_resource type="Script" path="res://ui/panel_switch.gd" id="1_wr236"]
+[ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_635di"]
+[ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="3_rowmx"]
+[ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="4_hbjgl"]
+[ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="5_yn5sk"]
+[ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="6_qa2gt"]
+[ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="7_tqjcw"]
+[ext_resource type="Script" path="res://ui/data_grid.gd" id="8_sh8ee"]
+[ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="9_035gd"]
+[ext_resource type="Script" path="res://ui/alert_handler.gd" id="10_mkaa0"]
+[ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="11_rbv2e"]
+[ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="12_r6bjx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d77aa"]
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
+texture = ExtResource("7_tqjcw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1unmv"]
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+
+[node name="EngineeringScreen" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Screen" type="VBoxContainer" parent="." node_paths=PackedStringArray("buttons_parent", "panels_parent")]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_wr236")
+smooth = true
+buttons_parent = NodePath("ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder")
+panels_parent = NodePath("HUDs")
+
+[node name="HUDs" type="VBoxContainer" parent="Screen"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HUD1" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_635di")
+
+[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HUD2" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_635di")
+
+[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HUD3" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HUD4" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_635di")
+
+[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/HUDs/HUD4/Shifter"]
+layout_mode = 2
+
+[node name="MarginCam" type="MarginContainer" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Panel" type="Panel" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+stretch = true
+script = ExtResource("3_rowmx")
+
+[node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 0
+
+[node name="CamRoot" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("4_hbjgl")]
+camera_select = 1
+
+[node name="ScreenText" type="VBoxContainer" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
+layout_mode = 2
+theme = ExtResource("5_yn5sk")
+text = "BORESIGHT +X"
+
+[node name="Label2" type="Label" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
+layout_mode = 2
+theme = ExtResource("5_yn5sk")
+text = "AUTO"
+
+[node name="Label3" type="Label" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
+layout_mode = 2
+theme = ExtResource("5_yn5sk")
+text = "FOV45"
+
+[node name="HUD5" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Shifter" type="VBoxContainer" parent="Screen/HUDs/HUD5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUD6" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HUD7" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD7"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HUD8" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD8"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ModeSelectorPanel" type="Panel" parent="Screen"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.14
+theme_override_styles/panel = SubResource("StyleBoxFlat_d77aa")
+
+[node name="MarginContainer" type="MarginContainer" parent="Screen/ModeSelectorPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="ButtonPanel" type="Panel" parent="Screen/ModeSelectorPanel/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonHolder" type="GridContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="ModeButton1" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton1" groups=["Buttons"]]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+toggle_mode = true
+button_pressed = true
+text = "POWER"
+
+[node name="ModeButton2" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+
+[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton2" groups=["Buttons"]]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+toggle_mode = true
+text = "FUEL"
+
+[node name="ModeButton3" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+
+[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton3" groups=["Buttons"]]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+toggle_mode = true
+text = "THRUSTERS"
+
+[node name="ModeButton4" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+
+[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton4" groups=["Buttons"]]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+toggle_mode = true
+text = "CAMERAS"
+
+[node name="ModeButton5" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton5" groups=["Buttons"]]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+toggle_mode = true
+text = "PROPULSION"
+
+[node name="ModeButton6" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton6" groups=["Buttons"]]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+toggle_mode = true
+text = "THERMAL"
+
+[node name="ModeButton7" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton7" groups=["Buttons"]]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+toggle_mode = true
+text = "DAMAGE"
+
+[node name="ModeButton8" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton8" groups=["Buttons"]]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+toggle_mode = true
+text = "SENSORS"
+
+[node name="MarginContainer" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="Label" type="Label" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("6_qa2gt")
+text = "MODES"
+
+[node name="TriangleCutout" type="Panel" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
+
+[node name="Sidebar" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Sidepanel1" type="MarginContainer" parent="Sidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="Panel" type="Panel" parent="Sidebar/Sidepanel1"]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+
+[node name="MarginContainer" type="MarginContainer" parent="Sidebar/Sidepanel1/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/Sidepanel1/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("6_qa2gt")
+text = "STATE"
+
+[node name="DataGrid" type="GridContainer" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+script = ExtResource("8_sh8ee")
+
+[node name="Title1" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_qa2gt")
+text = "REF"
+
+[node name="Data1" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Earth"
+horizontal_alignment = 2
+
+[node name="Title2" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_qa2gt")
+text = "ALT"
+
+[node name="Data2" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1,475"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Title3" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_qa2gt")
+text = "VEL"
+
+[node name="Data3" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "7.768"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Title4" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_qa2gt")
+text = "ECC"
+
+[node name="Data4" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.324"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Title5" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_qa2gt")
+text = "STP"
+
+[node name="Data5" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.324"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="TriangleCutout" type="Panel" parent="Sidebar/Sidepanel1/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
+
+[node name="Sidepanel2" type="MarginContainer" parent="Sidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="Panel" type="Panel" parent="Sidebar/Sidepanel2"]
+layout_mode = 2
+theme = ExtResource("6_qa2gt")
+
+[node name="MarginContainer" type="MarginContainer" parent="Sidebar/Sidepanel2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/Sidepanel2/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("6_qa2gt")
+text = "ALERTS"
+
+[node name="Panel" type="Panel" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("9_035gd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1unmv")
+
+[node name="MarginContainer" type="MarginContainer" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("10_mkaa0")
+
+[node name="Label" type="Label" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "AVI_START: Avionics startup complete."
+label_settings = ExtResource("11_rbv2e")
+autowrap_mode = 2
+
+[node name="Spacer" type="Panel" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="TriangleCutout" type="Panel" parent="Sidebar/Sidepanel2/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
+
+[node name="Spacer" type="Panel" parent="Sidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="MarginContainer" type="MarginContainer" parent="Sidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="Sidebar/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+texture = ExtResource("12_r6bjx")
+expand_mode = 2
+stretch_mode = 4
+
+[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton1/Button" to="Screen" method="_on_button1_pressed"]
+[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton2/Button" to="Screen" method="_on_button2_pressed"]
+[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton3/Button" to="Screen" method="_on_button3_pressed"]
+[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton4/Button" to="Screen" method="_on_button4_pressed"]
+[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton5/Button" to="Screen" method="_on_button5_pressed"]
+[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton6/Button" to="Screen" method="_on_button6_pressed"]
+[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton7/Button" to="Screen" method="_on_button7_pressed"]
+[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton8/Button" to="Screen" method="_on_button8_pressed"]

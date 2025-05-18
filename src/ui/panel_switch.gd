@@ -61,6 +61,7 @@ func set_panel(i):
 	h = i # used for keeping track of which HUD is active
 	
 	# Set all the buttons to be un-toggled except the one just pressed
+	# Necessary because the arrow keys won't caues the button to be pressed
 	for b in buttons:
 		if buttons.find(b,0) == i:
 			b.set_pressed_no_signal(true)
