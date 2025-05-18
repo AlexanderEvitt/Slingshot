@@ -28,19 +28,21 @@ script = ExtResource("2_bh7rb")
 button_group = ExtResource("27_ytqrm")
 
 [node name="FlightScreen" parent="." instance=ExtResource("4_l1uqb")]
-visible = false
 layout_mode = 1
 
 [node name="EngineeringScreen" parent="." instance=ExtResource("5_i05jk")]
+visible = false
 layout_mode = 1
 
 [node name="ExternalScreen" parent="." instance=ExtResource("6_b2rax")]
 layout_mode = 0
 
 [node name="NavigationScreen" parent="." instance=ExtResource("7_c6axk")]
+visible = false
 layout_mode = 1
 
 [node name="UtilityScreen" parent="." instance=ExtResource("8_76tcd")]
+visible = false
 layout_mode = 1
 
 [node name="CinematicScreen" parent="." instance=ExtResource("9_xulks")]

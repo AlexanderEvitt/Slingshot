@@ -8,6 +8,8 @@ func _input(_event):
 func _ready():
 	OwnShip.ship.auto_disc.connect(auto_disc)
 	OwnShip.ship.nav_disc.connect(nav_disc)
+	OwnShip.ship.rel_clamp.connect(rel_clamp)
+	OwnShip.ship.collision.connect(collision)
 
 func auto_disc():
 	var new_label = Label.new()
@@ -28,4 +30,18 @@ func avi_test():
 	new_label.label_settings = load("res://ui/themes/info_label.tres")
 	new_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	new_label.text = "AVI_TEST: Avionics test completed satisfactorily."
+	add_child(new_label)
+
+func rel_clamp():
+	var new_label = Label.new()
+	new_label.label_settings = load("res://ui/themes/info_label.tres")
+	new_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	new_label.text = "REL_CLAMP: Docking clamps released. Spacecraft free for maneuvering."
+	add_child(new_label)
+	
+func collision():
+	var new_label = Label.new()
+	new_label.label_settings = load("res://ui/themes/warning_label.tres")
+	new_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	new_label.text = "COLLISION: Collision detected. Damage sustained."
 	add_child(new_label)

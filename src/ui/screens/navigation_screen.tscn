@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cc5h5k3lje0ma"]
+[gd_scene load_steps=36 format=4 uid="uid://cc5h5k3lje0ma"]
 
 [ext_resource type="Script" path="res://ui/panel_switch.gd" id="1_ukvq0"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_os1l8"]
@@ -21,8 +21,7 @@
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="19_ccqhq"]
 [ext_resource type="Script" path="res://ui/data_grid.gd" id="20_1y7br"]
 [ext_resource type="ButtonGroup" uid="uid://dfe3ephasfx3r" path="res://ui/screens/navigation_button_group.tres" id="20_sd8s0"]
-[ext_resource type="Script" path="res://ui/alert_handler.gd" id="21_wmjsu"]
-[ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="22_ew60s"]
+[ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/alerts_panel/alerts_panel.tscn" id="22_d7aba"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="23_agbb4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
@@ -219,9 +218,6 @@ bg_color = Color(0.501961, 0, 0, 1)
 bg_color = Color(0.501961, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d77aa"]
-bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1unmv"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 
 [node name="NavigationScreen" type="HBoxContainer"]
@@ -1788,96 +1784,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
 
-[node name="Sidepanel2" type="MarginContainer" parent="Sidebar"]
+[node name="Alerts" parent="Sidebar" instance=ExtResource("22_d7aba")]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-
-[node name="Panel" type="Panel" parent="Sidebar/Sidepanel2"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-
-[node name="MarginContainer" type="MarginContainer" parent="Sidebar/Sidepanel2/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/Sidepanel2/Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("9_37stn")
-text = "ALERTS"
-
-[node name="Panel" type="Panel" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("8_cmm8l")
-theme_override_styles/panel = SubResource("StyleBoxFlat_1unmv")
-
-[node name="MarginContainer" type="MarginContainer" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel/MarginContainer"]
-layout_mode = 2
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("21_wmjsu")
-
-[node name="Label" type="Label" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-text = "AVI_START: Avionics startup complete."
-label_settings = ExtResource("22_ew60s")
-autowrap_mode = 2
-
-[node name="Spacer" type="Panel" parent="Sidebar/Sidepanel2/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="TriangleCutout" type="Panel" parent="Sidebar/Sidepanel2/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
 
 [node name="Spacer" type="Panel" parent="Sidebar"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
+theme = ExtResource("2_os1l8")
 
 [node name="MarginContainer" type="MarginContainer" parent="Sidebar"]
 layout_mode = 2

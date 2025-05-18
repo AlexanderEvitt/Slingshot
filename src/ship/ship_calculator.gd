@@ -32,6 +32,8 @@ var planned_acceleration
 # Signals
 signal auto_disc
 signal nav_disc
+signal rel_clamp
+signal collision
 
 var previous_dt = 0.03333
 var previous_t = 0
@@ -90,6 +92,7 @@ func _process(delta):
 		velocity = (dock.get_parent().fetch(SystemTime.t) - dock.get_parent().fetch(SystemTime.t - SystemTime.step))
 	if Input.is_action_just_pressed("dock"):
 		docked = false
+		rel_clamp.emit() # show alert
 
 func integrate_normally(_delta):
 	
@@ -109,6 +112,10 @@ func integrate_normally(_delta):
 	
 	# Change the velociity by the impulse
 	velocity += collision_calculator.impulse/mass
+	
+	# Emit collision alarm if there's impulse
+	if collision_calculator.impulse.length_squared() > 0:
+		collision.emit()
 
 func move_by_plan():
 	var i = find_time_index(propagator.planned_times,SystemTime.t)
