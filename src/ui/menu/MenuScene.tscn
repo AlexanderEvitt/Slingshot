@@ -56,7 +56,7 @@ theme = ExtResource("9_1tlqv")
 theme_override_font_sizes/font_size = 20
 text = "================================================================================
   Slingshot Astrodynamics System v0.0.1 - Boot Sequence
-  © 1996-2025, ConkSat Industries | Property of 12th Fleet, FFC
+  © 1996-2025, ConkSat Industries | Property of 12th Fleet, Federal Navy
 ================================================================================
 
 [SYS] Initializing Power & Avionics Systems...
@@ -436,7 +436,7 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/GainLabel/VBoxContainer"]
 layout_mode = 2
-text = "SPACE CONTROL"
+text = "TRANSPORT"
 horizontal_alignment = 1
 
 [node name="StartPanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2"]

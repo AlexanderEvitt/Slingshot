@@ -20,8 +20,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SystemTime="*res://ship/system_time.cs"
-Conversions="*res://ship/conversions.cs"
+SystemTime="*res://ship/SystemTime.cs"
+Conversions="*res://ship/Conversions.cs"
 OwnShip="*res://ship/own_ship.gd"
 
 [display]

@@ -8,7 +8,7 @@ func _ready() -> void:
 	get_parent().get_node("UI").startup.connect(_on_startup)
 	
 	# Load ship frame
-	player_ship = preload("res://ship/frame/ShipFrame.tscn").instantiate()
+	player_ship = preload("res://ship/entity/ship_entity.tscn").instantiate()
 
 func _on_startup():
 	# Add the ship

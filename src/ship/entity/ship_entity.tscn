@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://c71thxnvwh37i"]
 
-[ext_resource type="Script" path="res://ship/frame/ship_calculator.gd" id="1_012ot"]
-[ext_resource type="Script" path="res://ship/frame/attitude_calculator.gd" id="2_7e8cl"]
-[ext_resource type="Script" path="res://ship/frame/collision_calculator.gd" id="3_wjkl8"]
-[ext_resource type="Script" path="res://ship/propagator.cs" id="4_7neml"]
-[ext_resource type="Script" path="res://ship/frame/thrust_calculator.gd" id="5_n5nff"]
+[ext_resource type="Script" path="res://ship/entity/ship_calculator.gd" id="1_012ot"]
+[ext_resource type="Script" path="res://ship/entity/attitude_calculator.gd" id="2_7e8cl"]
+[ext_resource type="Script" path="res://ship/entity/collision_calculator.gd" id="3_wjkl8"]
+[ext_resource type="Script" path="res://ship/Propagator.cs" id="4_7neml"]
+[ext_resource type="Script" path="res://ship/entity/thrust_calculator.gd" id="5_n5nff"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qcdir"]
 
