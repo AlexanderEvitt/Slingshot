@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c723tonvicthq"
-path="res://.godot/imported/frigate.glb-4d08018bd6e8ad32fc69f825edeebfa8.scn"
+path="res://.godot/imported/frigate.glb-8accdf4a8dff148c907aca38898fbdb7.scn"
 
 [deps]
 
-source_file="res://ship/frigate/frigate.glb"
-dest_files=["res://.godot/imported/frigate.glb-4d08018bd6e8ad32fc69f825edeebfa8.scn"]
+source_file="res://ship/frigate/real/frigate.glb"
+dest_files=["res://.godot/imported/frigate.glb-8accdf4a8dff148c907aca38898fbdb7.scn"]
 
 [params]
 

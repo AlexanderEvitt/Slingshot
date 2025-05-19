@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2qfyqcebrhc8"
-path.s3tc="res://.godot/imported/clipper_TankBump.png-5a488cc39fa89841e1b535500cff2347.s3tc.ctex"
+uid="uid://4hysq3x4hkeb"
+path.s3tc="res://.godot/imported/frigate_IsoGridNormal.png-318853cb71500740442de7fc91b57ff8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "30e8ca974c4c581f9e544a2e056709b3"
+"md5": "e97089985f82b98da21be24fa198f0f4"
 }
 
 [deps]
 
-source_file="res://ship/clipper/clipper_TankBump.png"
-dest_files=["res://.godot/imported/clipper_TankBump.png-5a488cc39fa89841e1b535500cff2347.s3tc.ctex"]
+source_file="res://ship/frigate/real/frigate_IsoGridNormal.png"
+dest_files=["res://.godot/imported/frigate_IsoGridNormal.png-318853cb71500740442de7fc91b57ff8.s3tc.ctex"]
 
 [params]
 
@@ -28,7 +28,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://ship/clipper/clipper_TankBump.png"
+roughness/src_normal="res://ship/frigate/frigate_IsoGridNormal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

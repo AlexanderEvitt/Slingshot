@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://duncb2lf44vea"]
 
-[ext_resource type="Material" uid="uid://brn1ecxyjrf0n" path="res://ship/frigate/AccentPaint.tres" id="1_o0h05"]
+[ext_resource type="Material" uid="uid://brn1ecxyjrf0n" path="res://ship/frigate/real/AccentPaint.tres" id="1_o0h05"]
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="2_p4xqk"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2b0lc"]

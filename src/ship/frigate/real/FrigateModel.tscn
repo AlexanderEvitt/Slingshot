@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bfwsgcbvelo0t"]
 
-[ext_resource type="PackedScene" uid="uid://c723tonvicthq" path="res://ship/frigate/frigate.glb" id="1_p2xcd"]
+[ext_resource type="PackedScene" uid="uid://c723tonvicthq" path="res://ship/frigate/real/frigate.glb" id="1_p2xcd"]
 [ext_resource type="Texture2D" uid="uid://drvl7m6jpple6" path="res://ship/frigate/external_material/MakedBrick_albedo.png" id="2_c712i"]
 [ext_resource type="Material" uid="uid://ddobmiq0l53c" path="res://ship/frigate/external_material/MakedBrick.tres" id="2_gb527"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="2_k8wt2"]

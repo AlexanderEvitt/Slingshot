@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="13_kuxx4"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="13_xts1l"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="14_g31x3"]
-[ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/ShipWireframe.tscn" id="18_lxife"]
+[ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="18_lxife"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="22_66qh8"]
 [ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="23_vt6nb"]
 

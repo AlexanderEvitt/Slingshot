@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
 [ext_resource type="Texture2D" uid="uid://djyppx76cf4t5" path="res://scenes/attitude/prograde.png" id="3_ehpfi"]
 [ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="3_p1375"]
-[ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/frigate/PlayerShip.tscn" id="3_r7nlu"]
+[ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/frigate/real/FrigateReal.tscn" id="3_r7nlu"]
 [ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="4_bholp"]
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="4_n8kbm"]
