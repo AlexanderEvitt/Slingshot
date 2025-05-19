@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c8q7ioeg374gn"]
 
-[ext_resource type="Shader" path="res://ship/sobel_wireframe.gdshader" id="1_e5hnk"]
+[ext_resource type="Shader" path="res://ship/frigate/wireframe/sobel_wireframe.gdshader" id="1_e5hnk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mhx8v"]
 render_priority = 0

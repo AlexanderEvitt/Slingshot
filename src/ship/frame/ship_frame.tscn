@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://c71thxnvwh37i"]
 
-[ext_resource type="Script" path="res://ship/ship_calculator.gd" id="1_ols0f"]
-[ext_resource type="Script" path="res://ship/attitude.gd" id="2_88nqh"]
-[ext_resource type="Script" path="res://ship/collision_detector.gd" id="3_e0teg"]
-[ext_resource type="Script" path="res://ship/Propagator.cs" id="3_h654o"]
-[ext_resource type="Script" path="res://ship/thrust_calculator.gd" id="4_107xu"]
+[ext_resource type="Script" path="res://ship/frame/ship_calculator.gd" id="1_012ot"]
+[ext_resource type="Script" path="res://ship/frame/attitude_calculator.gd" id="2_7e8cl"]
+[ext_resource type="Script" path="res://ship/frame/collision_calculator.gd" id="3_wjkl8"]
+[ext_resource type="Script" path="res://ship/propagator.cs" id="4_7neml"]
+[ext_resource type="Script" path="res://ship/frame/thrust_calculator.gd" id="5_n5nff"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qcdir"]
 
@@ -12,13 +12,13 @@
 size = Vector3(0.05, 0.015, 0.015)
 
 [node name="OwnShip" type="Node3D"]
-script = ExtResource("1_ols0f")
+script = ExtResource("1_012ot")
 start_position = Vector3(42164, -50, 0)
 start_velocity = Vector3(0, 3.075, 0)
 
 [node name="AttitudeCalculator" type="Node3D" parent="."]
 transform = Transform3D(0.995227, -2.92237e-19, 0.0975829, 0.0975829, 5.97523e-18, -0.995227, -2.92237e-19, 1, 5.97523e-18, 0, 0, 0)
-script = ExtResource("2_88nqh")
+script = ExtResource("2_7e8cl")
 
 [node name="CollisionDetector" type="RigidBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_qcdir")
@@ -30,14 +30,14 @@ custom_integrator = true
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 3
-script = ExtResource("3_e0teg")
+script = ExtResource("3_wjkl8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionDetector"]
 shape = SubResource("BoxShape3D_fdpi8")
 
 [node name="Propagator" type="Node3D" parent="."]
-script = ExtResource("3_h654o")
+script = ExtResource("4_7neml")
 n = 400
 
 [node name="Thrusters" type="Node3D" parent="."]
-script = ExtResource("4_107xu")
+script = ExtResource("5_n5nff")
