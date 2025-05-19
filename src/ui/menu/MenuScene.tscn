@@ -67,7 +67,7 @@ text = "========================================================================
       > Flight Director Data Link ....... [ RECEIVED ]
       > Orbital Debris Tracking ......... [ ONLINE ]
 
-[MISSION] Status: HARD DOCKED @ BERTH-4A | Relative Vel: 0.0000 m/s
+[MISSION] Status: HARD DOCKED @ BERTH-E7 | Relative Vel: 0.0000 m/s
 [MISSION] Docking Interface Active | Awaiting Undock Command...
 
 --------------------------------------------------------------------------------
@@ -219,7 +219,7 @@ theme_override_constants/margin_top = 20
 [node name="ModesTitle" type="Label" parent="StartupPanel/HBoxContainer/ButtonPanel/MarginContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_b1svf")
-text = "AVI STARTUP"
+text = "STARTUP"
 horizontal_alignment = 1
 
 [node name="ButtonHolder" type="GridContainer" parent="StartupPanel/HBoxContainer/ButtonPanel"]
