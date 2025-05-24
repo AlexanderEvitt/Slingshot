@@ -22,15 +22,15 @@ func _ready():
 func _process(_delta):
 	# Use camera mode to determine whether camera is included in rotation
 	if true:
-		pointer.transform.basis = OwnShip.attitude
+		pointer.transform.basis = ShipData.player_ship.attitude
 	else:
-		transform.basis = OwnShip.attitude
-		plotter.transform.basis = OwnShip.attitude.inverse() # plotter needs to stay in the right frame
-	position = OwnShip.position/scaledown
+		transform.basis = ShipData.player_ship.attitude
+		plotter.transform.basis = ShipData.player_ship.attitude.inverse() # plotter needs to stay in the right frame
+	position = ShipData.player_ship.position/scaledown
 	if smashed:
 		position.z = 0
 	
-	plotter.positions = OwnShip.plotted_positions
+	plotter.positions = ShipData.player_ship.plotted_positions
 	if plan:
-		planner.positions = OwnShip.planned_positions
+		planner.positions = ShipData.player_ship.planned_positions
 	

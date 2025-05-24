@@ -13,7 +13,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if retro != 0:
-		v = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
+		v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
 		position = retro*v.normalized()/2
 	
 	if side_check:

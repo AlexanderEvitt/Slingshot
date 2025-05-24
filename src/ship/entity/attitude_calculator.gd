@@ -40,17 +40,17 @@ func _process(_delta):
 		match ship.current_mode:
 			"HDG":
 				# HDG is component of velocity normal to radius
-				var v = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
-				var r = Conversions.FindFrame(SystemTime.t) - OwnShip.position
+				var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
+				var r = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
 				var v_along_r = (r.dot(v)/r.length_squared())*r.normalized()
 				target = v - v_along_r
 			"CRS":
-				target = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
+				target = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
 			"TRG":
-				target = Conversions.FindFrame(SystemTime.prev_t) - OwnShip.position
+				target = Conversions.FindFrame(ShipData.player_ship.prev_t) - ShipData.player_ship.position
 			"NRM":
-				var v = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
-				var r = Conversions.FindFrame(SystemTime.t) - OwnShip.position
+				var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
+				var r = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
 				target = r.cross(v)
 			"NAV":
 				target = ship.planned_acceleration

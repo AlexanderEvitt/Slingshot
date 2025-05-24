@@ -10,20 +10,20 @@ var throttle = 0
 var plotted_positions
 var planned_positions
 
-var ship
+var player_ship
 var propagator
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if ship != null:
+	if player_ship != null:
 		# Only start assigning after ship is defined
 		# ship is set by the ships_handler
-		position = ship.position
-		velocity = ship.velocity
-		attitude = ship.attitude
-		thrust = ship.thrust
-		torque = ship.torque
-		throttle = ship.throttle
+		position = player_ship.position
+		velocity = player_ship.velocity
+		attitude = player_ship.attitude
+		thrust = player_ship.thrust
+		torque = player_ship.torque
+		throttle = player_ship.throttle
 		
 		plotted_positions = propagator.plotted_positions
 		planned_positions = propagator.passed_planned_positions

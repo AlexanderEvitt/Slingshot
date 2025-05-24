@@ -16,8 +16,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	# Move to attach to ship
-	var ship_global = OwnShip.position + center.global_position
-	global_position = ship_global + OwnShip.attitude*clamp_pos
+	var ship_global = ShipData.player_ship.position + center.global_position
+	global_position = ship_global + ShipData.player_ship.attitude*clamp_pos
 	
 	# Clamp to a small range of motion
 	position = position.clamp(Vector3(-drange,-drange,-3*drange),Vector3(drange,drange,3*drange))

@@ -6,10 +6,10 @@ func _input(_event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	OwnShip.ship.auto_disc.connect(auto_disc)
-	OwnShip.ship.nav_disc.connect(nav_disc)
-	OwnShip.ship.rel_clamp.connect(rel_clamp)
-	OwnShip.ship.collision.connect(collision)
+	ShipData.player_ship.auto_disc.connect(auto_disc)
+	ShipData.player_ship.nav_disc.connect(nav_disc)
+	ShipData.player_ship.rel_clamp.connect(rel_clamp)
+	ShipData.player_ship.collision.connect(collision)
 
 func auto_disc():
 	var new_label = Label.new()

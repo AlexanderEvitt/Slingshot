@@ -3,7 +3,7 @@ extends RigidBody3D
 var impulse = Vector3(0,0,0)
 
 func _process(_delta):
-	transform.basis = OwnShip.attitude
+	transform.basis = ShipData.player_ship.attitude
 
 func _integrate_forces(state):
 	impulse = Vector3(0,0,0)

@@ -11,7 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var power = OwnShip.throttle
+	var power = ShipData.player_ship.throttle
 	if power > 0:
 		visible = true
 		tail.set_shader_parameter("alpha_intensity_factor",0.05/power)

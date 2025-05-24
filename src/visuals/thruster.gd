@@ -18,7 +18,7 @@ func _process(_delta):
 	visible = false
 	
 	# Record thruster firings
-	var thrusters = OwnShip.thrust - OwnShip.throttle*Vector3(1,0,0)
+	var thrusters = ShipData.player_ship.thrust - ShipData.player_ship.throttle*Vector3(1,0,0)
 	if thrusters.length() < 0.001:
 		my_thrust = 0
 	else:
@@ -27,10 +27,10 @@ func _process(_delta):
 		my_thrust = clamp(-my_thrust,0,1)
 	
 	# Record commanded torque
-	torque = OwnShip.torque
+	torque = ShipData.player_ship.torque
 	if torque == null:
 		torque = Vector3(0,0,0)
-	torque = OwnShip.attitude.inverse()*torque
+	torque = ShipData.player_ship.attitude.inverse()*torque
 	var my_torque = 0
 	if up:
 		my_torque = my_torque + (torque.z)

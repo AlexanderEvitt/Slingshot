@@ -62,7 +62,7 @@ void fragment() {
     gradient_height *= 1.0 / dissolve_length;
     gradient_height = clamp(pow(gradient_height, gradient_bias) + noise_value, 0.0, 1.0);
 
-    
+
 
 
     ALPHA = mix(1.0, 0.0, gradient_height);

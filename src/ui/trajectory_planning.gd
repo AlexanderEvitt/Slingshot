@@ -16,11 +16,11 @@ func _process(_delta):
 func _on_calculate():
 	# Zeroth order estimate of transfer time
 	var target = Conversions.FindFrame(SystemTime.t)
-	var transfer_dist = target - OwnShip.position;
+	var transfer_dist = target - ShipData.player_ship.position;
 	var transfer_time = 2*sqrt(transfer_dist.length()/0.05)
 	
 	# Calculate properly
-	OwnShip.propagator.SMC(OwnShip.position,Conversions.FindFrame(SystemTime.t + transfer_time), OwnShip.velocity, SystemTime.t)
+	ShipData.propagator.SMC(ShipData.player_ship.position,Conversions.FindFrame(SystemTime.t + transfer_time), ShipData.player_ship.velocity, SystemTime.t)
 
 	# Set the status box to green
 	var new_style = StyleBoxFlat.new()
@@ -29,7 +29,7 @@ func _on_calculate():
 	calc_status_box.get_node("Label").text = "CALCULATED"
 
 func _on_clear():
-	OwnShip.propagator.ClearPlan()
+	ShipData.propagator.ClearPlan()
 	
 	# Set the status box to red
 	var new_style = StyleBoxFlat.new()

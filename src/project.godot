@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 
 SystemTime="*res://ship/SystemTime.cs"
 Conversions="*res://ship/Conversions.cs"
-OwnShip="*res://ship/own_ship.gd"
+ShipData="*res://ship/ship_data.gd"
 
 [display]
 

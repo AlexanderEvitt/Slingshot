@@ -23,15 +23,15 @@ func _process(_delta):
 		label1.text = Conversions.bodies[Conversions.f].name
 	
 	# Calculate and set altitude
-	var r = Conversions.ToFrame(OwnShip.position,SystemTime.t)
+	var r = Conversions.ToFrame(ShipData.player_ship.position,SystemTime.t)
 	label2.text = str(snapped(r.length(), 1))
 	
 	# Calculate and set velocity
-	var v = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
+	var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
 	label3.text = str(snapped(v.length(), 0.001))
 	
 	# Calculate and set eccentricity
-	var e = Conversions.CalcEccentricity(OwnShip.position,OwnShip.velocity,SystemTime.t)
+	var e = Conversions.CalcEccentricity(ShipData.player_ship.position,ShipData.player_ship.velocity,SystemTime.t)
 	label4.text = str(snapped(e.length(), 0.001))
 	
 	# Get and set time step

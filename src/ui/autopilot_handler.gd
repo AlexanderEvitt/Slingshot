@@ -24,32 +24,32 @@ func _ready():
 	autopilot_status_box = get_node("HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer/Panel")
 	navigation_status_box = get_node("HBoxContainer2/NavPanel/VBoxContainer/MarginContainer/Panel")
 	
-	OwnShip.ship.auto_disc.connect(autopilot_disconnect)
-	OwnShip.ship.nav_disc.connect(navigation_disconnect)
+	ShipData.player_ship.auto_disc.connect(autopilot_disconnect)
+	ShipData.player_ship.nav_disc.connect(navigation_disconnect)
 	
 func set_modes():
 	## Function that reads in the state of the autopilot panel
 	# Get the current attitude mode
 	for i in modes:
 		if i.button_pressed:
-			OwnShip.ship.current_mode = i.text
+			ShipData.player_ship.current_mode = i.text
 			
 	# Set the appropriate flags
 	for i in keys:
 		match i.text:
 			"INV":
-				OwnShip.ship.inv_flag = i.button_pressed
+				ShipData.player_ship.inv_flag = i.button_pressed
 			"STAB":
-				OwnShip.ship.stab_flag = i.button_pressed
+				ShipData.player_ship.stab_flag = i.button_pressed
 			"NAV":
-				OwnShip.ship.nav_flag = i.button_pressed
+				ShipData.player_ship.nav_flag = i.button_pressed
 			"AUTO":
-				OwnShip.ship.autopilot_flag = i.button_pressed
+				ShipData.player_ship.autopilot_flag = i.button_pressed
 				
 				
 	# Set status boxes
 	var new_style = StyleBoxFlat.new()
-	if OwnShip.ship.autopilot_flag:
+	if ShipData.player_ship.autopilot_flag:
 		# Set the status box to green
 		new_style.bg_color = Color8(51, 255, 51, 255)
 		autopilot_status_box.add_theme_stylebox_override("panel",new_style)
@@ -60,7 +60,7 @@ func set_modes():
 		autopilot_status_box.get_node("Label").text = "IDLE"
 		
 	new_style = StyleBoxFlat.new()
-	if OwnShip.ship.nav_flag:
+	if ShipData.player_ship.nav_flag:
 		# Set the status box to green
 		new_style.bg_color = Color8(51, 255, 51, 255)
 		navigation_status_box.add_theme_stylebox_override("panel",new_style)

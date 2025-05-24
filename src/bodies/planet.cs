@@ -54,7 +54,7 @@ public partial class planet : Node3D
 	{
 		// uses previous time to avoid a leapfrogging error
 		// because this calculates too early in comparison to the ship
-		t = SystemTime.Instance.prev_t;
+		t = SystemTime.Instance.t;
 		
 		Position = fetch(t)/scaledown;
 	}

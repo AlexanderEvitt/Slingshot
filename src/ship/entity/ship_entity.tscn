@@ -11,7 +11,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
 size = Vector3(0.05, 0.015, 0.015)
 
-[node name="OwnShip" type="Node3D"]
+[node name="PlayerShip" type="Node3D"]
 script = ExtResource("1_012ot")
 start_position = Vector3(42164, -50, 0)
 start_velocity = Vector3(0, 3.075, 0)

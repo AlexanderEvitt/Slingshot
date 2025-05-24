@@ -18,11 +18,11 @@ func _process(_delta):
 	frame_label.text = "FRAME " + Conversions.bodies[Conversions.f].name
 	
 	# Calculate and set altitude
-	var r = Conversions.ToFrame(OwnShip.position,SystemTime.t)
+	var r = Conversions.ToFrame(ShipData.player_ship.position,SystemTime.t)
 	altitude_label.text = to_hud_string(r.length(), "h")
 	
 	# Calculate and set velocity
-	var v = Conversions.VelToFrame(OwnShip.velocity,SystemTime.t)
+	var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
 	velocity_label.text = to_hud_string(v.length(), "v")
 
 func to_hud_string(num: float, prefix: String) -> String:

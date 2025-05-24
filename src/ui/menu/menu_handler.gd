@@ -31,13 +31,9 @@ func _on_startup():
 	# Emit signal (for creating player ship)
 	startup.emit()
 	
-	# Load UI and associated subscenes
+	# Load normal UI and associated subscenes
 	var ui = ResourceLoader.load_threaded_get(UI_SCENE_PATH).instantiate()
 	add_child(ui)
-	
-	# Wait a tiny amount of time
-	# This lets the button light have time to turn green
-	# await get_tree().create_timer(1).timeout
 	
 	# Delete menu
 	self.remove_child(get_node("MenuUI"))

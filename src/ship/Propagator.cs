@@ -30,7 +30,7 @@ public partial class Propagator : Node3D
 	[Export]
 	public int n;
 
-	private Node OwnShip;
+	private Node player_ship;
 
 	public int c = 0;
 	public double timescale = 0.07d;
@@ -40,8 +40,8 @@ public partial class Propagator : Node3D
 		// Get planets
 		bodies = GetTree().GetNodesInGroup("Bodies");
 
-		// Get singleton for OwnShip (written in GDScript so this is necessary)
-		OwnShip = GetNode("/root/OwnShip");
+		// Get singleton for ShipData (written in GDScript so this is necessary)
+		player_ship = GetParent();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,8 +51,9 @@ public partial class Propagator : Node3D
 		if (c == 0)
 		{
 			// Reset starting point to current point
-			start_position = (Vector3)OwnShip.Get("position");
-			start_velocity = (Vector3)OwnShip.Get("velocity");
+
+			start_position = (Vector3)player_ship.Get("position");
+			start_velocity = (Vector3)player_ship.Get("velocity");
 
 			// Refresh trajectory
 			double t = SystemTime.Instance.t;

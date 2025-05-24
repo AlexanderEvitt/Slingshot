@@ -8,4 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	transform.basis = OwnShip.attitude
+	transform.basis = ShipData.player_ship.attitude
