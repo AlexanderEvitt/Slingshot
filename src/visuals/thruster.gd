@@ -17,15 +17,6 @@ func _process(_delta):
 	# Start as invisible, make visible if firing
 	visible = false
 	
-	# Record thruster firings
-	var thrusters = ShipData.player_ship.thrust - ShipData.player_ship.throttle*Vector3(1,0,0)
-	if thrusters.length() < 0.001:
-		my_thrust = 0
-	else:
-		var my_thrust_vector = transform.basis.y
-		my_thrust = thrusters.dot(my_thrust_vector)/thrusters.length()
-		my_thrust = clamp(-my_thrust,0,1)
-	
 	# Record commanded torque
 	torque = ShipData.player_ship.torque
 	if torque == null:
@@ -44,6 +35,17 @@ func _process(_delta):
 		my_torque = my_torque + (-torque.x)
 	if roll_right:
 		my_torque = my_torque + (torque.x)
+	
+	# Record translational thruster firings
+	var thrusters = ShipData.player_ship.thrust - ShipData.player_ship.throttle*Vector3(1,0,0)
+	if thrusters.length() < 0.001:
+		my_thrust = 0
+	else:
+		var my_thrust_vector = transform.basis.y
+		my_thrust = thrusters.dot(my_thrust_vector)/thrusters.length()
+		my_thrust = clamp(-my_thrust,0,1)
+	
+
 		
 	# Turn on thruster
 	var fire = (my_torque + 0.5*my_thrust)

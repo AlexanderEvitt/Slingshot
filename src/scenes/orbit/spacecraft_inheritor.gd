@@ -30,7 +30,7 @@ func _process(_delta):
 	if smashed:
 		position.z = 0
 	
-	plotter.positions = ShipData.player_ship.plotted_positions
+	plotter.positions = ShipData.propagator.plotted_positions
 	if plan:
-		planner.positions = ShipData.player_ship.planned_positions
+		planner.positions = ShipData.propagator.planned_positions
 	

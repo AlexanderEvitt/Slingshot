@@ -23,11 +23,11 @@ public partial class SystemTime : Node
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		prev_t = t;
 		step = steps[i];
-		t = t + step*0.03333; // assumes 30 fps, replace with delta
+		t = t + step*delta; // assumes 30 fps, replace with delta
 		
 		if (Input.IsActionJustPressed("time_speed_up"))
 		{

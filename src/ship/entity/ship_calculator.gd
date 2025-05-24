@@ -58,7 +58,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	# Update values for this iteration
 	attitude = attitude_calculator.transform.basis
 	torque = attitude_calculator.torque
@@ -86,17 +86,15 @@ func _process(delta):
 		
 	# Fix to start position if still docked
 	if docked:
-		# dumb hacky solution. basically there's an off by 1 timestep error somewhere in the station
-		# so changing timestep causes havoc
-		position = dock.get_parent().fetch(SystemTime.t) + dock.get_parent().transform.basis*dock.position + Vector3(-0.02229,0.102566,0)
+		position = dock.get_parent().fetch(SystemTime.t) + dock.get_parent().transform.basis*dock.position
 		velocity = (dock.get_parent().fetch(SystemTime.t) - dock.get_parent().fetch(SystemTime.t - SystemTime.step))
 	if Input.is_action_just_pressed("dock"):
 		docked = false
 		rel_clamp.emit() # show alert
 
-func integrate_normally(_delta):
+func integrate_normally(delta):
 	
-	var dt = SystemTime.step*0.03333; # assumes 30 fps, replace with delta
+	var dt = SystemTime.step*delta; # assumes 30 fps, replace with delta
 	
 	# Somehow get the acceleration from gravity in here
 	var prev_gravity = propagator.Acceleration(position,SystemTime.prev_t)
