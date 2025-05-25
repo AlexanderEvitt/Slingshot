@@ -82,7 +82,15 @@ func _physics_process(delta):
 		
 	# Otherwise, integrate regularly
 	else:
-		integrate_normally(delta)
+		# Do multiple simulation time steps per run of physics_process
+		# Allow max timestep of 1000*(1/30) s
+		# Do one sim step per physics step up to step = 100, then increase
+		# Also say no more than max 100 steps per step
+		var sim_steps_per_physics_tick = clamp(SystemTime.step/100,1,100)
+		for i in range(sim_steps_per_physics_tick):
+			# Calculate simulation timestep
+			var dt = SystemTime.step*delta/sim_steps_per_physics_tick
+			integrate_normally(dt)
 		
 	# Fix to start position if still docked
 	if docked:
@@ -92,10 +100,7 @@ func _physics_process(delta):
 		docked = false
 		rel_clamp.emit() # show alert
 
-func integrate_normally(delta):
-	
-	var dt = SystemTime.step*delta; # assumes 30 fps, replace with delta
-	
+func integrate_normally(dt):
 	# Somehow get the acceleration from gravity in here
 	var prev_gravity = propagator.Acceleration(position,SystemTime.prev_t)
 	var gravity = propagator.Acceleration(position,SystemTime.t)
