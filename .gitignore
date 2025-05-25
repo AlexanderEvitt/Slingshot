@@ -1,3 +1,4 @@
 # Godot 4+ specific ignores
 src/.godot/
+editor/rcedit-x64.exe
 build
