@@ -47,7 +47,7 @@ func _process(_delta):
 			"CRS":
 				target = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
 			"TRG":
-				target = Conversions.FindFrame(ShipData.player_ship.prev_t) - ShipData.player_ship.position
+				target = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
 			"NRM":
 				var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
 				var r = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
