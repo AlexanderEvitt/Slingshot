@@ -41,7 +41,7 @@ func _process(delta):
 		elif line_instance != null:
 			# If positions become null, remove the line
 			undraw(line_instance)
-	
+
 	# Move by how much the ref frame has moved since traj drawn
 	if line_instance != null:
 		line_instance.position -= Conversions.VelToFrame(ShipData.player_ship.velocity, SystemTime.t)*delta*SystemTime.step

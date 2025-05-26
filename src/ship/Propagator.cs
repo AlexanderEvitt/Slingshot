@@ -135,7 +135,7 @@ public partial class Propagator : Node3D
 
 	public void SMC(Vector3 initial_position, Vector3 target_position, Vector3 initial_velocity, double t)
 	{
-		// Initialize lists of size n to hold data
+		// Initialize Godot arrays to hold data
 		planned_positions = new Godot.Collections.Array<Vector3>();
 		planned_velocities = new Godot.Collections.Array<Vector3>();
 		planned_times = new Godot.Collections.Array<double>();
@@ -160,11 +160,14 @@ public partial class Propagator : Node3D
 			Vector3 a = Acceleration(planned_positions[i],planned_times[i]);
 
 			// Calculate velocity normal to trajectory and counter it
-			Vector3 correction = planned_velocities[i];
+			Vector3 courseProjection = course * (planned_velocities[i].Dot(course) / course.LengthSquared());
+			Vector3 off_traj_velocity = planned_velocities[i] - courseProjection;
 
-			// Calculate control as antigravity + in direction or opposite if more than halfway
+			// Calculate control as antigravity + antivelocity_off_trajectory + along course or opposite if more than halfway
+			// 0.01d corresponds to 1G acceleration
 			Vector3 flight_direction = target_position - planned_positions[i];
-			planned_controls.Add(flip*0.01d*flight_direction.Normalized() - a);
+			Vector3 control = flip * 0.01d * flight_direction.Normalized() - a - 0.0001*off_traj_velocity;
+			planned_controls.Add(control);
 			
 			// Propagate to next timestep
 			(Vector3 np,Vector3 nv,double nt) = StepVerlet(planned_positions[i],planned_velocities[i],planned_controls[i],planned_times[i]);

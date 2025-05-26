@@ -27,10 +27,12 @@ func _process(_delta):
 		transform.basis = ShipData.player_ship.attitude
 		plotter.transform.basis = ShipData.player_ship.attitude.inverse() # plotter needs to stay in the right frame
 	position = ShipData.player_ship.position/scaledown
+	
 	if smashed:
 		position.z = 0
 	
 	plotter.positions = ShipData.propagator.plotted_positions
 	if plan:
-		planner.positions = ShipData.propagator.planned_positions
+		# passed_ prefix means in planet frame
+		planner.positions = ShipData.propagator.passed_planned_positions
 	

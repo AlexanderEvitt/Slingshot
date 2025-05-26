@@ -31,6 +31,7 @@ public partial class Conversions : Node
 	public Godot.Collections.Array<Vector3> SubtractBodyMotion(Godot.Collections.Array<Vector3> positions, Godot.Collections.Array<double> times)
 	{
 		// Place the positions into the frame listed
+		// Each point is now how much the craft has moved since t0 minus how much the frame has moved since t0
 		Godot.Collections.Array<Vector3> new_positions = new Godot.Collections.Array<Vector3> ( new Vector3[positions.Count] );
 		Node body_node = bodies[f];
 		planet body = (planet)body_node;
