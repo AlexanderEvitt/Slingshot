@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://dyuel0delkcqp"]
+[gd_scene load_steps=54 format=4 uid="uid://dyuel0delkcqp"]
 
 [ext_resource type="Material" uid="uid://bjawwxqbe6tlh" path="res://ship/frigate/real/GunMetal.tres" id="1_ng8r8"]
 [ext_resource type="Material" uid="uid://c8q7ioeg374gn" path="res://ship/frigate/wireframe/ShipWireframe.tres" id="2_ebf1t"]
@@ -969,6 +969,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_f6cvs")
 
+[sub_resource type="Environment" id="Environment_wjvqu"]
+background_mode = 1
+background_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+
 [node name="Ship" type="Node3D"]
 
 [node name="Ship" type="Node3D" parent="."]
@@ -996,6 +1000,8 @@ layers = 2
 mesh = SubResource("ArrayMesh_t7fgb")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_ebf1t")
+surface_material_override/1 = ExtResource("2_ebf1t")
+surface_material_override/2 = ExtResource("2_ebf1t")
 
 [node name="Airlock" type="MeshInstance3D" parent="Ship"]
 layers = 2
@@ -1053,8 +1059,8 @@ surface_material_override/0 = ExtResource("2_ebf1t")
 
 [node name="Fins" type="MeshInstance3D" parent="Ship"]
 mesh = SubResource("ArrayMesh_eovsi")
-skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_ebf1t")
+surface_material_override/1 = ExtResource("2_ebf1t")
 
 [node name="EngineTube" type="MeshInstance3D" parent="Ship"]
 layers = 2
@@ -1250,3 +1256,12 @@ transform = Transform3D(9.18485e-15, 150, 0, 106.066, -6.49467e-15, 106.066, 106
 
 [node name="Thruster8" parent="Thrusters/Pod3NR" instance=ExtResource("11_6l12o")]
 transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, 106.066, -106.066, 1.9484e-14, -106.066, -20.9412, -6.40007, -6.40007)
+
+[node name="VehicleOverviewCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.724172, -0.287075, 0.627027, 0, 0.909236, 0.416281, -0.68962, -0.301459, 0.658443, 18.414, 13.77, 21.751)
+environment = SubResource("Environment_wjvqu")
+projection = 1
+fov = 69.4
+size = 40.0
+near = 10.0
+far = 100.0
