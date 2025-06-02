@@ -4,6 +4,7 @@ var ship
 var torque = Vector3(0,0,0)
 var max_torque = 0.5
 var angular_velocity = Vector3(0,0,0)
+var commanded_torque = Vector3(0,0,0)
 
 # Moment of inertia tensor (assuming diagonal for simplicity)
 var inertia: Vector3 = Vector3(1, 1, 1)  # Modify based on spacecraft geometry
@@ -13,25 +14,35 @@ func _ready():
 	ship = get_parent()
 
 func _process(_delta):
-	# Initialize zero torque
-	torque = Vector3(0,0,0)
-	
-	# Add up torques from input
+	# Calculate torque by increasing as you hold the button
+	# Commanded torque is in ship frame
+	var torque_rate = 0.02
+	# Add torque if button is held down, set to zero if not
 	if Input.is_action_pressed("down"):
-		torque = torque + max_torque*(-transform.basis.z)
-	if Input.is_action_pressed("up"):
-		torque = torque + max_torque*(transform.basis.z)
+		commanded_torque.z += -torque_rate
+	elif Input.is_action_pressed("up"):
+		commanded_torque.z += torque_rate
+	else:
+		commanded_torque.z = 0
 		
 	if Input.is_action_pressed("left"):
-		torque = torque + max_torque*(transform.basis.y)
-	if Input.is_action_pressed("right"):
-		torque = torque + max_torque*(-transform.basis.y)
+		commanded_torque.y += torque_rate
+	elif Input.is_action_pressed("right"):
+		commanded_torque.y += -torque_rate
+	else:
+		commanded_torque.y = 0
 		
 	if Input.is_action_pressed("roll_left"):
-		torque = torque + max_torque*(-transform.basis.x)
-	if Input.is_action_pressed("roll_right"):
-		torque = torque + max_torque*(transform.basis.x)
+		commanded_torque.x += -torque_rate
+	elif Input.is_action_pressed("roll_right"):
+		commanded_torque.x += torque_rate
+	else:
+		commanded_torque.x = 0
 		
+	# Clamp to max allowable torque
+	commanded_torque = commanded_torque.clampf(-max_torque, max_torque)
+	# Convert to global frame
+	torque = transform.basis*commanded_torque
 	
 	# Calculate autopilot response
 	var target
@@ -67,7 +78,9 @@ func _process(_delta):
 			
 	# Calculate damping if stabilizers OR autopilot is enabled
 	if ship.stab_flag or ship.autopilot_flag:
-		torque -= 2*(angular_velocity)
+		print(ship.stab_flag)
+		print(ship.autopilot_flag)
+		torque -= 10*(angular_velocity)
 	else:
 		torque -= 0.1*(angular_velocity)
 		

@@ -105,7 +105,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD3/Shifter/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1496, 843)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="Ship" parent="Screen/HUDs/HUD3/Shifter/SubViewportContainer/SubViewport" instance=ExtResource("4_0f0kw")]
@@ -160,7 +160,7 @@ script = ExtResource("5_7j1hq")
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1452, 839)
 render_target_update_mode = 0
 
 [node name="CamRoot" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_wlcgb")]
