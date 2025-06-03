@@ -79,7 +79,7 @@ func _process(_delta):
 			
 	# Calculate damping if stabilizers OR autopilot is enabled
 	if ship.stab_flag or ship.autopilot_flag:
-		torque -= 10*(angular_velocity)
+		torque -= 3*(angular_velocity)
 	else:
 		torque -= 0.1*(angular_velocity)
 		

@@ -37,7 +37,6 @@ func set_modes():
 
 	# Set the appropriate flags
 	for i in keys:
-		print(i.get_node("Button").text)
 		match i.get_node("Button").text:
 			"INV":
 				ShipData.player_ship.inv_flag = i.get_node("Button").button_pressed
