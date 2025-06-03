@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ckg801jn7baa1"]
+[gd_scene load_steps=15 format=3 uid="uid://ckg801jn7baa1"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_bgvoi"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="2_tlo2w"]
@@ -6,17 +6,14 @@
 [ext_resource type="Script" path="res://ui/menu/terminal_code.gd" id="6_aybfq"]
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="6_b1svf"]
 [ext_resource type="ButtonGroup" uid="uid://b7ltikwsb6n48" path="res://ui/menu/menu_button_group.tres" id="7_ix6vk"]
-[ext_resource type="Script" path="res://ui/button_light.gd" id="8_lenix"]
 [ext_resource type="Script" path="res://ui/status_light.gd" id="8_yb1pt"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="9_1tlqv"]
 [ext_resource type="Texture2D" uid="uid://cf4yhwi23x8o1" path="res://ui/stripes.png" id="9_h2atm"]
+[ext_resource type="PackedScene" uid="uid://w0adn324ymo3" path="res://ui/widgets/light_button/light_button.tscn" id="10_af4d5"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="10_nthiu"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="16_g0tso"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5l1na"]
-bg_color = Color(0.501961, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aib7h"]
 bg_color = Color(0.501961, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vgwr0"]
@@ -493,34 +490,9 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer"]
+[node name="LightButtonPanel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer" instance=ExtResource("10_af4d5")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "INITIALIZE"
-script = ExtResource("8_lenix")
-
-[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.15
-anchor_right = 0.95
-anchor_bottom = 0.85
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_aib7h")
+label_text = "INITIALIZE"
 
 [node name="LoadingBack" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig"]
 layout_mode = 2
@@ -655,35 +627,9 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer"]
+[node name="LightButtonPanel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer" instance=ExtResource("10_af4d5")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-toggle_mode = true
-text = "INITIALIZE"
-script = ExtResource("8_lenix")
-
-[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.15
-anchor_right = 0.95
-anchor_bottom = 0.85
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_aib7h")
+label_text = "INITIALIZE"
 
 [node name="LoadingBack" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig"]
 layout_mode = 2

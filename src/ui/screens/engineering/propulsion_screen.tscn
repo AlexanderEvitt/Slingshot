@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwyyrjeji023x"]
+
+[ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_1geiy"]
+[ext_resource type="Texture2D" uid="uid://cf4yhwi23x8o1" path="res://ui/stripes.png" id="2_xxg6q"]
+
+[node name="Propulsion" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1geiy")
+theme_override_constants/separation = 0
+
+[node name="FlowDiagram" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="Tank1" type="Panel" parent="FlowDiagram"]
+layout_mode = 0
+offset_left = 349.0
+offset_top = 234.0
+offset_right = 649.0
+offset_bottom = 534.0
+
+[node name="Tank" type="Polygon2D" parent="FlowDiagram/Tank1"]
+scale = Vector2(3, 3)
+polygon = PackedVector2Array(10, 0, 90, 0, 100, 10, 100, 90, 90, 100, 10, 100, 0, 90, 0, 10)
+
+[node name="Empty" type="Polygon2D" parent="FlowDiagram/Tank1/Tank"]
+position = Vector2(2, 2)
+scale = Vector2(0.96, 0.96)
+color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+polygon = PackedVector2Array(10, 0, 90, 0, 100, 10, 100, 90, 90, 100, 10, 100, 0, 90, 0, 10)
+
+[node name="Fill" type="Polygon2D" parent="FlowDiagram/Tank1/Tank/Empty"]
+texture_repeat = 2
+texture = ExtResource("2_xxg6q")
+texture_scale = Vector2(3.42, 3.42)
+polygon = PackedVector2Array(100, 53.0612, 100, 90, 90, 100, 10, 100, 0, 90, 0, 53.0612)
+
+[node name="Panel" type="Panel" parent="FlowDiagram/Tank1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -25.0
+offset_right = 50.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="FlowDiagram/Tank1/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.5
+offset_top = -50.0
+offset_right = 92.5
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "He3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstrumentsPanel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3

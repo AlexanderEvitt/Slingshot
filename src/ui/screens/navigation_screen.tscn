@@ -1,21 +1,21 @@
-[gd_scene load_steps=36 format=4 uid="uid://cc5h5k3lje0ma"]
+[gd_scene load_steps=34 format=4 uid="uid://cc5h5k3lje0ma"]
 
 [ext_resource type="Script" path="res://ui/panel_switch.gd" id="1_ukvq0"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_os1l8"]
 [ext_resource type="Theme" uid="uid://bhtmuml4efphk" path="res://ui/themes/medium_panel.tres" id="3_ggd3n"]
 [ext_resource type="PackedScene" uid="uid://1sgfn61bmfrt" path="res://scenes/orbit/OrbitScene.tscn" id="4_xnid0"]
 [ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="5_gb6k3"]
-[ext_resource type="Script" path="res://ui/gauge_writer.gd" id="6_uajic"]
-[ext_resource type="PackedScene" uid="uid://co1ql607hc2v5" path="res://ui/gauge.tscn" id="7_xfvdt"]
+[ext_resource type="Script" path="res://ui/widgets/gauge/gauge_writer.gd" id="6_uajic"]
+[ext_resource type="PackedScene" uid="uid://co1ql607hc2v5" path="res://ui/widgets/gauge/gauge.tscn" id="7_xfvdt"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="8_cmm8l"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="9_37stn"]
 [ext_resource type="Script" path="res://ui/trajectory_planning.gd" id="10_44og4"]
-[ext_resource type="PackedScene" uid="uid://bqeqlwsenu6hl" path="res://ui/knob/knob.tscn" id="11_ubap5"]
+[ext_resource type="PackedScene" uid="uid://bqeqlwsenu6hl" path="res://ui/widgets/knob/knob.tscn" id="11_ubap5"]
 [ext_resource type="PackedScene" uid="uid://ci0m8qqbyhlyn" path="res://scenes/flat/FlatOrbitScene.tscn" id="12_4hvmx"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="13_tft7u"]
 [ext_resource type="Script" path="res://ui/autopilot_handler.gd" id="14_1tdl3"]
+[ext_resource type="PackedScene" uid="uid://w0adn324ymo3" path="res://ui/widgets/light_button/light_button.tscn" id="15_1gfkw"]
 [ext_resource type="ButtonGroup" uid="uid://444nnqo6ich8" path="res://ui/attitude_button_group.tres" id="15_ytpid"]
-[ext_resource type="Script" path="res://ui/button_light.gd" id="16_x6kqf"]
 [ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="17_ipi0g"]
 [ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="18_2ejbn"]
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="19_ccqhq"]
@@ -205,12 +205,6 @@ bg_color = Color(0.501961, 0, 0, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
 texture = ExtResource("13_tft7u")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_howla"]
-bg_color = Color(0.501961, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsc67"]
-bg_color = Color(0.501961, 0, 0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hp22"]
 bg_color = Color(0.501961, 0, 0, 1)
 
@@ -241,6 +235,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="HUD1" type="Panel" parent="Screen/HUDs"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -292,8 +287,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1452, 839)
-render_target_update_mode = 4
+size = Vector2i(2, 2)
+render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_xnid0")]
 camera_mode = true
@@ -357,7 +352,7 @@ stretch = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(626, 531)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="NavballRoot" parent="Screen/HUDs/HUD2/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/VBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("5_gb6k3")]
@@ -405,7 +400,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD2/Shifter/HBoxContainer/MarginContainer2/Panel/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(691, 826)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD2/Shifter/HBoxContainer/MarginContainer2/Panel/SubViewportContainer/SubViewport" instance=ExtResource("4_xnid0")]
@@ -461,7 +456,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD3/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1452, 839)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD3/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("12_4hvmx")]
@@ -494,7 +489,6 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="HUD5" type="Panel" parent="Screen/HUDs"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -914,8 +908,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
+size = Vector2i(634, 523)
+render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("12_4hvmx")]
 
@@ -1069,36 +1063,10 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer"]
+[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer" groups=["Attitude Modes"] instance=ExtResource("15_1gfkw")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Attitude Modes"]]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-toggle_mode = true
+label_text = "HDG"
 button_group = ExtResource("15_ytpid")
-text = "HDG"
-script = ExtResource("16_x6kqf")
-
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.15
-anchor_right = 0.95
-anchor_bottom = 0.85
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_howla")
 
 [node name="MarginContainer2" type="MarginContainer" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
@@ -1108,36 +1076,10 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2"]
+[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2" groups=["Attitude Modes"] instance=ExtResource("15_1gfkw")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel" groups=["Attitude Modes"]]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-toggle_mode = true
+label_text = "CRS"
 button_group = ExtResource("15_ytpid")
-text = "CRS"
-script = ExtResource("16_x6kqf")
-
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2/Panel/Button"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.15
-anchor_right = 0.95
-anchor_bottom = 0.85
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fsc67")
 
 [node name="MarginContainer3" type="MarginContainer" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
@@ -1147,36 +1089,10 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3"]
+[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3" groups=["Attitude Modes"] instance=ExtResource("15_1gfkw")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel" groups=["Attitude Modes"]]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-toggle_mode = true
+label_text = "TRG"
 button_group = ExtResource("15_ytpid")
-text = "TRG"
-script = ExtResource("16_x6kqf")
-
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3/Panel/Button"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.15
-anchor_right = 0.95
-anchor_bottom = 0.85
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fsc67")
 
 [node name="MarginContainer4" type="MarginContainer" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
@@ -1186,36 +1102,10 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4"]
+[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4" groups=["Attitude Modes"] instance=ExtResource("15_1gfkw")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel" groups=["Attitude Modes"]]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-toggle_mode = true
+label_text = "NRM"
 button_group = ExtResource("15_ytpid")
-text = "NRM"
-script = ExtResource("16_x6kqf")
-
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4/Panel/Button"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.15
-anchor_right = 0.95
-anchor_bottom = 0.85
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fsc67")
 
 [node name="AttitudePanel2" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
 layout_mode = 2
@@ -1241,35 +1131,9 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer"]
+[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer" instance=ExtResource("15_1gfkw")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer/Panel" groups=["Autopilot Keys"]]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-toggle_mode = true
-text = "INV"
-script = ExtResource("16_x6kqf")
-
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer/Panel/Button"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.15
-anchor_right = 0.95
-anchor_bottom = 0.85
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_howla")
+label_text = "INV"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
 layout_mode = 2
@@ -1280,35 +1144,9 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2"]
+[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2" instance=ExtResource("15_1gfkw")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel" groups=["Autopilot Keys"]]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-toggle_mode = true
-text = "STAB"
-script = ExtResource("16_x6kqf")
-
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2/Panel/Button"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.15
-anchor_right = 0.95
-anchor_bottom = 0.85
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fsc67")
+label_text = "STAB"
 
 [node name="NavPanel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
 layout_mode = 2
@@ -1361,11 +1199,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer" groups=["Autopilot Keys"]]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Attitude Modes", "Autopilot Keys"]]
+[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1431,11 +1269,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer" groups=["Autopilot Keys"]]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel" groups=["Autopilot Keys"]]
+[node name="Button" type="Button" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0

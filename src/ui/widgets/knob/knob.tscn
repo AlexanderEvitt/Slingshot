@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqeqlwsenu6hl"]
 
-[ext_resource type="Texture2D" uid="uid://b6g1ej6nhbc05" path="res://ui/knob/knob_back.png" id="1_a1woy"]
-[ext_resource type="Texture2D" uid="uid://lk4jougj0ms0" path="res://ui/knob/knob_front.png" id="2_njs6d"]
+[ext_resource type="Texture2D" uid="uid://b6g1ej6nhbc05" path="res://ui/widgets/knob/knob_back.png" id="1_a1woy"]
+[ext_resource type="Texture2D" uid="uid://lk4jougj0ms0" path="res://ui/widgets/knob/knob_front.png" id="2_njs6d"]
 
 [node name="Knob" type="MarginContainer"]
 size_flags_vertical = 3

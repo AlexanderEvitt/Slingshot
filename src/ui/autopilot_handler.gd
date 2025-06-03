@@ -14,11 +14,11 @@ func _ready():
 	
 	# Assign signals to the set_modes bar
 	for i in modes:
-		i.pressed.connect(set_modes)
+		i.get_node("Button").pressed.connect(set_modes)
 		
 	for i in keys:
-		if i.text != "NAV": # nav is already connected as a mode
-			i.pressed.connect(set_modes)
+		if i.get_node("Button").text != "NAV": # nav is already connected as a mode
+			i.get_node("Button").pressed.connect(set_modes)
 		
 	# Get status boxes
 	autopilot_status_box = get_node("HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer/Panel")
@@ -28,23 +28,24 @@ func _ready():
 	ShipData.player_ship.nav_disc.connect(navigation_disconnect)
 	
 func set_modes():
-	## Function that reads in the state of the autopilot panel
+	## Function that reads in the state of the autopilot panel and sets the
+	## appropriate flag in the ship entity
 	# Get the current attitude mode
 	for i in modes:
-		if i.button_pressed:
-			ShipData.player_ship.current_mode = i.text
+		if i.get_node("Button").button_pressed:
+			ShipData.player_ship.current_mode = i.get_node("Button").text
 			
 	# Set the appropriate flags
 	for i in keys:
-		match i.text:
+		match i.get_node("Button").text:
 			"INV":
-				ShipData.player_ship.inv_flag = i.button_pressed
+				ShipData.player_ship.inv_flag = i.get_node("Button").button_pressed
 			"STAB":
-				ShipData.player_ship.stab_flag = i.button_pressed
+				ShipData.player_ship.stab_flag = i.get_node("Button").button_pressed
 			"NAV":
-				ShipData.player_ship.nav_flag = i.button_pressed
+				ShipData.player_ship.nav_flag = i.get_node("Button").button_pressed
 			"AUTO":
-				ShipData.player_ship.autopilot_flag = i.button_pressed
+				ShipData.player_ship.autopilot_flag = i.get_node("Button").button_pressed
 				
 				
 	# Set status boxes
@@ -72,9 +73,9 @@ func set_modes():
 
 func autopilot_disconnect():
 	for i in keys:
-		match i.text:
+		match i.get_node("Button").text:
 			"AUTO":
-				i.button_pressed = false
+				i.get_node("Button").button_pressed = false
 				
 	set_modes()
 	
@@ -82,8 +83,8 @@ func autopilot_disconnect():
 	
 func navigation_disconnect():
 	for i in keys:
-		match i.text:
+		match i.get_node("Button").text:
 			"NAV":
-				i.button_pressed = false
+				i.get_node("Button").button_pressed = false
 				
 	set_modes()

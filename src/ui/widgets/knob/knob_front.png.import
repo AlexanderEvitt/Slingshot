@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brdeyiuesg2lp"
-path="res://.godot/imported/gauge2.png-74092c9c5564c7db32ee05cfd85c95da.ctex"
+uid="uid://lk4jougj0ms0"
+path="res://.godot/imported/knob_front.png-7218c9f21c4ee0251d621ea19d331188.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/gauge2.png"
-dest_files=["res://.godot/imported/gauge2.png-74092c9c5564c7db32ee05cfd85c95da.ctex"]
+source_file="res://ui/widgets/knob/knob_front.png"
+dest_files=["res://.godot/imported/knob_front.png-7218c9f21c4ee0251d621ea19d331188.ctex"]
 
 [params]
 

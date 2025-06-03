@@ -2,7 +2,7 @@ extends Node3D
 
 var ship
 var torque = Vector3(0,0,0)
-var max_torque = 0.5
+var max_torque = 0.4
 var angular_velocity = Vector3(0,0,0)
 var commanded_torque = Vector3(0,0,0)
 

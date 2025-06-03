@@ -1,15 +1,28 @@
-extends Button
+@tool
+extends Panel
 
 var light
+var button
+@export var label_text : String
+@export var button_group : ButtonGroup
 
 func _ready():
-	light = get_node("Panel")
+	light = get_node("Button/Light")
+	button = get_node("Button")
+	
+	# Set the text on the button
+	button.text = label_text
+	
+	# If there's a button_group, set it
+	if button_group != null:
+		button.button_group = button_group
+		print(button.button_group)
 	
 	# send toggled signal to self
-	self.button_down.connect(_on_toggled)
+	button.button_down.connect(_on_toggled)
 
 func _on_toggled():
-	if button_pressed:
+	if button.button_pressed:
 		# Set the status box to green
 		var new_style = StyleBoxFlat.new()
 		new_style.bg_color = Color8(51, 255, 51, 255)

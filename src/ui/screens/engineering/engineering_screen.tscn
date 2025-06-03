@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpcripo2vb6ip"]
+[gd_scene load_steps=16 format=3 uid="uid://dpcripo2vb6ip"]
 
 [ext_resource type="Script" path="res://ui/panel_switch.gd" id="1_6nhqn"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_incdm"]
+[ext_resource type="PackedScene" uid="uid://cwyyrjeji023x" path="res://ui/screens/engineering/propulsion_screen.tscn" id="3_qw07w"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="4_0f0kw"]
 [ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="5_7j1hq"]
 [ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="6_wlcgb"]
@@ -62,6 +63,9 @@ theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
+
+[node name="Propulsion" parent="Screen/HUDs/HUD1/Shifter" instance=ExtResource("3_qw07w")]
+layout_mode = 2
 
 [node name="HUD2" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
 visible = false
@@ -160,7 +164,7 @@ script = ExtResource("5_7j1hq")
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1452, 839)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="CamRoot" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_wlcgb")]

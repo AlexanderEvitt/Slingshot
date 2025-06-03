@@ -12,7 +12,7 @@ func _ready() -> void:
 	# Start resource loader
 	ResourceLoader.load_threaded_request(UI_SCENE_PATH)
 	# Connect start button signal
-	start_button = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel/Button")
+	start_button = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/LightButtonPanel/Button")
 	progress_bar = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/LoadingBack/TextureRect")
 	done_light = get_node("MenuUI/StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/Panel")
 	start_button.button_up.connect(_on_startup)

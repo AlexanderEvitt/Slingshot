@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6g1ej6nhbc05"
-path="res://.godot/imported/knob_back.png-3a9750819f5cd77cb98fee25b0435a27.ctex"
+path="res://.godot/imported/knob_back.png-defabeb35f326d98f18550539d932158.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/knob/knob_back.png"
-dest_files=["res://.godot/imported/knob_back.png-3a9750819f5cd77cb98fee25b0435a27.ctex"]
+source_file="res://ui/widgets/knob/knob_back.png"
+dest_files=["res://.godot/imported/knob_back.png-defabeb35f326d98f18550539d932158.ctex"]
 
 [params]
 
