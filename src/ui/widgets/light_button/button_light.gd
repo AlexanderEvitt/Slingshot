@@ -5,6 +5,8 @@ var light
 var button
 @export var label_text : String
 @export var button_group : ButtonGroup
+@export var on : bool
+var previously_on : bool
 
 func _ready():
 	light = get_node("Button/Light")
@@ -16,13 +18,14 @@ func _ready():
 	# If there's a button_group, set it
 	if button_group != null:
 		button.button_group = button_group
-		print(button.button_group)
 	
-	# send toggled signal to self
-	button.button_down.connect(_on_toggled)
+	# send toggled signal to function that changes light color
+	button.toggled.connect(_on_toggled)
 
-func _on_toggled():
-	if button.button_pressed:
+func _on_toggled(new_state):
+	# new_state is the new on/off setting of the button
+	# Set status light
+	if new_state:
 		# Set the status box to green
 		var new_style = StyleBoxFlat.new()
 		new_style.bg_color = Color8(51, 255, 51, 255)

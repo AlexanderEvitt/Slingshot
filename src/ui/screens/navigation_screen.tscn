@@ -1067,6 +1067,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 label_text = "HDG"
 button_group = ExtResource("15_ytpid")
+on = false
 
 [node name="MarginContainer2" type="MarginContainer" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
@@ -1080,6 +1081,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 label_text = "CRS"
 button_group = ExtResource("15_ytpid")
+on = false
 
 [node name="MarginContainer3" type="MarginContainer" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
@@ -1093,6 +1095,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 label_text = "TRG"
 button_group = ExtResource("15_ytpid")
+on = false
 
 [node name="MarginContainer4" type="MarginContainer" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
@@ -1106,6 +1109,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 label_text = "NRM"
 button_group = ExtResource("15_ytpid")
+on = false
 
 [node name="AttitudePanel2" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
 layout_mode = 2
@@ -1131,9 +1135,10 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer" instance=ExtResource("15_1gfkw")]
+[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer" groups=["Autopilot Keys"] instance=ExtResource("15_1gfkw")]
 layout_mode = 2
 label_text = "INV"
+on = false
 
 [node name="MarginContainer2" type="MarginContainer" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
 layout_mode = 2
@@ -1144,9 +1149,10 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2" instance=ExtResource("15_1gfkw")]
+[node name="LightButtonPanel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2" groups=["Autopilot Keys"] instance=ExtResource("15_1gfkw")]
 layout_mode = 2
 label_text = "STAB"
+on = false
 
 [node name="NavPanel" type="Panel" parent="Screen/HUDs/HUD5/Shifter/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
 layout_mode = 2

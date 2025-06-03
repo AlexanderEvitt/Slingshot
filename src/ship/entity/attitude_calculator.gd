@@ -74,12 +74,11 @@ func _process(_delta):
 			if ship.inv_flag:
 				target = -target
 			# Cross product for torque
-			torque = torque + -target.cross(ship.attitude.x)
+			var Kp = 2.0 # control proportional gain
+			torque = torque + -Kp*target.cross(ship.attitude.x)
 			
 	# Calculate damping if stabilizers OR autopilot is enabled
 	if ship.stab_flag or ship.autopilot_flag:
-		print(ship.stab_flag)
-		print(ship.autopilot_flag)
 		torque -= 10*(angular_velocity)
 	else:
 		torque -= 0.1*(angular_velocity)

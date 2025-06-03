@@ -14,11 +14,11 @@ func _ready():
 	
 	# Assign signals to the set_modes bar
 	for i in modes:
-		i.get_node("Button").pressed.connect(set_modes)
+		i.get_node("Button").button_up.connect(set_modes)
 		
 	for i in keys:
 		if i.get_node("Button").text != "NAV": # nav is already connected as a mode
-			i.get_node("Button").pressed.connect(set_modes)
+			i.get_node("Button").button_up.connect(set_modes)
 		
 	# Get status boxes
 	autopilot_status_box = get_node("HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer/Panel")
@@ -34,9 +34,10 @@ func set_modes():
 	for i in modes:
 		if i.get_node("Button").button_pressed:
 			ShipData.player_ship.current_mode = i.get_node("Button").text
-			
+
 	# Set the appropriate flags
 	for i in keys:
+		print(i.get_node("Button").text)
 		match i.get_node("Button").text:
 			"INV":
 				ShipData.player_ship.inv_flag = i.get_node("Button").button_pressed
