@@ -1,70 +1,93 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwyyrjeji023x"]
+[gd_scene load_steps=6 format=3 uid="uid://cwyyrjeji023x"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_1geiy"]
 [ext_resource type="Texture2D" uid="uid://cf4yhwi23x8o1" path="res://ui/stripes.png" id="2_xxg6q"]
+[ext_resource type="Texture2D" uid="uid://dcvuaxyke8bl0" path="res://ui/widgets/tank/tank.png" id="3_r0xpq"]
+[ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="4_cq345"]
+[ext_resource type="Script" path="res://ui/autopilot_handler.gd" id="5_12yk2"]
 
 [node name="Propulsion" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -424.0
+offset_bottom = -237.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_1geiy")
 theme_override_constants/separation = 0
+
+[node name="FlowPaths" type="HBoxContainer" parent="."]
+layout_mode = 2
 
 [node name="FlowDiagram" type="Panel" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
 
-[node name="Tank1" type="Panel" parent="FlowDiagram"]
-layout_mode = 0
-offset_left = 349.0
-offset_top = 234.0
-offset_right = 649.0
-offset_bottom = 534.0
-
-[node name="Tank" type="Polygon2D" parent="FlowDiagram/Tank1"]
-scale = Vector2(3, 3)
-polygon = PackedVector2Array(10, 0, 90, 0, 100, 10, 100, 90, 90, 100, 10, 100, 0, 90, 0, 10)
-
-[node name="Empty" type="Polygon2D" parent="FlowDiagram/Tank1/Tank"]
-position = Vector2(2, 2)
-scale = Vector2(0.96, 0.96)
-color = Color(0.0745098, 0.0745098, 0.0980392, 1)
-polygon = PackedVector2Array(10, 0, 90, 0, 100, 10, 100, 90, 90, 100, 10, 100, 0, 90, 0, 10)
-
-[node name="Fill" type="Polygon2D" parent="FlowDiagram/Tank1/Tank/Empty"]
-texture_repeat = 2
-texture = ExtResource("2_xxg6q")
-texture_scale = Vector2(3.42, 3.42)
-polygon = PackedVector2Array(100, 53.0612, 100, 90, 90, 100, 10, 100, 0, 90, 0, 53.0612)
-
-[node name="Panel" type="Panel" parent="FlowDiagram/Tank1"]
+[node name="MarginContainer" type="MarginContainer" parent="FlowDiagram"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -25.0
-offset_right = 50.0
-offset_bottom = 25.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="FlowDiagram/Tank1/Panel"]
+[node name="Flow1" type="VBoxContainer" parent="FlowDiagram/MarginContainer"]
+layout_mode = 2
+
+[node name="FillValve" type="Panel" parent="FlowDiagram/MarginContainer/Flow1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="FlowDiagram/MarginContainer/Flow1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="FlowDiagram/MarginContainer/Flow1/Panel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -92.5
-offset_top = -50.0
-offset_right = 92.5
-offset_bottom = 50.0
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("2_xxg6q")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="FlowDiagram/MarginContainer/Flow1/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("3_r0xpq")
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
+
+[node name="CenterContainer" type="CenterContainer" parent="FlowDiagram/MarginContainer/Flow1/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="FlowDiagram/MarginContainer/Flow1/Panel/CenterContainer"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="FlowDiagram/MarginContainer/Flow1/Panel/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
@@ -72,6 +95,47 @@ text = "He3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InstrumentsPanel" type="Panel" parent="."]
+[node name="MainValve" type="Panel" parent="FlowDiagram/MarginContainer/Flow1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Pump" type="Panel" parent="FlowDiagram/MarginContainer/Flow1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Corner" type="Panel" parent="FlowDiagram/MarginContainer/Flow1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FlowDiagram2" type="Panel" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="EngineInstruments" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EngineInstruments"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="EngineInstruments/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="EngineInstruments/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("4_cq345")
+text = "ENGINE"
+horizontal_alignment = 1
+
+[node name="MainPanel" type="Panel" parent="EngineInstruments/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_cq345")
+script = ExtResource("5_12yk2")
