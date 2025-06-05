@@ -9,7 +9,6 @@ bg_color = Color(0.501961, 0, 0, 1)
 size_flags_horizontal = 3
 script = ExtResource("1_3bu10")
 label_text = "INITIALIZED"
-on = null
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

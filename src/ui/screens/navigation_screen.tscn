@@ -908,7 +908,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(634, 523)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("12_4hvmx")]
