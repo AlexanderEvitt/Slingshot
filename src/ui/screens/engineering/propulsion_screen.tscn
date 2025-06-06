@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwyyrjeji023x"]
+[gd_scene load_steps=13 format=3 uid="uid://cwyyrjeji023x"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_1geiy"]
 [ext_resource type="Texture2D" uid="uid://dnv5fk1pjj2ug" path="res://ui/widgets/valve/valve.png" id="2_fehqd"]
@@ -8,6 +8,24 @@
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="4_cq345"]
 [ext_resource type="Texture2D" uid="uid://dfn5sfmkeqibg" path="res://ui/widgets/pump/pump.png" id="6_dfgcn"]
 [ext_resource type="PackedScene" uid="uid://w0adn324ymo3" path="res://ui/widgets/light_button/light_button.tscn" id="6_uj4sx"]
+[ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="8_gm114"]
+[ext_resource type="Texture2D" uid="uid://cmexnft0ep2kb" path="res://ui/widgets/tca/tca.png" id="10_5cwsb"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o0b8l"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+attractor_interaction_enabled = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_24wan"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(48, 88, 1)
+velocity_pivot = Vector3(0, 300, 0)
+gravity = Vector3(0, 1000, 0)
+scale_min = 0.1
+scale_max = 0.2
 
 [node name="Propulsion" type="HBoxContainer"]
 anchors_preset = 15
@@ -19,9 +37,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_1geiy")
 theme_override_constants/separation = 0
-
-[node name="FlowPaths" type="HBoxContainer" parent="."]
-layout_mode = 2
 
 [node name="FlowDiagram" type="Panel" parent="."]
 layout_mode = 2
@@ -176,7 +191,7 @@ stretch_mode = 5
 [node name="Panel2" type="Panel" parent="FlowDiagram/MarginContainer/Flow1/PipeContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.5
 
 [node name="MainValveContainer" type="HBoxContainer" parent="FlowDiagram/MarginContainer/Flow1"]
 layout_mode = 2
@@ -207,7 +222,12 @@ stretch_mode = 5
 [node name="Panel2" type="Panel" parent="FlowDiagram/MarginContainer/Flow1/MainValveContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="FlowDiagram/MarginContainer/Flow1/MainValveContainer/Panel2"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_o0b8l")
+texture = ExtResource("8_gm114")
 
 [node name="PipeContainer2" type="HBoxContainer" parent="FlowDiagram/MarginContainer/Flow1"]
 layout_mode = 2
@@ -230,7 +250,7 @@ stretch_mode = 5
 [node name="Panel2" type="Panel" parent="FlowDiagram/MarginContainer/Flow1/PipeContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.5
 
 [node name="PumpContainer" type="HBoxContainer" parent="FlowDiagram/MarginContainer/Flow1"]
 layout_mode = 2
@@ -249,7 +269,7 @@ layout_mode = 2
 theme = ExtResource("4_cq345")
 label_text = "HeMP"
 
-[node name="Valve" type="TextureRect" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer"]
+[node name="Pump" type="TextureRect" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -258,14 +278,46 @@ texture = ExtResource("6_dfgcn")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="TextureRect" type="TextureRect" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer/Pump"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 49.0
+offset_right = 44.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 1.5708
+texture = ExtResource("3_rwp1b")
+expand_mode = 1
+
 [node name="Panel2" type="Panel" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.5
 
 [node name="Corner" type="Panel" parent="FlowDiagram/MarginContainer/Flow1"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="TCAHolder" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="TCAHolder"]
+z_index = 1
+position = Vector2(0, 256)
+texture = ExtResource("10_5cwsb")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="TCAHolder/Sprite2D"]
+position = Vector2(0, -32)
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_24wan")
+texture = ExtResource("8_gm114")
 
 [node name="FlowDiagram2" type="Panel" parent="."]
 layout_mode = 2
@@ -407,7 +459,7 @@ size_flags_stretch_ratio = 0.5
 [node name="Panel2" type="Panel" parent="FlowDiagram2/MarginContainer/Flow1/PipeContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.5
 
 [node name="Pipe" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/PipeContainer"]
 layout_mode = 2
@@ -429,7 +481,7 @@ size_flags_vertical = 3
 [node name="Panel2" type="Panel" parent="FlowDiagram2/MarginContainer/Flow1/MainValveContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.5
 
 [node name="Valve" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/MainValveContainer"]
 layout_mode = 2
@@ -461,7 +513,7 @@ size_flags_stretch_ratio = 0.5
 [node name="Panel2" type="Panel" parent="FlowDiagram2/MarginContainer/Flow1/PipeContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.5
 
 [node name="Pipe" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/PipeContainer2"]
 layout_mode = 2
@@ -483,9 +535,9 @@ size_flags_vertical = 3
 [node name="Panel2" type="Panel" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.5
 
-[node name="Valve" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer"]
+[node name="Pump" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -493,6 +545,20 @@ size_flags_stretch_ratio = 0.7
 texture = ExtResource("6_dfgcn")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer/Pump"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 49.0
+offset_right = 32.0
+offset_bottom = -18.0
+grow_vertical = 2
+rotation = 1.5708
+texture = ExtResource("3_rwp1b")
+expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer"]
 layout_mode = 2
