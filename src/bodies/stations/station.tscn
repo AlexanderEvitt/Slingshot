@@ -52,6 +52,7 @@ layers = 2
 
 [node name="Beamlight" type="Node3D" parent="Docks/DockE/Control" index="0"]
 transform = Transform3D(0.970552, -0.237621, 0.0395511, 0.236374, 0.971076, 0.0337462, -0.046426, -0.0234036, 0.998648, 1.76698, 2.6395, -0.496562)
+visible = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Docks/DockE/Control/Beamlight" index="0"]
 light_energy = 50.0
@@ -60,6 +61,7 @@ omni_attenuation = 0.2
 
 [node name="Beamlight2" type="Node3D" parent="Docks/DockE/Control" index="1"]
 transform = Transform3D(0.970552, -0.237621, 0.0395511, 0.236374, 0.971076, 0.0337462, -0.046426, -0.0234036, 0.998648, 1.81336, 2.6395, 1.58898)
+visible = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Docks/DockE/Control/Beamlight2" index="0"]
 light_energy = 50.0
@@ -84,21 +86,7 @@ light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Docks/DockE/Barlight" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-omni_range = 0.2
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Docks/DockE/Barlight" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-omni_range = 0.2
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight" index="3"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021, 0, 0)
 layers = 2
 light_color = Color(0.973167, 1, 0.93, 1)
@@ -114,21 +102,7 @@ light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Docks/DockE/Barlight2" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-omni_range = 0.2
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Docks/DockE/Barlight2" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-omni_range = 0.2
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight2" index="3"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight2" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021, 0, 0)
 layers = 2
 light_color = Color(0.973167, 1, 0.93, 1)
@@ -144,21 +118,7 @@ light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Docks/DockE/Barlight3" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-omni_range = 0.2
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Docks/DockE/Barlight3" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-omni_range = 0.2
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight3" index="3"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight3" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021, 0, 0)
 layers = 2
 light_color = Color(0.973167, 1, 0.93, 1)
@@ -174,21 +134,7 @@ light_color = Color(1, 0.854333, 0.62, 1)
 light_energy = 0.002
 omni_range = 0.2
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Docks/DockE/Barlight4" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
-layers = 2
-light_color = Color(1, 0.854333, 0.62, 1)
-light_energy = 0.002
-omni_range = 0.2
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Docks/DockE/Barlight4" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014, 0, 0)
-layers = 2
-light_color = Color(1, 0.854333, 0.62, 1)
-light_energy = 0.002
-omni_range = 0.2
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight4" index="3"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight4" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021, 0, 0)
 layers = 2
 light_color = Color(1, 0.854333, 0.62, 1)
@@ -205,23 +151,7 @@ light_energy = 0.001
 shadow_enabled = true
 omni_range = 0.2
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Docks/DockE/Barlight5" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-shadow_enabled = true
-omni_range = 0.2
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Docks/DockE/Barlight5" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-shadow_enabled = true
-omni_range = 0.2
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight5" index="3"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight5" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021, 0, 0)
 layers = 2
 light_color = Color(0.973167, 1, 0.93, 1)
@@ -239,23 +169,7 @@ light_energy = 0.001
 shadow_enabled = true
 omni_range = 0.2
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Docks/DockE/Barlight6" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-shadow_enabled = true
-omni_range = 0.2
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Docks/DockE/Barlight6" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-shadow_enabled = true
-omni_range = 0.2
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight6" index="3"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight6" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021, 0, 0)
 layers = 2
 light_color = Color(0.973167, 1, 0.93, 1)
@@ -273,23 +187,7 @@ light_energy = 0.001
 shadow_enabled = true
 omni_range = 0.2
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Docks/DockE/Barlight7" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-shadow_enabled = true
-omni_range = 0.2
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Docks/DockE/Barlight7" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-shadow_enabled = true
-omni_range = 0.2
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight7" index="3"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight7" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021, 0, 0)
 layers = 2
 light_color = Color(0.973167, 1, 0.93, 1)
@@ -307,23 +205,7 @@ light_energy = 0.001
 shadow_enabled = true
 omni_range = 0.2
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Docks/DockE/Barlight8" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-shadow_enabled = true
-omni_range = 0.2
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Docks/DockE/Barlight8" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014, 0, 0)
-layers = 2
-light_color = Color(0.973167, 1, 0.93, 1)
-light_energy = 0.001
-shadow_enabled = true
-omni_range = 0.2
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight8" index="3"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Docks/DockE/Barlight8" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021, 0, 0)
 layers = 2
 light_color = Color(0.973167, 1, 0.93, 1)
