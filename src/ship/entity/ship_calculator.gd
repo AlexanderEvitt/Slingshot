@@ -14,7 +14,7 @@ var plotted_positions
 @export var start_velocity : Vector3
 
 var attitude_calculator
-var thrust_calculator
+var propulsion
 var collision_calculator
 
 # Autopilot modes
@@ -47,7 +47,7 @@ var docked = true
 
 func _ready():
 	attitude_calculator = get_node("AttitudeCalculator")
-	thrust_calculator = get_node("Thrusters")
+	propulsion = get_node("PropulsionCalculator")
 	collision_calculator = get_node("CollisionDetector")
 	propagator = get_node("Propagator")
 	
@@ -64,8 +64,8 @@ func _physics_process(delta):
 	torque = attitude_calculator.torque
 	
 	# Update thrust
-	thrust = thrust_calculator.thrust
-	throttle = thrust_calculator.throttle
+	thrust = propulsion.thrust
+	throttle = propulsion.throttle
 	
 	# If navigation mode and autopilot are engaged, fly along precalculated trajectory
 	if propagator.planned_positions != null and nav_flag and autopilot_flag:

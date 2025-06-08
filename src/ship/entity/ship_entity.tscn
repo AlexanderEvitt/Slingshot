@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://ship/entity/attitude_calculator.gd" id="2_7e8cl"]
 [ext_resource type="Script" path="res://ship/entity/collision_calculator.gd" id="3_wjkl8"]
 [ext_resource type="Script" path="res://ship/Propagator.cs" id="4_7neml"]
-[ext_resource type="Script" path="res://ship/entity/thrust_calculator.gd" id="5_n5nff"]
+[ext_resource type="Script" path="res://ship/entity/propulsion_calculator.gd" id="5_n5nff"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qcdir"]
 
@@ -39,5 +39,5 @@ shape = SubResource("BoxShape3D_fdpi8")
 script = ExtResource("4_7neml")
 n = 400
 
-[node name="Thrusters" type="Node3D" parent="."]
+[node name="PropulsionCalculator" type="Node3D" parent="."]
 script = ExtResource("5_n5nff")

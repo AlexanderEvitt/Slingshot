@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf4yhwi23x8o1"
-path="res://.godot/imported/stripes.png-59eec087fbea09f136f30871595803d1.ctex"
+uid="uid://d3kc3y6ffgu2"
+path="res://.godot/imported/carat.png-d2477a9f4ff8c96c47f075e4e7a2c30b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/stripes.png"
-dest_files=["res://.godot/imported/stripes.png-59eec087fbea09f136f30871595803d1.ctex"]
+source_file="res://ui/widgets/bar/carat.png"
+dest_files=["res://.godot/imported/carat.png-d2477a9f4ff8c96c47f075e4e7a2c30b.ctex"]
 
 [params]
 
