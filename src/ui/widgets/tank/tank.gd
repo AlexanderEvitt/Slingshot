@@ -1,5 +1,4 @@
 @tool
-class_name TankWidget
 extends Node
 
 @onready var fill = get_node("TankFill")

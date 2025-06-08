@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwyyrjeji023x"]
+[gd_scene load_steps=22 format=3 uid="uid://cwyyrjeji023x"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_1geiy"]
+[ext_resource type="Script" path="res://ui/screens/engineering/propulsion_ui_handler.gd" id="2_465f1"]
 [ext_resource type="Texture2D" uid="uid://dnv5fk1pjj2ug" path="res://ui/widgets/valve/valve.png" id="2_fehqd"]
 [ext_resource type="Texture2D" uid="uid://cf4yhwi23x8o1" path="res://ui/widgets/bar/stripes.png" id="2_xxg6q"]
 [ext_resource type="Texture2D" uid="uid://d15ncfw65i0f7" path="res://ui/widgets/pipe/pipe.png" id="3_rwp1b"]
@@ -13,7 +14,8 @@
 [ext_resource type="Shader" path="res://ui/screens/engineering/particle_burst.gdshader" id="11_ccqdn"]
 [ext_resource type="PackedScene" uid="uid://bcaj67ttyd84r" path="res://ui/widgets/circle_gauge/circle_gauge.tscn" id="12_6p3uq"]
 [ext_resource type="Texture2D" uid="uid://b0qag8225a2v5" path="res://ui/widgets/tca/particle_burst.png" id="12_iyntx"]
-[ext_resource type="Script" path="res://ui/screens/engineering/he_pump.gd" id="13_g11d4"]
+[ext_resource type="Script" path="res://ui/widgets/circle_gauge/circle_gauge.gd" id="14_ikcyp"]
+[ext_resource type="PackedScene" uid="uid://cwon27kv3df22" path="res://ui/widgets/bar/carat_bar.tscn" id="15_2ic2g"]
 [ext_resource type="Texture2D" uid="uid://d3kc3y6ffgu2" path="res://ui/widgets/bar/carat.png" id="15_fj5j6"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o0b8l"]
@@ -75,7 +77,7 @@ shader_parameter/gravity = Vector3(0, 0, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k7dai"]
 
-[node name="Propulsion" type="HBoxContainer"]
+[node name="Propulsion" type="HBoxContainer" node_paths=PackedStringArray("he_tank", "de_tank", "he_pump", "de_pump", "thrust_bar", "he_pump_spinner", "de_pump_spinner", "tca")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -85,6 +87,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_1geiy")
 theme_override_constants/separation = 0
+script = ExtResource("2_465f1")
+he_tank = NodePath("FlowDiagram/MarginContainer/Flow1/Tank/Tank")
+de_tank = NodePath("FlowDiagram2/MarginContainer/Flow1/Tank/Tank2")
+he_pump = NodePath("EngineInstruments/VBoxContainer/FeedPanel/HBoxContainer/Gauge1")
+de_pump = NodePath("EngineInstruments/VBoxContainer/FeedPanel/HBoxContainer/Gauge2")
+thrust_bar = NodePath("EngineInstruments/VBoxContainer/ThrustBar")
+he_pump_spinner = NodePath("FlowDiagram/MarginContainer/Flow1/PumpContainer/Panel/CenterContainer/Control/Spinner")
+de_pump_spinner = NodePath("FlowDiagram2/MarginContainer/Flow1/PumpContainer/Panel/CenterContainer/Control/Spinner")
+tca = NodePath("TCAHolder/Sprite2D/GPUParticles2D")
 
 [node name="FlowDiagram" type="Panel" parent="."]
 layout_mode = 2
@@ -267,31 +278,51 @@ layout_mode = 2
 theme = ExtResource("4_cq345")
 label_text = "HeMP"
 
-[node name="Pump" type="TextureRect" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer"]
+[node name="Panel" type="Panel" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 size_flags_stretch_ratio = 0.7
-texture = ExtResource("6_dfgcn")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer/Pump"]
+[node name="TextureRect" type="TextureRect" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer/Panel"]
 z_index = 1
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
+anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = 28.0
+offset_left = 165.0
 offset_top = 49.0
-offset_right = 44.0
+offset_right = 181.0
 offset_bottom = -18.0
-grow_horizontal = 0
 grow_vertical = 2
 rotation = 1.5708
 texture = ExtResource("3_rwp1b")
 expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer/Panel/CenterContainer"]
+layout_mode = 2
+
+[node name="Spinner" type="TextureRect" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer/Panel/CenterContainer/Control"]
+z_index = 1
+layout_mode = 2
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("6_dfgcn")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Panel2" type="Panel" parent="FlowDiagram/MarginContainer/Flow1/PumpContainer"]
 layout_mode = 2
@@ -314,8 +345,8 @@ texture = ExtResource("10_5cwsb")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="TCAHolder/Sprite2D"]
 material = SubResource("CanvasItemMaterial_j1w38")
 position = Vector2(0, -32)
-emitting = false
 amount = 100
+amount_ratio = 0.0
 process_material = SubResource("ShaderMaterial_oma55")
 texture = ExtResource("12_iyntx")
 lifetime = 0.4
@@ -488,28 +519,51 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Pump" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer"]
+[node name="Panel" type="Panel" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 size_flags_stretch_ratio = 0.7
-texture = ExtResource("6_dfgcn")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer/Pump"]
+[node name="TextureRect" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer/Panel"]
 z_index = 1
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = 16.0
+offset_left = 15.0
 offset_top = 49.0
-offset_right = 32.0
+offset_right = 31.0
 offset_bottom = -18.0
 grow_vertical = 2
 rotation = 1.5708
 texture = ExtResource("3_rwp1b")
 expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer/Panel/CenterContainer"]
+layout_mode = 2
+
+[node name="Spinner" type="TextureRect" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer/Panel/CenterContainer/Control"]
+z_index = 1
+layout_mode = 2
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("6_dfgcn")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="FlowDiagram2/MarginContainer/Flow1/PumpContainer"]
 layout_mode = 2
@@ -567,8 +621,13 @@ grow_vertical = 2
 
 [node name="Gauge1" parent="EngineInstruments/VBoxContainer/FeedPanel/HBoxContainer" instance=ExtResource("12_6p3uq")]
 layout_mode = 2
-script = ExtResource("13_g11d4")
-label_text = null
+script = ExtResource("14_ikcyp")
+label_text = "nHeMP"
+
+[node name="Gauge2" parent="EngineInstruments/VBoxContainer/FeedPanel/HBoxContainer" instance=ExtResource("12_6p3uq")]
+layout_mode = 2
+script = ExtResource("14_ikcyp")
+label_text = "nDeMP"
 
 [node name="ReactorTitle" type="MarginContainer" parent="EngineInstruments/VBoxContainer"]
 layout_mode = 2
@@ -603,42 +662,8 @@ theme = ExtResource("4_cq345")
 text = "THRUST"
 horizontal_alignment = 1
 
-[node name="ThrustBar" type="VBoxContainer" parent="EngineInstruments/VBoxContainer"]
+[node name="ThrustBar" parent="EngineInstruments/VBoxContainer" instance=ExtResource("15_2ic2g")]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
-theme_override_constants/separation = 0
-
-[node name="Panel" type="Panel" parent="EngineInstruments/VBoxContainer/ThrustBar"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="TextureRect" type="TextureRect" parent="EngineInstruments/VBoxContainer/ThrustBar/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.798
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_xxg6q")
-expand_mode = 1
-stretch_mode = 1
-
-[node name="Panel2" type="Panel" parent="EngineInstruments/VBoxContainer/ThrustBar"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_k7dai")
-
-[node name="TextureRect2" type="TextureRect" parent="EngineInstruments/VBoxContainer/ThrustBar/Panel2"]
-layout_mode = 2
-offset_left = 350.0
-offset_right = 438.0
-offset_bottom = 38.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("15_fj5j6")
-stretch_mode = 3
 
 [node name="DeltaVTitle" type="MarginContainer" parent="EngineInstruments/VBoxContainer"]
 layout_mode = 2

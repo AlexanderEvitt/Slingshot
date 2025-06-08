@@ -22,6 +22,8 @@ var commanded_throttle = 0.0
 var thruster_power = 0.005
 var engine_power = 0.05
 
+var fuel_burn_rate = 0.001
+
 
 func _process(_delta: float) -> void:
 	thrust = Vector3(0,0,0)
@@ -44,15 +46,15 @@ func _process(_delta: float) -> void:
 	de_mp = de_mp
 	
 	# Drain fuel by corresponding amount
-	he_quant = he_quant - 0.00001*he_mp
-	de_quant = de_quant - 0.00001*de_mp
+	he_quant = he_quant - fuel_burn_rate*he_mp
+	de_quant = de_quant - fuel_burn_rate*de_mp
 		
 	# Calculate thrust from pump speed
 	throttle = engine_power*min(he_mp,de_mp) # lowest pump speed
 	thrust = thrust + Vector3(throttle,0,0)
 	
 	# Zero thrust if fuel is empty
-	if he_quant == 0 or de_quant == 0:
+	if he_quant <= 0 or de_quant <= 0:
 		throttle = 0
 		commanded_throttle = 0
 	

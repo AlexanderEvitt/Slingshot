@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwon27kv3df22"]
+
+[ext_resource type="Script" path="res://ui/widgets/bar/carat_bar.gd" id="1_dkyqt"]
+[ext_resource type="Texture2D" uid="uid://cf4yhwi23x8o1" path="res://ui/widgets/bar/stripes.png" id="1_gf3os"]
+[ext_resource type="Texture2D" uid="uid://d3kc3y6ffgu2" path="res://ui/widgets/bar/carat.png" id="2_y76tl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k7dai"]
+
+[node name="ThrustBar" type="VBoxContainer" node_paths=PackedStringArray("fill", "carat")]
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_constants/separation = 0
+script = ExtResource("1_dkyqt")
+fill = NodePath("Panel/TextureRect")
+carat = NodePath("Panel2/TextureRect2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.798
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gf3os")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_k7dai")
+
+[node name="TextureRect2" type="TextureRect" parent="Panel2"]
+layout_mode = 2
+offset_left = 350.0
+offset_right = 438.0
+offset_bottom = 38.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_y76tl")
+stretch_mode = 3
