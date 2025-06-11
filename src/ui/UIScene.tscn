@@ -35,7 +35,15 @@ visible = false
 layout_mode = 1
 
 [node name="ExternalScreen" parent="." instance=ExtResource("6_b2rax")]
-layout_mode = 0
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="NavigationScreen" parent="." instance=ExtResource("7_c6axk")]
 visible = false
@@ -46,7 +54,8 @@ visible = false
 layout_mode = 1
 
 [node name="CinematicScreen" parent="." instance=ExtResource("9_xulks")]
-layout_mode = 0
+visible = false
+layout_mode = 1
 
 [node name="ScreenSelectorPanel" type="Panel" parent="."]
 visible = false
