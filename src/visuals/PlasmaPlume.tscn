@@ -53,7 +53,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_yust4")
 [node name="Light" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.527216, 0, 0)
 layers = 2
-light_energy = 0.5
+light_energy = 0.3
 shadow_enabled = true
 shadow_bias = 10.0
 omni_range = 0.008

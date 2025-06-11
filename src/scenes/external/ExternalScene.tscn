@@ -365,9 +365,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
 
 [node name="EarthAtmosphere" parent="Earth/EarthMesh" instance=ExtResource("5_2nae2")]
 planet_radius = 6371.0
-atmosphere_height = 70.0
+atmosphere_height = 40.0
 sun_path = NodePath("../../../Sun/BigSunLight")
-shader_params/u_density = 0.13
+shader_params/u_density = 0.2
+shader_params/u_scattering_strength = 0.35
+shader_params/u_scattering_wavelengths = Vector3(650, 540, 440)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="Lights" type="MeshInstance3D" parent="Earth/EarthMesh" node_paths=PackedStringArray("sun_path")]

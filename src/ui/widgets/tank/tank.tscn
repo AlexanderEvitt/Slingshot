@@ -9,7 +9,7 @@ size_flags_vertical = 3
 script = ExtResource("1_hpdgw")
 
 [node name="TankFill" type="TextureRect" parent="."]
-modulate = Color(0.78, 0.934, 1, 1)
+modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.596
@@ -57,6 +57,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
-text = "He3"
 horizontal_alignment = 1
 vertical_alignment = 1
