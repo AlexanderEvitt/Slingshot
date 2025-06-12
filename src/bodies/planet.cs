@@ -41,7 +41,7 @@ public partial class planet : Node3D
 
 			// Get initial ephemeris time
 			double tdb;
-			fixed (byte* timeChars = Encoding.ASCII.GetBytes("2025 JANUARY 01 23:59:59.9"))
+			fixed (byte* timeChars = Encoding.ASCII.GetBytes("2025 JUNE 20 19:40:59.9"))
 			{
 				Spice.STR2ET_C(timeChars, &tdb);
 			}
