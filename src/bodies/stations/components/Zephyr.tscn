@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0s1bdqqag6dw"]
+
+[ext_resource type="PackedScene" uid="uid://di1rqgkjupvjx" path="res://bodies/stations/components/ring.glb" id="1_fdvks"]
+[ext_resource type="Script" path="res://bodies/stations/rotator.gd" id="2_4xpbp"]
+[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="2_urlyi"]
+[ext_resource type="PackedScene" uid="uid://bgip3t8gmj3q6" path="res://bodies/stations/components/stump.glb" id="4_2vtgi"]
+[ext_resource type="PackedScene" uid="uid://dv7pt2qq8bgjl" path="res://bodies/stations/components/shipyard.glb" id="5_0n850"]
+
+[node name="Zephyr" type="Node3D"]
+
+[node name="ring" parent="." instance=ExtResource("1_fdvks")]
+script = ExtResource("2_4xpbp")
+
+[node name="ring2" parent="." instance=ExtResource("1_fdvks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.92352, 0)
+script = ExtResource("2_4xpbp")
+flip = -1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_urlyi")
+
+[node name="stump" parent="." instance=ExtResource("4_2vtgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.99498, 0)
+
+[node name="shipyard" parent="." instance=ExtResource("5_0n850")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.15088, 0)
