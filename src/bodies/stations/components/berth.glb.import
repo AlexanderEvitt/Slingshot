@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b2uahkmikokwc"
-path="res://.godot/imported/ring.glb-26d5bddb8ff8ac0b02b7d6a40fb44b30.scn"
+uid="uid://dljr03rg7o43w"
+path="res://.godot/imported/berth.glb-10d4c4a32639bd77049ad52003de1994.scn"
 
 [deps]
 
-source_file="res://bodies/stations/components/ring.glb"
-dest_files=["res://.godot/imported/ring.glb-26d5bddb8ff8ac0b02b7d6a40fb44b30.scn"]
+source_file="res://bodies/stations/components/berth.glb"
+dest_files=["res://.godot/imported/berth.glb-10d4c4a32639bd77049ad52003de1994.scn"]
 
 [params]
 

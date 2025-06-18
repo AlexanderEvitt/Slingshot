@@ -2,6 +2,8 @@
 
 [resource]
 background_energy_multiplier = 0.0
+ambient_light_source = 2
+ambient_light_color = Color(0.04, 0.04, 0.04, 1)
 tonemap_mode = 2
 glow_enabled = true
 glow_mix = 0.239
