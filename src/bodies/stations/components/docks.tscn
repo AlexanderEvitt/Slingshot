@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://g4qb63wurhbg"]
+
+[ext_resource type="PackedScene" uid="uid://d0tpv6bx674ne" path="res://bodies/stations/components/docks.glb" id="1_wd4of"]
+[ext_resource type="Material" uid="uid://bu1jwblsgunfc" path="res://bodies/stations/components/materials/BasicGreeble.tres" id="2_y4qs5"]
+[ext_resource type="PackedScene" uid="uid://d1tcbt5jko4sn" path="res://bodies/stations/components/berth.tscn" id="3_dckp4"]
+[ext_resource type="PackedScene" uid="uid://1ol84f0enmql" path="res://bodies/stations/components/simplified_berth.tscn" id="4_01trk"]
+
+[node name="docks" instance=ExtResource("1_wd4of")]
+
+[node name="Docks" parent="." index="0"]
+layers = 4
+surface_material_override/0 = ExtResource("2_y4qs5")
+
+[node name="berth" parent="Docks/Berth1" index="0" instance=ExtResource("3_dckp4")]
+
+[node name="simplified_berth" parent="Docks/Berth2" index="0" instance=ExtResource("4_01trk")]
+
+[node name="simplified_berth" parent="Docks/Berth3" index="0" instance=ExtResource("4_01trk")]
+
+[node name="simplified_berth" parent="Docks/Berth4" index="0" instance=ExtResource("4_01trk")]
+
+[node name="simplified_berth" parent="Docks/Berth5" index="0" instance=ExtResource("4_01trk")]
+
+[node name="simplified_berth" parent="Docks/Berth6" index="0" instance=ExtResource("4_01trk")]
+
+[node name="simplified_berth" parent="Docks/Berth7" index="0" instance=ExtResource("4_01trk")]
+
+[node name="simplified_berth" parent="Docks/Berth8" index="0" instance=ExtResource("4_01trk")]

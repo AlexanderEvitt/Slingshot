@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dludvu0b82cft"]
+
+[ext_resource type="Texture2D" uid="uid://cyd6aaowyrvob" path="res://bodies/stations/components/materials/DetailNormal.png" id="1_4spbq"]
+
+[resource]
+metallic = 1.0
+normal_enabled = true
+normal_texture = ExtResource("1_4spbq")

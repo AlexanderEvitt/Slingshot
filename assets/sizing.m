@@ -63,8 +63,8 @@ flux/1400 % in percent of solar irradiance at 1AU
 
 %% Centrifugal ring sizing
 clear; clc;
-w = 0.03; % rad /s
-r = 10000;
+w = 0.04; % rad /s
+r = 4500;
 a = (w^2)*r
 
 rpm = (w/(2*pi))*(60)

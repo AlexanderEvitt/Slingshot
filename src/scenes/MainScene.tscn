@@ -61,8 +61,7 @@ period = 86400.0
 SMA = 42164.0
 
 [node name="DockCenter" type="Node3D" parent="Planets/Earth/ZephyrStationMain"]
-process_priority = 13
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.86778, 53.2291, 0.0872049)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
 
 [node name="Luna" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13

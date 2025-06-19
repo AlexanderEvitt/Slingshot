@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://crmu6btryp01q"]
+
+[ext_resource type="Texture2D" uid="uid://kegakxmtgqvl" path="res://bodies/stations/components/materials/ConcreteAlbedo.png" id="1_dbsbr"]
+[ext_resource type="Texture2D" uid="uid://cn4iadruws4u" path="res://bodies/stations/components/materials/StampedConcreteNormal.png" id="2_qjgc3"]
+
+[resource]
+resource_name = "StampedConcrete"
+cull_mode = 2
+albedo_texture = ExtResource("1_dbsbr")
+normal_enabled = true
+normal_texture = ExtResource("2_qjgc3")
+uv1_scale = Vector3(5, 5, 5)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0s1bdqqag6dw"]
+
+[ext_resource type="PackedScene" uid="uid://bty856a1y2vt0" path="res://bodies/stations/components/stump.tscn" id="2_o24in"]
+[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="2_urlyi"]
+[ext_resource type="PackedScene" uid="uid://cr6y3tpnww4h7" path="res://bodies/stations/components/ring.tscn" id="3_e7nfi"]
+[ext_resource type="PackedScene" uid="uid://bkei6pvqd0x5g" path="res://bodies/stations/components/shipyard.tscn" id="4_goyf3"]
+
+[node name="Zephyr" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_urlyi")
+
+[node name="stump" parent="." instance=ExtResource("2_o24in")]
+
+[node name="ring1" parent="." instance=ExtResource("3_e7nfi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98572, 0)
+
+[node name="ring2" parent="." instance=ExtResource("3_e7nfi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.86544, 0)
+flip = -1
+
+[node name="shipyard" parent="." instance=ExtResource("4_goyf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1074, 0)

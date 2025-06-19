@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=3 uid="uid://d1tcbt5jko4sn"]
+
+[ext_resource type="PackedScene" uid="uid://dljr03rg7o43w" path="res://bodies/stations/components/berth.glb" id="1_sdcv1"]
+[ext_resource type="Material" uid="uid://o7dtbv1yqscr" path="res://bodies/stations/components/materials/SmoothConcrete.tres" id="2_agj8e"]
+[ext_resource type="Material" uid="uid://crmu6btryp01q" path="res://bodies/stations/components/materials/StampedConcrete.tres" id="3_02i7e"]
+[ext_resource type="Material" uid="uid://dw6b8drc721yf" path="res://bodies/stations/components/materials/LightMetal.tres" id="4_pbg5w"]
+[ext_resource type="Texture2D" uid="uid://cyd6aaowyrvob" path="res://bodies/stations/components/materials/DetailNormal.png" id="5_obry5"]
+[ext_resource type="Script" path="res://bodies/stations/docking_clamps.gd" id="6_ljwh4"]
+[ext_resource type="Material" uid="uid://dludvu0b82cft" path="res://bodies/stations/components/materials/DetailMetal.tres" id="6_prrdp"]
+[ext_resource type="Material" uid="uid://ddp6bqs75itvp" path="res://bodies/stations/components/materials/BlackPaint.tres" id="7_p8e0j"]
+[ext_resource type="Material" uid="uid://cljigg1mdxyr8" path="res://bodies/stations/components/materials/GreyMetal.tres" id="8_ucgqw"]
+[ext_resource type="Material" uid="uid://boikfvjvgjn2o" path="res://bodies/stations/components/materials/Floodlights.tres" id="9_r4srt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5lxg"]
+metallic = 1.0
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("5_obry5")
+
+[node name="berth" instance=ExtResource("1_sdcv1")]
+
+[node name="DockE" parent="." index="0"]
+layers = 2
+surface_material_override/0 = ExtResource("2_agj8e")
+surface_material_override/1 = ExtResource("3_02i7e")
+
+[node name="BackPipe" parent="DockE" index="0"]
+layers = 2
+surface_material_override/0 = ExtResource("4_pbg5w")
+
+[node name="Clamps1" parent="DockE" index="1"]
+layers = 2
+surface_material_override/0 = ExtResource("4_pbg5w")
+surface_material_override/1 = SubResource("StandardMaterial3D_p5lxg")
+script = ExtResource("6_ljwh4")
+
+[node name="Springs" parent="DockE/Clamps1" index="0"]
+layers = 2
+surface_material_override/0 = ExtResource("4_pbg5w")
+
+[node name="Clamps2" parent="DockE" index="2"]
+layers = 2
+surface_material_override/0 = ExtResource("4_pbg5w")
+surface_material_override/1 = ExtResource("6_prrdp")
+script = ExtResource("6_ljwh4")
+
+[node name="Control" parent="DockE" index="3"]
+layers = 2
+surface_material_override/0 = ExtResource("2_agj8e")
+surface_material_override/1 = ExtResource("7_p8e0j")
+
+[node name="Cube" parent="DockE" index="4"]
+layers = 2
+surface_material_override/0 = ExtResource("2_agj8e")
+
+[node name="DoorLeft" parent="DockE/DoorLeftHinge" index="0"]
+layers = 2
+surface_material_override/0 = ExtResource("2_agj8e")
+surface_material_override/1 = ExtResource("8_ucgqw")
+
+[node name="DoorRight" parent="DockE/DoorRightHinge" index="0"]
+layers = 2
+surface_material_override/0 = ExtResource("2_agj8e")
+surface_material_override/1 = ExtResource("8_ucgqw")
+
+[node name="Frames" parent="DockE" index="7"]
+layers = 2
+surface_material_override/0 = ExtResource("8_ucgqw")
+
+[node name="FuelingPipe" parent="DockE" index="8"]
+layers = 2
+surface_material_override/0 = ExtResource("4_pbg5w")
+surface_material_override/1 = ExtResource("6_prrdp")
+
+[node name="Lamps" parent="DockE" index="9"]
+layers = 2
+surface_material_override/0 = ExtResource("2_agj8e")
+surface_material_override/1 = ExtResource("9_r4srt")
+
+[node name="Supports" parent="DockE" index="10"]
+layers = 2
+surface_material_override/0 = ExtResource("2_agj8e")
+
+[node name="Node3D" type="Node3D" parent="." index="1"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.064, -0.015, -0.015)
+layers = 2
+light_color = Color(0.973167, 1, 0.93, 1)
+light_energy = 0.001
+omni_range = 0.2
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Node3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.064, 0.015, -0.015)
+layers = 2
+light_color = Color(0.973167, 1, 0.93, 1)
+light_energy = 0.001
+omni_range = 0.2
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Node3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.064, 0.015, 0.015)
+layers = 2
+light_color = Color(0.973167, 1, 0.93, 1)
+light_energy = 0.001
+omni_range = 0.2
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Node3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.064, -0.015, 0.015)
+layers = 2
+light_color = Color(0.973167, 1, 0.93, 1)
+light_energy = 0.001
+omni_range = 0.2
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Node3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984491, -0.015, -0.015)
+layers = 2
+light_color = Color(0.973167, 1, 0.93, 1)
+light_energy = 0.001
+omni_range = 0.2
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Node3D" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984491, 0.015, -0.015)
+layers = 2
+light_color = Color(0.973167, 1, 0.93, 1)
+light_energy = 0.001
+omni_range = 0.2
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="Node3D" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984491, 0.015, 0.015)
+layers = 2
+light_color = Color(0.973167, 1, 0.93, 1)
+light_energy = 0.001
+omni_range = 0.2
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="Node3D" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984491, -0.015, 0.015)
+layers = 2
+light_color = Color(0.973167, 1, 0.93, 1)
+light_energy = 0.001
+omni_range = 0.2

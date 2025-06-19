@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ol84f0enmql"]
+
+[ext_resource type="PackedScene" uid="uid://k8ryt31i0fvu" path="res://bodies/stations/components/simplified_berth.glb" id="1_uv4by"]
+[ext_resource type="Material" uid="uid://o7dtbv1yqscr" path="res://bodies/stations/components/materials/SmoothConcrete.tres" id="2_mr283"]
+[ext_resource type="Material" uid="uid://cljigg1mdxyr8" path="res://bodies/stations/components/materials/GreyMetal.tres" id="3_samsr"]
+
+[node name="simplified_berth" instance=ExtResource("1_uv4by")]
+
+[node name="SimplifiedBerth_001" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_mr283")
+
+[node name="SimplifiedDoor" parent="SimplifiedBerth_001" index="0"]
+surface_material_override/0 = ExtResource("2_mr283")
+surface_material_override/1 = ExtResource("3_samsr")

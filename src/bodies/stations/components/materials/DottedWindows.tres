@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cptd1y5ttpy0m"]
+
+[ext_resource type="Texture2D" uid="uid://bxjaoa3q0we0r" path="res://bodies/stations/components/materials/DetailAlbedo.png" id="1_dxxw8"]
+[ext_resource type="Texture2D" uid="uid://b8nuid08ppvxm" path="res://bodies/stations/components/materials/Windows.png" id="2_7pv5k"]
+[ext_resource type="Texture2D" uid="uid://cyd6aaowyrvob" path="res://bodies/stations/components/materials/DetailNormal.png" id="3_s8uhq"]
+
+[resource]
+albedo_color = Color(0.646029, 0.646029, 0.646029, 1)
+albedo_texture = ExtResource("1_dxxw8")
+emission_enabled = true
+emission_texture = ExtResource("2_7pv5k")
+normal_enabled = true
+normal_scale = 16.0
+normal_texture = ExtResource("3_s8uhq")

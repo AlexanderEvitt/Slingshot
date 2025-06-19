@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bty856a1y2vt0"]
+
+[ext_resource type="PackedScene" uid="uid://dkr7sn2nkif3j" path="res://bodies/stations/components/stump.glb" id="1_50hjm"]
+[ext_resource type="Material" uid="uid://o7dtbv1yqscr" path="res://bodies/stations/components/materials/SmoothConcrete.tres" id="2_7kd4x"]
+
+[node name="stump" instance=ExtResource("1_50hjm")]
+
+[node name="Cylinder" parent="." index="0"]
+layers = 4
+surface_material_override/0 = ExtResource("2_7kd4x")
