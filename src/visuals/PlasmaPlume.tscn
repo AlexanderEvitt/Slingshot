@@ -10,8 +10,8 @@ height = 6.0
 cap_top = false
 
 [sub_resource type="Gradient" id="Gradient_uhggj"]
-offsets = PackedFloat32Array(0, 0.139344, 0.532787)
-colors = PackedColorArray(0.1224, 0.29172, 0.72, 1, 0.214385, 0.122292, 0.720203, 1, 0.631373, 0.121569, 0.721569, 1)
+offsets = PackedFloat32Array(0.448718, 1)
+colors = PackedColorArray(0.1224, 0.29172, 0.72, 1, 0.631373, 0.121569, 0.721569, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4m3j0"]
 gradient = SubResource("Gradient_uhggj")

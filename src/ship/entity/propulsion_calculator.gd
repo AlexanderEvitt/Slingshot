@@ -22,7 +22,7 @@ var commanded_throttle = 0.0
 var thruster_power = 0.005
 var engine_power = 0.05
 
-var fuel_burn_rate = 0.001
+var fuel_burn_rate = 0.00001
 
 
 func _process(_delta: float) -> void:
@@ -36,7 +36,7 @@ func _process(_delta: float) -> void:
 	commanded_throttle = clamp(commanded_throttle,0,engine_power)
 	
 	# Increment pump speed based on error between throttle and result
-	var Kp = 0.01
+	var Kp = 0.1
 	var error = (commanded_throttle - throttle)/engine_power
 	he_mp = he_mp + Kp*error
 	de_mp = de_mp + Kp*error

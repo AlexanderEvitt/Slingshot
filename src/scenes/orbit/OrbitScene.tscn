@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=39 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://2q27idy8fbkr" path="res://bodies/wireframe/UranusWireframe.tscn" id="10_girv0"]
 [ext_resource type="PackedScene" uid="uid://d386uc0phqab7" path="res://bodies/wireframe/NeptuneWireframe.tscn" id="11_ciut5"]
 [ext_resource type="Script" path="res://bodies/moon.gd" id="11_jnixu"]
+[ext_resource type="PackedScene" uid="uid://b5dn6bevfg722" path="res://scenes/orbit/koz.tscn" id="12_fkbho"]
 [ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="12_oiuin"]
 [ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="13_kuxx4"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="13_xts1l"]
@@ -266,6 +267,9 @@ pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
+
+[node name="wiresphere" parent="Earth/AsteroidStation" instance=ExtResource("12_fkbho")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="Luna" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 12989.3)
@@ -694,6 +698,7 @@ color = Color(0.552941, 0, 0.552941, 1)
 [node name="Pointer" type="Node3D" parent="Spacecraft"]
 
 [node name="Ship" parent="Spacecraft/Pointer" instance=ExtResource("18_lxife")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
 [node name="FirstCam" type="Camera3D" parent="Spacecraft/Pointer"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
@@ -719,10 +724,11 @@ transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323
 [node name="Camera3D" type="Camera3D" parent="Spacecraft/CameraRig/CameraRotator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
 fov = 60.0
-near = 1.0
+near = 0.01
 far = 1e+10
 script = ExtResource("2_awidn")
 zoomable = true
 zoom_distance = 3000.0
+zoom_min = 0.02
 
 [node name="CinemaCam" type="Camera3D" parent="."]

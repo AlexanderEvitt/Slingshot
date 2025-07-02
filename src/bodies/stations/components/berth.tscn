@@ -85,56 +85,56 @@ surface_material_override/0 = ExtResource("2_agj8e")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Node3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.064, -0.015, -0.015)
-layers = 2
+layers = 6
 light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Node3D" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.064, 0.015, -0.015)
-layers = 2
+layers = 6
 light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Node3D" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.064, 0.015, 0.015)
-layers = 2
+layers = 6
 light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Node3D" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.064, -0.015, 0.015)
-layers = 2
+layers = 6
 light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="Node3D" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984491, -0.015, -0.015)
-layers = 2
+layers = 6
 light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
 [node name="OmniLight3D6" type="OmniLight3D" parent="Node3D" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984491, 0.015, -0.015)
-layers = 2
+layers = 6
 light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="Node3D" index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984491, 0.015, 0.015)
-layers = 2
+layers = 6
 light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
 [node name="OmniLight3D8" type="OmniLight3D" parent="Node3D" index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984491, -0.015, 0.015)
-layers = 2
+layers = 6
 light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2

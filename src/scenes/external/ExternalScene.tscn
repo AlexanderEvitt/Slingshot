@@ -371,7 +371,6 @@ shader_params/u_density = 0.2
 shader_params/u_scattering_strength = 0.35
 shader_params/u_scattering_wavelengths = Vector3(650, 540, 440)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
-shader_params/u_sphere_depth_factor = 1.0
 
 [node name="Lights" type="MeshInstance3D" parent="Earth/EarthMesh" node_paths=PackedStringArray("sun_path")]
 visibility_range_end = 1e+07
