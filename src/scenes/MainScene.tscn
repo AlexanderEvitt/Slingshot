@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://n78uivx6mb2"]
 
 [ext_resource type="Script" path="res://ui/menu/menu_handler.gd" id="1_tywdm"]
-[ext_resource type="Script" path="res://bodies/planet.cs" id="2_56nas"]
+[ext_resource type="Script" path="res://scenes/barycenter.gd" id="1_ww0f1"]
 [ext_resource type="PackedScene" uid="uid://ckg801jn7baa1" path="res://ui/menu/MenuScene.tscn" id="2_f6v6y"]
 [ext_resource type="Script" path="res://bodies/planet_collider.gd" id="4_g1v5r"]
 [ext_resource type="Script" path="res://scenes/ships_handler.gd" id="4_sh5nh"]
-[ext_resource type="Script" path="res://bodies/moon.gd" id="5_xfsep"]
+[ext_resource type="Script" path="res://bodies/body.gd" id="5_xfsep"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jcvw1"]
 
@@ -17,32 +17,54 @@ radius = 6371.0
 
 [node name="Planets" type="Node3D" parent="."]
 process_priority = 13
+script = ExtResource("1_ww0f1")
+GM = 1.32712e+11
 
 [node name="Sun" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
-script = ExtResource("2_56nas")
-body = "SUN"
+script = ExtResource("5_xfsep")
 GM = 1.32712e+11
+a = 1.34249e+06
+e = 0.094
+i = 0.026
+RAAN = 1.806
+argp = 4.504
+theta0 = 4.808
 
 [node name="Mercury" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
-script = ExtResource("2_56nas")
-body = "MERCURY"
+script = ExtResource("5_xfsep")
 GM = 22032.0
+a = 5.79091e+07
+e = 0.206
+i = 0.122
+RAAN = 0.832
+argp = 0.535
+theta0 = 2.464
 
 [node name="Venus" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
-script = ExtResource("2_56nas")
-body = "VENUS"
+script = ExtResource("5_xfsep")
 GM = 324859.0
+a = 1.08208e+08
+e = 0.018
+i = 0.059
+RAAN = 1.312
+argp = 0.979
+theta0 = 1.038
 
 [node name="Earth" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
-script = ExtResource("2_56nas")
-body = "EARTH"
+script = ExtResource("5_xfsep")
 GM = 398600.0
+a = 1.47683e+08
+e = 0.021
+i = 0.001
+RAAN = 3.029
+argp = 5.571
+theta0 = 4.687
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Planets/Earth"]
 process_priority = 13
@@ -57,53 +79,132 @@ shape = SubResource("SphereShape3D_fvy80")
 process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("5_xfsep")
-period = 86400.0
-SMA = 42164.0
+a = 42164.0
+theta0 = 3.14
 
 [node name="DockCenter" type="Node3D" parent="Planets/Earth/ZephyrStationMain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
 
-[node name="Luna" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Luna" type="Node3D" parent="Planets/Earth" groups=["Bodies"]]
 process_priority = 13
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 12989.3)
-script = ExtResource("2_56nas")
-body = "MOON"
-GM = 4904.87
+script = ExtResource("5_xfsep")
+GM = 4902.8
+a = 387078.0
+e = 0.045
+i = 0.092
+RAAN = 3.399
+argp = 1.573
+theta0 = 2.226
 
 [node name="Mars" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
-script = ExtResource("2_56nas")
-body = "MARS BARYCENTER"
+script = ExtResource("5_xfsep")
 GM = 42828.4
+a = 2.27941e+08
+e = 0.094
+i = 0.032
+RAAN = 0.837
+argp = 5.068
+theta0 = 5.873
 
 [node name="Jupiter" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
-script = ExtResource("2_56nas")
-body = "JUPITER BARYCENTER"
+script = ExtResource("5_xfsep")
 GM = 1.26687e+08
+a = 7.78469e+08
+e = 0.049
+i = 0.023
+RAAN = 1.77
+argp = 4.787
+theta0 = 1.518
+
+[node name="Io" type="Node3D" parent="Planets/Jupiter"]
+script = ExtResource("5_xfsep")
+GM = 5959.92
+a = 422038.0
+e = 0.005
+i = 0.039
+RAAN = 5.879
+argp = 1.58
+theta0 = 0.344
+
+[node name="Callisto" type="Node3D" parent="Planets/Jupiter"]
+script = ExtResource("5_xfsep")
+GM = 7179.28
+a = 1.88281e+06
+e = 0.007
+i = 0.027
+RAAN = 5.949
+argp = 2.557
+theta0 = 5.713
+
+[node name="Europa" type="Node3D" parent="Planets/Jupiter"]
+script = ExtResource("5_xfsep")
+GM = 3202.71
+a = 671245.0
+e = 0.009
+i = 0.046
+RAAN = 5.832
+argp = 4.693
+theta0 = 0.223
+
+[node name="Ganymede" type="Node3D" parent="Planets/Jupiter"]
+script = ExtResource("5_xfsep")
+GM = 9887.83
+a = 1.07049e+06
+e = 0.002
+i = 0.037
+RAAN = 5.817
+argp = 1.822
+theta0 = 3.006
 
 [node name="Saturn" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
-script = ExtResource("2_56nas")
-body = "SATURN BARYCENTER"
+script = ExtResource("5_xfsep")
 GM = 3.79312e+07
+a = 1.43408e+09
+e = 0.058
+i = 0.044
+RAAN = 1.96
+argp = 6.019
+theta0 = 0.417
+
+[node name="Titan" type="Node3D" parent="Planets/Saturn"]
+script = ExtResource("5_xfsep")
+GM = 8978.14
+a = 1.22197e+06
+e = 0.029
+i = 0.476
+RAAN = 2.945
+argp = 4.668
+theta0 = 1.209
 
 [node name="Uranus" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 580869, 0, 0)
-script = ExtResource("2_56nas")
-body = "URANUS BARYCENTER"
+script = ExtResource("5_xfsep")
 GM = 5.79394e+06
+a = 2.88907e+09
+e = 0.05
+i = 0.013
+RAAN = 1.299
+argp = 1.605
+theta0 = 4.848
 
 [node name="Neptune" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
-script = ExtResource("2_56nas")
-body = "NEPTUNE BARYCENTER"
+script = ExtResource("5_xfsep")
 GM = 6.83653e+06
+a = 4.51659e+09
+e = 0.013
+i = 0.031
+RAAN = 2.3
+argp = 4.893
+theta0 = 5.987
 
 [node name="Ships" type="Node3D" parent="."]
 script = ExtResource("4_sh5nh")

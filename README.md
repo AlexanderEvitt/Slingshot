@@ -4,39 +4,34 @@
 ![Logo](src/visuals/logo/patch.png)
 ![Flying Past Stars](streaks.png)
 
-Slingshot is a full-up, 6DOF astrodynamics simulation with a cool UI. Aimed at being somewhere between a video game and a display for flight operations teams, it presents a complete sandbox for spacecraft navigation and control.
+Slingshot is a 6DOF spaceflight simulator that combines futuristic high-energy fusion propulsion systems with realistic physics. The entire solar system is implemented at real scale.
 
 Demo footage: [YouTube Link](https://youtu.be/2RoTKBjrhYA?si=A5Ma15xtFgd1WDBr)
 
-![Ejecting from Earth, Looking Back](looking_back.png)
-![Planning a Luna Transfer](planning.png)
-![Burning Hard for Ejection](burning_hard.png)
-![Interplanetary Transfer](transfer.png)
-![Arrival in Luna Orbit](luna_orbit.png)
+![Entering the Jupiter System](planning.png)
+![Departing from Zephyr Station](proxops.png)
 
 
 ## Current Features
 
-- Full solar system of planets with data taken from SPICE
+- Full solar system of planets and significant moons
+- Network of space stations for docking and undocking
 - n-body physics providing a numerically-integrated trajectory (with symplectic integrators and adaptive step size control)
-- Flight instruments to allow "eyeballing" trajectories, allowing the user to get familiar with n-body motion
-- Autopilot capable of plotting "flip-and-burn" trajectories between planets
+- Guidance computer that provides autopilot functionality for interplanetary trips
 - Translation and docking simulation
-- Cool graphics that belong on the big screen in a control room
+- Cool graphics
 
-## Planned Features
+## Development Plan
 
-- More minor solar system bodies, moons, asteroids, etc
-- More autopilot algorithms to assist in trajectory creation
-- Numerical trajectory optimizaiton algorithms
-- Power and propulsion simulation
-- 2D plots to aid trajectory design
-- Visual additions - Lagrange points, manifolds, gravitational potential plots, and more
+- (CURRENT) v0.0.1: Interplanetary transport game mode - fly between stations scattered around the solar system to complete missions.
+- v0.0.2: Space combat - defend your ship from pirates and hostile adversaries as you fly around.
+- v0.0.3: Extrasolar flight - addition of other solar systems beyond Sol.
+- v0.0.4: Ship interiors - addition of ship interior.
+- v0.0.5: More pilotable ship types
 
 ## Dev Environment Setup Instructions
 
 1. Clone the repo somewhere safe
-2. Download the SPICE data required, place it at /AppData/Roaming/SPICE/ (currently only works on Windows)
 3. Download the .NET library 8.0
 4. Configure NuGet to use the local source stored in the repo at /editor/MyLocalNugetSource/
 ```

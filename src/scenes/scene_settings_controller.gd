@@ -13,7 +13,6 @@ var cam
 func _ready():
 	var spacecraft = get_node("Spacecraft")
 	spacecraft.camera_mode = camera_mode
-
 	
 	# Set which camera is active
 	var first_cam = get_node("Spacecraft/Pointer/FirstCam")

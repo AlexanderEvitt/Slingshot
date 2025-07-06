@@ -34,11 +34,10 @@ public partial class Conversions : Node
 		// Each point is now how much the craft has moved since t0 minus how much the frame has moved since t0
 		Godot.Collections.Array<Vector3> new_positions = new Godot.Collections.Array<Vector3> ( new Vector3[positions.Count] );
 		Node body_node = bodies[f];
-		planet body = (planet)body_node;
 		for (int i = 0; i < positions.Count; i++)
 		{
 			// Subtract how much the ref body moves between the start of the array and the current time step
-			new_positions[i] = positions[i] - positions[0] - body.fetch(times[i]) + body.fetch(times[0]);
+			new_positions[i] = positions[i] - positions[0] - (Vector3)body_node.Call("fetch",times[i]) + (Vector3)body_node.Call("fetch",times[0]);
 		}
 		return new_positions;
 	}
@@ -47,8 +46,7 @@ public partial class Conversions : Node
 	{
 		// Convert the start position, given in relative to the start frame, to universal position
 		Node body_node = bodies[f];
-		planet body = (planet)body_node;
-		Vector3 new_positions = position + body.fetch(t);
+		Vector3 new_positions = position + (Vector3)body_node.Call("fetch",t);
 		return new_positions;
 	}
 
@@ -56,8 +54,7 @@ public partial class Conversions : Node
 	{
 		// Convert the start position, given in relative to the start frame, to universal position
 		Node body_node = bodies[f];
-		planet body = (planet)body_node;
-		Vector3 new_positions = position - body.fetch(t);
+		Vector3 new_positions = position - (Vector3)body_node.Call("fetch",t);
 		return new_positions;
 	}
 
@@ -65,8 +62,7 @@ public partial class Conversions : Node
 	{
 		// Convert the start position, given in relative to the start frame, to universal velocity
 		Node body_node = bodies[f];
-		planet body = (planet)body_node;
-		Vector3 vel = body.fetch(1d + t) - body.fetch(t);
+		Vector3 vel = (Vector3)body_node.Call("fetch",1d+t) - (Vector3)body_node.Call("fetch",t);
 		Vector3 new_v = v + vel;
 		return new_v;
 	}
@@ -76,8 +72,7 @@ public partial class Conversions : Node
 		// Convert a universal velocity to a frame velocity
 		// Only works at initial timestep
 		Node body_node = bodies[f];
-		planet body = (planet)body_node;
-		Vector3 vel = body.fetch(t + 1d) - body.fetch(t);
+		Vector3 vel = (Vector3)body_node.Call("fetch",1d+t) - (Vector3)body_node.Call("fetch",t);
 		Vector3 new_v = v - vel;
 		return new_v;
 	}
@@ -86,8 +81,7 @@ public partial class Conversions : Node
 	{
 		// Returns position of current frame origin
 		Node frame_body = bodies[f];
-		planet body = (planet)frame_body;
-		return body.fetch(t);
+		return (Vector3)frame_body.Call("fetch", t);
 	}
 
 	public Vector3 CalcEccentricity(Vector3 r, Vector3 v, double t)
@@ -95,8 +89,7 @@ public partial class Conversions : Node
 		// Calculates the eccentricity vector
 		// Get the planet's mu
 		Node body_node = bodies[f];
-		planet body = (planet)body_node;
-		double mu = (double)body.Get("GM");
+		double mu = (double)body_node.Get("GM");
 
 		Vector3 r_frame = ToFrame(r,t);
 		Vector3 v_frame = VelToFrame(v,t);
@@ -112,8 +105,7 @@ public partial class Conversions : Node
 		// Calculates the hyperbolic excess velocity
 		// Get the planet's mu
 		Node body_node = bodies[f];
-		planet body = (planet)body_node;
-		double mu = (double)body.Get("GM");
+		double mu = (double)body_node.Get("GM");
 
 		Vector3 r_frame = ToFrame(r,t);
 		Vector3 v_frame = VelToFrame(v,t);

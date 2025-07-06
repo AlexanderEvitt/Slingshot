@@ -1,7 +1,6 @@
-[gd_scene load_steps=39 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=38 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
-[ext_resource type="Script" path="res://bodies/planet.cs" id="1_xfjlq"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
 [ext_resource type="Script" path="res://visuals/camera_controller.gd" id="2_awidn"]
 [ext_resource type="PackedScene" uid="uid://rg5pq75kxwxo" path="res://bodies/wireframe/MercuryWireframe.tscn" id="3_orujh"]
@@ -13,9 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://olsok6qpjvew" path="res://bodies/wireframe/MarsWireframe.tscn" id="7_ug63k"]
 [ext_resource type="PackedScene" uid="uid://bmc8fp2kenecv" path="res://bodies/wireframe/JupiterWireframe.tscn" id="8_hosp8"]
 [ext_resource type="PackedScene" uid="uid://bgifrw1p56y10" path="res://bodies/wireframe/SaturnWireframe.tscn" id="9_1qyms"]
+[ext_resource type="Script" path="res://bodies/body_inheritor.gd" id="9_2beyu"]
 [ext_resource type="PackedScene" uid="uid://2q27idy8fbkr" path="res://bodies/wireframe/UranusWireframe.tscn" id="10_girv0"]
 [ext_resource type="PackedScene" uid="uid://d386uc0phqab7" path="res://bodies/wireframe/NeptuneWireframe.tscn" id="11_ciut5"]
-[ext_resource type="Script" path="res://bodies/moon.gd" id="11_jnixu"]
 [ext_resource type="PackedScene" uid="uid://b5dn6bevfg722" path="res://scenes/orbit/koz.tscn" id="12_fkbho"]
 [ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="12_oiuin"]
 [ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="13_kuxx4"]
@@ -105,9 +104,8 @@ script = ExtResource("1_sj5o8")
 environment = SubResource("Environment_aovhe")
 
 [node name="Sun" type="Node3D" parent="."]
-script = ExtResource("1_xfjlq")
-body = "SUN"
-GM = 1.32712e+11
+script = ExtResource("9_2beyu")
+body_path = "Sun"
 
 [node name="SunMesh" type="MeshInstance3D" parent="Sun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -770000, 0, 0)
@@ -134,9 +132,8 @@ horizontal_alignment = 0
 
 [node name="Mercury" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
-script = ExtResource("1_xfjlq")
-body = "MERCURY"
-GM = 22032.0
+script = ExtResource("9_2beyu")
+body_path = "Mercury"
 
 [node name="MercuryPlotter" type="Node3D" parent="Mercury" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
@@ -165,9 +162,8 @@ horizontal_alignment = 0
 
 [node name="Venus" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
-script = ExtResource("1_xfjlq")
-body = "VENUS"
-GM = 324859.0
+script = ExtResource("9_2beyu")
+body_path = "Venus"
 
 [node name="VenusPlotter" type="Node3D" parent="Venus" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
@@ -196,9 +192,8 @@ horizontal_alignment = 0
 
 [node name="Earth" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 0, 0)
-script = ExtResource("1_xfjlq")
-body = "EARTH"
-GM = 398600.0
+script = ExtResource("9_2beyu")
+body_path = "Earth"
 
 [node name="EarthPlotter" type="Node3D" parent="Earth" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
@@ -228,9 +223,8 @@ horizontal_alignment = 0
 
 [node name="AsteroidStation" type="Node3D" parent="Earth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.3)
-script = ExtResource("11_jnixu")
-period = 86400.0
-SMA = 42164.0
+script = ExtResource("9_2beyu")
+body_path = "Earth/ZephyrStationMain"
 
 [node name="BodyMesh" type="MeshInstance3D" parent="Earth/AsteroidStation"]
 visibility_range_end = 1e+07
@@ -269,17 +263,16 @@ fixed_size = true
 texture = ExtResource("2_3t7g4")
 
 [node name="wiresphere" parent="Earth/AsteroidStation" instance=ExtResource("12_fkbho")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 
-[node name="Luna" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 14.9547, 12989.3)
-script = ExtResource("1_xfjlq")
-body = "MOON"
-GM = 4904.87
+[node name="Luna" type="Node3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.9547, 12989.3)
+script = ExtResource("9_2beyu")
+body_path = "Earth/Luna"
 
-[node name="LunaMesh" parent="Luna" instance=ExtResource("6_bom1w")]
+[node name="LunaMesh" parent="Earth/Luna" instance=ExtResource("6_bom1w")]
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Luna"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Earth/Luna"]
 visibility_range_end = 2000.0
 visibility_range_end_margin = 2000.0
 visibility_range_fade_mode = 1
@@ -289,14 +282,14 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Plotter" type="Node3D" parent="Luna" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Earth/Luna" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 27.3
 color = Color(1, 1, 1, 1)
 visible_distance = 2000000
-relative_to = NodePath("../../Earth")
+relative_to = NodePath("../..")
 
-[node name="Label" type="Label3D" parent="Luna"]
+[node name="Label" type="Label3D" parent="Earth/Luna"]
 visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
@@ -312,9 +305,8 @@ horizontal_alignment = 0
 
 [node name="Mars" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
-script = ExtResource("1_xfjlq")
-body = "MARS BARYCENTER"
-GM = 42828.4
+script = ExtResource("9_2beyu")
+body_path = "Mars"
 
 [node name="MarsPlotter" type="Node3D" parent="Mars" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
@@ -343,9 +335,8 @@ horizontal_alignment = 0
 
 [node name="Jupiter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
-script = ExtResource("1_xfjlq")
-body = "JUPITER BARYCENTER"
-GM = 1.26687e+08
+script = ExtResource("9_2beyu")
+body_path = "Jupiter"
 
 [node name="JupiterPlotter" type="Node3D" parent="Jupiter" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
@@ -374,9 +365,8 @@ horizontal_alignment = 0
 
 [node name="Io" type="Node3D" parent="Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.6)
-script = ExtResource("11_jnixu")
-period = 152854.0
-SMA = 421700.0
+script = ExtResource("9_2beyu")
+body_path = "Jupiter/Io"
 
 [node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Io"]
 visibility_range_end = 1e+07
@@ -416,10 +406,8 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Callisto" type="Node3D" parent="Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28387.6, 0, 86043.4)
-script = ExtResource("11_jnixu")
-period = 1.44193e+06
-true_anomaly = 1.0
-SMA = 1.8827e+06
+script = ExtResource("9_2beyu")
+body_path = "Jupiter/Callisto"
 
 [node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Callisto"]
 visibility_range_end = 1e+07
@@ -459,10 +447,8 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Europa" type="Node3D" parent="Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25504.2, 0, 90486.3)
-script = ExtResource("11_jnixu")
-period = 306806.0
-true_anomaly = 4.0
-SMA = 670900.0
+script = ExtResource("9_2beyu")
+body_path = "Jupiter/Europa"
 
 [node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Europa"]
 visibility_range_end = 1e+07
@@ -502,10 +488,8 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Ganymede" type="Node3D" parent="Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26531.7, 0, 82270.3)
-script = ExtResource("11_jnixu")
-period = 618106.0
-true_anomaly = 3.0
-SMA = 1.0704e+06
+script = ExtResource("9_2beyu")
+body_path = "Jupiter/Ganymede"
 
 [node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Ganymede"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70714, 0, 0)
@@ -546,9 +530,8 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Saturn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
-script = ExtResource("1_xfjlq")
-body = "SATURN BARYCENTER"
-GM = 3.79312e+07
+script = ExtResource("9_2beyu")
+body_path = "Saturn"
 
 [node name="SaturnPlotter" type="Node3D" parent="Saturn" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
@@ -577,10 +560,8 @@ horizontal_alignment = 0
 
 [node name="Titan" type="Node3D" parent="Saturn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.393, 0, 33535.6)
-script = ExtResource("11_jnixu")
-period = 1.37765e+06
-true_anomaly = 0.5
-SMA = 1.22187e+06
+script = ExtResource("9_2beyu")
+body_path = "Saturn/Titan"
 
 [node name="TitanMesh" type="MeshInstance3D" parent="Saturn/Titan"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
@@ -621,9 +602,8 @@ texture = ExtResource("2_3t7g4")
 
 [node name="Uranus" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 580869, 0, 0)
-script = ExtResource("1_xfjlq")
-body = "URANUS BARYCENTER"
-GM = 5.79394e+06
+script = ExtResource("9_2beyu")
+body_path = "Uranus"
 
 [node name="UranusPlotter" type="Node3D" parent="Uranus" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
@@ -652,9 +632,8 @@ horizontal_alignment = 0
 
 [node name="Neptune" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
-script = ExtResource("1_xfjlq")
-body = "NEPTUNE BARYCENTER"
-GM = 6.83653e+06
+script = ExtResource("9_2beyu")
+body_path = "Neptune"
 
 [node name="NeptunePlotter" type="Node3D" parent="Neptune" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")

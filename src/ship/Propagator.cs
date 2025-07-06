@@ -72,10 +72,9 @@ public partial class Propagator : Node3D
 		Vector3 a = new Vector3(0d,0d,0d);
 		foreach (Node body in bodies)
 		{
-			planet p = (planet)body;
-			Vector3 r_to = r - p.fetch(t);
+			Vector3 r_to = r - (Vector3)body.Call("fetch",t);
 			double sqrDist = r_to.LengthSquared();
-            a = a - r_to.Normalized() * (p.GM / sqrDist);
+            a = a - r_to.Normalized() * ((float)body.Get("GM") / sqrDist);
 		}
 		return a;
 	}
