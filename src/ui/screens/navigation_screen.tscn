@@ -235,7 +235,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="HUD1" type="Panel" parent="Screen/HUDs"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -287,8 +286,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
+size = Vector2i(1452, 839)
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_xnid0")]
 camera_mode = true
@@ -401,7 +399,6 @@ stretch = true
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(2, 2)
-render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD2/Shifter/HBoxContainer/MarginContainer2/Panel/SubViewportContainer/SubViewport" instance=ExtResource("4_xnid0")]
 
@@ -456,7 +453,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD3/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1452, 839)
 render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD3/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("12_4hvmx")]
@@ -489,6 +486,7 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="HUD5" type="Panel" parent="Screen/HUDs"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -912,7 +910,7 @@ stretch = true
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(624, 523)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("12_4hvmx")]
 

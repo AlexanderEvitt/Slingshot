@@ -37,7 +37,7 @@ shape = SubResource("BoxShape3D_fdpi8")
 
 [node name="Propagator" type="Node3D" parent="."]
 script = ExtResource("4_7neml")
-n = 400
+n = 200
 
 [node name="PropulsionCalculator" type="Node3D" parent="."]
 script = ExtResource("5_n5nff")

@@ -25,6 +25,10 @@ var c3: float
 var c4: float
 var c5: float
 var c6: float
+var Ri: Basis
+var Rom: Basis
+var Rcombine: Basis
+var Rthw: Basis
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,9 +47,17 @@ func _ready() -> void:
 	c4 = ((103.0/96.0)*pow(e,4.0) - (451.0/480.0)*pow(e,6.0))
 	c5 = (1097.0/960.0)*pow(e,5.0)
 	c6 = (1223.0/960.0)*pow(e,6.0)
+	
+	# Rotation matrices
+	Ri = Basis()
+	Ri = Ri.rotated(Vector3(1,0,0),i)
+	Rom = Basis()
+	Rom = Rom.rotated(Vector3(0,0,1),RAAN)
+	
+	Rcombine = Rom*Ri
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _physics_process(_delta):
 	position = calculate_self_position(SystemTime.t)
 
 func fetch(time):
@@ -54,7 +66,6 @@ func fetch(time):
 	
 func calculate_self_position(time):
 	# Calculate mean anomaly at time
-
 	M = 2*PI*(time/T)
 	
 	# Approximate true anomaly at time
@@ -67,14 +78,10 @@ func calculate_self_position(time):
 	#var vt = sqrt_mu_over_p*(1 + e*cos(theta))
 	
 	# Transform into a vector form using rotations
-	var Rthw = Basis()
-	Rthw = Rthw.rotated(Vector3(0,0,1),theta+argp)
-	var Ri = Basis()
-	Ri = Ri.rotated(Vector3(1,0,0),i)
-	var Rom = Basis()
-	Rom = Rom.rotated(Vector3(0,0,1),RAAN)
+	# r vector rotated about z by theta + argp
+	var rthw = r*Vector3(cos(theta + argp),sin(theta+argp),0)
 	
-	# Return position Rom*Ri*Rthw*Vector3(r,0,0)
-	# For some reason the precision depends on the theta0? 0.3 is unstable, 0.0 is stable
-	var pos = Rom*Ri*Rthw*Vector3(r,0,0)
+	# Return position vector
+	# 3-1-3 rotation equivalent to Rom*Ri*Rthw*Vector3(r,0,0)
+	var pos = Rcombine*rthw
 	return pos
