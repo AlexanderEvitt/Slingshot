@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://djhub5hfmxtif"]
+
+[ext_resource type="PackedScene" uid="uid://draqrihfwqq2y" path="res://scenes/orbit/koz/wire_cylinder.glb" id="1_4x83k"]
+[ext_resource type="Material" uid="uid://b5nk1c0nysggi" path="res://scenes/orbit/koz/koz_wire.tres" id="2_s52ug"]
+[ext_resource type="Material" uid="uid://d282y3omxhmqq" path="res://scenes/orbit/koz/koz_main.tres" id="3_ke28u"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wav4b"]
+top_radius = 1.0
+bottom_radius = 1.0
+
+[node name="wire_cylinder" instance=ExtResource("1_4x83k")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_s52ug")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("CylinderMesh_wav4b")
+surface_material_override/0 = ExtResource("3_ke28u")

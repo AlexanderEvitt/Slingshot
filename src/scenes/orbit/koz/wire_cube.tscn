@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://btpxws4tx476f"]
+
+[ext_resource type="PackedScene" uid="uid://dvx4bsyvw5le0" path="res://scenes/orbit/koz/wire_cube.glb" id="1_njs05"]
+[ext_resource type="Material" uid="uid://b5nk1c0nysggi" path="res://scenes/orbit/koz/koz_wire.tres" id="2_iikrw"]
+[ext_resource type="Material" uid="uid://d282y3omxhmqq" path="res://scenes/orbit/koz/koz_main.tres" id="3_5cov2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tse3b"]
+size = Vector3(2, 2, 2)
+
+[node name="wire_cube" instance=ExtResource("1_njs05")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_iikrw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("BoxMesh_tse3b")
+surface_material_override/0 = ExtResource("3_5cov2")

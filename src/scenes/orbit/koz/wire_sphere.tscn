@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b51mp318qc6wr"]
+
+[ext_resource type="PackedScene" uid="uid://dvl7ema6g3r1t" path="res://scenes/orbit/koz/wire_sphere.glb" id="1_qvq0p"]
+[ext_resource type="Material" uid="uid://b5nk1c0nysggi" path="res://scenes/orbit/koz/koz_wire.tres" id="2_u8tqd"]
+[ext_resource type="Material" uid="uid://d282y3omxhmqq" path="res://scenes/orbit/koz/koz_main.tres" id="3_3xflp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kwxim"]
+radius = 1.0
+height = 2.0
+
+[node name="wire_sphere" instance=ExtResource("1_qvq0p")]
+
+[node name="Sphere" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_u8tqd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("SphereMesh_kwxim")
+surface_material_override/0 = ExtResource("3_3xflp")

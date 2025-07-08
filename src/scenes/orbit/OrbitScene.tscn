@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=40 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -14,12 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://bgifrw1p56y10" path="res://bodies/wireframe/SaturnWireframe.tscn" id="9_1qyms"]
 [ext_resource type="Script" path="res://bodies/body_inheritor.gd" id="9_2beyu"]
 [ext_resource type="PackedScene" uid="uid://2q27idy8fbkr" path="res://bodies/wireframe/UranusWireframe.tscn" id="10_girv0"]
+[ext_resource type="PackedScene" uid="uid://b51mp318qc6wr" path="res://scenes/orbit/koz/wire_sphere.tscn" id="11_8re0r"]
 [ext_resource type="PackedScene" uid="uid://d386uc0phqab7" path="res://bodies/wireframe/NeptuneWireframe.tscn" id="11_ciut5"]
-[ext_resource type="PackedScene" uid="uid://b5dn6bevfg722" path="res://scenes/orbit/koz.tscn" id="12_fkbho"]
+[ext_resource type="PackedScene" uid="uid://djhub5hfmxtif" path="res://scenes/orbit/koz/wire_cylinder.tscn" id="12_5etm5"]
 [ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="12_oiuin"]
 [ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="13_kuxx4"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="13_xts1l"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="14_g31x3"]
+[ext_resource type="PackedScene" uid="uid://btpxws4tx476f" path="res://scenes/orbit/koz/wire_cube.tscn" id="14_k6kd7"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="18_lxife"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="22_66qh8"]
 [ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="23_vt6nb"]
@@ -262,8 +264,23 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="wiresphere" parent="Earth/AsteroidStation" instance=ExtResource("12_fkbho")]
-transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+[node name="KOZ" type="Node3D" parent="Earth/AsteroidStation"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+
+[node name="wire_sphere" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("11_8re0r")]
+transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 29.32, 0, 0, 0)
+
+[node name="wire_cylinder" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
+
+[node name="wire_cylinder2" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
+
+[node name="wire_cylinder3" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
+
+[node name="wire_cube" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("14_k6kd7")]
+transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
 [node name="Luna" type="Node3D" parent="Earth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.9547, 12989.3)
