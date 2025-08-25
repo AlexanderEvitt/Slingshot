@@ -5,7 +5,8 @@ var cam
 var prev_basis: Basis  # Store previous camera basis for rotation calculation
 var damped_angle = 0
 var damped_axis = Vector3(0,0,0)
-var w = 0.9
+var w = 0.9 # blend to use for damping
+var s = 0.1 # scale of angle displacements
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,7 +34,7 @@ func _process(_delta: float) -> void:
 
 	# Send values to shader
 	mat.set_shader_parameter("rotation_axis", damped_axis)
-	mat.set_shader_parameter("rotation_angle", damped_angle)
+	mat.set_shader_parameter("rotation_angle", s*damped_angle)
 	mat.set_shader_parameter("brightness", bright(damped_angle))
 
 	# Update previous basis for next frame
