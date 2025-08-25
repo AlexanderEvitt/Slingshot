@@ -35,9 +35,9 @@ vec3 lensflare(vec2 uv,vec2 pos, vec2 texResolution)
 
 	float n = noise_vec2(vec2(ang*16.0,dist*32.0), texResolution);
 
-	// Do not need an artificial sun
-	//float f0 = 1.0/(length(uv-pos)*16.0+1.0);
-	//f0 = f0 + f0*(sin(noise_float(sin(ang*2.+pos.x)*4.0 - cos(ang*3.+pos.y), texResolution)*16.)*.1 + dist*.1 + .8);
+	// Artificial sun
+	float f0 = 0.4*1.0/(length(uv-pos)*16.0+1.0);
+	f0 = f0 + f0*(sin(noise_float(sin(ang*2.+pos.x)*4.0 - cos(ang*3.+pos.y), texResolution)*16.)*.1 + dist*.1 + .8);
 
 	float f1 = max(0.01-pow(length(uv+1.2*pos),1.9),.0)*7.0;
 
@@ -69,7 +69,7 @@ vec3 lensflare(vec2 uv,vec2 pos, vec2 texResolution)
 	c = c*1.3 - vec3(length(uvd)*.05);
 
 	// Do not need an artificial sun
-	//c+=vec3(f0);
+	c+=vec3(f0);
 
 	return c;
 }
@@ -86,7 +86,7 @@ const mat2 rot2 = mat2(vec2(0.5, R32), vec2(-R32, 0.5));
 
 float spike(vec2 d) {
     vec2 s = abs(d) * vec2(8,1);
-    return 16.*(dot(s,s) + sqrt(s.x) + s.y);
+    return 64.*(dot(s,s) + sqrt(s.x) + s.y);
 }
 float spikes(vec2 p) {
     float d = length(p);

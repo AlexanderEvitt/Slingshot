@@ -78,6 +78,7 @@ process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("3_5edpo")
 a = 42164.0
+theta0 = 3.142
 
 [node name="DockCenter" type="Node3D" parent="Planets/Earth/ZephyrStationMain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
