@@ -9,9 +9,6 @@
 offset_right = 424.0
 offset_bottom = 419.0
 size_flags_vertical = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
 
 [node name="Selection" type="MarginContainer" parent="."]
 layout_mode = 2
