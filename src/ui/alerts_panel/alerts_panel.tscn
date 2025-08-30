@@ -1,16 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctjdd1ssvl2eb"]
+[gd_scene load_steps=5 format=3 uid="uid://ctjdd1ssvl2eb"]
 
-[ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="1_dlsmy"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="2_25kul"]
 [ext_resource type="Script" path="res://ui/alert_handler.gd" id="3_s8et8"]
+[ext_resource type="Script" path="res://ui/autopilot_handler.gd" id="4_13g6e"]
 [ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="4_nx2pf"]
-[ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="5_hfg5n"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1unmv"]
-bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
-texture = ExtResource("5_hfg5n")
 
 [node name="Alerts" type="MarginContainer"]
 offset_right = 424.0
@@ -20,81 +13,58 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Selection" type="MarginContainer" parent="."]
 layout_mode = 2
-theme = ExtResource("1_dlsmy")
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Selection"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="Selection/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("1_dlsmy")
+theme = ExtResource("2_25kul")
 text = "ALERTS"
+horizontal_alignment = 1
 
-[node name="Panel" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="MainPanel" type="Panel" parent="Selection/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_25kul")
-theme_override_styles/panel = SubResource("StyleBoxFlat_1unmv")
+script = ExtResource("4_13g6e")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Panel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Selection/VBoxContainer/MainPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/MarginContainer"]
-layout_mode = 2
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Selection/VBoxContainer/MainPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_s8et8")
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "AVI_START: Avionics startup complete."
 label_settings = ExtResource("4_nx2pf")
 autowrap_mode = 2
-
-[node name="Spacer" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="TriangleCutout" type="Panel" parent="Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")

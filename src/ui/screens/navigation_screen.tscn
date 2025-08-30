@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://cc5h5k3lje0ma"]
+[gd_scene load_steps=32 format=4 uid="uid://cc5h5k3lje0ma"]
 
 [ext_resource type="Script" path="res://ui/panel_switch.gd" id="1_ukvq0"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_os1l8"]
@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="18_2ejbn"]
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="19_ccqhq"]
 [ext_resource type="Script" path="res://ui/data_grid.gd" id="20_1y7br"]
-[ext_resource type="ButtonGroup" uid="uid://dfe3ephasfx3r" path="res://ui/screens/navigation_button_group.tres" id="20_sd8s0"]
 [ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/alerts_panel/alerts_panel.tscn" id="22_d7aba"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="23_agbb4"]
 
@@ -211,9 +210,6 @@ bg_color = Color(0.501961, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8abg"]
 bg_color = Color(0.501961, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d77aa"]
-bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
-
 [node name="NavigationScreen" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -222,12 +218,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_os1l8")
 
-[node name="Screen" type="VBoxContainer" parent="." node_paths=PackedStringArray("buttons_parent", "panels_parent")]
+[node name="Screen" type="VBoxContainer" parent="." node_paths=PackedStringArray("panels_parent")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_ukvq0")
 smooth = true
-buttons_parent = NodePath("ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder")
 panels_parent = NodePath("HUDs")
 
 [node name="HUDs" type="VBoxContainer" parent="Screen"]
@@ -235,6 +230,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="HUD1" type="Panel" parent="Screen/HUDs"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -286,7 +282,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1452, 839)
+size = Vector2i(1452, 434)
+render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD1/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_xnid0")]
 camera_mode = true
@@ -399,6 +396,7 @@ stretch = true
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(2, 2)
+render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD2/Shifter/HBoxContainer/MarginContainer2/Panel/SubViewportContainer/SubViewport" instance=ExtResource("4_xnid0")]
 
@@ -453,7 +451,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD3/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(1452, 839)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD3/Shifter/HBoxContainer/MarginCam/Panel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("12_4hvmx")]
@@ -486,7 +484,6 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="HUD5" type="Panel" parent="Screen/HUDs"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -909,8 +906,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
-size = Vector2i(624, 523)
-render_target_update_mode = 0
+size = Vector2i(624, 621)
+render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="Screen/HUDs/HUD5/Shifter/Planner/VBoxContainer/ButtonPanel/HBoxContainer/MapPanel/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("12_4hvmx")]
 
@@ -1431,193 +1428,6 @@ text = "MISSION: TRANSPORT"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
-
-[node name="ModeSelectorPanel" type="Panel" parent="Screen"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.14
-theme_override_styles/panel = SubResource("StyleBoxFlat_d77aa")
-
-[node name="MarginContainer" type="MarginContainer" parent="Screen/ModeSelectorPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 16
-
-[node name="ButtonPanel" type="Panel" parent="Screen/ModeSelectorPanel/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ButtonHolder" type="GridContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 4
-
-[node name="ModeButton1" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton1"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-toggle_mode = true
-button_pressed = true
-button_group = ExtResource("20_sd8s0")
-text = "ORBITAL"
-
-[node name="ModeButton2" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton2"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-toggle_mode = true
-button_group = ExtResource("20_sd8s0")
-text = "ATTITUDE"
-
-[node name="ModeButton3" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton3"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-toggle_mode = true
-button_group = ExtResource("20_sd8s0")
-text = "SITUATION"
-
-[node name="ModeButton4" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton4"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-toggle_mode = true
-button_group = ExtResource("20_sd8s0")
-text = "DOCKING"
-
-[node name="ModeButton5" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
-
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton5"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-toggle_mode = true
-button_group = ExtResource("20_sd8s0")
-text = "CONTROL"
-
-[node name="ModeButton6" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
-
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton6"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-toggle_mode = true
-button_group = ExtResource("20_sd8s0")
-text = "EXTERNAL"
-
-[node name="ModeButton7" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
-
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton7"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-toggle_mode = true
-button_group = ExtResource("20_sd8s0")
-text = "ASTROGATION"
-
-[node name="ModeButton8" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton8"]
-layout_mode = 2
-theme = ExtResource("9_37stn")
-toggle_mode = true
-button_group = ExtResource("20_sd8s0")
-text = "MISSION"
-
-[node name="MarginContainer" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_right = 40
-
-[node name="Label" type="Label" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("9_37stn")
-text = "MODES"
-
-[node name="TriangleCutout" type="Panel" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
 
 [node name="Sidebar" type="VBoxContainer" parent="."]
 layout_mode = 2

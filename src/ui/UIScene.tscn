@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c6ewf1e7q725g" path="res://ui/screens/flight_screen.tscn" id="4_l1uqb"]
 [ext_resource type="PackedScene" uid="uid://dpcripo2vb6ip" path="res://ui/screens/engineering/engineering_screen.tscn" id="5_i05jk"]
 [ext_resource type="PackedScene" uid="uid://b07e4fcvvtdqq" path="res://ui/screens/external_screen.tscn" id="6_b2rax"]
-[ext_resource type="PackedScene" uid="uid://cc5h5k3lje0ma" path="res://ui/screens/navigation_screen.tscn" id="7_c6axk"]
+[ext_resource type="PackedScene" uid="uid://d06hakxi1tnc8" path="res://ui/screens/new_navigation_screen.tscn" id="7_j2pmq"]
 [ext_resource type="PackedScene" uid="uid://b0akt2w44i68p" path="res://ui/screens/utility_screen.tscn" id="8_76tcd"]
 [ext_resource type="PackedScene" uid="uid://cupcgndqidmw2" path="res://ui/screens/cinematic_screen.tscn" id="9_xulks"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="14_k3rsk"]
@@ -45,7 +45,7 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NavigationScreen" parent="." instance=ExtResource("7_c6axk")]
+[node name="NavigationScreen" parent="." instance=ExtResource("7_j2pmq")]
 visible = false
 layout_mode = 1
 

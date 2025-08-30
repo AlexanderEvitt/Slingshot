@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=41 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -46,6 +46,9 @@ shader_parameter/colored = Color(1, 0.6, 0, 1)
 shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 shader_parameter/textured = ExtResource("13_kuxx4")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xs2mn"]
+radius = 6371.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_385ak"]
 radius = 1822.0
@@ -319,6 +322,11 @@ font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
+
+[node name="ClickDetector" type="Area3D" parent="Earth"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Earth/ClickDetector"]
+shape = SubResource("SphereShape3D_xs2mn")
 
 [node name="Mars" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)

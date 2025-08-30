@@ -1,0 +1,633 @@
+[gd_scene load_steps=15 format=3 uid="uid://d06hakxi1tnc8"]
+
+[ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_4aitx"]
+[ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="2_hujfr"]
+[ext_resource type="Script" path="res://ui/data_grid.gd" id="3_2dm7q"]
+[ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="4_pj4ge"]
+[ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/alerts_panel/alerts_panel.tscn" id="5_llhfu"]
+[ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="6_aufww"]
+[ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="7_u6w85"]
+[ext_resource type="PackedScene" uid="uid://1sgfn61bmfrt" path="res://scenes/orbit/OrbitScene.tscn" id="8_pvmy7"]
+[ext_resource type="Script" path="res://ui/autopilot_handler.gd" id="9_hrd7p"]
+[ext_resource type="PackedScene" uid="uid://w0adn324ymo3" path="res://ui/widgets/light_button/light_button.tscn" id="10_6k86d"]
+[ext_resource type="ButtonGroup" uid="uid://444nnqo6ich8" path="res://ui/attitude_button_group.tres" id="11_eaxst"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5raml"]
+texture = ExtResource("4_pj4ge")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8cm7d"]
+bg_color = Color(0.501961, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_72qjf"]
+bg_color = Color(0.501961, 0, 0, 1)
+
+[node name="NavigationScreen" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4aitx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftSidebar" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Sidepanel1" type="MarginContainer" parent="HBoxContainer/LeftSidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="Panel" type="Panel" parent="HBoxContainer/LeftSidebar/Sidepanel1"]
+layout_mode = 2
+theme = ExtResource("2_hujfr")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_hujfr")
+text = "STATE"
+
+[node name="DataGrid" type="GridContainer" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+script = ExtResource("3_2dm7q")
+
+[node name="Title1" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hujfr")
+text = "REF"
+
+[node name="Data1" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Earth"
+horizontal_alignment = 2
+
+[node name="Title2" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hujfr")
+text = "ALT"
+
+[node name="Data2" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1,475"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Title3" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hujfr")
+text = "VEL"
+
+[node name="Data3" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "7.768"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Title4" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hujfr")
+text = "ECC"
+
+[node name="Data4" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.324"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Title5" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_hujfr")
+text = "STP"
+
+[node name="Data5" type="Label" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.324"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="TriangleCutout" type="Panel" parent="HBoxContainer/LeftSidebar/Sidepanel1/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5raml")
+
+[node name="Alerts" parent="HBoxContainer/LeftSidebar" instance=ExtResource("5_llhfu")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+
+[node name="Spacer" type="Panel" parent="HBoxContainer/LeftSidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.49
+theme = ExtResource("6_aufww")
+
+[node name="CenterBar" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Map" type="Panel" parent="HBoxContainer/CenterBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("7_u6w85")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterBar/Map"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/CenterBar/Map/MarginContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/CenterBar/Map/MarginContainer/SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(1343, 819)
+render_target_update_mode = 4
+
+[node name="OrbitRoot" parent="HBoxContainer/CenterBar/Map/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("8_pvmy7")]
+camera_mode = true
+planet_orbits = true
+zoomable = true
+
+[node name="Autopilot" type="MarginContainer" parent="HBoxContainer/CenterBar"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterBar/Autopilot"]
+layout_mode = 2
+
+[node name="Titles" type="HBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/Titles"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("7_u6w85")
+text = "ATTITUDE"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/Titles"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer3"]
+layout_mode = 2
+theme = ExtResource("7_u6w85")
+text = "NAVIGATION"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/Titles"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("7_u6w85")
+text = "AUTOPILOT"
+horizontal_alignment = 1
+
+[node name="MainPanel" type="Panel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("7_u6w85")
+script = ExtResource("9_hrd7p")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="AttitudePanel" type="Panel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme = ExtResource("7_u6w85")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelContainer" type="HBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FrameLabel" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/FrameLabel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "TARGET"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+layout_mode = 2
+text = "EARTH"
+horizontal_alignment = 1
+
+[node name="GainLabel" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/GainLabel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "GAIN"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
+layout_mode = 2
+text = "112%"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="LightButtonPanel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer" groups=["Attitude Modes"] instance=ExtResource("10_6k86d")]
+layout_mode = 2
+label_text = "HDG"
+button_group = ExtResource("11_eaxst")
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="LightButtonPanel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer2" groups=["Attitude Modes"] instance=ExtResource("10_6k86d")]
+layout_mode = 2
+label_text = "CRS"
+button_group = ExtResource("11_eaxst")
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="LightButtonPanel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer3" groups=["Attitude Modes"] instance=ExtResource("10_6k86d")]
+layout_mode = 2
+label_text = "TRG"
+button_group = ExtResource("11_eaxst")
+
+[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="LightButtonPanel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel/VBoxContainer/ButtonContainer/MarginContainer4" groups=["Attitude Modes"] instance=ExtResource("10_6k86d")]
+layout_mode = 2
+label_text = "NRM"
+button_group = ExtResource("11_eaxst")
+
+[node name="AttitudePanel2" type="Panel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+theme = ExtResource("7_u6w85")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="LightButtonPanel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer" groups=["Autopilot Keys"] instance=ExtResource("10_6k86d")]
+layout_mode = 2
+label_text = "INV"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="LightButtonPanel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2" groups=["Autopilot Keys"] instance=ExtResource("10_6k86d")]
+layout_mode = 2
+label_text = "STAB"
+
+[node name="NavPanel" type="Panel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("7_u6w85")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_8cm7d")
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "IDLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer" groups=["Autopilot Keys"]]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/NavPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+button_group = ExtResource("11_eaxst")
+text = "NAV"
+
+[node name="AutoPanel" type="Panel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("7_u6w85")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_72qjf")
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "IDLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer" groups=["Autopilot Keys"]]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBoxContainer/CenterBar/Autopilot/VBoxContainer/MainPanel/HBoxContainer2/AutoPanel/VBoxContainer/ButtonContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+text = "AUTO"
+
+[node name="RightSidebar" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Waypoints" type="MarginContainer" parent="HBoxContainer/RightSidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightSidebar/Waypoints"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer/RightSidebar/Waypoints/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_u6w85")
+text = "WAYPOINTS"
+horizontal_alignment = 1
+
+[node name="MainPanel" type="Panel" parent="HBoxContainer/RightSidebar/Waypoints/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("7_u6w85")
+script = ExtResource("9_hrd7p")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/RightSidebar/Waypoints/VBoxContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Selection" type="MarginContainer" parent="HBoxContainer/RightSidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightSidebar/Selection"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer/RightSidebar/Selection/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_u6w85")
+text = "SELECTION INFO"
+horizontal_alignment = 1
+
+[node name="MainPanel" type="Panel" parent="HBoxContainer/RightSidebar/Selection/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("7_u6w85")
+script = ExtResource("9_hrd7p")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/RightSidebar/Selection/VBoxContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
