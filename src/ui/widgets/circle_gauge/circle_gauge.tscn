@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcaj67ttyd84r"]
+[gd_scene load_steps=4 format=3 uid="uid://bcaj67ttyd84r"]
 
 [ext_resource type="Texture2D" uid="uid://c8hxr1i8ii10u" path="res://ui/widgets/circle_gauge/circle_gauge_back.png" id="1_vn35s"]
 [ext_resource type="Texture2D" uid="uid://br8c405n2b38" path="res://ui/widgets/circle_gauge/circle_bar.png" id="2_vmy1o"]
+[ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="3_pmqod"]
 
 [node name="Gauge1" type="CenterContainer"]
 size_flags_horizontal = 3
@@ -25,8 +26,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 16
 text = "nHeMP"
+label_settings = ExtResource("3_pmqod")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -41,4 +43,5 @@ offset_right = 10.0
 offset_bottom = 33.0
 grow_horizontal = 0
 text = "1250"
+label_settings = ExtResource("3_pmqod")
 vertical_alignment = 1

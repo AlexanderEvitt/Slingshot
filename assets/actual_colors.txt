@@ -1,7 +1,10 @@
 Colors: (out of 255)
+bright = 
 middle = RGB(30,30,40)
 dark = RGB(19,19,25)
 
 guidance = RGB(141,0,141)
-CRT_yellow = RGB(255,176,0)
+CRT_yellow (caution) = RGB(255,176,0)
 CRT_green = RGB(51,255,51)
+warning = RGB(255,0,0)
+

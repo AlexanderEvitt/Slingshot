@@ -19,10 +19,6 @@ func _ready():
 	for i in keys:
 		if i.get_node("Button").text != "NAV": # nav is already connected as a mode
 			i.get_node("Button").button_up.connect(set_modes)
-		
-	# Get status boxes
-	autopilot_status_box = get_node("HBoxContainer2/AutoPanel/VBoxContainer/MarginContainer/Panel")
-	navigation_status_box = get_node("HBoxContainer2/NavPanel/VBoxContainer/MarginContainer/Panel")
 	
 	ShipData.player_ship.auto_disc.connect(autopilot_disconnect)
 	ShipData.player_ship.nav_disc.connect(navigation_disconnect)
@@ -46,30 +42,6 @@ func set_modes():
 				ShipData.player_ship.nav_flag = i.get_node("Button").button_pressed
 			"AUTO":
 				ShipData.player_ship.autopilot_flag = i.get_node("Button").button_pressed
-				
-				
-	# Set status boxes
-	var new_style = StyleBoxFlat.new()
-	if ShipData.player_ship.autopilot_flag:
-		# Set the status box to green
-		new_style.bg_color = Color8(51, 255, 51, 255)
-		autopilot_status_box.add_theme_stylebox_override("panel",new_style)
-		autopilot_status_box.get_node("Label").text = "ENGAGED"
-	else:
-		new_style.bg_color = Color8(128, 0, 0, 255)
-		autopilot_status_box.add_theme_stylebox_override("panel",new_style)
-		autopilot_status_box.get_node("Label").text = "IDLE"
-		
-	new_style = StyleBoxFlat.new()
-	if ShipData.player_ship.nav_flag:
-		# Set the status box to green
-		new_style.bg_color = Color8(51, 255, 51, 255)
-		navigation_status_box.add_theme_stylebox_override("panel",new_style)
-		navigation_status_box.get_node("Label").text = "ENGAGED"
-	else:
-		new_style.bg_color = Color8(128, 0, 0, 255)
-		navigation_status_box.add_theme_stylebox_override("panel",new_style)
-		navigation_status_box.get_node("Label").text = "IDLE"
 
 func autopilot_disconnect():
 	for i in keys:
