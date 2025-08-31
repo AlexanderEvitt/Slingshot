@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d06hakxi1tnc8"]
+[gd_scene load_steps=20 format=3 uid="uid://d06hakxi1tnc8"]
 
 [ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_oebc5"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="2_e80r5"]
@@ -10,12 +10,17 @@
 [ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="7_quxj8"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="8_kc5ob"]
 [ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="9_5oiv6"]
+[ext_resource type="Texture2D" uid="uid://cnvtq4stuilwc" path="res://ui/widgets/slider/slider_bar.png" id="9_66qcq"]
+[ext_resource type="Texture2D" uid="uid://bntgf7isxk720" path="res://ui/widgets/slider/carrot.png" id="10_6uvsr"]
 [ext_resource type="PackedScene" uid="uid://1sgfn61bmfrt" path="res://scenes/orbit/OrbitScene.tscn" id="10_n4sgr"]
 [ext_resource type="Script" path="res://ui/autopilot_handler.gd" id="11_am0j0"]
 [ext_resource type="PackedScene" uid="uid://w0adn324ymo3" path="res://ui/widgets/light_button/light_button.tscn" id="12_poj7e"]
 [ext_resource type="ButtonGroup" uid="uid://444nnqo6ich8" path="res://ui/attitude_button_group.tres" id="13_4xkmw"]
 [ext_resource type="Texture2D" uid="uid://d3kc3y6ffgu2" path="res://ui/widgets/bar/carat.png" id="15_352fx"]
 [ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/alerts_panel/alerts_panel.tscn" id="16_jw1r5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45e6v"]
+bg_color = Color(0.166667, 0.5, 0, 1)
 
 [node name="NavigationScreen" type="Panel"]
 anchors_preset = 15
@@ -149,72 +154,261 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="Gauge1" parent="VBoxContainer/MainSection/LeftSidebar" instance=ExtResource("4_3ikq8")]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/LeftSidebar"]
 layout_mode = 2
-script = ExtResource("5_cykad")
-label_text = "N1"
-
-[node name="Gauge2" parent="VBoxContainer/MainSection/LeftSidebar" instance=ExtResource("4_3ikq8")]
-layout_mode = 2
-script = ExtResource("5_cykad")
-label_text = "G"
-
-[node name="ProgressBar" type="TextureProgressBar" parent="VBoxContainer/MainSection/LeftSidebar"]
-layout_mode = 2
-
-[node name="State" type="MarginContainer" parent="VBoxContainer/MainSection/LeftSidebar"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
+
+[node name="GGauge" parent="VBoxContainer/MainSection/LeftSidebar/MarginContainer" instance=ExtResource("4_3ikq8")]
+layout_mode = 2
+script = ExtResource("5_cykad")
+label_text = "ACC"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MainSection/LeftSidebar"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GGauge" parent="VBoxContainer/MainSection/LeftSidebar/MarginContainer2" instance=ExtResource("4_3ikq8")]
+layout_mode = 2
+script = ExtResource("5_cykad")
+label_text = "RP"
+
+[node name="PumpSlider" type="VBoxContainer" parent="VBoxContainer/MainSection/LeftSidebar"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MainSection/LeftSidebar/PumpSlider"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "PUMP SPEED"
+label_settings = ExtResource("7_quxj8")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/LeftSidebar/PumpSlider"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = -20
 theme_override_constants/margin_right = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainSection/LeftSidebar/State"]
+[node name="SliderBar" type="NinePatchRect" parent="VBoxContainer/MainSection/LeftSidebar/PumpSlider/MarginContainer"]
+z_index = 1
+texture_filter = 3
 layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("9_66qcq")
+patch_margin_left = 4
+patch_margin_top = 64
+patch_margin_right = 4
 
-[node name="Title" type="Label" parent="VBoxContainer/MainSection/LeftSidebar/State/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_e80r5")
-text = "STATE"
-horizontal_alignment = 1
-
-[node name="Panel" type="Panel" parent="VBoxContainer/MainSection/LeftSidebar/State/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_e80r5")
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/LeftSidebar/State/VBoxContainer/Panel"]
+[node name="GreenSection" type="Panel" parent="VBoxContainer/MainSection/LeftSidebar/PumpSlider/MarginContainer/SliderBar"]
+z_index = -1
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.5
+anchor_right = 0.8
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_45e6v")
+
+[node name="BottomSlider" type="TextureRect" parent="VBoxContainer/MainSection/LeftSidebar/PumpSlider/MarginContainer/SliderBar"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.54
+anchor_top = 0.5
+anchor_right = 0.54
+anchor_bottom = 0.5
+offset_top = 2.0
+offset_right = 16.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_6uvsr")
+
+[node name="TopSlider" type="TextureRect" parent="VBoxContainer/MainSection/LeftSidebar/PumpSlider/MarginContainer/SliderBar"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.51
+anchor_top = 0.5
+anchor_right = 0.51
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_right = 16.0
+grow_horizontal = 2
+scale = Vector2(0.5, -0.5)
+texture = ExtResource("10_6uvsr")
+
+[node name="TempSlider" type="VBoxContainer" parent="VBoxContainer/MainSection/LeftSidebar"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MainSection/LeftSidebar/TempSlider"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "PUMP TEMP"
+label_settings = ExtResource("7_quxj8")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/LeftSidebar/TempSlider"]
+layout_mode = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = -20
 theme_override_constants/margin_right = 20
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/MainSection/LeftSidebar"]
+[node name="SliderBar" type="NinePatchRect" parent="VBoxContainer/MainSection/LeftSidebar/TempSlider/MarginContainer"]
+z_index = 1
+texture_filter = 3
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("9_66qcq")
+patch_margin_left = 4
+patch_margin_top = 64
+patch_margin_right = 4
+
+[node name="GreenSection" type="Panel" parent="VBoxContainer/MainSection/LeftSidebar/TempSlider/MarginContainer/SliderBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.5
+anchor_right = 0.4
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_45e6v")
+
+[node name="BottomSlider" type="TextureRect" parent="VBoxContainer/MainSection/LeftSidebar/TempSlider/MarginContainer/SliderBar"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21
+anchor_top = 0.5
+anchor_right = 0.21
+anchor_bottom = 0.5
+offset_top = 2.0
+offset_right = 16.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_6uvsr")
+
+[node name="TopSlider" type="TextureRect" parent="VBoxContainer/MainSection/LeftSidebar/TempSlider/MarginContainer/SliderBar"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.19
+anchor_top = 0.5
+anchor_right = 0.19
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_right = 16.0
+grow_horizontal = 2
+scale = Vector2(0.5, -0.5)
+texture = ExtResource("10_6uvsr")
+
+[node name="FuelSlider" type="VBoxContainer" parent="VBoxContainer/MainSection/LeftSidebar"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MainSection/LeftSidebar/FuelSlider"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "FUEL QUANT"
+label_settings = ExtResource("7_quxj8")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/LeftSidebar/FuelSlider"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = -20
+theme_override_constants/margin_right = 20
+
+[node name="SliderBar" type="NinePatchRect" parent="VBoxContainer/MainSection/LeftSidebar/FuelSlider/MarginContainer"]
+z_index = 1
+texture_filter = 3
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("9_66qcq")
+patch_margin_left = 4
+patch_margin_top = 64
+patch_margin_right = 4
+
+[node name="GreenSection" type="Panel" parent="VBoxContainer/MainSection/LeftSidebar/FuelSlider/MarginContainer/SliderBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_45e6v")
+
+[node name="BottomSlider" type="TextureRect" parent="VBoxContainer/MainSection/LeftSidebar/FuelSlider/MarginContainer/SliderBar"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.67
+anchor_top = 0.5
+anchor_right = 0.67
+anchor_bottom = 0.5
+offset_top = 2.0
+offset_right = 16.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_6uvsr")
+
+[node name="TopSlider" type="TextureRect" parent="VBoxContainer/MainSection/LeftSidebar/FuelSlider/MarginContainer/SliderBar"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.67
+anchor_top = 0.5
+anchor_right = 0.67
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_right = 16.0
+grow_horizontal = 2
+scale = Vector2(0.5, -0.5)
+texture = ExtResource("10_6uvsr")
+
+[node name="Spacer" type="Panel" parent="VBoxContainer/MainSection/LeftSidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme = ExtResource("8_kc5ob")
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/MainSection/LeftSidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/MainSection/LeftSidebar/MarginContainer3"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/MainSection/LeftSidebar/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/MainSection/LeftSidebar/MarginContainer3/SubViewportContainer"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(273, 230)
+size = Vector2i(273, 249)
 render_target_update_mode = 4
 
-[node name="NavballRoot" parent="VBoxContainer/MainSection/LeftSidebar/SubViewportContainer/SubViewport" instance=ExtResource("9_5oiv6")]
-
-[node name="Spacer" type="Panel" parent="VBoxContainer/MainSection/LeftSidebar"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.4
-theme = ExtResource("8_kc5ob")
+[node name="NavballRoot" parent="VBoxContainer/MainSection/LeftSidebar/MarginContainer3/SubViewportContainer/SubViewport" instance=ExtResource("9_5oiv6")]
 
 [node name="CenterBar" type="VBoxContainer" parent="VBoxContainer/MainSection"]
 layout_mode = 2
@@ -787,7 +981,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 3
-text = "EARTH is the original cradle of humanity and the center of human civilization. With one moon, and several stations, Earth has a population of over 10 billion."
+text = "EARTH is the original cradle of humanity and the center of human civilization. With one moon and several stations, Earth has a population of over 10 billion."
 label_settings = ExtResource("7_quxj8")
 autowrap_mode = 2
 
