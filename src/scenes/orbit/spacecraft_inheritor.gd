@@ -10,6 +10,8 @@ var scaledown = 1
 @export var smashed : bool
 @export var camera_mode : bool
 
+var body_path = "Ships/PlayerShip" # Needed to access data for selecting it
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	plotter = get_node("Plotter")

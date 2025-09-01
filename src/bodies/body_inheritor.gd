@@ -5,7 +5,7 @@ var body : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	body = get_tree().root.get_node("GameRoot/Planets/" + body_path)
+	body = get_tree().root.get_node("GameRoot/" + body_path)
 
 func fetch(time):
 	return body.fetch(time)

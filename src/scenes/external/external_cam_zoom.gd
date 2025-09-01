@@ -10,7 +10,7 @@ var rate = 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	cam = get_node("SubViewport/CamRoot/Spacecraft/Pointer/FirstCam")
+	cam = get_node("SubViewport/CamRoot/Ships/PlayerShip/Pointer/FirstCam")
 	if set_fov:
 		fov_label = get_node("ScreenText/Label3")
 

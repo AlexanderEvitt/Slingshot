@@ -41,7 +41,7 @@ var previous_t = 0
 var mass = 1
 
 var docked = true
-@onready var dock = get_node("../../Planets/Earth/ZephyrStationMain/DockCenter")
+@onready var dock = get_node("../../Planets/Earth/ZephyrStation/DockCenter")
 
 # this module moves data from the master scene to an autoload where others can access it
 

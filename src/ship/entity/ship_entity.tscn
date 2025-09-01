@@ -12,6 +12,7 @@
 size = Vector3(0.05, 0.015, 0.015)
 
 [node name="PlayerShip" type="Node3D"]
+editor_description = "FV JUNIPER is a Shrub-class frigate in the Federal Navy. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
 script = ExtResource("1_012ot")
 start_position = Vector3(42164, -50, 0)
 start_velocity = Vector3(0, 3.075, 0)

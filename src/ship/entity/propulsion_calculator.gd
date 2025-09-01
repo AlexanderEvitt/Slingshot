@@ -22,7 +22,7 @@ var commanded_throttle = 0.0
 var thruster_power = 0.005
 var engine_power = 0.05
 
-var fuel_burn_rate = 0.00001
+var fuel_burn_rate = 0.0001
 
 
 func _process(_delta: float) -> void:

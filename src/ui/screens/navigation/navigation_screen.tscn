@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d06hakxi1tnc8"]
+[gd_scene load_steps=20 format=3 uid="uid://d06hakxi1tnc8"]
 
 [ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_oebc5"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="2_e80r5"]
@@ -18,6 +18,7 @@
 [ext_resource type="ButtonGroup" uid="uid://444nnqo6ich8" path="res://ui/attitude_button_group.tres" id="13_4xkmw"]
 [ext_resource type="Texture2D" uid="uid://d3kc3y6ffgu2" path="res://ui/widgets/bar/carat.png" id="15_352fx"]
 [ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/alerts_panel/alerts_panel.tscn" id="16_jw1r5"]
+[ext_resource type="Script" path="res://ui/screens/navigation/selection_panel.gd" id="19_b130n"]
 
 [node name="NavigationScreen" type="Panel"]
 anchors_preset = 15
@@ -254,26 +255,26 @@ label_settings = ExtResource("7_quxj8")
 horizontal_alignment = 2
 clip_text = true
 
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments"]
+[node name="Navball" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.3
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/MainSection/Instruments/MarginContainer3"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/MainSection/Instruments/Navball"]
 layout_mode = 2
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/MainSection/Instruments/MarginContainer3/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/MainSection/Instruments/Navball/SubViewportContainer"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(200, 180)
 render_target_update_mode = 4
 
-[node name="NavballRoot" parent="VBoxContainer/MainSection/Instruments/MarginContainer3/SubViewportContainer/SubViewport" instance=ExtResource("9_5oiv6")]
+[node name="NavballRoot" parent="VBoxContainer/MainSection/Instruments/Navball/SubViewportContainer/SubViewport" instance=ExtResource("9_5oiv6")]
 
 [node name="Control" type="Control" parent="VBoxContainer/MainSection/Instruments"]
 layout_mode = 2
@@ -308,6 +309,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/MainSection/CenterBar/Map/MarginContainer/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
+physics_object_picking = true
 size = Vector2i(1308, 842)
 render_target_update_mode = 4
 
@@ -817,10 +819,13 @@ theme = ExtResource("2_e80r5")
 text = "SELECTION"
 horizontal_alignment = 1
 
-[node name="MainPanel" type="Panel" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer"]
+[node name="MainPanel" type="Panel" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer" node_paths=PackedStringArray("orbit_scene_root", "about")]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_e80r5")
+script = ExtResource("19_b130n")
+orbit_scene_root = NodePath("../../../../CenterBar/Map/MarginContainer/SubViewportContainer/SubViewport/OrbitRoot")
+about = NodePath("ScrollContainer/MarginContainer/VBoxContainer/About")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel"]
 layout_mode = 1
@@ -846,39 +851,35 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="About" type="Label" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 3
-text = "EARTH is the original cradle of humanity and the center of human civilization. With one moon and several stations, Earth has a population of over 10 billion."
+text = "NULL"
 label_settings = ExtResource("7_quxj8")
 autowrap_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="FrameButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-toggle_mode = true
 action_mode = 0
 text = "SET FRAME"
 
-[node name="Button3" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="CameraButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-toggle_mode = true
 action_mode = 0
 text = "FOCUS VIEW"
 
-[node name="Button2" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="WaypointButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-toggle_mode = true
 action_mode = 0
 text = "ADD WAYPOINT"
 
-[node name="Button4" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="TargetButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-toggle_mode = true
 action_mode = 0
 text = "LOCK TARGET"
 

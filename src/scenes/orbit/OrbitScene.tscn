@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=53 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="13_xts1l"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="14_g31x3"]
 [ext_resource type="PackedScene" uid="uid://btpxws4tx476f" path="res://scenes/orbit/koz/wire_cube.tscn" id="14_k6kd7"]
+[ext_resource type="Script" path="res://scenes/orbit/click_detector.gd" id="15_c6xwu"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="18_lxife"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="22_66qh8"]
 [ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="23_vt6nb"]
@@ -37,6 +38,15 @@ height = 1.4e+06
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tj412"]
 shading_mode = 0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_p4asf"]
+radius = 700000.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0l1rk"]
+radius = 2440.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dwd31"]
+radius = 6052.0
+
 [sub_resource type="PointMesh" id="PointMesh_ywapt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e0jq5"]
@@ -47,8 +57,17 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 shader_parameter/textured = ExtResource("13_kuxx4")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_xs2mn"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_8k6tq"]
+radius = 44.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xbyhg"]
+radius = 1740.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g8ppe"]
 radius = 6371.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_smwit"]
+radius = 3396.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_385ak"]
 radius = 1822.0
@@ -90,6 +109,9 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 shader_parameter/textured = ExtResource("13_kuxx4")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_d04h7"]
+radius = 71492.0
+
 [sub_resource type="SphereMesh" id="SphereMesh_o4sno"]
 radius = 2575.0
 height = 5150.0
@@ -102,29 +124,45 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 shader_parameter/textured = ExtResource("13_kuxx4")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_wa8fu"]
+radius = 60268.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c3psq"]
+radius = 25559.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4ijo1"]
+radius = 24764.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_75n57"]
+radius = 0.04
+
 [node name="OrbitRoot" type="Node3D"]
 script = ExtResource("1_sj5o8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aovhe")
 
-[node name="Sun" type="Node3D" parent="."]
-script = ExtResource("9_2beyu")
-body_path = "Sun"
+[node name="CinemaCam" type="Camera3D" parent="."]
 
-[node name="SunMesh" type="MeshInstance3D" parent="Sun"]
+[node name="Planets" type="Node3D" parent="."]
+
+[node name="Sun" type="Node3D" parent="Planets"]
+script = ExtResource("9_2beyu")
+body_path = "Planets/Sun"
+
+[node name="SunMesh" type="MeshInstance3D" parent="Planets/Sun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -770000, 0, 0)
 mesh = SubResource("SphereMesh_fskp6")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_tj412")
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Sun"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Sun"]
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Sun"]
+[node name="Label" type="Label3D" parent="Planets/Sun"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
@@ -135,26 +173,34 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Mercury" type="Node3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Planets/Sun" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Sun/ClickDetector"]
+shape = SubResource("SphereShape3D_p4asf")
+
+[node name="Mercury" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
 script = ExtResource("9_2beyu")
-body_path = "Mercury"
+body_path = "Planets/Mercury"
 
-[node name="MercuryPlotter" type="Node3D" parent="Mercury" groups=["BodyOrbit"]]
+[node name="MercuryPlotter" type="Node3D" parent="Planets/Mercury" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 88.0
 color = Color(0.45, 0.28305, 0.2115, 1)
 
-[node name="MercuryMesh" parent="Mercury" instance=ExtResource("3_orujh")]
+[node name="MercuryMesh" parent="Planets/Mercury" instance=ExtResource("3_orujh")]
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Mercury"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Mercury"]
 modulate = Color(0.45098, 0.282353, 0.211765, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Mercury"]
+[node name="Label" type="Label3D" parent="Planets/Mercury"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
@@ -165,26 +211,34 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Venus" type="Node3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Planets/Mercury" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Mercury/ClickDetector"]
+shape = SubResource("SphereShape3D_0l1rk")
+
+[node name="Venus" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
 script = ExtResource("9_2beyu")
-body_path = "Venus"
+body_path = "Planets/Venus"
 
-[node name="VenusPlotter" type="Node3D" parent="Venus" groups=["BodyOrbit"]]
+[node name="VenusPlotter" type="Node3D" parent="Planets/Venus" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 224.7
 color = Color(0.67, 0.482512, 0.1809, 1)
 
-[node name="VenusMesh" parent="Venus" instance=ExtResource("4_klp4m")]
+[node name="VenusMesh" parent="Planets/Venus" instance=ExtResource("4_klp4m")]
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Venus"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Venus"]
 modulate = Color(0.670588, 0.482353, 0.180392, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Venus"]
+[node name="Label" type="Label3D" parent="Planets/Venus"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
@@ -195,27 +249,35 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Earth" type="Node3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Planets/Venus" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Venus/ClickDetector"]
+shape = SubResource("SphereShape3D_dwd31")
+
+[node name="Earth" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 0, 0)
 script = ExtResource("9_2beyu")
-body_path = "Earth"
+body_path = "Planets/Earth"
 
-[node name="EarthPlotter" type="Node3D" parent="Earth" groups=["BodyOrbit"]]
+[node name="EarthPlotter" type="Node3D" parent="Planets/Earth" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 365.25
 color = Color(0.181977, 0.313911, 0.600695, 1)
 
-[node name="EarthMesh" parent="Earth" instance=ExtResource("5_wg1iu")]
+[node name="EarthMesh" parent="Planets/Earth" instance=ExtResource("5_wg1iu")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Earth"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Earth"]
 modulate = Color(0.180392, 0.313726, 0.6, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Earth"]
+[node name="Label" type="Label3D" parent="Planets/Earth"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
@@ -226,17 +288,17 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="AsteroidStation" type="Node3D" parent="Earth"]
+[node name="ZephyrStation" type="Node3D" parent="Planets/Earth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.3)
 script = ExtResource("9_2beyu")
-body_path = "Earth/ZephyrStationMain"
+body_path = "Planets/Earth/ZephyrStation"
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Earth/AsteroidStation"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Earth/ZephyrStation"]
 visibility_range_end = 1e+07
 mesh = SubResource("PointMesh_ywapt")
 surface_material_override/0 = SubResource("ShaderMaterial_e0jq5")
 
-[node name="MoonLabel" type="Label3D" parent="Earth/AsteroidStation/BodyMesh"]
+[node name="MoonLabel" type="Label3D" parent="Planets/Earth/ZephyrStation/BodyMesh"]
 visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
@@ -250,14 +312,14 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="Earth/AsteroidStation" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Planets/Earth/ZephyrStation" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 1.0
 color = Color(1, 0.6, 0, 1)
 visible_distance = 2000000
 relative_to = NodePath("../..")
 
-[node name="FlatMoonSprite" type="Sprite3D" parent="Earth/AsteroidStation"]
+[node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Earth/ZephyrStation"]
 visibility_range_end = 2000.0
 visibility_range_end_margin = 2000.0
 visibility_range_fade_mode = 1
@@ -267,32 +329,40 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="KOZ" type="Node3D" parent="Earth/AsteroidStation"]
+[node name="KOZ" type="Node3D" parent="Planets/Earth/ZephyrStation"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 
-[node name="wire_sphere" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("11_8re0r")]
+[node name="wire_sphere" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("11_8re0r")]
 transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 29.32, 0, 0, 0)
 
-[node name="wire_cylinder" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("12_5etm5")]
+[node name="wire_cylinder" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("12_5etm5")]
 transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
 
-[node name="wire_cylinder2" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("12_5etm5")]
+[node name="wire_cylinder2" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("12_5etm5")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
 
-[node name="wire_cylinder3" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("12_5etm5")]
+[node name="wire_cylinder3" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("12_5etm5")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
 
-[node name="wire_cube" parent="Earth/AsteroidStation/KOZ" instance=ExtResource("14_k6kd7")]
+[node name="wire_cube" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("14_k6kd7")]
 transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
-[node name="Luna" type="Node3D" parent="Earth"]
+[node name="ClickDetector" type="Area3D" parent="Planets/Earth/ZephyrStation" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Earth/ZephyrStation/ClickDetector"]
+shape = SubResource("SphereShape3D_8k6tq")
+
+[node name="Luna" type="Node3D" parent="Planets/Earth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.9547, 12989.3)
 script = ExtResource("9_2beyu")
-body_path = "Earth/Luna"
+body_path = "Planets/Earth/Luna"
 
-[node name="LunaMesh" parent="Earth/Luna" instance=ExtResource("6_bom1w")]
+[node name="LunaMesh" parent="Planets/Earth/Luna" instance=ExtResource("6_bom1w")]
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Earth/Luna"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Earth/Luna"]
 visibility_range_end = 2000.0
 visibility_range_end_margin = 2000.0
 visibility_range_fade_mode = 1
@@ -302,14 +372,14 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Plotter" type="Node3D" parent="Earth/Luna" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Planets/Earth/Luna" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 27.3
 color = Color(1, 1, 1, 1)
 visible_distance = 2000000
 relative_to = NodePath("../..")
 
-[node name="Label" type="Label3D" parent="Earth/Luna"]
+[node name="Label" type="Label3D" parent="Planets/Earth/Luna"]
 visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
@@ -323,31 +393,42 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="ClickDetector" type="Area3D" parent="Earth"]
+[node name="ClickDetector" type="Area3D" parent="Planets/Earth/Luna" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
+expandable = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Earth/ClickDetector"]
-shape = SubResource("SphereShape3D_xs2mn")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Earth/Luna/ClickDetector"]
+shape = SubResource("SphereShape3D_xbyhg")
 
-[node name="Mars" type="Node3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Planets/Earth" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Earth/ClickDetector"]
+shape = SubResource("SphereShape3D_g8ppe")
+
+[node name="Mars" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
 script = ExtResource("9_2beyu")
-body_path = "Mars"
+body_path = "Planets/Mars"
 
-[node name="MarsPlotter" type="Node3D" parent="Mars" groups=["BodyOrbit"]]
+[node name="MarsPlotter" type="Node3D" parent="Planets/Mars" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 687.0
 color = Color(0.539592, 0.205864, 0.196268, 1)
 
-[node name="MarsMesh" parent="Mars" instance=ExtResource("7_ug63k")]
+[node name="MarsMesh" parent="Planets/Mars" instance=ExtResource("7_ug63k")]
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Mars"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Mars"]
 modulate = Color(0.541176, 0.203922, 0.196078, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Mars"]
+[node name="Label" type="Label3D" parent="Planets/Mars"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
@@ -358,26 +439,34 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Jupiter" type="Node3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Planets/Mars" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Mars/ClickDetector"]
+shape = SubResource("SphereShape3D_smwit")
+
+[node name="Jupiter" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
 script = ExtResource("9_2beyu")
-body_path = "Jupiter"
+body_path = "Planets/Jupiter"
 
-[node name="JupiterPlotter" type="Node3D" parent="Jupiter" groups=["BodyOrbit"]]
+[node name="JupiterPlotter" type="Node3D" parent="Planets/Jupiter" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 4331.0
 color = Color(0.607, 0.0604174, 0.245852, 1)
 
-[node name="JupiterMesh" parent="Jupiter" instance=ExtResource("8_hosp8")]
+[node name="JupiterMesh" parent="Planets/Jupiter" instance=ExtResource("8_hosp8")]
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Jupiter"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Jupiter"]
 modulate = Color(0.607843, 0.0588235, 0.247059, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Jupiter"]
+[node name="Label" type="Label3D" parent="Planets/Jupiter"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
@@ -388,17 +477,17 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Io" type="Node3D" parent="Jupiter"]
+[node name="Io" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.6)
 script = ExtResource("9_2beyu")
-body_path = "Jupiter/Io"
+body_path = "Planets/Jupiter/Io"
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Io"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Io"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_385ak")
 surface_material_override/0 = SubResource("ShaderMaterial_e0jq5")
 
-[node name="MoonLabel" type="Label3D" parent="Jupiter/Io/BodyMesh"]
+[node name="MoonLabel" type="Label3D" parent="Planets/Jupiter/Io/BodyMesh"]
 visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
@@ -412,14 +501,14 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="Jupiter/Io" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Planets/Jupiter/Io" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 1.769
 color = Color(1, 0.6, 0, 1)
 visible_distance = 2000000
 relative_to = NodePath("../..")
 
-[node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Io"]
+[node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Jupiter/Io"]
 visibility_range_end = 2000.0
 visibility_range_end_margin = 2000.0
 visibility_range_fade_mode = 1
@@ -429,17 +518,17 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Callisto" type="Node3D" parent="Jupiter"]
+[node name="Callisto" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28387.6, 0, 86043.4)
 script = ExtResource("9_2beyu")
-body_path = "Jupiter/Callisto"
+body_path = "Planets/Jupiter/Callisto"
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Callisto"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Callisto"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_kxpab")
 surface_material_override/0 = SubResource("ShaderMaterial_h4gya")
 
-[node name="MoonLabel" type="Label3D" parent="Jupiter/Callisto/BodyMesh"]
+[node name="MoonLabel" type="Label3D" parent="Planets/Jupiter/Callisto/BodyMesh"]
 visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
@@ -453,14 +542,14 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="Jupiter/Callisto" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Planets/Jupiter/Callisto" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 16.689
 color = Color(0.52549, 0.239216, 0.290196, 1)
 visible_distance = 2000000
 relative_to = NodePath("../..")
 
-[node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Callisto"]
+[node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Jupiter/Callisto"]
 visibility_range_end = 2000.0
 visibility_range_end_margin = 2000.0
 visibility_range_fade_mode = 1
@@ -470,17 +559,17 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Europa" type="Node3D" parent="Jupiter"]
+[node name="Europa" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25504.2, 0, 90486.3)
 script = ExtResource("9_2beyu")
-body_path = "Jupiter/Europa"
+body_path = "Planets/Jupiter/Europa"
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Europa"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Europa"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_p12ly")
 surface_material_override/0 = SubResource("ShaderMaterial_j4g1t")
 
-[node name="MoonLabel" type="Label3D" parent="Jupiter/Europa/BodyMesh"]
+[node name="MoonLabel" type="Label3D" parent="Planets/Jupiter/Europa/BodyMesh"]
 visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
@@ -494,14 +583,14 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="Jupiter/Europa" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Planets/Jupiter/Europa" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 3.551
 color = Color(0, 0.368627, 0, 1)
 visible_distance = 2000000
 relative_to = NodePath("../..")
 
-[node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Europa"]
+[node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Jupiter/Europa"]
 visibility_range_end = 2000.0
 visibility_range_end_margin = 2000.0
 visibility_range_fade_mode = 1
@@ -511,18 +600,18 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Ganymede" type="Node3D" parent="Jupiter"]
+[node name="Ganymede" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26531.7, 0, 82270.3)
 script = ExtResource("9_2beyu")
-body_path = "Jupiter/Ganymede"
+body_path = "Planets/Jupiter/Ganymede"
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Ganymede"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Ganymede"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70714, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_2a7sc")
 surface_material_override/0 = SubResource("ShaderMaterial_37qg8")
 
-[node name="MoonLabel" type="Label3D" parent="Jupiter/Ganymede/BodyMesh"]
+[node name="MoonLabel" type="Label3D" parent="Planets/Jupiter/Ganymede/BodyMesh"]
 visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
@@ -536,14 +625,14 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="Jupiter/Ganymede" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Planets/Jupiter/Ganymede" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 7.154
 color = Color(0.560784, 0.560784, 0.560784, 1)
 visible_distance = 2000000
 relative_to = NodePath("../..")
 
-[node name="FlatMoonSprite" type="Sprite3D" parent="Jupiter/Ganymede"]
+[node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Jupiter/Ganymede"]
 visibility_range_end = 2000.0
 visibility_range_end_margin = 2000.0
 visibility_range_fade_mode = 1
@@ -553,26 +642,34 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Saturn" type="Node3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Planets/Jupiter" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Jupiter/ClickDetector"]
+shape = SubResource("SphereShape3D_d04h7")
+
+[node name="Saturn" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
 script = ExtResource("9_2beyu")
-body_path = "Saturn"
+body_path = "Planets/Saturn"
 
-[node name="SaturnPlotter" type="Node3D" parent="Saturn" groups=["BodyOrbit"]]
+[node name="SaturnPlotter" type="Node3D" parent="Planets/Saturn" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 10747.0
 color = Color(0.405878, 0.319402, 0, 1)
 
-[node name="SaturnMesh" parent="Saturn" instance=ExtResource("9_1qyms")]
+[node name="SaturnMesh" parent="Planets/Saturn" instance=ExtResource("9_1qyms")]
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Saturn"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Saturn"]
 modulate = Color(0.403922, 0.317647, 0, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Saturn"]
+[node name="Label" type="Label3D" parent="Planets/Saturn"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
@@ -583,18 +680,18 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Titan" type="Node3D" parent="Saturn"]
+[node name="Titan" type="Node3D" parent="Planets/Saturn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.393, 0, 33535.6)
 script = ExtResource("9_2beyu")
-body_path = "Saturn/Titan"
+body_path = "Planets/Saturn/Titan"
 
-[node name="TitanMesh" type="MeshInstance3D" parent="Saturn/Titan"]
+[node name="TitanMesh" type="MeshInstance3D" parent="Planets/Saturn/Titan"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 10000.0
 mesh = SubResource("SphereMesh_o4sno")
 surface_material_override/0 = SubResource("ShaderMaterial_m08ws")
 
-[node name="MoonLabel" type="Label3D" parent="Saturn/Titan/TitanMesh"]
+[node name="MoonLabel" type="Label3D" parent="Planets/Saturn/Titan/TitanMesh"]
 visibility_range_end = 2e+06
 visibility_range_end_margin = 2e+06
 visibility_range_fade_mode = 1
@@ -608,14 +705,14 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="Saturn/Titan" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Planets/Saturn/Titan" node_paths=PackedStringArray("relative_to") groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 15.945
 color = Color(0.890196, 0.643137, 0.25098, 1)
 visible_distance = 2000000
 relative_to = NodePath("../..")
 
-[node name="FlatMoonSprite" type="Sprite3D" parent="Saturn/Titan"]
+[node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Saturn/Titan"]
 visibility_range_end = 2000.0
 visibility_range_end_margin = 2000.0
 visibility_range_fade_mode = 1
@@ -625,26 +722,34 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Uranus" type="Node3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Planets/Saturn" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Saturn/ClickDetector"]
+shape = SubResource("SphereShape3D_wa8fu")
+
+[node name="Uranus" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 580869, 0, 0)
 script = ExtResource("9_2beyu")
-body_path = "Uranus"
+body_path = "Planets/Uranus"
 
-[node name="UranusPlotter" type="Node3D" parent="Uranus" groups=["BodyOrbit"]]
+[node name="UranusPlotter" type="Node3D" parent="Planets/Uranus" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 30589.0
 color = Color(0.354396, 0.696462, 0.973375, 1)
 
-[node name="UranusMesh" parent="Uranus" instance=ExtResource("10_girv0")]
+[node name="UranusMesh" parent="Planets/Uranus" instance=ExtResource("10_girv0")]
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Uranus"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Uranus"]
 modulate = Color(0.352941, 0.698039, 0.972549, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Uranus"]
+[node name="Label" type="Label3D" parent="Planets/Uranus"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
@@ -655,26 +760,34 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Neptune" type="Node3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Planets/Uranus" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Uranus/ClickDetector"]
+shape = SubResource("SphereShape3D_c3psq")
+
+[node name="Neptune" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
 script = ExtResource("9_2beyu")
-body_path = "Neptune"
+body_path = "Planets/Neptune"
 
-[node name="NeptunePlotter" type="Node3D" parent="Neptune" groups=["BodyOrbit"]]
+[node name="NeptunePlotter" type="Node3D" parent="Planets/Neptune" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 period = 59800.0
 color = Color(0.145, 0.254342, 0.760636, 1)
 
-[node name="NeptuneMesh" parent="Neptune" instance=ExtResource("11_ciut5")]
+[node name="NeptuneMesh" parent="Planets/Neptune" instance=ExtResource("11_ciut5")]
 
-[node name="FlatPlanetSprite" type="Sprite3D" parent="Neptune"]
+[node name="FlatPlanetSprite" type="Sprite3D" parent="Planets/Neptune"]
 modulate = Color(0.145098, 0.254902, 0.760784, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Label" type="Label3D" parent="Neptune"]
+[node name="Label" type="Label3D" parent="Planets/Neptune"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
@@ -685,33 +798,43 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Spacecraft" type="Node3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Planets/Neptune" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Neptune/ClickDetector"]
+shape = SubResource("SphereShape3D_4ijo1")
+
+[node name="Ships" type="Node3D" parent="."]
+
+[node name="PlayerShip" type="Node3D" parent="Ships"]
 script = ExtResource("13_xts1l")
 plan = true
 camera_mode = true
 
-[node name="Plotter" type="Node3D" parent="Spacecraft"]
+[node name="Plotter" type="Node3D" parent="Ships/PlayerShip"]
 script = ExtResource("14_g31x3")
 color = Color(1, 0.690196, 0, 1)
 slice = true
 
-[node name="Planner" type="Node3D" parent="Spacecraft"]
+[node name="Planner" type="Node3D" parent="Ships/PlayerShip"]
 script = ExtResource("14_g31x3")
 color = Color(0.552941, 0, 0.552941, 1)
 
-[node name="Pointer" type="Node3D" parent="Spacecraft"]
+[node name="Pointer" type="Node3D" parent="Ships/PlayerShip"]
 
-[node name="Ship" parent="Spacecraft/Pointer" instance=ExtResource("18_lxife")]
+[node name="Ship" parent="Ships/PlayerShip/Pointer" instance=ExtResource("18_lxife")]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="FirstCam" type="Camera3D" parent="Spacecraft/Pointer"]
+[node name="FirstCam" type="Camera3D" parent="Ships/PlayerShip/Pointer"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
 fov = 50.0
 size = 2.0
 near = 0.001
 far = 1e+07
 
-[node name="CenterMarker" type="Sprite3D" parent="Spacecraft/Pointer/FirstCam"]
+[node name="CenterMarker" type="Sprite3D" parent="Ships/PlayerShip/Pointer/FirstCam"]
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.0639505)
 pixel_size = 0.0005
 axis = 0
@@ -720,19 +843,22 @@ fixed_size = true
 texture = ExtResource("22_66qh8")
 script = ExtResource("23_vt6nb")
 
-[node name="CameraRig" type="Node3D" parent="Spacecraft"]
+[node name="CameraRig" type="Node3D" parent="Ships/PlayerShip"]
 transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
+script = ExtResource("2_awidn")
 
-[node name="CameraRotator" type="Node3D" parent="Spacecraft/CameraRig"]
+[node name="CameraRotator" type="Node3D" parent="Ships/PlayerShip/CameraRig"]
 
-[node name="Camera3D" type="Camera3D" parent="Spacecraft/CameraRig/CameraRotator"]
+[node name="Camera3D" type="Camera3D" parent="Ships/PlayerShip/CameraRig/CameraRotator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
 fov = 60.0
 near = 0.01
 far = 1e+10
-script = ExtResource("2_awidn")
-zoomable = true
-zoom_distance = 3000.0
-zoom_min = 0.02
 
-[node name="CinemaCam" type="Camera3D" parent="."]
+[node name="ClickDetector" type="Area3D" parent="Ships/PlayerShip" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ships/PlayerShip/ClickDetector"]
+shape = SubResource("SphereShape3D_75n57")

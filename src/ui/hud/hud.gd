@@ -14,8 +14,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-		# Get and set frame
-	frame_label.text = "FRAME " + Conversions.bodies[Conversions.f].name
+	# Get and set frame
+	var frame_name = Conversions.frame_name.split("/")[-1] # slice out last thing in frame path
+	frame_label.text = "FRAME " + frame_name
 	
 	# Calculate and set altitude
 	var r = Conversions.ToFrame(ShipData.player_ship.position,SystemTime.t)

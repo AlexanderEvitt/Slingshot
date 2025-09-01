@@ -22,6 +22,7 @@ GM = 1.32712e+11
 
 [node name="Sun" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
+editor_description = "SOL is the center of humanity's origin system and a G2V star. Until the last century, the Sol system was home to most of humanity."
 script = ExtResource("3_5edpo")
 GM = 1.32712e+11
 a = 1.34249e+06
@@ -33,6 +34,7 @@ theta0 = 4.808
 
 [node name="Mercury" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
+editor_description = "MERCURY is the smallest planet of the Sol system. Its proximity to Sol itself makes it difficult to survive on and is today only occupied by a few mining outposts."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
 script = ExtResource("3_5edpo")
 a = 5.79091e+07
@@ -43,6 +45,7 @@ argp = 0.535
 
 [node name="Venus" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
+editor_description = "VENUS is the second planet of the Sol system. It's harsh surface conditions have stubbed attempts at colonization."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
 script = ExtResource("3_5edpo")
 GM = 324859.0
@@ -55,6 +58,7 @@ theta0 = 1.038
 
 [node name="Earth" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
+editor_description = "EARTH is the original cradle of humanity and the center of civilization. With one large moon and several stations, over 10 billion people call Earth home."
 script = ExtResource("3_5edpo")
 GM = 398600.0
 a = 1.47683e+08
@@ -73,18 +77,20 @@ script = ExtResource("4_g1v5r")
 process_priority = 13
 shape = SubResource("SphereShape3D_fvy80")
 
-[node name="ZephyrStationMain" type="Node3D" parent="Planets/Earth"]
+[node name="ZephyrStation" type="Node3D" parent="Planets/Earth"]
 process_priority = 13
+editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("3_5edpo")
 a = 42164.0
 theta0 = 3.142
 
-[node name="DockCenter" type="Node3D" parent="Planets/Earth/ZephyrStationMain"]
+[node name="DockCenter" type="Node3D" parent="Planets/Earth/ZephyrStation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
 
 [node name="Luna" type="Node3D" parent="Planets/Earth" groups=["Bodies"]]
 process_priority = 13
+editor_description = "LUNA is Earth's sole natural satellite and the gateway to the planets. Almost two billion people live in its domed cities, servicing the numerous ports and dockyards scattered across the regolith."
 script = ExtResource("3_5edpo")
 GM = 4902.8
 a = 387078.0
@@ -96,6 +102,7 @@ theta0 = 2.226
 
 [node name="Mars" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
+editor_description = "MARS is the second-most populous planet in the Sol system, owing to early colonization efforts that predate most other planetary colonies by almost a century."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
 script = ExtResource("3_5edpo")
 GM = 42828.4
@@ -108,6 +115,7 @@ theta0 = 5.873
 
 [node name="Jupiter" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
+editor_description = "JUPITER is a gas giant and the largest planet of the Sol system. Numerous stations and cities are scattered amongst its moons."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
 script = ExtResource("3_5edpo")
 GM = 1.26687e+08
@@ -119,6 +127,7 @@ argp = 4.787
 theta0 = 1.518
 
 [node name="Io" type="Node3D" parent="Planets/Jupiter"]
+editor_description = "IO is a highly volcanic moon of Jupiter. The high-radiation environment and active volcanism has precluded attempts at habitation."
 script = ExtResource("3_5edpo")
 GM = 5959.92
 a = 422038.0
@@ -129,6 +138,7 @@ argp = 1.58
 theta0 = 0.344
 
 [node name="Callisto" type="Node3D" parent="Planets/Jupiter"]
+editor_description = "CALLISTO is an icy moon of Jupiter and the most populous in the system. Low radiation and gravity of over one tenth G have led to significant immigration."
 script = ExtResource("3_5edpo")
 GM = 7179.28
 a = 1.88281e+06
@@ -139,6 +149,7 @@ argp = 2.557
 theta0 = 5.713
 
 [node name="Europa" type="Node3D" parent="Planets/Jupiter"]
+editor_description = "EUROPA, long considered a sister moon of Callisto, was colonized similarly for centuries. However, the violent nationalist conflicts of the 2400s led to most settlers emigrating and many colonies being abandoned."
 script = ExtResource("3_5edpo")
 GM = 3202.71
 a = 671245.0
@@ -149,6 +160,7 @@ argp = 4.693
 theta0 = 0.223
 
 [node name="Ganymede" type="Node3D" parent="Planets/Jupiter"]
+editor_description = "GANYMEDE is the most massive moon in the Sol system. Its relatively high gravity has led to the development of the local healthcare industry, with several large hospitals and military bases located around its equator."
 script = ExtResource("3_5edpo")
 GM = 9887.83
 a = 1.07049e+06
@@ -160,6 +172,7 @@ theta0 = 3.006
 
 [node name="Saturn" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
+editor_description = "SATURN is a ringed gas giant, with the most cataloged moons of any planet in the known universe. Although Saturn itself is uninhabitable, the rings have welcomed a small ice mining industry."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
 script = ExtResource("3_5edpo")
 GM = 3.79312e+07
@@ -171,6 +184,7 @@ argp = 6.019
 theta0 = 0.417
 
 [node name="Titan" type="Node3D" parent="Planets/Saturn"]
+editor_description = "TITAN, sometimes referred to as the \"jewel of the outer planets,\" is the only moon in the Sol system with a significant atmosphere. The lack of a need for pressure suits on its surface has contributed to an incredible explosion in population."
 script = ExtResource("3_5edpo")
 GM = 8978.14
 a = 1.22197e+06
@@ -182,6 +196,7 @@ theta0 = 1.209
 
 [node name="Uranus" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
+editor_description = "URANUS is an ice giant deep in the outer solar system. Very little economic incentive has existed historically to justify colonization this far out, but a few straggling colonial cities have been established, mostly in the ammonia extraction business."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 580869, 0, 0)
 script = ExtResource("3_5edpo")
 GM = 5.79394e+06
@@ -194,6 +209,7 @@ theta0 = 4.848
 
 [node name="Neptune" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
+editor_description = "NEPTUNE is the farthest planet from Sol and has almost no permanent population. A handful of research stations exist to take advantage of the low-noise environment."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
 script = ExtResource("3_5edpo")
 GM = 6.83653e+06

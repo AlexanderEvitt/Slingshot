@@ -1,14 +1,12 @@
-extends Camera3D
-
-@export var zoomable : bool
-@export var reparentable : bool
+extends Node
 
 @export var zoom_distance := 200.0
-var zoom_speed := 1.4
+var zoom_speed := 1.2
 @export var zoom_min := 7.0
 var zoom_max := 2000000000.0
 
-@export var super_zoom := false
+@onready var camera_rotator = $CameraRotator
+@onready var camera = $CameraRotator/Camera3D
 
 var rotation_speed := 0.0001
 var r := false
@@ -17,33 +15,20 @@ var yaw := 0.0
 
 var viewer
 
-var bodies = ["Sun","Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune"]
-var i = 3
-
 func _ready():
+	# Get the parent of the viewport, so you can see if the viewport is even visible
+	# If it's not, don't bother moving the camera
 	viewer = get_viewport().get_parent()
-	
-	# editor doesn't let you set really small values
-	if super_zoom:
-		near = near/1000
-		zoom_min = zoom_min/1000
-		
 
 func _process(_delta):
+	# Set zoom from inputs
 	if viewer.is_visible_in_tree():
-		if zoomable:
-			if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
-				zoom_distance = zoom_speed*zoom_distance
-			if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):
-				zoom_distance = zoom_distance/zoom_speed
-			zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
-			position = Vector3(0, 0, zoom_distance)
-		
-		if reparentable:
-			if Input.is_action_pressed("switch_planet"):
-					i = (i + 1) % 9
-					get_parent().get_parent().reparent(get_parent().get_parent().get_parent().get_parent().get_node(bodies[i]))
-					get_parent().get_parent().position = Vector3(0,0,0)
+		if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
+			zoom_distance = zoom_speed*zoom_distance
+		if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):
+			zoom_distance = zoom_distance/zoom_speed
+		zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
+		camera.position = Vector3(0, 0, zoom_distance)
 		
 		# Handle arrow keys rotation	
 		if Input.is_action_pressed("mod_up"):
@@ -78,4 +63,4 @@ func set_orientation():
 	pitch = clamp(pitch - Input.get_last_mouse_velocity().y * rotation_speed, -1.57, 1.57)
 	
 	# Set rotation on the parent, CameraRig
-	get_parent().rotation = Vector3(pitch, yaw, 0)
+	camera_rotator.rotation = Vector3(pitch, yaw, 0)

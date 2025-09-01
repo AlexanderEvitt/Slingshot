@@ -42,11 +42,6 @@
 [ext_resource type="Script" path="res://bodies/body_inheritor.gd" id="29_i3asx"]
 [ext_resource type="Script" path="res://scenes/external/cinema_cam.gd" id="42_ktyp3"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_dewes"]
-material = ExtResource("4_bholp")
-flip_faces = true
-size = Vector2(2, 2)
-
 [sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
 radius = 700000.0
 height = 1.4e+06
@@ -183,112 +178,38 @@ height = 49528.0
 transparency = 4
 albedo_texture = ExtResource("17_n5xr7")
 
+[sub_resource type="QuadMesh" id="QuadMesh_dewes"]
+material = ExtResource("4_bholp")
+flip_faces = true
+size = Vector2(2, 2)
+
 [node name="CamRoot" type="Node3D"]
 script = ExtResource("1_5ri2s")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_n8kbm")
 
-[node name="Spacecraft" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2129.53, 0, -14835.1)
-script = ExtResource("2_dogxd")
-camera_mode = true
-
-[node name="CameraRig" type="Node3D" parent="Spacecraft"]
-transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
-
-[node name="CameraRotator" type="Node3D" parent="Spacecraft/CameraRig"]
-
-[node name="Camera3D" type="Camera3D" parent="Spacecraft/CameraRig/CameraRotator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
-current = true
-fov = 50.0
+[node name="CinemaCam" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15638.1)
+fov = 10.0
 near = 0.001
 far = 1e+07
-script = ExtResource("5_17hwb")
-zoomable = true
-zoom_distance = 0.1
-zoom_min = 0.01
+script = ExtResource("42_ktyp3")
 
-[node name="ShaderQuad" type="MeshInstance3D" parent="Spacecraft/CameraRig/CameraRotator/Camera3D"]
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_dewes")
-skeleton = NodePath("../../../../..")
-script = ExtResource("5_hwbsh")
+[node name="Planets" type="Node3D" parent="."]
 
-[node name="Starfield" parent="Spacecraft/CameraRig/CameraRotator/Camera3D" instance=ExtResource("8_wqcie")]
-transform = Transform3D(6.12323e-16, -10, 6.12323e-16, 0, 6.12323e-16, 10, -10, -6.12323e-16, 3.7494e-32, 0, 0, 0)
-script = ExtResource("9_licgw")
-
-[node name="Pointer" type="Node3D" parent="Spacecraft"]
-
-[node name="player_ship" parent="Spacecraft/Pointer" instance=ExtResource("3_r7nlu")]
-
-[node name="FirstCam" type="Camera3D" parent="Spacecraft/Pointer"]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
-fov = 50.0
-size = 2.0
-near = 0.001
-far = 1e+07
-
-[node name="CenterMarker" type="Sprite3D" parent="Spacecraft/Pointer/FirstCam"]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.0639505)
-pixel_size = 0.0005
-axis = 0
-no_depth_test = true
-fixed_size = true
-texture = ExtResource("9_j0ace")
-script = ExtResource("3_p1375")
-
-[node name="Plotter" type="Node3D" parent="Spacecraft"]
-visible = false
-script = ExtResource("5_8bt3m")
-color = Color(1, 0.690196, 0, 1)
-slice = true
-
-[node name="Planner" type="Node3D" parent="Spacecraft"]
-visible = false
-script = ExtResource("5_8bt3m")
-color = Color(0.552941, 0, 0.552941, 1)
-
-[node name="HUD" type="Node3D" parent="Spacecraft"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00408274, 0.00811089, 0)
-script = ExtResource("3_p1375")
-
-[node name="ProgradeMarker" type="Sprite3D" parent="Spacecraft/HUD"]
-pixel_size = 0.0005
-billboard = 1
-no_depth_test = true
-fixed_size = true
-render_priority = 2
-texture = ExtResource("3_ehpfi")
-script = ExtResource("4_y4k4s")
-retro = 1
-side_check = false
-
-[node name="RetroMarker" type="Sprite3D" parent="Spacecraft/HUD"]
-pixel_size = 0.0005
-billboard = 1
-no_depth_test = true
-fixed_size = true
-render_priority = 2
-texture = ExtResource("5_a7blp")
-script = ExtResource("4_y4k4s")
-retro = -1
-side_check = false
-
-[node name="Sun" type="Node3D" parent="."]
+[node name="Sun" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1e+06)
 script = ExtResource("29_i3asx")
-body_path = "Sun"
+body_path = "Planets/Sun"
 
-[node name="SunMesh" type="MeshInstance3D" parent="Sun"]
+[node name="SunMesh" type="MeshInstance3D" parent="Planets/Sun"]
 layers = 0
 mesh = SubResource("SphereMesh_v7y0l")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
 
-[node name="BigSunLight" type="DirectionalLight3D" parent="Sun"]
+[node name="BigSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 light_energy = 0.7
 light_cull_mask = 4294967289
@@ -298,7 +219,7 @@ directional_shadow_max_distance = 1e+06
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
-[node name="SmallSunLight" type="DirectionalLight3D" parent="Sun"]
+[node name="SmallSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 light_cull_mask = 4294967290
 shadow_enabled = true
@@ -309,7 +230,7 @@ directional_shadow_max_distance = 0.2
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
-[node name="MediumSunLight" type="DirectionalLight3D" parent="Sun"]
+[node name="MediumSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 light_energy = 0.8
 light_cull_mask = 4294967292
@@ -320,46 +241,46 @@ directional_shadow_max_distance = 500.0
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
-[node name="Mercury" type="Node3D" parent="."]
+[node name="Mercury" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1e+06, 0, 0)
 script = ExtResource("29_i3asx")
-body_path = "Mercury"
+body_path = "Planets/Mercury"
 
-[node name="MercuryMesh" type="MeshInstance3D" parent="Mercury"]
+[node name="MercuryMesh" type="MeshInstance3D" parent="Planets/Mercury"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_8fy0r")
 surface_material_override/0 = SubResource("StandardMaterial3D_gmmuk")
 
-[node name="Venus" type="Node3D" parent="."]
+[node name="Venus" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18554.7, 0, 0)
 script = ExtResource("29_i3asx")
-body_path = "Venus"
+body_path = "Planets/Venus"
 
-[node name="VenusMesh" type="MeshInstance3D" parent="Venus"]
+[node name="VenusMesh" type="MeshInstance3D" parent="Planets/Venus"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_t6ay8")
 surface_material_override/0 = SubResource("StandardMaterial3D_oivmx")
 
-[node name="Earth" type="Node3D" parent="."]
+[node name="Earth" type="Node3D" parent="Planets"]
 script = ExtResource("29_i3asx")
-body_path = "Earth"
+body_path = "Planets/Earth"
 
-[node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
+[node name="EarthMesh" type="MeshInstance3D" parent="Planets/Earth"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_aom7d")
 surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
 script = ExtResource("17_wir2g")
 
-[node name="Clouds" type="MeshInstance3D" parent="Earth/EarthMesh"]
+[node name="Clouds" type="MeshInstance3D" parent="Planets/Earth/EarthMesh"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_282r8")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
 
-[node name="EarthAtmosphere" parent="Earth/EarthMesh" instance=ExtResource("5_2nae2")]
+[node name="EarthAtmosphere" parent="Planets/Earth/EarthMesh" instance=ExtResource("5_2nae2")]
 planet_radius = 6371.0
 atmosphere_height = 40.0
 sun_path = NodePath("../../../Sun/BigSunLight")
@@ -368,148 +289,230 @@ shader_params/u_scattering_strength = 0.35
 shader_params/u_scattering_wavelengths = Vector3(650, 540, 440)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
-[node name="Lights" type="MeshInstance3D" parent="Earth/EarthMesh" node_paths=PackedStringArray("sun_path")]
+[node name="Lights" type="MeshInstance3D" parent="Planets/Earth/EarthMesh" node_paths=PackedStringArray("sun_path")]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_282r8")
 surface_material_override/0 = SubResource("ShaderMaterial_1ptrw")
 script = ExtResource("18_elqqx")
 sun_path = NodePath("../../../Sun")
 
-[node name="Earthshine" type="OmniLight3D" parent="Earth"]
+[node name="Earthshine" type="OmniLight3D" parent="Planets/Earth"]
 light_color = Color(0.764073, 0.840415, 1, 1)
 omni_range = 15000.0
 omni_attenuation = 0.25
 
-[node name="ZephyrStation" parent="Earth" instance=ExtResource("19_8qfgt")]
+[node name="ZephyrStation" parent="Planets/Earth" instance=ExtResource("19_8qfgt")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 6441, 0, 0)
 script = ExtResource("29_i3asx")
-body_path = "Earth/ZephyrStationMain"
+body_path = "Planets/Earth/ZephyrStation"
 
-[node name="Luna" type="Node3D" parent="Earth"]
+[node name="Luna" type="Node3D" parent="Planets/Earth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5956.87, 0.322938, 15744.7)
 script = ExtResource("29_i3asx")
-body_path = "Earth/Luna"
+body_path = "Planets/Earth/Luna"
 
-[node name="LunaMesh" type="MeshInstance3D" parent="Earth/Luna"]
+[node name="LunaMesh" type="MeshInstance3D" parent="Planets/Earth/Luna"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_6xnwu")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
 
-[node name="Mars" type="Node3D" parent="."]
+[node name="Mars" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14482.7, 0, 0)
 script = ExtResource("29_i3asx")
-body_path = "Mars"
+body_path = "Planets/Mars"
 
-[node name="MarsMesh" type="MeshInstance3D" parent="Mars"]
+[node name="MarsMesh" type="MeshInstance3D" parent="Planets/Mars"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_61v7t")
 surface_material_override/0 = SubResource("StandardMaterial3D_563sj")
 
-[node name="Jupiter" type="Node3D" parent="."]
+[node name="Jupiter" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93232, 0, 76.6756)
 script = ExtResource("29_i3asx")
-body_path = "Jupiter"
+body_path = "Planets/Jupiter"
 
-[node name="JupiterMesh" type="MeshInstance3D" parent="Jupiter"]
+[node name="JupiterMesh" type="MeshInstance3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_ke1qx")
 surface_material_override/0 = SubResource("StandardMaterial3D_lnura")
 
-[node name="Io" type="Node3D" parent="Jupiter"]
+[node name="Io" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, -83052.1)
 script = ExtResource("29_i3asx")
-body_path = "Jupiter/Io"
+body_path = "Planets/Jupiter/Io"
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Io"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Io"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_fh4a2")
 surface_material_override/0 = SubResource("StandardMaterial3D_thbh0")
 
-[node name="Callisto" type="Node3D" parent="Jupiter"]
+[node name="Callisto" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5628.5, 0, -83129.1)
 script = ExtResource("29_i3asx")
-body_path = "Jupiter/Callisto"
+body_path = "Planets/Jupiter/Callisto"
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Callisto"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Callisto"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_w33s7")
 surface_material_override/0 = SubResource("StandardMaterial3D_6oicq")
 
-[node name="Europa" type="Node3D" parent="Jupiter"]
+[node name="Europa" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5128.23, 0, -82091.2)
 script = ExtResource("29_i3asx")
-body_path = "Jupiter/Europa"
+body_path = "Planets/Jupiter/Europa"
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Europa"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Europa"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_jcfjd")
 surface_material_override/0 = SubResource("StandardMaterial3D_4wqeu")
 
-[node name="Ganymede" type="Node3D" parent="Jupiter"]
+[node name="Ganymede" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10234.5, 0, -82903.5)
 script = ExtResource("29_i3asx")
-body_path = "Jupiter/Ganymede"
+body_path = "Planets/Jupiter/Ganymede"
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Jupiter/Ganymede"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Ganymede"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70714, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_34wev")
 surface_material_override/0 = SubResource("StandardMaterial3D_3g57a")
 
-[node name="Saturn" type="Node3D" parent="."]
+[node name="Saturn" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -352822, 0, 147.853)
 script = ExtResource("29_i3asx")
-body_path = "Saturn"
+body_path = "Planets/Saturn"
 
-[node name="SaturnMesh" type="MeshInstance3D" parent="Saturn"]
+[node name="SaturnMesh" type="MeshInstance3D" parent="Planets/Saturn"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 visibility_range_end_margin = 100.0
 mesh = SubResource("SphereMesh_p4pre")
 surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
 
-[node name="rings" parent="Saturn/SaturnMesh" instance=ExtResource("15_qf8i2")]
+[node name="rings" parent="Planets/Saturn/SaturnMesh" instance=ExtResource("15_qf8i2")]
 transform = Transform3D(67300, 0, 0, 0, 67300, 0, 0, 0, 67300, 0, 0, 0)
 
-[node name="Titan" type="Node3D" parent="Saturn"]
+[node name="Titan" type="Node3D" parent="Planets/Saturn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.393, 0, -91558.2)
 script = ExtResource("29_i3asx")
-body_path = "Saturn/Titan"
+body_path = "Planets/Saturn/Titan"
 
-[node name="TitanMesh" type="MeshInstance3D" parent="Saturn/Titan"]
+[node name="TitanMesh" type="MeshInstance3D" parent="Planets/Saturn/Titan"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_uj08c")
 surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
 
-[node name="Uranus" type="Node3D" parent="."]
+[node name="Uranus" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -577316, 0, 0)
 script = ExtResource("29_i3asx")
-body_path = "Uranus"
+body_path = "Planets/Uranus"
 
-[node name="UranusMesh" type="MeshInstance3D" parent="Uranus"]
+[node name="UranusMesh" type="MeshInstance3D" parent="Planets/Uranus"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_t3fbd")
 surface_material_override/0 = SubResource("StandardMaterial3D_fqvh8")
 
-[node name="Neptune" type="Node3D" parent="."]
+[node name="Neptune" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -664570, 0, 0)
 script = ExtResource("29_i3asx")
-body_path = "Neptune"
+body_path = "Planets/Neptune"
 
-[node name="NeptuneMesh" type="MeshInstance3D" parent="Neptune"]
+[node name="NeptuneMesh" type="MeshInstance3D" parent="Planets/Neptune"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_j27v8")
 surface_material_override/0 = SubResource("StandardMaterial3D_nnkww")
 
-[node name="CinemaCam" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15638.1)
-fov = 10.0
+[node name="Ships" type="Node3D" parent="."]
+
+[node name="PlayerShip" type="Node3D" parent="Ships"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2129.53, 0, -14835.1)
+script = ExtResource("2_dogxd")
+camera_mode = true
+
+[node name="CameraRig" type="Node3D" parent="Ships/PlayerShip"]
+transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
+script = ExtResource("5_17hwb")
+zoom_distance = 0.1
+zoom_min = 0.01
+
+[node name="CameraRotator" type="Node3D" parent="Ships/PlayerShip/CameraRig"]
+
+[node name="Camera3D" type="Camera3D" parent="Ships/PlayerShip/CameraRig/CameraRotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+current = true
+fov = 50.0
 near = 0.001
 far = 1e+07
-script = ExtResource("42_ktyp3")
+
+[node name="ShaderQuad" type="MeshInstance3D" parent="Ships/PlayerShip/CameraRig/CameraRotator/Camera3D"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_dewes")
+skeleton = NodePath("../../../../../..")
+script = ExtResource("5_hwbsh")
+
+[node name="Starfield" parent="Ships/PlayerShip/CameraRig/CameraRotator/Camera3D" instance=ExtResource("8_wqcie")]
+transform = Transform3D(6.12323e-16, -10, 6.12323e-16, 0, 6.12323e-16, 10, -10, -6.12323e-16, 3.7494e-32, 0, 0, 0)
+script = ExtResource("9_licgw")
+
+[node name="Pointer" type="Node3D" parent="Ships/PlayerShip"]
+
+[node name="player_ship" parent="Ships/PlayerShip/Pointer" instance=ExtResource("3_r7nlu")]
+
+[node name="FirstCam" type="Camera3D" parent="Ships/PlayerShip/Pointer"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
+fov = 50.0
+size = 2.0
+near = 0.001
+far = 1e+07
+
+[node name="CenterMarker" type="Sprite3D" parent="Ships/PlayerShip/Pointer/FirstCam"]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.0639505)
+pixel_size = 0.0005
+axis = 0
+no_depth_test = true
+fixed_size = true
+texture = ExtResource("9_j0ace")
+script = ExtResource("3_p1375")
+
+[node name="Plotter" type="Node3D" parent="Ships/PlayerShip"]
+visible = false
+script = ExtResource("5_8bt3m")
+color = Color(1, 0.690196, 0, 1)
+slice = true
+
+[node name="Planner" type="Node3D" parent="Ships/PlayerShip"]
+visible = false
+script = ExtResource("5_8bt3m")
+color = Color(0.552941, 0, 0.552941, 1)
+
+[node name="HUD" type="Node3D" parent="Ships/PlayerShip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00408274, 0.00811089, 0)
+script = ExtResource("3_p1375")
+
+[node name="ProgradeMarker" type="Sprite3D" parent="Ships/PlayerShip/HUD"]
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+render_priority = 2
+texture = ExtResource("3_ehpfi")
+script = ExtResource("4_y4k4s")
+retro = 1
+side_check = false
+
+[node name="RetroMarker" type="Sprite3D" parent="Ships/PlayerShip/HUD"]
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+render_priority = 2
+texture = ExtResource("5_a7blp")
+script = ExtResource("4_y4k4s")
+retro = -1
+side_check = false
