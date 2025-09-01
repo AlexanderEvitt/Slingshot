@@ -42,8 +42,8 @@ func _process(_delta: float) -> void:
 	de_mp = de_mp + Kp*error
 	
 	# Add in some random noise
-	he_mp = he_mp
-	de_mp = de_mp
+	he_mp = he_mp + randfn(0.0, he_mp/1000.0)
+	de_mp = de_mp + randfn(0.0, de_mp/1000.0)
 	
 	# Drain fuel by corresponding amount
 	he_quant = he_quant - fuel_burn_rate*he_mp

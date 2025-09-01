@@ -14,6 +14,8 @@ func _ready():
 	
 	text_label.text = label_text
 
-func set_fill(variable):
+func set_fill(variable,variable_text : String):
+	# Sets the fill of the gauge to variable (0 to 1)
+	# and the text to whatever you input
 	progress_bar.value = variable
-	num_label.text = String.num(variable,2)
+	num_label.text = variable_text

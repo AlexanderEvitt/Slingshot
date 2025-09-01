@@ -12,10 +12,13 @@ extends HBoxContainer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	# Set the fill line of the tanks
 	he_tank.set_fill(ShipData.player_ship.propulsion.he_quant)
 	de_tank.set_fill(ShipData.player_ship.propulsion.de_quant)
-	he_pump.set_fill(ShipData.player_ship.propulsion.he_mp)
-	de_pump.set_fill(ShipData.player_ship.propulsion.de_mp)
+	
+	# Set the pump speed circle gauges
+	he_pump.set_fill(ShipData.player_ship.propulsion.he_mp,String.num(ShipData.player_ship.propulsion.he_mp,2))
+	de_pump.set_fill(ShipData.player_ship.propulsion.de_mp,String.num(ShipData.player_ship.propulsion.de_mp,2))
 	
 	var power = ShipData.player_ship.propulsion.throttle/0.05
 	

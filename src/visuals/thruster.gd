@@ -10,19 +10,25 @@ extends Node3D
 var cutoff = 0.1
 var torque
 
-var my_thrust
+var my_torque = 0
+var my_thrust = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	# Start as invisible, make visible if firing
 	visible = false
 	
+	record_torque()
+	record_thrusters()
+	make_thruster_fire()
+
+func record_torque():
 	# Record commanded torque
 	torque = ShipData.player_ship.torque
 	if torque == null:
 		torque = Vector3(0,0,0)
 	torque = ShipData.player_ship.attitude.inverse()*torque
-	var my_torque = 0
+	my_torque = 0
 	if up:
 		my_torque = my_torque + (torque.z)
 	if down:
@@ -35,7 +41,8 @@ func _process(_delta):
 		my_torque = my_torque + (-torque.x)
 	if roll_right:
 		my_torque = my_torque + (torque.x)
-	
+
+func record_thrusters():
 	# Record translational thruster firings
 	var thrusters = ShipData.player_ship.thrust - ShipData.player_ship.throttle*Vector3(1,0,0)
 	if thrusters.length() < 0.001:
@@ -45,8 +52,7 @@ func _process(_delta):
 		my_thrust = thrusters.dot(my_thrust_vector)/thrusters.length()
 		my_thrust = clamp(-my_thrust,0,1)
 	
-
-		
+func make_thruster_fire():
 	# Turn on thruster
 	var fire = (my_torque + 0.5*my_thrust)
 

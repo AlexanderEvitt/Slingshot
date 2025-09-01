@@ -29,6 +29,7 @@ layers = 2
 surface_material_override/0 = ExtResource("4_pbg5w")
 
 [node name="Clamps1" parent="DockE" index="1"]
+visible = false
 layers = 2
 surface_material_override/0 = ExtResource("4_pbg5w")
 surface_material_override/1 = SubResource("StandardMaterial3D_p5lxg")
@@ -39,6 +40,7 @@ layers = 2
 surface_material_override/0 = ExtResource("4_pbg5w")
 
 [node name="Clamps2" parent="DockE" index="2"]
+visible = false
 layers = 2
 surface_material_override/0 = ExtResource("4_pbg5w")
 surface_material_override/1 = ExtResource("6_prrdp")
