@@ -4,7 +4,7 @@ extends Drawer
 var line_instance = MeshInstance3D.new()
 
 
-func _process(delta):
+func _process(_delta):
 	# Add each point to traj
 	var traj = []
 	for x in ShipData.player_ship.waypoints:
@@ -12,6 +12,7 @@ func _process(delta):
 		var pos = x["Position"] + body.fetch(SystemTime.t) # relative to solar system origin
 		traj.append(pos)
 		
-	undraw(line_instance)
-	line_instance = line(traj, color)
-	draw(self,line_instance)
+	if traj.size() > 1:
+		undraw(line_instance)
+		line_instance = line(traj, color)
+		draw(self,line_instance)
