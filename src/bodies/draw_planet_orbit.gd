@@ -2,7 +2,6 @@ extends Drawer
 
 @export var period: float # days
 @export var color: Color
-@export var smashed: bool
 @export var visible_distance = 0
 var c = 0
 var n = 48
@@ -32,6 +31,7 @@ func refresh_traj():
 	var traj = []
 	
 	# Subtract start position of planet
+	# Positions are relative to where the planet currently is
 	var p0 = planet.fetch(SystemTime.t)
 	
 	for i in range(0,n):
@@ -41,9 +41,7 @@ func refresh_traj():
 		# If relative_to exists, subtract its velocity
 		if relative_to != null:
 			p = p - (relative_to.fetch(t) - relative_to.fetch(tc))
-		
-		if smashed:
-			p.z = 0
+
 		traj.append(p)
 	
 	# Remove previous line, create new line, draw new line

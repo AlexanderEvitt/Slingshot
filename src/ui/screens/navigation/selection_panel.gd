@@ -9,13 +9,15 @@ extends Panel
 @onready var waypoint_button = $ScrollContainer/MarginContainer/VBoxContainer/WaypointButton
 @onready var target_button = $ScrollContainer/MarginContainer/VBoxContainer/TargetButton
 
-# Get camera node (necessary to reparent it)
+# Get nodes from orbit scene (necessary to reparent them)
 @onready var camera_rig = orbit_scene_root.get_node("Ships/PlayerShip/CameraRig")
+@onready var waypoint_rig = orbit_scene_root.get_node("WaypointRig")
 
 func _ready():
 	# Connect button presses to function calls
 	frame_button.pressed.connect(on_frame_change)
 	camera_button.pressed.connect(on_cam_change)
+	waypoint_button.pressed.connect(on_waypoint_select)
 
 func _process(_delta):
 	if orbit_scene_root.selected_body != null:
@@ -32,3 +34,12 @@ func on_cam_change():
 	# Move the camera rig to its new parent
 	camera_rig.position = Vector3(0,0,0)
 	
+func on_waypoint_select():
+	# Reparent the rig to the selected body
+	waypoint_rig.reparent(orbit_scene_root.get_node(orbit_scene_root.selected_body))
+	# Move the rig to its new parent
+	waypoint_rig.position = Vector3(0,0,0)
+	# Active waypoint selection mode
+	waypoint_rig.select_mode = true
+	# Give the waypoint rig the camera rig reference
+	waypoint_rig.camera_rig = camera_rig

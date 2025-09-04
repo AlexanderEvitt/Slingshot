@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=55 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -26,6 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="18_lxife"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="22_66qh8"]
 [ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="23_vt6nb"]
+[ext_resource type="Script" path="res://scenes/orbit/waypoint_rig.gd" id="27_2mw5s"]
+[ext_resource type="Script" path="res://scenes/orbit/waypoint_plotter.gd" id="28_3ag27"]
 
 [sub_resource type="Environment" id="Environment_aovhe"]
 background_mode = 1
@@ -862,3 +864,11 @@ expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ships/PlayerShip/ClickDetector"]
 shape = SubResource("SphereShape3D_75n57")
+
+[node name="WaypointRig" type="Node3D" parent="."]
+script = ExtResource("27_2mw5s")
+color = Color(1, 1, 1, 1)
+
+[node name="WaypointPlotter" type="Node3D" parent="."]
+script = ExtResource("28_3ag27")
+color = Color(0.552941, 0, 0.552941, 1)

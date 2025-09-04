@@ -1,5 +1,5 @@
 class_name Drawer
-extends Node
+extends Node3D
 
 var scaledown = 1
 

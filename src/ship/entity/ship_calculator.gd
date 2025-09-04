@@ -29,6 +29,9 @@ var planned_positions
 var planned_velocities
 var planned_acceleration
 
+# Waypoints
+var waypoints = []
+
 # Signals
 signal auto_disc
 signal nav_disc
@@ -140,3 +143,8 @@ func find_time_index(times,time):
 		if times[i] < time:
 			index = i
 	return index
+
+func fetch(_time):
+	# Return origin of ship frame
+	# So if you select the ship frame, you basically just get the trajectory relative to wherever you are right now
+	return position
