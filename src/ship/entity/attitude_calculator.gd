@@ -1,6 +1,6 @@
 extends Node3D
 
-var ship
+@onready var ship = get_parent()
 var torque = Vector3(0,0,0)
 var max_torque = 0.4
 var angular_velocity = Vector3(0,0,0)
@@ -10,8 +10,6 @@ var commanded_torque = Vector3(0,0,0)
 var inertia: Vector3 = Vector3(1, 1, 1)  # Modify based on spacecraft geometry
 var inv_inertia: Vector3 = Vector3(1.0 / inertia.x, 1.0 / inertia.y, 1.0 / inertia.z)
 
-func _ready():
-	ship = get_parent()
 
 func _process(_delta):
 	# Calculate torque by increasing as you hold the button
@@ -64,7 +62,7 @@ func _process(_delta):
 				var r = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
 				target = r.cross(v)
 			"NAV":
-				target = ship.planned_acceleration
+				target = ship.navigation_calculator.control.normalized()
 		
 		# Calculate torque from autopilot
 		if target != null:

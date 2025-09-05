@@ -13,16 +13,16 @@ extends HBoxContainer
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	# Set the fill line of the tanks
-	he_tank.set_fill(ShipData.player_ship.propulsion.he_quant)
-	de_tank.set_fill(ShipData.player_ship.propulsion.de_quant)
+	he_tank.set_fill(ShipData.player_ship.propulsion_calculator.he_quant)
+	de_tank.set_fill(ShipData.player_ship.propulsion_calculator.de_quant)
 	
 	# Set the pump speed circle gauges
-	he_pump.set_fill(ShipData.player_ship.propulsion.he_mp,String.num(ShipData.player_ship.propulsion.he_mp,2))
-	de_pump.set_fill(ShipData.player_ship.propulsion.de_mp,String.num(ShipData.player_ship.propulsion.de_mp,2))
+	he_pump.set_fill(ShipData.player_ship.propulsion_calculator.he_mp,String.num(ShipData.player_ship.propulsion_calculator.he_mp,2))
+	de_pump.set_fill(ShipData.player_ship.propulsion_calculator.de_mp,String.num(ShipData.player_ship.propulsion_calculator.de_mp,2))
 	
-	var power = ShipData.player_ship.propulsion.throttle/0.05
+	var power = ShipData.player_ship.propulsion_calculator.throttle/0.05
 	
 	thrust_bar.set_fill(power)
 	tca.amount_ratio = power
-	he_pump_spinner.rotation = he_pump_spinner.rotation + ShipData.player_ship.propulsion.he_mp
-	de_pump_spinner.rotation = de_pump_spinner.rotation + ShipData.player_ship.propulsion.de_mp
+	he_pump_spinner.rotation = he_pump_spinner.rotation + ShipData.player_ship.propulsion_calculator.he_mp
+	de_pump_spinner.rotation = de_pump_spinner.rotation + ShipData.player_ship.propulsion_calculator.de_mp

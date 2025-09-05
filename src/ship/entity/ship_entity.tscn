@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c71thxnvwh37i"]
+[gd_scene load_steps=9 format=3 uid="uid://c71thxnvwh37i"]
 
 [ext_resource type="Script" path="res://ship/entity/ship_calculator.gd" id="1_012ot"]
 [ext_resource type="Script" path="res://ship/entity/attitude_calculator.gd" id="2_7e8cl"]
 [ext_resource type="Script" path="res://ship/entity/collision_calculator.gd" id="3_wjkl8"]
 [ext_resource type="Script" path="res://ship/Propagator.cs" id="4_7neml"]
 [ext_resource type="Script" path="res://ship/entity/propulsion_calculator.gd" id="5_n5nff"]
+[ext_resource type="Script" path="res://ship/entity/navigation_calculator.gd" id="6_nvs0w"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qcdir"]
 
@@ -21,7 +22,7 @@ start_velocity = Vector3(0, 3.075, 0)
 transform = Transform3D(-1, 1.22465e-16, 0, -7.4988e-33, -6.12323e-17, 1, 1.22465e-16, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("2_7e8cl")
 
-[node name="CollisionDetector" type="RigidBody3D" parent="."]
+[node name="CollisionCalculator" type="RigidBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_qcdir")
 gravity_scale = 0.0
 inertia = Vector3(1, 1, 1)
@@ -33,7 +34,7 @@ contact_monitor = true
 max_contacts_reported = 3
 script = ExtResource("3_wjkl8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionDetector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionCalculator"]
 shape = SubResource("BoxShape3D_fdpi8")
 
 [node name="Propagator" type="Node3D" parent="."]
@@ -42,3 +43,6 @@ n = 100
 
 [node name="PropulsionCalculator" type="Node3D" parent="."]
 script = ExtResource("5_n5nff")
+
+[node name="NavigationCalculator" type="Node3D" parent="."]
+script = ExtResource("6_nvs0w")

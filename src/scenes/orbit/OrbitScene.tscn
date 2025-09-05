@@ -820,10 +820,6 @@ script = ExtResource("14_g31x3")
 color = Color(1, 0.690196, 0, 1)
 slice = true
 
-[node name="Planner" type="Node3D" parent="Ships/PlayerShip"]
-script = ExtResource("14_g31x3")
-color = Color(0.552941, 0, 0.552941, 1)
-
 [node name="Pointer" type="Node3D" parent="Ships/PlayerShip"]
 
 [node name="Ship" parent="Ships/PlayerShip/Pointer" instance=ExtResource("18_lxife")]

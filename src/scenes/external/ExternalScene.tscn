@@ -486,11 +486,6 @@ script = ExtResource("5_8bt3m")
 color = Color(1, 0.690196, 0, 1)
 slice = true
 
-[node name="Planner" type="Node3D" parent="Ships/PlayerShip"]
-visible = false
-script = ExtResource("5_8bt3m")
-color = Color(0.552941, 0, 0.552941, 1)
-
 [node name="HUD" type="Node3D" parent="Ships/PlayerShip"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00408274, 0.00811089, 0)
 script = ExtResource("3_p1375")

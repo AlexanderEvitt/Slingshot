@@ -24,6 +24,7 @@ var engine_power = 0.05
 
 var fuel_burn_rate = 0.0001
 
+@onready var ship = get_parent()
 
 func _process(_delta: float) -> void:
 	thrust = Vector3(0,0,0)
@@ -33,6 +34,8 @@ func _process(_delta: float) -> void:
 		commanded_throttle = commanded_throttle + 0.01
 	if Input.is_action_pressed("decrement_throttle"):
 		commanded_throttle = commanded_throttle - 0.01
+	if ship.nav_flag and ship.autopilot_flag:
+		commanded_throttle = ship.navigation_calculator.control.length()
 	commanded_throttle = clamp(commanded_throttle,0,engine_power)
 	
 	# Increment pump speed based on error between throttle and result

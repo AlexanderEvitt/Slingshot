@@ -7,15 +7,16 @@ var torque
 var thrust = Vector3(0,0,0)
 var throttle = 0
 
-var propagator
 var plotted_positions
 
 @export var start_position : Vector3
 @export var start_velocity : Vector3
 
-var attitude_calculator
-var propulsion
-var collision_calculator
+@onready var attitude_calculator = $AttitudeCalculator
+@onready var navigation_calculator = $NavigationCalculator
+@onready var propulsion_calculator = $PropulsionCalculator
+@onready var collision_calculator = $CollisionCalculator
+@onready var propagator = $Propagator
 
 # Autopilot modes
 var current_mode
@@ -23,11 +24,6 @@ var inv_flag
 var stab_flag
 var autopilot_flag
 var nav_flag
-
-# Planned stuff
-var planned_positions
-var planned_velocities
-var planned_acceleration
 
 # Waypoints
 var waypoints = []
@@ -49,41 +45,28 @@ var docked = true
 # this module moves data from the master scene to an autoload where others can access it
 
 func _ready():
-	attitude_calculator = get_node("AttitudeCalculator")
-	propulsion = get_node("PropulsionCalculator")
-	collision_calculator = get_node("CollisionDetector")
-	propagator = get_node("Propagator")
-	
 	# Initialize values
 	attitude = attitude_calculator.transform.basis
 	position = Conversions.ToUniversal(start_position,0)
 	velocity = Conversions.VelFromFrame(start_velocity,0)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# Update values for this iteration
 	attitude = attitude_calculator.transform.basis
 	torque = attitude_calculator.torque
 	
 	# Update thrust
-	thrust = propulsion.thrust
-	throttle = propulsion.throttle
-	
-	# If navigation mode and autopilot are engaged, fly along precalculated trajectory
-	if propagator.planned_positions != null and nav_flag and autopilot_flag:
-		# Find current index in the planned trajectory
-		var i = find_time_index(propagator.planned_times,SystemTime.t)
-		if i+2 > propagator.planned_times.size():
-			# Disconnect autopilot and reset thrust
-			integrate_normally(delta)
-			auto_disc.emit()
-			nav_disc.emit()
-			thrust = Vector3(0,0,0)
-		else:
-			move_by_plan()
-		
-	# Otherwise, integrate regularly
+	thrust = propulsion_calculator.thrust
+	throttle = propulsion_calculator.throttle
+
+	# Fix to start position if still docked
+	if docked:
+		position = dock.get_parent().fetch(SystemTime.t) + dock.get_parent().transform.basis*dock.position
+		velocity = (dock.get_parent().fetch(SystemTime.t) - dock.get_parent().fetch(SystemTime.t - 1.0))
+		if Input.is_action_just_pressed("dock"):
+			docked = false
+			rel_clamp.emit() # show alert
+	# Integrate regularly
 	else:
 		# Do multiple simulation time steps per run of physics_process
 		# Allow max timestep of 1000*(1/30) s
@@ -94,14 +77,6 @@ func _physics_process(delta):
 			# Calculate simulation timestep
 			var dt = SystemTime.step*delta/sim_steps_per_physics_tick
 			integrate_normally(dt)
-		
-	# Fix to start position if still docked
-	if docked:
-		position = dock.get_parent().fetch(SystemTime.t) + dock.get_parent().transform.basis*dock.position
-		velocity = (dock.get_parent().fetch(SystemTime.t) - dock.get_parent().fetch(SystemTime.t - SystemTime.step))
-	if Input.is_action_just_pressed("dock"):
-		docked = false
-		rel_clamp.emit() # show alert
 
 func integrate_normally(dt):
 	# Somehow get the acceleration from gravity in here
@@ -122,19 +97,6 @@ func integrate_normally(dt):
 	# Emit collision alarm if there's impulse
 	if collision_calculator.impulse.length_squared() > 0:
 		collision.emit()
-
-func move_by_plan():
-	var i = find_time_index(propagator.planned_times,SystemTime.t)
-	# Linearly interpolate between points
-	var dt = propagator.planned_times[i+1] - propagator.planned_times[i]
-	var frac = (SystemTime.t - propagator.planned_times[i])/dt
-	position = (1 - frac)*propagator.planned_positions[i] + frac*propagator.planned_positions[i+1]
-	velocity = (1 - frac)*propagator.planned_velocities[i] + frac*propagator.planned_velocities[i+1]
-	
-	# Guess at acceleration
-	planned_acceleration = (propagator.planned_velocities[i+1] - propagator.planned_velocities[i])/dt
-	throttle = planned_acceleration.length()
-	thrust = planned_acceleration
 
 
 func find_time_index(times,time):
