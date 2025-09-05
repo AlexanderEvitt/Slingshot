@@ -1,9 +1,7 @@
 class_name Drawer
 extends Node3D
 
-var scaledown = 1
-
-func line(pos: Array, color = Color.WHITE_SMOKE, squashed = false):
+func line(pos: Array, color = Color.WHITE_SMOKE):
 	# If there's no positions, make up bogus zero positions
 	if pos == null:
 		pos = [Vector3(0,0,0),Vector3(0,0,0)]
@@ -20,9 +18,7 @@ func line(pos: Array, color = Color.WHITE_SMOKE, squashed = false):
 	# Start drawing line along positions
 	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP, material)
 	for i in pos:
-		if squashed:
-			i.z = 0
-		immediate_mesh.surface_add_vertex(i/scaledown)
+		immediate_mesh.surface_add_vertex(i)
 		
 	immediate_mesh.surface_end()
 

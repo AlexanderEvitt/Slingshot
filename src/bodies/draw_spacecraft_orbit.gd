@@ -2,7 +2,6 @@ extends Drawer
 
 @export var color: Color
 @export var slice: bool
-@export var squashed : bool
 var c = 0
 var n = 100.0
 var positions
@@ -25,9 +24,9 @@ func _process(delta):
 				undraw(line_instance)
 			
 			if slice:
-				line_instance = line(positions.slice(0,positions.size(),slicer), color, squashed)
+				line_instance = line(positions.slice(0,positions.size(),slicer), color)
 			else:
-				line_instance = line(positions, color, squashed)
+				line_instance = line(positions, color)
 			draw(self,line_instance)
 			
 			# Set position to spacecraft's position
