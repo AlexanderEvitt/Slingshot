@@ -33,6 +33,7 @@ signal auto_disc
 signal nav_disc
 signal rel_clamp
 signal collision
+signal waypoints_updated
 
 var previous_dt = 0.03333
 var previous_t = 0

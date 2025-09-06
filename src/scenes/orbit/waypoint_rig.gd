@@ -6,9 +6,6 @@ var select_mode = false
 var camera_rig # reference to the camera_rig, populated by the selection panel
 var hit # most recent intersection between mouse pointer and plane at selected body
 
-func _ready():
-	pass # Replace with function body.
-
 
 func _process(_delta):
 	var traj = []
@@ -44,4 +41,8 @@ func _input(event):
 		
 		# Pass to ship computer
 		if hit != null:
+			# Add to waypoints array
 			ShipData.player_ship.waypoints.append({"Frame":get_parent().body_path, "Position":hit})
+			# Emit waypoints_updated signal to alert nodes of update
+			ShipData.player_ship.waypoints_updated.emit()
+			

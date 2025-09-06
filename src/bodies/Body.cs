@@ -62,15 +62,25 @@ public partial class Body : Node3D
 
     public override void _PhysicsProcess(double delta)
     {
-        GlobalPosition = calculate_self_position(SystemTime.Instance.t);
+        // Technically this doesn't do anything right now
+        // Positions of bodies in external and orbit scene are taken by calling fetch
+        // Positions of bodies for gravity also call fetch
+        Position = get_local_position(SystemTime.Instance.t);
     }
 
     public Godot.Vector3 fetch(double time)
     {
-        return (Godot.Vector3)parentBody.Call("fetch", time) + calculate_self_position(time);
+        // Return the position of the body in the solar system's frame
+        return (Godot.Vector3)parentBody.Call("fetch", time) + get_local_position(time);
     }
 
-    private Godot.Vector3 calculate_self_position(double time)
+    public Godot.Vector3 fetch_velocity(double time)
+    {
+        // Return the position of the body in the solar system's frame
+        return (Godot.Vector3)parentBody.Call("fetch_velocity", time) + get_local_velocity(time);
+    }
+
+    private Godot.Vector3 get_local_position(double time)
     {
         // Mean anomaly
         M = 2.0 * Math.PI * (time / T);
@@ -98,4 +108,38 @@ public partial class Body : Node3D
         Godot.Vector3 pos = Rcombine * rthw;
         return pos;
     }
+
+    private Godot.Vector3 get_local_velocity(double time)
+    {
+        // Mean anomaly
+        M = 2.0 * Math.PI * (time / T);
+
+        // Approximate true anomaly
+        double theta = theta0 + M
+            + c1 * Math.Sin(M)
+            + c2 * Math.Sin(2 * M)
+            + c3 * Math.Sin(3 * M)
+            + c4 * Math.Sin(4 * M)
+            + c5 * Math.Sin(5 * M)
+            + c6 * Math.Sin(6 * M);
+
+        // Orbit parameters
+        double r = p / (1.0 + e * Math.Cos(theta));
+        double vr = sqrtMuOverP * e * Math.Sin(theta);
+        double vt = sqrtMuOverP * (1.0 + e * Math.Cos(theta));
+
+        // Velocity components in orbital plane (perifocal frame)
+        Godot.Vector3 vthw = new Godot.Vector3(
+            (double)(vr * Math.Cos(theta + argp) - vt * Math.Sin(theta + argp)),
+            (double)(vr * Math.Sin(theta + argp) + vt * Math.Cos(theta + argp)),
+            0d
+        );
+
+        // Rotate into inertial space with the same combined rotation as position
+        Godot.Vector3 vel = Rcombine * vthw;
+
+        return vel;
+    }
+
+
 }
