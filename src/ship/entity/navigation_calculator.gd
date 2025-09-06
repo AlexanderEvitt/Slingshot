@@ -7,8 +7,8 @@ var waypoints = []
 var proportional_error = Vector3(0,0,0)
 var last_proportional_error = Vector3(0,0,0)
 
-@export var Kp = 0.00025
-@export var Kd = 0.025
+@export var Kp = 0.000005 # 10,000km max deflection
+@export var Kd = 0.05 # 1km/s max deflection
 
 @onready var ship = get_parent()
 @onready var game_root = get_tree().root.get_node("GameRoot/")
@@ -27,39 +27,46 @@ func navigate():
 	# Update waypoints, course info
 	var last_waypoint = waypoints[active_waypoint]
 	var next_waypoint = waypoints[active_waypoint + 1]
-	# Write the current solar system positions of the waypoints
+	# Write the current solar system positions/velocities of the waypoints
 	var from = last_waypoint["Position"] + game_root.get_node(last_waypoint["Frame"]).fetch(SystemTime.t)
 	var to = next_waypoint["Position"] + game_root.get_node(next_waypoint["Frame"]).fetch(SystemTime.t)
-	# Get the course (desired direction)
-	var course = (to - from).normalized()
-	# Get the heading (current direction)
-	# i.e. ship velocity in a frame affixed to the line - linear combination of start and end frames
-	var heading = ship.velocity
+	var from_vel = game_root.get_node(last_waypoint["Frame"]).fetch_velocity(SystemTime.t)
+	var to_vel = game_root.get_node(next_waypoint["Frame"]).fetch_velocity(SystemTime.t)
 
+	# Get the course (vector from previous point to next point)
+	var course = (to - from)
 	
+	# Get the nearest point along the line
+	# Parametric projection factor t (scalar form of projection position onto from, 0 to 1)
+	var t = (ship.position - from).dot(course) / course.length_squared()
+	print("t: ", t)
+	# Closest point on the infinite line
+	var closest_point = from + t * course
+	
+	# Get the velocity relative to the line (linear combination of endpoint velocity)
+	var relative_velocity = ship.velocity - (t*to_vel + (1.0 - t)*from_vel)
+	# Component of that in the direction of course
+	var on_course_velocity = relative_velocity.project(course)
+
 	# Calculate acceleration [a1] in opposition to gravity
 	var a1 = -ship.propagator.Acceleration(ship.position,SystemTime.t)
 	
 	# Calculate error correction [a2] to move towards course
-	# Parametric projection factor t
-	var t = (ship.position - from).dot(course) / course.length_squared()
-	# Closest point on the infinite line
-	var closest_point = from + t * course
-	# Vector from ship to that point (orthogonal to line direction)
+	# Vector from ship to closest point (orthogonal to line direction)
 	var position_error = closest_point - ship.position
-	# Velocity error from direction
-	var velocity_error = (course - heading)
+	# Velocity error (velocity not in the direction of course)
+	var velocity_error = on_course_velocity - relative_velocity
 	# Sum up, reducing gains with time rate to reduce jitter
-	var scalek = 1.0
-	var a2 = (Kp*scalek)*proportional_error + (Kd*scalek)*velocity_error
+	var scalek = 1.0/(log(SystemTime.step) + 1)
+	var a2 = (Kp*scalek)*position_error + (Kd*scalek)*velocity_error
 	
-	print("PE: ", proportional_error)
+	print("PE: ", position_error)
 	print("VE: ", velocity_error)
-	print("Proportional term: ", (Kp*scalek)*proportional_error.length())
+	print("Proportional term: ", (Kp*scalek)*position_error.length())
 	print("Derivative term: ", (Kd*scalek)*velocity_error.length())
 	
 	# Calculate thrust along line [a3]
-	var a3 = 0.01*course
+	var a3 = 0.01*course.normalized()
 	
 	# Sum thrust and clamp
 	control = a1 + a2 + a3

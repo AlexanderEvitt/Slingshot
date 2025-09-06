@@ -62,9 +62,10 @@ public partial class Body : Node3D
 
     public override void _PhysicsProcess(double delta)
     {
-        // Technically this doesn't do anything right now
+        // Technically this doesn't influence anything right now
         // Positions of bodies in external and orbit scene are taken by calling fetch
         // Positions of bodies for gravity also call fetch
+        // Nothing depends on the positions of the bodies in the main scene being correct
         Position = get_local_position(SystemTime.Instance.t);
     }
 
@@ -76,8 +77,11 @@ public partial class Body : Node3D
 
     public Godot.Vector3 fetch_velocity(double time)
     {
-        // Return the position of the body in the solar system's frame
-        return (Godot.Vector3)parentBody.Call("fetch_velocity", time) + get_local_velocity(time);
+        // Does a finite difference approximation
+        // Very low confidence in get_local_velocity due to the approximation of true anomaly right now
+        // So using this for the moment
+        float dt = 0.01f;
+        return (Godot.Vector3)((fetch(SystemTime.Instance.t) - fetch(SystemTime.Instance.t - dt))/dt);
     }
 
     private Godot.Vector3 get_local_position(double time)
@@ -111,6 +115,9 @@ public partial class Body : Node3D
 
     private Godot.Vector3 get_local_velocity(double time)
     {
+        // Not confident this actually works when using an approximation of the true anomaly.
+        // Produces a different result to fetch(t) - fetch(t - 1)
+
         // Mean anomaly
         M = 2.0 * Math.PI * (time / T);
 
