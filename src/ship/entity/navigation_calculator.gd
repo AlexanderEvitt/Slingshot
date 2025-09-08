@@ -7,6 +7,8 @@ var waypoints = []
 var proportional_error = Vector3(0,0,0)
 var last_proportional_error = Vector3(0,0,0)
 
+var cornering_velocity = 0.0 # target velocity at endpoint, km/s
+
 @export var Kp = 0.000005 # 10,000km max deflection
 @export var Kd = 0.05 # 1km/s max deflection
 
@@ -66,7 +68,14 @@ func navigate():
 	print("Derivative term: ", (Kd*scalek)*velocity_error.length())
 	
 	# Calculate thrust along line [a3]
-	var a3 = 0.01*course.normalized()
+	# Calculate required thrust to hit cornering_velocity at endpoint
+	var remaining_distance = course.length() * (1.0 - t)
+	var required_decel = abs((cornering_velocity**2 - on_course_velocity.length_squared())/(2*remaining_distance))
+	var a3
+	if required_decel < 0.01:
+		a3 = 0.01*course.normalized()
+	else:
+		a3 = -required_decel*course.normalized()
 	
 	# Sum thrust and clamp
 	control = a1 + a2 + a3
