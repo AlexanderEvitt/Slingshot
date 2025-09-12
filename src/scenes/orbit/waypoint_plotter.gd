@@ -18,8 +18,11 @@ func _process(_delta):
 		var pos = x["Position"] + body.fetch(SystemTime.t) + orbit_root.position # relative to camera position
 		traj.append(pos)
 	
+	# Cull the previous trajectory
+	if line_instance != null:
+		undraw(line_instance)
+	
 	# Draw the trajectory if there are at least two points to draw
 	if traj.size() > 1:
-		undraw(line_instance)
 		line_instance = line(traj, color)
 		draw(self,line_instance)

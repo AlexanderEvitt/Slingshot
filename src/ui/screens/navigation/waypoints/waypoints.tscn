@@ -45,7 +45,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="WaypointsList" type="VBoxContainer" parent="VBoxContainer/MainPanel/ScrollContainer/MarginContainer"]
+[node name="Box" type="VBoxContainer" parent="VBoxContainer/MainPanel/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="WaypointsList" type="VBoxContainer" parent="VBoxContainer/MainPanel/ScrollContainer/MarginContainer/Box"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="NextButton" type="Button" parent="VBoxContainer/MainPanel/ScrollContainer/MarginContainer/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+action_mode = 0
+text = "NEXT WAYPOINT"
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/MainPanel/ScrollContainer/MarginContainer/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+action_mode = 0
+text = "CLEAR WAYPOINTS"

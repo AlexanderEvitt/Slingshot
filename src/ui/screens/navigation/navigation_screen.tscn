@@ -640,10 +640,4 @@ theme_override_font_sizes/font_size = 16
 action_mode = 0
 text = "ADD WAYPOINT"
 
-[node name="TargetButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-action_mode = 0
-text = "LOCK TARGET"
-
 [connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/MarginContainer5/ButtonPanel/Button" to="VBoxContainer/TopBar/HBoxContainer/MarginContainer/Label" method="_on_reset"]

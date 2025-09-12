@@ -7,7 +7,6 @@ extends Panel
 @onready var frame_button = $ScrollContainer/MarginContainer/VBoxContainer/FrameButton
 @onready var camera_button = $ScrollContainer/MarginContainer/VBoxContainer/CameraButton
 @onready var waypoint_button = $ScrollContainer/MarginContainer/VBoxContainer/WaypointButton
-@onready var target_button = $ScrollContainer/MarginContainer/VBoxContainer/TargetButton
 
 # Get nodes from orbit scene (necessary to reparent them)
 @onready var camera_rig = orbit_scene_root.get_node("Ships/PlayerShip/CameraRig")
@@ -20,9 +19,21 @@ func _ready():
 	waypoint_button.pressed.connect(on_waypoint_select)
 
 func _process(_delta):
+	# Buttons disabled unless you select something
+	frame_button.disabled = true
+	camera_button.disabled = true
+	waypoint_button.disabled = true
+	
+	# If you select a target
 	if orbit_scene_root.selected_body != null:
 		var selected = get_tree().root.get_node("GameRoot/" + orbit_scene_root.selected_body)
 		about.text = selected.editor_description
+		camera_button.disabled = false
+		
+		# Only allow frame and waypoint if user is not selecting the ship
+		if orbit_scene_root.selected_body != "Ships/PlayerShip":
+			frame_button.disabled = false
+			waypoint_button.disabled = false
 
 func on_frame_change():
 	# Give the Conversions autoload a new frame path based on the selected body

@@ -862,6 +862,24 @@ expandable = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ships/PlayerShip/ClickDetector"]
 shape = SubResource("SphereShape3D_75n57")
 
+[node name="ShipSprite" type="Sprite3D" parent="Ships/PlayerShip"]
+modulate = Color(0.15, 0.5, 0.185, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("2_3t7g4")
+
+[node name="ShipLabel" type="Label3D" parent="Ships/PlayerShip"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = "FV JUNIPER"
+font = ExtResource("4_uugyr")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
 [node name="WaypointRig" type="Node3D" parent="."]
 script = ExtResource("27_2mw5s")
 color = Color(1, 1, 1, 1)
