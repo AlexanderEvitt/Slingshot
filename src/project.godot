@@ -25,6 +25,10 @@ SystemTime="*res://ship/SystemTime.cs"
 Conversions="*res://ship/Conversions.cs"
 ShipData="*res://ship/ship_data.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [display]
 
 window/size/viewport_width=1920

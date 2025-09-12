@@ -31,6 +31,7 @@ var waypoints = []
 # Signals
 signal auto_disc
 signal nav_disc
+signal nav_next
 signal rel_clamp
 signal collision
 signal waypoints_updated
@@ -73,24 +74,30 @@ func _physics_process(delta):
 		# Allow max timestep of 1000*(1/30) s
 		# Do one sim step per physics step up to step = 100, then increase
 		# Also say no more than max 100 steps per step
-		var sim_steps_per_physics_tick = clamp(SystemTime.step/100,1,100)
+		var sim_steps_per_physics_tick = clamp(SystemTime.step,1,100)
+		var prev_gravity = propagator.Acceleration(position,SystemTime.prev_t)
 		for i in range(sim_steps_per_physics_tick):
 			# Calculate simulation timestep
 			var dt = SystemTime.step*delta/sim_steps_per_physics_tick
-			integrate_normally(dt)
+			
+			# Process children processes that need to run with simulation
+			navigation_calculator.update(dt, prev_gravity)
+			attitude_calculator.update(dt)
+			propulsion_calculator.update(dt)
+			
+			integrate_normally(dt, prev_gravity)
 
-func integrate_normally(dt):
+func integrate_normally(dt, prev_gravity):
 	# Somehow get the acceleration from gravity in here
-	var prev_gravity = propagator.Acceleration(position,SystemTime.prev_t)
-	var gravity = propagator.Acceleration(position,SystemTime.t)
+	# var gravity = propagator.Acceleration(position,SystemTime.t)
 	
 	# Calculate acceleration on vehicle
 	var prev_acceleration = attitude*thrust + prev_gravity
-	var acceleration = attitude*thrust + gravity
+	# var acceleration = attitude*thrust + gravity
 	
 	# Calculate updated position and velocity through Verlet integration
 	position = position + velocity*dt# + 0.5*prev_acceleration*previous_dt**2
-	velocity = velocity + 1*(0*acceleration+prev_acceleration)*dt
+	velocity = velocity + (prev_acceleration)*dt
 	
 	# Change the velociity by the impulse
 	velocity += collision_calculator.impulse/mass

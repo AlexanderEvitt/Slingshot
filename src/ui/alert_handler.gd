@@ -9,6 +9,7 @@ func _ready():
 	# Connect signals from ship entity to functions here
 	ShipData.player_ship.auto_disc.connect(auto_disc)
 	ShipData.player_ship.nav_disc.connect(nav_disc)
+	ShipData.player_ship.nav_next.connect(nav_next)
 	ShipData.player_ship.rel_clamp.connect(rel_clamp)
 	ShipData.player_ship.collision.connect(collision)
 	
@@ -64,7 +65,12 @@ func auto_disc():
 
 func nav_disc():
 	var new_label = make_caution_label()
-	new_label.text = "NAV_DISC: Trajectory no longer valid. Navigation mode disconnected."
+	new_label.text = "NAV_DISC: Destination reached, navigation ended."
+	alerts_list.add_child(new_label)
+	
+func nav_next():
+	var new_label = make_info_label()
+	new_label.text = "NAV_NEXT: Waypoint reached, navigating to next waypoint."
 	alerts_list.add_child(new_label)
 	
 func avi_test():

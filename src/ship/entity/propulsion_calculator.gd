@@ -22,11 +22,11 @@ var commanded_throttle = 0.0
 var thruster_power = 0.005
 var engine_power = 0.05
 
-var fuel_burn_rate = 0.0001
+var fuel_burn_rate = 0.00001
 
 @onready var ship = get_parent()
 
-func _process(_delta: float) -> void:
+func update(_dt: float) -> void:
 	thrust = Vector3(0,0,0)
 	
 	# Input main engine commanded throttle
@@ -35,25 +35,30 @@ func _process(_delta: float) -> void:
 	if Input.is_action_pressed("decrement_throttle"):
 		commanded_throttle = commanded_throttle - 0.01
 	if ship.nav_flag and ship.autopilot_flag:
-		commanded_throttle = ship.navigation_calculator.control.length()
+		commanded_throttle = ship.navigation_calculator.control_throttle
 	commanded_throttle = clamp(commanded_throttle,0,engine_power)
 	
-	# Increment pump speed based on error between throttle and result
-	var Kp = 0.1
-	var error = (commanded_throttle - throttle)/engine_power
-	he_mp = he_mp + Kp*error
-	de_mp = de_mp + Kp*error
-	
-	# Add in some random noise
-	he_mp = he_mp + randfn(0.0, he_mp/1000.0)
-	de_mp = de_mp + randfn(0.0, de_mp/1000.0)
-	
-	# Drain fuel by corresponding amount
-	he_quant = he_quant - fuel_burn_rate*he_mp
-	de_quant = de_quant - fuel_burn_rate*de_mp
+	# Simulate engine if time rate is 1
+	if SystemTime.step == 1:
+		# Increment pump speed based on error between throttle and result
+		var Kp = 0.1
+		var error = (commanded_throttle - throttle)/engine_power
+		he_mp = he_mp + Kp*error
+		de_mp = de_mp + Kp*error
 		
-	# Calculate thrust from pump speed
-	throttle = engine_power*min(he_mp,de_mp) # lowest pump speed
+		# Add in some random noise
+		he_mp = he_mp + randfn(0.0, he_mp/1000.0)
+		de_mp = de_mp + randfn(0.0, de_mp/1000.0)
+		
+		# Drain fuel by corresponding amount
+		he_quant = he_quant - fuel_burn_rate*he_mp
+		de_quant = de_quant - fuel_burn_rate*de_mp
+			
+		# Calculate thrust from pump speed
+		throttle = engine_power*min(he_mp,de_mp) # lowest pump speed
+	else:
+		# At other time rates, just directly set the throttle
+		throttle = commanded_throttle
 	thrust = thrust + Vector3(throttle,0,0)
 	
 	# Zero thrust if fuel is empty

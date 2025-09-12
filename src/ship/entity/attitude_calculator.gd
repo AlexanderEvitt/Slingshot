@@ -11,7 +11,7 @@ var inertia: Vector3 = Vector3(1, 1, 1)  # Modify based on spacecraft geometry
 var inv_inertia: Vector3 = Vector3(1.0 / inertia.x, 1.0 / inertia.y, 1.0 / inertia.z)
 
 
-func _process(_delta):
+func update(_dt):
 	# Calculate torque by increasing as you hold the button
 	# Commanded torque is in ship frame
 	var torque_rate = 0.02
@@ -62,7 +62,7 @@ func _process(_delta):
 				var r = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
 				target = r.cross(v)
 			"NAV":
-				target = ship.navigation_calculator.control.normalized()
+				target = ship.navigation_calculator.control_pointing
 		
 		# Calculate torque from autopilot
 		if target != null:
