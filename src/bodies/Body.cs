@@ -25,7 +25,7 @@ public partial class Body : Node3D
 
     // Persistent values for orbital calculations
     private double M;               // mean anomaly
-    private double T;               // orbital period
+    private double period;               // orbital period
     private double p;               // semi-latus rectum
     private double sqrtMuOverP;
     private double c1, c2, c3, c4, c5, c6;
@@ -41,7 +41,7 @@ public partial class Body : Node3D
 
         // Orbital constants
         M = 0.0;
-        T = 2.0 * Math.PI * Math.Sqrt(Math.Pow(a, 3.0) / parentMu);
+        period = 2.0 * Math.PI * Math.Sqrt(Math.Pow(a, 3.0) / parentMu);
         p = a * (1.0 - Math.Pow(e, 2.0));
         sqrtMuOverP = Math.Sqrt(parentMu / p);
 
@@ -58,6 +58,8 @@ public partial class Body : Node3D
         Rom = Basis.Identity.Rotated(new Godot.Vector3(0, 0, 1), RAAN);
 
         Rcombine = Rom * Ri;
+
+        // Produce the orbital period so orbit plotters can use it
     }
 
     public override void _PhysicsProcess(double delta)
@@ -87,7 +89,7 @@ public partial class Body : Node3D
     private Godot.Vector3 get_local_position(double time)
     {
         // Mean anomaly
-        M = 2.0 * Math.PI * (time / T);
+        M = 2.0 * Math.PI * (time / period);
 
         // Approximate true anomaly
         double theta = theta0 + M
@@ -119,7 +121,7 @@ public partial class Body : Node3D
         // Produces a different result to fetch(t) - fetch(t - 1)
 
         // Mean anomaly
-        M = 2.0 * Math.PI * (time / T);
+        M = 2.0 * Math.PI * (time / period);
 
         // Approximate true anomaly
         double theta = theta0 + M

@@ -48,7 +48,6 @@ environment = ExtResource("2_yr5qi")
 
 [node name="MediumSunLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
-visible = false
 layers = 2
 light_energy = 0.7
 light_cull_mask = 4294967294

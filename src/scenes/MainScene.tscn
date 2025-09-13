@@ -100,6 +100,19 @@ RAAN = 3.399
 argp = 1.573
 theta0 = 2.226
 
+[node name="Endurance" type="Node3D" parent="Planets/Earth/Luna"]
+process_priority = 13
+editor_description = "ENDURANCE is the gateway station to Shackleton crater, the largest city on Luna. As the sister station to Zephyr, countless ships make the run between them each cycle."
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+script = ExtResource("3_5edpo")
+a = 36618.0
+e = 0.7
+i = 1.571
+argp = 1.571
+
+[node name="DockCenter" type="Node3D" parent="Planets/Earth/Luna/Endurance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
+
 [node name="Mars" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
 editor_description = "MARS is the second-most populous planet in the Sol system, owing to early colonization efforts that predate most other planetary colonies by almost a century."
