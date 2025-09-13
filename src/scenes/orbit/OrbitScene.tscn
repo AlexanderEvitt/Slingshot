@@ -407,24 +407,6 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("11_lodt7")
 
-[node name="KOZ" type="Node3D" parent="Planets/Earth/Luna/Endurance"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
-
-[node name="wire_sphere" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("11_8re0r")]
-transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 29.32, 0, 0, 0)
-
-[node name="wire_cylinder" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("12_5etm5")]
-transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
-
-[node name="wire_cylinder2" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("12_5etm5")]
-transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
-
-[node name="wire_cylinder3" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("12_5etm5")]
-transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
-
-[node name="wire_cube" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("14_k6kd7")]
-transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
-
 [node name="ClickDetector" type="Area3D" parent="Planets/Earth/Luna/Endurance" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../../../Ships/PlayerShip/CameraRig")
@@ -446,6 +428,24 @@ font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
 horizontal_alignment = 0
+
+[node name="KOZ" type="Node3D" parent="Planets/Earth/Luna/Endurance"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+
+[node name="wire_sphere" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("11_8re0r")]
+transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 55.295, 0, 0, 0)
+
+[node name="wire_cylinder" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
+
+[node name="wire_cylinder2" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
+
+[node name="wire_cylinder3" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
+
+[node name="wire_cube" parent="Planets/Earth/Luna/Endurance/KOZ" instance=ExtResource("14_k6kd7")]
+transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
 [node name="ClickDetector" type="Area3D" parent="Planets/Earth" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
 script = ExtResource("15_c6xwu")

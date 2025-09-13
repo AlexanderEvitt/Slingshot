@@ -35,7 +35,7 @@ func update(dt, gravity):
 		control = Vector3(0,0,0)
 		
 	if report:
-		count = (count + 1) % 300
+		count = (count + 1) % 3000
 	
 func navigate(dt, gravity):
 	# Update waypoints, course info

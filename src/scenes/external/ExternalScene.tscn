@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=76 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
@@ -35,9 +35,10 @@
 [ext_resource type="Texture2D" uid="uid://bh21nouyh0k42" path="res://bodies/photo/NeptuneTrue.jpg" id="17_n5xr7"]
 [ext_resource type="Script" path="res://bodies/rotator.gd" id="17_wir2g"]
 [ext_resource type="Script" path="res://scenes/external/nightlights.gd" id="18_elqqx"]
+[ext_resource type="PackedScene" uid="uid://cdxkk5qy7ccnc" path="res://bodies/stations/stations/Endurance.tscn" id="18_ikxh7"]
+[ext_resource type="PackedScene" uid="uid://b0s1bdqqag6dw" path="res://bodies/stations/stations/Zephyr.tscn" id="18_n2nyd"]
 [ext_resource type="Texture2D" uid="uid://bf0o1r3dwo25y" path="res://bodies/photo/CallistoTrue.jpg" id="18_ufqw4"]
 [ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="19_7nri8"]
-[ext_resource type="PackedScene" uid="uid://d0nudijdf1bts" path="res://bodies/asteroids/asteroid.tscn" id="19_8qfgt"]
 [ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
 [ext_resource type="Script" path="res://bodies/body_inheritor.gd" id="29_i3asx"]
 [ext_resource type="Script" path="res://scenes/external/cinema_cam.gd" id="42_ktyp3"]
@@ -219,17 +220,6 @@ directional_shadow_max_distance = 1e+06
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
-[node name="SmallSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
-transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
-light_cull_mask = 4294967290
-shadow_enabled = true
-shadow_bias = 0.001
-shadow_opacity = 0.98
-shadow_blur = 0.8
-directional_shadow_max_distance = 0.2
-sky_mode = 1
-script = ExtResource("7_6u2xr")
-
 [node name="MediumSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 light_energy = 0.8
@@ -238,6 +228,17 @@ shadow_enabled = true
 shadow_blur = 1.808
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 500.0
+sky_mode = 1
+script = ExtResource("7_6u2xr")
+
+[node name="SmallSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+light_cull_mask = 4294967290
+shadow_enabled = true
+shadow_bias = 0.001
+shadow_opacity = 0.98
+shadow_blur = 0.8
+directional_shadow_max_distance = 0.2
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
@@ -301,11 +302,6 @@ light_color = Color(0.764073, 0.840415, 1, 1)
 omni_range = 15000.0
 omni_attenuation = 0.25
 
-[node name="ZephyrStation" parent="Planets/Earth" instance=ExtResource("19_8qfgt")]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 6441, 0, 0)
-script = ExtResource("29_i3asx")
-body_path = "Planets/Earth/ZephyrStation"
-
 [node name="Luna" type="Node3D" parent="Planets/Earth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5956.87, 0.322938, 15744.7)
 script = ExtResource("29_i3asx")
@@ -316,6 +312,16 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_6xnwu")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
+
+[node name="Endurance" parent="Planets/Earth/Luna" instance=ExtResource("18_ikxh7")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 2701.34, 0, 0)
+script = ExtResource("29_i3asx")
+body_path = "Planets/Earth/Luna/Endurance"
+
+[node name="ZephyrStation" parent="Planets/Earth" instance=ExtResource("18_n2nyd")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 7065.97, 0, 0)
+script = ExtResource("29_i3asx")
+body_path = "Planets/Earth/ZephyrStation"
 
 [node name="Mars" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14482.7, 0, 0)
