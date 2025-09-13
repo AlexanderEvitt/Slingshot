@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://kdt5ykkpsdpa"]
+
+[ext_resource type="Texture2D" uid="uid://c2wxii6kyvmli" path="res://bodies/asteroids/asteroid_BakedPotatoColor.png" id="1_7d7bt"]
+[ext_resource type="Texture2D" uid="uid://chkqjx2e6ugo5" path="res://bodies/asteroids/asteroid_BakedPotatoNormals.png" id="2_dadem"]
+
+[resource]
+resource_name = "BakedPotato"
+cull_mode = 2
+albedo_texture = ExtResource("1_7d7bt")
+roughness = 0.85
+normal_enabled = true
+normal_texture = ExtResource("2_dadem")
