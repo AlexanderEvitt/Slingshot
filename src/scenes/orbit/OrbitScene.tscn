@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=57 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://2q27idy8fbkr" path="res://bodies/wireframe/UranusWireframe.tscn" id="10_girv0"]
 [ext_resource type="PackedScene" uid="uid://b51mp318qc6wr" path="res://scenes/orbit/koz/wire_sphere.tscn" id="11_8re0r"]
 [ext_resource type="PackedScene" uid="uid://d386uc0phqab7" path="res://bodies/wireframe/NeptuneWireframe.tscn" id="11_ciut5"]
+[ext_resource type="Texture2D" uid="uid://cvrhj5um66egb" path="res://scenes/orbit/station_symbol.png" id="11_lodt7"]
 [ext_resource type="PackedScene" uid="uid://djhub5hfmxtif" path="res://scenes/orbit/koz/wire_cylinder.tscn" id="12_5etm5"]
 [ext_resource type="Shader" path="res://bodies/wireframe/outline.gdshader" id="12_oiuin"]
 [ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="13_kuxx4"]
@@ -29,6 +30,7 @@
 [ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="23_vt6nb"]
 [ext_resource type="Script" path="res://scenes/orbit/waypoint_rig.gd" id="27_2mw5s"]
 [ext_resource type="Script" path="res://scenes/orbit/waypoint_plotter.gd" id="28_3ag27"]
+[ext_resource type="Texture2D" uid="uid://d3qgybl45ufxd" path="res://scenes/orbit/ship_symbol.png" id="29_4bect"]
 
 [sub_resource type="Environment" id="Environment_aovhe"]
 background_mode = 1
@@ -289,17 +291,17 @@ body_path = "Planets/Earth/ZephyrStation"
 [node name="Plotter" type="Node3D" parent="Planets/Earth/ZephyrStation" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 color = Color(1, 0.6, 0, 1)
-visible_distance = 2000000
+visible_distance = 200000
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Earth/ZephyrStation"]
-visibility_range_end = 2000.0
-visibility_range_end_margin = 2000.0
+visibility_range_end = 20000.0
+visibility_range_end_margin = 20000.0
 visibility_range_fade_mode = 1
 modulate = Color(1, 0.6, 0, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
-texture = ExtResource("2_3t7g4")
+texture = ExtResource("11_lodt7")
 
 [node name="KOZ" type="Node3D" parent="Planets/Earth/ZephyrStation"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
@@ -328,14 +330,14 @@ expandable = true
 shape = SubResource("SphereShape3D_8k6tq")
 
 [node name="MoonLabel" type="Label3D" parent="Planets/Earth/ZephyrStation"]
-visibility_range_end = 2e+06
-visibility_range_end_margin = 2e+06
+visibility_range_end = 200000.0
+visibility_range_end_margin = 200000.0
 visibility_range_fade_mode = 1
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
-text = " PORT"
+text = " ZEPHYR"
 font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
@@ -403,7 +405,7 @@ modulate = Color(1, 0.6, 0, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
-texture = ExtResource("2_3t7g4")
+texture = ExtResource("11_lodt7")
 
 [node name="KOZ" type="Node3D" parent="Planets/Earth/Luna/Endurance"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
@@ -439,7 +441,7 @@ pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
-text = "ENDURANCE"
+text = " ENDURANCE"
 font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
@@ -894,14 +896,14 @@ modulate = Color(0.15, 0.5, 0.185, 1)
 pixel_size = 0.0001
 billboard = 1
 fixed_size = true
-texture = ExtResource("2_3t7g4")
+texture = ExtResource("29_4bect")
 
 [node name="ShipLabel" type="Label3D" parent="Ships/PlayerShip"]
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1
 fixed_size = true
-text = "FV JUNIPER"
+text = " FV JUNIPER"
 font = ExtResource("4_uugyr")
 font_size = 64
 outline_size = 6
