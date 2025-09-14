@@ -82,11 +82,336 @@ process_priority = 13
 editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("3_5edpo")
+station = true
 a = 42164.0
 theta0 = 3.142
 
-[node name="DockCenter" type="Node3D" parent="Planets/Earth/ZephyrStation"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
+[node name="Shipyard" type="Node3D" parent="Planets/Earth/ZephyrStation"]
+transform = Transform3D(0.410518, 0, 0, 0, 0.410518, 0, 0, 0, 0.410518, 0.718406, 40.0973, 0)
+
+[node name="DockA" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(2.43595, 0, 0, 0, 2.43595, 0, 0, 0, 2.43595, 1, 0.298156, 7.29684)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockB" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(2.43595, 0, 0, 0, 2.43595, 0, 0, 0, 2.43595, 1, 0.298156, 4.7722)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockC" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(2.43595, 0, 0, 0, 2.43595, 0, 0, 0, 2.43595, 1, 0.298156, 2.12256)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockD" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(2.43595, 0, 0, 0, 2.43595, 0, 0, 0, 2.43595, 1, 0.298156, -0.527079)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockE" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(2.43595, 0, 0, 0, 2.43595, 0, 0, 0, 2.43595, 1, 0.298156, -3.17672)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockF" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(2.43595, 0, 0, 0, 2.43595, 0, 0, 0, 2.43595, 1, 0.298156, -5.70136)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockG" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(-2.43595, 0, 3.67818e-07, 0, 2.43595, 0, -3.67818e-07, 0, -2.43595, -4.5, 0.298156, -7.29684)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockG"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockG"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockG"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockG"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockG"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockG"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockG"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockG"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockH" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(-2.43595, 0, 3.67818e-07, 0, 2.43595, 0, -3.67818e-07, 0, -2.43595, -4.5, 0.298156, -4.7722)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockH"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockH"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockH"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockH"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockH"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockH"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockH"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockH"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockI" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(-2.43595, 0, 3.67818e-07, 0, 2.43595, 0, -3.67818e-07, 0, -2.43595, -4.5, 0.298156, -2.12256)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockI"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockI"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockI"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockI"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockI"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockI"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockI"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockI"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockJ" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(-2.43595, 0, 3.67818e-07, 0, 2.43595, 0, -3.67818e-07, 0, -2.43595, -4.5, 0.298156, 0.527079)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockJ"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockJ"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockJ"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockJ"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockJ"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockJ"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockJ"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockJ"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockK" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(-2.43595, 0, 3.67818e-07, 0, 2.43595, 0, -3.67818e-07, 0, -2.43595, -4.5, 0.298156, 3.17672)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockK"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockK"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockK"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockK"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockK"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockK"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockK"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockK"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockL" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard"]
+transform = Transform3D(-2.43595, 0, 3.67818e-07, 0, 2.43595, 0, -3.67818e-07, 0, -2.43595, -4.5, 0.298156, 5.70136)
+
+[node name="Berth1" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockL"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockL"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockL"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockL"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockL"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockL"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockL"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Earth/ZephyrStation/Shipyard/DockL"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
 
 [node name="Luna" type="Node3D" parent="Planets/Earth" groups=["Bodies"]]
 process_priority = 13
@@ -105,6 +430,7 @@ process_priority = 13
 editor_description = "ENDURANCE is the gateway station to Shackleton crater, the largest city on Luna. As the sister station to Zephyr, countless ships make the run between them each cycle."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("3_5edpo")
+station = true
 a = 36618.0
 e = 0.7
 i = 1.571

@@ -1,17 +1,15 @@
 extends Node3D
 
+# State variables
 var velocity
 var attitude
 
+# Engine variables
 var torque
 var thrust = Vector3(0,0,0)
 var throttle = 0
 
-var plotted_positions
-
-@export var start_position : Vector3
-@export var start_velocity : Vector3
-
+# Children components
 @onready var attitude_calculator = $AttitudeCalculator
 @onready var navigation_calculator = $NavigationCalculator
 @onready var propulsion_calculator = $PropulsionCalculator
@@ -32,25 +30,26 @@ var waypoints = []
 signal auto_disc
 signal nav_disc
 signal nav_next
+signal att_clamp
 signal rel_clamp
 signal collision
 signal waypoints_updated
+signal berth_updated
 
-var previous_dt = 0.03333
-var previous_t = 0
-
+# Mass currently only for collision impulse
 var mass = 1
 
-var docked = true
-@onready var dock = get_node("../../Planets/Earth/ZephyrStation/DockCenter")
+# Which berth to start at (updated)
+var berthed = true
+@onready var station = get_tree().root.get_node("GameRoot/Planets/Earth/ZephyrStation")
+@onready var dock = station.get_node("Shipyard/DockC")
+@onready var berth = dock.get_node("Berth4")
+var berth_offset = Vector3(0.1,0,0)
 
-# this module moves data from the master scene to an autoload where others can access it
 
 func _ready():
 	# Initialize values
 	attitude = attitude_calculator.transform.basis
-	position = Conversions.ToUniversal(start_position,0)
-	velocity = Conversions.VelFromFrame(start_velocity,0)
 
 func _physics_process(delta):
 	# Update values for this iteration
@@ -61,19 +60,16 @@ func _physics_process(delta):
 	thrust = propulsion_calculator.thrust
 	throttle = propulsion_calculator.throttle
 
-	# Fix to start position if still docked
-	if docked:
-		position = dock.get_parent().fetch(SystemTime.t) + dock.get_parent().transform.basis*dock.position
-		velocity = (dock.get_parent().fetch(SystemTime.t) - dock.get_parent().fetch(SystemTime.t - 1.0))
-		if Input.is_action_just_pressed("dock"):
-			docked = false
-			rel_clamp.emit() # show alert
+	# Attach ship to dock if docked
+	if berthed:
+		# Move ship with dock
+		position = station.fetch(SystemTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
+		velocity = station.fetch(SystemTime.t) - station.fetch(SystemTime.t - 1.0)
+		attitude_calculator.transform.basis = berth.global_transform.basis
+
 	# Integrate regularly
 	else:
 		# Do multiple simulation time steps per run of physics_process
-		# Allow max timestep of 1000*(1/30) s
-		# Do one sim step per physics step up to step = 100, then increase
-		# Also say no more than max 100 steps per step
 		var sim_steps_per_physics_tick = clamp(SystemTime.step,1,100)
 		var prev_gravity = propagator.Acceleration(position,SystemTime.prev_t)
 		for i in range(sim_steps_per_physics_tick):
@@ -86,6 +82,19 @@ func _physics_process(delta):
 			propulsion_calculator.update(dt)
 			
 			integrate_normally(dt, prev_gravity)
+			
+		# Dock/undock if key is pressed
+	if Input.is_action_just_pressed("dock"):
+		if berthed:
+			berthed = false
+			rel_clamp.emit()
+		elif !berthed:
+			var berth_position = station.fetch(SystemTime.t) + (berth.global_position - station.global_position)
+			var berth_error = (berth_position - position).length()
+			# Allow docking only within ten meters
+			if berth_error < 0.01:
+				berthed = true
+				att_clamp.emit()
 
 func integrate_normally(dt, prev_gravity):
 	# Somehow get the acceleration from gravity in here
@@ -95,8 +104,8 @@ func integrate_normally(dt, prev_gravity):
 	var prev_acceleration = attitude*thrust + prev_gravity
 	# var acceleration = attitude*thrust + gravity
 	
-	# Calculate updated position and velocity through Verlet integration
-	position = position + velocity*dt# + 0.5*prev_acceleration*previous_dt**2
+	# Euler integrate for position and velocity
+	position = position + velocity*dt
 	velocity = velocity + (prev_acceleration)*dt
 	
 	# Change the velociity by the impulse
@@ -116,5 +125,23 @@ func find_time_index(times,time):
 
 func fetch(_time):
 	# Return origin of ship frame
-	# So if you select the ship frame, you basically just get the trajectory relative to wherever you are right now
 	return position
+
+func assign_berth(new_station):
+	# Make sure you're undocked so you don't move to the berth
+	berthed = false
+	
+	# Assign station
+	station = get_tree().root.get_node("GameRoot/" + new_station)
+	
+	# Get shipyard (parent to all dock)
+	var shipyard = get_tree().root.get_node("GameRoot/" + new_station + "/Shipyard")
+	
+	# Get random dock
+	var docks = shipyard.get_children()
+	dock = docks[randi_range(0, len(docks) - 1)]
+	
+	# Get random berth
+	var berths = dock.get_children()
+	berth = berths[randi_range(0, len(berths) - 1)]
+	berth_updated.emit()

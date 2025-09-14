@@ -10,6 +10,7 @@ func _ready():
 	ShipData.player_ship.auto_disc.connect(auto_disc)
 	ShipData.player_ship.nav_disc.connect(nav_disc)
 	ShipData.player_ship.nav_next.connect(nav_next)
+	ShipData.player_ship.att_clamp.connect(att_clamp)
 	ShipData.player_ship.rel_clamp.connect(rel_clamp)
 	ShipData.player_ship.collision.connect(collision)
 	
@@ -76,6 +77,11 @@ func nav_next():
 func avi_test():
 	var new_label = make_info_label()
 	new_label.text = "AVI_TEST: Avionics test completed satisfactorily."
+	alerts_list.add_child(new_label)
+
+func att_clamp():
+	var new_label = make_caution_label()
+	new_label.text = "ATT_CLAMP: Docking clamps attached. Hard dock established."
 	alerts_list.add_child(new_label)
 
 func rel_clamp():

@@ -88,6 +88,7 @@ rings = 64
 render_priority = 1
 transparency = 1
 blend_mode = 1
+specular_mode = 2
 albedo_texture = ExtResource("14_t6djw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ptrw"]
@@ -410,7 +411,15 @@ body_path = "Planets/Saturn/Titan"
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_uj08c")
-surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
+
+[node name="TitanAtmosphere" parent="Planets/Saturn/Titan" instance=ExtResource("5_2nae2")]
+planet_radius = 2575.0
+atmosphere_height = 100.0
+sun_path = NodePath("../../../Sun/BigSunLight")
+shader_params/u_density = 5.175
+shader_params/u_scattering_strength = 0.007
+shader_params/u_atmosphere_modulate = Color(0.921569, 0.866667, 0.521569, 1)
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0, 1)
 
 [node name="Uranus" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -577316, 0, 0)
@@ -422,6 +431,16 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_t3fbd")
 surface_material_override/0 = SubResource("StandardMaterial3D_fqvh8")
+
+[node name="UranusAtmosphere" parent="Planets/Uranus" instance=ExtResource("5_2nae2")]
+planet_radius = 25611.5
+atmosphere_height = 100.0
+sun_path = NodePath("../../Sun/BigSunLight")
+force_fullscreen = true
+shader_params/u_density = 1.285
+shader_params/u_scattering_strength = 0.192
+shader_params/u_atmosphere_modulate = Color(0.811765, 0.909804, 0.941176, 1)
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0, 1)
 
 [node name="Neptune" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -664570, 0, 0)

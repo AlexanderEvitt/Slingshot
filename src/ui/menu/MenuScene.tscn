@@ -18,6 +18,7 @@ bg_color = Color(0.501961, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vgwr0"]
 texture = ExtResource("16_g0tso")
+modulate_color = Color(0.117647, 0.117647, 0.156863, 1)
 
 [node name="MenuUI" type="Panel"]
 anchors_preset = 15

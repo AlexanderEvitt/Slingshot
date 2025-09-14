@@ -101,15 +101,23 @@ func navigate(dt, gravity):
 		if active_waypoint + 2 >= len(waypoints):
 			# Shut off navigation
 			ship.nav_disc.emit()
+			control = Vector3(0,0,0)
+			reverse = false
+			i_error = Vector3(0,0,0)
 		else:
 			# Move to next waypoint
 			active_waypoint = active_waypoint + 1
 			ship.nav_next.emit()
 			reverse = false
+			i_error = Vector3(0,0,0)
 	
 	# Split control into pointing and throttle command
-	control_pointing = control.normalized()
 	control_throttle = control.length()
+	if control_throttle > 0:
+		control_pointing = control.normalized()
+	else:
+		# Point retrocourse at autopilot shutoff
+		control_pointing = -course.normalized()
 	# Don't fire engine if pointing is incorrect
 	var attitude_error = acos(control_pointing.dot(ship.attitude.x)) # radians
 	if attitude_error > 0.087: # 5 degree tolerance
