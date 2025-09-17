@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=77 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bpfrq18j1sk54" path="res://scenes/external/stars/stars.tscn" id="8_wqcie"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="9_j0ace"]
 [ext_resource type="Script" path="res://scenes/external/stars/starblur_controller.gd" id="9_licgw"]
+[ext_resource type="Texture2D" uid="uid://dk713bymep7el" path="res://bodies/photo/EarthNorm.png" id="9_vu063"]
 [ext_resource type="Texture2D" uid="uid://dgl8wj4mkimt3" path="res://bodies/photo/MarsTrue.jpg" id="10_mv0q4"]
 [ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/photo/JupiterTrue.jpg" id="11_74p1c"]
 [ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="13_4jafp"]
@@ -69,14 +70,16 @@ albedo_texture = ExtResource("15_k1fbk")
 [sub_resource type="SphereMesh" id="SphereMesh_aom7d"]
 radius = 6371.0
 height = 12742.0
-radial_segments = 256
-rings = 128
+radial_segments = 512
+rings = 256
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imlac"]
 albedo_texture = ExtResource("4_eafgx")
-roughness = 0.4
 roughness_texture = ExtResource("13_fflf8")
 roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 3.0
+normal_texture = ExtResource("9_vu063")
 
 [sub_resource type="SphereMesh" id="SphereMesh_282r8"]
 radius = 6380.0
@@ -105,7 +108,7 @@ height = 3480.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qq6b"]
 albedo_texture = ExtResource("13_4jafp")
 normal_enabled = true
-normal_scale = 0.05
+normal_scale = -0.1
 normal_texture = ExtResource("14_0kyry")
 
 [sub_resource type="SphereMesh" id="SphereMesh_61v7t"]
@@ -167,6 +170,8 @@ height = 5150.0
 [sub_resource type="SphereMesh" id="SphereMesh_t3fbd"]
 radius = 25559.0
 height = 51118.0
+radial_segments = 512
+rings = 256
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqvh8"]
 transparency = 4
@@ -286,8 +291,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
 planet_radius = 6371.0
 atmosphere_height = 40.0
 sun_path = NodePath("../../../Sun/BigSunLight")
-shader_params/u_density = 0.2
-shader_params/u_scattering_strength = 0.35
+shader_params/u_density = 0.12
+shader_params/u_scattering_strength = 1.681
 shader_params/u_scattering_wavelengths = Vector3(650, 540, 440)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
@@ -299,12 +304,13 @@ script = ExtResource("18_elqqx")
 sun_path = NodePath("../../../Sun")
 
 [node name="Earthshine" type="OmniLight3D" parent="Planets/Earth"]
+visible = false
 light_color = Color(0.764073, 0.840415, 1, 1)
 omni_range = 15000.0
 omni_attenuation = 0.25
 
 [node name="Luna" type="Node3D" parent="Planets/Earth"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5956.87, 0.322938, 15744.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5956.87, 9614.39, 15744.7)
 script = ExtResource("29_i3asx")
 body_path = "Planets/Earth/Luna"
 
@@ -436,9 +442,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fqvh8")
 planet_radius = 25611.5
 atmosphere_height = 100.0
 sun_path = NodePath("../../Sun/BigSunLight")
-force_fullscreen = true
 shader_params/u_density = 1.285
-shader_params/u_scattering_strength = 0.192
+shader_params/u_scattering_strength = 0.195
 shader_params/u_atmosphere_modulate = Color(0.811765, 0.909804, 0.941176, 1)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0, 1)
 
