@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=78 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="9_j0ace"]
 [ext_resource type="Script" path="res://scenes/external/stars/starblur_controller.gd" id="9_licgw"]
 [ext_resource type="Texture2D" uid="uid://dk713bymep7el" path="res://bodies/photo/EarthNorm.png" id="9_vu063"]
-[ext_resource type="Texture2D" uid="uid://dgl8wj4mkimt3" path="res://bodies/photo/MarsTrue.jpg" id="10_mv0q4"]
 [ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/photo/JupiterTrue.jpg" id="11_74p1c"]
 [ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="13_4jafp"]
 [ext_resource type="Texture2D" uid="uid://le10flv78rjl" path="res://bodies/photo/MercuryTrue.jpg" id="13_4pb4k"]
@@ -41,6 +40,8 @@
 [ext_resource type="Texture2D" uid="uid://bf0o1r3dwo25y" path="res://bodies/photo/CallistoTrue.jpg" id="18_ufqw4"]
 [ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="19_7nri8"]
 [ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
+[ext_resource type="Texture2D" uid="uid://bdybpcdcv37y" path="res://bodies/photo/MarsTrue.png" id="21_qmkav"]
+[ext_resource type="Texture2D" uid="uid://yfa1thnw2jj0" path="res://bodies/photo/MarsNorm.jpg" id="22_ywee2"]
 [ext_resource type="Script" path="res://bodies/body_inheritor.gd" id="29_i3asx"]
 [ext_resource type="Script" path="res://scenes/external/cinema_cam.gd" id="42_ktyp3"]
 
@@ -118,7 +119,10 @@ radial_segments = 128
 rings = 64
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_563sj"]
-albedo_texture = ExtResource("10_mv0q4")
+albedo_texture = ExtResource("21_qmkav")
+normal_enabled = true
+normal_scale = 1.21
+normal_texture = ExtResource("22_ywee2")
 
 [sub_resource type="SphereMesh" id="SphereMesh_ke1qx"]
 radius = 71492.0

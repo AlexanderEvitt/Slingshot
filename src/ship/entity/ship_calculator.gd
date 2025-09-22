@@ -46,6 +46,9 @@ var berthed = true
 @onready var berth = dock.get_node("Berth4")
 var berth_offset = Vector3(0.1,0,0)
 
+# Tell the selection panel that this isn't a station you can dock with
+var is_station = false
+
 
 func _ready():
 	# Initialize values
@@ -91,6 +94,7 @@ func _physics_process(delta):
 		elif !berthed:
 			var berth_position = station.fetch(SystemTime.t) + (berth.global_position - station.global_position)
 			var berth_error = (berth_position - position).length()
+			print(berth_error)
 			# Allow docking only within ten meters
 			if berth_error < 0.01:
 				berthed = true

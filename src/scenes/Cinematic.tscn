@@ -1,0 +1,122 @@
+[gd_scene load_steps=19 format=3 uid="uid://cbunmnqhjx5y1"]
+
+[ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="1_i8siu"]
+[ext_resource type="Texture2D" uid="uid://dk713bymep7el" path="res://bodies/photo/EarthNorm.png" id="2_4grjg"]
+[ext_resource type="Texture2D" uid="uid://wxloygaaug3q" path="res://bodies/photo/EarthRough.png" id="3_lxb8n"]
+[ext_resource type="Script" path="res://bodies/rotator.gd" id="4_oib2c"]
+[ext_resource type="Texture2D" uid="uid://dggsu48bwuw4l" path="res://bodies/photo/EarthClouds.png" id="5_7ensr"]
+[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="6_fqrug"]
+[ext_resource type="Shader" path="res://scenes/external/nightlights.gdshader" id="7_x5ylm"]
+[ext_resource type="Texture2D" uid="uid://df6jgthy17fmr" path="res://bodies/photo/EarthLights.png" id="8_yvoja"]
+[ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="11_boowo"]
+[ext_resource type="Texture2D" uid="uid://s4i4jbyto3n4" path="res://bodies/photo/LunaNorm.png" id="12_o45j6"]
+[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="16_8u66r"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ts1cy"]
+radius = 6371.0
+height = 12742.0
+radial_segments = 512
+rings = 256
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1p3ad"]
+albedo_texture = ExtResource("1_i8siu")
+roughness_texture = ExtResource("3_lxb8n")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 3.0
+normal_texture = ExtResource("2_4grjg")
+
+[sub_resource type="SphereMesh" id="SphereMesh_pul8i"]
+radius = 6380.0
+height = 12760.0
+radial_segments = 128
+rings = 64
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1eep"]
+render_priority = 1
+transparency = 1
+blend_mode = 1
+specular_mode = 2
+albedo_texture = ExtResource("5_7ensr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pyu4n"]
+render_priority = 0
+shader = ExtResource("7_x5ylm")
+shader_parameter/emission_color = Color(1, 0.74902, 0, 1)
+shader_parameter/sun_dir = Vector3(0, 1, 0)
+shader_parameter/lights_texture = ExtResource("8_yvoja")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cohwv"]
+radius = 1740.0
+height = 3480.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7p2i"]
+albedo_texture = ExtResource("11_boowo")
+normal_enabled = true
+normal_scale = -0.1
+normal_texture = ExtResource("12_o45j6")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Earth" type="Node3D" parent="."]
+
+[node name="EarthMesh" type="MeshInstance3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 1e+07
+mesh = SubResource("SphereMesh_ts1cy")
+surface_material_override/0 = SubResource("StandardMaterial3D_1p3ad")
+script = ExtResource("4_oib2c")
+
+[node name="Clouds" type="MeshInstance3D" parent="Earth/EarthMesh"]
+visibility_range_end = 1e+07
+mesh = SubResource("SphereMesh_pul8i")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_v1eep")
+
+[node name="EarthAtmosphere" parent="Earth/EarthMesh" instance=ExtResource("6_fqrug")]
+planet_radius = 6371.0
+atmosphere_height = 40.0
+sun_path = NodePath("../../../BigSunLight")
+shader_params/u_density = 0.12
+shader_params/u_scattering_strength = 1.681
+shader_params/u_scattering_wavelengths = Vector3(650, 540, 440)
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
+
+[node name="Lights" type="MeshInstance3D" parent="Earth/EarthMesh"]
+visible = false
+visibility_range_end = 1e+07
+mesh = SubResource("SphereMesh_pul8i")
+surface_material_override/0 = SubResource("ShaderMaterial_pyu4n")
+
+[node name="Earthshine" type="OmniLight3D" parent="Earth"]
+visible = false
+light_color = Color(0.764073, 0.840415, 1, 1)
+omni_range = 15000.0
+omni_attenuation = 0.25
+
+[node name="Luna" type="Node3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5956.87, 1585.64, 9184.96)
+
+[node name="LunaMesh" type="MeshInstance3D" parent="Earth/Luna"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -10428.9, 4595.61, -1240.54)
+visibility_range_end = 1e+07
+mesh = SubResource("SphereMesh_cohwv")
+surface_material_override/0 = SubResource("StandardMaterial3D_f7p2i")
+
+[node name="BigSunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 0, 1.22465e-16, 1.22465e-16, 6.12323e-17, 1, -7.49882e-33, 1, -6.12323e-17, 0, 10441.1, 0)
+light_energy = 0.7
+light_cull_mask = 4294967289
+shadow_enabled = true
+directional_shadow_split_1 = 0.05
+directional_shadow_max_distance = 1e+06
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("16_8u66r")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.732568, 0.245071, 0.635047, 0, 0.93294, -0.360031, -0.680694, 0.263747, 0.683442, 16441.7, -8564.16, 18007.3)
+fov = 40.0
+near = 100.0
+far = 200000.0

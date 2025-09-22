@@ -39,7 +39,7 @@ func _process(_delta):
 			waypoint_button.disabled = false
 		
 		# Only allow request berth if user is selecting a station
-		if selected.station == true:
+		if selected.is_station == true:
 			request_button.disabled = false
 
 func on_frame_change():

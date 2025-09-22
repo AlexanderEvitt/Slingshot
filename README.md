@@ -1,7 +1,7 @@
 # Slingshot
 ## Astrodynamics Simulator
 
-![Logo](src/visuals/logo/patch.png)
+![Cover](cover.png)
 ![Flying Past Stars](streaks.png)
 
 Slingshot is a 6DOF spaceflight simulator that combines futuristic high-energy fusion propulsion systems with realistic physics. The entire solar system is implemented at real scale.

@@ -11,7 +11,7 @@ public partial class Body : Node3D
 
     // Booleans for defining type of object
     [Export]
-    public bool station { get; set; }
+    public bool is_station { get; set; }
 
     // Input orbital elements
     [Export]

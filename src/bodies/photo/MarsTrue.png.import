@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgl8wj4mkimt3"
-path.s3tc="res://.godot/imported/MarsTrue.jpg-700eddd0f1f9ad53f49fc1b40e13390f.s3tc.ctex"
+uid="uid://bdybpcdcv37y"
+path.s3tc="res://.godot/imported/MarsTrue.png-61e99962aa50dacb7a69b8d0493cd686.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://bodies/photo/MarsTrue.jpg"
-dest_files=["res://.godot/imported/MarsTrue.jpg-700eddd0f1f9ad53f49fc1b40e13390f.s3tc.ctex"]
+source_file="res://bodies/photo/MarsTrue.png"
+dest_files=["res://.godot/imported/MarsTrue.png-61e99962aa50dacb7a69b8d0493cd686.s3tc.ctex"]
 
 [params]
 
