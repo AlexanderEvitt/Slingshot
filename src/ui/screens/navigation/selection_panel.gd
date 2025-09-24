@@ -49,8 +49,10 @@ func on_frame_change():
 func on_cam_change():
 	# Reparent the camera to the selected body
 	camera_rig.reparent(orbit_scene_root.get_node(orbit_scene_root.selected_body))
-	# Move the camera rig to its new parent
-	camera_rig.position = Vector3(0,0,0)
+	# Move the camera rig to its new parent (by smoothly tweening to zero)
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(camera_rig, "position", Vector3(0,0,0), 0.3)
 	
 func on_waypoint_select():
 	# Reparent the rig to the selected body

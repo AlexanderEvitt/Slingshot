@@ -82,7 +82,6 @@ process_priority = 13
 editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("3_5edpo")
-is_station = true
 a = 42164.0
 theta0 = 3.142
 
@@ -430,7 +429,6 @@ process_priority = 13
 editor_description = "ENDURANCE is the gateway station to Shackleton crater, the largest city on Luna. As the sister station to Zephyr, countless ships make the run between them each cycle."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("3_5edpo")
-is_station = true
 a = 36618.0
 e = 0.7
 i = 1.571

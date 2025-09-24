@@ -2,6 +2,7 @@ extends Node
 
 @export var zoom_distance := 200.0
 var zoom_speed := 1.2
+var smooth_zoom := 0.2 # 1.0 is move instantly to new zoom, 0.0 is don't move
 @export var zoom_min := 7.0
 var zoom_max := 2000000000.0
 
@@ -28,7 +29,10 @@ func _process(_delta):
 		if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):
 			zoom_distance = zoom_distance/zoom_speed
 		zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
-		camera.position = Vector3(0, 0, zoom_distance)
+		
+		# Smoothly move to new position
+		var old_zoom = camera.position.z
+		camera.position = Vector3(0, 0, smooth_zoom*zoom_distance + (1.0 - smooth_zoom)*old_zoom)
 		
 		# Handle arrow keys rotation	
 		if Input.is_action_pressed("mod_up"):
