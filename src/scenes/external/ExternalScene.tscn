@@ -225,31 +225,9 @@ transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 
 light_energy = 0.7
 light_cull_mask = 4294967289
 shadow_enabled = true
-directional_shadow_split_1 = 0.05
-directional_shadow_max_distance = 1e+06
-sky_mode = 1
-script = ExtResource("7_6u2xr")
-
-[node name="MediumSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
-transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
-light_energy = 0.8
-light_cull_mask = 4294967292
-shadow_enabled = true
-shadow_blur = 1.808
-directional_shadow_blend_splits = true
-directional_shadow_max_distance = 500.0
-sky_mode = 1
-script = ExtResource("7_6u2xr")
-
-[node name="SmallSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
-transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
-light_cull_mask = 4294967290
-shadow_enabled = true
-shadow_bias = 0.005
-shadow_normal_bias = 0.0
-shadow_opacity = 0.98
-shadow_blur = 0.8
-directional_shadow_max_distance = 0.2
+directional_shadow_split_1 = 0.01
+directional_shadow_split_2 = 0.1
+directional_shadow_max_distance = 1000.0
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
@@ -315,7 +293,7 @@ omni_range = 15000.0
 omni_attenuation = 0.25
 
 [node name="Luna" type="Node3D" parent="Planets/Earth"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5956.87, 9614.39, 15744.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5956.87, 728.873, 15744.7)
 script = ExtResource("29_i3asx")
 body_path = "Planets/Earth/Luna"
 

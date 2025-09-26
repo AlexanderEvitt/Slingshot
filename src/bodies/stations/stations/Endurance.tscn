@@ -61,14 +61,6 @@ flip = -1
 [node name="shipyard" parent="." instance=ExtResource("4_4614r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38.881, 0)
 
-[node name="MediumSunLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
-visible = false
-light_energy = 0.7
-light_cull_mask = 4294967292
-shadow_enabled = true
-sky_mode = 1
-
 [node name="DockCenter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
 
@@ -92,6 +84,5 @@ transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
 [node name="BakedPotato" type="MeshInstance3D" parent="."]
 transform = Transform3D(26.05, 0, 0, 0, 26.05, 0, 0, 0, 26.05, 0, 0, 0)
-layers = 4
 mesh = SubResource("ArrayMesh_y4kea")
 skeleton = NodePath("")

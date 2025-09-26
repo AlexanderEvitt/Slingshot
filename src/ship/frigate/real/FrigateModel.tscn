@@ -20,40 +20,11 @@ uv1_scale = Vector3(5, 5, 5)
 
 [node name="frigate" instance=ExtResource("1_p2xcd")]
 
-[node name="Turret1" parent="." index="0"]
-layers = 2
-
-[node name="Laser1" parent="Turret1" index="0"]
-layers = 2
-
 [node name="Pods" parent="." index="1"]
-layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_ylmgo")
 
-[node name="Antenna" parent="." index="2"]
-layers = 2
-
-[node name="Airlock" parent="." index="3"]
-layers = 2
-
-[node name="Turret2" parent="." index="4"]
-layers = 2
-
-[node name="Laser2" parent="Turret2" index="0"]
-layers = 2
-
-[node name="Pipes" parent="." index="5"]
-layers = 2
-
-[node name="MissileTubes" parent="." index="6"]
-layers = 2
-
 [node name="FinalHull" parent="." index="7"]
-layers = 2
 surface_material_override/5 = ExtResource("2_gb527")
-
-[node name="Fins" parent="." index="9"]
-layers = 2
 
 [node name="ConkLogo" type="Sprite3D" parent="." index="12"]
 transform = Transform3D(5.89646e-17, -0.269626, -0.962965, 1.65098e-17, 0.962965, -0.269626, 1, 0, 6.12323e-17, -10.2921, 6.24429, 0)
@@ -96,15 +67,3 @@ text = "117"
 font = ExtResource("7_67fpr")
 font_size = 96
 outline_size = 0
-
-[node name="EngineTube" parent="." index="17"]
-layers = 2
-
-[node name="Magnets" parent="." index="18"]
-layers = 2
-
-[node name="Injectors" parent="." index="19"]
-layers = 2
-
-[node name="CoolantManifold" parent="." index="20"]
-layers = 2

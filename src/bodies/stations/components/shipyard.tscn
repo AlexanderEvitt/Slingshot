@@ -12,15 +12,12 @@
 script = ExtResource("2_tvlfv")
 
 [node name="Mast" parent="." index="0"]
-layers = 4
 surface_material_override/0 = ExtResource("2_cttqy")
 
 [node name="Truss" parent="." index="1"]
-layers = 4
 surface_material_override/0 = ExtResource("3_vv554")
 
 [node name="Shipyard" parent="." index="2"]
-layers = 4
 surface_material_override/0 = ExtResource("4_ww0q7")
 surface_material_override/1 = ExtResource("5_k2jnt")
 
@@ -61,5 +58,4 @@ transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
 [node name="Sphere" parent="." index="3"]
-layers = 4
 surface_material_override/0 = ExtResource("3_vv554")

@@ -7,7 +7,6 @@
 [node name="docks" instance=ExtResource("1_wd4of")]
 
 [node name="Docks" parent="." index="0"]
-layers = 4
 surface_material_override/0 = ExtResource("2_y4qs5")
 
 [node name="simplified_berth" parent="Docks/Berth1" index="0" instance=ExtResource("4_01trk")]

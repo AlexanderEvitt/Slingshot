@@ -13,70 +13,47 @@
 [node name="berth" instance=ExtResource("1_sdcv1")]
 
 [node name="DockE" parent="." index="0"]
-layers = 2
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("3_02i7e")
 
 [node name="BackPipe" parent="DockE" index="0"]
-layers = 2
 surface_material_override/0 = ExtResource("4_pbg5w")
 
 [node name="Control" parent="DockE" index="2"]
-layers = 2
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("7_p8e0j")
 
 [node name="DoorLeft" parent="DockE/DoorLeftHinge" index="0"]
-layers = 2
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("8_ucgqw")
 
 [node name="DoorRight" parent="DockE/DoorRightHinge" index="0"]
-layers = 2
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("8_ucgqw")
 
 [node name="Frames" parent="DockE" index="5"]
-layers = 2
 surface_material_override/0 = ExtResource("8_ucgqw")
 
 [node name="FuelingPipe" parent="DockE" index="6"]
-layers = 2
 surface_material_override/0 = ExtResource("4_pbg5w")
 surface_material_override/1 = ExtResource("6_prrdp")
 
 [node name="Lamps" parent="DockE" index="7"]
-layers = 2
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("9_r4srt")
 
 [node name="LeftClamp" parent="DockE" index="8" node_paths=PackedStringArray("upper_clamp", "lower_clamp")]
-layers = 2
 script = ExtResource("9_ghmh8")
 upper_clamp = NodePath("LeftUpperClamp")
 lower_clamp = NodePath("LeftLowerClamp")
 rightness = -1
 
-[node name="LeftLowerClamp" parent="DockE/LeftClamp" index="0"]
-layers = 2
-
-[node name="LeftUpperClamp" parent="DockE/LeftClamp" index="1"]
-layers = 2
-
 [node name="RightClamp" parent="DockE" index="9" node_paths=PackedStringArray("upper_clamp", "lower_clamp")]
-layers = 2
 script = ExtResource("9_ghmh8")
 upper_clamp = NodePath("RightUpperClamp")
 lower_clamp = NodePath("RightLowerClamp")
 
-[node name="RightLowerClamp" parent="DockE/RightClamp" index="0"]
-layers = 2
-
-[node name="RightUpperClamp" parent="DockE/RightClamp" index="1"]
-layers = 2
-
 [node name="Supports" parent="DockE" index="10"]
-layers = 2
 surface_material_override/0 = ExtResource("2_agj8e")
 
 [node name="Node3D" type="Node3D" parent="." index="1"]

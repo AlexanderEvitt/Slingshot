@@ -14,23 +14,18 @@ tunnel_node = NodePath("Tunnel")
 frame_node = NodePath("Frame")
 
 [node name="Ring" parent="." index="0"]
-layers = 4
 surface_material_override/0 = ExtResource("2_n0105")
 surface_material_override/1 = ExtResource("3_lg67x")
 
 [node name="Mast" parent="." index="1"]
-layers = 4
 surface_material_override/0 = ExtResource("4_wcdpf")
 
 [node name="Hub" parent="." index="2"]
-layers = 4
 surface_material_override/0 = ExtResource("2_n0105")
 surface_material_override/1 = ExtResource("5_hngcu")
 
 [node name="Tunnel" parent="." index="3"]
-layers = 4
 surface_material_override/0 = ExtResource("2_n0105")
 
 [node name="Frame" parent="." index="4"]
-layers = 4
 surface_material_override/0 = ExtResource("5_hngcu")
