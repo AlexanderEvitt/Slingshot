@@ -223,10 +223,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
 [node name="BigSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 light_energy = 0.7
-light_cull_mask = 4294967289
 shadow_enabled = true
-directional_shadow_split_1 = 0.01
-directional_shadow_split_2 = 0.1
+shadow_bias = 0.001
+shadow_normal_bias = 1.0
+directional_shadow_split_1 = 0.001
 directional_shadow_max_distance = 1000.0
 sky_mode = 1
 script = ExtResource("7_6u2xr")

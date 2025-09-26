@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=62 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -68,7 +68,16 @@ radius = 3396.0
 radius = 1822.0
 height = 3643.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e0jq5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7j3p"]
+render_priority = 0
+shader = ExtResource("12_oiuin")
+shader_parameter/colored = Color(0.527308, 0.238355, 0.289012, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+shader_parameter/textured = ExtResource("13_kuxx4")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_335ah"]
+radius = 1822.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_kxpab"]
 radius = 2410.0
@@ -82,6 +91,9 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 shader_parameter/textured = ExtResource("13_kuxx4")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_1q5uj"]
+radius = 2410.0
+
 [sub_resource type="SphereMesh" id="SphereMesh_p12ly"]
 radius = 1561.0
 height = 3122.0
@@ -94,6 +106,9 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 shader_parameter/textured = ExtResource("13_kuxx4")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_e817l"]
+radius = 1561.0
+
 [sub_resource type="SphereMesh" id="SphereMesh_2a7sc"]
 radius = 2634.0
 height = 5268.0
@@ -105,6 +120,9 @@ shader_parameter/colored = Color(0.56, 0.56, 0.56, 1)
 shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 shader_parameter/textured = ExtResource("13_kuxx4")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lepoe"]
+radius = 2634.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d04h7"]
 radius = 71492.0
@@ -532,7 +550,7 @@ body_path = "Planets/Jupiter/Io"
 [node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Io"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_385ak")
-surface_material_override/0 = SubResource("ShaderMaterial_e0jq5")
+surface_material_override/0 = SubResource("ShaderMaterial_l7j3p")
 
 [node name="MoonLabel" type="Label3D" parent="Planets/Jupiter/Io/BodyMesh"]
 visibility_range_end = 2e+06
@@ -562,6 +580,14 @@ pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
+
+[node name="ClickDetector" type="Area3D" parent="Planets/Jupiter/Io" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Jupiter/Io/ClickDetector"]
+shape = SubResource("SphereShape3D_335ah")
 
 [node name="Callisto" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28387.6, 0, 86043.4)
@@ -602,6 +628,14 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
+[node name="ClickDetector" type="Area3D" parent="Planets/Jupiter/Callisto" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Jupiter/Callisto/ClickDetector"]
+shape = SubResource("SphereShape3D_1q5uj")
+
 [node name="Europa" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25504.2, 0, 90486.3)
 script = ExtResource("9_2beyu")
@@ -640,6 +674,14 @@ pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
+
+[node name="ClickDetector" type="Area3D" parent="Planets/Jupiter/Europa" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Jupiter/Europa/ClickDetector"]
+shape = SubResource("SphereShape3D_e817l")
 
 [node name="Ganymede" type="Node3D" parent="Planets/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26531.7, 0, 82270.3)
@@ -680,6 +722,14 @@ pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
+
+[node name="ClickDetector" type="Area3D" parent="Planets/Jupiter/Ganymede" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Jupiter/Ganymede/ClickDetector"]
+shape = SubResource("SphereShape3D_lepoe")
 
 [node name="ClickDetector" type="Area3D" parent="Planets/Jupiter" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
 script = ExtResource("15_c6xwu")

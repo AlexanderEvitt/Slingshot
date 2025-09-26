@@ -13,6 +13,7 @@ func _ready():
 	ShipData.player_ship.att_clamp.connect(att_clamp)
 	ShipData.player_ship.rel_clamp.connect(rel_clamp)
 	ShipData.player_ship.collision.connect(collision)
+	ShipData.player_ship.berth_updated.connect(berth_granted)
 	
 	# Get the needed node references
 	alerts_list = $"VBoxContainer/MainPanel/ScrollContainer/MarginContainer/AlertsList"
@@ -72,6 +73,11 @@ func nav_disc():
 func nav_next():
 	var new_label = make_info_label()
 	new_label.text = "NAV_NEXT: Waypoint reached, navigating to next waypoint."
+	alerts_list.add_child(new_label)
+	
+func berth_granted():
+	var new_label = make_info_label()
+	new_label.text = "BRTH_GRANT: Docking permission granted, berth assigned."
 	alerts_list.add_child(new_label)
 	
 func avi_test():

@@ -7,6 +7,7 @@ var line_instance = MeshInstance3D.new()
 
 func _process(_delta):
 	# Move node to where the camera is (global origin)
+	# Lines use graphics that don't have double precision
 	global_position = Vector3(0,0,0)
 	
 	# Add each point to traj
