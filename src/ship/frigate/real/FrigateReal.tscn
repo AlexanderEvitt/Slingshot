@@ -37,7 +37,7 @@ transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 transform = Transform3D(138.79, 0, 0, 0, 138.79, 0, 0, 0, 138.79, -31.1913, 0, 0)
 
 [node name="Plume" parent="scaledown/Plumes" instance=ExtResource("1_bs7i2")]
-transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, -0.00170921, 0, 0)
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.00628205, 0, 0)
 
 [node name="Thrusters" type="Node3D" parent="scaledown"]
 
@@ -104,7 +104,7 @@ roll_right = true
 transform = Transform3D(9.18485e-15, 150, 0, 150, -9.18485e-15, -1.83697e-14, -1.83697e-14, 1.12482e-30, -150, 24.3485, -6.07937, 3.94772e-05)
 
 [node name="Pod1" type="Node3D" parent="scaledown/Thrusters"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87947, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)
 
 [node name="Thruster1" parent="scaledown/Thrusters/Pod1" instance=ExtResource("2_nl3g8")]
 transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -16.37, 9.20155, 0)
@@ -137,7 +137,7 @@ transform = Transform3D(9.18485e-15, 150, 0, -150, 9.18485e-15, 0, 0, 0, 150, -1
 transform = Transform3D(-2.75546e-14, -150, 0, 150, -2.75546e-14, 0, 0, 0, 150, -20.9412, 9.05106, 0)
 
 [node name="Pod2NR" type="Node3D" parent="scaledown/Thrusters"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87947, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)
 
 [node name="Thruster1" parent="scaledown/Thrusters/Pod2NR" instance=ExtResource("2_nl3g8")]
 transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -16.37, -6.50648, 6.50648)
@@ -170,7 +170,7 @@ transform = Transform3D(9.18485e-15, 150, 0, 106.066, -6.49467e-15, -106.066, -1
 transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, -106.066, 106.066, -1.9484e-14, -106.066, -20.9412, -6.40007, 6.40007)
 
 [node name="Pod3NR" type="Node3D" parent="scaledown/Thrusters"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87947, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)
 
 [node name="Thruster1" parent="scaledown/Thrusters/Pod3NR" instance=ExtResource("2_nl3g8")]
 transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -16.37, -6.50648, -6.50648)
