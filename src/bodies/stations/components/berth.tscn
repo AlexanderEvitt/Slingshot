@@ -1,21 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1tcbt5jko4sn"]
+[gd_scene load_steps=10 format=3 uid="uid://d1tcbt5jko4sn"]
 
 [ext_resource type="PackedScene" uid="uid://dljr03rg7o43w" path="res://bodies/stations/components/berth.glb" id="1_sdcv1"]
 [ext_resource type="Material" uid="uid://o7dtbv1yqscr" path="res://bodies/stations/components/materials/SmoothConcrete.tres" id="2_agj8e"]
 [ext_resource type="Material" uid="uid://crmu6btryp01q" path="res://bodies/stations/components/materials/StampedConcrete.tres" id="3_02i7e"]
 [ext_resource type="Material" uid="uid://dw6b8drc721yf" path="res://bodies/stations/components/materials/LightMetal.tres" id="4_pbg5w"]
-[ext_resource type="Texture2D" uid="uid://cyd6aaowyrvob" path="res://bodies/stations/components/materials/DetailNormal.png" id="5_obry5"]
-[ext_resource type="Script" path="res://bodies/stations/docking_clamps.gd" id="6_ljwh4"]
 [ext_resource type="Material" uid="uid://dludvu0b82cft" path="res://bodies/stations/components/materials/DetailMetal.tres" id="6_prrdp"]
 [ext_resource type="Material" uid="uid://ddp6bqs75itvp" path="res://bodies/stations/components/materials/BlackPaint.tres" id="7_p8e0j"]
 [ext_resource type="Material" uid="uid://cljigg1mdxyr8" path="res://bodies/stations/components/materials/GreyMetal.tres" id="8_ucgqw"]
+[ext_resource type="Script" path="res://bodies/stations/components/clamp_manager.gd" id="9_ghmh8"]
 [ext_resource type="Material" uid="uid://boikfvjvgjn2o" path="res://bodies/stations/components/materials/Floodlights.tres" id="9_r4srt"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5lxg"]
-metallic = 1.0
-roughness = 0.5
-normal_enabled = true
-normal_texture = ExtResource("5_obry5")
 
 [node name="berth" instance=ExtResource("1_sdcv1")]
 
@@ -28,32 +21,10 @@ surface_material_override/1 = ExtResource("3_02i7e")
 layers = 2
 surface_material_override/0 = ExtResource("4_pbg5w")
 
-[node name="Clamps1" parent="DockE" index="1"]
-visible = false
-layers = 2
-surface_material_override/0 = ExtResource("4_pbg5w")
-surface_material_override/1 = SubResource("StandardMaterial3D_p5lxg")
-script = ExtResource("6_ljwh4")
-
-[node name="Springs" parent="DockE/Clamps1" index="0"]
-layers = 2
-surface_material_override/0 = ExtResource("4_pbg5w")
-
-[node name="Clamps2" parent="DockE" index="2"]
-visible = false
-layers = 2
-surface_material_override/0 = ExtResource("4_pbg5w")
-surface_material_override/1 = ExtResource("6_prrdp")
-script = ExtResource("6_ljwh4")
-
-[node name="Control" parent="DockE" index="3"]
+[node name="Control" parent="DockE" index="2"]
 layers = 2
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("7_p8e0j")
-
-[node name="Cube" parent="DockE" index="4"]
-layers = 2
-surface_material_override/0 = ExtResource("2_agj8e")
 
 [node name="DoorLeft" parent="DockE/DoorLeftHinge" index="0"]
 layers = 2
@@ -65,19 +36,44 @@ layers = 2
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("8_ucgqw")
 
-[node name="Frames" parent="DockE" index="7"]
+[node name="Frames" parent="DockE" index="5"]
 layers = 2
 surface_material_override/0 = ExtResource("8_ucgqw")
 
-[node name="FuelingPipe" parent="DockE" index="8"]
+[node name="FuelingPipe" parent="DockE" index="6"]
 layers = 2
 surface_material_override/0 = ExtResource("4_pbg5w")
 surface_material_override/1 = ExtResource("6_prrdp")
 
-[node name="Lamps" parent="DockE" index="9"]
+[node name="Lamps" parent="DockE" index="7"]
 layers = 2
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("9_r4srt")
+
+[node name="LeftClamp" parent="DockE" index="8" node_paths=PackedStringArray("upper_clamp", "lower_clamp")]
+layers = 2
+script = ExtResource("9_ghmh8")
+upper_clamp = NodePath("LeftUpperClamp")
+lower_clamp = NodePath("LeftLowerClamp")
+rightness = -1
+
+[node name="LeftLowerClamp" parent="DockE/LeftClamp" index="0"]
+layers = 2
+
+[node name="LeftUpperClamp" parent="DockE/LeftClamp" index="1"]
+layers = 2
+
+[node name="RightClamp" parent="DockE" index="9" node_paths=PackedStringArray("upper_clamp", "lower_clamp")]
+layers = 2
+script = ExtResource("9_ghmh8")
+upper_clamp = NodePath("RightUpperClamp")
+lower_clamp = NodePath("RightLowerClamp")
+
+[node name="RightLowerClamp" parent="DockE/RightClamp" index="0"]
+layers = 2
+
+[node name="RightUpperClamp" parent="DockE/RightClamp" index="1"]
+layers = 2
 
 [node name="Supports" parent="DockE" index="10"]
 layers = 2

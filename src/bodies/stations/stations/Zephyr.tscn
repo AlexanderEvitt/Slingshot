@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://b0s1bdqqag6dw"]
+[gd_scene load_steps=12 format=4 uid="uid://b0s1bdqqag6dw"]
 
 [ext_resource type="PackedScene" uid="uid://bty856a1y2vt0" path="res://bodies/stations/components/stump.tscn" id="2_o24in"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="2_urlyi"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://djhub5hfmxtif" path="res://scenes/orbit/koz/wire_cylinder.tscn" id="6_d8yrx"]
 [ext_resource type="PackedScene" uid="uid://btpxws4tx476f" path="res://scenes/orbit/koz/wire_cube.tscn" id="7_jhtc2"]
 [ext_resource type="Material" uid="uid://kdt5ykkpsdpa" path="res://bodies/asteroids/BakedPotato.tres" id="8_f78mt"]
+[ext_resource type="Script" path="res://scenes/external/sun_light.gd" id="9_xf6qk"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_54jvb"]
 _surfaces = [{
@@ -61,14 +62,6 @@ flip = -1
 [node name="shipyard" parent="." instance=ExtResource("4_goyf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38.881, 0)
 
-[node name="MediumSunLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
-visible = false
-light_energy = 0.7
-light_cull_mask = 4294967292
-shadow_enabled = true
-sky_mode = 1
-
 [node name="DockCenter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
 
@@ -95,3 +88,41 @@ transform = Transform3D(29.775, 0, 0, 0, 29.775, 0, 0, 0, 29.775, 0, 0, 0)
 layers = 4
 mesh = SubResource("ArrayMesh_77ytm")
 skeleton = NodePath("")
+
+[node name="BigSunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.66029, 0, 0.751011, 0, 1, 0, -0.751011, 0, -0.66029, 0, 0, 0)
+visible = false
+light_energy = 0.7
+light_cull_mask = 4294967289
+shadow_enabled = true
+directional_shadow_split_1 = 0.05
+directional_shadow_max_distance = 1e+06
+sky_mode = 1
+script = ExtResource("9_xf6qk")
+
+[node name="MediumSunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.66029, 0, 0.751011, 0, 1, 0, -0.751011, 0, -0.66029, 0, 0, 0)
+visible = false
+light_energy = 0.8
+light_cull_mask = 4294967292
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 1.509
+shadow_reverse_cull_face = true
+shadow_blur = 0.0
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 500.0
+sky_mode = 1
+script = ExtResource("9_xf6qk")
+
+[node name="SmallSunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.66029, 0, 0.751011, 0, 1, 0, -0.751011, 0, -0.66029, 0, 0, 0)
+visible = false
+light_cull_mask = 4294967289
+shadow_bias = 0.005
+shadow_normal_bias = 0.0
+shadow_opacity = 0.98
+shadow_blur = 0.8
+directional_shadow_max_distance = 0.2
+sky_mode = 1
+script = ExtResource("9_xf6qk")

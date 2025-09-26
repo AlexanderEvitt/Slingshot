@@ -37,27 +37,34 @@ public partial class Propagator : Node3D
 		player_ship = GetParent();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
-		if (c == 0)
+		// Only publish a trajectory when ship is not berthed anywhere
+		if ((bool)player_ship.Get("berthed") == false)
 		{
-			// Reset starting point to current point
+			// Only refresh trajectory every so often
+			if (c == 0)
+			{
+				// Reset starting point to current point
 
-			start_position = (Vector3)player_ship.Get("position");
-			start_velocity = (Vector3)player_ship.Get("velocity");
+				start_position = (Vector3)player_ship.Get("position");
+				start_velocity = (Vector3)player_ship.Get("velocity");
 
-			// Refresh trajectory
-			double t = SystemTime.Instance.t;
-			Refresh(t);
-			c = 10;
+				// Refresh trajectory
+				double t = SystemTime.Instance.t;
+				Refresh(t);
+				c = 10;
+			}
+			c = c - 1;
+
+			// Expose positions for plotting
+			Godot.Collections.Array<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
+			plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
 		}
-		c = c - 1;
-
-		// expose positions for plotting
-		Godot.Collections.Array<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
-		plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
+		else
+		{
+			plotted_positions = null;
+		}
 	}
 
 	public Vector3 Acceleration(Vector3 r, double t)

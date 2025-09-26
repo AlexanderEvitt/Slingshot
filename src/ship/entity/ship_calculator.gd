@@ -44,7 +44,7 @@ var berthed = true
 @onready var station = get_tree().root.get_node("GameRoot/Planets/Earth/ZephyrStation")
 @onready var dock = station.get_node("Shipyard/DockC")
 @onready var berth = dock.get_node("Berth4")
-var berth_offset = Vector3(0.1,0,0)
+var berth_offset = Vector3(0.07,0,0) # how far into the berth the docking point is
 
 # Tell the selection panel that this isn't a station you can dock with
 var is_station = false
@@ -66,7 +66,8 @@ func _physics_process(delta):
 	# Attach ship to dock if docked
 	if berthed:
 		# Move ship with dock
-		position = station.fetch(SystemTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
+		var berth_position = station.fetch(SystemTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
+		position = berth_position
 		velocity = station.fetch(SystemTime.t) - station.fetch(SystemTime.t - 1.0)
 		attitude_calculator.transform.basis = berth.global_transform.basis
 
@@ -92,11 +93,10 @@ func _physics_process(delta):
 			berthed = false
 			rel_clamp.emit()
 		elif !berthed:
-			var berth_position = station.fetch(SystemTime.t) + (berth.global_position - station.global_position)
+			var berth_position = station.fetch(SystemTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
 			var berth_error = (berth_position - position).length()
-			print(berth_error)
-			# Allow docking only within ten meters
-			if berth_error < 0.01:
+			# Allow docking only within five meters
+			if berth_error < 0.005:
 				berthed = true
 				att_clamp.emit()
 

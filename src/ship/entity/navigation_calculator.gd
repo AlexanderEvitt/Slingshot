@@ -18,7 +18,7 @@ var cornering_velocity = 0.0 # target velocity at endpoint, km/s
 @onready var ship = get_parent()
 @onready var game_root = get_tree().root.get_node("GameRoot/")
 
-var report = true
+var report = false
 var count = 0 # counter for when to write report
 
 var reverse = false
@@ -101,6 +101,7 @@ func navigate(dt, gravity):
 		if active_waypoint + 2 >= len(waypoints):
 			# Shut off navigation
 			ship.nav_disc.emit()
+			ship.auto_disc.emit()
 			control = Vector3(0,0,0)
 			reverse = false
 			i_error = Vector3(0,0,0)
@@ -124,7 +125,7 @@ func navigate(dt, gravity):
 		control_throttle = 0
 	
 	# Write report for debugging
-	if count == 0:
+	if report and (count == 0):
 		print("Navigating to: ", active_waypoint)
 		print("	Flying reverse: ", reverse)
 		print("	t: ", t)

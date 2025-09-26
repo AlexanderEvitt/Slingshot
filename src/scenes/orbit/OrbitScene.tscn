@@ -910,6 +910,7 @@ fixed_size = true
 texture = ExtResource("29_4bect")
 
 [node name="ShipLabel" type="Label3D" parent="Ships/PlayerShip"]
+visible = false
 pixel_size = 0.0003
 offset = Vector2(32, 0)
 billboard = 1

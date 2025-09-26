@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfwsgcbvelo0t"]
+[gd_scene load_steps=9 format=3 uid="uid://bfwsgcbvelo0t"]
 
 [ext_resource type="PackedScene" uid="uid://c723tonvicthq" path="res://ship/frigate/real/frigate.glb" id="1_p2xcd"]
 [ext_resource type="Texture2D" uid="uid://drvl7m6jpple6" path="res://ship/frigate/external_material/MakedBrick_albedo.png" id="2_c712i"]
 [ext_resource type="Material" uid="uid://ddobmiq0l53c" path="res://ship/frigate/external_material/MakedBrick.tres" id="2_gb527"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="2_k8wt2"]
 [ext_resource type="Texture2D" uid="uid://dfp5lpn48nk0d" path="res://ship/frigate/external_material/MakedBrick_normal.png" id="3_r1umb"]
-[ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="4_vw5qa"]
 [ext_resource type="Texture2D" uid="uid://bwvdv60c7w7lx" path="res://ship/frigate/external_material/MakedBrick_orm.png" id="4_y1dru"]
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="7_67fpr"]
 
@@ -53,16 +52,7 @@ layers = 2
 layers = 2
 surface_material_override/5 = ExtResource("2_gb527")
 
-[node name="Cube" parent="." index="8"]
-layers = 2
-
 [node name="Fins" parent="." index="9"]
-layers = 2
-
-[node name="TVC" parent="." index="10"]
-layers = 2
-
-[node name="TVC_001" parent="." index="11"]
 layers = 2
 
 [node name="ConkLogo" type="Sprite3D" parent="." index="12"]
@@ -116,24 +106,5 @@ layers = 2
 [node name="Injectors" parent="." index="19"]
 layers = 2
 
-[node name="EngineLogo" type="Sprite3D" parent="." index="20"]
-transform = Transform3D(-0.5, 6.12323e-17, 3.7494e-33, 0, 3.06162e-17, -0.5, -6.12323e-17, -0.5, -3.06162e-17, -15.89, 0, -5.1654)
-layers = 2
-pixel_size = 0.003
-axis = 1
-shaded = true
-texture = ExtResource("4_vw5qa")
-
-[node name="EngineLogo2" type="Sprite3D" parent="." index="21"]
-transform = Transform3D(0.5, 0, 0, 0, 3.06162e-17, -0.5, 0, 0.5, 3.06162e-17, -15.89, 0, 5.165)
-layers = 2
-pixel_size = 0.003
-axis = 1
-shaded = true
-texture = ExtResource("4_vw5qa")
-
-[node name="CoolantManifold" parent="." index="22"]
-layers = 2
-
-[node name="Cube_001" parent="." index="23"]
+[node name="CoolantManifold" parent="." index="20"]
 layers = 2
