@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dclrlvx4upy8x"]
+
+[ext_resource type="PackedScene" uid="uid://cwmm3wilqk7ns" path="res://bodies/stations/components/round_port.glb" id="1_je5ca"]
+[ext_resource type="Material" uid="uid://o7dtbv1yqscr" path="res://bodies/stations/components/materials/SmoothConcrete.tres" id="2_u4sf0"]
+[ext_resource type="Material" uid="uid://bu1jwblsgunfc" path="res://bodies/stations/components/materials/BasicGreeble.tres" id="3_khnng"]
+[ext_resource type="Material" uid="uid://cljigg1mdxyr8" path="res://bodies/stations/components/materials/GreyMetal.tres" id="4_qej6t"]
+[ext_resource type="Material" uid="uid://cptd1y5ttpy0m" path="res://bodies/stations/components/materials/DottedWindows.tres" id="5_j3hae"]
+[ext_resource type="PackedScene" uid="uid://g4qb63wurhbg" path="res://bodies/stations/components/docks.tscn" id="6_mgq7c"]
+
+[node name="round_port" instance=ExtResource("1_je5ca")]
+
+[node name="Mast" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_u4sf0")
+
+[node name="Tunnel" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_khnng")
+
+[node name="Hub" parent="." index="3"]
+surface_material_override/0 = ExtResource("3_khnng")
+surface_material_override/1 = ExtResource("4_qej6t")
+
+[node name="Frame" parent="." index="4"]
+surface_material_override/0 = ExtResource("4_qej6t")
+
+[node name="RoundPort" parent="." index="5"]
+surface_material_override/0 = ExtResource("3_khnng")
+surface_material_override/1 = ExtResource("5_j3hae")
+
+[node name="docks" parent="RoundPort/DockA" index="0" instance=ExtResource("6_mgq7c")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="docks" parent="RoundPort/DockB" index="0" instance=ExtResource("6_mgq7c")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="docks" parent="RoundPort/DockC" index="0" instance=ExtResource("6_mgq7c")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="docks" parent="RoundPort/DockD" index="0" instance=ExtResource("6_mgq7c")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="docks" parent="RoundPort/DockE" index="0" instance=ExtResource("6_mgq7c")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="docks" parent="RoundPort/DockF" index="0" instance=ExtResource("6_mgq7c")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)

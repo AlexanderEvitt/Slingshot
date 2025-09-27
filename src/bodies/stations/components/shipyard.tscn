@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bkcvn8u664ge" path="res://bodies/stations/components/shipyard.glb" id="1_8qkne"]
 [ext_resource type="Material" uid="uid://o7dtbv1yqscr" path="res://bodies/stations/components/materials/SmoothConcrete.tres" id="2_cttqy"]
-[ext_resource type="Script" path="res://bodies/stations/components/shipyard.gd" id="2_tvlfv"]
+[ext_resource type="Script" path="res://bodies/stations/components/port.gd" id="2_tvlfv"]
 [ext_resource type="Material" uid="uid://cljigg1mdxyr8" path="res://bodies/stations/components/materials/GreyMetal.tres" id="3_vv554"]
 [ext_resource type="Material" uid="uid://bu1jwblsgunfc" path="res://bodies/stations/components/materials/BasicGreeble.tres" id="4_ww0q7"]
 [ext_resource type="Material" uid="uid://cptd1y5ttpy0m" path="res://bodies/stations/components/materials/DottedWindows.tres" id="5_k2jnt"]
@@ -17,44 +17,44 @@ surface_material_override/0 = ExtResource("2_cttqy")
 [node name="Truss" parent="." index="1"]
 surface_material_override/0 = ExtResource("3_vv554")
 
-[node name="Shipyard" parent="." index="2"]
+[node name="Port" parent="." index="2"]
 surface_material_override/0 = ExtResource("4_ww0q7")
 surface_material_override/1 = ExtResource("5_k2jnt")
 
-[node name="docks" parent="Shipyard/DockA" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockA" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockB" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockB" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockC" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockC" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockD" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockD" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockE" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockE" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockF" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockF" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockG" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockG" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockH" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockH" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockI" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockI" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockJ" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockJ" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockK" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockK" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="docks" parent="Shipyard/DockL" index="0" instance=ExtResource("6_3eyj4")]
+[node name="docks" parent="Port/DockL" index="0" instance=ExtResource("6_3eyj4")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
 [node name="Sphere" parent="." index="3"]

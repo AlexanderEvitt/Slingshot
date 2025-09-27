@@ -42,7 +42,7 @@ var mass = 1
 # Which berth to start at (updated)
 var berthed = true
 @onready var station = get_tree().root.get_node("GameRoot/Planets/Earth/ZephyrStation")
-@onready var dock = station.get_node("Shipyard/DockC")
+@onready var dock = station.get_node("Port/DockC")
 @onready var berth = dock.get_node("Berth4")
 var berth_offset = Vector3(0.07,0,0) # how far into the berth the docking point is
 
@@ -138,11 +138,11 @@ func assign_berth(new_station):
 	# Assign station
 	station = get_tree().root.get_node("GameRoot/" + new_station)
 	
-	# Get shipyard (parent to all dock)
-	var shipyard = get_tree().root.get_node("GameRoot/" + new_station + "/Shipyard")
+	# Get port component (parent to all docks)
+	var port = get_tree().root.get_node("GameRoot/" + new_station + "/Port")
 	
 	# Get random dock
-	var docks = shipyard.get_children()
+	var docks = port.get_children()
 	dock = docks[randi_range(0, len(docks) - 1)]
 	
 	# Get random berth

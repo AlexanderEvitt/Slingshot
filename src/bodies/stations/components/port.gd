@@ -26,7 +26,7 @@ func update_berth():
 	# Figure out what the new berth is
 	var dock_name = ShipData.player_ship.dock.name
 	var berth_name = ShipData.player_ship.berth.name
-	current_berth = get_node("Shipyard/" + dock_name + "/docks/Docks/" + berth_name)
+	current_berth = get_node("Port/" + dock_name + "/docks/Docks/" + berth_name)
 	
 	# Remove the new berth's simplified berth
 	if current_berth != null:
