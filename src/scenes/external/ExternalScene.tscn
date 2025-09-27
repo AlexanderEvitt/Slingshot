@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=79 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_dogxd"]
@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
 [ext_resource type="Texture2D" uid="uid://bdybpcdcv37y" path="res://bodies/photo/MarsTrue.png" id="21_qmkav"]
 [ext_resource type="Texture2D" uid="uid://yfa1thnw2jj0" path="res://bodies/photo/MarsNorm.jpg" id="22_ywee2"]
+[ext_resource type="PackedScene" uid="uid://dxbqssxh6kpdo" path="res://bodies/stations/stations/Yugala.tscn" id="23_vliu8"]
 [ext_resource type="Script" path="res://bodies/body_inheritor.gd" id="29_i3asx"]
 [ext_resource type="Script" path="res://scenes/external/cinema_cam.gd" id="42_ktyp3"]
 
@@ -222,12 +223,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
 
 [node name="BigSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
-light_energy = 0.7
+light_energy = 0.75
 shadow_enabled = true
-shadow_bias = 0.001
-shadow_normal_bias = 1.0
+shadow_bias = 0.003
 directional_shadow_split_1 = 0.001
-directional_shadow_max_distance = 1000.0
+directional_shadow_fade_start = 0.9
+directional_shadow_pancake_size = 5.0
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
@@ -323,6 +324,11 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_61v7t")
 surface_material_override/0 = SubResource("StandardMaterial3D_563sj")
+
+[node name="Yugala" parent="Planets/Mars" instance=ExtResource("23_vliu8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3787.37, 0, 0)
+script = ExtResource("29_i3asx")
+body_path = "Planets/Mars/Yugala"
 
 [node name="Jupiter" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93232, 0, 76.6756)

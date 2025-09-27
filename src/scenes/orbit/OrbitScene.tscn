@@ -513,6 +513,68 @@ expandable = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Mars/ClickDetector"]
 shape = SubResource("SphereShape3D_smwit")
 
+[node name="Yugala" type="Node3D" parent="Planets/Mars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 115.063)
+script = ExtResource("9_2beyu")
+body_path = "Planets/Mars/Yugala"
+
+[node name="Plotter" type="Node3D" parent="Planets/Mars/Yugala" groups=["BodyOrbit"]]
+script = ExtResource("5_vmpxk")
+color = Color(0.41, 0.116167, 0, 1)
+visible_distance = 200000
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Mars/Yugala"]
+visibility_range_end = 20000.0
+visibility_range_end_margin = 20000.0
+visibility_range_fade_mode = 1
+modulate = Color(0.411765, 0.117647, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("11_lodt7")
+
+[node name="ClickDetector" type="Area3D" parent="Planets/Mars/Yugala" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Mars/Yugala/ClickDetector"]
+shape = SubResource("SphereShape3D_8k6tq")
+
+[node name="MoonLabel" type="Label3D" parent="Planets/Mars/Yugala"]
+visibility_range_end = 200000.0
+visibility_range_end_margin = 200000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = "YUGALA ORBITAL"
+font = ExtResource("4_uugyr")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="KOZ" type="Node3D" parent="Planets/Mars/Yugala"]
+
+[node name="wire_sphere" parent="Planets/Mars/Yugala/KOZ" instance=ExtResource("11_8re0r")]
+transform = Transform3D(5.5, 0, 0, 0, 5.5, 0, 0, 0, 5.5, 0, -12.49, 0)
+
+[node name="wire_sphere2" parent="Planets/Mars/Yugala/KOZ" instance=ExtResource("11_8re0r")]
+transform = Transform3D(5.5, 0, 0, 0, 5.5, 0, 0, 0, 5.5, 0, 12.49, 0)
+
+[node name="wire_cylinder" parent="Planets/Mars/Yugala/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(0.5, 0, 0, 0, 12, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="wire_cylinder2" parent="Planets/Mars/Yugala/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 4, 0)
+
+[node name="wire_cylinder3" parent="Planets/Mars/Yugala/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, -4, 0)
+
+[node name="wire_cylinder4" parent="Planets/Mars/Yugala/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(2.475, 0, 0, 0, 0.415, 0, 0, 0, 3.11, 0, 0.104842, 0)
+
 [node name="Jupiter" type="Node3D" parent="Planets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
 script = ExtResource("9_2beyu")

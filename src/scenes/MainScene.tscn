@@ -776,6 +776,179 @@ RAAN = 0.837
 argp = 5.068
 theta0 = 5.873
 
+[node name="Yugala" type="Node3D" parent="Planets/Mars"]
+process_priority = 13
+editor_description = "YUGALA ORBITAL is the largest station in proximity to Mars. It acts as a vital military base providing protection to the inner planets from pirates and thieves."
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+script = ExtResource("3_5edpo")
+is_station = true
+a = 42164.0
+theta0 = 3.142
+
+[node name="Port" type="Node3D" parent="Planets/Mars/Yugala"]
+
+[node name="DockA" type="Node3D" parent="Planets/Mars/Yugala/Port"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 1.73597, 0.30918, -2.23241)
+
+[node name="Berth1" type="Node3D" parent="Planets/Mars/Yugala/Port/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Mars/Yugala/Port/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Mars/Yugala/Port/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Mars/Yugala/Port/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Mars/Yugala/Port/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Mars/Yugala/Port/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Mars/Yugala/Port/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Mars/Yugala/Port/DockA"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockB" type="Node3D" parent="Planets/Mars/Yugala/Port"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.359181, 0.30918, -3.05274)
+
+[node name="Berth1" type="Node3D" parent="Planets/Mars/Yugala/Port/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Mars/Yugala/Port/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Mars/Yugala/Port/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Mars/Yugala/Port/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Mars/Yugala/Port/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Mars/Yugala/Port/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Mars/Yugala/Port/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Mars/Yugala/Port/DockB"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockC" type="Node3D" parent="Planets/Mars/Yugala/Port"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -1.24573, 0.30918, -2.65926)
+
+[node name="Berth1" type="Node3D" parent="Planets/Mars/Yugala/Port/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Mars/Yugala/Port/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Mars/Yugala/Port/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Mars/Yugala/Port/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Mars/Yugala/Port/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Mars/Yugala/Port/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Mars/Yugala/Port/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Mars/Yugala/Port/DockC"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockD" type="Node3D" parent="Planets/Mars/Yugala/Port"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 1.27283, 0.30918, 2.69555)
+
+[node name="Berth1" type="Node3D" parent="Planets/Mars/Yugala/Port/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Mars/Yugala/Port/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Mars/Yugala/Port/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Mars/Yugala/Port/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Mars/Yugala/Port/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Mars/Yugala/Port/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Mars/Yugala/Port/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Mars/Yugala/Port/DockD"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockE" type="Node3D" parent="Planets/Mars/Yugala/Port"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -0.295792, 0.30918, 3.05274)
+
+[node name="Berth1" type="Node3D" parent="Planets/Mars/Yugala/Port/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Mars/Yugala/Port/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Mars/Yugala/Port/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Mars/Yugala/Port/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Mars/Yugala/Port/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Mars/Yugala/Port/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Mars/Yugala/Port/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Mars/Yugala/Port/DockE"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
+[node name="DockF" type="Node3D" parent="Planets/Mars/Yugala/Port"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -1.70886, 0.30918, 2.19613)
+
+[node name="Berth1" type="Node3D" parent="Planets/Mars/Yugala/Port/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.0340438)
+
+[node name="Berth2" type="Node3D" parent="Planets/Mars/Yugala/Port/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.174776, -0.102131)
+
+[node name="Berth3" type="Node3D" parent="Planets/Mars/Yugala/Port/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.0340438)
+
+[node name="Berth4" type="Node3D" parent="Planets/Mars/Yugala/Port/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, -0.244692, -0.102131)
+
+[node name="Berth5" type="Node3D" parent="Planets/Mars/Yugala/Port/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.552844)
+
+[node name="Berth6" type="Node3D" parent="Planets/Mars/Yugala/Port/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.174776, -0.620931)
+
+[node name="Berth7" type="Node3D" parent="Planets/Mars/Yugala/Port/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.552844)
+
+[node name="Berth8" type="Node3D" parent="Planets/Mars/Yugala/Port/DockF"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.22045e-16, -0.244692, -0.620931)
+
 [node name="Jupiter" type="Node3D" parent="Planets" groups=["Bodies"]]
 process_priority = 13
 editor_description = "JUPITER is a gas giant and the largest planet of the Sol system. Numerous stations and cities are scattered amongst its moons."
