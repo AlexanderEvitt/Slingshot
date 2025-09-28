@@ -149,3 +149,5 @@ func assign_berth(new_station):
 	var berths = dock.get_children()
 	berth = berths[randi_range(0, len(berths) - 1)]
 	berth_updated.emit()
+	
+	print(station, " ", port)

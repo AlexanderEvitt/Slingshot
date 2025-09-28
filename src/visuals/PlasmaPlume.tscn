@@ -1,17 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://bu2j4yalwn3ks"]
+[gd_scene load_steps=11 format=3 uid="uid://bu2j4yalwn3ks"]
 
 [ext_resource type="Shader" path="res://visuals/PlasmaPlume.gdshader" id="1_eo5p0"]
 [ext_resource type="Script" path="res://visuals/plume_controller.gd" id="2_y04ml"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_n1q1i"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_2hk2m"]
 lightmap_size_hint = Vector2i(17, 19)
-top_radius = 2.0
-height = 6.0
+top_radius = 3.0
+bottom_radius = 0.45
+height = 16.0
+rings = 0
 cap_top = false
+cap_bottom = false
 
 [sub_resource type="Gradient" id="Gradient_uhggj"]
 offsets = PackedFloat32Array(0.448718, 1)
-colors = PackedColorArray(0.1224, 0.29172, 0.72, 1, 0.631373, 0.121569, 0.721569, 1)
+colors = PackedColorArray(0.1224, 0.29172, 0.72, 1, 0.678696, 0.150366, 0.773538, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4m3j0"]
 gradient = SubResource("Gradient_uhggj")
@@ -22,22 +25,51 @@ gradient = SubResource("Gradient_uhggj")
 seamless = true
 noise = SubResource("FastNoiseLite_j80rw")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yust4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phgne"]
 render_priority = 0
 shader = ExtResource("1_eo5p0")
-shader_parameter/model_height = 6.0
+shader_parameter/model_height = 16.0
 shader_parameter/dissolve_start = 0.0
 shader_parameter/dissolve_length = 1.0
-shader_parameter/gradient_bias = 2.872
+shader_parameter/gradient_bias = 3.678
 shader_parameter/noise_direction = Vector2(0, 1)
-shader_parameter/noise_speed = 2.0
-shader_parameter/noise_strength = 0.25
+shader_parameter/noise_speed = 1.0
+shader_parameter/noise_strength = 0.0
+shader_parameter/stretch_factor = 0.6
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_xas2e")
+shader_parameter/power_factor = 3.01
+shader_parameter/alpha_intensity_factor = 1.0
+shader_parameter/fresnel_factor = 2.0
+shader_parameter/fresnel_amplification = 0.695
+shader_parameter/fresnel_power = 5.0
+shader_parameter/enable_fresnel = true
+shader_parameter/gradient = SubResource("GradientTexture1D_4m3j0")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n1q1i"]
+lightmap_size_hint = Vector2i(17, 19)
+top_radius = 1.0
+bottom_radius = 0.1
+height = 8.0
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udyin"]
+render_priority = 0
+shader = ExtResource("1_eo5p0")
+shader_parameter/model_height = 8.0
+shader_parameter/dissolve_start = 0.0
+shader_parameter/dissolve_length = 0.8
+shader_parameter/gradient_bias = 5.0
+shader_parameter/noise_direction = Vector2(0, 1)
+shader_parameter/noise_speed = 5.0
+shader_parameter/noise_strength = 0.28
 shader_parameter/stretch_factor = 0.4
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_xas2e")
-shader_parameter/power_factor = 0.5
-shader_parameter/alpha_intensity_factor = 1.0
-shader_parameter/fresnel_factor = 0.4
-shader_parameter/fresnel_amplification = 2.0
+shader_parameter/power_factor = 0.535
+shader_parameter/alpha_intensity_factor = 5.0
+shader_parameter/fresnel_factor = 0.56
+shader_parameter/fresnel_amplification = 1.445
 shader_parameter/fresnel_power = 5.0
 shader_parameter/enable_fresnel = true
 shader_parameter/gradient = SubResource("GradientTexture1D_4m3j0")
@@ -45,15 +77,31 @@ shader_parameter/gradient = SubResource("GradientTexture1D_4m3j0")
 [node name="Plume" type="Node3D"]
 script = ExtResource("2_y04ml")
 
-[node name="Tail" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -3, 0, 0)
+[node name="Fan" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -8, 0, 0)
+mesh = SubResource("CylinderMesh_2hk2m")
+surface_material_override/0 = SubResource("ShaderMaterial_phgne")
+
+[node name="Pencil" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -4, 0, 0)
 mesh = SubResource("CylinderMesh_n1q1i")
-surface_material_override/0 = SubResource("ShaderMaterial_yust4")
+surface_material_override/0 = SubResource("ShaderMaterial_udyin")
 
 [node name="Light" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.527216, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 layers = 2
-light_energy = 0.3
+light_energy = 0.2
+light_cull_mask = 4294967294
+shadow_enabled = true
+shadow_bias = 0.001
+omni_range = 0.008
+omni_shadow_mode = 0
+
+[node name="Light2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337524, 0, 0)
+layers = 2
+light_energy = 0.1
+light_cull_mask = 4294967294
 shadow_enabled = true
 shadow_bias = 10.0
 omni_range = 0.008

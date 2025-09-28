@@ -1,12 +1,16 @@
 extends Node3D
 
-var chamber
-var tail
+var chamber1
+var chamber2
+var fan
+var pencil
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tail = get_node("Tail").get_active_material(0)
-	chamber = get_node("Light")
+	fan = get_node("Fan").get_active_material(0)
+	pencil = get_node("Pencil").get_active_material(0)
+	chamber1 = get_node("Light")
+	chamber2 = get_node("Light2")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,7 +18,9 @@ func _process(_delta):
 	var power = ShipData.player_ship.throttle
 	if power > 0:
 		visible = true
-		tail.set_shader_parameter("alpha_intensity_factor",0.05/power)
-		chamber.light_energy = 0.3*power/0.05
+		pencil.set_shader_parameter("alpha_intensity_factor",0.05/power)
+		fan.set_shader_parameter("alpha_intensity_factor",0.05/power)
+		chamber1.light_energy = 0.2*power/0.05
+		chamber2.light_energy = 0.1*power/0.05
 	else:
 		visible = false

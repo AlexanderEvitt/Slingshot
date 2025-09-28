@@ -67,3 +67,6 @@ text = "117"
 font = ExtResource("7_67fpr")
 font_size = 96
 outline_size = 0
+
+[node name="InternalTube" parent="." index="22"]
+layers = 2
