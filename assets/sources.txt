@@ -4,3 +4,5 @@ Jupiter texture: https://planetary.s3.amazonaws.com/web/assets/pictures/20180511
 Galilean moons are from: https://bjj.mmedia.is/data/planetary_maps.html
 This includes Europa, Ganymede, Callisto, Io
 Must be credited in game
+
+Editor theme: https://github.com/passivestar/godot-minimal-theme

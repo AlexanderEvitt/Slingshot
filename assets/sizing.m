@@ -11,23 +11,20 @@ eff = 0.95;
 v = eff*v;
 
 % Mass fraction, fueled mass over empty mass
-mf = 2;
+mf = 1.5;
 % Total delta-V, m/s
 dV = v*log(mf);
 
 % Time of flight at given acceleration
-a = 10  * 9.81;
+a = 1 * 9.81;
 tb = dV/a;
-tb = tb/(60*60*24) % in days
+tb/(60*60*24) % in days
 
 % Time of flight of theoretical flip-and-burn trip
-r = 20 * 1.496e11; % 1 au, m
+r = 10 * 1.496e11; % 1 au, m
 tf = 2*sqrt(r/a);
 
-tf = tf/(60*60*24) % in days
-
-% Gravity of the sun at the radius
-as = 1.327e20/(r^2);
+tf/(60*60*24) % in days
 
 
 %% Sizing for tanks
@@ -55,11 +52,21 @@ v_tank = pi*(r^2)*h + (4/3)*pi*r^3;
 v_tank/v_deuterium
 
 %% Brightness and thermals
-percent_emmitted = 0.05;
-wattage = percent_emmitted*E*m_fuel / tb;
-dist = 74000000;
-flux = wattage/(4*pi*dist^2);
-flux/1400 % in percent of solar irradiance at 1AU
+% Power breakdown
+fraction_emitted = 0.05;
+fraction_absorbed = 1e-7;
+wattage = E*m_fuel / tb;
+wattage_emitted = fraction_emitted*wattage;
+wattage_absorbed = fraction_absorbed*wattage;
+
+% Brightness at distance
+dist = 74000; % meters
+flux = wattage_emitted/(4*pi*dist^2);
+irradiance = flux/1400 % fraction of solar irradiance at 1AU (sun is 1400 W/m2)
+
+% Necessary radiators
+radiant_exitance = (5.670374e-8)*(3695^4) % tungsten radiator
+radiator_area = wattage_absorbed/radiant_exitance
 
 %% Centrifugal ring sizing
 clear; clc;
