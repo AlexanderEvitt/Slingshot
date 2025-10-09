@@ -8,6 +8,7 @@ lightmap_size_hint = Vector2i(17, 19)
 top_radius = 3.0
 bottom_radius = 0.45
 height = 16.0
+radial_segments = 128
 rings = 0
 cap_top = false
 cap_bottom = false

@@ -458,7 +458,6 @@ camera_mode = true
 transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("5_17hwb")
 zoom_distance = 0.1
-zoom_min = 0.01
 
 [node name="CameraRotator" type="Node3D" parent="Ships/PlayerShip/CameraRig"]
 

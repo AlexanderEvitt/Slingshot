@@ -31,9 +31,9 @@ func update(_dt: float) -> void:
 	
 	# Input main engine commanded throttle
 	if Input.is_action_pressed("increment_throttle"):
-		commanded_throttle = commanded_throttle + 0.01
+		commanded_throttle = commanded_throttle + 0.001
 	if Input.is_action_pressed("decrement_throttle"):
-		commanded_throttle = commanded_throttle - 0.01
+		commanded_throttle = commanded_throttle - 0.001
 	if ship.nav_flag and ship.autopilot_flag:
 		commanded_throttle = ship.navigation_calculator.control_throttle
 	commanded_throttle = clamp(commanded_throttle,0,engine_power)

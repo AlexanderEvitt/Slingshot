@@ -1,18 +1,27 @@
-extends Node
+extends Node3D
 
-@export var zoom_distance := 200.0
-var zoom_speed := 1.2
+# Zoom parameters
+@export var zoom_distance := 200.0 # start zoom, then current zoom
+var zoom_speed := 1.2 # multiplicative rate of zoom
 var smooth_zoom := 0.2 # 1.0 is move instantly to new zoom, 0.0 is don't move
-@export var zoom_min := 7.0
-var zoom_max := 2000000000.0
+@export var zoom_min := 0.01 # minimum zoom distance
+var zoom_max := 2000000000.0 # maximum zoom distance
+
+# Motion of camera constants
+@export var Kd := 0.99 # speed at which camera bounces back (1.0 = never moves)
+@export var Kp := 0.5 # scale of motion from acceleration
+@export var Ka := 0.1 # speed at which camera moves to new attitude
+
+var camera_mode = "Global" # whether camera moves with ship or stays fixed
 
 @onready var camera_rotator = $CameraRotator
 @onready var camera = $CameraRotator/Camera3D
 
-var rotation_speed := 0.0001
-var r := false
-var pitch := 0.0
-var yaw := 0.0
+# Camera rotation parameters
+var rotation_speed := 0.0001 # sensitivity of camera rotation
+var r := false # whether to allow rotation
+var pitch := 0.0 # start pitch
+var yaw := 0.0 # start yaw
 
 var viewer
 
@@ -47,6 +56,23 @@ func _process(_delta):
 		if Input.is_action_pressed("mod_right"):
 			yaw = yaw + 100*rotation_speed
 			set_orientation()
+			
+	# Move camera back from acceleration
+	# by linearly interpolating between current position and offset by thrust
+	var acceleration = ShipData.player_ship.attitude*ShipData.player_ship.thrust
+	position = (Kd)*position + (1.0 - Kd)*Kp*(-acceleration)
+	
+	# Rotate camera to ship attitude if in "Local" mode
+	if camera_mode == "Global":
+		rotation = Vector3(0,-PI/2,-PI/2)
+		if Input.is_action_just_pressed("view"):
+			camera_mode = "Local"
+	elif camera_mode == "Local":
+		# Linearly interpolate to ship attitude, with Ka as the weight
+		transform.basis = transform.basis.slerp(ShipData.player_ship.attitude, Ka)
+		if Input.is_action_just_pressed("view"):
+			camera_mode = "Global"
+	
 
 
 func _unhandled_input(event):

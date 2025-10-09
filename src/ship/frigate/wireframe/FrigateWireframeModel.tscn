@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfjyiueui6yog"]
+
+[ext_resource type="PackedScene" uid="uid://3xv2ico0ju28" path="res://ship/frigate/wireframe/frigate_wireframe.glb" id="1_7kdmc"]
+[ext_resource type="Material" uid="uid://c8q7ioeg374gn" path="res://ship/frigate/wireframe/WireframeBody.tres" id="2_hp5cc"]
+[ext_resource type="Material" uid="uid://bkpdqe230ki7v" path="res://ship/frigate/wireframe/WireframeLines.tres" id="3_bx44r"]
+
+[node name="frigate_wireframe" instance=ExtResource("1_7kdmc")]
+
+[node name="MainBody" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_hp5cc")
+
+[node name="Turret2Body" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_hp5cc")
+
+[node name="Laser2Body" parent="Turret2Body" index="0"]
+surface_material_override/0 = ExtResource("2_hp5cc")
+
+[node name="Laser2Lines" parent="Turret2Body/Laser2Body" index="0"]
+surface_material_override/0 = ExtResource("3_bx44r")
+
+[node name="Turret2Lines" parent="Turret2Body" index="1"]
+surface_material_override/0 = ExtResource("3_bx44r")
+
+[node name="Turret1Body" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_hp5cc")
+
+[node name="Laser1Body" parent="Turret1Body" index="0"]
+surface_material_override/0 = ExtResource("2_hp5cc")
+
+[node name="Laser1Lines" parent="Turret1Body/Laser1Body" index="0"]
+surface_material_override/0 = ExtResource("3_bx44r")
+
+[node name="Turret1Lines" parent="Turret1Body" index="1"]
+surface_material_override/0 = ExtResource("3_bx44r")
+
+[node name="MainLines" parent="." index="3"]
+surface_material_override/0 = ExtResource("3_bx44r")
