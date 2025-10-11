@@ -1,4 +1,37 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bhtmuml4efphk"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bhtmuml4efphk"]
+
+[ext_resource type="FontFile" uid="uid://1tccf66eoucs" path="res://ui/fonts/Oxanium-SemiBold.ttf" id="1_y5dlm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2utn2"]
+bg_color = Color(0.117647, 0.117647, 0.156863, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhv36"]
+bg_color = Color(0.117647, 0.117647, 0.156863, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ctis"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_276hv"]
 bg_color = Color(0.117647, 0.117647, 0.156863, 1)
@@ -8,4 +41,13 @@ border_width_right = 2
 border_width_bottom = 2
 
 [resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0.117647, 0.117647, 0.156863, 1)
+Button/font_sizes/font_size = 32
+Button/styles/hover = SubResource("StyleBoxFlat_2utn2")
+Button/styles/normal = SubResource("StyleBoxFlat_hhv36")
+Button/styles/pressed = SubResource("StyleBoxFlat_5ctis")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_y5dlm")
 Panel/styles/panel = SubResource("StyleBoxFlat_276hv")

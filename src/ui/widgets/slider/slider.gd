@@ -2,7 +2,8 @@
 extends VBoxContainer
 
 # Inputs unique to each slider
-@export var title : String
+@export var top_text : String
+@export var bottom_text : String
 @export var bottom_carrot_label_text : String
 @export var top_carrot_label_text : String
 @export var green_zone_bounds : Vector2
@@ -20,8 +21,17 @@ func _ready():
 	bottom_carrot_label = bottom_carrot.get_node("Label")
 	top_carrot_label = top_carrot.get_node("Label")
 	
-	# Set the text appropriately
-	$Title.text = title
+	# Set the titles text appropriately
+	var top_text_label = $TopText
+	var bottom_text_label = $BottomText
+	if top_text.length() > 0:
+		top_text_label.text = top_text
+		top_text_label.visible = true
+	if bottom_text.length() > 0:
+		bottom_text_label.text = bottom_text
+		bottom_text_label.visible = true
+		
+	# Set the carat text
 	bottom_carrot_label.text = bottom_carrot_label_text
 	top_carrot_label.text = top_carrot_label_text
 	

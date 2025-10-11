@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://dxptfdorrp7mi"]
 
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="1_xwr2b"]
-[ext_resource type="StyleBox" uid="uid://bhl4tsdr58raf" path="res://ui/alerts_panel/caution.tres" id="2_6dryd"]
-[ext_resource type="StyleBox" uid="uid://bo3j5clff2yuf" path="res://ui/alerts_panel/warning.tres" id="3_ojy8x"]
+[ext_resource type="StyleBox" uid="uid://bhl4tsdr58raf" path="res://ui/widgets/alerts_panel/caution.tres" id="2_6dryd"]
+[ext_resource type="StyleBox" uid="uid://bo3j5clff2yuf" path="res://ui/widgets/alerts_panel/warning.tres" id="3_ojy8x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_554k3"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -11,6 +11,10 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2dnf"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -19,6 +23,10 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j76c4"]
 bg_color = Color(0.117647, 0.117647, 0.156863, 1)
@@ -27,6 +35,10 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)

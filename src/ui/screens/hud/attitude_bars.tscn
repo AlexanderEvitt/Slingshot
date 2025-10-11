@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://4vjxamh38dkk"]
 
-[ext_resource type="Script" path="res://ui/hud/bar_controller.gd" id="1_hj8xr"]
-[ext_resource type="Texture2D" uid="uid://cslsed55c4a5m" path="res://ui/hud/attitude_bar.png" id="2_jxtlg"]
-[ext_resource type="Script" path="res://ui/hud/bar.gd" id="3_xbpjj"]
+[ext_resource type="Script" path="res://ui/screens/hud/bar_controller.gd" id="1_hj8xr"]
+[ext_resource type="Texture2D" uid="uid://cslsed55c4a5m" path="res://ui/screens/hud/attitude_bar.png" id="2_jxtlg"]
+[ext_resource type="Script" path="res://ui/screens/hud/bar.gd" id="3_xbpjj"]
 [ext_resource type="FontFile" uid="uid://dqyy4mogwg27l" path="res://ui/fonts/Oxanium-Regular.ttf" id="4_jbwex"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2205c"]

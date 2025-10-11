@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://ui/autopilot_handler.gd" id="11_am0j0"]
 [ext_resource type="PackedScene" uid="uid://w0adn324ymo3" path="res://ui/widgets/light_button/light_button.tscn" id="12_poj7e"]
 [ext_resource type="ButtonGroup" uid="uid://444nnqo6ich8" path="res://ui/attitude_button_group.tres" id="13_4xkmw"]
-[ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/alerts_panel/alerts_panel.tscn" id="16_jw1r5"]
+[ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/widgets/alerts_panel/alerts_panel.tscn" id="16_jw1r5"]
 [ext_resource type="PackedScene" uid="uid://jpb6h7avv8co" path="res://ui/screens/navigation/waypoints/waypoints.tscn" id="17_gsl3v"]
 [ext_resource type="Script" path="res://ui/screens/navigation/selection_panel.gd" id="19_b130n"]
 
@@ -174,21 +174,21 @@ label_text = "RP"
 
 [node name="PumpSlider" parent="VBoxContainer/MainSection/Instruments" instance=ExtResource("8_4t4jw")]
 layout_mode = 2
-title = "PUMP SPEED"
+top_text = "PUMP SPEEDS"
 bottom_carrot_label_text = "D"
 top_carrot_label_text = "H"
 green_zone_bounds = Vector2(0.2, 0.8)
 
 [node name="TempSlider" parent="VBoxContainer/MainSection/Instruments" instance=ExtResource("8_4t4jw")]
 layout_mode = 2
-title = "PUMP TEMP"
+top_text = "MAGNET TEMP"
 bottom_carrot_label_text = "D"
 top_carrot_label_text = "H"
 green_zone_bounds = Vector2(0.05, 0.4)
 
 [node name="FuelSlider" parent="VBoxContainer/MainSection/Instruments" instance=ExtResource("8_4t4jw")]
 layout_mode = 2
-title = "FUEL QUANT"
+top_text = "FUEL LOAD"
 bottom_carrot_label_text = "D"
 top_carrot_label_text = "H"
 green_zone_bounds = Vector2(0.1, 1)
@@ -271,7 +271,7 @@ stretch = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(200, 200)
 render_target_update_mode = 4
 
 [node name="NavballRoot" parent="VBoxContainer/MainSection/Instruments/Navball/SubViewportContainer/SubViewport" instance=ExtResource("9_5oiv6")]
@@ -310,7 +310,7 @@ stretch = true
 own_world_3d = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(2, 2)
+size = Vector2i(1308, 842)
 render_target_update_mode = 4
 
 [node name="OrbitRoot" parent="VBoxContainer/MainSection/CenterBar/Map/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("10_n4sgr")]

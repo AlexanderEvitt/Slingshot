@@ -8,7 +8,7 @@
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="6_hqukt"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="7_8fexf"]
 [ext_resource type="Script" path="res://ui/data_grid.gd" id="8_586vo"]
-[ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/alerts_panel/alerts_panel.tscn" id="9_h7qnh"]
+[ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/widgets/alerts_panel/alerts_panel.tscn" id="9_h7qnh"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="12_4hj8y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]

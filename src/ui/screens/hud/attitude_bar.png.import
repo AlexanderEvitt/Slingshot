@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmexnft0ep2kb"
-path="res://.godot/imported/tca.png-67ceda9a741dacfc0165876c79efebf7.ctex"
+uid="uid://cslsed55c4a5m"
+path="res://.godot/imported/attitude_bar.png-7b6ca9985098e274ccf66ad748c7b624.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/widgets/tca/tca.png"
-dest_files=["res://.godot/imported/tca.png-67ceda9a741dacfc0165876c79efebf7.ctex"]
+source_file="res://ui/screens/hud/attitude_bar.png"
+dest_files=["res://.godot/imported/attitude_bar.png-7b6ca9985098e274ccf66ad748c7b624.ctex"]
 
 [params]
 

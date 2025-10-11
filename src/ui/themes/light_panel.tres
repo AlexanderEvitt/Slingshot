@@ -15,6 +15,10 @@ border_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uue3l"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)

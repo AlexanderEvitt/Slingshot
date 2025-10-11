@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyuel0delkcqp"]
 
-[ext_resource type="PackedScene" uid="uid://cfjyiueui6yog" path="res://ship/frigate/wireframe/FrigateWireframeModel.tscn" id="1_stbap"]
+[ext_resource type="PackedScene" path="res://ship/frigate/wireframe/FrigateWireframeModel.tscn" id="1_stbap"]
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="10_jswew"]
 [ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="11_6l12o"]
 
 [sub_resource type="Environment" id="Environment_wjvqu"]
 background_mode = 1
-background_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+background_color = Color(0.117647, 0.117647, 0.156863, 1)
 
 [node name="Ship" type="Node3D"]
 

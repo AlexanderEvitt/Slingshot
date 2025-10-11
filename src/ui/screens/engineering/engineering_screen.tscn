@@ -1,17 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpcripo2vb6ip"]
+[gd_scene load_steps=10 format=3 uid="uid://dpcripo2vb6ip"]
 
-[ext_resource type="Script" path="res://ui/panel_switch.gd" id="1_6nhqn"]
+[ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_s5c5d"]
+[ext_resource type="PackedScene" uid="uid://cxicwm84uu63x" path="res://ui/screens/engineering/propulsion_screen.tscn" id="2_55hwn"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_incdm"]
-[ext_resource type="PackedScene" uid="uid://cwyyrjeji023x" path="res://ui/screens/engineering/propulsion_screen.tscn" id="3_qw07w"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="4_0f0kw"]
 [ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="5_7j1hq"]
 [ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="6_wlcgb"]
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="7_meeju"]
-[ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="8_np0qd"]
-[ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="9_7g1b1"]
-[ext_resource type="Script" path="res://ui/data_grid.gd" id="10_dcvce"]
-[ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/alerts_panel/alerts_panel.tscn" id="11_0njp3"]
-[ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="12_1g1i2"]
+[ext_resource type="Theme" uid="uid://bhtmuml4efphk" path="res://ui/themes/medium_panel.tres" id="9_48ijl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
@@ -20,58 +16,34 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
-texture = ExtResource("9_7g1b1")
-modulate_color = Color(0.117647, 0.117647, 0.156863, 1)
-
-[node name="EngineeringScreen" type="HBoxContainer"]
+[node name="EngineeringScreen" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_incdm")
+theme = ExtResource("1_s5c5d")
 
-[node name="Screen" type="VBoxContainer" parent="." node_paths=PackedStringArray("buttons_parent", "panels_parent")]
+[node name="Screen" type="VBoxContainer" parent="."]
 layout_mode = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
 size_flags_horizontal = 3
-script = ExtResource("1_6nhqn")
-smooth = true
-buttons_parent = NodePath("ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder")
-panels_parent = NodePath("HUDs")
 
-[node name="HUDs" type="VBoxContainer" parent="Screen"]
+[node name="Panels" type="VBoxContainer" parent="Screen"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HUD1" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-theme = ExtResource("2_incdm")
-
-[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD1"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="Propulsion" parent="Screen/HUDs/HUD1/Shifter" instance=ExtResource("3_qw07w")]
+[node name="PropPanel" parent="Screen/Panels" instance=ExtResource("2_55hwn")]
 layout_mode = 2
 
-[node name="HUD2" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+[node name="PowPanel" type="Panel" parent="Screen/Panels" groups=["HUDs"]]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_incdm")
 
-[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD2"]
+[node name="Shifter" type="MarginContainer" parent="Screen/Panels/PowPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,12 +55,12 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="HUD3" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+[node name="AttPanel" type="Panel" parent="Screen/Panels" groups=["HUDs"]]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD3"]
+[node name="Shifter" type="MarginContainer" parent="Screen/Panels/AttPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,25 +72,52 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Screen/HUDs/HUD3/Shifter"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Screen/Panels/AttPanel/Shifter"]
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD3/Shifter/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Screen/Panels/AttPanel/Shifter/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="Ship" parent="Screen/HUDs/HUD3/Shifter/SubViewportContainer/SubViewport" instance=ExtResource("4_0f0kw")]
+[node name="Ship" parent="Screen/Panels/AttPanel/Shifter/SubViewportContainer/SubViewport" instance=ExtResource("4_0f0kw")]
 
-[node name="HUD4" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
+[node name="LifePanel" type="Panel" parent="Screen/Panels" groups=["HUDs"]]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Shifter" type="MarginContainer" parent="Screen/Panels/LifePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.5
+offset_top = -20.0
+offset_right = 183.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Screen/Panels/LifePanel/Shifter"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "ALL SPACES PRESSURIZED"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CamPanel" type="Panel" parent="Screen/Panels" groups=["HUDs"]]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_incdm")
 
-[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD4"]
+[node name="Shifter" type="MarginContainer" parent="Screen/Panels/CamPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -130,21 +129,21 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Screen/HUDs/HUD4/Shifter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/Panels/CamPanel/Shifter"]
 layout_mode = 2
 
-[node name="MarginCam" type="MarginContainer" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer"]
+[node name="MarginCam" type="MarginContainer" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="Panel" type="Panel" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam"]
+[node name="Panel" type="Panel" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -159,116 +158,40 @@ size_flags_horizontal = 3
 stretch = true
 script = ExtResource("5_7j1hq")
 
-[node name="SubViewport" type="SubViewport" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="CamRoot" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_wlcgb")]
+[node name="CamRoot" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_wlcgb")]
 camera_select = 1
 
-[node name="ScreenText" type="VBoxContainer" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
+[node name="ScreenText" type="VBoxContainer" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
+[node name="Label" type="Label" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
 layout_mode = 2
 theme = ExtResource("7_meeju")
 text = "BORESIGHT +X"
 
-[node name="Label2" type="Label" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
+[node name="Label2" type="Label" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
 layout_mode = 2
 theme = ExtResource("7_meeju")
 text = "AUTO"
 
-[node name="Label3" type="Label" parent="Screen/HUDs/HUD4/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
+[node name="Label3" type="Label" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
 layout_mode = 2
 theme = ExtResource("7_meeju")
 text = "FOV45"
-
-[node name="HUD5" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Shifter" type="VBoxContainer" parent="Screen/HUDs/HUD5"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HUD6" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD6"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="HUD7" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD7"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = -11.5
-offset_right = 88.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Screen/HUDs/HUD7/Shifter"]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
-text = "ALL SYSTEMS HEALTHY"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="HUD8" type="Panel" parent="Screen/HUDs" groups=["HUDs"]]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Shifter" type="MarginContainer" parent="Screen/HUDs/HUD8"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -183.5
-offset_top = -20.0
-offset_right = 183.5
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Screen/HUDs/HUD8/Shifter"]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
-text = "ALL SPACES PRESSURIZED"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
 
 [node name="ModeSelectorPanel" type="Panel" parent="Screen"]
 z_index = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.14
+size_flags_stretch_ratio = 0.1
+theme = ExtResource("9_48ijl")
 
 [node name="MarginContainer" type="MarginContainer" parent="Screen/ModeSelectorPanel"]
 layout_mode = 1
@@ -277,319 +200,57 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 20
+theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
-[node name="ButtonPanel" type="Panel" parent="Screen/ModeSelectorPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/ModeSelectorPanel/MarginContainer"]
 layout_mode = 2
-theme = ExtResource("8_np0qd")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ButtonHolder" type="GridContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer"]
+[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 4
-
-[node name="ModeButton1" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton1" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("8_np0qd")
 toggle_mode = true
 button_pressed = true
-text = "PROPULSION"
+text = "PROP"
 
-[node name="ModeButton2" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+[node name="Button2" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
+text = "POW"
 
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton2" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("8_np0qd")
-toggle_mode = true
-text = "FUEL"
-
-[node name="ModeButton3" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+[node name="Button3" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
+text = "ATT"
 
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton3" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("8_np0qd")
-toggle_mode = true
-text = "THRUSTERS"
-
-[node name="ModeButton4" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+[node name="Button4" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
+text = "LIFE"
 
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton4" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("8_np0qd")
-toggle_mode = true
-text = "CAMERAS"
-
-[node name="ModeButton5" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+[node name="Button5" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
+text = "CAM"
 
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton5" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("8_np0qd")
-toggle_mode = true
-text = "POWER"
-
-[node name="ModeButton6" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+[node name="Button6" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
 
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton6" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("8_np0qd")
-toggle_mode = true
-text = "THERMAL"
-
-[node name="ModeButton7" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+[node name="Button7" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
 
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton7" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("8_np0qd")
-toggle_mode = true
-text = "DAMAGE"
-
-[node name="ModeButton8" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder"]
+[node name="Button8" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
 
-[node name="Button" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton8" groups=["Buttons"]]
-layout_mode = 2
-theme = ExtResource("8_np0qd")
-toggle_mode = true
-text = "ATMOSPHERE"
-
-[node name="MarginContainer" type="MarginContainer" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_right = 40
-
-[node name="Label" type="Label" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("8_np0qd")
-text = "MODES"
-
-[node name="TriangleCutout" type="Panel" parent="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
-
-[node name="Sidebar" type="VBoxContainer" parent="."]
+[node name="Button9" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
 
-[node name="Sidepanel1" type="MarginContainer" parent="Sidebar"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-
-[node name="Panel" type="Panel" parent="Sidebar/Sidepanel1"]
-layout_mode = 2
-theme = ExtResource("8_np0qd")
-
-[node name="MarginContainer" type="MarginContainer" parent="Sidebar/Sidepanel1/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/Sidepanel1/Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("8_np0qd")
-text = "STATE"
-
-[node name="DataGrid" type="GridContainer" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-columns = 2
-script = ExtResource("10_dcvce")
-
-[node name="Title1" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
+[node name="Button10" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("8_np0qd")
-text = "REF"
-
-[node name="Data1" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Earth"
-horizontal_alignment = 2
-
-[node name="Title2" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("8_np0qd")
-text = "ALT"
-
-[node name="Data2" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "1,475"
-horizontal_alignment = 2
-clip_text = true
-
-[node name="Title3" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("8_np0qd")
-text = "VEL"
-
-[node name="Data3" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "7.768"
-horizontal_alignment = 2
-clip_text = true
-
-[node name="Title4" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("8_np0qd")
-text = "ECC"
-
-[node name="Data4" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "0.324"
-horizontal_alignment = 2
-clip_text = true
-
-[node name="Title5" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("8_np0qd")
-text = "STP"
-
-[node name="Data5" type="Label" parent="Sidebar/Sidepanel1/Panel/MarginContainer/VBoxContainer/DataGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "0.324"
-horizontal_alignment = 2
-clip_text = true
-
-[node name="TriangleCutout" type="Panel" parent="Sidebar/Sidepanel1/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
-
-[node name="Alerts" parent="Sidebar" instance=ExtResource("11_0njp3")]
-layout_mode = 2
-
-[node name="Spacer" type="Panel" parent="Sidebar"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
-
-[node name="MarginContainer" type="MarginContainer" parent="Sidebar"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.7
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="TextureRect" type="TextureRect" parent="Sidebar/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-texture = ExtResource("12_1g1i2")
-expand_mode = 2
-stretch_mode = 4
-
-[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton1/Button" to="Screen" method="_on_button1_pressed"]
-[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton2/Button" to="Screen" method="_on_button2_pressed"]
-[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton3/Button" to="Screen" method="_on_button3_pressed"]
-[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton4/Button" to="Screen" method="_on_button4_pressed"]
-[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton5/Button" to="Screen" method="_on_button5_pressed"]
-[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton6/Button" to="Screen" method="_on_button6_pressed"]
-[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton7/Button" to="Screen" method="_on_button7_pressed"]
-[connection signal="pressed" from="Screen/ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder/ModeButton8/Button" to="Screen" method="_on_button8_pressed"]
