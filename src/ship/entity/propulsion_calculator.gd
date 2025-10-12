@@ -1,21 +1,12 @@
 extends Node
 
-# Fuel quantity
+# Fuel quantity (kg)
 var he_quant = 1.0
 var de_quant = 1.0
 
-# Pump speeds
-var he_mp = 0.0
-var de_mp = 0.0
-
-# Main valve positions
-var he_mv = false
-var de_mv = false
 
 # Total thrust applied to vehicle, including thrusters
 var thrust = Vector3(0,0,0) # in ship frame
-# Resulting acceleration from main engine only
-var throttle = 0.0
 # Commanded acceleration from main engine only
 var commanded_throttle = 0.0
 
@@ -41,30 +32,12 @@ func update(_dt: float) -> void:
 	# Simulate engine if time rate is 1
 	if SystemTime.step == 1:
 		# Increment pump speed based on error between throttle and result
-		var Kp = 0.1
-		var error = (commanded_throttle - throttle)/engine_power
-		he_mp = he_mp + Kp*error
-		de_mp = de_mp + Kp*error
-		
-		# Add in some random noise
-		he_mp = he_mp + randfn(0.0, he_mp/1000.0)
-		de_mp = de_mp + randfn(0.0, de_mp/1000.0)
-		
-		# Drain fuel by corresponding amount
-		he_quant = he_quant - fuel_burn_rate*he_mp
-		de_quant = de_quant - fuel_burn_rate*de_mp
-			
-		# Calculate thrust from pump speed
-		throttle = engine_power*min(he_mp,de_mp) # lowest pump speed
+		pass
 	else:
 		# At other time rates, just directly set the throttle
-		throttle = commanded_throttle
-	thrust = thrust + Vector3(throttle,0,0)
+		pass
 	
-	# Zero thrust if fuel is empty
-	if he_quant <= 0 or de_quant <= 0:
-		throttle = 0
-		commanded_throttle = 0
+
 	
 	# Add thruster inputs to thrust
 	if Input.is_action_pressed("translate_left"):

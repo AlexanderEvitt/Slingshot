@@ -16,22 +16,13 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhv36"]
 bg_color = Color(0.117647, 0.117647, 0.156863, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ctis"]
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_276hv"]
 bg_color = Color(0.117647, 0.117647, 0.156863, 1)
@@ -44,7 +35,7 @@ border_color = Color(1, 1, 1, 1)
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_pressed_color = Color(0.117647, 0.117647, 0.156863, 1)
-Button/font_sizes/font_size = 32
+Button/font_sizes/font_size = 16
 Button/styles/hover = SubResource("StyleBoxFlat_2utn2")
 Button/styles/normal = SubResource("StyleBoxFlat_hhv36")
 Button/styles/pressed = SubResource("StyleBoxFlat_5ctis")

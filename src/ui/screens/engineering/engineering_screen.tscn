@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpcripo2vb6ip"]
+[gd_scene load_steps=13 format=3 uid="uid://dpcripo2vb6ip"]
 
 [ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_s5c5d"]
 [ext_resource type="PackedScene" uid="uid://cxicwm84uu63x" path="res://ui/screens/engineering/propulsion_screen.tscn" id="2_55hwn"]
+[ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="2_g4lhf"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_incdm"]
+[ext_resource type="Script" path="res://ui/screens/navigation/clock.gd" id="3_ri0wj"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="4_0f0kw"]
+[ext_resource type="Script" path="res://ui/screens/navigation/timerate.gd" id="4_glkqa"]
 [ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="5_7j1hq"]
 [ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="6_wlcgb"]
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="7_meeju"]
@@ -29,6 +32,112 @@ layout_mode = 2
 offset_right = 1920.0
 offset_bottom = 1080.0
 size_flags_horizontal = 3
+
+[node name="TopBar" type="Panel" parent="Screen"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="CenterContainer" parent="Screen/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="Label" type="Label" parent="Screen/TopBar/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_g4lhf")
+text = "T+00d00h00m00s"
+script = ExtResource("3_ri0wj")
+
+[node name="MarginContainer2" type="CenterContainer" parent="Screen/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Label" type="Label" parent="Screen/TopBar/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("2_g4lhf")
+text = "×1k"
+script = ExtResource("4_glkqa")
+
+[node name="MarginContainer5" type="MarginContainer" parent="Screen/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ButtonPanel" type="Panel" parent="Screen/TopBar/HBoxContainer/MarginContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_g4lhf")
+
+[node name="Button" type="Button" parent="Screen/TopBar/HBoxContainer/MarginContainer5/ButtonPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+action_mode = 0
+text = "RESET"
+
+[node name="FrameLabel" type="Label" parent="Screen/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme = ExtResource("2_g4lhf")
+text = "ENGINEERING // FUSION REACTOR"
+horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="Screen/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="MarginContainer4" type="MarginContainer" parent="Screen/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ButtonPanel" type="Panel" parent="Screen/TopBar/HBoxContainer/MarginContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_g4lhf")
+
+[node name="Button" type="Button" parent="Screen/TopBar/HBoxContainer/MarginContainer4/ButtonPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+toggle_mode = true
+action_mode = 0
+text = "MENU"
 
 [node name="Panels" type="VBoxContainer" parent="Screen"]
 layout_mode = 2
@@ -254,3 +363,5 @@ size_flags_horizontal = 3
 [node name="Button10" type="Button" parent="Screen/ModeSelectorPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[connection signal="pressed" from="Screen/TopBar/HBoxContainer/MarginContainer5/ButtonPanel/Button" to="Screen/TopBar/HBoxContainer/MarginContainer/Label" method="_on_reset"]

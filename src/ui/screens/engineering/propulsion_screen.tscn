@@ -1,13 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxicwm84uu63x"]
+[gd_scene load_steps=28 format=3 uid="uid://cxicwm84uu63x"]
 
 [ext_resource type="Theme" uid="uid://bhtmuml4efphk" path="res://ui/themes/medium_panel.tres" id="1_0yfo2"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="2_8oiwl"]
+[ext_resource type="Texture2D" uid="uid://dnv5fk1pjj2ug" path="res://ui/widgets/valve/valve.png" id="2_n4sfo"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="3_nv0kw"]
 [ext_resource type="PackedScene" uid="uid://14nd8yy5f85e" path="res://ui/widgets/slider/slider.tscn" id="4_g6mn0"]
+[ext_resource type="PackedScene" uid="uid://chc5yjtcfsxvt" path="res://ui/widgets/thermometer/thermometer.tscn" id="5_fij3w"]
+[ext_resource type="PackedScene" uid="uid://bcaj67ttyd84r" path="res://ui/widgets/circle_gauge/circle_gauge.tscn" id="5_g0x2g"]
+[ext_resource type="Script" path="res://ui/widgets/circle_gauge/circle_gauge.gd" id="6_th1l2"]
+[ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/widgets/alerts_panel/alerts_panel.tscn" id="7_vmyaf"]
+[ext_resource type="Texture2D" uid="uid://cf4yhwi23x8o1" path="res://ui/widgets/bar/stripes.png" id="8_oue47"]
+[ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="10_3n7pl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71ci7"]
-bg_color = Color(1, 1, 1, 1)
-draw_center = false
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -35,12 +41,13 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_q0grj"]
 color = Color(1, 1, 1, 1)
-grow_begin = 4.0
-grow_end = 4.0
+grow_begin = 0.0
+grow_end = 0.0
 thickness = 8
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_seveu"]
 color = Color(1, 1, 1, 1)
+grow_end = 0.0
 thickness = 8
 vertical = true
 
@@ -49,15 +56,82 @@ color = Color(1, 1, 1, 1)
 thickness = 8
 vertical = true
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ixkx8"]
+color = Color(1, 1, 1, 1)
+grow_begin = 8.0
+grow_end = 0.0
+thickness = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ripso"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_detail = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4w7q"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0k15l"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ip4l"]
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6uyv"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 64
+corner_radius_bottom_left = 64
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glitf"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3bod"]
+bg_color = Color(0.188235, 0.501961, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87va7"]
+bg_color = Color(0.188235, 0.501961, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1r1e"]
+bg_color = Color(1, 0.690196, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
 [node name="PropPanel" type="VBoxContainer"]
 offset_right = 1920.0
-offset_bottom = 978.0
+offset_bottom = 932.0
 size_flags_vertical = 3
 theme = ExtResource("1_0yfo2")
 
@@ -65,16 +139,17 @@ theme = ExtResource("1_0yfo2")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="Slice1" type="VBoxContainer" parent="Readouts"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
+size_flags_stretch_ratio = 0.6
 
 [node name="TopTank" type="MarginContainer" parent="Readouts/Slice1"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 80
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 40
@@ -101,7 +176,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Readouts/Slice1/TopTank/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "HE3 TANK"
+text = "HE-3 TANK"
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="Readouts/Slice1/TopTank/Panel/MarginContainer/VBoxContainer"]
@@ -123,7 +198,7 @@ vertical_alignment = 1
 [node name="TopTank2" type="MarginContainer" parent="Readouts/Slice1"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 80
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 40
@@ -150,7 +225,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Readouts/Slice1/TopTank2/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "DE TANK"
+text = "DEUT TANK"
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="Readouts/Slice1/TopTank2/Panel/MarginContainer/VBoxContainer"]
@@ -172,12 +247,14 @@ vertical_alignment = 1
 [node name="Slice2" type="HBoxContainer" parent="Readouts"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
+size_flags_stretch_ratio = 0.2
+theme_override_constants/separation = 0
 
 [node name="Pipes1" type="VBoxContainer" parent="Readouts/Slice2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="Spacer1" type="Panel" parent="Readouts/Slice2/Pipes1"]
 layout_mode = 2
@@ -185,6 +262,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 
 [node name="Pipe1" type="Panel" parent="Readouts/Slice2/Pipes1"]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
 
@@ -195,6 +273,7 @@ size_flags_stretch_ratio = 2.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 
 [node name="Pipe2" type="Panel" parent="Readouts/Slice2/Pipes1"]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
 
@@ -206,6 +285,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 [node name="MiddlePipes" type="VBoxContainer" parent="Readouts/Slice2"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="Spacer1" type="Panel" parent="Readouts/Slice2/MiddlePipes"]
 layout_mode = 2
@@ -213,10 +293,37 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 
 [node name="Pipe1" type="Panel" parent="Readouts/Slice2/MiddlePipes"]
+custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_override_styles/panel = SubResource("StyleBoxLine_seveu")
+
+[node name="Valve1" type="TextureRect" parent="Readouts/Slice2/MiddlePipes/Pipe1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_bottom = 0.25
+offset_left = -28.0
+offset_top = -32.0
+offset_right = 36.0
+offset_bottom = 32.0
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("2_n4sfo")
+expand_mode = 1
+
+[node name="Valve2" type="TextureRect" parent="Readouts/Slice2/MiddlePipes/Pipe1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_bottom = 0.75
+offset_left = -28.0
+offset_top = -32.0
+offset_right = 36.0
+offset_bottom = 32.0
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("2_n4sfo")
+expand_mode = 1
 
 [node name="Spacer2" type="Panel" parent="Readouts/Slice2/MiddlePipes"]
 layout_mode = 2
@@ -225,10 +332,37 @@ size_flags_stretch_ratio = 2.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 
 [node name="Pipe2" type="Panel" parent="Readouts/Slice2/MiddlePipes"]
+custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_override_styles/panel = SubResource("StyleBoxLine_ia2ag")
+
+[node name="Valve1" type="TextureRect" parent="Readouts/Slice2/MiddlePipes/Pipe2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_bottom = 0.25
+offset_left = -28.0
+offset_top = -32.0
+offset_right = 36.0
+offset_bottom = 32.0
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("2_n4sfo")
+expand_mode = 1
+
+[node name="Valve2" type="TextureRect" parent="Readouts/Slice2/MiddlePipes/Pipe2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_bottom = 0.75
+offset_left = -28.0
+offset_top = -32.0
+offset_right = 36.0
+offset_bottom = 32.0
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("2_n4sfo")
+expand_mode = 1
 
 [node name="Spacer3" type="Panel" parent="Readouts/Slice2/MiddlePipes"]
 layout_mode = 2
@@ -239,6 +373,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="Spacer1" type="Panel" parent="Readouts/Slice2/Pipes2"]
 layout_mode = 2
@@ -246,8 +381,9 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 
 [node name="Pipe1" type="Panel" parent="Readouts/Slice2/Pipes2"]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+theme_override_styles/panel = SubResource("StyleBoxLine_ixkx8")
 
 [node name="Spacer2" type="Panel" parent="Readouts/Slice2/Pipes2"]
 layout_mode = 2
@@ -256,8 +392,9 @@ size_flags_stretch_ratio = 2.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 
 [node name="Pipe2" type="Panel" parent="Readouts/Slice2/Pipes2"]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+theme_override_styles/panel = SubResource("StyleBoxLine_ixkx8")
 
 [node name="Spacer3" type="Panel" parent="Readouts/Slice2/Pipes2"]
 layout_mode = 2
@@ -270,8 +407,9 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 
 [node name="Pipe3" type="Panel" parent="Readouts/Slice2/Pipes2"]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+theme_override_styles/panel = SubResource("StyleBoxLine_ixkx8")
 
 [node name="Spacer5" type="Panel" parent="Readouts/Slice2/Pipes2"]
 layout_mode = 2
@@ -280,8 +418,9 @@ size_flags_stretch_ratio = 2.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 
 [node name="Pipe4" type="Panel" parent="Readouts/Slice2/Pipes2"]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+theme_override_styles/panel = SubResource("StyleBoxLine_ixkx8")
 
 [node name="Spacer6" type="Panel" parent="Readouts/Slice2/Pipes2"]
 layout_mode = 2
@@ -291,13 +430,13 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
 [node name="Slice3" type="VBoxContainer" parent="Readouts"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.5
 
 [node name="Pump1" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_bottom = 48
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Pump1"]
 layout_mode = 2
@@ -362,8 +501,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ripso")
 [node name="Pump2" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_bottom = 48
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Pump2"]
 layout_mode = 2
@@ -428,8 +567,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ripso")
 [node name="Pump3" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_bottom = 48
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Pump3"]
 layout_mode = 2
@@ -494,8 +633,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ripso")
 [node name="Pump4" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_bottom = 48
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Pump4"]
 layout_mode = 2
@@ -557,83 +696,690 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 theme_override_styles/panel = SubResource("StyleBoxFlat_ripso")
 
-[node name="Slice4" type="VBoxContainer" parent="Readouts"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.7
-
 [node name="Slice5" type="VBoxContainer" parent="Readouts"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.7
+size_flags_stretch_ratio = 1.2
 
-[node name="MarginContainer" type="MarginContainer" parent="Readouts/Slice5"]
+[node name="Magnet1" type="MarginContainer" parent="Readouts/Slice5"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 48
-theme_override_constants/margin_top = 48
-theme_override_constants/margin_right = 48
-theme_override_constants/margin_bottom = 48
+size_flags_stretch_ratio = 0.7
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice5/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Readouts/Slice5/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "PROPELLANT FEED"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice5/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+[node name="MagnetAssembly" type="HBoxContainer" parent="Readouts/Slice5/Magnet1"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Panel" type="Button" parent="Readouts/Slice5/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Inlet" type="VBoxContainer" parent="Readouts/Slice5/Magnet1/MagnetAssembly"]
 layout_mode = 2
 size_flags_horizontal = 3
-toggle_mode = true
-button_pressed = true
-text = "PROPULSOR"
+size_flags_stretch_ratio = 0.2
 
-[node name="Panel2" type="Panel" parent="Readouts/Slice5/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Spacer1" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Inlet"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
+
+[node name="Pipe1" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Inlet"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+
+[node name="Main" type="VBoxContainer" parent="Readouts/Slice5/Magnet1/MagnetAssembly"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Readouts/Slice5/MarginContainer/VBoxContainer/HBoxContainer/Panel2"]
+[node name="TitlePanel" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("2_8oiwl")
+
+[node name="Label" type="Label" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/TitlePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "COLD"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+text = " MAGNET ARRAY TEMP"
+vertical_alignment = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Readouts/Slice5/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+[node name="MainPanel" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main"]
 layout_mode = 2
-theme_override_constants/separation = 0
+size_flags_vertical = 3
+theme = ExtResource("3_nv0kw")
 
-[node name="Panel" type="Button" parent="Readouts/Slice5/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-button_pressed = true
-text = "PROPULSOR"
-
-[node name="Panel2" type="Panel" parent="Readouts/Slice5/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Readouts/Slice5/MarginContainer/VBoxContainer/HBoxContainer2/Panel2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Thermometer" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer2" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer3" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer4" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer5" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer6" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Mag1" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_e4w7q")
+
+[node name="Mag2" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_e4w7q")
+
+[node name="Mag3" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_e4w7q")
+
+[node name="Mag4" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_e4w7q")
+
+[node name="Mag5" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_e4w7q")
+
+[node name="Mag6" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_e4w7q")
+
+[node name="Outlet" type="VBoxContainer" parent="Readouts/Slice5/Magnet1/MagnetAssembly"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Spacer1" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Outlet"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
+
+[node name="Pipe1" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Outlet"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+
+[node name="Arrow" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Outlet/Pipe1"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_top = -8.0
+offset_right = 11.0
+offset_bottom = 16.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.02
+theme_override_styles/panel = SubResource("StyleBoxFlat_0k15l")
+
+[node name="ReactorAssembly" type="HBoxContainer" parent="Readouts/Slice5"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Inlet" type="VBoxContainer" parent="Readouts/Slice5/ReactorAssembly"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+theme_override_constants/separation = 0
+
+[node name="Spacer1" type="Panel" parent="Readouts/Slice5/ReactorAssembly/Inlet"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
+
+[node name="Pipe1" type="Panel" parent="Readouts/Slice5/ReactorAssembly/Inlet"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+
+[node name="Spacer2" type="Panel" parent="Readouts/Slice5/ReactorAssembly/Inlet"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.9
+theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
+
+[node name="Pipe2" type="Panel" parent="Readouts/Slice5/ReactorAssembly/Inlet"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+
+[node name="Spacer3" type="Panel" parent="Readouts/Slice5/ReactorAssembly/Inlet"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
+
+[node name="ReactorMargin" type="MarginContainer" parent="Readouts/Slice5/ReactorAssembly"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Reactor" type="Panel" parent="Readouts/Slice5/ReactorAssembly/ReactorMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ip4l")
+
+[node name="Label" type="Label" parent="Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.5
+offset_top = 8.0
+offset_right = 71.5
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "REACTOR"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gauge1" parent="Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer" instance=ExtResource("5_g0x2g")]
+layout_mode = 2
+script = ExtResource("6_th1l2")
+label_text = "PWR"
+
+[node name="Gauge2" parent="Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer" instance=ExtResource("5_g0x2g")]
+layout_mode = 2
+script = ExtResource("6_th1l2")
+label_text = "ISP"
+
+[node name="Gauge3" parent="Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer" instance=ExtResource("5_g0x2g")]
+layout_mode = 2
+script = ExtResource("6_th1l2")
+label_text = "BETA"
+
+[node name="Gauge4" parent="Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer" instance=ExtResource("5_g0x2g")]
+layout_mode = 2
+script = ExtResource("6_th1l2")
+label_text = "T"
+
+[node name="NozzleHolder" type="MarginContainer" parent="Readouts/Slice5/ReactorAssembly"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Nozzle" type="Panel" parent="Readouts/Slice5/ReactorAssembly/NozzleHolder"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_b6uyv")
+
+[node name="Label" type="Label" parent="Readouts/Slice5/ReactorAssembly/NozzleHolder/Nozzle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+theme_override_font_sizes/font_size = 16
+text = "N
+O
+Z
+Z
+L
+E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Magnet2" type="MarginContainer" parent="Readouts/Slice5"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="MagnetAssembly" type="HBoxContainer" parent="Readouts/Slice5/Magnet2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Inlet" type="VBoxContainer" parent="Readouts/Slice5/Magnet2/MagnetAssembly"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Spacer1" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Inlet"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
+
+[node name="Pipe1" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Inlet"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+
+[node name="Main" type="VBoxContainer" parent="Readouts/Slice5/Magnet2/MagnetAssembly"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Mag1" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_glitf")
+
+[node name="Mag2" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_glitf")
+
+[node name="Mag3" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_glitf")
+
+[node name="Mag4" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_glitf")
+
+[node name="Mag5" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_glitf")
+
+[node name="Mag6" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_glitf")
+
+[node name="MainPanel" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_nv0kw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Thermometer" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer2" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer3" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer4" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer5" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="Thermometer6" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+layout_mode = 2
+
+[node name="TitlePanel" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("2_8oiwl")
+
+[node name="Label" type="Label" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = " MAGNET ARRAY FIELD"
+vertical_alignment = 2
+
+[node name="Outlet" type="VBoxContainer" parent="Readouts/Slice5/Magnet2/MagnetAssembly"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Spacer1" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Outlet"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_02o1l")
+
+[node name="Pipe1" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Outlet"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxLine_q0grj")
+
+[node name="Arrow" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Outlet/Pipe1"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_top = -8.0
+offset_right = 11.0
+offset_bottom = 16.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.02
+theme_override_styles/panel = SubResource("StyleBoxFlat_0k15l")
+
+[node name="Slice6" type="VBoxContainer" parent="Readouts"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="Controls" type="MarginContainer" parent="Readouts/Slice6"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice6/Controls"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Readouts/Slice6/Controls/VBoxContainer"]
+layout_mode = 2
+text = "FEED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control1" type="HBoxContainer" parent="Readouts/Slice6/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Button" parent="Readouts/Slice6/Controls/VBoxContainer/Control1"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "PROPULSOR"
+
+[node name="Panel2" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/Control1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="Label" type="Label" parent="Readouts/Slice6/Controls/VBoxContainer/Control1/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
 text = "COLD"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Control2" type="HBoxContainer" parent="Readouts/Slice6/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Button" type="Button" parent="Readouts/Slice6/Controls/VBoxContainer/Control2"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_pressed = true
+text = "REACTOR"
+
+[node name="AnnunciatorPanel" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/Control2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+theme_override_styles/panel = SubResource("StyleBoxFlat_o3bod")
+
+[node name="Label" type="Label" parent="Readouts/Slice6/Controls/VBoxContainer/Control2/AnnunciatorPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "OK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title2" type="Label" parent="Readouts/Slice6/Controls/VBoxContainer"]
+layout_mode = 2
+text = "MAGNET"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="HBoxContainer" parent="Readouts/Slice6/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Button" parent="Readouts/Slice6/Controls/VBoxContainer/Control3"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_pressed = true
+text = "CRYO"
+
+[node name="Panel2" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/Control3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+theme_override_styles/panel = SubResource("StyleBoxFlat_87va7")
+
+[node name="Label" type="Label" parent="Readouts/Slice6/Controls/VBoxContainer/Control3/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "STABLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control4" type="HBoxContainer" parent="Readouts/Slice6/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Button" type="Button" parent="Readouts/Slice6/Controls/VBoxContainer/Control4"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_pressed = true
+text = "FIELD"
+
+[node name="AnnunciatorPanel" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/Control4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+theme_override_styles/panel = SubResource("StyleBoxFlat_o3bod")
+
+[node name="Label" type="Label" parent="Readouts/Slice6/Controls/VBoxContainer/Control4/AnnunciatorPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "OK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title3" type="Label" parent="Readouts/Slice6/Controls/VBoxContainer"]
+layout_mode = 2
+text = "SAFETY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control5" type="HBoxContainer" parent="Readouts/Slice6/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Button" parent="Readouts/Slice6/Controls/VBoxContainer/Control5"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_pressed = true
+text = "THRUST LIM"
+
+[node name="Panel2" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/Control5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+theme_override_styles/panel = SubResource("StyleBoxFlat_87va7")
+
+[node name="Label" type="Label" parent="Readouts/Slice6/Controls/VBoxContainer/Control5/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "ON"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control6" type="HBoxContainer" parent="Readouts/Slice6/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Button" type="Button" parent="Readouts/Slice6/Controls/VBoxContainer/Control6"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_pressed = true
+text = "SCRAM INHIBIT"
+
+[node name="AnnunciatorPanel" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/Control6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+theme_override_styles/panel = SubResource("StyleBoxFlat_n1r1e")
+
+[node name="Label" type="Label" parent="Readouts/Slice6/Controls/VBoxContainer/Control6/AnnunciatorPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "INHIBIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="TextureRect" parent="Readouts/Slice6/Controls/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("8_oue47")
+stretch_mode = 1
+
+[node name="Panel" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Readouts/Slice6/Controls/VBoxContainer/Panel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_3n7pl")
+toggle_mode = true
+text = "SCRAM"
+
+[node name="MarginContainer" type="MarginContainer" parent="Readouts/Slice6"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/margin_top = 20
+
+[node name="Gauge1" parent="Readouts/Slice6/MarginContainer" instance=ExtResource("5_g0x2g")]
+layout_mode = 2
+script = ExtResource("6_th1l2")
+label_text = "ACC"
+
+[node name="Alerts" parent="Readouts/Slice6" instance=ExtResource("7_vmyaf")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.3

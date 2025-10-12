@@ -2,3 +2,4 @@
 src/.godot/
 editor/rcedit-x64.exe
 build
+.vscode
