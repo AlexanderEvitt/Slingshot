@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b07e4fcvvtdqq"]
+[gd_scene load_steps=3 format=3 uid="uid://b07e4fcvvtdqq"]
 
 [ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="1_usa1s"]
+[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="1_xv6sl"]
 
 [node name="ExternalScreen" type="HBoxContainer"]
 offset_right = 1920.0
@@ -12,9 +13,10 @@ size_flags_horizontal = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="FPVUI"]
-own_world_3d = true
+world_3d = ExtResource("1_xv6sl")
 handle_input_locally = false
-size = Vector2i(1920, 1080)
+size = Vector2i(2, 2)
+render_target_update_mode = 4
 
 [node name="CamRoot" parent="FPVUI/SubViewport" instance=ExtResource("1_usa1s")]
 camera_mode = true

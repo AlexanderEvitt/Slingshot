@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpcripo2vb6ip"]
+[gd_scene load_steps=10 format=3 uid="uid://dpcripo2vb6ip"]
 
 [ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_s5c5d"]
 [ext_resource type="PackedScene" uid="uid://cxicwm84uu63x" path="res://ui/screens/engineering/propulsion_screen.tscn" id="2_55hwn"]
@@ -7,9 +7,6 @@
 [ext_resource type="Script" path="res://ui/screens/navigation/clock.gd" id="3_ri0wj"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="4_0f0kw"]
 [ext_resource type="Script" path="res://ui/screens/navigation/timerate.gd" id="4_glkqa"]
-[ext_resource type="Script" path="res://scenes/external/external_cam_zoom.gd" id="5_7j1hq"]
-[ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="6_wlcgb"]
-[ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="7_meeju"]
 [ext_resource type="Theme" uid="uid://bhtmuml4efphk" path="res://ui/themes/medium_panel.tres" id="9_48ijl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5g2n"]
@@ -251,48 +248,6 @@ theme_override_constants/margin_right = 20
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_l5g2n")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-stretch = true
-script = ExtResource("5_7j1hq")
-
-[node name="SubViewport" type="SubViewport" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
-own_world_3d = true
-handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
-
-[node name="CamRoot" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/SubViewport" instance=ExtResource("6_wlcgb")]
-camera_select = 1
-
-[node name="ScreenText" type="VBoxContainer" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
-layout_mode = 2
-theme = ExtResource("7_meeju")
-text = "BORESIGHT +X"
-
-[node name="Label2" type="Label" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
-layout_mode = 2
-theme = ExtResource("7_meeju")
-text = "AUTO"
-
-[node name="Label3" type="Label" parent="Screen/Panels/CamPanel/Shifter/HBoxContainer/MarginCam/Panel/SubViewportContainer/ScreenText"]
-layout_mode = 2
-theme = ExtResource("7_meeju")
-text = "FOV45"
 
 [node name="ModeSelectorPanel" type="Panel" parent="Screen"]
 z_index = 2

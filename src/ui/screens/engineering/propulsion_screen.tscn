@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://cxicwm84uu63x"]
+[gd_scene load_steps=29 format=3 uid="uid://cxicwm84uu63x"]
 
 [ext_resource type="Theme" uid="uid://bhtmuml4efphk" path="res://ui/themes/medium_panel.tres" id="1_0yfo2"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="2_8oiwl"]
 [ext_resource type="Texture2D" uid="uid://dnv5fk1pjj2ug" path="res://ui/widgets/valve/valve.png" id="2_n4sfo"]
+[ext_resource type="Script" path="res://ui/screens/engineering/propulsion_handler.gd" id="2_x0m6y"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="3_nv0kw"]
 [ext_resource type="PackedScene" uid="uid://14nd8yy5f85e" path="res://ui/widgets/slider/slider.tscn" id="4_g6mn0"]
 [ext_resource type="PackedScene" uid="uid://chc5yjtcfsxvt" path="res://ui/widgets/thermometer/thermometer.tscn" id="5_fij3w"]
@@ -129,11 +130,18 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
 
-[node name="PropPanel" type="VBoxContainer"]
+[node name="PropPanel" type="VBoxContainer" node_paths=PackedStringArray("power_dial", "ve_dial", "beta_dial", "thrust_dial", "he_tank_text", "de_tank_text")]
 offset_right = 1920.0
 offset_bottom = 932.0
 size_flags_vertical = 3
 theme = ExtResource("1_0yfo2")
+script = ExtResource("2_x0m6y")
+power_dial = NodePath("Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer/Gauge1")
+ve_dial = NodePath("Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer/Gauge2")
+beta_dial = NodePath("Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer/Gauge3")
+thrust_dial = NodePath("Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer/Gauge4")
+he_tank_text = NodePath("Readouts/Slice1/TopTank/Panel/MarginContainer/VBoxContainer/Panel/HeLabel")
+de_tank_text = NodePath("Readouts/Slice1/TopTank2/Panel/MarginContainer/VBoxContainer/Panel/DeLabel")
 
 [node name="Readouts" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -184,7 +192,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_bbshc")
 
-[node name="Label" type="Label" parent="Readouts/Slice1/TopTank/Panel/MarginContainer/VBoxContainer/Panel"]
+[node name="HeLabel" type="Label" parent="Readouts/Slice1/TopTank/Panel/MarginContainer/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -233,7 +241,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_bbshc")
 
-[node name="Label" type="Label" parent="Readouts/Slice1/TopTank2/Panel/MarginContainer/VBoxContainer/Panel"]
+[node name="DeLabel" type="Label" parent="Readouts/Slice1/TopTank2/Panel/MarginContainer/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -933,7 +941,7 @@ label_text = "PWR"
 [node name="Gauge2" parent="Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer" instance=ExtResource("5_g0x2g")]
 layout_mode = 2
 script = ExtResource("6_th1l2")
-label_text = "ISP"
+label_text = "EFF"
 
 [node name="Gauge3" parent="Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer" instance=ExtResource("5_g0x2g")]
 layout_mode = 2
@@ -1366,7 +1374,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("10_3n7pl")
-toggle_mode = true
 text = "SCRAM"
 
 [node name="MarginContainer" type="MarginContainer" parent="Readouts/Slice6"]

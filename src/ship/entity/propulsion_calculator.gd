@@ -32,10 +32,14 @@ var power_dot = 0.0
 var power_ddot = 0.0
 var k = 100.0 # proportional constant
 var c = 50.0 # damping constant
+var exhaust_velocity = 0.0 # exhaust velocity
 
 # Pump flow control variables
 var kp = 1e-9
 var mass_flow = 0.0
+
+# Required electrical power
+var electrical_power = 1e12 # W
 
 @onready var ship = get_parent()
 
@@ -51,10 +55,16 @@ func update(dt: float) -> void:
 		throttle = ship.navigation_calculator.control_throttle
 	throttle = clamp(throttle,0,engine_power)
 	
+	# Get desired engine parameters
+	var mass = ship.total_mass
+	var desired_thrust = mass*1000*throttle # (kg)*(km/s) -> N
+	
 	# Simulate engine if time rate is 1
 	if SystemTime.step == 1:
 		# Get possible steady state power output of reactor
 		var steady_power = (design_power/design_mass_flow)*mass_flow
+		# Add electrical power to thrust power
+		steady_power = steady_power + electrical_power
 		
 		# Simulate spring mass damper for instantaneous power of reactor
 		var power_err = power - steady_power
@@ -64,42 +74,43 @@ func update(dt: float) -> void:
 		power = clamp(power, 0.0, 100.0*design_power)
 		
 		# Calculate thrust from power and flow rate
-		var exit_velocity = 0.0 # m/s
+		exhaust_velocity = 0.0 # m/s
 		if mass_flow != 0.0 and power != 0.0:
-			exit_velocity = sqrt(2*power/mass_flow) # m/s
-		main_thrust = mass_flow*exit_velocity
+			exhaust_velocity = sqrt(2*power/mass_flow) # m/s
+		main_thrust = mass_flow*exhaust_velocity
 		thrust = thrust + Vector3(main_thrust,0,0) # N
 		
 		# Get control signal for pumps
-		var mass = ship.total_mass
-		var desired_thrust = mass*1000*throttle # (kg)*(km/s) -> N
 		var thrust_err = thrust.length() - desired_thrust
 		# Change mass flow by thrust error
 		mass_flow = mass_flow - kp*thrust_err
 		# Ensure value doesn't become physically impossible
 		mass_flow = clamp(mass_flow,0.0,100.0*design_mass_flow)
 		
-		# Remove fuel from tanks
-		var he_mdot = mass_flow*(3.0/5.0)
-		var de_mdot = mass_flow*(2.0/5.0)
-		he_quant = he_quant - he_mdot*dt
-		de_quant = de_quant - de_mdot*dt
-		
-		# Print diagnostic information
-		if true:
-			print("\nTimestep at: ", SystemTime.t)
-			print("	Throttle: ", throttle)
-			print("	Thrust: ", thrust)
-			print("	Desired_thrust: ", desired_thrust)
-			print("	Mass flow: ", mass_flow)
-			print("	Thrust err: ", thrust_err)
-			print("	Efficiency: ", exit_velocity/design_ve)
-			print("	Steady power fraction: ", steady_power/design_power)
-			print("	Instantaneous/steady power: ", power/steady_power)
 	else:
-		# At other time rates, just directly set the throttle
-		pass
+		# At other time rates, don't control, just set the values
+		# Should you not be allowed to time warp above design thrust?
+		thrust = thrust + Vector3(desired_thrust,0,0)
+		exhaust_velocity = 1.0526*design_ve
+		mass_flow = desired_thrust/exhaust_velocity
+		power = 0.5*mass_flow*pow(exhaust_velocity,2)
+		power_dot = 0.0
+		power_ddot = 0.0
+		
+	# Remove fuel from tanks
+	var he_mdot = mass_flow*(3.0/5.0)
+	var de_mdot = mass_flow*(2.0/5.0)
+	he_quant = he_quant - he_mdot*dt
+	de_quant = de_quant - de_mdot*dt
 	
+	# Print diagnostic information
+	if false:
+		print("Requesting acceleration: ", throttle)
+		print("	Thrust: ", thrust)
+		print("	Desired_thrust: ", desired_thrust)
+		print("	Mass flow: ", mass_flow)
+		print("	Efficiency: ", exhaust_velocity/design_ve)
+		print("	Power frac: ", power/design_power)
 
 	
 	# Add thruster inputs to thrust
