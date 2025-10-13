@@ -59,7 +59,7 @@ func _process(_delta):
 			
 	# Move camera back from acceleration
 	# by linearly interpolating between current position and offset by thrust
-	var acceleration = ShipData.player_ship.attitude*ShipData.player_ship.thrust
+	var acceleration = ShipData.player_ship.acceleration
 	position = (Kd)*position + (1.0 - Kd)*Kp*(-acceleration)
 	
 	# Rotate camera to ship attitude if in "Local" mode

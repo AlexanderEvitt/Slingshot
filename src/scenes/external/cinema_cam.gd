@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 		position = ShipData.player_ship.position + offset + thrust_offset
 		
 		var dt = SystemTime.step*0.03333
-		offset_vel += ShipData.player_ship.attitude*(ShipData.player_ship.thrust - ShipData.player_ship.throttle*Vector3(1,0,0))*dt
+		offset_vel += ShipData.player_ship.acceleration*dt
 		thrust_offset -= offset_vel*dt
 		
 		if Input.is_action_just_pressed("view"):

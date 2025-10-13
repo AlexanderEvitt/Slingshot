@@ -69,7 +69,6 @@ radiant_exitance = (5.670374e-8)*(3695^4) % tungsten radiator
 radiator_area = wattage_absorbed/radiant_exitance
 
 %% Centrifugal ring sizing
-clear; clc;
 w = 0.04; % rad /s
 r = 4500;
 a = (w^2)*r

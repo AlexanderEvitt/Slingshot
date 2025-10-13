@@ -1,13 +1,17 @@
 extends Node3D
 
-# State variables
-var velocity
+# State variables (global frame)
+var acceleration = Vector3(0,0,0)
+var velocity = Vector3(0,0,0)
 var attitude
 
 # Engine variables
 var torque
 var thrust = Vector3(0,0,0)
-var throttle = 0
+
+# Vehicle mass
+var dry_mass = 14813280 # kg
+var total_mass = dry_mass # kg (updated by propulsion)
 
 # Children components
 @onready var attitude_calculator = $AttitudeCalculator
@@ -61,8 +65,10 @@ func _physics_process(delta):
 	
 	# Update thrust
 	thrust = propulsion_calculator.thrust
-	throttle = propulsion_calculator.throttle
-
+	
+	# Update total vehicle mass
+	total_mass = dry_mass + propulsion_calculator.he_quant + propulsion_calculator.de_quant
+	
 	# Attach ship to dock if docked
 	if berthed:
 		# Move ship with dock
@@ -101,16 +107,13 @@ func _physics_process(delta):
 				att_clamp.emit()
 
 func integrate_normally(dt, prev_gravity):
-	# Somehow get the acceleration from gravity in here
-	# var gravity = propagator.Acceleration(position,SystemTime.t)
-	
 	# Calculate acceleration on vehicle
-	var prev_acceleration = attitude*thrust + prev_gravity
-	# var acceleration = attitude*thrust + gravity
+	var thrust_acceleration = (thrust/1000.0)/total_mass # acceleration from all sources of thrust
+	acceleration = attitude*thrust_acceleration + prev_gravity # current state depends on previous state
 	
 	# Euler integrate for position and velocity
 	position = position + velocity*dt
-	velocity = velocity + (prev_acceleration)*dt
+	velocity = velocity + (acceleration)*dt
 	
 	# Change the velociity by the impulse
 	velocity += collision_calculator.impulse/mass
