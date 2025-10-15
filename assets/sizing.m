@@ -16,7 +16,7 @@ mf = 1.5;
 dV = v*log(mf);
 
 % Time of flight at given acceleration
-a = 1 * 9.81;
+a = 0.5 * 9.81;
 tb = dV/a;
 tb/(60*60*24) % in days
 

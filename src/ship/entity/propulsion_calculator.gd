@@ -17,6 +17,9 @@ var engine_power = 0.05 # km/s2
 # Desired acceleration (km/s2)
 var throttle = 0.0
 
+# Constants
+var fusion_energy_density = 3.5897e14 # J/kg
+
 # Design parameters
 var design_accel = 0.00981 # 1g
 var design_power = 2.5265e+15 # W
@@ -34,12 +37,17 @@ var k = 100.0 # proportional constant
 var c = 50.0 # damping constant
 var exhaust_velocity = 0.0 # exhaust velocity
 
+# Mass flow total and through each pump
+var reactor_mass_flow = 0.0
+var reactor_mass_flow_he = 0.0
+var reactor_mass_flow_de = 0.0
+var propulsor_mass_flow = 0.0 # hydrogen flow
+
 # Pump flow control variables
 var kp = 1e-9
-var mass_flow = 0.0
 
 # Required electrical power
-var electrical_power = 1e12 # W
+var electrical_power = 2e14 # W
 
 @onready var ship = get_parent()
 
@@ -61,10 +69,13 @@ func update(dt: float) -> void:
 	
 	# Simulate engine if time rate is 1
 	if SystemTime.step == 1:
-		# Get possible steady state power output of reactor
-		var steady_power = (design_power/design_mass_flow)*mass_flow
-		# Add electrical power to thrust power
-		steady_power = steady_power + electrical_power
+		# Simulate FRC power
+		# Get desired thrust power (linear for now)
+		var thrust_power = 0.5*design_power*(throttle/0.01)
+		thrust_power = clamp(thrust_power, 0e15, 3e15)
+		# Add electrical power to thrust power to get steady state power output
+		var steady_power = thrust_power + electrical_power
+		var frac_elec = electrical_power/steady_power # fraction of total power not in thrust
 		
 		# Simulate spring mass damper for instantaneous power of reactor
 		var power_err = power - steady_power
@@ -72,45 +83,54 @@ func update(dt: float) -> void:
 		power_dot = power_dot + power_ddot*dt
 		power = power + power_dot*dt
 		power = clamp(power, 0.0, 100.0*design_power)
+
+		# Get reactor mass flow from power
+		reactor_mass_flow = power/fusion_energy_density # kg/s
 		
 		# Calculate thrust from power and flow rate
 		exhaust_velocity = 0.0 # m/s
-		if mass_flow != 0.0 and power != 0.0:
-			exhaust_velocity = sqrt(2*power/mass_flow) # m/s
-		main_thrust = mass_flow*exhaust_velocity
+		thrust_power = (1.0 - frac_elec)*power # unsteady thrust power
+		if propulsor_mass_flow != 0.0:
+			exhaust_velocity = sqrt(2*thrust_power/(propulsor_mass_flow + reactor_mass_flow)) # m/s
+		main_thrust = (propulsor_mass_flow + reactor_mass_flow)*exhaust_velocity
 		thrust = thrust + Vector3(main_thrust,0,0) # N
 		
-		# Get control signal for pumps
+		# Control propulsor mass flow with a proportional control on thrust
+		# Get control signal for propulsor pumps
 		var thrust_err = thrust.length() - desired_thrust
 		# Change mass flow by thrust error
-		mass_flow = mass_flow - kp*thrust_err
+		propulsor_mass_flow = propulsor_mass_flow - kp*thrust_err
 		# Ensure value doesn't become physically impossible
-		mass_flow = clamp(mass_flow,0.0,100.0*design_mass_flow)
+		propulsor_mass_flow = clamp(propulsor_mass_flow,0.0,100.0*design_mass_flow)
+		
+		# Split mass flow by fuel and destination
+		reactor_mass_flow_he = reactor_mass_flow*(3.0/5.0) # all helium mass flow
+		reactor_mass_flow_de = reactor_mass_flow*(2.0/5.0) # all deuterium mass flow
 		
 	else:
 		# At other time rates, don't control, just set the values
 		# Should you not be allowed to time warp above design thrust?
 		thrust = thrust + Vector3(desired_thrust,0,0)
 		exhaust_velocity = 1.0526*design_ve
-		mass_flow = desired_thrust/exhaust_velocity
-		power = 0.5*mass_flow*pow(exhaust_velocity,2)
+		reactor_mass_flow = desired_thrust/exhaust_velocity
+		power = 0.5*reactor_mass_flow*pow(exhaust_velocity,2)
 		power_dot = 0.0
 		power_ddot = 0.0
 		
 	# Remove fuel from tanks
-	var he_mdot = mass_flow*(3.0/5.0)
-	var de_mdot = mass_flow*(2.0/5.0)
-	he_quant = he_quant - he_mdot*dt
-	de_quant = de_quant - de_mdot*dt
+	he_quant = he_quant - reactor_mass_flow_he*dt
+	de_quant = de_quant - reactor_mass_flow_de*dt
 	
 	# Print diagnostic information
 	if false:
 		print("Requesting acceleration: ", throttle)
 		print("	Thrust: ", thrust)
 		print("	Desired_thrust: ", desired_thrust)
-		print("	Mass flow: ", mass_flow)
+		print("	Reactor mass flow frac: ", reactor_mass_flow/design_mass_flow)
+		print("	Propulsor mass flow frac: ", propulsor_mass_flow/design_mass_flow)
 		print("	Efficiency: ", exhaust_velocity/design_ve)
 		print("	Power frac: ", power/design_power)
+		print("	Produced energy density: ", power/reactor_mass_flow)
 
 	
 	# Add thruster inputs to thrust

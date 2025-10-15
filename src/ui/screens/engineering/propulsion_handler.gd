@@ -20,12 +20,16 @@ func _ready():
 
 func _process(_delta):
 	# Assign power to gauge
-	var max_power = 7.0*prop.design_power
+	var max_power = prop.design_power
 	power_dial.set_fill(prop.power/max_power, String.num(prop.power*1e-15,1) + " PW")
 	
 	# Assign exhaust velocity to gauge
-	var max_ve = 1.1*prop.design_ve
-	ve_dial.set_fill(prop.exhaust_velocity/max_ve, String.num(prop.exhaust_velocity/prop.design_ve*100,0) + "%")
+	var c = 299792458 # speed of light, m/s
+	var max_ve = 0.1*c
+	ve_dial.set_fill(prop.exhaust_velocity/max_ve, String.num(prop.exhaust_velocity/c*100,0) + "%c")
+	
+	# Assign throttle to thrust gauge
+	thrust_dial.set_fill(prop.throttle/0.05, String.num(prop.throttle*1000.0/9.81,1) + " G")
 	
 	# Assign tank contents
 	he_tank_text.text = String.num(prop.he_quant/1000.0, 0) + "t"
