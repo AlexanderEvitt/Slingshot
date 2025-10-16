@@ -9,6 +9,12 @@ extends VBoxContainer
 # Tank references
 @export var he_tank_text : Label
 @export var de_tank_text : Label
+@export var hyd_tank_text : Label
+
+# Pump slider references
+@export var he_pump : Node
+@export var de_pump : Node
+@export var hyd_pump : Node
 
 var prop
 
@@ -31,7 +37,31 @@ func _process(_delta):
 	# Assign throttle to thrust gauge
 	thrust_dial.set_fill(prop.throttle/0.05, String.num(prop.throttle*1000.0/9.81,1) + " G")
 	
+	# Run pumps
+	var max_he_flow = 5.0
+	var max_de_flow = 3.5
+	var max_hyd_flow = 300.0
+	var flow_coefficient = 1473.0
+	
+	
+	var he_pump_speed = prop.reactor_mass_flow_he * flow_coefficient
+	he_pump.set_fill_top(prop.reactor_mass_flow_he/max_he_flow)
+	he_pump.set_fill_bottom(max_he_flow * flow_coefficient)
+	he_pump.set_labels(String.num(3.6*prop.reactor_mass_flow_he,1) + " t/hr", String.num(he_pump_speed,0) + " RPM")
+	
+	var de_pump_speed = prop.reactor_mass_flow_de * flow_coefficient
+	de_pump.set_fill_top(prop.reactor_mass_flow_de/max_de_flow)
+	de_pump.set_fill_bottom(max_de_flow * flow_coefficient)
+	de_pump.set_labels(String.num(3.6*prop.reactor_mass_flow_de,1) + " t/hr", String.num(de_pump_speed,0) + " RPM")
+	
+	var hyd_pump_speed = prop.propulsor_mass_flow * flow_coefficient
+	hyd_pump.set_fill_top(prop.propulsor_mass_flow/max_hyd_flow)
+	hyd_pump.set_fill_bottom(max_hyd_flow * flow_coefficient)
+	hyd_pump.set_labels(String.num(3.6*prop.propulsor_mass_flow,1) + " t/hr", String.num(hyd_pump_speed,0) + " RPM")
+	
+	
 	# Assign tank contents
 	he_tank_text.text = String.num(prop.he_quant/1000.0, 0) + "t"
 	de_tank_text.text = String.num(prop.de_quant/1000.0, 0) + "t"
+	hyd_tank_text.text = String.num(prop.hyd_quant/1000.0, 0) + "t"
 	

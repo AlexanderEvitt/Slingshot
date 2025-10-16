@@ -3,6 +3,7 @@ extends Node
 # Fuel quantity (kg)
 var he_quant = 4443984
 var de_quant = 2962656
+var hyd_quant = 985432 # arbitrary
 
 
 # Total thrust applied to vehicle, including thrusters
@@ -36,6 +37,7 @@ var power_ddot = 0.0
 var k = 100.0 # proportional constant
 var c = 50.0 # damping constant
 var exhaust_velocity = 0.0 # exhaust velocity
+var power_limit = 2.6e15 # W
 
 # Mass flow total and through each pump
 var reactor_mass_flow = 0.0
@@ -47,7 +49,7 @@ var propulsor_mass_flow = 0.0 # hydrogen flow
 var kp = 1e-9
 
 # Required electrical power
-var electrical_power = 2e14 # W
+var electrical_power = 1e14 # W
 
 @onready var ship = get_parent()
 
@@ -71,8 +73,8 @@ func update(dt: float) -> void:
 	if SystemTime.step == 1:
 		# Simulate FRC power
 		# Get desired thrust power (linear for now)
-		var thrust_power = 0.5*design_power*(throttle/0.01)
-		thrust_power = clamp(thrust_power, 0e15, 3e15)
+		var thrust_power = 1.0*design_power*(throttle/0.01)
+		thrust_power = clamp(thrust_power, 0.0, power_limit)
 		# Add electrical power to thrust power to get steady state power output
 		var steady_power = thrust_power + electrical_power
 		var frac_elec = electrical_power/steady_power # fraction of total power not in thrust
@@ -120,6 +122,7 @@ func update(dt: float) -> void:
 	# Remove fuel from tanks
 	he_quant = he_quant - reactor_mass_flow_he*dt
 	de_quant = de_quant - reactor_mass_flow_de*dt
+	hyd_quant = hyd_quant - propulsor_mass_flow*dt
 	
 	# Print diagnostic information
 	if false:

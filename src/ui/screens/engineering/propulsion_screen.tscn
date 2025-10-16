@@ -130,7 +130,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
 
-[node name="PropPanel" type="VBoxContainer" node_paths=PackedStringArray("power_dial", "ve_dial", "beta_dial", "thrust_dial", "he_tank_text", "de_tank_text")]
+[node name="PropPanel" type="VBoxContainer" node_paths=PackedStringArray("power_dial", "ve_dial", "beta_dial", "thrust_dial", "he_tank_text", "de_tank_text", "hyd_tank_text", "he_pump", "de_pump", "hyd_pump")]
 offset_right = 1920.0
 offset_bottom = 932.0
 size_flags_vertical = 3
@@ -141,7 +141,11 @@ ve_dial = NodePath("Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxCo
 beta_dial = NodePath("Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer/Gauge3")
 thrust_dial = NodePath("Readouts/Slice5/ReactorAssembly/ReactorMargin/Reactor/HBoxContainer/Gauge4")
 he_tank_text = NodePath("Readouts/Slice1/TopTank/Panel/MarginContainer/VBoxContainer/Panel/HeLabel")
-de_tank_text = NodePath("Readouts/Slice1/TopTank2/Panel/MarginContainer/VBoxContainer/Panel/DeLabel")
+de_tank_text = NodePath("Readouts/Slice1/BottomTank/Panel/MarginContainer/VBoxContainer/Panel/DeLabel")
+hyd_tank_text = NodePath("Readouts/Slice1/MiddleTank/Panel/MarginContainer/VBoxContainer/Panel/HydLabel")
+he_pump = NodePath("Readouts/Slice3/Pump1/HBoxContainer/VBoxContainer/Panel2/PumpSlider")
+de_pump = NodePath("Readouts/Slice3/Pump3/HBoxContainer/VBoxContainer/Panel2/PumpSlider")
+hyd_pump = NodePath("Readouts/Slice3/Pump2/HBoxContainer/VBoxContainer/Panel2/PumpSlider")
 
 [node name="Readouts" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -152,15 +156,15 @@ theme_override_constants/separation = 0
 [node name="Slice1" type="VBoxContainer" parent="Readouts"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.6
+size_flags_stretch_ratio = 0.4
 
 [node name="TopTank" type="MarginContainer" parent="Readouts/Slice1"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 40
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_bottom = 20
 
 [node name="Panel" type="Panel" parent="Readouts/Slice1/TopTank"]
 layout_mode = 2
@@ -184,6 +188,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Readouts/Slice1/TopTank/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
+theme_override_font_sizes/font_size = 16
 text = "HE-3 TANK"
 horizontal_alignment = 1
 
@@ -199,23 +204,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 16
 text = "4443t"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TopTank2" type="MarginContainer" parent="Readouts/Slice1"]
+[node name="MiddleTank" type="MarginContainer" parent="Readouts/Slice1"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 40
 
-[node name="Panel" type="Panel" parent="Readouts/Slice1/TopTank2"]
+[node name="Panel" type="Panel" parent="Readouts/Slice1/MiddleTank"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_71ci7")
 
-[node name="MarginContainer" type="MarginContainer" parent="Readouts/Slice1/TopTank2/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Readouts/Slice1/MiddleTank/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -227,27 +231,80 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice1/TopTank2/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice1/MiddleTank/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Readouts/Slice1/TopTank2/Panel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Readouts/Slice1/MiddleTank/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "DEUT TANK"
+theme_override_font_sizes/font_size = 16
+text = "HYD TANK"
 horizontal_alignment = 1
 
-[node name="Panel" type="Panel" parent="Readouts/Slice1/TopTank2/Panel/MarginContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="Readouts/Slice1/MiddleTank/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_bbshc")
 
-[node name="DeLabel" type="Label" parent="Readouts/Slice1/TopTank2/Panel/MarginContainer/VBoxContainer/Panel"]
+[node name="HydLabel" type="Label" parent="Readouts/Slice1/MiddleTank/Panel/MarginContainer/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "4443t"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomTank" type="MarginContainer" parent="Readouts/Slice1"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="Panel" parent="Readouts/Slice1/BottomTank"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_71ci7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Readouts/Slice1/BottomTank/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice1/BottomTank/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Readouts/Slice1/BottomTank/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 16
+text = "DEUT TANK"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="Readouts/Slice1/BottomTank/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_bbshc")
+
+[node name="DeLabel" type="Label" parent="Readouts/Slice1/BottomTank/Panel/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
 text = "2962t"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -443,8 +500,8 @@ size_flags_stretch_ratio = 0.5
 [node name="Pump1" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_top = 48
-theme_override_constants/margin_bottom = 48
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Pump1"]
 layout_mode = 2
@@ -506,11 +563,59 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 theme_override_styles/panel = SubResource("StyleBoxFlat_ripso")
 
+[node name="DoseGauge" type="MarginContainer" parent="Readouts/Slice3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/DoseGauge"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice3/DoseGauge/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Readouts/Slice3/DoseGauge/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("2_8oiwl")
+
+[node name="Label" type="Label" parent="Readouts/Slice3/DoseGauge/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = " ENDURANCE"
+vertical_alignment = 2
+
+[node name="Panel2" type="Panel" parent="Readouts/Slice3/DoseGauge/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_nv0kw")
+
+[node name="Label" type="Label" parent="Readouts/Slice3/DoseGauge/HBoxContainer/VBoxContainer/Panel2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "3270 RPM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Pump2" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_top = 48
-theme_override_constants/margin_bottom = 48
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Pump2"]
 layout_mode = 2
@@ -532,7 +637,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 16
-text = " HE3 REACTOR PUMP"
+text = " REACTION MASS PUMP"
 vertical_alignment = 2
 
 [node name="Panel2" type="Panel" parent="Readouts/Slice3/Pump2/HBoxContainer/VBoxContainer"]
@@ -572,11 +677,59 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 theme_override_styles/panel = SubResource("StyleBoxFlat_ripso")
 
+[node name="DoseGauge2" type="MarginContainer" parent="Readouts/Slice3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/DoseGauge2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice3/DoseGauge2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Readouts/Slice3/DoseGauge2/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("2_8oiwl")
+
+[node name="Label" type="Label" parent="Readouts/Slice3/DoseGauge2/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = " DOSIMETRY"
+vertical_alignment = 2
+
+[node name="Panel2" type="Panel" parent="Readouts/Slice3/DoseGauge2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_nv0kw")
+
+[node name="Label" type="Label" parent="Readouts/Slice3/DoseGauge2/HBoxContainer/VBoxContainer/Panel2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "3270 RPM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Pump3" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_top = 48
-theme_override_constants/margin_bottom = 48
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Pump3"]
 layout_mode = 2
@@ -598,7 +751,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 16
-text = " HE3 REACTOR PUMP"
+text = "DE REACTOR PUMP"
 vertical_alignment = 2
 
 [node name="Panel2" type="Panel" parent="Readouts/Slice3/Pump3/HBoxContainer/VBoxContainer"]
@@ -633,72 +786,6 @@ top_carrot_label_text = "ṁ"
 green_zone_bounds = Vector2(0.3, 0.9)
 
 [node name="Wedge" type="Panel" parent="Readouts/Slice3/Pump3/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
-theme_override_styles/panel = SubResource("StyleBoxFlat_ripso")
-
-[node name="Pump4" type="MarginContainer" parent="Readouts/Slice3"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_top = 48
-theme_override_constants/margin_bottom = 48
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Pump4"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice3/Pump4/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Panel" type="Panel" parent="Readouts/Slice3/Pump4/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme = ExtResource("2_8oiwl")
-
-[node name="Label" type="Label" parent="Readouts/Slice3/Pump4/HBoxContainer/VBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 16
-text = " HE3 REACTOR PUMP"
-vertical_alignment = 2
-
-[node name="Panel2" type="Panel" parent="Readouts/Slice3/Pump4/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("3_nv0kw")
-
-[node name="Label" type="Label" parent="Readouts/Slice3/Pump4/HBoxContainer/VBoxContainer/Panel2"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "3270 RPM"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PumpSlider" parent="Readouts/Slice3/Pump4/HBoxContainer/VBoxContainer/Panel2" instance=ExtResource("4_g6mn0")]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-top_text = "15 t/hr"
-bottom_text = "5134 RPM"
-bottom_carrot_label_text = "n"
-top_carrot_label_text = "ṁ"
-green_zone_bounds = Vector2(0.3, 0.9)
-
-[node name="Wedge" type="Panel" parent="Readouts/Slice3/Pump4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1

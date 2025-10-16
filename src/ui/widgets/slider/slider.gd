@@ -14,6 +14,9 @@ var top_carrot
 var bottom_carrot_label
 var top_carrot_label
 
+@onready var top_text_label = $TopText
+@onready var bottom_text_label = $BottomText
+
 func _ready():
 	# Get references to the nodes that we need to move
 	bottom_carrot = $MarginContainer/SliderBar/BottomCarrot
@@ -22,8 +25,6 @@ func _ready():
 	top_carrot_label = top_carrot.get_node("Label")
 	
 	# Set the titles text appropriately
-	var top_text_label = $TopText
-	var bottom_text_label = $BottomText
 	if top_text.length() > 0:
 		top_text_label.text = top_text
 		top_text_label.visible = true
@@ -49,3 +50,11 @@ func set_fill_top(variable):
 	# Set the position of the lower slider
 	top_carrot.anchor_left = variable
 	top_carrot.anchor_right = variable
+	
+func set_labels(new_top_text,new_bottom_text):
+	if new_top_text.length() > 0:
+		top_text_label.text = new_top_text
+		top_text_label.visible = true
+	if new_bottom_text.length() > 0:
+		bottom_text_label.text = new_bottom_text
+		bottom_text_label.visible = true
