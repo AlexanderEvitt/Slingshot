@@ -1,15 +1,27 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dxptfdorrp7mi"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dxptfdorrp7mi"]
 
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="1_xwr2b"]
 [ext_resource type="StyleBox" uid="uid://bhl4tsdr58raf" path="res://ui/widgets/alerts_panel/caution.tres" id="2_6dryd"]
 [ext_resource type="StyleBox" uid="uid://bo3j5clff2yuf" path="res://ui/widgets/alerts_panel/warning.tres" id="3_ojy8x"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_554k3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0f5s6"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_554k3"]
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
@@ -40,15 +52,37 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8h7t3"]
+bg_color = Color(0.117647, 0.117647, 0.156863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6rba"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_disabled_color = Color(0.87451, 0.87451, 0.87451, 0)
+Button/colors/font_disabled_color = Color(1, 1, 1, 1)
 Button/font_sizes/font_size = 16
 Button/fonts/font = ExtResource("1_xwr2b")
+Button/styles/disabled = SubResource("StyleBoxFlat_0f5s6")
 Button/styles/hover = SubResource("StyleBoxFlat_554k3")
 Button/styles/normal = SubResource("StyleBoxFlat_r2dnf")
 Button/styles/pressed = SubResource("StyleBoxFlat_j76c4")
 Caution/base_type = &"Button"
+Caution/styles/disabled = ExtResource("2_6dryd")
 Caution/styles/normal = ExtResource("2_6dryd")
+Panel/styles/panel = SubResource("StyleBoxFlat_8h7t3")
 Warning/base_type = &"Button"
+Warning/styles/disabled = ExtResource("3_ojy8x")
 Warning/styles/normal = ExtResource("3_ojy8x")
+WarningPanel/base_type = &"Panel"
+WarningPanel/styles/panel = SubResource("StyleBoxFlat_l6rba")

@@ -16,11 +16,22 @@ extends VBoxContainer
 @export var de_pump : Node
 @export var hyd_pump : Node
 
+# Control button references
+var butttons
+@export var propulsor_button : Button
+@export var reactor_button : Button
+@export var cryo_button : Button
+@export var field_button : Button
+@export var limiter_button : Button
+@export var scram_inhibit_button : Button
+
 var prop
 
 func _ready():
 	# Get a shorthand reference to the propulsion system
 	prop = ShipData.player_ship.propulsion_calculator
+	
+	propulsor_button.toggled.connect(on_propulsor_toggled)
 
 
 
@@ -64,4 +75,19 @@ func _process(_delta):
 	he_tank_text.text = String.num(prop.he_quant/1000.0, 0) + "t"
 	de_tank_text.text = String.num(prop.de_quant/1000.0, 0) + "t"
 	hyd_tank_text.text = String.num(prop.hyd_quant/1000.0, 0) + "t"
+
+# Functions for toggling controls
+func on_propulsor_toggled(new_state):
+	# Send to propulsion module
+	prop.propulsor = new_state
 	
+	# Get annunciator
+	var annunciator = propulsor_button.get_parent().get_node("Annunciator")
+	var annunciator_label = annunciator.get_node("Label")
+	
+	# Set annunciator panel colors
+	if prop.propulsor:
+		annunciator.set_theme_type_variation("WarningPanel")
+	else:
+		annunciator.set_theme_type_variation("")
+		

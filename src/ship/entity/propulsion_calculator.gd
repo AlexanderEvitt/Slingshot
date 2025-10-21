@@ -51,6 +51,14 @@ var kp = 1e-9
 # Required electrical power
 var electrical_power = 1e14 # W
 
+# State of control system
+var propulsor := false
+var reactor := false
+var cryo := false
+var field := false
+var thrust_limiter := true
+var scram_inhibit := true
+
 @onready var ship = get_parent()
 
 func update(dt: float) -> void:
