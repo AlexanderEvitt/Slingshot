@@ -16,6 +16,11 @@ extends VBoxContainer
 @export var de_pump : Node
 @export var hyd_pump : Node
 
+# Valve references
+@export var he_valve : Node
+@export var de_valve : Node
+@export var hyd_valve : Node
+
 # Control button references
 var butttons
 @export var propulsor_button : Button
@@ -31,8 +36,15 @@ func _ready():
 	# Get a shorthand reference to the propulsion system
 	prop = ShipData.player_ship.propulsion_calculator
 	
-	propulsor_button.toggled.connect(on_propulsor_toggled)
+	# Refresh model with control states anytime a button gets pushed
+	propulsor_button.toggled.connect(update_model_with_control_states)
+	reactor_button.toggled.connect(update_model_with_control_states)
+	cryo_button.toggled.connect(update_model_with_control_states)
+	field_button.toggled.connect(update_model_with_control_states)
+	limiter_button.toggled.connect(update_model_with_control_states)
+	scram_inhibit_button.toggled.connect(update_model_with_control_states)
 
+	update_model_with_control_states(false)
 
 
 func _process(_delta):
@@ -44,9 +56,28 @@ func _process(_delta):
 	var c = 299792458 # speed of light, m/s
 	var max_ve = 0.1*c
 	ve_dial.set_fill(prop.exhaust_velocity/max_ve, String.num(prop.exhaust_velocity/c*100,0) + "%c")
+
+	# Assign beta to beta gauge
+	beta_dial.set_fill(prop.beta, String.num(prop.beta,3) + " B")
 	
 	# Assign throttle to thrust gauge
 	thrust_dial.set_fill(prop.throttle/0.05, String.num(prop.throttle*1000.0/9.81,1) + " G")
+	
+	# Assign valve positions
+	if prop.reactor_mass_flow_he > 0.0:
+		he_valve.rotation = PI/2.0
+	else:
+		he_valve.rotation = 0.0
+		
+	if prop.reactor_mass_flow_de > 0.0:
+		de_valve.rotation = PI/2.0
+	else:
+		de_valve.rotation = 0.0
+		
+	if prop.propulsor_mass_flow > 0.0:
+		hyd_valve.rotation = PI/2.0
+	else:
+		hyd_valve.rotation = 0.0
 	
 	# Run pumps
 	var max_he_flow = 5.0
@@ -77,17 +108,11 @@ func _process(_delta):
 	hyd_tank_text.text = String.num(prop.hyd_quant/1000.0, 0) + "t"
 
 # Functions for toggling controls
-func on_propulsor_toggled(new_state):
+func update_model_with_control_states(_new_state):
 	# Send to propulsion module
-	prop.propulsor = new_state
-	
-	# Get annunciator
-	var annunciator = propulsor_button.get_parent().get_node("Annunciator")
-	var annunciator_label = annunciator.get_node("Label")
-	
-	# Set annunciator panel colors
-	if prop.propulsor:
-		annunciator.set_theme_type_variation("WarningPanel")
-	else:
-		annunciator.set_theme_type_variation("")
-		
+	prop.propulsor = propulsor_button.button_pressed
+	prop.reactor = reactor_button.button_pressed
+	prop.cryo = cryo_button.button_pressed
+	prop.field = field_button.button_pressed
+	prop.thrust_limiter = limiter_button.button_pressed
+	prop.scram_inhibit = scram_inhibit_button.button_pressed

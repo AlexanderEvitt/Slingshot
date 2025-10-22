@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cxicwm84uu63x"]
+[gd_scene load_steps=32 format=3 uid="uid://cxicwm84uu63x"]
 
 [ext_resource type="Theme" uid="uid://bhtmuml4efphk" path="res://ui/themes/medium_panel.tres" id="1_0yfo2"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="2_8oiwl"]
@@ -64,6 +64,13 @@ corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 corner_detail = 1
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_rhyl4"]
+color = Color(1, 1, 1, 1)
+grow_begin = 0.0
+grow_end = 300.0
+thickness = 8
+vertical = true
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0k15l"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_right = 100
@@ -94,6 +101,13 @@ bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_detail = 1
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_osoi2"]
+color = Color(1, 1, 1, 1)
+grow_begin = 300.0
+grow_end = 0.0
+thickness = 8
+vertical = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8v6m8"]
 bg_color = Color(0.117647, 0.117647, 0.156863, 1)
@@ -133,7 +147,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
 
-[node name="PropPanel" type="VBoxContainer" node_paths=PackedStringArray("power_dial", "ve_dial", "beta_dial", "thrust_dial", "he_tank_text", "de_tank_text", "hyd_tank_text", "he_pump", "de_pump", "hyd_pump", "propulsor_button", "reactor_button", "cryo_button", "field_button", "limiter_button", "scram_inhibit_button")]
+[node name="PropPanel" type="VBoxContainer" node_paths=PackedStringArray("power_dial", "ve_dial", "beta_dial", "thrust_dial", "he_tank_text", "de_tank_text", "hyd_tank_text", "he_pump", "de_pump", "hyd_pump", "he_valve", "de_valve", "hyd_valve", "propulsor_button", "reactor_button", "cryo_button", "field_button", "limiter_button", "scram_inhibit_button")]
 offset_right = 1920.0
 offset_bottom = 932.0
 size_flags_vertical = 3
@@ -149,6 +163,9 @@ hyd_tank_text = NodePath("Readouts/Slice1/MiddleTank/Panel/MarginContainer/VBoxC
 he_pump = NodePath("Readouts/Slice3/Pump1/HBoxContainer/VBoxContainer/Panel2/PumpSlider")
 de_pump = NodePath("Readouts/Slice3/Pump3/HBoxContainer/VBoxContainer/Panel2/PumpSlider")
 hyd_pump = NodePath("Readouts/Slice3/Pump2/HBoxContainer/VBoxContainer/Panel2/PumpSlider")
+he_valve = NodePath("Readouts/Slice2/Pipes2/Pipe1/Valve1")
+de_valve = NodePath("Readouts/Slice2/Pipes2/Pipe3/Valve1")
+hyd_valve = NodePath("Readouts/Slice2/Pipes2/Pipe2/Valve1")
 propulsor_button = NodePath("Readouts/Slice6/Controls/VBoxContainer/PropulsorControl/Button")
 reactor_button = NodePath("Readouts/Slice6/Controls/VBoxContainer/ReactorControl/Button")
 cryo_button = NodePath("Readouts/Slice6/Controls/VBoxContainer/CryoControl/Button")
@@ -821,6 +838,13 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 theme_override_styles/panel = SubResource("StyleBoxFlat_e4w7q")
 
+[node name="Fueling" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/HBoxContainer"]
+z_index = -1
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxLine_rhyl4")
+
 [node name="Mag4" type="Panel" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1037,6 +1061,13 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 theme_override_styles/panel = SubResource("StyleBoxFlat_glitf")
 
+[node name="Fueling" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/HBoxContainer"]
+z_index = -1
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxLine_osoi2")
+
 [node name="Mag4" type="Panel" parent="Readouts/Slice5/Magnet2/MagnetAssembly/Main/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1197,7 +1228,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_n8oo1")
 toggle_mode = true
-button_pressed = true
 text = "REACTOR"
 
 [node name="Annunciator" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/ReactorControl"]
@@ -1234,7 +1264,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_n8oo1")
 toggle_mode = true
-button_pressed = true
 text = "CRYO"
 
 [node name="Annunciator" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/CryoControl"]
@@ -1265,7 +1294,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_n8oo1")
 toggle_mode = true
-button_pressed = true
 text = "FIELD"
 
 [node name="Annunciator" type="Panel" parent="Readouts/Slice6/Controls/VBoxContainer/FieldControl"]
@@ -1382,17 +1410,6 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("10_3n7pl")
 text = "SCRAM"
 
-[node name="MarginContainer" type="MarginContainer" parent="Readouts/Slice6"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-theme_override_constants/margin_top = 20
-
-[node name="Gauge1" parent="Readouts/Slice6/MarginContainer" instance=ExtResource("5_g0x2g")]
-layout_mode = 2
-script = ExtResource("6_th1l2")
-label_text = "ACC"
-
 [node name="Alerts" parent="Readouts/Slice6" instance=ExtResource("7_vmyaf")]
 layout_mode = 2
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.6

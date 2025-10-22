@@ -44,7 +44,7 @@ func record_torque():
 
 func record_thrusters():
 	# Record translational thruster firings
-	var thrusters = ShipData.player_ship.thrust - ShipData.player_ship.propulsion_calculator.main_thrust*Vector3(1,0,0)
+	var thrusters = ShipData.player_ship.propulsion_calculator.thrust - ShipData.player_ship.propulsion_calculator.main_thrust*Vector3(1,0,0)
 	if thrusters.length() < 0.001:
 		my_thrust = 0
 	else:

@@ -13,7 +13,7 @@ var main_thrust = 0.0
 # Maneuvering thrusters acceleration
 var thruster_force = 50e6 # N
 # Maximum allowable engine acceleration
-var engine_power = 0.05 # km/s2
+var engine_power = 10000.0*0.05 # km/s2
 
 # Desired acceleration (km/s2)
 var throttle = 0.0
@@ -34,10 +34,11 @@ var design_burn_time = 1.0518e+6 # s duration at design_power
 var power = 0.0
 var power_dot = 0.0
 var power_ddot = 0.0
+var beta = 1.0
 var k = 100.0 # proportional constant
 var c = 50.0 # damping constant
 var exhaust_velocity = 0.0 # exhaust velocity
-var power_limit = 2.6e15 # W
+var power_limit = 6.0e15 # W
 
 # Mass flow total and through each pump
 var reactor_mass_flow = 0.0
@@ -46,7 +47,7 @@ var reactor_mass_flow_de = 0.0
 var propulsor_mass_flow = 0.0 # hydrogen flow
 
 # Pump flow control variables
-var kp = 1e-9
+var kp = 1e-8
 
 # Required electrical power
 var electrical_power = 1e14 # W
@@ -78,54 +79,64 @@ func update(dt: float) -> void:
 	var desired_thrust = mass*1000*throttle # (kg)*(km/s) -> N
 	
 	# Simulate engine if time rate is 1
-	if SystemTime.step == 1:
-		# Simulate FRC power
-		# Get desired thrust power (linear for now)
-		var thrust_power = 1.0*design_power*(throttle/0.01)
+
+	# Simulate FRC power
+	# Get desired thrust power (linear for now)
+	var thrust_power = 1.0*design_power*sqrt(throttle/0.01)
+	if thrust_limiter:
 		thrust_power = clamp(thrust_power, 0.0, power_limit)
-		# Add electrical power to thrust power to get steady state power output
-		var steady_power = thrust_power + electrical_power
-		var frac_elec = electrical_power/steady_power # fraction of total power not in thrust
-		
-		# Simulate spring mass damper for instantaneous power of reactor
+	# Add electrical power to thrust power to get steady state power output
+	var steady_power = 0.0
+	var frac_elec = 1.0
+	if reactor:
+		steady_power = thrust_power + electrical_power
+		frac_elec = electrical_power/steady_power # fraction of total power not in thrust
+	
+	# Damping decreases with power using stability beta
+	# Loses 90% of its damping by reaching the power limit
+	beta = 1.0 - 0.9*(power/power_limit)
+	var c_current = beta*c
+	
+	# Simulate spring mass damper for instantaneous power of reactor
+	# only if in real time
+	if SystemTime.step == 1:
 		var power_err = power - steady_power
-		power_ddot = -k*power_err - c*power_dot
+		power_ddot = -k*power_err - c_current*power_dot
 		power_dot = power_dot + power_ddot*dt
 		power = power + power_dot*dt
-		power = clamp(power, 0.0, 100.0*design_power)
+	# otherwise assume steady flow
+	else:
+		# Turn on thrust limiting if not enabled
+		thrust_limiter = true
+		power = steady_power
+	# Clamp power to reasonable limits
+	power = clamp(power, 0.0, 1000.0*design_power)
 
-		# Get reactor mass flow from power
-		reactor_mass_flow = power/fusion_energy_density # kg/s
-		
-		# Calculate thrust from power and flow rate
-		exhaust_velocity = 0.0 # m/s
-		thrust_power = (1.0 - frac_elec)*power # unsteady thrust power
-		if propulsor_mass_flow != 0.0:
-			exhaust_velocity = sqrt(2*thrust_power/(propulsor_mass_flow + reactor_mass_flow)) # m/s
-		main_thrust = (propulsor_mass_flow + reactor_mass_flow)*exhaust_velocity
-		thrust = thrust + Vector3(main_thrust,0,0) # N
-		
-		# Control propulsor mass flow with a proportional control on thrust
-		# Get control signal for propulsor pumps
-		var thrust_err = thrust.length() - desired_thrust
-		# Change mass flow by thrust error
+	# Get reactor mass flow from power
+	reactor_mass_flow = steady_power/fusion_energy_density # kg/s
+	
+	# Calculate thrust from power and flow rate
+	exhaust_velocity = 0.0 # m/s
+	thrust_power = (1.0 - frac_elec)*power # unsteady thrust power
+	if (propulsor_mass_flow +  reactor_mass_flow) != 0.0:
+		exhaust_velocity = sqrt(2*thrust_power/(propulsor_mass_flow + reactor_mass_flow)) # m/s
+	main_thrust = (propulsor_mass_flow + reactor_mass_flow)*exhaust_velocity
+	thrust = thrust + Vector3(main_thrust,0,0) # N
+	
+	# Control propulsor mass flow with a proportional control on thrust
+	# Get control signal for propulsor pumps
+	var thrust_err = thrust.length() - desired_thrust
+	# Change mass flow by thrust error, only if propulsor enabled
+	if propulsor:
 		propulsor_mass_flow = propulsor_mass_flow - kp*thrust_err
 		# Ensure value doesn't become physically impossible
-		propulsor_mass_flow = clamp(propulsor_mass_flow,0.0,100.0*design_mass_flow)
-		
-		# Split mass flow by fuel and destination
-		reactor_mass_flow_he = reactor_mass_flow*(3.0/5.0) # all helium mass flow
-		reactor_mass_flow_de = reactor_mass_flow*(2.0/5.0) # all deuterium mass flow
-		
+		propulsor_mass_flow = clamp(propulsor_mass_flow,0.0,1000.0*design_mass_flow)
 	else:
-		# At other time rates, don't control, just set the values
-		# Should you not be allowed to time warp above design thrust?
-		thrust = thrust + Vector3(desired_thrust,0,0)
-		exhaust_velocity = 1.0526*design_ve
-		reactor_mass_flow = desired_thrust/exhaust_velocity
-		power = 0.5*reactor_mass_flow*pow(exhaust_velocity,2)
-		power_dot = 0.0
-		power_ddot = 0.0
+		propulsor_mass_flow = 0.0
+	
+	# Split mass flow by fuel and destination
+	reactor_mass_flow_he = reactor_mass_flow*(3.0/5.0) # all helium mass flow
+	reactor_mass_flow_de = reactor_mass_flow*(2.0/5.0) # all deuterium mass flow
 		
 	# Remove fuel from tanks
 	he_quant = he_quant - reactor_mass_flow_he*dt
@@ -135,13 +146,8 @@ func update(dt: float) -> void:
 	# Print diagnostic information
 	if false:
 		print("Requesting acceleration: ", throttle)
-		print("	Thrust: ", thrust)
-		print("	Desired_thrust: ", desired_thrust)
-		print("	Reactor mass flow frac: ", reactor_mass_flow/design_mass_flow)
-		print("	Propulsor mass flow frac: ", propulsor_mass_flow/design_mass_flow)
-		print("	Efficiency: ", exhaust_velocity/design_ve)
+		print("	Thrust/desired: ", thrust.length()/desired_thrust)
 		print("	Power frac: ", power/design_power)
-		print("	Produced energy density: ", power/reactor_mass_flow)
 
 	
 	# Add thruster inputs to thrust
