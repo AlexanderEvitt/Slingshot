@@ -10,7 +10,7 @@ var torque
 var thrust = Vector3(0,0,0)
 
 # Vehicle mass
-var dry_mass = 14813280 # kg
+var dry_mass = 613280 # kg
 var total_mass = dry_mass # kg (updated by propulsion)
 
 # Children components

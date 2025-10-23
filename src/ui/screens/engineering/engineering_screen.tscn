@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpcripo2vb6ip"]
+[gd_scene load_steps=11 format=3 uid="uid://dpcripo2vb6ip"]
 
 [ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_s5c5d"]
 [ext_resource type="PackedScene" uid="uid://cxicwm84uu63x" path="res://ui/screens/engineering/propulsion_screen.tscn" id="2_55hwn"]
@@ -15,6 +15,8 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wqdmg"]
 
 [node name="EngineeringScreen" type="Panel"]
 anchors_preset = 15
@@ -259,6 +261,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 theme = ExtResource("9_48ijl")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wqdmg")
 
 [node name="MarginContainer" type="MarginContainer" parent="Screen/ModeSelectorPanel"]
 layout_mode = 1

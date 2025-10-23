@@ -147,7 +147,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
 
-[node name="PropPanel" type="VBoxContainer" node_paths=PackedStringArray("power_dial", "ve_dial", "beta_dial", "thrust_dial", "he_tank_text", "de_tank_text", "hyd_tank_text", "he_pump", "de_pump", "hyd_pump", "he_valve", "de_valve", "hyd_valve", "propulsor_button", "reactor_button", "cryo_button", "field_button", "limiter_button", "scram_inhibit_button")]
+[node name="PropPanel" type="VBoxContainer" node_paths=PackedStringArray("power_dial", "ve_dial", "beta_dial", "thrust_dial", "he_tank_text", "de_tank_text", "hyd_tank_text", "he_pump", "de_pump", "hyd_pump", "he_valve", "de_valve", "hyd_valve", "propulsor_button", "reactor_button", "cryo_button", "field_button", "limiter_button", "scram_inhibit_button", "thermometers", "dosimetry", "endurance")]
 offset_right = 1920.0
 offset_bottom = 932.0
 size_flags_vertical = 3
@@ -172,6 +172,9 @@ cryo_button = NodePath("Readouts/Slice6/Controls/VBoxContainer/CryoControl/Butto
 field_button = NodePath("Readouts/Slice6/Controls/VBoxContainer/FieldControl/Button")
 limiter_button = NodePath("Readouts/Slice6/Controls/VBoxContainer/LimControl/Button")
 scram_inhibit_button = NodePath("Readouts/Slice6/Controls/VBoxContainer/InhibitControl/Button")
+thermometers = NodePath("Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/Thermometers")
+dosimetry = NodePath("Readouts/Slice3/Dosimetry/HBoxContainer/VBoxContainer/Panel2/HBoxContainer/Label")
+endurance = NodePath("Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer/Panel2/GridContainer")
 
 [node name="Readouts" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -463,7 +466,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 16
-text = " HE3 REACTOR PUMP"
+text = " HE-3 REACTOR PUMP"
 vertical_alignment = 2
 
 [node name="Panel2" type="Panel" parent="Readouts/Slice3/Pump1/HBoxContainer/VBoxContainer"]
@@ -503,7 +506,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 theme_override_styles/panel = SubResource("StyleBoxFlat_ripso")
 
-[node name="DoseGauge" type="MarginContainer" parent="Readouts/Slice3"]
+[node name="Endurance" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 48
@@ -511,19 +514,19 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/DoseGauge"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Endurance"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice3/DoseGauge/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice3/Endurance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Readouts/Slice3/DoseGauge/HBoxContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("2_8oiwl")
 
-[node name="Label" type="Label" parent="Readouts/Slice3/DoseGauge/HBoxContainer/VBoxContainer/Panel"]
+[node name="Label" type="Label" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -534,20 +537,69 @@ theme_override_font_sizes/font_size = 16
 text = " ENDURANCE"
 vertical_alignment = 2
 
-[node name="Panel2" type="Panel" parent="Readouts/Slice3/DoseGauge/HBoxContainer/VBoxContainer"]
+[node name="Panel2" type="Panel" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_nv0kw")
 
-[node name="Label" type="Label" parent="Readouts/Slice3/DoseGauge/HBoxContainer/VBoxContainer/Panel2"]
-visible = false
+[node name="GridContainer" type="GridContainer" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer/Panel2"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 16.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "3270 RPM"
+columns = 2
+
+[node name="Label" type="Label" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer/Panel2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "HE-3: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeEndurance" type="Label" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer/Panel2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "T-00d00h00m00s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer/Panel2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "HYD:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HydEndurance" type="Label" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer/Panel2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "T-00d00h00m00s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer/Panel2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "DEUT:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeEndurance" type="Label" parent="Readouts/Slice3/Endurance/HBoxContainer/VBoxContainer/Panel2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "T-00d00h00m00s"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -617,7 +669,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 theme_override_styles/panel = SubResource("StyleBoxFlat_ripso")
 
-[node name="DoseGauge2" type="MarginContainer" parent="Readouts/Slice3"]
+[node name="Dosimetry" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 48
@@ -625,19 +677,19 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/DoseGauge2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Dosimetry"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice3/DoseGauge2/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Readouts/Slice3/Dosimetry/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="Readouts/Slice3/DoseGauge2/HBoxContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="Readouts/Slice3/Dosimetry/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("2_8oiwl")
 
-[node name="Label" type="Label" parent="Readouts/Slice3/DoseGauge2/HBoxContainer/VBoxContainer/Panel"]
+[node name="Label" type="Label" parent="Readouts/Slice3/Dosimetry/HBoxContainer/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -648,22 +700,34 @@ theme_override_font_sizes/font_size = 16
 text = " DOSIMETRY"
 vertical_alignment = 2
 
-[node name="Panel2" type="Panel" parent="Readouts/Slice3/DoseGauge2/HBoxContainer/VBoxContainer"]
+[node name="Panel2" type="Panel" parent="Readouts/Slice3/Dosimetry/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_nv0kw")
 
-[node name="Label" type="Label" parent="Readouts/Slice3/DoseGauge2/HBoxContainer/VBoxContainer/Panel2"]
-visible = false
+[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice3/Dosimetry/HBoxContainer/VBoxContainer/Panel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "3270 RPM"
-horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Readouts/Slice3/Dosimetry/HBoxContainer/VBoxContainer/Panel2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+text = "60"
+horizontal_alignment = 2
 vertical_alignment = 1
+clip_text = true
+
+[node name="Label2" type="Label" parent="Readouts/Slice3/Dosimetry/HBoxContainer/VBoxContainer/Panel2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " μSv/hr"
+vertical_alignment = 1
+clip_text = true
 
 [node name="Pump3" type="MarginContainer" parent="Readouts/Slice3"]
 layout_mode = 2
@@ -691,7 +755,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 16
-text = "DE REACTOR PUMP"
+text = " DEUT REACTOR PUMP"
 vertical_alignment = 2
 
 [node name="Panel2" type="Panel" parent="Readouts/Slice3/Pump3/HBoxContainer/VBoxContainer"]
@@ -789,7 +853,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_nv0kw")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel"]
+[node name="Thermometers" type="HBoxContainer" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -797,23 +861,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Thermometer" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+[node name="0" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/Thermometers" instance=ExtResource("5_fij3w")]
 layout_mode = 2
+label_text = "T_M"
 
-[node name="Thermometer2" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+[node name="1" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/Thermometers" instance=ExtResource("5_fij3w")]
 layout_mode = 2
+label_text = "T_1"
 
-[node name="Thermometer3" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+[node name="2" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/Thermometers" instance=ExtResource("5_fij3w")]
 layout_mode = 2
+label_text = "T_2"
 
-[node name="Thermometer4" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+[node name="3" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/Thermometers" instance=ExtResource("5_fij3w")]
 layout_mode = 2
+label_text = "T_3"
 
-[node name="Thermometer5" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+[node name="4" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/Thermometers" instance=ExtResource("5_fij3w")]
 layout_mode = 2
+label_text = "T_C"
 
-[node name="Thermometer6" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/HBoxContainer" instance=ExtResource("5_fij3w")]
+[node name="5" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main/MainPanel/Thermometers" instance=ExtResource("5_fij3w")]
 layout_mode = 2
+label_text = "T_N"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Readouts/Slice5/Magnet1/MagnetAssembly/Main"]
 layout_mode = 2

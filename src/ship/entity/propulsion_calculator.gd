@@ -1,9 +1,9 @@
 extends Node
 
 # Fuel quantity (kg)
-var he_quant = 4443984
-var de_quant = 2962656
-var hyd_quant = 985432 # arbitrary
+var he_quant = 0.04*4443984
+var de_quant = 0.04*2962656
+var hyd_quant = 0.08*13985432
 
 
 # Total thrust applied to vehicle, including thrusters
@@ -11,7 +11,7 @@ var thrust = Vector3(0,0,0) # in ship frame
 # Actual thrust from main engine only
 var main_thrust = 0.0
 # Maneuvering thrusters acceleration
-var thruster_force = 50e6 # N
+var thruster_force = 5e6 # N
 # Maximum allowable engine acceleration
 var engine_power = 10000.0*0.05 # km/s2
 
@@ -22,13 +22,7 @@ var throttle = 0.0
 var fusion_energy_density = 3.5897e14 # J/kg
 
 # Design parameters
-var design_accel = 0.00981 # 1g
-var design_power = 2.5265e+15 # W
-var design_mass = 22219920 # kg
-var design_fuel = 7406640 # kg
-var design_ve = 2.5448e7 # m/s
-var design_burn_time = 1.0518e+6 # s duration at design_power
-@onready var design_mass_flow = design_fuel/design_burn_time
+var design_power = 5.0e+13 # W
 
 # Reactor power simulation state variables
 var power = 0.0
@@ -50,7 +44,7 @@ var propulsor_mass_flow = 0.0 # hydrogen flow
 var kp = 1e-8
 
 # Required electrical power
-var electrical_power = 1e14 # W
+var electrical_power = 1e13 # W
 
 # State of control system
 var propulsor := false
@@ -59,6 +53,14 @@ var cryo := false
 var field := false
 var thrust_limiter := true
 var scram_inhibit := true
+
+# Magnet fields and temps
+var fields = [0,0,0,0,0,0]
+var start_temp = 300.0
+var thermal_mass = 10000.0
+var transfer_coefficient = 200.0
+var coolant_temp = 15 # K
+var temps = [start_temp,start_temp,start_temp,start_temp,start_temp,start_temp]
 
 @onready var ship = get_parent()
 
@@ -82,7 +84,7 @@ func update(dt: float) -> void:
 
 	# Simulate FRC power
 	# Get desired thrust power (linear for now)
-	var thrust_power = 1.0*design_power*sqrt(throttle/0.01)
+	var thrust_power = design_power*sqrt(throttle/0.01)
 	if thrust_limiter:
 		thrust_power = clamp(thrust_power, 0.0, power_limit)
 	# Add electrical power to thrust power to get steady state power output
@@ -115,6 +117,10 @@ func update(dt: float) -> void:
 	# Get reactor mass flow from power
 	reactor_mass_flow = steady_power/fusion_energy_density # kg/s
 	
+	# If chilling, ensure something is always flowing through core
+	if cryo:
+		reactor_mass_flow = clamp(reactor_mass_flow, 0.05, 1e99)
+	
 	# Calculate thrust from power and flow rate
 	exhaust_velocity = 0.0 # m/s
 	thrust_power = (1.0 - frac_elec)*power # unsteady thrust power
@@ -130,7 +136,7 @@ func update(dt: float) -> void:
 	if propulsor:
 		propulsor_mass_flow = propulsor_mass_flow - kp*thrust_err
 		# Ensure value doesn't become physically impossible
-		propulsor_mass_flow = clamp(propulsor_mass_flow,0.0,1000.0*design_mass_flow)
+		propulsor_mass_flow = clamp(propulsor_mass_flow,0.0,1e6)
 	else:
 		propulsor_mass_flow = 0.0
 	
@@ -143,11 +149,26 @@ func update(dt: float) -> void:
 	de_quant = de_quant - reactor_mass_flow_de*dt
 	hyd_quant = hyd_quant - propulsor_mass_flow*dt
 	
+	# Calculate magnetic temperatures
+	# Loop through each magnet
+	for i in 6:
+		var absorbed_power_fraction = randf()*1e-10
+		var effective_mass_flow = exp(-power/power_limit)*reactor_mass_flow
+		# Calculate power of heating from reactor
+		var heating = absorbed_power_fraction*power
+		var cooling = effective_mass_flow*transfer_coefficient*(temps[i] - coolant_temp)
+		var Q = heating - cooling
+		temps[i] = temps[i] + (1/thermal_mass)*Q*dt
+		if temps[i] < 0.0:
+			temps[i] = 0.0
+	
 	# Print diagnostic information
 	if false:
 		print("Requesting acceleration: ", throttle)
 		print("	Thrust/desired: ", thrust.length()/desired_thrust)
 		print("	Power frac: ", power/design_power)
+		print(" Temp: ", temps[0])
+		
 
 	
 	# Add thruster inputs to thrust

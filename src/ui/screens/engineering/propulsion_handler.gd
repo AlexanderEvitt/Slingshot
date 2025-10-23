@@ -30,6 +30,16 @@ var butttons
 @export var limiter_button : Button
 @export var scram_inhibit_button : Button
 
+# Magnet references
+@export var thermometers : Node
+
+# Side panels
+@export var dosimetry : Node
+@export var endurance : Node
+@onready var he_endurance = endurance.get_node("HeEndurance")
+@onready var de_endurance = endurance.get_node("DeEndurance")
+@onready var hyd_endurance = endurance.get_node("HydEndurance")
+
 var prop
 
 func _ready():
@@ -49,8 +59,8 @@ func _ready():
 
 func _process(_delta):
 	# Assign power to gauge
-	var max_power = prop.design_power
-	power_dial.set_fill(prop.power/max_power, String.num(prop.power*1e-15,1) + " PW")
+	var max_power = 3.0*prop.design_power
+	power_dial.set_fill(prop.power/max_power, String.num(prop.power*1e-12,0) + " GW")
 	
 	# Assign exhaust velocity to gauge
 	var c = 299792458 # speed of light, m/s
@@ -106,6 +116,28 @@ func _process(_delta):
 	he_tank_text.text = String.num(prop.he_quant/1000.0, 0) + "t"
 	de_tank_text.text = String.num(prop.de_quant/1000.0, 0) + "t"
 	hyd_tank_text.text = String.num(prop.hyd_quant/1000.0, 0) + "t"
+	
+	# Assign magnetic temperatures
+	for i in 6:
+		var thermometer = thermometers.get_child(i)
+		var max_temp = 300.0
+		thermometer.set_fill(prop.temps[i]/max_temp, String.num(prop.temps[i],0) + " K")
+
+	# Assign dose rate
+	var dose = 60.0 + PI*prop.power/1e15
+	dosimetry.text = String.num(dose, 0)
+	
+	# Assign endurance
+	if prop.reactor_mass_flow > 0.0:
+		he_endurance.text = format_time(-prop.he_quant/prop.reactor_mass_flow_he)
+		de_endurance.text = format_time(-prop.de_quant/prop.reactor_mass_flow_de)
+	else:
+		he_endurance.text = "NO FLOW"
+		de_endurance.text = "NO FLOW"
+	if prop.propulsor_mass_flow > 0.0:
+		hyd_endurance.text = format_time(-prop.hyd_quant/prop.propulsor_mass_flow)
+	else:
+		hyd_endurance.text = "NO FLOW"
 
 # Functions for toggling controls
 func update_model_with_control_states(_new_state):
@@ -116,3 +148,23 @@ func update_model_with_control_states(_new_state):
 	prop.field = field_button.button_pressed
 	prop.thrust_limiter = limiter_button.button_pressed
 	prop.scram_inhibit = scram_inhibit_button.button_pressed
+
+# Formatting times
+func format_time(seconds):
+	var signs := "T+"
+	if seconds < 0:
+		signs = "T-"
+		seconds = abs(seconds)
+
+	# Break down
+	seconds = int(seconds)
+	var days := int(seconds / 86400)
+	var hours := int((seconds % 86400) / 3600)
+	var minutes := int((seconds % 3600) / 60)
+	var secs := int(seconds % 60)
+
+	# Cap days at 99
+	if days > 99:
+		return "LOW FLOW"
+
+	return "%s%02dd%02dh%02dm%02ds" % [signs, days, hours, minutes, secs]
