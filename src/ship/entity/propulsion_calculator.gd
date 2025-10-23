@@ -57,7 +57,7 @@ var scram_inhibit := true
 # Magnet fields and temps
 var fields = [0,0,0,0,0,0]
 var start_temp = 300.0
-var thermal_mass = 10000.0
+var thermal_mass = 1000.0
 var transfer_coefficient = 200.0
 var coolant_temp = 15 # K
 var temps = [start_temp,start_temp,start_temp,start_temp,start_temp,start_temp]

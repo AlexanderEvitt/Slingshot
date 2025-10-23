@@ -60,7 +60,7 @@ func _ready():
 func _process(_delta):
 	# Assign power to gauge
 	var max_power = 3.0*prop.design_power
-	power_dial.set_fill(prop.power/max_power, String.num(prop.power*1e-12,0) + " GW")
+	power_dial.set_fill(prop.power/max_power, String.num(prop.power*1e-12,0) + " TW")
 	
 	# Assign exhaust velocity to gauge
 	var c = 299792458 # speed of light, m/s
