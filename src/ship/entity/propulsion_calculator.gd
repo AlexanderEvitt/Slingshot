@@ -32,7 +32,7 @@ var beta = 1.0
 var k = 100.0 # proportional constant
 var c = 50.0 # damping constant
 var exhaust_velocity = 0.0 # exhaust velocity
-var power_limit = 6.0e15 # W
+var power_limit = 120.0e12 # W
 
 # Mass flow total and through each pump
 var reactor_mass_flow = 0.0

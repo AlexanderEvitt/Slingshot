@@ -13,7 +13,7 @@ func _ready():
 	chamber1 = get_node("Light")
 	chamber2 = get_node("Light2")
 	
-	design_thrust = 22219920*50 # N
+	design_thrust = 613280*50 # N
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
