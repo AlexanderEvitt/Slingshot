@@ -7,6 +7,6 @@ func fetch(time):
 	return body.fetch(time)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _physics_process(_delta):
 	# Inherit position from main scene
 	position = body.get_local_position(SystemTime.t)

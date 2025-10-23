@@ -61,9 +61,6 @@ flip = -1
 [node name="shipyard" parent="." instance=ExtResource("4_goyf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38.881, 0)
 
-[node name="DockCenter" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
-
 [node name="KOZ" type="Node3D" parent="."]
 visible = false
 

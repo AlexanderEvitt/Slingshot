@@ -3,7 +3,6 @@ extends Node3D
 var plotter
 var pointer
 
-var scaledown = 1
 
 @export var plan : bool
 @export var camera_mode : bool
@@ -24,6 +23,6 @@ func _process(_delta):
 	else:
 		transform.basis = ShipData.player_ship.attitude
 		plotter.transform.basis = ShipData.player_ship.attitude.inverse() # plotter needs to stay in the right frame
-	position = ShipData.player_ship.position/scaledown
+	position = ShipData.player_ship.position
 	
 	plotter.positions = ShipData.propagator.plotted_positions

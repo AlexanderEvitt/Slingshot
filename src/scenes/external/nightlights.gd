@@ -1,6 +1,6 @@
 extends MeshInstance3D
 
-@export var sun_path : Node
+@export var sun_path : Node # path to main Sun node
 var mat
 
 # Called when the node enters the scene tree for the first time.
