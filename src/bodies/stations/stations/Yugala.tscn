@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://dxbqssxh6kpdo"]
+[gd_scene load_steps=10 format=4 uid="uid://dxbqssxh6kpdo"]
 
+[ext_resource type="Script" path="res://bodies/stations/components/station_manager.gd" id="1_6fdwo"]
 [ext_resource type="PackedScene" uid="uid://bty856a1y2vt0" path="res://bodies/stations/components/stump.tscn" id="2_j4e1c"]
 [ext_resource type="PackedScene" uid="uid://cr6y3tpnww4h7" path="res://bodies/stations/components/ring.tscn" id="3_cwtld"]
 [ext_resource type="PackedScene" uid="uid://dclrlvx4upy8x" path="res://bodies/stations/components/round_port.tscn" id="3_trdss"]
@@ -41,7 +42,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_mq5qg")
 
-[node name="Yugala" type="Node3D"]
+[node name="Station" type="Node3D"]
+script = ExtResource("1_6fdwo")
+berth_path = "round_port/Port/{}/docks/Docks/{}/"
 
 [node name="stump" parent="." instance=ExtResource("2_j4e1c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 0)

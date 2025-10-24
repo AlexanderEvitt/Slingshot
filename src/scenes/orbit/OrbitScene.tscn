@@ -300,17 +300,17 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="ZephyrStation" type="Node3D" parent="Planets/Earth"]
+[node name="Zephyr" type="Node3D" parent="Planets/Earth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.3)
 script = ExtResource("9_2beyu")
-body_path = "Planets/Earth/ZephyrStation"
+body_path = "Planets/Earth/Zephyr"
 
-[node name="Plotter" type="Node3D" parent="Planets/Earth/ZephyrStation" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="Planets/Earth/Zephyr" groups=["BodyOrbit"]]
 script = ExtResource("5_vmpxk")
 color = Color(1, 0.6, 0, 1)
 visible_distance = 200000
 
-[node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Earth/ZephyrStation"]
+[node name="FlatMoonSprite" type="Sprite3D" parent="Planets/Earth/Zephyr"]
 visibility_range_end = 20000.0
 visibility_range_end_margin = 20000.0
 visibility_range_fade_mode = 1
@@ -320,33 +320,33 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("11_lodt7")
 
-[node name="KOZ" type="Node3D" parent="Planets/Earth/ZephyrStation"]
+[node name="KOZ" type="Node3D" parent="Planets/Earth/Zephyr"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 
-[node name="wire_sphere" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("11_8re0r")]
+[node name="wire_sphere" parent="Planets/Earth/Zephyr/KOZ" instance=ExtResource("11_8re0r")]
 transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 29.32, 0, 0, 0)
 
-[node name="wire_cylinder" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("12_5etm5")]
+[node name="wire_cylinder" parent="Planets/Earth/Zephyr/KOZ" instance=ExtResource("12_5etm5")]
 transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
 
-[node name="wire_cylinder2" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("12_5etm5")]
+[node name="wire_cylinder2" parent="Planets/Earth/Zephyr/KOZ" instance=ExtResource("12_5etm5")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
 
-[node name="wire_cylinder3" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("12_5etm5")]
+[node name="wire_cylinder3" parent="Planets/Earth/Zephyr/KOZ" instance=ExtResource("12_5etm5")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
 
-[node name="wire_cube" parent="Planets/Earth/ZephyrStation/KOZ" instance=ExtResource("14_k6kd7")]
+[node name="wire_cube" parent="Planets/Earth/Zephyr/KOZ" instance=ExtResource("14_k6kd7")]
 transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
-[node name="ClickDetector" type="Area3D" parent="Planets/Earth/ZephyrStation" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="Planets/Earth/Zephyr" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Earth/ZephyrStation/ClickDetector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Earth/Zephyr/ClickDetector"]
 shape = SubResource("SphereShape3D_8k6tq")
 
-[node name="MoonLabel" type="Label3D" parent="Planets/Earth/ZephyrStation"]
+[node name="MoonLabel" type="Label3D" parent="Planets/Earth/Zephyr"]
 visibility_range_end = 200000.0
 visibility_range_end_margin = 200000.0
 visibility_range_fade_mode = 1

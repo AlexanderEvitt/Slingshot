@@ -12,12 +12,13 @@ var back_off_distance = 1.0/1000.0
 var squeeze_angle = 66.0
 var animation_time = 1.0
 
+
 func _ready():
 	# Connect to signals
 	ShipData.player_ship.rel_clamp.connect(release_clamps)
 	ShipData.player_ship.att_clamp.connect(attach_clamps)
 	
-	# Attach clamps at startup
+	# Start with clamps attached
 	attach_clamps()
 
 func release_clamps():

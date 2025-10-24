@@ -185,7 +185,7 @@ height = 49528.0
 transparency = 4
 albedo_texture = ExtResource("17_n5xr7")
 
-[node name="CamRoot" type="Node3D"]
+[node name="SimRoot" type="Node3D"]
 script = ExtResource("1_5ri2s")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -287,7 +287,7 @@ script = ExtResource("8_it1pn")
 process_priority = 13
 shape = SubResource("SphereShape3D_4v3sc")
 
-[node name="ZephyrStation" type="Node3D" parent="Planets/Earth"]
+[node name="Zephyr" type="Node3D" parent="Planets/Earth"]
 process_priority = 13
 editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 6610.83, 0, 0)
@@ -296,7 +296,7 @@ is_station = true
 a = 42164.0
 theta0 = 3.142
 
-[node name="ZephyrModel" parent="Planets/Earth/ZephyrStation" instance=ExtResource("18_n2nyd")]
+[node name="Station" parent="Planets/Earth/Zephyr" instance=ExtResource("18_n2nyd")]
 
 [node name="Luna" type="Node3D" parent="Planets/Earth" groups=["Bodies"]]
 process_priority = 13
@@ -322,7 +322,7 @@ e = 0.7
 i = 1.571
 argp = 1.571
 
-[node name="EnduranceModel" parent="Planets/Earth/Luna/Endurance" instance=ExtResource("18_ikxh7")]
+[node name="Station" parent="Planets/Earth/Luna/Endurance" instance=ExtResource("18_ikxh7")]
 
 [node name="LunaMesh" type="MeshInstance3D" parent="Planets/Earth/Luna"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
@@ -389,7 +389,7 @@ is_station = true
 a = 42164.0
 theta0 = 3.142
 
-[node name="YugalaModel" parent="Planets/Mars/Yugala" instance=ExtResource("23_vliu8")]
+[node name="Station" parent="Planets/Mars/Yugala" instance=ExtResource("23_vliu8")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
 
 [node name="MarsMesh" type="MeshInstance3D" parent="Planets/Mars"]

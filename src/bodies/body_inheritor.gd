@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var body_path : String
-@onready var body = ShipData.physics_root.get_node(body_path)
+@onready var body = ShipData.sim_root.get_node(body_path)
 
 func fetch(time):
 	return body.fetch(time)

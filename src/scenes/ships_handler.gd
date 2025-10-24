@@ -7,6 +7,10 @@ func _ready() -> void:
 	# Connect startup signal
 	# get_parent().get_node("UI").startup.connect(_on_startup)
 	
+	# Tell the ShipData global how to reference the planets
+	ShipData.sim_root = get_parent()
+	Conversions.sim_root = get_parent()
+	
 	# Load ship physics entity
 	player_ship = preload("res://ship/entity/ship_entity.tscn").instantiate()
 
@@ -18,6 +22,3 @@ func _ready() -> void:
 	
 	# Tell the ShipData global where its ship node is
 	ShipData.player_ship = get_node("PlayerShip")
-	
-	# Tell the ShipData global how to reference the planets
-	ShipData.physics_root = get_parent()

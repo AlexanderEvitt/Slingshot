@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=4 uid="uid://cdxkk5qy7ccnc"]
+[gd_scene load_steps=12 format=4 uid="uid://cdxkk5qy7ccnc"]
 
+[ext_resource type="Script" path="res://bodies/stations/components/station_manager.gd" id="1_5moyy"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="1_jprih"]
 [ext_resource type="PackedScene" uid="uid://bty856a1y2vt0" path="res://bodies/stations/components/stump.tscn" id="2_66665"]
 [ext_resource type="PackedScene" uid="uid://cr6y3tpnww4h7" path="res://bodies/stations/components/ring.tscn" id="3_nsi5c"]
@@ -43,7 +44,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_a4k8o")
 
-[node name="Endurance" type="Node3D"]
+[node name="Station" type="Node3D"]
+script = ExtResource("1_5moyy")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_jprih")

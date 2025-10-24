@@ -45,11 +45,11 @@ signal berth_updated
 # Mass currently only for collision impulse
 var mass = 1
 
-# Which berth to start at (updated)
+# Data on where you are docked
 var berthed = true
-@onready var station = get_tree().root.get_node("GameRoot/Planets/Earth/ZephyrStation")
-@onready var dock = station.get_node("Port/DockC")
-@onready var berth = dock.get_node("Berth4")
+var station : Node
+var dock : Node
+var berth : Node
 var berth_offset = Vector3(0.07,0,0) # how far into the berth the docking point is
 
 # Tell the selection panel that this isn't a station you can dock with
@@ -59,6 +59,10 @@ var is_station = false
 func _ready():
 	# Initialize values
 	attitude = attitude_calculator.transform.basis
+	
+	# Assign to random berth at Zephyr at start
+	assign_berth("Planets/Earth/Zephyr")
+	berthed = true
 
 func _physics_process(delta):
 	# Update values for this iteration
@@ -143,22 +147,30 @@ func fetch(_time):
 	return position
 
 func assign_berth(new_station):
+	# Called by selection_panel.gd with the name of the new_station
+	
 	# Make sure you're undocked so you don't move to the berth
 	berthed = false
 	
-	# Assign station
-	station = get_tree().root.get_node("GameRoot/" + new_station)
+	# Get the station (the child of the Body that represents the station)
+	station = ShipData.sim_root.get_node(new_station + "/Station")
+	
+	# Get the berth_path of the station (contains info on finding the berth node)
+	var berth_path = station.berth_path
+	var split_path = berth_path.split("/{}/")
 	
 	# Get port component (parent to all docks)
-	var port = get_tree().root.get_node("GameRoot/" + new_station + "/Port")
+	var port_path = split_path[0]
+	var port = station.get_node(port_path)
 	
 	# Get random dock
 	var docks = port.get_children()
 	dock = docks[randi_range(0, len(docks) - 1)]
 	
+	# Get parent node to all berths (child of selected dock)
+	var berth_parent = dock.get_node(split_path[1])
+	
 	# Get random berth
-	var berths = dock.get_children()
+	var berths = berth_parent.get_children()
 	berth = berths[randi_range(0, len(berths) - 1)]
 	berth_updated.emit()
-	
-	print(station, " ", port)

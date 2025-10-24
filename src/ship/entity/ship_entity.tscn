@@ -25,7 +25,7 @@ flip_faces = true
 size = Vector2(2, 2)
 
 [node name="PlayerShip" type="Node3D"]
-editor_description = "FV JUNIPER is a Hedge-class frigate in the Federal Navy. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
+editor_description = "FV JUNIPER is a Hedge-class frigate in service as privateer vessel. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
 script = ExtResource("1_012ot")
 
 [node name="AttitudeCalculator" type="Node3D" parent="."]

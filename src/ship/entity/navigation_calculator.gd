@@ -16,7 +16,6 @@ var cornering_velocity = 0.0 # target velocity at endpoint, km/s
 @export var Kd = 0.05 # 1km/s max deflection
 
 @onready var ship = get_parent()
-@onready var game_root = get_tree().root.get_node("GameRoot/")
 
 var report = false
 var count = 0 # counter for when to write report
@@ -43,10 +42,10 @@ func navigate(dt, gravity):
 	var next_waypoint = waypoints[active_waypoint + 1]
 	
 	# Write the current solar system positions/velocities of the waypoints
-	var from = last_waypoint["Position"] + game_root.get_node(last_waypoint["Frame"]).fetch(SystemTime.t)
-	var to = next_waypoint["Position"] + game_root.get_node(next_waypoint["Frame"]).fetch(SystemTime.t)
-	var from_vel = game_root.get_node(last_waypoint["Frame"]).fetch_velocity(SystemTime.t)
-	var to_vel = game_root.get_node(next_waypoint["Frame"]).fetch_velocity(SystemTime.t)
+	var from = last_waypoint["Position"] + ShipData.sim_root.get_node(last_waypoint["Frame"]).fetch(SystemTime.t)
+	var to = next_waypoint["Position"] + ShipData.sim_root.get_node(next_waypoint["Frame"]).fetch(SystemTime.t)
+	var from_vel = ShipData.sim_root.get_node(last_waypoint["Frame"]).fetch_velocity(SystemTime.t)
+	var to_vel = ShipData.sim_root.get_node(next_waypoint["Frame"]).fetch_velocity(SystemTime.t)
 
 	# Get the course (vector from previous point to next point)
 	var course = (to - from)

@@ -3,6 +3,14 @@ extends Node3D
 # Scenes that are the berths
 var current_berth = null
 
+# Body that this is a child of
+@onready var body = get_parent()
+
+# Path from station (self) to specific berth
+# First {} is the dock name
+# Second {} is the berth name
+@export var berth_path := "shipyard/Port/{}/docks/Docks/{}/"
+
 func _ready():
 	# Connect the loading and unloading to the signal emitted by the ship
 	ShipData.player_ship.berth_updated.connect(update_berth)
@@ -24,9 +32,8 @@ func update_berth():
 		current_berth.add_child(simplified_berth)
 	
 	# Figure out what the new berth is
-	var dock_name = ShipData.player_ship.dock.name
-	var berth_name = ShipData.player_ship.berth.name
-	current_berth = get_node("Port/" + dock_name + "/docks/Docks/" + berth_name)
+	var new_berth = ShipData.player_ship.berth
+	current_berth = new_berth
 	
 	# Remove the new berth's simplified berth
 	if current_berth != null:
@@ -35,3 +42,10 @@ func update_berth():
 	# Add a berth to the new berth
 	if current_berth != null:
 		current_berth.add_child(full_berth)
+
+# Fetch the state of the parent body when asked
+func fetch(time):
+	return body.fetch(time)
+
+func fetch_velocity(time):
+	return body.fetch_velocity(time)

@@ -29,7 +29,7 @@ func _process(_delta):
 	
 	# If you select a target
 	if orbit_scene_root.selected_body != null:
-		var selected = get_tree().root.get_node("GameRoot/" + orbit_scene_root.selected_body)
+		var selected = ShipData.sim_root.get_node(orbit_scene_root.selected_body)
 		about.text = selected.editor_description
 		camera_button.disabled = false
 		
