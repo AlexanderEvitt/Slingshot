@@ -4,31 +4,13 @@ var scaledown = 1
 
 var cam
 
-@export var camera_mode : bool
-@export var camera_select = 3
 @export var planet_orbits : bool
 @export var zoomable : bool
-@export var hud_enable = false
 
 var selected_body = null
 
 func _ready():
 	var spacecraft = get_node("Ships/PlayerShip")
-	spacecraft.camera_mode = camera_mode
-	
-	# Set which camera is active
-	var first_cam = get_node("Ships/PlayerShip/Pointer/FirstCam")
-	var third_cam = get_node("Ships/PlayerShip/CameraRig/CameraRotator/Camera3D")
-	var cinema_cam = get_node("CinemaCam")
-	first_cam.current = false
-	third_cam.current = false
-	cinema_cam.current = false
-	if camera_select == 3:
-		third_cam.current = true
-	elif camera_select == 1:
-		first_cam.current = true
-	else:
-		cinema_cam.current = true
 	
 	# Get the camera node (is this the right camera?)
 	cam = spacecraft.get_node("CameraRig/CameraRotator/Camera3D")

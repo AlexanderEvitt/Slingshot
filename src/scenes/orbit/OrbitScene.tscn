@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=60 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" path="res://scenes/scene_settings_controller.gd" id="1_sj5o8"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -26,8 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://btpxws4tx476f" path="res://scenes/orbit/koz/wire_cube.tscn" id="14_k6kd7"]
 [ext_resource type="Script" path="res://scenes/orbit/click_detector.gd" id="15_c6xwu"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="18_lxife"]
-[ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="22_66qh8"]
-[ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="23_vt6nb"]
 [ext_resource type="Script" path="res://scenes/orbit/waypoint_rig.gd" id="27_2mw5s"]
 [ext_resource type="Script" path="res://scenes/orbit/waypoint_plotter.gd" id="28_3ag27"]
 [ext_resource type="Texture2D" uid="uid://d3qgybl45ufxd" path="res://scenes/orbit/ship_symbol.png" id="29_4bect"]
@@ -159,8 +157,6 @@ script = ExtResource("1_sj5o8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aovhe")
-
-[node name="CinemaCam" type="Camera3D" parent="."]
 
 [node name="Planets" type="Node3D" parent="."]
 script = ExtResource("2_d30s2")
@@ -964,8 +960,7 @@ shape = SubResource("SphereShape3D_4ijo1")
 
 [node name="PlayerShip" type="Node3D" parent="Ships"]
 script = ExtResource("13_xts1l")
-plan = true
-camera_mode = true
+body_path = "Ships/PlayerShip"
 
 [node name="Plotter" type="Node3D" parent="Ships/PlayerShip"]
 script = ExtResource("14_g31x3")
@@ -977,22 +972,6 @@ slice = true
 [node name="Ship" parent="Ships/PlayerShip/Pointer" instance=ExtResource("18_lxife")]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="FirstCam" type="Camera3D" parent="Ships/PlayerShip/Pointer"]
-transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
-fov = 50.0
-size = 2.0
-near = 0.001
-far = 1e+07
-
-[node name="CenterMarker" type="Sprite3D" parent="Ships/PlayerShip/Pointer/FirstCam"]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.0639505)
-pixel_size = 0.0005
-axis = 0
-no_depth_test = true
-fixed_size = true
-texture = ExtResource("22_66qh8")
-script = ExtResource("23_vt6nb")
-
 [node name="CameraRig" type="Node3D" parent="Ships/PlayerShip"]
 transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("2_awidn")
@@ -1001,6 +980,7 @@ script = ExtResource("2_awidn")
 
 [node name="Camera3D" type="Camera3D" parent="Ships/PlayerShip/CameraRig/CameraRotator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
+current = true
 fov = 60.0
 near = 0.01
 far = 1e+10

@@ -1,6 +1,5 @@
 extends Node3D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	visible = get_viewport().get_child(0).hud_enable
+# Sets the visibility if the viewport container is visible
+func _process(_delta: float) -> void:
+	visible = get_viewport().get_parent().is_visible_in_tree()

@@ -27,15 +27,7 @@ theme = ExtResource("2_bmshc")
 script = ExtResource("2_bh7rb")
 button_group = ExtResource("27_ytqrm")
 
-[node name="FlightScreen" parent="." instance=ExtResource("4_l1uqb")]
-layout_mode = 1
-
-[node name="EngineeringScreen" parent="." instance=ExtResource("5_i05jk")]
-visible = false
-layout_mode = 1
-
 [node name="ExternalScreen" parent="." instance=ExtResource("6_b2rax")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,6 +36,14 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="FlightScreen" parent="." instance=ExtResource("4_l1uqb")]
+visible = false
+layout_mode = 1
+
+[node name="EngineeringScreen" parent="." instance=ExtResource("5_i05jk")]
+visible = false
+layout_mode = 1
 
 [node name="NavigationScreen" parent="." instance=ExtResource("7_j2pmq")]
 visible = false
@@ -96,7 +96,7 @@ theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_pressed = true
 button_group = ExtResource("27_ytqrm")
-text = "FLIGHT"
+text = "EXTERNAL"
 
 [node name="EngineeringButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
 layout_mode = 2
@@ -111,7 +111,7 @@ layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_group = ExtResource("27_ytqrm")
-text = "ENGINEERING"
+text = "FLIGHT"
 
 [node name="ExternalButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
 layout_mode = 2
@@ -126,7 +126,7 @@ layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_group = ExtResource("27_ytqrm")
-text = "EXTERNAL"
+text = "ENGINEERING"
 
 [node name="NavigationButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
 layout_mode = 2

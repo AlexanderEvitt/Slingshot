@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cupcgndqidmw2"]
+[gd_scene load_steps=3 format=3 uid="uid://cupcgndqidmw2"]
 
-[ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="1_gooas"]
+[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="1_ken57"]
+[ext_resource type="Script" path="res://scenes/external/cinema_cam.gd" id="2_anq8f"]
 
 [node name="CinematicScreen" type="HBoxContainer"]
 anchors_preset = 15
@@ -15,11 +16,13 @@ size_flags_horizontal = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="FPVUI"]
-own_world_3d = true
+world_3d = ExtResource("1_ken57")
 handle_input_locally = false
 size = Vector2i(1920, 1080)
-render_target_update_mode = 4
 
-[node name="CamRoot" parent="FPVUI/SubViewport" instance=ExtResource("1_gooas")]
-camera_mode = true
-camera_select = 2
+[node name="CinemaCam" type="Camera3D" parent="FPVUI/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15638.1)
+fov = 10.0
+near = 0.001
+far = 1e+07
+script = ExtResource("2_anq8f")

@@ -19,6 +19,8 @@ var total_mass = dry_mass # kg (updated by propulsion)
 @onready var propulsion_calculator = $PropulsionCalculator
 @onready var collision_calculator = $CollisionCalculator
 @onready var propagator = $Propagator
+@onready var plotter = $Plotter
+@onready var pointer = $Pointer
 
 # Autopilot modes
 var current_mode
@@ -105,6 +107,12 @@ func _physics_process(delta):
 			if berth_error < 0.005:
 				berthed = true
 				att_clamp.emit()
+				
+	# Pass attitude to pointer
+	pointer.transform.basis = attitude
+	
+	# Pass plotter position to plotter
+	plotter.positions = propagator.plotted_positions
 
 func integrate_normally(dt, prev_gravity):
 	# Calculate acceleration on vehicle

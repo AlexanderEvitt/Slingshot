@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var body_path : String
-@onready var body = get_tree().root.get_node("GameRoot/" + body_path)
+@onready var body = ShipData.physics_root.get_node(body_path)
 
 func fetch(time):
 	return body.fetch(time)
