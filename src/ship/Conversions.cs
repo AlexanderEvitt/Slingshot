@@ -12,7 +12,7 @@ public partial class Conversions : Node
 	public Godot.Node sim_root;
 
 	// Path to the body that the frame is defined by
-	public string frame_name = "Planets/Earth";
+	public string frame_name = "SolarSystem/Earth";
 	
 	public override void _Ready()
 	{

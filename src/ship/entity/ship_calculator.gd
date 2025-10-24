@@ -61,7 +61,7 @@ func _ready():
 	attitude = attitude_calculator.transform.basis
 	
 	# Assign to random berth at Zephyr at start
-	assign_berth("Planets/Earth/Zephyr")
+	assign_berth("SolarSystem/Earth/Zephyr")
 	berthed = true
 
 func _physics_process(delta):

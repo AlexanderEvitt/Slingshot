@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var GM : float
+@export var body_path : String
 
 func fetch(_time):
 	# Return origin of global reference frame

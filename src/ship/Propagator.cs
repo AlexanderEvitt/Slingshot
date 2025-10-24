@@ -7,14 +7,13 @@ using System.Threading;
 
 public partial class Propagator : Node3D
 {
-	// Initialize times, positions, velocities, and controls lists
+	// Initialize times, positions, velocities lists
 	public Godot.Collections.Array<Node> bodies;
 	public Godot.Collections.Array<Vector3> positions;
 	public Godot.Collections.Array<Vector3> velocities;
 	public Godot.Collections.Array<double> times;
-	public Godot.Collections.Array<Vector3> controls;
 
-	// Initialize arrays for passing up
+	// Initialize array for passing up positions
 	public Godot.Collections.Array<Vector3> plotted_positions;
 
 	// Initial conditions
@@ -28,6 +27,11 @@ public partial class Propagator : Node3D
 	public int c = 0;
 	public double timescale = 0.15d;
 
+	// Array that holds the list of bodies we consider gravity from
+	public Godot.Collections.Array<Vector3> gravitators;
+	// Lowest-hierarchy body we are in proximity to
+	public Godot.Node primary;
+
 	public override void _Ready()
 	{
 		// Get planets
@@ -35,6 +39,9 @@ public partial class Propagator : Node3D
 
 		// Get singleton for ShipData (written in GDScript so this is necessary)
 		player_ship = GetParent();
+
+		// Initialize the gravitators as being around the Sun
+		primary = Conversions.Instance.sim_root.GetNode("SolarSystem");
 	}
 
 	public override void _Process(double delta)
@@ -60,6 +67,8 @@ public partial class Propagator : Node3D
 			// Expose positions for plotting
 			Godot.Collections.Array<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
 			plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
+
+			// Check if you need to update the gravitating array
 		}
 		else
 		{

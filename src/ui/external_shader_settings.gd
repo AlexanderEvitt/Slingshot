@@ -8,7 +8,7 @@ var mat
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Get the sun
-	sun = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("Planets/Sun")
+	sun = ShipData.sim_root.get_node("SolarSystem/Sun")
 	
 	# Get the camera
 	cam = get_viewport().get_camera_3d()

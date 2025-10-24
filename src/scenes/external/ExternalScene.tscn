@@ -194,30 +194,25 @@ environment = ExtResource("4_n8kbm")
 [node name="Ships" type="Node3D" parent="."]
 script = ExtResource("35_gsmv1")
 
-[node name="Planets" type="Node3D" parent="."]
+[node name="SolarSystem" type="Node3D" parent="." groups=["Bodies"]]
 script = ExtResource("4_5kgsd")
 GM = 1.32712e+11
+body_path = "SolarSystem"
 
-[node name="Sun" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Sun" type="Node3D" parent="SolarSystem"]
 process_priority = 13
 editor_description = "SOL is the center of humanity's origin system and a G2V star. Until the last century, the Sol system was home to most of humanity."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.86707e+06)
-script = ExtResource("4_1rgsg")
-GM = 1.32712e+11
-a = 1.34249e+06
-e = 0.094
-i = 0.026
-RAAN = 1.806
-argp = 4.504
-theta0 = 4.808
+script = ExtResource("4_5kgsd")
+body_path = "SolarSystem/Sun"
 
-[node name="SunMesh" type="MeshInstance3D" parent="Planets/Sun"]
+[node name="SunMesh" type="MeshInstance3D" parent="SolarSystem/Sun"]
 layers = 0
 mesh = SubResource("SphereMesh_v7y0l")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
 
-[node name="BigSunLight" type="DirectionalLight3D" parent="Planets/Sun"]
+[node name="BigSunLight" type="DirectionalLight3D" parent="SolarSystem/Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 light_energy = 0.75
 shadow_enabled = true
@@ -228,7 +223,7 @@ directional_shadow_pancake_size = 5.0
 sky_mode = 1
 script = ExtResource("7_6u2xr")
 
-[node name="Mercury" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Mercury" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "MERCURY is the smallest planet of the Sol system. Its proximity to Sol itself makes it difficult to survive on and is today only occupied by a few mining outposts."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36082.9, 0, 0)
@@ -239,14 +234,14 @@ i = 0.122
 RAAN = 0.832
 argp = 0.535
 
-[node name="MercuryMesh" type="MeshInstance3D" parent="Planets/Mercury"]
+[node name="MercuryMesh" type="MeshInstance3D" parent="SolarSystem/Mercury"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_8fy0r")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_gmmuk")
 
-[node name="Venus" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Venus" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "VENUS is the second planet of the Sol system. It's harsh surface conditions have stubbed attempts at colonization."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26367.4, 0, 0)
@@ -259,14 +254,14 @@ RAAN = 1.312
 argp = 0.979
 theta0 = 1.038
 
-[node name="VenusMesh" type="MeshInstance3D" parent="Planets/Venus"]
+[node name="VenusMesh" type="MeshInstance3D" parent="SolarSystem/Venus"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_t6ay8")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_oivmx")
 
-[node name="Earth" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Earth" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "EARTH is the original cradle of humanity and the center of civilization. With one large moon and several stations, over 10 billion people call Earth home."
 script = ExtResource("4_1rgsg")
@@ -278,16 +273,16 @@ RAAN = 3.029
 argp = 5.571
 theta0 = 4.687
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Planets/Earth"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SolarSystem/Earth"]
 process_priority = 13
 physics_material_override = SubResource("PhysicsMaterial_6uqj7")
 script = ExtResource("8_it1pn")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/Earth/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/StaticBody3D"]
 process_priority = 13
 shape = SubResource("SphereShape3D_4v3sc")
 
-[node name="Zephyr" type="Node3D" parent="Planets/Earth"]
+[node name="Zephyr" type="Node3D" parent="SolarSystem/Earth"]
 process_priority = 13
 editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 6610.83, 0, 0)
@@ -296,9 +291,9 @@ is_station = true
 a = 42164.0
 theta0 = 3.142
 
-[node name="Station" parent="Planets/Earth/Zephyr" instance=ExtResource("18_n2nyd")]
+[node name="Station" parent="SolarSystem/Earth/Zephyr" instance=ExtResource("18_n2nyd")]
 
-[node name="Luna" type="Node3D" parent="Planets/Earth" groups=["Bodies"]]
+[node name="Luna" type="Node3D" parent="SolarSystem/Earth" groups=["Bodies"]]
 process_priority = 13
 editor_description = "LUNA is Earth's sole natural satellite and the gateway to the planets. Almost two billion people live in its domed cities, servicing the numerous ports and dockyards scattered across the regolith."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10121.8, 0, 0)
@@ -311,7 +306,7 @@ RAAN = 3.399
 argp = 1.573
 theta0 = 2.226
 
-[node name="Endurance" type="Node3D" parent="Planets/Earth/Luna"]
+[node name="Endurance" type="Node3D" parent="SolarSystem/Earth/Luna"]
 process_priority = 13
 editor_description = "ENDURANCE is the gateway station to Shackleton crater, the largest city on Luna. As the sister station to Zephyr, countless ships make the run between them each cycle."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 2044.07, 0, 0)
@@ -322,16 +317,16 @@ e = 0.7
 i = 1.571
 argp = 1.571
 
-[node name="Station" parent="Planets/Earth/Luna/Endurance" instance=ExtResource("18_ikxh7")]
+[node name="Station" parent="SolarSystem/Earth/Luna/Endurance" instance=ExtResource("18_ikxh7")]
 
-[node name="LunaMesh" type="MeshInstance3D" parent="Planets/Earth/Luna"]
+[node name="LunaMesh" type="MeshInstance3D" parent="SolarSystem/Earth/Luna"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_6xnwu")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
 
-[node name="EarthMesh" type="MeshInstance3D" parent="Planets/Earth"]
+[node name="EarthMesh" type="MeshInstance3D" parent="SolarSystem/Earth"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_aom7d")
@@ -339,13 +334,13 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
 script = ExtResource("17_wir2g")
 
-[node name="Clouds" type="MeshInstance3D" parent="Planets/Earth/EarthMesh"]
+[node name="Clouds" type="MeshInstance3D" parent="SolarSystem/Earth/EarthMesh"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_282r8")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
 
-[node name="EarthAtmosphere" parent="Planets/Earth/EarthMesh" instance=ExtResource("5_2nae2")]
+[node name="EarthAtmosphere" parent="SolarSystem/Earth/EarthMesh" instance=ExtResource("5_2nae2")]
 planet_radius = 6371.0
 atmosphere_height = 40.0
 sun_path = NodePath("../../../Sun/BigSunLight")
@@ -354,20 +349,20 @@ shader_params/u_scattering_strength = 1.681
 shader_params/u_scattering_wavelengths = Vector3(650, 540, 440)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
-[node name="Lights" type="MeshInstance3D" parent="Planets/Earth/EarthMesh" node_paths=PackedStringArray("sun_path")]
+[node name="Lights" type="MeshInstance3D" parent="SolarSystem/Earth/EarthMesh" node_paths=PackedStringArray("sun_path")]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_282r8")
 surface_material_override/0 = SubResource("ShaderMaterial_1ptrw")
 script = ExtResource("18_elqqx")
 sun_path = NodePath("../../../Sun")
 
-[node name="Earthshine" type="OmniLight3D" parent="Planets/Earth"]
+[node name="Earthshine" type="OmniLight3D" parent="SolarSystem/Earth"]
 visible = false
 light_color = Color(0.764073, 0.840415, 1, 1)
 omni_range = 15000.0
 omni_attenuation = 0.25
 
-[node name="Mars" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Mars" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "MARS is the second-most populous planet in the Sol system, owing to early colonization efforts that predate most other planetary colonies by almost a century."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
@@ -380,7 +375,7 @@ RAAN = 0.837
 argp = 5.068
 theta0 = 5.873
 
-[node name="Yugala" type="Node3D" parent="Planets/Mars"]
+[node name="Yugala" type="Node3D" parent="SolarSystem/Mars"]
 process_priority = 13
 editor_description = "YUGALA ORBITAL is the largest station in proximity to Mars. It acts as a vital military base providing protection to the inner planets from pirates and thieves."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -3852.12, 0, 0)
@@ -389,17 +384,17 @@ is_station = true
 a = 42164.0
 theta0 = 3.142
 
-[node name="Station" parent="Planets/Mars/Yugala" instance=ExtResource("23_vliu8")]
+[node name="Station" parent="SolarSystem/Mars/Yugala" instance=ExtResource("23_vliu8")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
 
-[node name="MarsMesh" type="MeshInstance3D" parent="Planets/Mars"]
+[node name="MarsMesh" type="MeshInstance3D" parent="SolarSystem/Mars"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_61v7t")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_563sj")
 
-[node name="Jupiter" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Jupiter" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "JUPITER is a gas giant and the largest planet of the Sol system. Numerous stations and cities are scattered amongst its moons."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -97771.8, 0, 0)
@@ -412,7 +407,7 @@ RAAN = 1.77
 argp = 4.787
 theta0 = 1.518
 
-[node name="Io" type="Node3D" parent="Planets/Jupiter"]
+[node name="Io" type="Node3D" parent="SolarSystem/Jupiter"]
 editor_description = "IO is a highly volcanic moon of Jupiter. The high-radiation environment and active volcanism has precluded attempts at habitation."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29743.1, 0, -84806.8)
 script = ExtResource("4_1rgsg")
@@ -424,13 +419,13 @@ RAAN = 5.879
 argp = 1.58
 theta0 = 0.344
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Io"]
+[node name="BodyMesh" type="MeshInstance3D" parent="SolarSystem/Jupiter/Io"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_fh4a2")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_thbh0")
 
-[node name="Callisto" type="Node3D" parent="Planets/Jupiter"]
+[node name="Callisto" type="Node3D" parent="SolarSystem/Jupiter"]
 editor_description = "CALLISTO is an icy moon of Jupiter and the most populous in the system. Low radiation and gravity of over one tenth G have led to significant immigration."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12773.1, 0, -84357.9)
 script = ExtResource("4_1rgsg")
@@ -442,13 +437,13 @@ RAAN = 5.949
 argp = 2.557
 theta0 = 5.713
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Callisto"]
+[node name="BodyMesh" type="MeshInstance3D" parent="SolarSystem/Jupiter/Callisto"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_w33s7")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_6oicq")
 
-[node name="Europa" type="Node3D" parent="Planets/Jupiter"]
+[node name="Europa" type="Node3D" parent="SolarSystem/Jupiter"]
 editor_description = "EUROPA, long considered a sister moon of Callisto, was colonized similarly for centuries. However, the violent nationalist conflicts of the 2400s led to most settlers emigrating and many colonies being abandoned."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6000.71, 0, -87993)
 script = ExtResource("4_1rgsg")
@@ -460,13 +455,13 @@ RAAN = 5.832
 argp = 4.693
 theta0 = 0.223
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Europa"]
+[node name="BodyMesh" type="MeshInstance3D" parent="SolarSystem/Jupiter/Europa"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_jcfjd")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_4wqeu")
 
-[node name="Ganymede" type="Node3D" parent="Planets/Jupiter"]
+[node name="Ganymede" type="Node3D" parent="SolarSystem/Jupiter"]
 editor_description = "GANYMEDE is the most massive moon in the Sol system. Its relatively high gravity has led to the development of the local healthcare industry, with several large hospitals and military bases located around its equator."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21337.3, 0, -77908.5)
 script = ExtResource("4_1rgsg")
@@ -478,20 +473,20 @@ RAAN = 5.817
 argp = 1.822
 theta0 = 3.006
 
-[node name="BodyMesh" type="MeshInstance3D" parent="Planets/Jupiter/Ganymede"]
+[node name="BodyMesh" type="MeshInstance3D" parent="SolarSystem/Jupiter/Ganymede"]
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_34wev")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_3g57a")
 
-[node name="JupiterMesh" type="MeshInstance3D" parent="Planets/Jupiter"]
+[node name="JupiterMesh" type="MeshInstance3D" parent="SolarSystem/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_ke1qx")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_lnura")
 
-[node name="Saturn" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Saturn" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "SATURN is a ringed gas giant, with the most cataloged moons of any planet in the known universe. Although Saturn itself is uninhabitable, the rings have welcomed a small ice mining industry."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -345563, 0, 0)
@@ -504,7 +499,7 @@ RAAN = 1.96
 argp = 6.019
 theta0 = 0.417
 
-[node name="Titan" type="Node3D" parent="Planets/Saturn"]
+[node name="Titan" type="Node3D" parent="SolarSystem/Saturn"]
 editor_description = "TITAN, sometimes referred to as the \"jewel of the outer planets,\" is the only moon in the Sol system with a significant atmosphere. The lack of a need for pressure suits on its surface has contributed to an incredible explosion in population."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78422.6)
 script = ExtResource("4_1rgsg")
@@ -516,13 +511,13 @@ RAAN = 2.945
 argp = 4.668
 theta0 = 1.209
 
-[node name="TitanMesh" type="MeshInstance3D" parent="Planets/Saturn/Titan"]
+[node name="TitanMesh" type="MeshInstance3D" parent="SolarSystem/Saturn/Titan"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_uj08c")
 skeleton = NodePath("")
 
-[node name="TitanAtmosphere" parent="Planets/Saturn/Titan" instance=ExtResource("5_2nae2")]
+[node name="TitanAtmosphere" parent="SolarSystem/Saturn/Titan" instance=ExtResource("5_2nae2")]
 planet_radius = 2575.0
 atmosphere_height = 100.0
 sun_path = NodePath("../../../Sun/BigSunLight")
@@ -531,7 +526,7 @@ shader_params/u_scattering_strength = 0.007
 shader_params/u_atmosphere_modulate = Color(0.921569, 0.866667, 0.521569, 1)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0, 1)
 
-[node name="SaturnMesh" type="MeshInstance3D" parent="Planets/Saturn"]
+[node name="SaturnMesh" type="MeshInstance3D" parent="SolarSystem/Saturn"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 visibility_range_end_margin = 100.0
@@ -539,10 +534,10 @@ mesh = SubResource("SphereMesh_p4pre")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
 
-[node name="rings" parent="Planets/Saturn/SaturnMesh" instance=ExtResource("15_qf8i2")]
+[node name="rings" parent="SolarSystem/Saturn/SaturnMesh" instance=ExtResource("15_qf8i2")]
 transform = Transform3D(67300, 0, 0, 0, 67300, 0, 0, 0, 67300, 0, 0, 0)
 
-[node name="Uranus" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Uranus" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "URANUS is an ice giant deep in the outer solar system. Very little economic incentive has existed historically to justify colonization this far out, but a few straggling colonial cities have been established, mostly in the ammonia extraction business."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -542088, 0, 0)
@@ -555,14 +550,14 @@ RAAN = 1.299
 argp = 1.605
 theta0 = 4.848
 
-[node name="UranusMesh" type="MeshInstance3D" parent="Planets/Uranus"]
+[node name="UranusMesh" type="MeshInstance3D" parent="SolarSystem/Uranus"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_t3fbd")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_fqvh8")
 
-[node name="UranusAtmosphere" parent="Planets/Uranus" instance=ExtResource("5_2nae2")]
+[node name="UranusAtmosphere" parent="SolarSystem/Uranus" instance=ExtResource("5_2nae2")]
 planet_radius = 25611.5
 atmosphere_height = 100.0
 sun_path = NodePath("../../Sun/BigSunLight")
@@ -571,7 +566,7 @@ shader_params/u_scattering_strength = 0.195
 shader_params/u_atmosphere_modulate = Color(0.811765, 0.909804, 0.941176, 1)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0, 1)
 
-[node name="Neptune" type="Node3D" parent="Planets" groups=["Bodies"]]
+[node name="Neptune" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "NEPTUNE is the farthest planet from Sol and has almost no permanent population. A handful of research stations exist to take advantage of the low-noise environment."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -612081, 0, 0)
@@ -584,7 +579,7 @@ RAAN = 2.3
 argp = 4.893
 theta0 = 5.987
 
-[node name="NeptuneMesh" type="MeshInstance3D" parent="Planets/Neptune"]
+[node name="NeptuneMesh" type="MeshInstance3D" parent="SolarSystem/Neptune"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 1e+07
 mesh = SubResource("SphereMesh_j27v8")

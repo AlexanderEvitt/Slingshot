@@ -22,7 +22,6 @@ public partial class SystemTime : Node
 		steps = new double[] {0.0d,1.0d,10.0d,100.0d,1000.0d,10000.0d};
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
 		prev_t = t;
