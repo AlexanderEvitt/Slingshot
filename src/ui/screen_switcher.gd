@@ -1,18 +1,22 @@
 extends Panel
 
-var screen_selector_panel
+# Groups
 var screens
-@export var button_group: ButtonGroup
 var buttons
+@export var button_group: ButtonGroup
+
+# Specialist panels
+@onready var screen_selector_panel := $ScreenSelectorPanel
+@onready var pause_menu := $PauseMenu
+
+# Record time rate so you can start time again when unpausing
+var last_step := 1
 
 func _ready():
-	# Get screen selector panel
-	screen_selector_panel = get_node("ScreenSelectorPanel")
-	
 	# Get buttons from button_group
 	buttons = button_group.get_buttons()
 	
-	# Get screens (includes screen selector)
+	# Get screens (includes screen selector and pause)
 	screens = get_children()
 	
 	# Connect signal to change screen function
@@ -24,17 +28,29 @@ func _ready():
 	
 
 func _input(_event: InputEvent) -> void:
-	## Pressing ESC opens screen switch panel
-	if Input.is_action_just_pressed("ui_cancel"):
+	# Pressing page opens screen switch panel
+	if Input.is_action_just_pressed("page"):
 		# Turn off all the screens (including selector paneL)
 		for s in screens:
 			s.visible = false
 		
 		# Turn on the screen selector panel
 		screen_selector_panel.visible = true
+		
+	# Pressing escape toggles pause menu
+	if Input.is_action_just_pressed("ui_cancel"):
+		# Turn on the pause menu
+		pause_menu.visible = !pause_menu.visible
+		# Stop time while paused
+		if pause_menu.visible:
+			last_step = SystemTime.step
+			SystemTime.i = 0
+		# Start time again when unpausing
+		else:
+			SystemTime.i = last_step
 	
 func _open_screen(n):
-	## Selecting screen opens just that screen
+	# Selecting screen opens just that screen
 	var i = 0
 	for child in get_children():
 		# If screen is input, show it

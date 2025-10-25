@@ -1,26 +1,24 @@
 [gd_scene load_steps=15 format=3 uid="uid://ckg801jn7baa1"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_bgvoi"]
+[ext_resource type="Script" path="res://ui/menu/menu_handler.gd" id="2_lg1nh"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="2_tlo2w"]
+[ext_resource type="ButtonGroup" uid="uid://bilwipxx0tq2n" path="res://ui/menu/slot_button_group.tres" id="3_h0sbo"]
 [ext_resource type="Script" path="res://ui/panel_switch.gd" id="5_nxqce"]
 [ext_resource type="Script" path="res://ui/menu/terminal_code.gd" id="6_aybfq"]
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="6_b1svf"]
 [ext_resource type="ButtonGroup" uid="uid://b7ltikwsb6n48" path="res://ui/menu/menu_button_group.tres" id="7_ix6vk"]
-[ext_resource type="Script" path="res://ui/status_light.gd" id="8_yb1pt"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="9_1tlqv"]
 [ext_resource type="Texture2D" uid="uid://cf4yhwi23x8o1" path="res://ui/widgets/bar/stripes.png" id="9_h2atm"]
 [ext_resource type="PackedScene" uid="uid://w0adn324ymo3" path="res://ui/widgets/light_button/light_button.tscn" id="10_af4d5"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="10_nthiu"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="16_g0tso"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5l1na"]
-bg_color = Color(0.501961, 0, 0, 1)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vgwr0"]
 texture = ExtResource("16_g0tso")
 modulate_color = Color(0.117647, 0.117647, 0.156863, 1)
 
-[node name="MenuUI" type="Panel"]
+[node name="MenuUI" type="Panel" node_paths=PackedStringArray("loading_bar", "start_button", "startup_panel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +27,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_bgvoi")
+script = ExtResource("2_lg1nh")
+loading_bar = NodePath("LoadingBack/LoadingBar")
+start_button = NodePath("StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer/StartButton")
+startup_panel = NodePath("StartupPanel")
+slot_button_group = ExtResource("3_h0sbo")
 
 [node name="Version" type="Label" parent="."]
 layout_mode = 1
@@ -54,7 +57,7 @@ theme = ExtResource("9_1tlqv")
 theme_override_font_sizes/font_size = 20
 text = "================================================================================
   Slingshot Astrodynamics System v0.0.1 - Boot Sequence
-  © 1996-2025, ConkSat Industries | Property of 12th Fleet, Federal Navy
+  © 1963-2025, ConkSat Industries | Intellectual Property of ConkSat
 ================================================================================
 
 [SYS] Initializing Power & Avionics Systems...
@@ -62,10 +65,10 @@ text = "========================================================================
       > Secondary Bus Power ............. [ ONLINE ]
       > Tertiary Redundant Power ........ [ STANDBY ]
       > Avionics Processing Network ..... [ SYNCHRONIZING ]
-      > Flight Director Data Link ....... [ RECEIVED ]
+      > Command Data Link ....... [ RECEIVED ]
       > Orbital Debris Tracking ......... [ ONLINE ]
 
-[MISSION] Status: HARD DOCKED @ BERTH-E7 | Relative Vel: 0.0000 m/s
+[MISSION] Status: HARD DOCKED | Relative Vel: 0.0000 m/s
 [MISSION] Docking Interface Active | Awaiting Undock Command...
 
 --------------------------------------------------------------------------------
@@ -174,7 +177,7 @@ text = "========================================================================
 --------------------------------------------------------------------------------
  FINAL SYSTEM READINESS CHECK
 --------------------------------------------------------------------------------
-[DOCK] Berth-4A Docking Clamps .......... [ SECURE ]
+[DOCK] Berth Docking Clamps .......... [ SECURE ]
 [DOCK] Umbilical Power Transfer ......... [ NOMINAL ]
 [DOCK] Fuel Line Purge .................. [ INITIATED ]
 [DOCK] Hard Dock Release ................ [ INHIBITED – AWAITING CREW COMMAND ]
@@ -184,6 +187,35 @@ text = "========================================================================
 ================================================================================
 "
 script = ExtResource("6_aybfq")
+
+[node name="LoadingBack" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.475
+anchor_right = 0.7
+anchor_bottom = 0.525
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+theme = ExtResource("9_1tlqv")
+
+[node name="LoadingBar" type="TextureRect" parent="LoadingBack"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_h2atm")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="StartupPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -206,7 +238,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_nxqce")
 buttons_parent = NodePath("ButtonPanel/ButtonHolder")
-panels_parent = NodePath("Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder")
+panels_parent = NodePath("Centerfold/MarginContainer/CenterPanel/PanelsHolder")
 
 [node name="ButtonPanel" type="VBoxContainer" parent="StartupPanel/HBoxContainer"]
 layout_mode = 2
@@ -226,22 +258,6 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ModeButton1" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 0
-
-[node name="Button" type="Button" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton1"]
-layout_mode = 2
-theme = ExtResource("10_nthiu")
-toggle_mode = true
-button_pressed = true
-button_group = ExtResource("7_ix6vk")
-text = "NEW SIM"
-
 [node name="ModeButton2" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -251,10 +267,12 @@ theme_override_constants/margin_right = 5
 
 [node name="Button" type="Button" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton2"]
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("10_nthiu")
 toggle_mode = true
+button_pressed = true
 button_group = ExtResource("7_ix6vk")
-text = "LOAD SIM"
+text = "SAVES"
 
 [node name="ModeButton3" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder"]
 layout_mode = 2
@@ -266,10 +284,11 @@ theme_override_constants/margin_bottom = 5
 
 [node name="Button" type="Button" parent="StartupPanel/HBoxContainer/ButtonPanel/ButtonHolder/ModeButton3"]
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("10_nthiu")
 toggle_mode = true
 button_group = ExtResource("7_ix6vk")
-text = "CONFIG"
+text = "CONTROLS"
 
 [node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/ButtonPanel"]
 layout_mode = 2
@@ -300,17 +319,14 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 70
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer"]
-layout_mode = 2
-
-[node name="CenterPanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer"]
+[node name="CenterPanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
 theme = ExtResource("9_1tlqv")
 
-[node name="PanelsHolder" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel"]
+[node name="PanelsHolder" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -322,15 +338,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="NewSimConfig" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder"]
-layout_mode = 2
-
-[node name="NewSimConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig"]
+[node name="Saves" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("9_1tlqv")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -340,250 +353,164 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="StatePanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2"]
+[node name="StatePanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 theme = ExtResource("9_1tlqv")
 theme_type_variation = &"LightBorderSidePanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel"]
+[node name="FrameLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="LabelContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="FrameLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer"]
-layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "START DOCK"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
-layout_mode = 2
-text = "ZEPHYR-E7"
-horizontal_alignment = 1
-
-[node name="GainLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_top = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/GainLabel"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "VESSEL"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/GainLabel/VBoxContainer"]
-layout_mode = 2
-text = "FV JUNIPER"
-horizontal_alignment = 1
-
-[node name="LabelContainer2" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="FrameLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_top = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/FrameLabel"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/FrameLabel/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "STATE"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/FrameLabel/VBoxContainer"]
-layout_mode = 2
-text = "COLD & DARK"
-horizontal_alignment = 1
-
-[node name="GainLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_top = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/GainLabel"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/GainLabel/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "MISSION"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer2/GainLabel/VBoxContainer"]
-layout_mode = 2
-text = "TRANSPORT"
-horizontal_alignment = 1
-
-[node name="StartPanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-theme = ExtResource("9_1tlqv")
-theme_type_variation = &"LightBorderSidePanel"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_5l1na")
-script = ExtResource("8_yb1pt")
-on_text = "READY"
-off_text = "IDLE"
-
-[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "IDLE"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ButtonContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="LightButtonPanel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer" instance=ExtResource("10_af4d5")]
-layout_mode = 2
-label_text = "INITIALIZE"
-
-[node name="LoadingBack" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.15
-theme = ExtResource("9_1tlqv")
-
-[node name="TextureRect" type="TextureRect" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/NewSimConfig/LoadingBack"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("9_h2atm")
-expand_mode = 1
-stretch_mode = 1
-
-[node name="LoadSimConfig" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder"]
-visible = false
-layout_mode = 2
-
-[node name="NewSimConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("9_1tlqv")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="StatePanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.8
-theme = ExtResource("9_1tlqv")
-theme_type_variation = &"LightBorderSidePanel"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LabelContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="FrameLabel" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_top = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "CHOOSE SAVE"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StatePanel/VBoxContainer/LabelContainer/FrameLabel/VBoxContainer"]
+[node name="0" type="Button" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer"]
 layout_mode = 2
-text = "FILE01"
+size_flags_vertical = 3
+focus_mode = 0
+theme = ExtResource("9_1tlqv")
+theme_type_variation = &"GentleButton"
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("3_h0sbo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/0/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SLOT0"
 horizontal_alignment = 1
 
-[node name="StartPanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2"]
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/0/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "2025-10-25T13:33:23z"
+horizontal_alignment = 1
+
+[node name="1" type="Button" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+theme = ExtResource("9_1tlqv")
+theme_type_variation = &"GentleButton"
+toggle_mode = true
+button_group = ExtResource("3_h0sbo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/1/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SLOT1"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/1/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "EMPTY"
+horizontal_alignment = 1
+
+[node name="2" type="Button" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+theme = ExtResource("9_1tlqv")
+theme_type_variation = &"GentleButton"
+toggle_mode = true
+button_group = ExtResource("3_h0sbo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SLOT2"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "EMPTY"
+horizontal_alignment = 1
+
+[node name="3" type="Button" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+theme = ExtResource("9_1tlqv")
+theme_type_variation = &"GentleButton"
+toggle_mode = true
+button_group = ExtResource("3_h0sbo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SLOT3"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StatePanel/FrameLabel/VBoxContainer/3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "EMPTY"
+horizontal_alignment = 1
+
+[node name="StartPanel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 theme = ExtResource("9_1tlqv")
 theme_type_variation = &"LightBorderSidePanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -591,38 +518,89 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Panel" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "SAVE:"
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "SLOT0"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "TIME:"
+
+[node name="Label4" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "T+12y3m4d"
+horizontal_alignment = 2
+
+[node name="Label5" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "SHIP:"
+
+[node name="Label6" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "FV JUNIPER"
+horizontal_alignment = 2
+
+[node name="Label7" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "LAST PORT:"
+
+[node name="Label8" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "YUGALA STATION"
+horizontal_alignment = 2
+
+[node name="Label9" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "VALUE:"
+
+[node name="Label10" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "$2.6m"
+horizontal_alignment = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_5l1na")
-script = ExtResource("8_yb1pt")
-on_text = "READY"
-off_text = "IDLE"
 
-[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/MarginContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "IDLE"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ButtonContainer" type="HBoxContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -630,38 +608,91 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="LightButtonPanel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/NewSimConfig/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer" instance=ExtResource("10_af4d5")]
+[node name="StartButton" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/ButtonContainer/MarginContainer" instance=ExtResource("10_af4d5")]
 layout_mode = 2
 label_text = "INITIALIZE"
 
-[node name="LoadingBack" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.15
-theme = ExtResource("9_1tlqv")
-
-[node name="TextureRect" type="TextureRect" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder/LoadSimConfig/LoadingBack"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("9_h2atm")
-expand_mode = 1
-stretch_mode = 1
-
-[node name="ConfigConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/VBoxContainer/CenterPanel/PanelsHolder"]
+[node name="ConfigConfig" type="Panel" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 theme = ExtResource("9_1tlqv")
+
+[node name="MarginContainer" type="MarginContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="Label" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[W] - PITCH DOWN"
+
+[node name="Label2" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[S] - PITCH UP"
+
+[node name="Label3" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[A] - YAW LEFT"
+
+[node name="Label4" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[D] - YAW RIGHT"
+
+[node name="Label5" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[Q] - ROLL LEFT"
+
+[node name="Label6" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[E] - ROLL RIGHT"
+
+[node name="Label7" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[B] - DOCK"
+
+[node name="Label8" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[Z] - THROTTLE UP"
+
+[node name="Label9" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[x] - THROTTLE DOWN"
+
+[node name="Label10" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[=] - ZOOM IN"
+
+[node name="Label11" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[-] - ZOOM OUT"
+
+[node name="Label12" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[S] - PITCH UP"
+
+[node name="Label13" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[.] - TIME ACCEL"
+
+[node name="Label14" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[,] - TIME DECEL"
+
+[node name="Label15" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/ConfigConfig/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "[TAB] - PAGE"
 
 [node name="TriangleCutout" type="Panel" parent="StartupPanel"]
 layout_mode = 1
@@ -672,6 +703,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -100.0
 offset_top = -50.0
+offset_right = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_vgwr0")

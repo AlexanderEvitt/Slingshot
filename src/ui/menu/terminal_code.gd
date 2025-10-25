@@ -1,26 +1,31 @@
 extends Label
 
+# Max seconds in between text fragments
+@export var n := 100.0
+
 var snippets
 var i = 0
 var done = false
 # Controls how many lines are visible on screen
 var max_lines = 50
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Split text by line
 	snippets = text.split('\n')
 	text = ""
 	visible = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	# Wait a random amount of time up to n seconds
 	if !done:
-		var t = 200*randf()
+		var t = n*randf()
+		# First five lines are instant
 		if i < 5:
 			t = 0
 		await get_tree().create_timer(t).timeout
 	
+	# Add each snippet to the text
 	if !done:
 		text = text + snippets[i] + "\n"
 		i = i + 1

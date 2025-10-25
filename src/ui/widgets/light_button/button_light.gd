@@ -8,6 +8,9 @@ var button
 @export var on : bool
 var previously_on : bool
 
+# Express the signal of its child button as itself
+signal toggled
+
 func _ready():
 	light = get_node("Button/Light")
 	button = get_node("Button")
@@ -23,6 +26,8 @@ func _ready():
 	button.toggled.connect(_on_toggled)
 
 func _on_toggled(new_state):
+	toggled.emit()
+	
 	# new_state is the new on/off setting of the button
 	# Set status light
 	if new_state:

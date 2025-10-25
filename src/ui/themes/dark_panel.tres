@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://y6tdkpsu24sm"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://y6tdkpsu24sm"]
 
 [ext_resource type="FontFile" uid="uid://1tccf66eoucs" path="res://ui/fonts/Oxanium-SemiBold.ttf" id="1_xad8u"]
 
@@ -29,6 +29,21 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p61j3"]
+bg_color = Color(0.1725, 0.1725, 0.23, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jejme"]
+bg_color = Color(0.1725, 0.1725, 0.23, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgh3w"]
+bg_color = Color(0.1725, 0.1725, 0.23, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4fp4"]
+bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k75gb"]
+bg_color = Color(0.1725, 0.1725, 0.23, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bx42g"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 0)
@@ -63,6 +78,12 @@ Button/styles/focus = SubResource("StyleBoxFlat_ikddi")
 Button/styles/hover = SubResource("StyleBoxFlat_65bjv")
 Button/styles/normal = SubResource("StyleBoxFlat_i76ea")
 Button/styles/pressed = SubResource("StyleBoxFlat_g07wm")
+GentleButton/base_type = &"Button"
+GentleButton/styles/focus = SubResource("StyleBoxFlat_p61j3")
+GentleButton/styles/hover = SubResource("StyleBoxFlat_jejme")
+GentleButton/styles/hover_pressed = SubResource("StyleBoxFlat_vgh3w")
+GentleButton/styles/normal = SubResource("StyleBoxFlat_j4fp4")
+GentleButton/styles/pressed = SubResource("StyleBoxFlat_k75gb")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_xad8u")

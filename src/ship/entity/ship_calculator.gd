@@ -47,10 +47,14 @@ var mass = 1
 
 # Data on where you are docked
 var berthed = true
-var station : Node
+# Path to station from sim_root (needed to save)
+var station_path : String
+# Nodes of station
+var station : Node # station component (underneath Body.cs)
 var dock : Node
 var berth : Node
-var berth_offset = Vector3(0.07,0,0) # how far into the berth the docking point is
+# How far into the berth the docking point is
+var berth_offset = Vector3(0.07,0,0)
 
 # Tell the selection panel that this isn't a station you can dock with
 var is_station = false
@@ -61,8 +65,9 @@ func _ready():
 	attitude = attitude_calculator.transform.basis
 	
 	# Assign to random berth at Zephyr at start
-	assign_berth("SolarSystem/Earth/Zephyr")
-	berthed = true
+	if berthed:
+		assign_berth("SolarSystem/Earth/Zephyr")
+		berthed = true
 
 func _physics_process(delta):
 	# Update values for this iteration
@@ -153,11 +158,13 @@ func assign_berth(new_station):
 	berthed = false
 	
 	# Get the station (the child of the Body that represents the station)
-	station = ShipData.sim_root.get_node(new_station + "/Station")
+	station_path = new_station + "/Station/"
+	station = ShipData.sim_root.get_node(station_path)
 	
 	# Get the berth_path of the station (contains info on finding the berth node)
-	var berth_path = station.berth_path
-	var split_path = berth_path.split("/{}/")
+	# this is relative to the station
+	var local_berth_path = station.berth_path
+	var split_path = local_berth_path.split("/{}/")
 	
 	# Get port component (parent to all docks)
 	var port_path = split_path[0]
@@ -174,3 +181,20 @@ func assign_berth(new_station):
 	var berths = berth_parent.get_children()
 	berth = berths[randi_range(0, len(berths) - 1)]
 	berth_updated.emit()
+	
+# Function that generates what data to save
+func save():
+	var save_dict = {
+		"position_x" : position.x,
+		"position_y" : position.y,
+		"position_z" : position.z,
+		"velocity_x" : velocity.x,
+		"velocity_y" : velocity.y,
+		"velocity_z" : velocity.z,
+		"rotation_x" : attitude_calculator.rotation.x,
+		"rotation_y" : attitude_calculator.rotation.y,
+		"rotation_z" : attitude_calculator.rotation.z,
+		"berthed" : berthed,
+		"station_path" : station_path,
+	}
+	return save_dict
