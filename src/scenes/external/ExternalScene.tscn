@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://bdybpcdcv37y" path="res://bodies/photo/MarsTrue.png" id="21_qmkav"]
 [ext_resource type="Texture2D" uid="uid://yfa1thnw2jj0" path="res://bodies/photo/MarsNorm.jpg" id="22_ywee2"]
 [ext_resource type="PackedScene" uid="uid://dxbqssxh6kpdo" path="res://bodies/stations/stations/Yugala.tscn" id="23_vliu8"]
-[ext_resource type="Script" path="res://scenes/ships_handler.gd" id="35_gsmv1"]
+[ext_resource type="Script" path="res://scenes/ships_loader.gd" id="35_gsmv1"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
 radius = 700000.0
@@ -71,7 +71,7 @@ height = 3480.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qq6b"]
 albedo_texture = ExtResource("13_4jafp")
 normal_enabled = true
-normal_scale = -0.1
+normal_scale = 0.1
 normal_texture = ExtResource("14_0kyry")
 
 [sub_resource type="SphereMesh" id="SphereMesh_aom7d"]

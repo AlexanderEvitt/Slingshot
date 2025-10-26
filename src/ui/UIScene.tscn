@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=14 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" path="res://ui/screen_switcher.gd" id="2_bh7rb"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
@@ -8,19 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://d06hakxi1tnc8" path="res://ui/screens/navigation/navigation_screen.tscn" id="7_j2pmq"]
 [ext_resource type="PackedScene" uid="uid://b0akt2w44i68p" path="res://ui/screens/utility_screen.tscn" id="8_76tcd"]
 [ext_resource type="PackedScene" uid="uid://cupcgndqidmw2" path="res://ui/screens/cinematic_screen.tscn" id="9_xulks"]
-[ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="13_x7p2f"]
-[ext_resource type="ButtonGroup" uid="uid://b7ltikwsb6n48" path="res://ui/menu/menu_button_group.tres" id="14_1w0og"]
+[ext_resource type="PackedScene" uid="uid://boi1ptoe3f73w" path="res://ui/pause/pause_menu.tscn" id="12_fy2ny"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="14_k3rsk"]
-[ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="15_s3xdw"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="17_adpiv"]
 [ext_resource type="ButtonGroup" uid="uid://ye2bbm1ubp2l" path="res://ui/screens_button_group.tres" id="27_ytqrm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
 texture = ExtResource("17_adpiv")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5jac4"]
-texture = ExtResource("17_adpiv")
-modulate_color = Color(0.117647, 0.117647, 0.156863, 1)
 
 [node name="ShipUI" type="Panel"]
 anchors_preset = 15
@@ -208,122 +202,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
 
-[node name="PauseMenu" type="Panel" parent="."]
+[node name="PauseMenu" parent="." instance=ExtResource("12_fy2ny")]
 visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.4
-anchor_right = 0.7
-anchor_bottom = 0.65
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-theme = ExtResource("14_k3rsk")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ButtonPanel" type="VBoxContainer" parent="PauseMenu/HBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="PauseMenu/HBoxContainer/ButtonPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 20
-
-[node name="ModesTitle" type="Label" parent="PauseMenu/HBoxContainer/ButtonPanel/MarginContainer2"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("13_x7p2f")
-text = "SIMULATION PAUSED"
-horizontal_alignment = 1
-
-[node name="MarginContainer3" type="MarginContainer" parent="PauseMenu/HBoxContainer/ButtonPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="ButtonHolder" type="GridContainer" parent="PauseMenu/HBoxContainer/ButtonPanel/MarginContainer3"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="PauseMenu/HBoxContainer/ButtonPanel/MarginContainer3/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("14_k3rsk")
-toggle_mode = true
-button_group = ExtResource("14_1w0og")
-text = "RETURN TO SIM"
-
-[node name="Button2" type="Button" parent="PauseMenu/HBoxContainer/ButtonPanel/MarginContainer3/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("14_k3rsk")
-toggle_mode = true
-button_group = ExtResource("14_1w0og")
-text = "LOAD LAST SAVE"
-
-[node name="Button3" type="Button" parent="PauseMenu/HBoxContainer/ButtonPanel/MarginContainer3/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("14_k3rsk")
-toggle_mode = true
-button_group = ExtResource("14_1w0og")
-text = "SAVE SIM"
-
-[node name="Button4" type="Button" parent="PauseMenu/HBoxContainer/ButtonPanel/MarginContainer3/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("14_k3rsk")
-toggle_mode = true
-button_group = ExtResource("14_1w0og")
-text = "MAIN MENU"
-
-[node name="Button5" type="Button" parent="PauseMenu/HBoxContainer/ButtonPanel/MarginContainer3/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("14_k3rsk")
-toggle_mode = true
-button_group = ExtResource("14_1w0og")
-text = "EXIT GAME"
-
-[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.8
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/HBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-size_flags_stretch_ratio = 3.22
-texture = ExtResource("15_s3xdw")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="TriangleCutout" type="Panel" parent="PauseMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -50.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_5jac4")
+anchor_top = 0.39
+anchor_bottom = 0.61

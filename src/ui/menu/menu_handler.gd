@@ -19,5 +19,5 @@ func _on_startup():
 	startup_panel.visible = false
 	
 	# Set save game slot
-	slot = int(slot_button_group.get_pressed_button().name)
-	print(slot)
+	slot = slot_button_group.get_pressed_button().id
+	ShipData.slot = slot

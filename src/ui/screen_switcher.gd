@@ -25,6 +25,9 @@ func _ready():
 		# Connect signal to change HUD function
 		b.pressed.connect(_open_screen.bind(k))
 		k += 1
+		
+	# Connect unpause signal from pause menu's unpause button
+	pause_menu.unpause.connect(toggle_pause_menu)
 	
 
 func _input(_event: InputEvent) -> void:
@@ -39,15 +42,7 @@ func _input(_event: InputEvent) -> void:
 		
 	# Pressing escape toggles pause menu
 	if Input.is_action_just_pressed("ui_cancel"):
-		# Turn on the pause menu
-		pause_menu.visible = !pause_menu.visible
-		# Stop time while paused
-		if pause_menu.visible:
-			last_step = SystemTime.step
-			SystemTime.i = 0
-		# Start time again when unpausing
-		else:
-			SystemTime.i = last_step
+		toggle_pause_menu()
 	
 func _open_screen(n):
 	# Selecting screen opens just that screen
@@ -60,3 +55,14 @@ func _open_screen(n):
 		else:
 			child.visible = false
 		i += 1
+
+func toggle_pause_menu():
+	# Toggle the pause menu
+	pause_menu.visible = !pause_menu.visible
+	# Stop time while paused
+	if pause_menu.visible:
+		last_step = SystemTime.i
+		SystemTime.i = 0
+	# Start time again when unpausing
+	else:
+		SystemTime.i = last_step

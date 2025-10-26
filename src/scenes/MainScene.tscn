@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://n78uivx6mb2"]
+[gd_scene load_steps=4 format=3 uid="uid://n78uivx6mb2"]
 
 [ext_resource type="Script" path="res://ui/menu/menu_loader.gd" id="1_tywdm"]
 [ext_resource type="PackedScene" uid="uid://ckg801jn7baa1" path="res://ui/menu/MenuScene.tscn" id="2_f6v6y"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_g2dsv"]
 
 [node name="GameRoot" type="Node"]
 script = ExtResource("1_tywdm")
 
 [node name="MenuUI" parent="." instance=ExtResource("2_f6v6y")]
+slot_button_group = SubResource("ButtonGroup_g2dsv")

@@ -27,9 +27,6 @@ func _on_startup():
 	# Start resource loader
 	ResourceLoader.load_threaded_request(UI_SCENE_PATH)
 	loading = true
-	
-	# Tell ShipData which slot the save game
-	ShipData.slot = menu.slot
 
 func initialize():
 	# Load normal UI and associated subscenes
