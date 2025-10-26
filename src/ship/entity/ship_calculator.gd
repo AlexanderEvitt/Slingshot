@@ -212,5 +212,4 @@ func initialize(save_dict):
 	
 	# Docking info
 	assign_berth(save_dict["station_path"])
-	print(save_dict["berthed"])
 	berthed = save_dict["berthed"]
