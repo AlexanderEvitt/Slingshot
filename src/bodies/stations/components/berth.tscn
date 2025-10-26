@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1tcbt5jko4sn"]
+[gd_scene load_steps=13 format=3 uid="uid://d1tcbt5jko4sn"]
 
 [ext_resource type="PackedScene" uid="uid://dljr03rg7o43w" path="res://bodies/stations/components/berth.glb" id="1_sdcv1"]
+[ext_resource type="Script" path="res://bodies/stations/components/berth_collider.gd" id="2_6mjwp"]
 [ext_resource type="Material" uid="uid://o7dtbv1yqscr" path="res://bodies/stations/components/materials/SmoothConcrete.tres" id="2_agj8e"]
 [ext_resource type="Material" uid="uid://crmu6btryp01q" path="res://bodies/stations/components/materials/StampedConcrete.tres" id="3_02i7e"]
 [ext_resource type="Material" uid="uid://dw6b8drc721yf" path="res://bodies/stations/components/materials/LightMetal.tres" id="4_pbg5w"]
@@ -10,7 +11,13 @@
 [ext_resource type="Script" path="res://bodies/stations/components/clamp_manager.gd" id="9_ghmh8"]
 [ext_resource type="Material" uid="uid://boikfvjvgjn2o" path="res://bodies/stations/components/materials/Floodlights.tres" id="9_r4srt"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5ow7a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cg1o8"]
+size = Vector3(0.02, 0.05, 0.05)
+
 [node name="berth" instance=ExtResource("1_sdcv1")]
+script = ExtResource("2_6mjwp")
 
 [node name="DockE" parent="." index="0"]
 surface_material_override/0 = ExtResource("2_agj8e")
@@ -113,3 +120,12 @@ layers = 6
 light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
+
+[node name="ColliderBody" type="StaticBody3D" parent="." index="3"]
+process_priority = 13
+physics_material_override = SubResource("PhysicsMaterial_5ow7a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ColliderBody" index="0"]
+process_priority = 13
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14086, 0, 0)
+shape = SubResource("BoxShape3D_cg1o8")

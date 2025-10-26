@@ -17,6 +17,11 @@ func _ready():
 	
 	# Run update berth so its already loaded in at game start
 	update_berth()
+	
+func _physics_process(_delta):
+	# Pass the velocity to the berth (for collider)
+	if current_berth != null:
+		current_berth.get_child(0).set_velocity(fetch_velocity(SystemTime.t))
 
 func update_berth():
 	# Load the berth meshes

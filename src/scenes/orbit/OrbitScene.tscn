@@ -163,6 +163,7 @@ script = ExtResource("2_d30s2")
 
 [node name="Sun" type="Node3D" parent="SolarSystem"]
 script = ExtResource("2_d30s2")
+body_path = "SolarSystem/Sun"
 
 [node name="SunMesh" type="MeshInstance3D" parent="SolarSystem/Sun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -770000, 0, 0)

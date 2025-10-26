@@ -1,8 +1,7 @@
-extends Node3D
+extends CharacterBody3D
 
 # State variables (global frame)
 var acceleration = Vector3(0,0,0)
-var velocity = Vector3(0,0,0)
 var attitude
 
 # Engine variables
@@ -17,7 +16,6 @@ var total_mass = dry_mass # kg (updated by propulsion)
 @onready var attitude_calculator = $AttitudeCalculator
 @onready var navigation_calculator = $NavigationCalculator
 @onready var propulsion_calculator = $PropulsionCalculator
-@onready var collision_calculator = $CollisionCalculator
 @onready var propagator = $Propagator
 @onready var plotter = $Plotter
 @onready var pointer = $Pointer
@@ -38,11 +36,11 @@ signal nav_disc
 signal nav_next
 signal att_clamp
 signal rel_clamp
-signal collision
+signal collided
 signal waypoints_updated
 signal berth_updated
 
-# Mass currently only for collision impulse
+# Mass only for collision impulse
 var mass = 1
 
 # Data on where you are docked
@@ -129,23 +127,45 @@ func integrate_normally(dt, prev_gravity):
 	acceleration = attitude*thrust_acceleration + prev_gravity # current state depends on previous state
 	
 	# Euler integrate for position and velocity
-	position = position + velocity*dt
-	velocity = velocity + (acceleration)*dt
+	var new_velocity = velocity + (acceleration)*dt
+	var motion = new_velocity * dt
 	
-	# Change the velociity by the impulse
-	velocity += collision_calculator.impulse/mass
+	# Get collision data
+	var collision = move_and_collide(motion)
 	
-	# Emit collision alarm if there's impulse
-	if collision_calculator.impulse.length_squared() > 0:
-		collision.emit()
+	if collision:
+		print("Colliding:")
+		_handle_collision(collision, new_velocity, dt)
+	else:
+		# No collision, update velocity
+		velocity = new_velocity
 
+func _handle_collision(collision: KinematicCollision3D, new_velocity: Vector3, _dt: float):
+	# Get collider normal
+	var normal = collision.get_normal()
+	
+	# Velocity of ship relative to collider
+	var colliding_velocity = collision.get_collider_velocity()
+	print("	colliding_velocity: ", colliding_velocity)
+	
+	# Bounce velocity off collider
+	var reflected_velocity = colliding_velocity.bounce(normal)
+	print("	reflected_velocity: ", reflected_velocity)
+	
+	# Apply restitution (bounciness)
+	var restitution = 0.3
+	reflected_velocity = reflected_velocity * restitution
+	
+	# Get collision change in velocity
+	var dv = reflected_velocity - colliding_velocity
+	
+	# Add change in velocity
+	print("	dv", dv)
+	velocity = velocity + dv
+	print("	velocity: ", velocity)
 
-func find_time_index(times,time):
-	var index = 0
-	for i in range(0,times.size()):
-		if times[i] < time:
-			index = i
-	return index
+	# Update position to the contact point (prevents tunneling)
+	# position = collision.get_position()
 
 func fetch(_time):
 	# Return origin of ship frame

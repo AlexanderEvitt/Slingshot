@@ -12,7 +12,7 @@ func _ready():
 	ShipData.player_ship.nav_next.connect(nav_next)
 	ShipData.player_ship.att_clamp.connect(att_clamp)
 	ShipData.player_ship.rel_clamp.connect(rel_clamp)
-	ShipData.player_ship.collision.connect(collision)
+	ShipData.player_ship.collided.connect(collision)
 	ShipData.player_ship.berth_updated.connect(berth_granted)
 	
 	# Get the needed node references

@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://c71thxnvwh37i"]
+[gd_scene load_steps=15 format=3 uid="uid://c71thxnvwh37i"]
 
 [ext_resource type="Script" path="res://ship/entity/ship_calculator.gd" id="1_012ot"]
 [ext_resource type="Script" path="res://ship/entity/attitude_calculator.gd" id="2_7e8cl"]
-[ext_resource type="Script" path="res://ship/entity/collision_calculator.gd" id="3_wjkl8"]
 [ext_resource type="Script" path="res://ship/Propagator.cs" id="4_7neml"]
 [ext_resource type="Script" path="res://ship/entity/propulsion_calculator.gd" id="5_n5nff"]
 [ext_resource type="Script" path="res://ship/entity/navigation_calculator.gd" id="6_nvs0w"]
@@ -14,38 +13,22 @@
 [ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/frigate/real/FrigateReal.tscn" id="12_by3ff"]
 [ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="15_vytt2"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qcdir"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
-size = Vector3(0.05, 0.015, 0.015)
-
 [sub_resource type="QuadMesh" id="QuadMesh_htw27"]
 material = ExtResource("8_2dnlt")
 flip_faces = true
 size = Vector2(2, 2)
 
-[node name="PlayerShip" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
+size = Vector3(0.05, 0.015, 0.015)
+
+[node name="PlayerShip" type="CharacterBody3D"]
 editor_description = "FV JUNIPER is a Hedge-class frigate in service as privateer vessel. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
+motion_mode = 1
 script = ExtResource("1_012ot")
 
 [node name="AttitudeCalculator" type="Node3D" parent="."]
 transform = Transform3D(-1, 1.22465e-16, 0, -7.4988e-33, -6.12323e-17, 1, 1.22465e-16, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("2_7e8cl")
-
-[node name="CollisionCalculator" type="RigidBody3D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_qcdir")
-gravity_scale = 0.0
-inertia = Vector3(1, 1, 1)
-can_sleep = false
-freeze_mode = 1
-custom_integrator = true
-continuous_cd = true
-contact_monitor = true
-max_contacts_reported = 3
-script = ExtResource("3_wjkl8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionCalculator"]
-shape = SubResource("BoxShape3D_fdpi8")
 
 [node name="Propagator" type="Node3D" parent="."]
 script = ExtResource("4_7neml")
@@ -90,3 +73,6 @@ visible = false
 script = ExtResource("15_vytt2")
 color = Color(1, 0.690196, 0, 1)
 slice = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fdpi8")
