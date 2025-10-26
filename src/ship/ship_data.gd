@@ -9,3 +9,4 @@ extends Node
 
 # Game-wide signals
 signal save
+signal main_menu

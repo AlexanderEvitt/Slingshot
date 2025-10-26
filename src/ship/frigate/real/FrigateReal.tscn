@@ -220,6 +220,41 @@ mesh = SubResource("CylinderMesh_ulwg0")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="scaledown/Lights/Beacon"]
 mesh = SubResource("CylinderMesh_xrp77")
 
+[node name="CompanyLight" type="SpotLight3D" parent="scaledown/Lights"]
+transform = Transform3D(-0.241701, 0.357635, -0.902041, 0.0925626, 0.933862, 0.345449, 0.965926, -4.16334e-17, -0.258819, -19.9162, 10.8628, 0)
+light_energy = 0.03
+shadow_enabled = true
+shadow_bias = 1.604
+spot_range = 0.02
+
+[node name="ForwardLight" type="SpotLight3D" parent="scaledown/Lights"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 10.9146, 5.23071, -3.7027)
+light_energy = 0.02
+shadow_enabled = true
+shadow_bias = 0.0
+spot_range = 0.02
+
+[node name="ForwardLight2" type="SpotLight3D" parent="scaledown/Lights"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 10.915, 5.231, 3.703)
+light_energy = 0.02
+shadow_enabled = true
+shadow_bias = 0.0
+spot_range = 0.02
+
+[node name="ForwardLight3" type="SpotLight3D" parent="scaledown/Lights"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 10.9146, -5.231, -3.7027)
+light_energy = 0.02
+shadow_enabled = true
+shadow_bias = 0.0
+spot_range = 0.02
+
+[node name="ForwardLight4" type="SpotLight3D" parent="scaledown/Lights"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 10.915, -5.231, 3.703)
+light_energy = 0.02
+shadow_enabled = true
+shadow_bias = 0.0
+spot_range = 0.02
+
 [node name="frigate" parent="scaledown" instance=ExtResource("3_5u4ba")]
 
 [node name="LaunchBay" type="Node3D" parent="scaledown"]

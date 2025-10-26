@@ -152,13 +152,14 @@ func fetch(_time):
 	return position
 
 func assign_berth(new_station):
-	# Called by selection_panel.gd with the name of the new_station (path to body)
+	# Called by selection_panel.gd with the name of the new_station (path to station underneath body)
 	
 	# Make sure you're undocked so you don't move to the berth
 	berthed = false
 	
 	# Get the station (the child of the Body that represents the station)
-	station = ShipData.sim_root.get_node(new_station)
+	station_path = new_station
+	station = ShipData.sim_root.get_node(station_path)
 	
 	# Get the berth_path of the station (contains info on finding the berth node)
 	# this is relative to the station

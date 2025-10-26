@@ -49,6 +49,7 @@ radius = 2440.0
 height = 4880.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmmuk"]
+disable_ambient_light = true
 albedo_texture = ExtResource("13_4pb4k")
 
 [sub_resource type="SphereMesh" id="SphereMesh_t6ay8"]
@@ -56,6 +57,7 @@ radius = 6052.0
 height = 12104.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oivmx"]
+disable_ambient_light = true
 albedo_texture = ExtResource("15_k1fbk")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6uqj7"]
@@ -69,6 +71,7 @@ radius = 1740.0
 height = 3480.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qq6b"]
+disable_ambient_light = true
 albedo_texture = ExtResource("13_4jafp")
 normal_enabled = true
 normal_scale = 0.1
@@ -81,6 +84,7 @@ radial_segments = 512
 rings = 256
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imlac"]
+disable_ambient_light = true
 albedo_texture = ExtResource("4_eafgx")
 roughness_texture = ExtResource("13_fflf8")
 roughness_texture_channel = 4
@@ -99,6 +103,7 @@ render_priority = 1
 transparency = 1
 blend_mode = 1
 specular_mode = 2
+disable_ambient_light = true
 albedo_texture = ExtResource("14_t6djw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ptrw"]
@@ -115,6 +120,7 @@ radial_segments = 128
 rings = 64
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_563sj"]
+disable_ambient_light = true
 albedo_texture = ExtResource("21_qmkav")
 normal_enabled = true
 normal_scale = 1.21
@@ -125,6 +131,7 @@ radius = 1822.0
 height = 3643.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thbh0"]
+disable_ambient_light = true
 albedo_texture = ExtResource("17_gcb48")
 
 [sub_resource type="SphereMesh" id="SphereMesh_w33s7"]
@@ -132,6 +139,7 @@ radius = 2410.0
 height = 4821.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6oicq"]
+disable_ambient_light = true
 albedo_texture = ExtResource("18_ufqw4")
 
 [sub_resource type="SphereMesh" id="SphereMesh_jcfjd"]
@@ -139,6 +147,7 @@ radius = 1561.0
 height = 3122.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wqeu"]
+disable_ambient_light = true
 albedo_texture = ExtResource("19_7nri8")
 
 [sub_resource type="SphereMesh" id="SphereMesh_34wev"]
@@ -146,6 +155,7 @@ radius = 2634.0
 height = 5268.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3g57a"]
+disable_ambient_light = true
 albedo_texture = ExtResource("20_a6jdv")
 
 [sub_resource type="SphereMesh" id="SphereMesh_ke1qx"]
@@ -154,6 +164,7 @@ height = 142984.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnura"]
 transparency = 4
+disable_ambient_light = true
 albedo_texture = ExtResource("11_74p1c")
 
 [sub_resource type="SphereMesh" id="SphereMesh_uj08c"]
@@ -165,6 +176,7 @@ radius = 60268.0
 height = 120536.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0p12"]
+disable_ambient_light = true
 albedo_texture = ExtResource("14_eha35")
 
 [sub_resource type="SphereMesh" id="SphereMesh_t3fbd"]
@@ -175,6 +187,7 @@ rings = 256
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqvh8"]
 transparency = 4
+disable_ambient_light = true
 albedo_texture = ExtResource("16_uf3kr")
 
 [sub_resource type="SphereMesh" id="SphereMesh_j27v8"]
@@ -183,6 +196,7 @@ height = 49528.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnkww"]
 transparency = 4
+disable_ambient_light = true
 albedo_texture = ExtResource("17_n5xr7")
 
 [node name="SimRoot" type="Node3D"]

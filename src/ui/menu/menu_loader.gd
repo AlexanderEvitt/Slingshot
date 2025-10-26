@@ -1,6 +1,7 @@
 extends Node
 
 const UI_SCENE_PATH : String = "res://ui/UIScene.tscn"
+const MENU_SCENE_PATH : String = "res://ui/menu/MenuScene.tscn"
 
 @onready var menu = $MenuUI
 @onready var loading_bar = menu.loading_bar
@@ -11,6 +12,8 @@ var loading := false # enables sending updates to loading bar
 func _ready() -> void:
 	# Connect startup signal from menu to command that loads scene
 	menu.startup.connect(_on_startup)
+	# Connect signal for going back to main menu
+	ShipData.main_menu.connect(_go_to_menu)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -40,3 +43,14 @@ func initialize():
 	SystemTime.i = 1;
 	
 	loading = false
+
+func _go_to_menu():
+	# Load and add menu scene
+	menu = preload(MENU_SCENE_PATH).instantiate()
+	add_child(menu)
+	
+	# Remove external scene
+	remove_child($ShipUI)
+	
+	# Connect the startup signal again
+	menu.startup.connect(_on_startup)
