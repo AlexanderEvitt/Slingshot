@@ -66,4 +66,4 @@ func on_waypoint_select():
 
 func on_request_berth():
 	# Tell the ship calculator to assign a berth
-	ShipData.player_ship.assign_berth(orbit_scene_root.selected_body)
+	ShipData.player_ship.assign_berth(orbit_scene_root.selected_body + "/Station/")

@@ -66,7 +66,7 @@ func _ready():
 	
 	# Assign to random berth at Zephyr at start
 	if berthed:
-		assign_berth("SolarSystem/Earth/Zephyr")
+		assign_berth("SolarSystem/Earth/Zephyr/Station")
 		berthed = true
 
 func _physics_process(delta):
@@ -152,14 +152,13 @@ func fetch(_time):
 	return position
 
 func assign_berth(new_station):
-	# Called by selection_panel.gd with the name of the new_station
+	# Called by selection_panel.gd with the name of the new_station (path to body)
 	
 	# Make sure you're undocked so you don't move to the berth
 	berthed = false
 	
 	# Get the station (the child of the Body that represents the station)
-	station_path = new_station + "/Station/"
-	station = ShipData.sim_root.get_node(station_path)
+	station = ShipData.sim_root.get_node(new_station)
 	
 	# Get the berth_path of the station (contains info on finding the berth node)
 	# this is relative to the station
@@ -185,6 +184,7 @@ func assign_berth(new_station):
 # Function that generates what data to save
 func save():
 	var save_dict = {
+		"identifier" : "PlayerShip",
 		"position_x" : position.x,
 		"position_y" : position.y,
 		"position_z" : position.z,
@@ -198,3 +198,19 @@ func save():
 		"station_path" : station_path,
 	}
 	return save_dict
+
+# Function that loads from a save file
+func initialize(save_dict):
+	# State info
+	position = Vector3(save_dict["position_x"],save_dict["position_y"],save_dict["position_z"])
+	velocity = Vector3(save_dict["velocity_x"],save_dict["velocity_y"],save_dict["velocity_z"])
+	
+	# Attitude info
+	attitude_calculator.rotation.x = save_dict["rotation_x"]
+	attitude_calculator.rotation.y = save_dict["rotation_y"]
+	attitude_calculator.rotation.z = save_dict["rotation_z"]
+	
+	# Docking info
+	assign_berth(save_dict["station_path"])
+	print(save_dict["berthed"])
+	berthed = save_dict["berthed"]
