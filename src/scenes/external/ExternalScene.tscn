@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=70 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://bodies/Body.cs" id="4_1rgsg"]
@@ -75,6 +75,9 @@ albedo_texture = ExtResource("13_4jafp")
 normal_enabled = true
 normal_scale = 0.1
 normal_texture = ExtResource("14_0kyry")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cmojb"]
+radius = 1740.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_aom7d"]
 radius = 6371.0
@@ -338,6 +341,15 @@ visibility_range_end = 10000000.0
 mesh = SubResource("SphereMesh_6xnwu")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SolarSystem/Earth/Luna"]
+process_priority = 13
+physics_material_override = SubResource("PhysicsMaterial_6uqj7")
+script = ExtResource("8_it1pn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/Luna/StaticBody3D"]
+process_priority = 13
+shape = SubResource("SphereShape3D_cmojb")
 
 [node name="EarthMesh" type="MeshInstance3D" parent="SolarSystem/Earth"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)

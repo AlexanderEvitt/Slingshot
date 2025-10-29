@@ -23,6 +23,7 @@ size = Vector3(0.05843319023733784, 0.015, 0.015)
 
 [node name="PlayerShip" type="CharacterBody3D"]
 editor_description = "FV JUNIPER is a Hedge-class frigate in service as privateer vessel. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
+collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_012ot")
 
@@ -75,5 +76,5 @@ color = Color(1, 0.690196, 0, 1)
 slice = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0042165955528616905, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00421659555286169, 0, 0)
 shape = SubResource("BoxShape3D_fdpi8")

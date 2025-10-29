@@ -40,8 +40,8 @@ signal collided
 signal waypoints_updated
 signal berth_updated
 
-# Mass only for collision impulse
-var mass = 1
+# Collider
+@onready var shape_node: CollisionShape3D = $CollisionShape3D
 
 # Data on where you are docked
 var berthed = true
@@ -71,6 +71,9 @@ func _physics_process(delta):
 	# Update values for this iteration
 	attitude = attitude_calculator.transform.basis
 	torque = attitude_calculator.torque
+	
+	# Update attitude for collision shape
+	shape_node.transform.basis = attitude
 	
 	# Update thrust
 	thrust = propulsion_calculator.thrust
@@ -127,48 +130,52 @@ func integrate_normally(dt, prev_gravity):
 	acceleration = attitude*thrust_acceleration + prev_gravity # current state depends on previous state
 	
 	# Euler integrate for position and velocity
-	var new_velocity = velocity + (acceleration)*dt
-	var motion = new_velocity * dt
+	velocity = velocity + (acceleration)*dt
+	var motion = velocity * dt
 	
-	# Get collision data
-	var result = test_move(global_transform, motion, null, 0.001, true)
-	if result == true:
-		print("Resulting")
-	var collision = move_and_collide(motion, false, 0.001, true, 1)
+	var space_state = get_world_3d().direct_space_state
 	
-	if collision != null:
-		print("Colliding:")
-		_handle_collision(collision, new_velocity, dt)
-	else:
-		# No collision, update velocity
-		velocity = new_velocity
-
-func _handle_collision(collision: KinematicCollision3D, new_velocity: Vector3, _dt: float):
-	# Get collider normal
-	var normal = collision.get_normal()
+	# Build a query for our spacecraft's shape
+	var shape = shape_node.shape
+	var params = PhysicsShapeQueryParameters3D.new()
+	params.shape = shape
+	params.transform = global_transform
+	params.motion = motion
+	params.collide_with_bodies = true
+	params.collide_with_areas = false
 	
-	# Velocity of ship relative to collider
-	var colliding_velocity = collision.get_collider_velocity()
-	print("	colliding_velocity: ", colliding_velocity)
+	# Cast the shape forward to detect where it will hit
+	# Returns safe and unsafe proportions of motion
+	# var result = space_state.cast_motion(params)
+	# var safe_proportion = result[0]
+	# print(safe_proportion)
 	
-	# Bounce velocity off collider
-	var reflected_velocity = colliding_velocity.bounce(normal)
-	print("	reflected_velocity: ", reflected_velocity)
-	
-	# Apply restitution (bounciness)
-	var restitution = 0.3
-	reflected_velocity = reflected_velocity * restitution
-	
-	# Get collision change in velocity
-	var dv = reflected_velocity - colliding_velocity
-	
-	# Add change in velocity
-	print("	dv", dv)
-	velocity = new_velocity + dv
-	print("	velocity: ", velocity)
-
-	# Update position to the contact point (prevents tunneling)
-	# position = collision.get_position()
+	# Check for current collisions
+	var collision_info = space_state.get_rest_info(params)
+	if collision_info:
+		# Print the thing you just collided with
+		# var collider_id = collision_info["collider_id"]
+		# var collider = instance_from_id(collider_id)
+		
+		# Get the relative velocity of the ship to the collider
+		var collider_velocity = collision_info.linear_velocity
+		var relative_velocity = velocity - collider_velocity
+		
+		# Check that the relative velocity is towards the collider
+		# i.e. opposite the normal
+		if relative_velocity.dot(collision_info.normal) < 0.0:
+			# Reflect velocity about normal of collision
+			var restitution = 0.1
+			var reflected_relative_velocity = restitution*relative_velocity.bounce(collision_info.normal)
+			
+			# Get change in velocity and add to velocity
+			var dv = reflected_relative_velocity - relative_velocity
+			velocity += dv
+			
+			# Emit signal that you hit something
+			collided.emit()
+		
+	position += motion
 
 func fetch(_time):
 	# Return origin of ship frame

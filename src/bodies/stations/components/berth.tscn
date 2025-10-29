@@ -1,20 +1,26 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1tcbt5jko4sn"]
+[gd_scene load_steps=15 format=3 uid="uid://d1tcbt5jko4sn"]
 
 [ext_resource type="PackedScene" uid="uid://dljr03rg7o43w" path="res://bodies/stations/components/berth.glb" id="1_sdcv1"]
-[ext_resource type="Script" path="res://bodies/stations/components/berth_collider.gd" id="2_6mjwp"]
+[ext_resource type="Script" uid="uid://vsljbo12lbl" path="res://bodies/stations/components/berth_collider.gd" id="2_6mjwp"]
 [ext_resource type="Material" uid="uid://o7dtbv1yqscr" path="res://bodies/stations/components/materials/SmoothConcrete.tres" id="2_agj8e"]
 [ext_resource type="Material" uid="uid://crmu6btryp01q" path="res://bodies/stations/components/materials/StampedConcrete.tres" id="3_02i7e"]
 [ext_resource type="Material" uid="uid://dw6b8drc721yf" path="res://bodies/stations/components/materials/LightMetal.tres" id="4_pbg5w"]
 [ext_resource type="Material" uid="uid://dludvu0b82cft" path="res://bodies/stations/components/materials/DetailMetal.tres" id="6_prrdp"]
 [ext_resource type="Material" uid="uid://ddp6bqs75itvp" path="res://bodies/stations/components/materials/BlackPaint.tres" id="7_p8e0j"]
 [ext_resource type="Material" uid="uid://cljigg1mdxyr8" path="res://bodies/stations/components/materials/GreyMetal.tres" id="8_ucgqw"]
-[ext_resource type="Script" path="res://bodies/stations/components/clamp_manager.gd" id="9_ghmh8"]
+[ext_resource type="Script" uid="uid://b1e0fpo4531ve" path="res://bodies/stations/components/clamp_manager.gd" id="9_ghmh8"]
 [ext_resource type="Material" uid="uid://boikfvjvgjn2o" path="res://bodies/stations/components/materials/Floodlights.tres" id="9_r4srt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5ow7a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cg1o8"]
 size = Vector3(0.02, 0.05, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6q4e8"]
+size = Vector3(0.13390575736434585, 0.05, 0.01748905030945025)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ogvin"]
+size = Vector3(0.01, 0.01, 0.04204596689328355)
 
 [node name="berth" instance=ExtResource("1_sdcv1")]
 script = ExtResource("2_6mjwp")
@@ -121,11 +127,35 @@ light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
-[node name="ColliderBody" type="StaticBody3D" parent="." index="3"]
+[node name="BerthCollider" type="StaticBody3D" parent="." index="3"]
 process_priority = 13
 physics_material_override = SubResource("PhysicsMaterial_5ow7a")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ColliderBody" index="0"]
+[node name="Back" type="CollisionShape3D" parent="BerthCollider" index="0"]
 process_priority = 13
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14086, 0, 0)
 shape = SubResource("BoxShape3D_cg1o8")
+
+[node name="Right" type="CollisionShape3D" parent="BerthCollider" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06570553504325385, 0, 0.030296746385809738)
+shape = SubResource("BoxShape3D_6q4e8")
+
+[node name="Left" type="CollisionShape3D" parent="BerthCollider" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06600000000617001, 0, -0.029999999998835847)
+shape = SubResource("BoxShape3D_6q4e8")
+
+[node name="Floor" type="CollisionShape3D" parent="BerthCollider" index="3"]
+transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, -1, 0, 1, 6.123233995736766e-17, 0.06600000000617001, -0.032111003027937915, 0)
+shape = SubResource("BoxShape3D_6q4e8")
+
+[node name="Ceiling" type="CollisionShape3D" parent="BerthCollider" index="4"]
+transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, -1, 0, 1, 6.123233995736766e-17, 0.06600000000617001, 0.03200000000651926, 0)
+shape = SubResource("BoxShape3D_6q4e8")
+
+[node name="RightClamp" type="CollisionShape3D" parent="BerthCollider" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08400000000256114, 0, 0.02899999999499414)
+shape = SubResource("BoxShape3D_ogvin")
+
+[node name="LeftClamp" type="CollisionShape3D" parent="BerthCollider" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08400000000256114, 0, -0.02899999999499414)
+shape = SubResource("BoxShape3D_ogvin")

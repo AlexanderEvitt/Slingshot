@@ -28,25 +28,27 @@ func update_berth():
 	var full_berth = preload("res://bodies/stations/components/berth.tscn").instantiate()
 	var simplified_berth = preload("res://bodies/stations/components/simplified_berth.tscn").instantiate()
 
-	# Remove the berth from the current berth
-	if current_berth != null:
-		current_berth.get_child(0).queue_free()
-	
-	# Replace the current_berth with a simplified berth
-	if current_berth != null:
-		current_berth.add_child(simplified_berth)
-	
-	# Figure out what the new berth is
-	var new_berth = ShipData.player_ship.berth
-	current_berth = new_berth
-	
-	# Remove the new berth's simplified berth
-	if current_berth != null:
-		current_berth.get_child(0).queue_free()
-	
-	# Add a berth to the new berth
-	if current_berth != null:
-		current_berth.add_child(full_berth)
+	# Only run this if the ship's station is this station
+	if ShipData.player_ship.station == self:
+		# Remove the berth from the current berth
+		if current_berth != null:
+			current_berth.get_child(0).queue_free()
+		
+		# Replace the current_berth with a simplified berth
+		if current_berth != null:
+			current_berth.add_child(simplified_berth)
+		
+		# Figure out what the new berth is
+		var new_berth = ShipData.player_ship.berth
+		current_berth = new_berth
+		
+		# Remove the new berth's simplified berth
+		if current_berth != null:
+			current_berth.get_child(0).queue_free()
+		
+		# Add a berth to the new berth
+		if current_berth != null:
+			current_berth.add_child(full_berth)
 
 # Fetch the state of the parent body when asked
 func fetch(time):

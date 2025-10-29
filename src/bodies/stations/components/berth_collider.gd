@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var collider := $ColliderBody
+@onready var collider := $BerthCollider
 
 func set_velocity(velocity):
 	# Sets the collider velocity
