@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Slingshot"
 run/main_scene="res://scenes/MainScene.tscn"
-config/features=PackedStringArray("4.3", "C#", "Double Precision", "Forward Plus")
+config/features=PackedStringArray("4.5", "C#", "Double Precision", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0.0745098, 0.0745098, 0.0980392, 1)
 boot_splash/image="res://visuals/logo/splash.png"
@@ -209,5 +209,5 @@ page={
 [rendering]
 
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
-environment/defaults/default_clear_color=Color(0.117647, 0.117647, 0.156863, 1)
 anti_aliasing/quality/msaa_3d=2
+environment/defaults/default_clear_color=Color(0.117647, 0.117647, 0.156863, 1)

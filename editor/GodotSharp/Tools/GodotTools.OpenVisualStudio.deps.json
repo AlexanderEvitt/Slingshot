@@ -1,12 +1,11 @@
 {
   "runtimeTarget": {
-    "name": ".NETCoreApp,Version=v6.0/win-x86",
+    "name": ".NETCoreApp,Version=v6.0",
     "signature": ""
   },
   "compilationOptions": {},
   "targets": {
-    ".NETCoreApp,Version=v6.0": {},
-    ".NETCoreApp,Version=v6.0/win-x86": {
+    ".NETCoreApp,Version=v6.0": {
       "GodotTools.OpenVisualStudio/1.0.0": {
         "dependencies": {
           "envdte": "17.8.37221"
