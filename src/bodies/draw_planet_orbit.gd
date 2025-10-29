@@ -17,7 +17,7 @@ func _process(_delta):
 	# Only refresh when more time has elapsed than 1/1e6 of a period
 	accumulator += SystemTime.step*0.03333;
 	period = this_body.body.period
-	if accumulator > period/1e6: # <= how many times the orbit is redrawn per orbit
+	if accumulator > period/2e5: # <= how many times the orbit is redrawn per orbit
 		refresh_traj()
 		accumulator = 0
 		

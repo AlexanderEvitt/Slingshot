@@ -1,17 +1,17 @@
 [gd_scene load_steps=15 format=3 uid="uid://c71thxnvwh37i"]
 
-[ext_resource type="Script" path="res://ship/entity/ship_calculator.gd" id="1_012ot"]
-[ext_resource type="Script" path="res://ship/entity/attitude_calculator.gd" id="2_7e8cl"]
-[ext_resource type="Script" path="res://ship/Propagator.cs" id="4_7neml"]
-[ext_resource type="Script" path="res://ship/entity/propulsion_calculator.gd" id="5_n5nff"]
-[ext_resource type="Script" path="res://ship/entity/navigation_calculator.gd" id="6_nvs0w"]
-[ext_resource type="Script" path="res://visuals/camera_controller.gd" id="7_q3f1n"]
+[ext_resource type="Script" uid="uid://cc283l37nveuy" path="res://ship/entity/ship_calculator.gd" id="1_012ot"]
+[ext_resource type="Script" uid="uid://8foh3a4rsbjc" path="res://ship/entity/attitude_calculator.gd" id="2_7e8cl"]
+[ext_resource type="Script" uid="uid://dm88ls8pwtpcc" path="res://ship/Propagator.cs" id="4_7neml"]
+[ext_resource type="Script" uid="uid://cg2yyvdpwvc0u" path="res://ship/entity/propulsion_calculator.gd" id="5_n5nff"]
+[ext_resource type="Script" uid="uid://55lrhua7ji4r" path="res://ship/entity/navigation_calculator.gd" id="6_nvs0w"]
+[ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="7_q3f1n"]
 [ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="8_2dnlt"]
-[ext_resource type="Script" path="res://ui/external_shader_settings.gd" id="9_hckom"]
+[ext_resource type="Script" uid="uid://dqq4m1h7sew1g" path="res://ui/external_shader_settings.gd" id="9_hckom"]
 [ext_resource type="PackedScene" uid="uid://bpfrq18j1sk54" path="res://scenes/external/stars/stars.tscn" id="10_6ji31"]
-[ext_resource type="Script" path="res://scenes/external/stars/starblur_controller.gd" id="11_onp74"]
+[ext_resource type="Script" uid="uid://dh6w57kuqpd04" path="res://scenes/external/stars/starblur_controller.gd" id="11_onp74"]
 [ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/frigate/real/FrigateReal.tscn" id="12_by3ff"]
-[ext_resource type="Script" path="res://bodies/draw_spacecraft_orbit.gd" id="15_vytt2"]
+[ext_resource type="Script" uid="uid://xet38inpduig" path="res://bodies/draw_spacecraft_orbit.gd" id="15_vytt2"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_htw27"]
 material = ExtResource("8_2dnlt")
@@ -19,7 +19,7 @@ flip_faces = true
 size = Vector2(2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
-size = Vector3(0.05, 0.015, 0.015)
+size = Vector3(0.05843319023733784, 0.015, 0.015)
 
 [node name="PlayerShip" type="CharacterBody3D"]
 editor_description = "FV JUNIPER is a Hedge-class frigate in service as privateer vessel. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
@@ -52,7 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 current = true
 fov = 50.0
 near = 0.001
-far = 1e+07
+far = 10000000.0
 
 [node name="ShaderQuad" type="MeshInstance3D" parent="CameraRig/CameraRotator/Camera3D"]
 extra_cull_margin = 16384.0
@@ -75,4 +75,5 @@ color = Color(1, 0.690196, 0, 1)
 slice = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0042165955528616905, 0, 0)
 shape = SubResource("BoxShape3D_fdpi8")

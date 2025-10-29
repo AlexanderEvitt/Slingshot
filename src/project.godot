@@ -204,7 +204,9 @@ page={
 
 [physics]
 
-3d/default_angular_damp=0.0
+3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/generate_all_kinematic_contacts=true
+jolt_physics_3d/limits/max_linear_velocity=1000000000.0
 
 [rendering]
 

@@ -7,8 +7,8 @@ colors = PackedColorArray(0.5, 0.5, 0.5, 1, 0.4, 0.4, 0.4, 1)
 frequency = 0.1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_17ct5"]
-color_ramp = SubResource("Gradient_q0jip")
 noise = SubResource("FastNoiseLite_vqlqm")
+color_ramp = SubResource("Gradient_q0jip")
 
 [resource]
 resource_name = "BasePaint"

@@ -131,9 +131,12 @@ func integrate_normally(dt, prev_gravity):
 	var motion = new_velocity * dt
 	
 	# Get collision data
-	var collision = move_and_collide(motion)
+	var result = test_move(global_transform, motion, null, 0.001, true)
+	if result == true:
+		print("Resulting")
+	var collision = move_and_collide(motion, false, 0.001, true, 1)
 	
-	if collision:
+	if collision != null:
 		print("Colliding:")
 		_handle_collision(collision, new_velocity, dt)
 	else:
@@ -161,7 +164,7 @@ func _handle_collision(collision: KinematicCollision3D, new_velocity: Vector3, _
 	
 	# Add change in velocity
 	print("	dv", dv)
-	velocity = velocity + dv
+	velocity = new_velocity + dv
 	print("	velocity: ", velocity)
 
 	# Update position to the contact point (prevents tunneling)
