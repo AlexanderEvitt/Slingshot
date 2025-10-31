@@ -7,6 +7,7 @@
 [node name="docks" instance=ExtResource("1_wd4of")]
 
 [node name="Docks" parent="." index="0"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_y4qs5")
 
 [node name="simplified_berth" parent="Docks/Berth1" index="0" instance=ExtResource("4_01trk")]

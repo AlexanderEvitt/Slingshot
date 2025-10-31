@@ -7,8 +7,10 @@
 [node name="simplified_berth" instance=ExtResource("1_uv4by")]
 
 [node name="SimplifiedBerth_001" parent="." index="0"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_mr283")
 
 [node name="SimplifiedDoor" parent="SimplifiedBerth_001" index="0"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_mr283")
 surface_material_override/1 = ExtResource("3_samsr")

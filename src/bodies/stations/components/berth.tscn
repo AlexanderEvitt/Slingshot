@@ -26,47 +26,73 @@ size = Vector3(0.01, 0.01, 0.04204596689328355)
 script = ExtResource("2_6mjwp")
 
 [node name="DockE" parent="." index="0"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("3_02i7e")
 
 [node name="BackPipe" parent="DockE" index="0"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("4_pbg5w")
 
+[node name="Columns" parent="DockE" index="1"]
+visibility_range_end = 10000000.0
+
 [node name="Control" parent="DockE" index="2"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("7_p8e0j")
 
 [node name="DoorLeft" parent="DockE/DoorLeftHinge" index="0"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("8_ucgqw")
 
 [node name="DoorRight" parent="DockE/DoorRightHinge" index="0"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("8_ucgqw")
 
 [node name="Frames" parent="DockE" index="5"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("8_ucgqw")
 
 [node name="FuelingPipe" parent="DockE" index="6"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("4_pbg5w")
 surface_material_override/1 = ExtResource("6_prrdp")
 
 [node name="Lamps" parent="DockE" index="7"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_agj8e")
 surface_material_override/1 = ExtResource("9_r4srt")
 
 [node name="LeftClamp" parent="DockE" index="8" node_paths=PackedStringArray("upper_clamp", "lower_clamp")]
+visibility_range_end = 10000000.0
 script = ExtResource("9_ghmh8")
 upper_clamp = NodePath("LeftUpperClamp")
 lower_clamp = NodePath("LeftLowerClamp")
 rightness = -1
 
+[node name="LeftLowerClamp" parent="DockE/LeftClamp" index="0"]
+visibility_range_end = 10000000.0
+
+[node name="LeftUpperClamp" parent="DockE/LeftClamp" index="1"]
+visibility_range_end = 10000000.0
+
 [node name="RightClamp" parent="DockE" index="9" node_paths=PackedStringArray("upper_clamp", "lower_clamp")]
+visibility_range_end = 10000000.0
 script = ExtResource("9_ghmh8")
 upper_clamp = NodePath("RightUpperClamp")
 lower_clamp = NodePath("RightLowerClamp")
 
+[node name="RightLowerClamp" parent="DockE/RightClamp" index="0"]
+visibility_range_end = 10000000.0
+
+[node name="RightUpperClamp" parent="DockE/RightClamp" index="1"]
+visibility_range_end = 10000000.0
+
 [node name="Supports" parent="DockE" index="10"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_agj8e")
 
 [node name="Node3D" type="Node3D" parent="." index="1"]
@@ -127,6 +153,9 @@ light_color = Color(0.973167, 1, 0.93, 1)
 light_energy = 0.001
 omni_range = 0.2
 
+[node name="ClampBase" parent="." index="2"]
+visibility_range_end = 10000000.0
+
 [node name="BerthCollider" type="StaticBody3D" parent="." index="3"]
 process_priority = 13
 physics_material_override = SubResource("PhysicsMaterial_5ow7a")
@@ -137,15 +166,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14086, 0, 0)
 shape = SubResource("BoxShape3D_cg1o8")
 
 [node name="Right" type="CollisionShape3D" parent="BerthCollider" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06570553504325385, 0, 0.030296746385809738)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06570553504325385, 0, 0.03029674638580973)
 shape = SubResource("BoxShape3D_6q4e8")
 
 [node name="Left" type="CollisionShape3D" parent="BerthCollider" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06600000000617001, 0, -0.029999999998835847)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06600000000617001, 0, -0.02999999999883584)
 shape = SubResource("BoxShape3D_6q4e8")
 
 [node name="Floor" type="CollisionShape3D" parent="BerthCollider" index="3"]
-transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, -1, 0, 1, 6.123233995736766e-17, 0.06600000000617001, -0.032111003027937915, 0)
+transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, -1, 0, 1, 6.123233995736766e-17, 0.06600000000617001, -0.03211100302793791, 0)
 shape = SubResource("BoxShape3D_6q4e8")
 
 [node name="Ceiling" type="CollisionShape3D" parent="BerthCollider" index="4"]

@@ -10,19 +10,24 @@
 [node name="round_port" instance=ExtResource("1_je5ca")]
 
 [node name="Mast" parent="." index="0"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_u4sf0")
 
 [node name="Tunnel" parent="." index="1"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("3_khnng")
 
 [node name="Hub" parent="." index="3"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("3_khnng")
 surface_material_override/1 = ExtResource("4_qej6t")
 
 [node name="Frame" parent="." index="4"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("4_qej6t")
 
 [node name="Port" parent="." index="5"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("3_khnng")
 surface_material_override/1 = ExtResource("5_j3hae")
 

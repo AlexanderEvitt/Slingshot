@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b2uahkmikokwc" path="res://bodies/stations/components/ring.glb" id="1_xjjhp"]
 [ext_resource type="Material" uid="uid://bu1jwblsgunfc" path="res://bodies/stations/components/materials/BasicGreeble.tres" id="2_n0105"]
 [ext_resource type="Material" uid="uid://cptd1y5ttpy0m" path="res://bodies/stations/components/materials/DottedWindows.tres" id="3_lg67x"]
-[ext_resource type="Script" path="res://bodies/stations/rotator.gd" id="4_f5kl5"]
+[ext_resource type="Script" uid="uid://dy0rtgjdmml70" path="res://bodies/stations/rotator.gd" id="4_f5kl5"]
 [ext_resource type="Material" uid="uid://o7dtbv1yqscr" path="res://bodies/stations/components/materials/SmoothConcrete.tres" id="4_wcdpf"]
 [ext_resource type="Material" uid="uid://cljigg1mdxyr8" path="res://bodies/stations/components/materials/GreyMetal.tres" id="5_hngcu"]
 
@@ -14,18 +14,23 @@ tunnel_node = NodePath("Tunnel")
 frame_node = NodePath("Frame")
 
 [node name="Ring" parent="." index="0"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_n0105")
 surface_material_override/1 = ExtResource("3_lg67x")
 
 [node name="Mast" parent="." index="1"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("4_wcdpf")
 
 [node name="Hub" parent="." index="2"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_n0105")
 surface_material_override/1 = ExtResource("5_hngcu")
 
 [node name="Tunnel" parent="." index="3"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("2_n0105")
 
 [node name="Frame" parent="." index="4"]
+visibility_range_end = 10000000.0
 surface_material_override/0 = ExtResource("5_hngcu")
