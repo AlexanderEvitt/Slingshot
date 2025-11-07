@@ -32,7 +32,7 @@ func _ready():
 
 func _process(_delta):
 	# Set zoom from inputs
-	if viewer.is_visible_in_tree():
+	if true:#viewer.is_visible_in_tree():
 		if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
 			zoom_distance = zoom_speed*zoom_distance
 		if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):

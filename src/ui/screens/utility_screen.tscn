@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://b0akt2w44i68p"]
 
-[ext_resource type="Script" path="res://ui/panel_switch.gd" id="1_c474i"]
+[ext_resource type="Script" uid="uid://cc707ckeltjdw" path="res://ui/panel_switch.gd" id="1_c474i"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_vq7fa"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="6_hqukt"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="7_8fexf"]
-[ext_resource type="Script" path="res://ui/data_grid.gd" id="8_586vo"]
+[ext_resource type="Script" uid="uid://6t3qjmouc510" path="res://ui/data_grid.gd" id="8_586vo"]
 [ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/widgets/alerts_panel/alerts_panel.tscn" id="9_h7qnh"]
 [ext_resource type="Texture2D" uid="uid://bfvknenmn5th5" path="res://visuals/logo/patch.png" id="12_4hj8y"]
 
@@ -32,7 +32,6 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_c474i")
-smooth = true
 buttons_parent = NodePath("ModeSelectorPanel/MarginContainer/ButtonPanel/HBoxContainer/ButtonHolder")
 panels_parent = NodePath("HUDs")
 

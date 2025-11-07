@@ -1,6 +1,7 @@
 extends Node
 
-const UI_SCENE_PATH : String = "res://ui/UIScene.tscn"
+const INTERIOR_SCENE_PATH : String = "res://scenes/interior/InteriorScene.tscn"
+const PHYSICS_SCENE_PATH : String = "res://scenes/external/ExternalScene.tscn"
 const MENU_SCENE_PATH : String = "res://ui/menu/MenuScene.tscn"
 
 @onready var menu = $MenuUI
@@ -8,33 +9,39 @@ const MENU_SCENE_PATH : String = "res://ui/menu/MenuScene.tscn"
 
 var loading := false # enables sending updates to loading bar
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Connect startup signal from menu to command that loads scene
 	menu.startup.connect(_on_startup)
 	# Connect signal for going back to main menu
 	ShipData.main_menu.connect(_go_to_menu)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if loading:
 	# Get status of resource loader
 		var a = []
-		ResourceLoader.load_threaded_get_status(UI_SCENE_PATH,a)
-		loading_bar.anchor_right = a[0] # send to progress bar
+		var b = []
+		ResourceLoader.load_threaded_get_status(INTERIOR_SCENE_PATH,a)
+		ResourceLoader.load_threaded_get_status(PHYSICS_SCENE_PATH,b)
+		loading_bar.anchor_right = (a[0] + b[0])/2.0 # send to progress bar
 		
-		if a[0] == 1.0:
+		if (a[0] + b[0])/2.0 == 1.0:
 			initialize()
 
 func _on_startup():
-	# Start resource loader
-	ResourceLoader.load_threaded_request(UI_SCENE_PATH)
+	# Start resource loader for both interior and physics
+	ResourceLoader.load_threaded_request(INTERIOR_SCENE_PATH)
+	ResourceLoader.load_threaded_request(PHYSICS_SCENE_PATH)
 	loading = true
 
 func initialize():
-	# Load normal UI and associated subscenes
-	var ui = ResourceLoader.load_threaded_get(UI_SCENE_PATH).instantiate()
-	add_child(ui)
+	# Load scenes, physics scene first (so ship exists before UI calls)
+	# Finish loading physics scene
+	var physics = ResourceLoader.load_threaded_get(PHYSICS_SCENE_PATH).instantiate()
+	$SimulationHolder.add_child(physics)
+	
+	# Finish loading interior scene
+	var interior = ResourceLoader.load_threaded_get(INTERIOR_SCENE_PATH).instantiate()
+	add_child(interior)
 	
 	# Delete menu
 	remove_child(menu)
@@ -49,8 +56,9 @@ func _go_to_menu():
 	menu = preload(MENU_SCENE_PATH).instantiate()
 	add_child(menu)
 	
-	# Remove external scene
-	remove_child($ShipUI)
+	# Remove interior and physics
+	remove_child($interior)
+	remove_child($SimRoot)
 	
 	# Connect the startup signal again
 	menu.startup.connect(_on_startup)

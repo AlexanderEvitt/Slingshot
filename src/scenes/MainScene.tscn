@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://n78uivx6mb2"]
+[gd_scene load_steps=5 format=3 uid="uid://n78uivx6mb2"]
 
-[ext_resource type="Script" path="res://ui/menu/menu_loader.gd" id="1_tywdm"]
+[ext_resource type="Script" uid="uid://cp104upqapb6e" path="res://ui/menu/menu_loader.gd" id="1_tywdm"]
 [ext_resource type="PackedScene" uid="uid://ckg801jn7baa1" path="res://ui/menu/MenuScene.tscn" id="2_f6v6y"]
+[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="3_c6dvc"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_g2dsv"]
 
@@ -10,3 +11,7 @@ script = ExtResource("1_tywdm")
 
 [node name="MenuUI" parent="." instance=ExtResource("2_f6v6y")]
 slot_button_group = SubResource("ButtonGroup_g2dsv")
+
+[node name="SimulationHolder" type="SubViewport" parent="."]
+world_3d = ExtResource("3_c6dvc")
+render_target_update_mode = 4

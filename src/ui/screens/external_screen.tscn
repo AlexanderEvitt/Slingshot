@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://b07e4fcvvtdqq"]
+[gd_scene load_steps=2 format=3 uid="uid://b07e4fcvvtdqq"]
 
-[ext_resource type="PackedScene" uid="uid://d0x7vyc4qrrc2" path="res://scenes/external/ExternalScene.tscn" id="1_usa1s"]
 [ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="1_xv6sl"]
 
 [node name="ExternalScreen" type="HBoxContainer"]
@@ -17,6 +16,3 @@ world_3d = ExtResource("1_xv6sl")
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
-
-[node name="SimRoot" parent="ExternalUI/SubViewport" instance=ExtResource("1_usa1s")]
-zoomable = true

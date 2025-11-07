@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://231jhr4hx8d6"]
 
-[ext_resource type="Script" path="res://ui/screen_switcher.gd" id="2_bh7rb"]
+[ext_resource type="Script" uid="uid://c5861dvxuxslk" path="res://ui/screen_switcher.gd" id="2_bh7rb"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
 [ext_resource type="PackedScene" uid="uid://c6ewf1e7q725g" path="res://ui/screens/flight_screen.tscn" id="4_l1uqb"]
 [ext_resource type="PackedScene" uid="uid://dpcripo2vb6ip" path="res://ui/screens/engineering/engineering_screen.tscn" id="5_i05jk"]
@@ -29,6 +29,7 @@ script = ExtResource("2_bh7rb")
 button_group = ExtResource("27_ytqrm")
 
 [node name="ExternalScreen" parent="." instance=ExtResource("6_b2rax")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +48,6 @@ visible = false
 layout_mode = 1
 
 [node name="NavigationScreen" parent="." instance=ExtResource("7_j2pmq")]
-visible = false
 layout_mode = 1
 
 [node name="UtilityScreen" parent="." instance=ExtResource("8_76tcd")]
