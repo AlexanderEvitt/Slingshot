@@ -1,14 +1,19 @@
 extends Node3D
 
-@onready var plotter = $Plotter
+var plotter
 @onready var pointer = $Pointer
 
 @export var body_path : String
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _ready():
+	# Only assign plotter if it exists to avoid error
+	if has_node("Plotter"):
+		plotter = $Plotter
+
 func _process(_delta):
 	# Use camera mode to determine whether camera is included in rotation
 	pointer.transform.basis = ShipData.player_ship.attitude
-	position = ShipData.player_ship.position
+	global_position = ShipData.player_ship.global_position
 	
-	plotter.positions = ShipData.player_ship.propagator.plotted_positions
+	if plotter:
+		plotter.positions = ShipData.player_ship.propagator.plotted_positions

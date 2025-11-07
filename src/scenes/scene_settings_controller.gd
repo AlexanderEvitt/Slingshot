@@ -1,20 +1,11 @@
 extends Node3D
 
-var scaledown = 1
-
-var cam
-
 @export var planet_orbits : bool
 @export var zoomable : bool
 
 var selected_body = null
 
 func _ready():
-	var spacecraft = get_node("Ships/PlayerShip")
-	
-	# Get the camera node (is this the right camera?)
-	cam = spacecraft.get_node("CameraRig/CameraRotator/Camera3D")
-	
 	# Connect the click detector signal
 	var selectables = get_tree().get_nodes_in_group("Selectable")
 	for s in selectables:
@@ -22,7 +13,7 @@ func _ready():
 		s.input_event.connect(on_selected.bind(body_path))
 
 func _process(_delta):
-	position += -cam.global_position/scaledown
+	position = -ShipData.player_ship.position
 	# Setting this root to the negative of the ship position ensures the cam is always at the global origin
 	# Should not be necessary (and should have no effect) in a double precision build
 	# But the atmosphere plugin needs this for some reason (jitters otherwise)

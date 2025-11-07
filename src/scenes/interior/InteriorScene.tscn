@@ -1,64 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cy2v2xkwsyqp4"]
+[gd_scene load_steps=6 format=3 uid="uid://cy2v2xkwsyqp4"]
 
 [ext_resource type="PackedScene" uid="uid://p4lgjdfw8o7y" path="res://scenes/interior/interior.glb" id="1_hytfg"]
-[ext_resource type="PackedScene" uid="uid://231jhr4hx8d6" path="res://ui/UIScene.tscn" id="2_64l87"]
-[ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/widgets/alerts_panel/alerts_panel.tscn" id="2_gujd0"]
-[ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="4_kc64s"]
-[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="5_bavqc"]
-[ext_resource type="PackedScene" uid="uid://dwmguh47arrut" path="res://ship/flight/flight_entity.tscn" id="6_47ag3"]
-[ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="7_47ag3"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_udntv"]
-viewport_path = NodePath("Interior/Console/Display/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hytfg"]
-resource_local_to_scene = true
-albedo_color = Color(0, 0, 0, 1)
-roughness = 0.5
-emission_enabled = true
-emission_texture = SubResource("ViewportTexture_udntv")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_47ag3"]
-viewport_path = NodePath("Interior/Console/Display/SmallDisplay/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47ag3"]
-resource_local_to_scene = true
-albedo_color = Color(0, 0, 0, 1)
-roughness = 0.5
-emission_enabled = true
-emission_texture = SubResource("ViewportTexture_47ag3")
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_uso82"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_c8a2x"]
-viewport_path = NodePath("Interior/Console/Display/SmallDisplay_002/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udntv"]
-resource_local_to_scene = true
-albedo_color = Color(0, 0, 0, 1)
-roughness = 0.5
-emission_enabled = true
-emission_texture = SubResource("ViewportTexture_c8a2x")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_2qs4y"]
-viewport_path = NodePath("Interior/Console/Display/SmallDisplay_003/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjiuk"]
-resource_local_to_scene = true
-albedo_color = Color(0, 0, 0, 1)
-roughness = 0.5
-emission_enabled = true
-emission_texture = SubResource("ViewportTexture_2qs4y")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_mjiuk"]
-viewport_path = NodePath("Interior/Console/Display/SmallDisplay_004/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7njs8"]
-resource_local_to_scene = true
-albedo_color = Color(0, 0, 0, 1)
-roughness = 0.5
-emission_enabled = true
-emission_texture = SubResource("ViewportTexture_mjiuk")
+[ext_resource type="PackedScene" uid="uid://c7557e6pmwk05" path="res://scenes/interior/display.tscn" id="2_64l87"]
+[ext_resource type="PackedScene" uid="uid://bfs5avexcwj15" path="res://scenes/interior/small_display.tscn" id="2_uso82"]
+[ext_resource type="Script" uid="uid://bquoraykqlqcq" path="res://scenes/interior/joystick.gd" id="4_gujd0"]
 
 [sub_resource type="Environment" id="Environment_s6rcy"]
 background_mode = 1
@@ -68,84 +13,48 @@ glow_blend_mode = 1
 
 [node name="interior" instance=ExtResource("1_hytfg")]
 
-[node name="Display" parent="Interior/Console" index="0"]
-surface_material_override/1 = SubResource("StandardMaterial3D_hytfg")
-
-[node name="SmallDisplay" parent="Interior/Console/Display" index="2"]
-surface_material_override/1 = SubResource("StandardMaterial3D_47ag3")
-
-[node name="SubViewport" type="SubViewport" parent="Interior/Console/Display/SmallDisplay" index="0"]
-own_world_3d = true
-
-[node name="Alerts" parent="Interior/Console/Display/SmallDisplay/SubViewport" index="0" instance=ExtResource("2_gujd0")]
-offset_right = 512.0
-offset_bottom = 512.0
-
-[node name="SubViewport" type="SubViewport" parent="Interior/Console/Display" index="3"]
-own_world_3d = true
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
-
-[node name="ShipUI" parent="Interior/Console/Display/SubViewport" index="0" instance=ExtResource("2_64l87")]
-button_group = SubResource("ButtonGroup_uso82")
-
-[node name="SmallDisplay_002" parent="Interior/Console/Display" index="4"]
-surface_material_override/1 = SubResource("StandardMaterial3D_udntv")
-
-[node name="SubViewport" type="SubViewport" parent="Interior/Console/Display/SmallDisplay_002" index="0"]
-own_world_3d = true
-
-[node name="NavballRoot" parent="Interior/Console/Display/SmallDisplay_002/SubViewport" index="0" instance=ExtResource("4_kc64s")]
-
-[node name="SmallDisplay_003" parent="Interior/Console/Display" index="5"]
-surface_material_override/1 = SubResource("StandardMaterial3D_mjiuk")
-
-[node name="SubViewport" type="SubViewport" parent="Interior/Console/Display/SmallDisplay_003" index="0"]
-world_3d = ExtResource("5_bavqc")
-handle_input_locally = false
-render_target_update_mode = 4
-
-[node name="PlayerShip" parent="Interior/Console/Display/SmallDisplay_003/SubViewport" index="0" instance=ExtResource("6_47ag3")]
-
-[node name="SmallDisplay_004" parent="Interior/Console/Display" index="6"]
-surface_material_override/1 = SubResource("StandardMaterial3D_7njs8")
-
-[node name="SubViewport" type="SubViewport" parent="Interior/Console/Display/SmallDisplay_004" index="0"]
-own_world_3d = true
-
-[node name="TextureRect" type="TextureRect" parent="Interior/Console/Display/SmallDisplay_004/SubViewport" index="0"]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 824.0
-offset_bottom = 824.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.48, 0.48)
-texture = ExtResource("7_47ag3")
-stretch_mode = 2
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." index="3"]
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5294556229807605, -1.3712510382218328)
-light_energy = 0.1
+light_energy = 0.15
 shadow_enabled = true
 
-[node name="SpotLight3D" type="SpotLight3D" parent="." index="4"]
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.3383930466875903, 0.9410048596864364, 0, -0.9410048596864364, 0.3383930466875903, -0.6639835088843766, -0.5902963524856719, -1.9870850887643925)
 light_color = Color(1, 0.8509804, 0.6039216, 1)
 light_energy = 4.299
 shadow_enabled = true
 spot_angle_attenuation = 4.594793
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="5"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="2"]
 environment = SubResource("Environment_s6rcy")
 
-[node name="Camera3D" type="Camera3D" parent="." index="6"]
+[node name="Camera3D" type="Camera3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 0.949425477641904, 0.3139924559674052, 0, -0.3139924559674052, 0.949425477641904, -0.731854897820834, -1.1071472472370745, -2.190648950291657)
 fov = 60.0
 near = 0.00999999999999999
 far = 100.0
+
+[node name="small_display" parent="Interior/Console/Display1A/Small1" index="0" instance=ExtResource("2_uso82")]
+
+[node name="small_display" parent="Interior/Console/Display1A/Small2" index="0" instance=ExtResource("2_uso82")]
+
+[node name="small_display" parent="Interior/Console/Display1A/Small3" index="0" instance=ExtResource("2_uso82")]
+
+[node name="small_display" parent="Interior/Console/Display1A/Small4" index="0" instance=ExtResource("2_uso82")]
+
+[node name="display" parent="Interior/Console/Display1A" index="4" instance=ExtResource("2_64l87")]
+
+[node name="Node3D" type="Node3D" parent="NavTable" index="0"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0.32584426282347034, 0)
+
+[node name="Node3D2" type="Node3D" parent="NavTable/Node3D" index="0"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Node3D3" type="Node3D" parent="NavTable/Node3D/Node3D2" index="0"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Node3D4" type="Node3D" parent="NavTable/Node3D/Node3D2/Node3D3" index="0"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Joystick" parent="." index="6"]
+script = ExtResource("4_gujd0")

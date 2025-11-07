@@ -32,7 +32,7 @@ func _ready():
 
 func _process(_delta):
 	# Set zoom from inputs
-	if true:#viewer.is_visible_in_tree():
+	if viewer.is_visible_in_tree():
 		if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
 			zoom_distance = zoom_speed*zoom_distance
 		if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):
@@ -80,10 +80,10 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == 2:
 		if !r:
 			r = true
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		elif r:
 			r = false
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	if r:
 		set_orientation()

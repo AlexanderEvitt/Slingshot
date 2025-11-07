@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://b07e4fcvvtdqq"]
+[gd_scene load_steps=9 format=3 uid="uid://b07e4fcvvtdqq"]
 
 [ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="1_xv6sl"]
+[ext_resource type="Script" uid="uid://coauq357djn0x" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_bu3jf"]
+[ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="3_mq6p4"]
+[ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="4_w87ht"]
+[ext_resource type="Script" uid="uid://dqq4m1h7sew1g" path="res://ui/external_shader_settings.gd" id="5_n68xp"]
+[ext_resource type="PackedScene" uid="uid://bpfrq18j1sk54" path="res://scenes/external/stars/stars.tscn" id="6_sghyb"]
+[ext_resource type="Script" uid="uid://dh6w57kuqpd04" path="res://scenes/external/stars/starblur_controller.gd" id="7_0wv60"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_4e2yt"]
+material = ExtResource("4_w87ht")
+flip_faces = true
+size = Vector2(2, 2)
 
 [node name="ExternalScreen" type="HBoxContainer"]
 offset_right = 1920.0
@@ -15,4 +26,33 @@ stretch = true
 world_3d = ExtResource("1_xv6sl")
 handle_input_locally = false
 size = Vector2i(1920, 1080)
-render_target_update_mode = 4
+
+[node name="PlayerShip" type="Node3D" parent="ExternalUI/SubViewport"]
+script = ExtResource("2_bu3jf")
+body_path = "Ships/PlayerShip"
+
+[node name="Pointer" type="Node3D" parent="ExternalUI/SubViewport/PlayerShip"]
+
+[node name="CameraRig" type="Node3D" parent="ExternalUI/SubViewport/PlayerShip"]
+transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
+script = ExtResource("3_mq6p4")
+zoom_distance = 0.1
+
+[node name="CameraRotator" type="Node3D" parent="ExternalUI/SubViewport/PlayerShip/CameraRig"]
+
+[node name="Camera3D" type="Camera3D" parent="ExternalUI/SubViewport/PlayerShip/CameraRig/CameraRotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+current = true
+fov = 50.0
+near = 0.001
+far = 10000000.0
+
+[node name="ShaderQuad" type="MeshInstance3D" parent="ExternalUI/SubViewport/PlayerShip/CameraRig/CameraRotator/Camera3D"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_4e2yt")
+skeleton = NodePath("../../../../../..")
+script = ExtResource("5_n68xp")
+
+[node name="Starfield" parent="ExternalUI/SubViewport/PlayerShip/CameraRig/CameraRotator/Camera3D" instance=ExtResource("6_sghyb")]
+transform = Transform3D(6.12323e-16, -10, 6.12323e-16, 0, 6.12323e-16, 10, -10, -6.12323e-16, 3.7494e-32, 0, 0, 0)
+script = ExtResource("7_0wv60")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7557e6pmwk05"]
+
+[ext_resource type="PackedScene" uid="uid://b4s0brks0pafw" path="res://scenes/interior/display.glb" id="1_7godr"]
+[ext_resource type="PackedScene" uid="uid://231jhr4hx8d6" path="res://ui/screens/UIScene.tscn" id="2_5pvgv"]
+[ext_resource type="Script" uid="uid://crfrjb78vcind" path="res://scenes/interior/display.gd" id="2_qf4pv"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7godr"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pvgv"]
+resource_local_to_scene = true
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.5
+emission_enabled = true
+emission_texture = SubResource("ViewportTexture_7godr")
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_qf4pv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4reng"]
+size = Vector3(0.75, 0.015, 0.42)
+
+[node name="display" instance=ExtResource("1_7godr")]
+script = ExtResource("2_qf4pv")
+
+[node name="Display" parent="." index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_5pvgv")
+
+[node name="SubViewport" type="SubViewport" parent="." index="1"]
+size = Vector2i(1920, 1080)
+
+[node name="ShipUI" parent="SubViewport" index="0" instance=ExtResource("2_5pvgv")]
+button_group = SubResource("ButtonGroup_qf4pv")
+
+[node name="Area3D" type="Area3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("BoxShape3D_4reng")

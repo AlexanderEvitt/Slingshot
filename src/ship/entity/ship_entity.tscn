@@ -1,22 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://c71thxnvwh37i"]
+[gd_scene load_steps=9 format=3 uid="uid://c71thxnvwh37i"]
 
 [ext_resource type="Script" uid="uid://cc283l37nveuy" path="res://ship/entity/ship_calculator.gd" id="1_012ot"]
 [ext_resource type="Script" uid="uid://8foh3a4rsbjc" path="res://ship/entity/attitude_calculator.gd" id="2_7e8cl"]
 [ext_resource type="Script" uid="uid://dm88ls8pwtpcc" path="res://ship/Propagator.cs" id="4_7neml"]
 [ext_resource type="Script" uid="uid://cg2yyvdpwvc0u" path="res://ship/entity/propulsion_calculator.gd" id="5_n5nff"]
 [ext_resource type="Script" uid="uid://55lrhua7ji4r" path="res://ship/entity/navigation_calculator.gd" id="6_nvs0w"]
-[ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="7_q3f1n"]
-[ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="8_2dnlt"]
-[ext_resource type="Script" uid="uid://dqq4m1h7sew1g" path="res://ui/external_shader_settings.gd" id="9_hckom"]
-[ext_resource type="PackedScene" uid="uid://bpfrq18j1sk54" path="res://scenes/external/stars/stars.tscn" id="10_6ji31"]
-[ext_resource type="Script" uid="uid://dh6w57kuqpd04" path="res://scenes/external/stars/starblur_controller.gd" id="11_onp74"]
 [ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/frigate/real/FrigateReal.tscn" id="12_by3ff"]
 [ext_resource type="Script" uid="uid://xet38inpduig" path="res://bodies/draw_spacecraft_orbit.gd" id="15_vytt2"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_htw27"]
-material = ExtResource("8_2dnlt")
-flip_faces = true
-size = Vector2(2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
 size = Vector3(0.05843319023733784, 0.015, 0.015)
@@ -40,30 +30,6 @@ script = ExtResource("5_n5nff")
 
 [node name="NavigationCalculator" type="Node3D" parent="."]
 script = ExtResource("6_nvs0w")
-
-[node name="CameraRig" type="Node3D" parent="."]
-transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
-script = ExtResource("7_q3f1n")
-zoom_distance = 0.1
-
-[node name="CameraRotator" type="Node3D" parent="CameraRig"]
-
-[node name="Camera3D" type="Camera3D" parent="CameraRig/CameraRotator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
-current = true
-fov = 50.0
-near = 0.001
-far = 10000000.0
-
-[node name="ShaderQuad" type="MeshInstance3D" parent="CameraRig/CameraRotator/Camera3D"]
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_htw27")
-skeleton = NodePath("../../../../../..")
-script = ExtResource("9_hckom")
-
-[node name="Starfield" parent="CameraRig/CameraRotator/Camera3D" instance=ExtResource("10_6ji31")]
-transform = Transform3D(6.12323e-16, -10, 6.12323e-16, 0, 6.12323e-16, 10, -10, -6.12323e-16, 3.7494e-32, 0, 0, 0)
-script = ExtResource("11_onp74")
 
 [node name="Pointer" type="Node3D" parent="."]
 
