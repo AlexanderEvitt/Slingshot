@@ -5,6 +5,9 @@ extends Node3D
 @onready var node_viewport = $SubViewport
 @onready var node_area = $Area3D
 
+# Determines whether it receives inputs
+@export var display_of_interest = true
+
 # Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside = false
 
@@ -34,7 +37,9 @@ func _unhandled_input(event):
 			# If the event is a mouse/touch event, then we can ignore it here, because it will be
 			# handled via Physics Picking.
 			return
-	node_viewport.push_input(event)
+	# Only pass input to child if display of interest is selected
+	if display_of_interest:
+		node_viewport.push_input(event)
 
 func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
 	# Event position in Area3D in world coordinate space.

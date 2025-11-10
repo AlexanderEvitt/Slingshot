@@ -31,31 +31,9 @@ func _ready():
 	viewer = get_viewport().get_parent()
 
 func _process(_delta):
-	# Set zoom from inputs
-	if viewer.is_visible_in_tree():
-		if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
-			zoom_distance = zoom_speed*zoom_distance
-		if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):
-			zoom_distance = zoom_distance/zoom_speed
-		zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
-		
-		# Smoothly move to new position
-		var old_zoom = camera.position.z
-		camera.position = Vector3(0, 0, smooth_zoom*zoom_distance + (1.0 - smooth_zoom)*old_zoom)
-		
-		# Handle arrow keys rotation	
-		if Input.is_action_pressed("mod_up"):
-			pitch = pitch - 100*rotation_speed
-			set_orientation()
-		if Input.is_action_pressed("mod_down"):
-			pitch = pitch + 100*rotation_speed
-			set_orientation()
-		if Input.is_action_pressed("mod_left"):
-			yaw = yaw - 100*rotation_speed
-			set_orientation()
-		if Input.is_action_pressed("mod_right"):
-			yaw = yaw + 100*rotation_speed
-			set_orientation()
+	# Smoothly move to new position
+	var old_zoom = camera.position.z
+	camera.position = Vector3(0, 0, smooth_zoom*zoom_distance + (1.0 - smooth_zoom)*old_zoom)
 			
 	# Move camera back from acceleration
 	# by linearly interpolating between current position and offset by thrust
@@ -76,6 +54,28 @@ func _process(_delta):
 
 
 func _unhandled_input(event):
+	# Set zoom from inputs
+	if viewer.is_visible_in_tree():
+		if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
+			zoom_distance = zoom_speed*zoom_distance
+		if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):
+			zoom_distance = zoom_distance/zoom_speed
+		zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
+		
+		# Handle arrow keys rotation	
+		if Input.is_action_pressed("mod_up"):
+			pitch = pitch - 100*rotation_speed
+			set_orientation()
+		if Input.is_action_pressed("mod_down"):
+			pitch = pitch + 100*rotation_speed
+			set_orientation()
+		if Input.is_action_pressed("mod_left"):
+			yaw = yaw - 100*rotation_speed
+			set_orientation()
+		if Input.is_action_pressed("mod_right"):
+			yaw = yaw + 100*rotation_speed
+			set_orientation()
+
 	# Right-click rotate
 	if event is InputEventMouseButton and event.button_index == 2:
 		if !r:

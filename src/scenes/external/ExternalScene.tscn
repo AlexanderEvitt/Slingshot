@@ -1,6 +1,6 @@
 [gd_scene load_steps=70 format=3 uid="uid://d0x7vyc4qrrc2"]
 
-[ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/scene_settings_controller.gd" id="1_5ri2s"]
+[ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/scene_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://bodies/Body.cs" id="4_1rgsg"]
 [ext_resource type="Script" uid="uid://sv406c618jxf" path="res://scenes/barycenter.gd" id="4_5kgsd"]
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]

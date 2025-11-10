@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://k452wc4u7ysf"]
+
+[ext_resource type="Script" uid="uid://bs8erl8nle1lb" path="res://ship/flight/flight_entity.gd" id="1_fymmc"]
+[ext_resource type="PackedScene" uid="uid://cfjyiueui6yog" path="res://ship/frigate/wireframe/FrigateWireframeModel.tscn" id="2_0ccpd"]
+
+[node name="PlayerShip" type="Node3D"]
+editor_description = "FV JUNIPER is a Hedge-class frigate in the Federal Navy. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
+script = ExtResource("1_fymmc")
+
+[node name="Pointer" type="Node3D" parent="."]
+
+[node name="FirstCam" type="Camera3D" parent="Pointer"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
+fov = 50.0
+size = 2.0
+near = 0.001
+far = 10000000.0
+
+[node name="HazL" type="Camera3D" parent="Pointer"]
+transform = Transform3D(-0.2366685751493401, 0, -0.9715904412543288, 0, 1, 0, 0.9715904412543288, 0, -0.2366685751493401, 0, 0, -0.010856957255050322)
+fov = 50.0
+near = 0.001
+far = 10000000.0
+
+[node name="HazR" type="Camera3D" parent="Pointer"]
+transform = Transform3D(0.23683814606561854, 0, -0.9715491199976463, 0, 1, 0, 0.9715491199976463, 0, 0.23683814606561854, 0, 0, 0.010999999998603016)
+fov = 50.0
+near = 0.001
+far = 10000000.0
+
+[node name="Overview" type="Camera3D" parent="Pointer"]
+transform = Transform3D(0, 0.4275945369971868, -0.9039706366526301, 0, 0.9039706366526301, 0.4275945369971868, 1, 0, 0, -0.021999999997206032, 0.01600000000325963, 0)
+fov = 50.0
+size = 2.0
+near = 0.001
+far = 10000000.0
+
+[node name="frigate_wireframe" parent="." instance=ExtResource("2_0ccpd")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+visible = false

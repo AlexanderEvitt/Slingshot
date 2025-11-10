@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://etb6wr74mvbq"]
+[gd_scene load_steps=10 format=3 uid="uid://etb6wr74mvbq"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_rl157"]
 [ext_resource type="Script" uid="uid://c5861dvxuxslk" path="res://ui/screen_switcher.gd" id="2_bxrle"]
 [ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="3_noksf"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="4_g0vkg"]
+[ext_resource type="PackedScene" uid="uid://jpb6h7avv8co" path="res://ui/screens/navigation/waypoints/waypoints.tscn" id="4_hqpxh"]
+[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="5_wn2yn"]
+[ext_resource type="PackedScene" uid="uid://k452wc4u7ysf" path="res://ship/flight/ship_camera_holder.tscn" id="6_o8nqi"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="10_floo7"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_noksf"]
@@ -23,6 +26,7 @@ script = ExtResource("2_bxrle")
 button_group = SubResource("ButtonGroup_noksf")
 
 [node name="Navball" type="SubViewportContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,11 +40,11 @@ stretch = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="NavballRoot" parent="Navball/SubViewport" instance=ExtResource("3_noksf")]
 
-[node name="Logo" type="TextureRect" parent="."]
+[node name="Waypoints" parent="." instance=ExtResource("4_hqpxh")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -48,10 +52,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_g0vkg")
-expand_mode = 2
 
-[node name="Logo2" type="TextureRect" parent="."]
+[node name="HazL" type="SubViewportContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -59,21 +61,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_g0vkg")
-expand_mode = 2
+size_flags_horizontal = 3
+stretch = true
 
-[node name="Logo3" type="TextureRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_g0vkg")
-expand_mode = 2
+[node name="SubViewport" type="SubViewport" parent="HazL"]
+world_3d = ExtResource("5_wn2yn")
+handle_input_locally = false
+render_target_update_mode = 0
 
-[node name="Logo4" type="TextureRect" parent="."]
+[node name="PlayerShip" parent="HazL/SubViewport" instance=ExtResource("6_o8nqi")]
+active_camera = "HazL"
+
+[node name="HazR" type="SubViewportContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -81,8 +80,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_g0vkg")
-expand_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HazR"]
+world_3d = ExtResource("5_wn2yn")
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="PlayerShip" parent="HazR/SubViewport" instance=ExtResource("6_o8nqi")]
+active_camera = "HazR"
+
+[node name="Overview" type="SubViewportContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Overview"]
+world_3d = ExtResource("5_wn2yn")
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="PlayerShip" parent="Overview/SubViewport" instance=ExtResource("6_o8nqi")]
+active_camera = "Overview"
 
 [node name="Logo5" type="TextureRect" parent="."]
 visible = false
@@ -96,7 +122,6 @@ texture = ExtResource("4_g0vkg")
 expand_mode = 2
 
 [node name="ScreenSelectorPanel" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -105,110 +130,73 @@ anchor_right = 0.9
 anchor_bottom = 0.9
 theme = ExtResource("10_floo7")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScreenSelectorPanel"]
+[node name="ButtonHolder" type="GridContainer" parent="ScreenSelectorPanel"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ButtonHolder" type="GridContainer" parent="ScreenSelectorPanel/HBoxContainer"]
-layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
 columns = 2
 
-[node name="FlightButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="Button" type="Button" parent="ScreenSelectorPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/FlightButton"]
-layout_mode = 2
 theme = ExtResource("10_floo7")
 toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_noksf")
 text = "ATT"
 
-[node name="EngineeringButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="Button2" type="Button" parent="ScreenSelectorPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/EngineeringButton"]
-layout_mode = 2
 theme = ExtResource("10_floo7")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_noksf")
-text = "HSI"
+text = "NAV"
 
-[node name="ExternalButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="Button3" type="Button" parent="ScreenSelectorPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/ExternalButton"]
-layout_mode = 2
 theme = ExtResource("10_floo7")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_noksf")
 text = "HAZ-L"
 
-[node name="NavigationButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="Button4" type="Button" parent="ScreenSelectorPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
-
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/NavigationButton"]
-layout_mode = 2
 theme = ExtResource("10_floo7")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_noksf")
 text = "HAZ-R"
 
-[node name="UtilityButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="Button5" type="Button" parent="ScreenSelectorPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
-
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/UtilityButton"]
-layout_mode = 2
 theme = ExtResource("10_floo7")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_noksf")
 text = "OVRVW"
 
-[node name="CinematicButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="Button6" type="Button" parent="ScreenSelectorPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 5
-
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/CinematicButton"]
-layout_mode = 2
 theme = ExtResource("10_floo7")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_noksf")
