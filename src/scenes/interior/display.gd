@@ -1,5 +1,6 @@
 extends Node3D
-
+## This code lets players interact with touchscreens in 3D
+## Adapted from https://godotengine.org/asset-library/asset/127
 
 @onready var node_viewport = $SubViewport
 @onready var node_area = $Area3D

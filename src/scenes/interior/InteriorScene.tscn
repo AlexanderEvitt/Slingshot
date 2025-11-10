@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy2v2xkwsyqp4"]
+[gd_scene load_steps=7 format=3 uid="uid://cy2v2xkwsyqp4"]
 
 [ext_resource type="PackedScene" uid="uid://p4lgjdfw8o7y" path="res://scenes/interior/interior.glb" id="1_hytfg"]
 [ext_resource type="PackedScene" uid="uid://c7557e6pmwk05" path="res://scenes/interior/display.tscn" id="2_64l87"]
+[ext_resource type="Script" uid="uid://clcy6betwv4h8" path="res://scenes/interior/console_camera.gd" id="2_kc64s"]
 [ext_resource type="PackedScene" uid="uid://bfs5avexcwj15" path="res://scenes/interior/small_display.tscn" id="2_uso82"]
 [ext_resource type="Script" uid="uid://bquoraykqlqcq" path="res://scenes/interior/joystick.gd" id="4_gujd0"]
 
@@ -13,26 +14,35 @@ glow_blend_mode = 1
 
 [node name="interior" instance=ExtResource("1_hytfg")]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." index="0"]
+[node name="Player" type="Node3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7320000000036089, -1.1070000000036089, -2.19100000000617)
+script = ExtResource("2_kc64s")
+focus_offset = Vector3(0, 0.4, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999999999999, 0, 0, 0, 0.9999999999999999, 0, 0, 0)
+fov = 60.0
+near = 0.00999999999999999
+far = 100.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Player" index="1"]
+target_position = Vector3(0, 0, -1)
+collide_with_areas = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5294556229807605, -1.3712510382218328)
 light_energy = 0.15
 shadow_enabled = true
 
-[node name="SpotLight3D" type="SpotLight3D" parent="." index="1"]
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.3383930466875903, 0.9410048596864364, 0, -0.9410048596864364, 0.3383930466875903, -0.6639835088843766, -0.5902963524856719, -1.9870850887643925)
 light_color = Color(1, 0.8509804, 0.6039216, 1)
 light_energy = 4.299
 shadow_enabled = true
 spot_angle_attenuation = 4.594793
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="2"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="3"]
 environment = SubResource("Environment_s6rcy")
-
-[node name="Camera3D" type="Camera3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 0.949425477641904, 0.3139924559674052, 0, -0.3139924559674052, 0.949425477641904, -0.731854897820834, -1.1071472472370745, -2.190648950291657)
-fov = 60.0
-near = 0.00999999999999999
-far = 100.0
 
 [node name="small_display" parent="Interior/Console/Display1A/Small1" index="0" instance=ExtResource("2_uso82")]
 
@@ -43,6 +53,8 @@ far = 100.0
 [node name="small_display" parent="Interior/Console/Display1A/Small4" index="0" instance=ExtResource("2_uso82")]
 
 [node name="display" parent="Interior/Console/Display1A" index="4" instance=ExtResource("2_64l87")]
+
+[node name="display" parent="Interior/Console/Display1B" index="0" instance=ExtResource("2_64l87")]
 
 [node name="Node3D" type="Node3D" parent="NavTable" index="0"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0.32584426282347034, 0)

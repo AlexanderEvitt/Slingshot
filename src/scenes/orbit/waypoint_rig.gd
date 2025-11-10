@@ -15,7 +15,7 @@ func _process(_delta):
 		# First get the mouse position in coordinates relative to the selected body
 		var camera = camera_rig.get_node("CameraRotator/Camera3D")
 		var mouse_pos = get_viewport().get_mouse_position()
-		var from = -get_parent().global_position # this is the camera position relative to the selected body (camera is at world origin)
+		var from = camera.global_position-get_parent().global_position # this is the camera position relative to the selected body
 		var dir = camera.project_ray_normal(mouse_pos)
 		var plane = Plane(Vector3(0,0,1), 0.0) # z=0 plane
 		hit = plane.intersects_ray(from, dir)
