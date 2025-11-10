@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://etb6wr74mvbq"]
+[gd_scene load_steps=7 format=3 uid="uid://etb6wr74mvbq"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_rl157"]
 [ext_resource type="Script" uid="uid://c5861dvxuxslk" path="res://ui/screen_switcher.gd" id="2_bxrle"]
 [ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="3_noksf"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="4_g0vkg"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="10_floo7"]
-[ext_resource type="PackedScene" uid="uid://boi1ptoe3f73w" path="res://ui/pause/pause_menu.tscn" id="12_dpds3"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_noksf"]
 
@@ -214,9 +213,3 @@ theme = ExtResource("10_floo7")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_noksf")
 text = "LOGO"
-
-[node name="PauseMenu" parent="." instance=ExtResource("12_dpds3")]
-visible = false
-layout_mode = 1
-anchor_top = 0.39
-anchor_bottom = 0.61

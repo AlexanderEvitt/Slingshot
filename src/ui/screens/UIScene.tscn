@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene load_steps=13 format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" uid="uid://c5861dvxuxslk" path="res://ui/screen_switcher.gd" id="2_bh7rb"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://d06hakxi1tnc8" path="res://ui/screens/navigation/navigation_screen.tscn" id="7_j2pmq"]
 [ext_resource type="PackedScene" uid="uid://b0akt2w44i68p" path="res://ui/screens/utility_screen.tscn" id="8_76tcd"]
 [ext_resource type="PackedScene" uid="uid://cupcgndqidmw2" path="res://ui/screens/cinematic_screen.tscn" id="9_xulks"]
-[ext_resource type="PackedScene" uid="uid://boi1ptoe3f73w" path="res://ui/pause/pause_menu.tscn" id="12_fy2ny"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="14_k3rsk"]
 [ext_resource type="Texture2D" uid="uid://qtmcjwohkxb0" path="res://ui/triangle_cutout.png" id="17_adpiv"]
 [ext_resource type="ButtonGroup" uid="uid://ye2bbm1ubp2l" path="res://ui/screens_button_group.tres" id="27_ytqrm"]
@@ -201,9 +200,3 @@ offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_r8b8m")
-
-[node name="PauseMenu" parent="." instance=ExtResource("12_fy2ny")]
-visible = false
-layout_mode = 1
-anchor_top = 0.39
-anchor_bottom = 0.61

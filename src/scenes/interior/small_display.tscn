@@ -21,6 +21,7 @@ size = Vector3(0.203, 0.015, 0.203)
 
 [node name="small_display" instance=ExtResource("1_4gg23")]
 script = ExtResource("2_cqwsr")
+display_size = Vector2(0.203, 0.203)
 
 [node name="SmallDisplay" parent="." index="0"]
 surface_material_override/1 = SubResource("StandardMaterial3D_cqwsr")

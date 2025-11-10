@@ -1,27 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyuel0delkcqp"]
+[gd_scene load_steps=4 format=3 uid="uid://dyuel0delkcqp"]
 
 [ext_resource type="PackedScene" uid="uid://cfjyiueui6yog" path="res://ship/frigate/wireframe/FrigateWireframeModel.tscn" id="1_stbap"]
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="10_jswew"]
 [ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="11_6l12o"]
-
-[sub_resource type="Environment" id="Environment_wjvqu"]
-background_mode = 1
-background_color = Color(0.117647, 0.117647, 0.156863, 1)
 
 [node name="Ship" type="Node3D"]
 
 [node name="Ship" type="Node3D" parent="."]
 
 [node name="frigate_wireframe" parent="Ship" instance=ExtResource("1_stbap")]
-
-[node name="VehicleOverviewCamera" type="Camera3D" parent="."]
-transform = Transform3D(0.724172, -0.287075, 0.627027, 0, 0.909236, 0.416281, -0.68962, -0.301459, 0.658443, 18.414, 13.77, 21.751)
-environment = SubResource("Environment_wjvqu")
-projection = 1
-fov = 69.4
-size = 40.0
-near = 10.0
-far = 100.0
 
 [node name="Plumes" type="Node3D" parent="."]
 transform = Transform3D(138.79, 0, 0, 0, 138.79, 0, 0, 0, 138.79, -29.0583, 0, 0)

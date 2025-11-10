@@ -8,6 +8,8 @@ extends Node3D
 
 @onready var camera = $Camera3D
 @onready var raycast = $RayCast3D
+@onready var crosshair = $Camera3D/Crosshair
+@onready var pause_menu := $Camera3D/PauseMenu
 
 var yaw := 0.0
 var pitch := 0.0
@@ -60,7 +62,9 @@ func _on_interact() -> void:
 				focusing = true
 				in_transition = true
 				transition_t = 0.0
+				# Mouse visible, cross hair not
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+				crosshair.visible = false
 	else:
 		# Return to original position
 		start_transform = camera.global_transform
@@ -68,7 +72,9 @@ func _on_interact() -> void:
 		focusing = false
 		in_transition = true
 		transition_t = 0.0
+		# Mouse invisible, cross hair visible
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		crosshair.visible = true
 
 func _physics_process(delta: float) -> void:
 	if in_transition:
