@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy2v2xkwsyqp4"]
+[gd_scene load_steps=14 format=3 uid="uid://cy2v2xkwsyqp4"]
 
 [ext_resource type="PackedScene" uid="uid://p4lgjdfw8o7y" path="res://scenes/interior/interior.glb" id="1_hytfg"]
 [ext_resource type="PackedScene" uid="uid://c7557e6pmwk05" path="res://scenes/interior/display.tscn" id="2_64l87"]
@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://boi1ptoe3f73w" path="res://ui/pause/pause_menu.tscn" id="4_c8a2x"]
 [ext_resource type="Script" uid="uid://bquoraykqlqcq" path="res://scenes/interior/joystick.gd" id="4_gujd0"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="5_bavqc"]
+[ext_resource type="AudioStream" uid="uid://b6etobfpn1eqc" path="res://audio/rumble.ogg" id="9_j2chi"]
+[ext_resource type="Script" uid="uid://crjpvll8nr1l0" path="res://ship/entity/ship_audio.gd" id="10_2qs4y"]
+[ext_resource type="AudioStream" uid="uid://bhyw1q27gt2np" path="res://audio/caution.ogg" id="11_7njs8"]
+[ext_resource type="AudioStream" uid="uid://bj5h1vhmxsi4x" path="res://audio/warning.ogg" id="13_oh51y"]
 
 [sub_resource type="Environment" id="Environment_s6rcy"]
 background_mode = 1
@@ -93,7 +97,7 @@ transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
 [node name="Ship" parent="NavTable" index="1" instance=ExtResource("5_bavqc")]
-transform = Transform3D(9.184850993605146e-19, 0, 0.014999999999999996, 0, 0.014999999999999996, 0, -0.014999999999999996, 0, 9.184850993605146e-19, 0, 0.5478845569204716, 0)
+transform = Transform3D(9.184850993605146e-19, 0, 0.01499999999999999, 0, 0.01499999999999999, 0, -0.01499999999999999, 0, 9.184850993605146e-19, 0, 0.5478845569204716, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="NavTable/Ship" index="3"]
 light_energy = 0.4
@@ -101,3 +105,18 @@ omni_range = 1.897
 
 [node name="Joystick" parent="." index="6"]
 script = ExtResource("4_gujd0")
+
+[node name="AudioRumble" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource("9_j2chi")
+volume_db = -80.0
+autoplay = true
+parameters/looping = true
+script = ExtResource("10_2qs4y")
+
+[node name="AudioCaution" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource("11_7njs8")
+parameters/looping = true
+
+[node name="AudioWarning" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource("13_oh51y")
+parameters/looping = true

@@ -4,6 +4,7 @@ extends Node3D
 
 @onready var node_viewport = $SubViewport
 @onready var node_area = $Area3D
+@onready var audio = $AudioStreamPlayer
 
 # Determines whether it receives inputs
 @export var display_of_interest = true
@@ -99,3 +100,7 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 	# Finally, send the processed input event to the viewport.
 	node_viewport.push_input(event)
+	
+	# Only play sound when mouse button is pressed down (not on move or release)
+	if event is InputEventMouseButton and event.pressed:
+		audio.play()

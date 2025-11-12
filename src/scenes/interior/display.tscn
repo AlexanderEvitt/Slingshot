@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7557e6pmwk05"]
+[gd_scene load_steps=9 format=3 uid="uid://c7557e6pmwk05"]
 
 [ext_resource type="PackedScene" uid="uid://b4s0brks0pafw" path="res://scenes/interior/display.glb" id="1_7godr"]
 [ext_resource type="PackedScene" uid="uid://231jhr4hx8d6" path="res://ui/screens/UIScene.tscn" id="2_5pvgv"]
 [ext_resource type="Script" uid="uid://crfrjb78vcind" path="res://scenes/interior/display.gd" id="2_qf4pv"]
+[ext_resource type="AudioStream" uid="uid://cvoo2j7gs1j30" path="res://audio/click.ogg" id="4_4reng"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7godr"]
 viewport_path = NodePath("SubViewport")
@@ -35,3 +36,7 @@ button_group = SubResource("ButtonGroup_qf4pv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("BoxShape3D_4reng")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("4_4reng")
+volume_db = -20.0
