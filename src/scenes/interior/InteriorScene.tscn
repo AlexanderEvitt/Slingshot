@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cy2v2xkwsyqp4"]
+[gd_scene load_steps=15 format=3 uid="uid://cy2v2xkwsyqp4"]
 
 [ext_resource type="PackedScene" uid="uid://p4lgjdfw8o7y" path="res://scenes/interior/interior.glb" id="1_hytfg"]
 [ext_resource type="PackedScene" uid="uid://c7557e6pmwk05" path="res://scenes/interior/display.tscn" id="2_64l87"]
@@ -17,7 +17,13 @@
 background_mode = 1
 tonemap_mode = 3
 ssao_enabled = true
+sdfgi_enabled = true
 glow_blend_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjiuk"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
 
 [node name="interior" instance=ExtResource("1_hytfg")]
 
@@ -58,6 +64,7 @@ collide_with_areas = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5294556229807605, -1.3712510382218328)
+visible = false
 light_energy = 0.15
 shadow_enabled = true
 
@@ -82,7 +89,12 @@ environment = SubResource("Environment_s6rcy")
 [node name="display" parent="Interior/Console/Display1A" index="4" instance=ExtResource("2_64l87")]
 
 [node name="display" parent="Interior/Console/Display1B" index="0" instance=ExtResource("2_64l87")]
-display_of_interest = false
+
+[node name="FloorLights" parent="Interior" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_mjiuk")
+
+[node name="Joystick" parent="Interior/JoystickBase" index="0"]
+script = ExtResource("4_gujd0")
 
 [node name="Node3D" type="Node3D" parent="NavTable" index="0"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0.32584426282347034, 0)
@@ -98,13 +110,11 @@ transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
 [node name="Ship" parent="NavTable" index="1" instance=ExtResource("5_bavqc")]
 transform = Transform3D(9.184850993605146e-19, 0, 0.01499999999999999, 0, 0.01499999999999999, 0, -0.01499999999999999, 0, 9.184850993605146e-19, 0, 0.5478845569204716, 0)
+visible = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="NavTable/Ship" index="3"]
 light_energy = 0.4
 omni_range = 1.897
-
-[node name="Joystick" parent="." index="6"]
-script = ExtResource("4_gujd0")
 
 [node name="AudioRumble" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource("9_j2chi")
