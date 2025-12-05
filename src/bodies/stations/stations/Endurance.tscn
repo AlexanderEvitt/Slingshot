@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=4 uid="uid://cdxkk5qy7ccnc"]
 
-[ext_resource type="Script" path="res://bodies/stations/components/station_manager.gd" id="1_5moyy"]
+[ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://bodies/stations/components/station_manager.gd" id="1_5moyy"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="1_jprih"]
 [ext_resource type="PackedScene" uid="uid://bty856a1y2vt0" path="res://bodies/stations/components/stump.tscn" id="2_66665"]
 [ext_resource type="PackedScene" uid="uid://cr6y3tpnww4h7" path="res://bodies/stations/components/ring.tscn" id="3_nsi5c"]
@@ -86,5 +86,6 @@ transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
 [node name="BakedPotato" type="MeshInstance3D" parent="."]
 transform = Transform3D(26.05, 0, 0, 0, 26.05, 0, 0, 0, 26.05, 0, 0, 0)
+visibility_range_end = 10000000.0
 mesh = SubResource("ArrayMesh_y4kea")
 skeleton = NodePath("")

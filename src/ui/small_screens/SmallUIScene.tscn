@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://etb6wr74mvbq"]
+[gd_scene load_steps=8 format=3 uid="uid://etb6wr74mvbq"]
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_rl157"]
 [ext_resource type="Script" uid="uid://c5861dvxuxslk" path="res://ui/screen_switcher.gd" id="2_bxrle"]
 [ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="3_noksf"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="4_g0vkg"]
 [ext_resource type="PackedScene" uid="uid://jpb6h7avv8co" path="res://ui/screens/navigation/waypoints/waypoints.tscn" id="4_hqpxh"]
-[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="5_wn2yn"]
-[ext_resource type="PackedScene" uid="uid://k452wc4u7ysf" path="res://ship/flight/ship_camera_holder.tscn" id="6_o8nqi"]
 [ext_resource type="Theme" uid="uid://dvd52f5nadxfl" path="res://ui/themes/light_panel.tres" id="10_floo7"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_noksf"]
@@ -53,7 +51,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HazL" type="SubViewportContainer" parent="."]
+[node name="HazL" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -62,17 +60,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="HazL"]
-world_3d = ExtResource("5_wn2yn")
-handle_input_locally = false
-render_target_update_mode = 0
-
-[node name="PlayerShip" parent="HazL/SubViewport" instance=ExtResource("6_o8nqi")]
-active_camera = "HazL"
-
-[node name="HazR" type="SubViewportContainer" parent="."]
+[node name="HazR" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -81,17 +70,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="HazR"]
-world_3d = ExtResource("5_wn2yn")
-handle_input_locally = false
-render_target_update_mode = 0
-
-[node name="PlayerShip" parent="HazR/SubViewport" instance=ExtResource("6_o8nqi")]
-active_camera = "HazR"
-
-[node name="Overview" type="SubViewportContainer" parent="."]
+[node name="Overview" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -100,15 +80,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="Overview"]
-world_3d = ExtResource("5_wn2yn")
-handle_input_locally = false
-render_target_update_mode = 0
-
-[node name="PlayerShip" parent="Overview/SubViewport" instance=ExtResource("6_o8nqi")]
-active_camera = "Overview"
 
 [node name="Logo5" type="TextureRect" parent="."]
 visible = false

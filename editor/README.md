@@ -26,7 +26,7 @@ bin\godot.windows.editor.double.x86_64.mono.exe --headless --generate-mono-glue 
 
 ```
 # cd into godot (root folder) first
-python .\modules\mono\build_scripts\build_assemblies.py --godot-output-dir ./bin --push-nupkgs-local C:\Users\alexa\MyLocalNugetSource
+python .\modules\mono\build_scripts\build_assemblies.py --godot-output-dir ./bin --push-nupkgs-local C:\Users\alexa\MyLocalNugetSource --precision=double
 ```
 
 

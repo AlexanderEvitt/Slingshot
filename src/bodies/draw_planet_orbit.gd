@@ -17,7 +17,7 @@ func _process(_delta):
 	# Only refresh when more time has elapsed than 1/2e5 of a period
 	accumulator += SystemTime.step*0.03333;
 	period = this_body.body.period
-	var refresh_period = clamp(period/2e5, 100, 1e99)
+	var refresh_period = clamp(period/2e5, 30, 1e99)
 	if accumulator > refresh_period: # <= how many times the orbit is redrawn per orbit
 		refresh_traj()
 		accumulator = 0
@@ -36,7 +36,7 @@ func refresh_traj():
 		var t = tc + (indent)*period + ((1 - indent)*period*i/n)
 		var p = this_body.fetch(t) - p0
 		
-		# Subtract parent velocity
+		# Subtract parent motion since start
 		p = p - (parent_body.fetch(t) - parent_body.fetch(tc))
 
 		traj.append(p)

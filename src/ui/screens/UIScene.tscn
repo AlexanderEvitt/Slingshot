@@ -47,6 +47,7 @@ visible = false
 layout_mode = 1
 
 [node name="NavigationScreen" parent="." instance=ExtResource("7_j2pmq")]
+visible = false
 layout_mode = 1
 
 [node name="UtilityScreen" parent="." instance=ExtResource("8_76tcd")]
@@ -58,7 +59,6 @@ visible = false
 layout_mode = 1
 
 [node name="ScreenSelectorPanel" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
