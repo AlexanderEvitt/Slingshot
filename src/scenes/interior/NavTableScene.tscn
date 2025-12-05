@@ -1,0 +1,804 @@
+[gd_scene load_steps=40 format=3 uid="uid://bkvmuhyyvkeei"]
+
+[ext_resource type="Script" uid="uid://sv406c618jxf" path="res://scenes/barycenter.gd" id="2_1drqo"]
+[ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="3_wharp"]
+[ext_resource type="FontFile" uid="uid://dqyy4mogwg27l" path="res://ui/fonts/Oxanium-Regular.ttf" id="4_415t4"]
+[ext_resource type="Script" uid="uid://biotnfa17c2e5" path="res://bodies/body_inheritor.gd" id="6_8eqfn"]
+[ext_resource type="Script" uid="uid://pu3fx41i2cr6" path="res://bodies/draw_planet_orbit.gd" id="7_mayw6"]
+[ext_resource type="PackedScene" uid="uid://rg5pq75kxwxo" path="res://bodies/wireframe/MercuryWireframe.tscn" id="8_7mv6u"]
+[ext_resource type="PackedScene" uid="uid://p6o5a3n7q5yl" path="res://bodies/wireframe/VenusWireframe.tscn" id="9_87rgh"]
+[ext_resource type="PackedScene" uid="uid://dlxcptlilq2sf" path="res://bodies/wireframe/EarthWireframe.tscn" id="10_hkkvi"]
+[ext_resource type="Texture2D" uid="uid://cvrhj5um66egb" path="res://scenes/orbit/station_symbol.png" id="11_fclyk"]
+[ext_resource type="PackedScene" uid="uid://b51mp318qc6wr" path="res://scenes/orbit/koz/wire_sphere.tscn" id="12_yjidv"]
+[ext_resource type="PackedScene" uid="uid://djhub5hfmxtif" path="res://scenes/orbit/koz/wire_cylinder.tscn" id="13_caddq"]
+[ext_resource type="PackedScene" uid="uid://btpxws4tx476f" path="res://scenes/orbit/koz/wire_cube.tscn" id="14_38xxk"]
+[ext_resource type="PackedScene" uid="uid://dhbrnbjd5ry01" path="res://bodies/wireframe/LunaWireframe.tscn" id="15_olndc"]
+[ext_resource type="PackedScene" uid="uid://olsok6qpjvew" path="res://bodies/wireframe/MarsWireframe.tscn" id="16_d2tyj"]
+[ext_resource type="PackedScene" uid="uid://bmc8fp2kenecv" path="res://bodies/wireframe/JupiterWireframe.tscn" id="17_iq34p"]
+[ext_resource type="Shader" uid="uid://m8q5t8rpuhox" path="res://bodies/wireframe/outline.gdshader" id="18_iw1cu"]
+[ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://bodies/wireframe/BlankWireframe.png" id="19_62xgv"]
+[ext_resource type="PackedScene" uid="uid://bgifrw1p56y10" path="res://bodies/wireframe/SaturnWireframe.tscn" id="20_4jm56"]
+[ext_resource type="PackedScene" uid="uid://2q27idy8fbkr" path="res://bodies/wireframe/UranusWireframe.tscn" id="21_42tfb"]
+[ext_resource type="PackedScene" uid="uid://d386uc0phqab7" path="res://bodies/wireframe/NeptuneWireframe.tscn" id="22_n67f3"]
+[ext_resource type="Script" uid="uid://coauq357djn0x" path="res://scenes/orbit/spacecraft_inheritor.gd" id="23_qamnj"]
+[ext_resource type="Script" uid="uid://xet38inpduig" path="res://bodies/draw_spacecraft_orbit.gd" id="24_min0a"]
+[ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="25_3fc6j"]
+[ext_resource type="Texture2D" uid="uid://d3qgybl45ufxd" path="res://scenes/orbit/ship_symbol.png" id="27_picn3"]
+[ext_resource type="Script" uid="uid://c6fhbhu4rnokq" path="res://scenes/orbit/waypoint_rig.gd" id="28_wbb5q"]
+[ext_resource type="Script" uid="uid://bitgjrtr11mkj" path="res://scenes/orbit/waypoint_plotter.gd" id="29_t8w4c"]
+
+[sub_resource type="Environment" id="Environment_aovhe"]
+background_mode = 1
+background_color = Color(0.117647, 0.117647, 0.156863, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fskp6"]
+radius = 700000.0
+height = 1400000.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tj412"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_385ak"]
+radius = 1822.0
+height = 3643.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7j3p"]
+render_priority = 0
+shader = ExtResource("18_iw1cu")
+shader_parameter/textured = ExtResource("19_62xgv")
+shader_parameter/colored = Color(0.527308, 0.238355, 0.289012, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_kxpab"]
+radius = 2410.0
+height = 4821.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h4gya"]
+render_priority = 0
+shader = ExtResource("18_iw1cu")
+shader_parameter/textured = ExtResource("19_62xgv")
+shader_parameter/colored = Color(0.527308, 0.238355, 0.289012, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_p12ly"]
+radius = 1561.0
+height = 3122.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4g1t"]
+render_priority = 0
+shader = ExtResource("18_iw1cu")
+shader_parameter/textured = ExtResource("19_62xgv")
+shader_parameter/colored = Color(0, 0.37, 0, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_2a7sc"]
+radius = 2634.0
+height = 5268.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37qg8"]
+render_priority = 0
+shader = ExtResource("18_iw1cu")
+shader_parameter/textured = ExtResource("19_62xgv")
+shader_parameter/colored = Color(0.56, 0.56, 0.56, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_o4sno"]
+radius = 2575.0
+height = 5150.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m08ws"]
+render_priority = 0
+shader = ExtResource("18_iw1cu")
+shader_parameter/textured = ExtResource("19_62xgv")
+shader_parameter/colored = Color(0.89, 0.64436, 0.2492, 1)
+shader_parameter/fresnel_threshold = 0.8
+shader_parameter/fresnel_power = 2.0
+
+[node name="OrbitRoot" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aovhe")
+
+[node name="SolarSystem" type="Node3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+script = ExtResource("2_1drqo")
+
+[node name="Sun" type="Node3D" parent="SolarSystem"]
+script = ExtResource("2_1drqo")
+body_path = "SolarSystem/Sun"
+
+[node name="SunMesh" type="MeshInstance3D" parent="SolarSystem/Sun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -770000, 0, 0)
+mesh = SubResource("SphereMesh_fskp6")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_tj412")
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Sun"]
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Label" type="Label3D" parent="SolarSystem/Sun"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " SUN"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Mercury" type="Node3D" parent="SolarSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Mercury"
+
+[node name="MercuryPlotter" type="Node3D" parent="SolarSystem/Mercury" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.45, 0.28305, 0.2115, 1)
+
+[node name="MercuryMesh" parent="SolarSystem/Mercury" instance=ExtResource("8_7mv6u")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Mercury"]
+modulate = Color(0.45098, 0.282353, 0.211765, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Label" type="Label3D" parent="SolarSystem/Mercury"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " MERCURY"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Venus" type="Node3D" parent="SolarSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Venus"
+
+[node name="VenusPlotter" type="Node3D" parent="SolarSystem/Venus" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.67, 0.482512, 0.1809, 1)
+
+[node name="VenusMesh" parent="SolarSystem/Venus" instance=ExtResource("9_87rgh")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Venus"]
+modulate = Color(0.670588, 0.482353, 0.180392, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Label" type="Label3D" parent="SolarSystem/Venus"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " VENUS"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Earth" type="Node3D" parent="SolarSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 0, 0)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Earth"
+
+[node name="EarthPlotter" type="Node3D" parent="SolarSystem/Earth" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.181977, 0.313911, 0.600695, 1)
+
+[node name="EarthMesh" parent="SolarSystem/Earth" instance=ExtResource("10_hkkvi")]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Earth"]
+modulate = Color(0.180392, 0.313726, 0.6, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Label" type="Label3D" parent="SolarSystem/Earth"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " EARTH"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Zephyr" type="Node3D" parent="SolarSystem/Earth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.3)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Earth/Zephyr"
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Zephyr" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(1, 0.6, 0, 1)
+visible_distance = 200000
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Earth/Zephyr"]
+visibility_range_end = 20000.0
+visibility_range_end_margin = 20000.0
+visibility_range_fade_mode = 1
+modulate = Color(1, 0.6, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("11_fclyk")
+
+[node name="KOZ" type="Node3D" parent="SolarSystem/Earth/Zephyr"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+
+[node name="wire_sphere" parent="SolarSystem/Earth/Zephyr/KOZ" instance=ExtResource("12_yjidv")]
+transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 29.32, 0, 0, 0)
+
+[node name="wire_cylinder" parent="SolarSystem/Earth/Zephyr/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
+
+[node name="wire_cylinder2" parent="SolarSystem/Earth/Zephyr/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
+
+[node name="wire_cylinder3" parent="SolarSystem/Earth/Zephyr/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
+
+[node name="wire_cube" parent="SolarSystem/Earth/Zephyr/KOZ" instance=ExtResource("14_38xxk")]
+transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Earth/Zephyr"]
+visibility_range_end = 200000.0
+visibility_range_end_margin = 200000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " ZEPHYR"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Luna" type="Node3D" parent="SolarSystem/Earth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.9547, 12989.3)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Earth/Luna"
+
+[node name="LunaMesh" parent="SolarSystem/Earth/Luna" instance=ExtResource("15_olndc")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Earth/Luna"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(0.589096, 0.589096, 0.589096, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Luna" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(1, 1, 1, 1)
+visible_distance = 2000000
+
+[node name="Label" type="Label3D" parent="SolarSystem/Earth/Luna"]
+visibility_range_end = 2000000.0
+visibility_range_end_margin = 2000000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " LUNA"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Endurance" type="Node3D" parent="SolarSystem/Earth/Luna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.3)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Earth/Luna/Endurance"
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance" groups=["BodyOrbit"]]
+visible = false
+script = ExtResource("7_mayw6")
+color = Color(1, 0.6, 0, 1)
+visible_distance = 200000
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Earth/Luna/Endurance"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(1, 0.6, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("11_fclyk")
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Earth/Luna/Endurance"]
+visibility_range_end = 2000000.0
+visibility_range_end_margin = 2000000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " ENDURANCE"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="KOZ" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+
+[node name="wire_sphere" parent="SolarSystem/Earth/Luna/Endurance/KOZ" instance=ExtResource("12_yjidv")]
+transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 55.295, 0, 0, 0)
+
+[node name="wire_cylinder" parent="SolarSystem/Earth/Luna/Endurance/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
+
+[node name="wire_cylinder2" parent="SolarSystem/Earth/Luna/Endurance/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
+
+[node name="wire_cylinder3" parent="SolarSystem/Earth/Luna/Endurance/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
+
+[node name="wire_cube" parent="SolarSystem/Earth/Luna/Endurance/KOZ" instance=ExtResource("14_38xxk")]
+transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
+
+[node name="Mars" type="Node3D" parent="SolarSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Mars"
+
+[node name="MarsPlotter" type="Node3D" parent="SolarSystem/Mars" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.539592, 0.205864, 0.196268, 1)
+
+[node name="MarsMesh" parent="SolarSystem/Mars" instance=ExtResource("16_d2tyj")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Mars"]
+modulate = Color(0.541176, 0.203922, 0.196078, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Label" type="Label3D" parent="SolarSystem/Mars"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " MARS"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Yugala" type="Node3D" parent="SolarSystem/Mars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 115.063)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Mars/Yugala"
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Mars/Yugala" groups=["BodyOrbit"]]
+visible = false
+script = ExtResource("7_mayw6")
+color = Color(0.41, 0.116167, 0, 1)
+visible_distance = 200000
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Mars/Yugala"]
+visibility_range_end = 20000.0
+visibility_range_end_margin = 20000.0
+visibility_range_fade_mode = 1
+modulate = Color(0.411765, 0.117647, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("11_fclyk")
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Mars/Yugala"]
+visibility_range_end = 200000.0
+visibility_range_end_margin = 200000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = "YUGALA ORBITAL"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="KOZ" type="Node3D" parent="SolarSystem/Mars/Yugala"]
+
+[node name="wire_sphere" parent="SolarSystem/Mars/Yugala/KOZ" instance=ExtResource("12_yjidv")]
+transform = Transform3D(5.5, 0, 0, 0, 5.5, 0, 0, 0, 5.5, 0, -12.49, 0)
+
+[node name="wire_sphere2" parent="SolarSystem/Mars/Yugala/KOZ" instance=ExtResource("12_yjidv")]
+transform = Transform3D(5.5, 0, 0, 0, 5.5, 0, 0, 0, 5.5, 0, 12.49, 0)
+
+[node name="wire_cylinder" parent="SolarSystem/Mars/Yugala/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(0.5, 0, 0, 0, 12, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="wire_cylinder2" parent="SolarSystem/Mars/Yugala/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 4, 0)
+
+[node name="wire_cylinder3" parent="SolarSystem/Mars/Yugala/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, -4, 0)
+
+[node name="wire_cylinder4" parent="SolarSystem/Mars/Yugala/KOZ" instance=ExtResource("13_caddq")]
+transform = Transform3D(2.475, 0, 0, 0, 0.415, 0, 0, 0, 3.11, 0, 0.104842, 0)
+
+[node name="Jupiter" type="Node3D" parent="SolarSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Jupiter"
+
+[node name="JupiterPlotter" type="Node3D" parent="SolarSystem/Jupiter" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.607, 0.0604174, 0.245852, 1)
+
+[node name="JupiterMesh" parent="SolarSystem/Jupiter" instance=ExtResource("17_iq34p")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Jupiter"]
+modulate = Color(0.607843, 0.0588235, 0.247059, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Label" type="Label3D" parent="SolarSystem/Jupiter"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " JUPITER"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Io" type="Node3D" parent="SolarSystem/Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.6)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Jupiter/Io"
+
+[node name="BodyMesh" type="MeshInstance3D" parent="SolarSystem/Jupiter/Io"]
+visibility_range_end = 10000000.0
+mesh = SubResource("SphereMesh_385ak")
+surface_material_override/0 = SubResource("ShaderMaterial_l7j3p")
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Jupiter/Io/BodyMesh"]
+visibility_range_end = 2000000.0
+visibility_range_end_margin = 2000000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " IO"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Io" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(1, 0.6, 0, 1)
+visible_distance = 2000000
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Jupiter/Io"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(1, 0.6, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Callisto" type="Node3D" parent="SolarSystem/Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28387.6, 0, 86043.4)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Jupiter/Callisto"
+
+[node name="BodyMesh" type="MeshInstance3D" parent="SolarSystem/Jupiter/Callisto"]
+visibility_range_end = 10000000.0
+mesh = SubResource("SphereMesh_kxpab")
+surface_material_override/0 = SubResource("ShaderMaterial_h4gya")
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Jupiter/Callisto/BodyMesh"]
+visibility_range_end = 2000000.0
+visibility_range_end_margin = 2000000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " CALLISTO"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Callisto" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.52549, 0.239216, 0.290196, 1)
+visible_distance = 2000000
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Jupiter/Callisto"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(0.52549, 0.239216, 0.290196, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Europa" type="Node3D" parent="SolarSystem/Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25504.2, 0, 90486.3)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Jupiter/Europa"
+
+[node name="BodyMesh" type="MeshInstance3D" parent="SolarSystem/Jupiter/Europa"]
+visibility_range_end = 10000000.0
+mesh = SubResource("SphereMesh_p12ly")
+surface_material_override/0 = SubResource("ShaderMaterial_j4g1t")
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Jupiter/Europa/BodyMesh"]
+visibility_range_end = 2000000.0
+visibility_range_end_margin = 2000000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " EUROPA"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Europa" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0, 0.368627, 0, 1)
+visible_distance = 2000000
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Jupiter/Europa"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(0, 0.368627, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Ganymede" type="Node3D" parent="SolarSystem/Jupiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26531.7, 0, 82270.3)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Jupiter/Ganymede"
+
+[node name="BodyMesh" type="MeshInstance3D" parent="SolarSystem/Jupiter/Ganymede"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70714, 0, 0)
+visibility_range_end = 10000000.0
+mesh = SubResource("SphereMesh_2a7sc")
+surface_material_override/0 = SubResource("ShaderMaterial_37qg8")
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Jupiter/Ganymede/BodyMesh"]
+visibility_range_end = 2000000.0
+visibility_range_end_margin = 2000000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " GANYMEDE"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Ganymede" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.560784, 0.560784, 0.560784, 1)
+visible_distance = 2000000
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Jupiter/Ganymede"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(0.560784, 0.560784, 0.560784, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Saturn" type="Node3D" parent="SolarSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Saturn"
+
+[node name="SaturnPlotter" type="Node3D" parent="SolarSystem/Saturn" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.405878, 0.319402, 0, 1)
+
+[node name="SaturnMesh" parent="SolarSystem/Saturn" instance=ExtResource("20_4jm56")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Saturn"]
+modulate = Color(0.403922, 0.317647, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Label" type="Label3D" parent="SolarSystem/Saturn"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " SATURN"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Titan" type="Node3D" parent="SolarSystem/Saturn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.393, 0, 33535.6)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Saturn/Titan"
+
+[node name="TitanMesh" type="MeshInstance3D" parent="SolarSystem/Saturn/Titan"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visibility_range_end = 10000.0
+mesh = SubResource("SphereMesh_o4sno")
+surface_material_override/0 = SubResource("ShaderMaterial_m08ws")
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Saturn/Titan/TitanMesh"]
+visibility_range_end = 2000000.0
+visibility_range_end_margin = 2000000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " TITAN"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Saturn/Titan" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.890196, 0.643137, 0.25098, 1)
+visible_distance = 2000000
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Saturn/Titan"]
+visibility_range_end = 2000.0
+visibility_range_end_margin = 2000.0
+visibility_range_fade_mode = 1
+modulate = Color(0.403922, 0.317647, 0, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Uranus" type="Node3D" parent="SolarSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 580869, 0, 0)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Uranus"
+
+[node name="UranusPlotter" type="Node3D" parent="SolarSystem/Uranus" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.354396, 0.696462, 0.973375, 1)
+
+[node name="UranusMesh" parent="SolarSystem/Uranus" instance=ExtResource("21_42tfb")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Uranus"]
+modulate = Color(0.352941, 0.698039, 0.972549, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Label" type="Label3D" parent="SolarSystem/Uranus"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " URANUS"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Neptune" type="Node3D" parent="SolarSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
+script = ExtResource("6_8eqfn")
+body_path = "SolarSystem/Neptune"
+
+[node name="NeptunePlotter" type="Node3D" parent="SolarSystem/Neptune" groups=["BodyOrbit"]]
+script = ExtResource("7_mayw6")
+color = Color(0.145, 0.254342, 0.760636, 1)
+
+[node name="NeptuneMesh" parent="SolarSystem/Neptune" instance=ExtResource("22_n67f3")]
+
+[node name="FlatPlanetSprite" type="Sprite3D" parent="SolarSystem/Neptune"]
+modulate = Color(0.145098, 0.254902, 0.760784, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_wharp")
+
+[node name="Label" type="Label3D" parent="SolarSystem/Neptune"]
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " NEPTUNE"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Ships" type="Node3D" parent="."]
+
+[node name="PlayerShip" type="Node3D" parent="Ships"]
+script = ExtResource("23_qamnj")
+body_path = "Ships/PlayerShip"
+
+[node name="Plotter" type="Node3D" parent="Ships/PlayerShip"]
+script = ExtResource("24_min0a")
+color = Color(1, 0.690196, 0, 1)
+slice = true
+
+[node name="Pointer" type="Node3D" parent="Ships/PlayerShip"]
+
+[node name="Ship" parent="Ships/PlayerShip/Pointer" instance=ExtResource("25_3fc6j")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="ShipSprite" type="Sprite3D" parent="Ships/PlayerShip"]
+modulate = Color(0.15, 0.5, 0.185, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("27_picn3")
+
+[node name="ShipLabel" type="Label3D" parent="Ships/PlayerShip"]
+visible = false
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " FV JUNIPER"
+font = ExtResource("4_415t4")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="WaypointRig" type="Node3D" parent="."]
+script = ExtResource("28_wbb5q")
+color = Color(1, 1, 1, 1)
+
+[node name="WaypointPlotter" type="Node3D" parent="."]
+script = ExtResource("29_t8w4c")
+color = Color(0.552941, 0, 0.552941, 1)
