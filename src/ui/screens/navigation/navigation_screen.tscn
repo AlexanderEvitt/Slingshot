@@ -1,24 +1,22 @@
-[gd_scene load_steps=20 format=3 uid="uid://d06hakxi1tnc8"]
+[gd_scene load_steps=18 format=3 uid="uid://d06hakxi1tnc8"]
 
 [ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_oebc5"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="2_e80r5"]
-[ext_resource type="Script" path="res://ui/screens/navigation/clock.gd" id="3_5ygb3"]
+[ext_resource type="Script" uid="uid://dxa3h8undbc7o" path="res://ui/screens/navigation/clock.gd" id="3_5ygb3"]
 [ext_resource type="PackedScene" uid="uid://bcaj67ttyd84r" path="res://ui/widgets/circle_gauge/circle_gauge.tscn" id="4_3ikq8"]
-[ext_resource type="Script" path="res://ui/screens/navigation/timerate.gd" id="4_s71s8"]
-[ext_resource type="Script" path="res://ui/screens/navigation/frame_label.gd" id="5_6nun4"]
-[ext_resource type="Script" path="res://ui/widgets/circle_gauge/circle_gauge.gd" id="5_cykad"]
-[ext_resource type="Script" path="res://ui/screens/navigation/instruments_populator.gd" id="6_4ln7h"]
+[ext_resource type="Script" uid="uid://cw7apltpjymk2" path="res://ui/screens/navigation/timerate.gd" id="4_s71s8"]
+[ext_resource type="Script" uid="uid://dlx6utxi6urtf" path="res://ui/screens/navigation/frame_label.gd" id="5_6nun4"]
+[ext_resource type="Script" uid="uid://dk1wi20mim6w8" path="res://ui/widgets/circle_gauge/circle_gauge.gd" id="5_cykad"]
+[ext_resource type="Script" uid="uid://bl46x5wkuv08" path="res://ui/screens/navigation/instruments_populator.gd" id="6_4ln7h"]
 [ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="7_quxj8"]
 [ext_resource type="PackedScene" uid="uid://14nd8yy5f85e" path="res://ui/widgets/slider/slider.tscn" id="8_4t4jw"]
 [ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="9_5oiv6"]
 [ext_resource type="PackedScene" uid="uid://1sgfn61bmfrt" path="res://scenes/orbit/OrbitScene.tscn" id="10_n4sgr"]
-[ext_resource type="Script" path="res://ui/data_grid.gd" id="10_rnj3v"]
-[ext_resource type="Script" path="res://ui/autopilot_handler.gd" id="11_am0j0"]
-[ext_resource type="PackedScene" uid="uid://w0adn324ymo3" path="res://ui/widgets/light_button/light_button.tscn" id="12_poj7e"]
-[ext_resource type="ButtonGroup" uid="uid://444nnqo6ich8" path="res://ui/attitude_button_group.tres" id="13_4xkmw"]
+[ext_resource type="Script" uid="uid://6t3qjmouc510" path="res://ui/data_grid.gd" id="10_rnj3v"]
+[ext_resource type="PackedScene" uid="uid://b32xn5dk7swle" path="res://ui/screens/navigation/autopilot.tscn" id="14_2uuav"]
 [ext_resource type="PackedScene" uid="uid://ctjdd1ssvl2eb" path="res://ui/widgets/alerts_panel/alerts_panel.tscn" id="16_jw1r5"]
 [ext_resource type="PackedScene" uid="uid://jpb6h7avv8co" path="res://ui/screens/navigation/waypoints/waypoints.tscn" id="17_gsl3v"]
-[ext_resource type="Script" path="res://ui/screens/navigation/selection_panel.gd" id="19_b130n"]
+[ext_resource type="Script" uid="uid://5jmytanbolh" path="res://ui/screens/navigation/selection_panel.gd" id="19_b130n"]
 
 [node name="NavigationScreen" type="Panel"]
 anchors_preset = 15
@@ -376,180 +374,8 @@ theme = ExtResource("2_e80r5")
 text = "AUTOPILOT"
 horizontal_alignment = 1
 
-[node name="ButtonPanel" type="Panel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer"]
+[node name="ButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer" instance=ExtResource("14_2uuav")]
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_e80r5")
-script = ExtResource("11_am0j0")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="AttitudePanel" type="Panel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-theme = ExtResource("2_e80r5")
-theme_type_variation = &"LightBorderSidePanel"
-
-[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel/ButtonContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="LightButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel/ButtonContainer/MarginContainer" groups=["Attitude Modes"] instance=ExtResource("12_poj7e")]
-layout_mode = 2
-label_text = "HDG"
-button_group = ExtResource("13_4xkmw")
-
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel/ButtonContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="LightButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel/ButtonContainer/MarginContainer2" groups=["Attitude Modes"] instance=ExtResource("12_poj7e")]
-layout_mode = 2
-label_text = "CRS"
-button_group = ExtResource("13_4xkmw")
-
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel/ButtonContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="LightButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel/ButtonContainer/MarginContainer3" groups=["Attitude Modes"] instance=ExtResource("12_poj7e")]
-layout_mode = 2
-label_text = "TRG"
-button_group = ExtResource("13_4xkmw")
-
-[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel/ButtonContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="LightButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel/ButtonContainer/MarginContainer4" groups=["Attitude Modes"] instance=ExtResource("12_poj7e")]
-layout_mode = 2
-label_text = "NRM"
-button_group = ExtResource("13_4xkmw")
-
-[node name="AttitudePanel2" type="Panel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-theme = ExtResource("2_e80r5")
-theme_type_variation = &"LightBorderSidePanel"
-
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="LightButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer" groups=["Autopilot Keys"] instance=ExtResource("12_poj7e")]
-layout_mode = 2
-label_text = "INV"
-
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel2/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="LightButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AttitudePanel2/VBoxContainer/MarginContainer2" groups=["Autopilot Keys"] instance=ExtResource("12_poj7e")]
-layout_mode = 2
-label_text = "STAB"
-
-[node name="NavPanel" type="Panel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
-theme = ExtResource("2_e80r5")
-theme_type_variation = &"LightBorderSidePanel"
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/NavPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="LightButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/NavPanel/MarginContainer" groups=["Attitude Modes", "Autopilot Keys"] instance=ExtResource("12_poj7e")]
-layout_mode = 2
-label_text = "NAV"
-
-[node name="AutoPanel" type="Panel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
-theme = ExtResource("2_e80r5")
-theme_type_variation = &"LightBorderSidePanel"
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AutoPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="LightButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/ButtonPanel/HBoxContainer2/AutoPanel/MarginContainer" groups=["Autopilot Keys"] instance=ExtResource("12_poj7e")]
-layout_mode = 2
-label_text = "AUTO"
 
 [node name="RightSidebar" type="VBoxContainer" parent="VBoxContainer/MainSection"]
 layout_mode = 2

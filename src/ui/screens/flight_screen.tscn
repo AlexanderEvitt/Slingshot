@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6ewf1e7q725g"]
+[gd_scene load_steps=9 format=3 uid="uid://c6ewf1e7q725g"]
 
-[ext_resource type="Script" uid="uid://fs5648oxe8ad" path="res://ui/screens/update_supressor.gd" id="2_ba6p2"]
 [ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="2_iesil"]
 [ext_resource type="Script" uid="uid://dlycu8e3slcny" path="res://ui/screens/hud/hud.gd" id="3_brmsx"]
 [ext_resource type="PackedScene" uid="uid://dwmguh47arrut" path="res://ship/flight/flight_entity.tscn" id="3_pck3v"]
@@ -41,7 +40,6 @@ world_3d = ExtResource("2_iesil")
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
-script = ExtResource("2_ba6p2")
 
 [node name="PlayerShip" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_pck3v")]
 
@@ -152,7 +150,6 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(350, 350)
 render_target_update_mode = 4
-script = ExtResource("2_ba6p2")
 
 [node name="NavballRoot" parent="HUD/SubViewportContainer/SubViewport" instance=ExtResource("5_4ex4u")]
 

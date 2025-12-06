@@ -26,7 +26,7 @@ var reverse = false
 func update(dt, gravity):
 	# Update waypoints, only navigate if you have two of them or more
 	waypoints = ship.waypoints
-	if waypoints.size() > 1 and SystemTime.step > 0 and ship.nav_flag and ship.autopilot_flag:
+	if waypoints.size() > 1 and SystemTime.step > 0 and ship.avionics["navigation"] and ship.avionics["autopilot"]:
 		# Don't navigate if there's no waypoints or the simulation isn't advancing
 		navigate(dt, gravity)
 

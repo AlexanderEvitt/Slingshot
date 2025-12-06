@@ -1,0 +1,158 @@
+[gd_scene load_steps=5 format=3 uid="uid://b32xn5dk7swle"]
+
+[ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="1_onaj7"]
+[ext_resource type="Script" uid="uid://b26qbb3s1nkvk" path="res://ui/autopilot_handler.gd" id="2_koav1"]
+[ext_resource type="PackedScene" uid="uid://w0adn324ymo3" path="res://ui/widgets/light_button/light_button.tscn" id="3_7a1o3"]
+[ext_resource type="ButtonGroup" uid="uid://444nnqo6ich8" path="res://ui/attitude_button_group.tres" id="4_ga8ox"]
+
+[node name="ButtonPanel" type="Panel" node_paths=PackedStringArray("hdg_mode", "crs_mode", "trg_mode", "nrm_mode", "auto_key", "nav_key", "inv_key", "stab_key")]
+offset_right = 1000.0
+offset_bottom = 100.0
+size_flags_vertical = 3
+theme = ExtResource("1_onaj7")
+script = ExtResource("2_koav1")
+hdg_mode = NodePath("HBoxContainer2/AttitudePanel/MarginContainer/ButtonContainer/HdgMode")
+crs_mode = NodePath("HBoxContainer2/AttitudePanel/MarginContainer/ButtonContainer/CrsMode")
+trg_mode = NodePath("HBoxContainer2/AttitudePanel/MarginContainer/ButtonContainer/TrgMode")
+nrm_mode = NodePath("HBoxContainer2/AttitudePanel/MarginContainer/ButtonContainer/NrmMode")
+auto_key = NodePath("HBoxContainer2/AutoPanel/MarginContainer/AutoKey")
+nav_key = NodePath("HBoxContainer2/NavPanel/MarginContainer/NavKey")
+inv_key = NodePath("HBoxContainer2/AttitudePanel2/MarginContainer/HBoxContainer/InvKey")
+stab_key = NodePath("HBoxContainer2/AttitudePanel2/MarginContainer/HBoxContainer/StabKey")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="AttitudePanel" type="Panel" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("1_onaj7")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2/AttitudePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ButtonContainer" type="HBoxContainer" parent="HBoxContainer2/AttitudePanel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="HdgMode" parent="HBoxContainer2/AttitudePanel/MarginContainer/ButtonContainer" instance=ExtResource("3_7a1o3")]
+layout_mode = 2
+label_text = "HDG"
+button_group = ExtResource("4_ga8ox")
+
+[node name="CrsMode" parent="HBoxContainer2/AttitudePanel/MarginContainer/ButtonContainer" instance=ExtResource("3_7a1o3")]
+layout_mode = 2
+label_text = "CRS"
+button_group = ExtResource("4_ga8ox")
+
+[node name="TrgMode" parent="HBoxContainer2/AttitudePanel/MarginContainer/ButtonContainer" instance=ExtResource("3_7a1o3")]
+layout_mode = 2
+label_text = "TRG"
+button_group = ExtResource("4_ga8ox")
+
+[node name="NrmMode" parent="HBoxContainer2/AttitudePanel/MarginContainer/ButtonContainer" instance=ExtResource("3_7a1o3")]
+layout_mode = 2
+label_text = "NRM"
+button_group = ExtResource("4_ga8ox")
+
+[node name="AttitudePanel2" type="Panel" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+theme = ExtResource("1_onaj7")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2/AttitudePanel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/AttitudePanel2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="InvKey" parent="HBoxContainer2/AttitudePanel2/MarginContainer/HBoxContainer" instance=ExtResource("3_7a1o3")]
+layout_mode = 2
+label_text = "INV"
+
+[node name="StabKey" parent="HBoxContainer2/AttitudePanel2/MarginContainer/HBoxContainer" instance=ExtResource("3_7a1o3")]
+layout_mode = 2
+label_text = "STAB"
+
+[node name="NavPanel" type="Panel" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme = ExtResource("1_onaj7")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2/NavPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="NavKey" parent="HBoxContainer2/NavPanel/MarginContainer" instance=ExtResource("3_7a1o3")]
+layout_mode = 2
+label_text = "NAV"
+
+[node name="AutoPanel" type="Panel" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme = ExtResource("1_onaj7")
+theme_type_variation = &"LightBorderSidePanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2/AutoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="AutoKey" parent="HBoxContainer2/AutoPanel/MarginContainer" instance=ExtResource("3_7a1o3")]
+layout_mode = 2
+label_text = "AUTO"

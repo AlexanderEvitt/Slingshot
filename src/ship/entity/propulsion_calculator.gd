@@ -72,7 +72,7 @@ func update(dt: float) -> void:
 		throttle = throttle + 0.001
 	if Input.is_action_pressed("decrement_throttle"):
 		throttle = throttle - 0.001
-	if ship.nav_flag and ship.autopilot_flag:
+	if ship.avionics["navigation"] and ship.avionics["autopilot"]:
 		throttle = ship.navigation_calculator.control_throttle
 	throttle = clamp(throttle,0,engine_power)
 	

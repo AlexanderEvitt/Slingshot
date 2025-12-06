@@ -20,12 +20,14 @@ var total_mass = dry_mass # kg (updated by propulsion)
 @onready var plotter = $Plotter
 @onready var pointer = $Pointer
 
-# Autopilot modes
-var current_mode
-var inv_flag
-var stab_flag
-var autopilot_flag
-var nav_flag
+# State of avionics
+var avionics = {
+	"attitude_mode" : "",
+	"attitude_inv" : false,
+	"attitude_stab" : true,
+	"autopilot" : false,
+	"navigation" : false
+}
 
 # Waypoints
 var waypoints = []

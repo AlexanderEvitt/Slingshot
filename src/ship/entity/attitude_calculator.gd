@@ -44,9 +44,9 @@ func update(_dt):
 	
 	# Calculate autopilot response
 	var target
-	if ship.autopilot_flag:
+	if ship.avionics["autopilot"]:
 		# Calculate target attitude
-		match ship.current_mode:
+		match ship.avionics["attitude_mode"]:
 			"HDG":
 				# HDG is component of velocity normal to radius
 				var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
@@ -69,14 +69,14 @@ func update(_dt):
 			# Normalize
 			target = target.normalized()
 			# Invert if invert key is depressed
-			if ship.inv_flag:
+			if ship.avionics["attitude_inv"]:
 				target = -target
 			# Cross product for torque
 			var Kp = 2.0 # control proportional gain
 			torque = torque + -Kp*target.cross(ship.attitude.x)
 			
 	# Calculate damping if stabilizers OR autopilot is enabled
-	if ship.stab_flag or ship.autopilot_flag:
+	if ship.avionics["attitude_stab"] or ship.avionics["autopilot"]:
 		torque -= 3*(angular_velocity)
 	else:
 		torque -= 0.1*(angular_velocity)

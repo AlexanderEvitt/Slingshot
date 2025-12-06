@@ -28,6 +28,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_5pvgv")
 
 [node name="SubViewport" type="SubViewport" parent="." index="1"]
 size = Vector2i(1920, 1080)
+render_target_update_mode = 3
 
 [node name="ShipUI" parent="SubViewport" index="0" instance=ExtResource("2_5pvgv")]
 button_group = SubResource("ButtonGroup_qf4pv")

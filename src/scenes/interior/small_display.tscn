@@ -30,6 +30,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_cqwsr")
 
 [node name="SubViewport" type="SubViewport" parent="." index="1"]
 own_world_3d = true
+render_target_update_mode = 3
 
 [node name="SmallUI" parent="SubViewport" index="0" instance=ExtResource("3_cqwsr")]
 offset_right = 0.0

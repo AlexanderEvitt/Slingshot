@@ -1,62 +1,63 @@
 extends Panel
 
-var modes
-var keys
 
 var autopilot_status_box
 var navigation_status_box
 
-# Called when the node enters the scene tree for the first time.
+# Modes are autopilot pointing directions
+@export var hdg_mode : Control
+@export var crs_mode : Control
+@export var trg_mode : Control
+@export var nrm_mode : Control
+# Keys are on/off autopilot modes (e.g. AUTO or NAV)
+@export var auto_key : Control
+@export var nav_key : Control
+@export var inv_key : Control
+@export var stab_key : Control
+
+# State of autopilot is maintained by ship_entity
+# Pressing a key button inverts the state of that avionic
+# Pressing a mode button sets the "attitude_mode" parameter
+# Keys get their status directly from the ship_entity
+# Modes get their status from "attitude_mode" 
+
 func _ready():
-	# Get modes and keys
-	modes = get_tree().get_nodes_in_group("Attitude Modes")
-	keys = get_tree().get_nodes_in_group("Autopilot Keys")
+	# Connect the modes
+	hdg_mode.toggled.connect(_set_mode.bind("HDG"))
+	crs_mode.toggled.connect(_set_mode.bind("CRS"))
+	trg_mode.toggled.connect(_set_mode.bind("TRG"))
+	nrm_mode.toggled.connect(_set_mode.bind("NRM"))
+	nav_key.toggled.connect(_set_mode.bind("NAV")) # both a mode and a key
 	
-	# Assign signals to the set_modes bar
-	for i in modes:
-		i.get_node("Button").button_up.connect(set_modes)
-		
-	for i in keys:
-		if i.get_node("Button").text != "NAV": # nav is already connected as a mode
-			i.get_node("Button").button_up.connect(set_modes)
-	
-	ShipData.player_ship.auto_disc.connect(autopilot_disconnect)
-	ShipData.player_ship.nav_disc.connect(navigation_disconnect)
-	
-func set_modes():
-	## Function that reads in the state of the autopilot panel and sets the
-	## appropriate flag in the ship entity
-	# Get the current attitude mode
-	for i in modes:
-		if i.get_node("Button").button_pressed:
-			ShipData.player_ship.current_mode = i.get_node("Button").text
+	# Connect the keys
+	auto_key.toggled.connect(_toggle_key.bind("autopilot"))
+	nav_key.toggled.connect(_toggle_key.bind("navigation"))
+	inv_key.toggled.connect(_toggle_key.bind("attitude_inv"))
+	stab_key.toggled.connect(_toggle_key.bind("attitude_stab"))
 
-	# Set the appropriate flags
-	for i in keys:
-		match i.get_node("Button").text:
-			"INV":
-				ShipData.player_ship.inv_flag = i.get_node("Button").button_pressed
-			"STAB":
-				ShipData.player_ship.stab_flag = i.get_node("Button").button_pressed
-			"NAV":
-				ShipData.player_ship.nav_flag = i.get_node("Button").button_pressed
-			"AUTO":
-				ShipData.player_ship.autopilot_flag = i.get_node("Button").button_pressed
+func _process(_delta: float) -> void:
+	# Set the status of each key to its state
+	auto_key.set_state(ShipData.player_ship.avionics["autopilot"])
+	nav_key.set_state(ShipData.player_ship.avionics["navigation"])
+	inv_key.set_state(ShipData.player_ship.avionics["attitude_inv"])
+	stab_key.set_state(ShipData.player_ship.avionics["attitude_stab"])
+	
+	# Set the mode to on if it's the current mode
+	for m in [hdg_mode, crs_mode, trg_mode, nrm_mode]:
+		if ShipData.player_ship.avionics["attitude_mode"] == m.label_text:
+			m.set_state(true)
+		else:
+			m.set_state(false)
 
-func autopilot_disconnect():
-	for i in keys:
-		match i.get_node("Button").text:
-			"AUTO":
-				i.get_node("Button").button_pressed = false
-				
-	set_modes()
-	
-	SystemTime.i = 1;
-	
-func navigation_disconnect():
-	for i in keys:
-		match i.get_node("Button").text:
-			"NAV":
-				i.get_node("Button").button_pressed = false
-				
-	set_modes()
+# Toggles the key of a specified variable
+func _toggle_key(variable):
+	ShipData.player_ship.avionics[variable] = !ShipData.player_ship.avionics[variable]
+
+# Sets the pressed mode in the avionics
+func _set_mode(mode):
+	# If mode isn't the current one, make it the current one
+	if mode != ShipData.player_ship.avionics["attitude_mode"]:
+		ShipData.player_ship.avionics["attitude_mode"] = mode
+	# Otherwise, set the mode to nothing
+	else:
+		ShipData.player_ship.avionics["attitude_mode"] = ""
