@@ -58,7 +58,7 @@ func _go_to_menu():
 	
 	# Remove interior and physics
 	remove_child($interior)
-	remove_child($SimulationHOlder/SimRoot)
+	remove_child($SimulationHolder/SimRoot)
 	
 	# Connect the startup signal again
 	menu.startup.connect(_on_startup)

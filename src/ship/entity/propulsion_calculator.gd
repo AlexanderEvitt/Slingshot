@@ -11,7 +11,7 @@ var thrust = Vector3(0,0,0) # in ship frame
 # Actual thrust from main engine only
 var main_thrust = 0.0
 # Maneuvering thrusters acceleration
-var thruster_force = 5e6 # N
+var thruster_force = 1e6 # N
 # Maximum allowable engine acceleration
 var engine_power = 10000.0*0.05 # km/s2
 

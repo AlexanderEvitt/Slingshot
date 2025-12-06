@@ -15,6 +15,7 @@ var yaw := 0.0
 var pitch := 0.0
 
 var in_transition := false
+var seated := false
 var focusing := false
 var transition_t := 0.0
 var start_transform: Transform3D

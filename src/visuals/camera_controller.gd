@@ -18,7 +18,8 @@ var camera_mode = "Global" # whether camera moves with ship or stays fixed
 @onready var camera = $CameraRotator/Camera3D
 
 # Camera rotation parameters
-var rotation_speed := 0.0001 # sensitivity of camera rotation
+var mouse_rotation_speed := 0.0001
+var key_rotation_speed := 0.1
 var r := false # whether to allow rotation
 var pitch := 0.0 # start pitch
 var yaw := 0.0 # start yaw
@@ -64,16 +65,16 @@ func _unhandled_input(event):
 		
 		# Handle arrow keys rotation	
 		if Input.is_action_pressed("mod_up"):
-			pitch = pitch - 100*rotation_speed
+			pitch = pitch - key_rotation_speed
 			set_orientation()
 		if Input.is_action_pressed("mod_down"):
-			pitch = pitch + 100*rotation_speed
+			pitch = pitch + key_rotation_speed
 			set_orientation()
 		if Input.is_action_pressed("mod_left"):
-			yaw = yaw - 100*rotation_speed
+			yaw = yaw - key_rotation_speed
 			set_orientation()
 		if Input.is_action_pressed("mod_right"):
-			yaw = yaw + 100*rotation_speed
+			yaw = yaw + key_rotation_speed
 			set_orientation()
 
 	# Right-click rotate
@@ -89,8 +90,8 @@ func _unhandled_input(event):
 		set_orientation()
 		
 func set_orientation():
-	yaw -= Input.get_last_mouse_velocity().x * rotation_speed
-	pitch = clamp(pitch - Input.get_last_mouse_velocity().y * rotation_speed, -1.57, 1.57)
+	yaw -= Input.get_last_mouse_velocity().x * mouse_rotation_speed
+	pitch = clamp(pitch - Input.get_last_mouse_velocity().y * mouse_rotation_speed, -1.57, 1.57)
 	
 	# Set rotation on the parent, CameraRig
 	camera_rotator.rotation = Vector3(pitch, yaw, 0)

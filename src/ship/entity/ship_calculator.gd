@@ -3,6 +3,7 @@ extends CharacterBody3D
 # State variables (global frame)
 var acceleration = Vector3(0,0,0)
 var attitude
+var thrust_acceleration = Vector3(0,0,0) # just thrust (from everything)
 
 # Engine variables
 var torque
@@ -128,7 +129,7 @@ func _physics_process(delta):
 
 func integrate_normally(dt, prev_gravity):
 	# Calculate acceleration on vehicle
-	var thrust_acceleration = (thrust/1000.0)/total_mass # acceleration from all sources of thrust
+	thrust_acceleration = (thrust/1000.0)/total_mass # acceleration from all sources of thrust
 	acceleration = attitude*thrust_acceleration + prev_gravity # current state depends on previous state
 	
 	# Euler integrate for position and velocity
