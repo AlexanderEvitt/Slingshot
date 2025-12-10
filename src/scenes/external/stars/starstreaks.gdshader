@@ -4,7 +4,7 @@ render_mode unshaded, depth_draw_never;
 uniform vec3 rotation_axis = vec3(1.0,0.0,0.0);
 uniform float rotation_angle = 1.0;
 uniform bool rotate = true;
-uniform float brightness = 1.0;
+uniform float brightness = 0.3;
 
 varying float v;
 

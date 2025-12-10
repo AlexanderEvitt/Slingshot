@@ -12,7 +12,7 @@ func _ready():
 	# Get buttons from button_group
 	buttons = button_group.get_buttons()
 	
-	# Get screens (includes screen selector and pause)
+	# Get screens (includes screen selector)
 	screens = get_children()
 	
 	# Connect signal to change screen function

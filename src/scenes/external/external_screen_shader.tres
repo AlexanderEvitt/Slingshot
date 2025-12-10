@@ -14,3 +14,4 @@ shader_parameter/sun_world_position = Vector3(0, 0, -1100000)
 shader_parameter/show_sun = true
 shader_parameter/tint = Vector3(1.3, 1.15, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_kueen")
+shader_parameter/sun_size = 0.1

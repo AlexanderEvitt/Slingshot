@@ -26,6 +26,7 @@ stretch = true
 world_3d = ExtResource("1_xv6sl")
 handle_input_locally = false
 size = Vector2i(1920, 1080)
+render_target_update_mode = 4
 
 [node name="PlayerShip" type="Node3D" parent="ExternalUI/SubViewport"]
 script = ExtResource("2_bu3jf")
@@ -55,4 +56,5 @@ script = ExtResource("5_n68xp")
 
 [node name="Starfield" parent="ExternalUI/SubViewport/PlayerShip/CameraRig/CameraRotator/Camera3D" instance=ExtResource("6_sghyb")]
 transform = Transform3D(6.12323e-16, -10, 6.12323e-16, 0, 6.12323e-16, 10, -10, -6.12323e-16, 3.7494e-32, 0, 0, 0)
+visible = false
 script = ExtResource("7_0wv60")

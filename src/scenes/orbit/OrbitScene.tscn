@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=62 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/scene_controller.gd" id="1_sj5o8"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -42,25 +42,36 @@ height = 1400000.0
 shading_mode = 0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_p4asf"]
+resource_local_to_scene = true
 radius = 700000.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0l1rk"]
+resource_local_to_scene = true
 radius = 2440.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dwd31"]
+resource_local_to_scene = true
 radius = 6052.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8k6tq"]
+resource_local_to_scene = true
 radius = 44.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xbyhg"]
+resource_local_to_scene = true
 radius = 1740.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_g8ppe"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_0a2c1"]
+resource_local_to_scene = true
 radius = 6371.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_smwit"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_87tlm"]
+resource_local_to_scene = true
 radius = 3396.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hk5po"]
+resource_local_to_scene = true
+radius = 44.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_385ak"]
 radius = 1822.0
@@ -75,6 +86,7 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_335ah"]
+resource_local_to_scene = true
 radius = 1822.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_kxpab"]
@@ -90,6 +102,7 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1q5uj"]
+resource_local_to_scene = true
 radius = 2410.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_p12ly"]
@@ -105,7 +118,12 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e817l"]
+resource_local_to_scene = true
 radius = 1561.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yl735"]
+resource_local_to_scene = true
+radius = 20.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_2a7sc"]
 radius = 2634.0
@@ -120,9 +138,11 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lepoe"]
+resource_local_to_scene = true
 radius = 2634.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d04h7"]
+resource_local_to_scene = true
 radius = 71492.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_o4sno"]
@@ -138,18 +158,23 @@ shader_parameter/fresnel_threshold = 0.8
 shader_parameter/fresnel_power = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jkrvl"]
+resource_local_to_scene = true
 radius = 2575.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wa8fu"]
+resource_local_to_scene = true
 radius = 60268.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_c3psq"]
+resource_local_to_scene = true
 radius = 25559.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4ijo1"]
+resource_local_to_scene = true
 radius = 24764.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_75n57"]
+resource_local_to_scene = true
 radius = 0.04
 
 [node name="OrbitRoot" type="Node3D"]
@@ -471,7 +496,7 @@ camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/ClickDetector"]
-shape = SubResource("SphereShape3D_g8ppe")
+shape = SubResource("SphereShape3D_0a2c1")
 
 [node name="Mars" type="Node3D" parent="SolarSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
@@ -508,7 +533,7 @@ camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Mars/ClickDetector"]
-shape = SubResource("SphereShape3D_smwit")
+shape = SubResource("SphereShape3D_87tlm")
 
 [node name="Yugala" type="Node3D" parent="SolarSystem/Mars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 115.063)
@@ -537,7 +562,7 @@ camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Mars/Yugala/ClickDetector"]
-shape = SubResource("SphereShape3D_8k6tq")
+shape = SubResource("SphereShape3D_hk5po")
 
 [node name="MoonLabel" type="Label3D" parent="SolarSystem/Mars/Yugala"]
 visibility_range_end = 200000.0
@@ -742,6 +767,57 @@ expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Jupiter/Europa/ClickDetector"]
 shape = SubResource("SphereShape3D_e817l")
+
+[node name="Concordia" type="Node3D" parent="SolarSystem/Jupiter/Europa"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2016.5718242058065, 0, 115.06299999999464)
+script = ExtResource("9_2beyu")
+body_path = "SolarSystem/Jupiter/Europa/Concordia"
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Jupiter/Europa/Concordia"]
+visibility_range_end = 20000.0
+visibility_range_end_margin = 20000.0
+visibility_range_fade_mode = 1
+modulate = Color(0.13069227, 0.19898957, 0.48214364, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("11_lodt7")
+
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Europa/Concordia" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Jupiter/Europa/Concordia/ClickDetector"]
+shape = SubResource("SphereShape3D_yl735")
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Jupiter/Europa/Concordia"]
+visibility_range_end = 200000.0
+visibility_range_end_margin = 200000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = " CONCORDIA II"
+font = ExtResource("4_uugyr")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="KOZ" type="Node3D" parent="SolarSystem/Jupiter/Europa/Concordia"]
+
+[node name="wire_cylinder" parent="SolarSystem/Jupiter/Europa/Concordia/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(0.5, 0, 0, 0, 9, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="wire_cylinder2" parent="SolarSystem/Jupiter/Europa/Concordia/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 4, 0)
+
+[node name="wire_cylinder3" parent="SolarSystem/Jupiter/Europa/Concordia/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, -4, 0)
+
+[node name="wire_cylinder4" parent="SolarSystem/Jupiter/Europa/Concordia/KOZ" instance=ExtResource("12_5etm5")]
+transform = Transform3D(2.475, 0, 0, 0, 0.415, 0, 0, 0, 3.11, 0, 0.104842, 0)
 
 [node name="Ganymede" type="Node3D" parent="SolarSystem/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26531.7, 0, 82270.3)

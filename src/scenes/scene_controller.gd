@@ -14,9 +14,10 @@ func _ready():
 
 func _process(_delta):
 	position = -ShipData.player_ship.position
-	# Setting this root to the negative of the ship position ensures the cam is always at the global origin
+	# Setting this root to the negative of the ship position ensures the cam is always near the global origin
 	# Should not be necessary (and should have no effect) in a double precision build
 	# But the atmosphere plugin needs this for some reason (jitters otherwise)
+	# Updated to ship position from camera position
 
 func on_selected(_camera, event, _click_position, _click_normal, _shape_idx, body_path):
 	# Handles mouse clicking on selectable objects

@@ -1,12 +1,36 @@
-[gd_scene load_steps=9 format=3 uid="uid://c71thxnvwh37i"]
+[gd_scene load_steps=16 format=3 uid="uid://c71thxnvwh37i"]
 
 [ext_resource type="Script" uid="uid://cc283l37nveuy" path="res://ship/entity/ship_calculator.gd" id="1_012ot"]
 [ext_resource type="Script" uid="uid://8foh3a4rsbjc" path="res://ship/entity/attitude_calculator.gd" id="2_7e8cl"]
 [ext_resource type="Script" uid="uid://dm88ls8pwtpcc" path="res://ship/Propagator.cs" id="4_7neml"]
 [ext_resource type="Script" uid="uid://cg2yyvdpwvc0u" path="res://ship/entity/propulsion_calculator.gd" id="5_n5nff"]
+[ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="6_2cinc"]
 [ext_resource type="Script" uid="uid://55lrhua7ji4r" path="res://ship/entity/navigation_calculator.gd" id="6_nvs0w"]
-[ext_resource type="PackedScene" uid="uid://dvuwcyu3chwr1" path="res://ship/frigate/real/FrigateReal.tscn" id="12_by3ff"]
+[ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="7_djrwc"]
+[ext_resource type="Script" uid="uid://bjogjpegblg60" path="res://visuals/blinking_light.gd" id="8_lgtsv"]
+[ext_resource type="Material" uid="uid://d3306785am850" path="res://ship/frigate/real/BasePaint.tres" id="9_ehrih"]
+[ext_resource type="PackedScene" uid="uid://bfwsgcbvelo0t" path="res://ship/frigate/real/FrigateModel.tscn" id="10_s0fd8"]
 [ext_resource type="Script" uid="uid://xet38inpduig" path="res://bodies/draw_spacecraft_orbit.gd" id="15_vytt2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhx50"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ulwg0"]
+material = SubResource("StandardMaterial3D_jhx50")
+top_radius = 0.3
+bottom_radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xrp77"]
+material = ExtResource("9_ehrih")
+top_radius = 0.3
+bottom_radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
 size = Vector3(0.05843319023733784, 0.015, 0.015)
@@ -33,7 +57,218 @@ script = ExtResource("6_nvs0w")
 
 [node name="Pointer" type="Node3D" parent="."]
 
-[node name="player_ship" parent="Pointer" instance=ExtResource("12_by3ff")]
+[node name="Plumes" type="Node3D" parent="Pointer"]
+transform = Transform3D(0.13879, 0, 0, 0, 0.13879, 0, 0, 0, 0.13879, -0.0290583, 0, 0)
+
+[node name="Plume" parent="Pointer/Plumes" instance=ExtResource("6_2cinc")]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, 0, 0)
+
+[node name="Thrusters" type="Node3D" parent="Pointer"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Thruster1" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 23.016, 5.86845, 0)
+down = true
+
+[node name="Thruster2" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 21.3994, 5.86845, 0)
+down = true
+
+[node name="Thruster3" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, 23.016, 6.08327, 0.711069)
+left = true
+roll_left = true
+
+[node name="Thruster4" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, 21.3994, 6.08327, 0.711069)
+left = true
+roll_left = true
+
+[node name="Thruster5" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, 23.016, 6.08327, -0.711)
+right = true
+roll_right = true
+
+[node name="Thruster6" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, 21.3994, 6.08327, -0.711)
+right = true
+roll_right = true
+
+[node name="Thruster7" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(9.18485e-15, 150, 0, -150, 9.18485e-15, 0, 0, 0, 150, 24.3485, 6.08418, 0)
+
+[node name="Thruster8" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -150, -1.83697e-14, 0, 1.83697e-14, -150, 23.0036, -5.87698, 3.94772e-05)
+up = true
+
+[node name="Thruster9" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -150, -1.83697e-14, 0, 1.83697e-14, -150, 21.4029, -5.87698, 3.94772e-05)
+up = true
+
+[node name="Thruster10" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, 23.016, -6.07937, -0.71103)
+right = true
+roll_left = true
+
+[node name="Thruster11" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, 21.3994, -6.07937, -0.71103)
+right = true
+roll_left = true
+
+[node name="Thruster12" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 4.59243e-14, -150, 0, 150, 4.59243e-14, 23.016, -6.07937, 0.711039)
+left = true
+roll_right = true
+
+[node name="Thruster13" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 4.59243e-14, -150, 0, 150, 4.59243e-14, 21.3994, -6.07937, 0.711039)
+left = true
+roll_right = true
+
+[node name="Thruster14" parent="Pointer/Thrusters" instance=ExtResource("7_djrwc")]
+transform = Transform3D(9.18485e-15, 150, 0, 150, -9.18485e-15, -1.83697e-14, -1.83697e-14, 1.12482e-30, -150, 24.3485, -6.07937, 3.94772e-05)
+
+[node name="Pod1" type="Node3D" parent="Pointer/Thrusters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)
+
+[node name="Thruster1" parent="Pointer/Thrusters/Pod1" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -16.37, 9.20155, 0)
+up = true
+
+[node name="Thruster2" parent="Pointer/Thrusters/Pod1" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, -16.368, 9.04997, 0.144937)
+roll_left = true
+
+[node name="Thruster3" parent="Pointer/Thrusters/Pod1" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, -16.368, 9.05, -0.145)
+roll_right = true
+
+[node name="Thruster4" parent="Pointer/Thrusters/Pod1" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -19.5736, 9.20155, 0)
+up = true
+
+[node name="Thruster5" parent="Pointer/Thrusters/Pod1" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, -19.5716, 9.04997, 0.144937)
+roll_left = true
+
+[node name="Thruster6" parent="Pointer/Thrusters/Pod1" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, -19.5716, 9.05, -0.145)
+roll_right = true
+
+[node name="Thruster7" parent="Pointer/Thrusters/Pod1" instance=ExtResource("7_djrwc")]
+transform = Transform3D(9.18485e-15, 150, 0, -150, 9.18485e-15, 0, 0, 0, 150, -14.9866, 9.05106, 0)
+
+[node name="Thruster8" parent="Pointer/Thrusters/Pod1" instance=ExtResource("7_djrwc")]
+transform = Transform3D(-2.75546e-14, -150, 0, 150, -2.75546e-14, 0, 0, 0, 150, -20.9412, 9.05106, 0)
+
+[node name="Pod2NR" type="Node3D" parent="Pointer/Thrusters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)
+
+[node name="Thruster1" parent="Pointer/Thrusters/Pod2NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -16.37, -6.50648, 6.50648)
+down = true
+
+[node name="Thruster2" parent="Pointer/Thrusters/Pod2NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -16.368, -6.50178, 6.29681)
+roll_left = true
+
+[node name="Thruster3" parent="Pointer/Thrusters/Pod2NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 106.066, -106.066, 0, 106.066, 106.066, -16.368, -6.29679, 6.50185)
+roll_right = true
+
+[node name="Thruster4" parent="Pointer/Thrusters/Pod2NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -19.5736, -6.50648, 6.50648)
+down = true
+
+[node name="Thruster5" parent="Pointer/Thrusters/Pod2NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -19.5716, -6.50178, 6.29681)
+roll_left = true
+
+[node name="Thruster6" parent="Pointer/Thrusters/Pod2NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 106.066, -106.066, 0, 106.066, 106.066, -19.5716, -6.29679, 6.50185)
+roll_right = true
+
+[node name="Thruster7" parent="Pointer/Thrusters/Pod2NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(9.18485e-15, 150, 0, 106.066, -6.49467e-15, -106.066, -106.066, 6.49467e-15, -106.066, -14.9866, -6.40007, 6.40007)
+
+[node name="Thruster8" parent="Pointer/Thrusters/Pod2NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, -106.066, 106.066, -1.9484e-14, -106.066, -20.9412, -6.40007, 6.40007)
+
+[node name="Pod3NR" type="Node3D" parent="Pointer/Thrusters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)
+
+[node name="Thruster1" parent="Pointer/Thrusters/Pod3NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -16.37, -6.50648, -6.50648)
+down = true
+
+[node name="Thruster2" parent="Pointer/Thrusters/Pod3NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 106.066, 106.066, 0, -106.066, 106.066, -16.368, -6.29681, -6.50178)
+roll_left = true
+
+[node name="Thruster3" parent="Pointer/Thrusters/Pod3NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -16.368, -6.50185, -6.29679)
+roll_right = true
+
+[node name="Thruster4" parent="Pointer/Thrusters/Pod3NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -19.5736, -6.50648, -6.50648)
+down = true
+
+[node name="Thruster5" parent="Pointer/Thrusters/Pod3NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, 106.066, 106.066, 0, -106.066, 106.066, -19.5716, -6.29681, -6.50178)
+roll_left = true
+
+[node name="Thruster6" parent="Pointer/Thrusters/Pod3NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -19.5716, -6.50185, -6.29679)
+roll_right = true
+
+[node name="Thruster7" parent="Pointer/Thrusters/Pod3NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(9.18485e-15, 150, 0, 106.066, -6.49467e-15, 106.066, 106.066, -6.49467e-15, -106.066, -14.9866, -6.40007, -6.40007)
+
+[node name="Thruster8" parent="Pointer/Thrusters/Pod3NR" instance=ExtResource("7_djrwc")]
+transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, 106.066, -106.066, 1.9484e-14, -106.066, -20.9412, -6.40007, -6.40007)
+
+[node name="Lights" type="Node3D" parent="Pointer"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Beacon" type="Node3D" parent="Pointer/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.92943, -7.23529, 0)
+script = ExtResource("8_lgtsv")
+
+[node name="Light" type="OmniLight3D" parent="Pointer/Lights/Beacon"]
+layers = 2
+light_color = Color(1, 0.03, 0.03, 1)
+light_energy = 0.05
+omni_range = 0.005
+
+[node name="Emit" type="MeshInstance3D" parent="Pointer/Lights/Beacon"]
+mesh = SubResource("CylinderMesh_ulwg0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Pointer/Lights/Beacon"]
+mesh = SubResource("CylinderMesh_xrp77")
+
+[node name="CompanyLight" type="SpotLight3D" parent="Pointer/Lights"]
+transform = Transform3D(-0.241701, 0.357635, -0.902041, 0.0925626, 0.933862, 0.345449, 0.965926, -4.16334e-17, -0.258819, -19.9162, 10.8628, 0)
+light_energy = 0.03
+shadow_enabled = true
+shadow_bias = 1.604
+spot_range = 0.02
+
+[node name="ForwardLight" type="SpotLight3D" parent="Pointer/Lights"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 10.9146, 5.23071, -3.7027)
+light_energy = 0.02
+shadow_enabled = true
+shadow_bias = 0.0
+spot_range = 0.02
+
+[node name="ForwardLight2" type="SpotLight3D" parent="Pointer/Lights"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 10.915, 5.231, 3.703)
+light_energy = 0.02
+shadow_enabled = true
+shadow_bias = 0.0
+spot_range = 0.02
+
+[node name="frigate" parent="Pointer" instance=ExtResource("10_s0fd8")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
 [node name="Plotter" type="Node3D" parent="."]
 visible = false

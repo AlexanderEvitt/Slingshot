@@ -15,7 +15,7 @@ var accumulator = 1e99 # so that all orbits are calculated in the first frame
 
 func _process(_delta):
 	# Only refresh when more time has elapsed than 1/2e5 of a period
-	accumulator += SystemTime.step*0.03333;
+	accumulator += 0.0333; #SystemTime.step*0.03333;
 	period = this_body.body.period
 	var refresh_period = clamp(period/2e5, 30, 1e99)
 	if accumulator > refresh_period: # <= how many times the orbit is redrawn per orbit

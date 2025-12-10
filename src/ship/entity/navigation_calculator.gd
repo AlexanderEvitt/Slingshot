@@ -7,6 +7,9 @@ var control_throttle = 0 # scalar acceleration of control
 var active_waypoint = 0
 var waypoints = []
 
+# Scalar projection factor t (scalar form of projection position onto from, 0 -> 1)
+var t = 0.0
+
 var i_error = Vector3(0,0,0) # integral error needs to persist between frames
 
 var cornering_velocity = 0.0 # target velocity at endpoint, km/s
@@ -16,9 +19,6 @@ var cornering_velocity = 0.0 # target velocity at endpoint, km/s
 @export var Kd = 0.05 # 1km/s max deflection
 
 @onready var ship = get_parent()
-
-var report = false
-var count = 0 # counter for when to write report
 
 var reverse = false
 
@@ -32,9 +32,6 @@ func update(dt, gravity):
 
 	else:
 		control = Vector3(0,0,0)
-		
-	if report:
-		count = (count + 1) % 3000
 	
 func navigate(dt, gravity):
 	# Update waypoints, course info
@@ -52,7 +49,7 @@ func navigate(dt, gravity):
 	
 	# Get the nearest point along the line
 	# Scalar projection factor t (scalar form of projection position onto from, 0 -> 1)
-	var t = (ship.position - from).dot(course) / course.length_squared()
+	t = (ship.position - from).dot(course) / course.length_squared()
 	# Closest point on the infinite line
 	var closest_point = from + t * course
 	
@@ -122,12 +119,3 @@ func navigate(dt, gravity):
 	var attitude_error = acos(control_pointing.dot(ship.attitude.x)) # radians
 	if attitude_error > 0.087: # 5 degree tolerance
 		control_throttle = 0
-	
-	# Write report for debugging
-	if report and (count == 0):
-		print("Navigating to: ", active_waypoint)
-		print("	Flying reverse: ", reverse)
-		print("	t: ", t)
-		print("	Errors - P: ", p_error.length(), " | I: ", i_error.length(), " | D: ", d_error.length())
-		print("	Throttles - P: ", (Kp*scalek)*p_error.length()/0.05, " | I: ", (Ki*scalek)*i_error.length()/0.05, " | D: ", (Kd*scalek)*d_error.length()/0.05)
-	

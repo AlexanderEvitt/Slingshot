@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=4 uid="uid://bpfrq18j1sk54"]
 
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="3_4kjkv"]
-[ext_resource type="Script" path="res://scenes/external/stars/startracks.gd" id="4_jwuqs"]
-[ext_resource type="Shader" path="res://scenes/external/stars/starstreaks.gdshader" id="4_tbgki"]
+[ext_resource type="Script" uid="uid://c13n3mmotbtbi" path="res://scenes/external/stars/startracks.gd" id="4_jwuqs"]
+[ext_resource type="Shader" uid="uid://chh0ov3lkttdk" path="res://scenes/external/stars/starstreaks.gdshader" id="4_tbgki"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_3gjxm"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_kl700"]
 _surfaces = [{
-"aabb": AABB(-99935.2, -99980.4, -99698.5, 199771, 199957, 199648),
+"aabb": AABB(-99935.20562417377, -99980.44281247104, -99698.48454749565, 199771.1383288895, 199957.3887301667, 199647.53026479948),
 "format": 34359738369,
 "primitive": 1,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -21,11 +21,11 @@ shader = ExtResource("4_tbgki")
 shader_parameter/rotation_axis = Vector3(1, 0, 0)
 shader_parameter/rotation_angle = 0.003
 shader_parameter/rotate = true
-shader_parameter/brightness = 1.0
+shader_parameter/brightness = 0.3
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_b3f31"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_yym4a"]
 _surfaces = [{
-"aabb": AABB(-99935.2, -99980.4, -99698.5, 199771, 199957, 199648),
+"aabb": AABB(-99935.20562417377, -99980.44281247104, -99698.48454749565, 199771.1383288895, 199957.3887301667, 199647.53026479948),
 "format": 34359738369,
 "primitive": 0,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -45,14 +45,14 @@ shader_parameter/brightness = 1.0
 [node name="Starfield" type="Node3D"]
 
 [node name="StarTracks" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_3gjxm")
+mesh = SubResource("ArrayMesh_kl700")
 surface_material_override/0 = SubResource("ShaderMaterial_qelgr")
 script = ExtResource("4_jwuqs")
 radius = 100000.0
 subdivisions = 4
 
 [node name="StarPoints" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_b3f31")
+mesh = SubResource("ArrayMesh_yym4a")
 surface_material_override/0 = SubResource("ShaderMaterial_fm00g")
 script = ExtResource("4_jwuqs")
 radius = 100000.0

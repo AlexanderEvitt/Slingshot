@@ -3,7 +3,8 @@ extends CharacterBody3D
 # State variables (global frame)
 var acceleration = Vector3(0,0,0)
 var attitude
-var thrust_acceleration = Vector3(0,0,0) # just thrust (from everything)
+var gravity_acceleration = Vector3(0,0,0) # just gravity
+var thrust_acceleration = Vector3(0,0,0) # just thrust (all sources)
 
 # Engine variables
 var torque
@@ -96,17 +97,17 @@ func _physics_process(delta):
 	else:
 		# Do multiple simulation time steps per run of physics_process
 		var sim_steps_per_physics_tick = clamp(SystemTime.step,1,100)
-		var prev_gravity = propagator.Acceleration(position,SystemTime.prev_t)
+		gravity_acceleration = propagator.Acceleration(position,SystemTime.prev_t)
 		for i in range(sim_steps_per_physics_tick):
 			# Calculate simulation timestep
 			var dt = SystemTime.step*delta/sim_steps_per_physics_tick
 			
 			# Process children processes that need to run with simulation
-			navigation_calculator.update(dt, prev_gravity)
+			navigation_calculator.update(dt, gravity_acceleration)
 			attitude_calculator.update(dt)
 			propulsion_calculator.update(dt)
 			
-			integrate_normally(dt, prev_gravity)
+			integrate_normally(dt, gravity_acceleration)
 			
 		# Dock/undock if key is pressed
 	if Input.is_action_just_pressed("dock"):

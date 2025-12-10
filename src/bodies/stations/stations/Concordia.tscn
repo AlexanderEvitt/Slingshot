@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1bhbnqab3tql"]
+
+[ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://bodies/stations/components/station_manager.gd" id="1_5ddl1"]
+[ext_resource type="PackedScene" uid="uid://cr6y3tpnww4h7" path="res://bodies/stations/components/ring.tscn" id="3_eo4fm"]
+[ext_resource type="PackedScene" uid="uid://dclrlvx4upy8x" path="res://bodies/stations/components/round_port.tscn" id="4_toxan"]
+[ext_resource type="PackedScene" uid="uid://djhub5hfmxtif" path="res://scenes/orbit/koz/wire_cylinder.tscn" id="6_m412c"]
+[ext_resource type="PackedScene" uid="uid://bvt1477iysnr5" path="res://bodies/stations/components/radar.tscn" id="6_r1hnp"]
+
+[node name="Station" type="Node3D"]
+script = ExtResource("1_5ddl1")
+berth_path = "round_port/Port/{}/docks/Docks/{}/"
+
+[node name="ring1" parent="." instance=ExtResource("3_eo4fm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="round_port" parent="." instance=ExtResource("4_toxan")]
+
+[node name="ring2" parent="." instance=ExtResource("3_eo4fm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+flip = -1
+
+[node name="KOZ" type="Node3D" parent="."]
+visible = false
+
+[node name="wire_cylinder" parent="KOZ" instance=ExtResource("6_m412c")]
+transform = Transform3D(0.5, 0, 0, 0, 9, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="wire_cylinder2" parent="KOZ" instance=ExtResource("6_m412c")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 4, 0)
+
+[node name="wire_cylinder3" parent="KOZ" instance=ExtResource("6_m412c")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, -4, 0)
+
+[node name="wire_cylinder4" parent="KOZ" instance=ExtResource("6_m412c")]
+transform = Transform3D(2.475, 0, 0, 0, 0.415, 0, 0, 0, 3.11, 0, 0.104842, 0)
+
+[node name="radar" parent="." instance=ExtResource("6_r1hnp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="radar2" parent="." instance=ExtResource("6_r1hnp")]
+transform = Transform3D(-1, -1.2246467991473532e-16, 0, 1.2246467991473532e-16, -1, 0, 0, 0, 1, 0, -6, 0)

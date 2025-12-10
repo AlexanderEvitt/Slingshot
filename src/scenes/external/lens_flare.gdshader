@@ -10,6 +10,8 @@ uniform bool show_sun = false;
 uniform vec3 tint = vec3(1.4,1.2,1.0);
 uniform sampler2D noise_texture;
 
+uniform float sun_size = 0.1;
+
 uniform sampler2D depth_texture : hint_depth_texture; // Scene depth buffer
 uniform sampler2D screen_texture : hint_screen_texture;
 
@@ -36,7 +38,7 @@ vec3 lensflare(vec2 uv,vec2 pos, vec2 texResolution)
 	float n = noise_vec2(vec2(ang*16.0,dist*32.0), texResolution);
 
 	// Artificial sun
-	float f0 = 0.4*1.0/(length(uv-pos)*16.0+1.0);
+	float f0 = sun_size*1.0/(length(uv-pos)*16.0+1.0);
 	f0 = f0 + f0*(sin(noise_float(sin(ang*2.+pos.x)*4.0 - cos(ang*3.+pos.y), texResolution)*16.)*.1 + dist*.1 + .8);
 
 	float f1 = max(0.01-pow(length(uv+1.2*pos),1.9),.0)*7.0;
@@ -154,7 +156,7 @@ void fragment() {
     ALBEDO = color;
     ALPHA = color.r;
 
-	float fuzz = 2.0;
+	float fuzz = 0.05f;
     if (sun_screen_uv.x < -fuzz || sun_screen_uv.x > 1.0 + fuzz || sun_screen_uv.y < -fuzz || sun_screen_uv.y > 1.0 + fuzz) {
     	discard; // Skip rendering for the second sun
 	}

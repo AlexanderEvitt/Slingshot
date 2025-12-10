@@ -20,7 +20,7 @@ func _ready():
 	
 func _physics_process(_delta):
 	# Pass the velocity to the berth (for collider)
-	if current_berth != null:
+	if current_berth != null and current_berth.get_child(0).name == "berth":
 		current_berth.get_child(0).set_velocity(fetch_velocity(SystemTime.t))
 
 func update_berth():

@@ -24,7 +24,7 @@ func _process(_delta):
 		visible = true
 		pencil.set_shader_parameter("alpha_intensity_factor",design_thrust/thrust)
 		fan.set_shader_parameter("alpha_intensity_factor",design_thrust/thrust)
-		chamber1.light_energy = 0.2*thrust/design_thrust
+		chamber1.light_energy = 8*0.2*thrust/design_thrust
 		chamber2.light_energy = 0.1*thrust/design_thrust
 	else:
 		visible = false

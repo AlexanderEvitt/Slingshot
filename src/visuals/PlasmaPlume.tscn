@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bu2j4yalwn3ks"]
 
-[ext_resource type="Shader" path="res://visuals/PlasmaPlume.gdshader" id="1_eo5p0"]
-[ext_resource type="Script" path="res://visuals/plume_controller.gd" id="2_y04ml"]
+[ext_resource type="Shader" uid="uid://b7w7d5gy31gtq" path="res://visuals/PlasmaPlume.gdshader" id="1_eo5p0"]
+[ext_resource type="Script" uid="uid://72ku7rvqc56i" path="res://visuals/plume_controller.gd" id="2_y04ml"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_2hk2m"]
 lightmap_size_hint = Vector2i(17, 19)
@@ -23,8 +23,8 @@ gradient = SubResource("Gradient_uhggj")
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_j80rw"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xas2e"]
-seamless = true
 noise = SubResource("FastNoiseLite_j80rw")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_phgne"]
 render_priority = 0

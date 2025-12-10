@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=71 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/scene_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://bodies/Body.cs" id="4_1rgsg"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://bdybpcdcv37y" path="res://bodies/photo/MarsTrue.png" id="21_qmkav"]
 [ext_resource type="Texture2D" uid="uid://yfa1thnw2jj0" path="res://bodies/photo/MarsNorm.jpg" id="22_ywee2"]
 [ext_resource type="PackedScene" uid="uid://dxbqssxh6kpdo" path="res://bodies/stations/stations/Yugala.tscn" id="23_vliu8"]
+[ext_resource type="PackedScene" uid="uid://d1bhbnqab3tql" path="res://bodies/stations/stations/Concordia.tscn" id="29_2tq45"]
 [ext_resource type="Script" uid="uid://m2sj0v6o2agd" path="res://scenes/ships_loader.gd" id="35_gsmv1"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
@@ -369,8 +370,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
 planet_radius = 6371.0
 atmosphere_height = 40.0
 sun_path = NodePath("../../../Sun/BigSunLight")
-shader_params/u_density = 0.12
-shader_params/u_scattering_strength = 1.681
+shader_params/u_density = 0.13
+shader_params/u_scattering_strength = 9.581
 shader_params/u_scattering_wavelengths = Vector3(650, 540, 440)
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
@@ -380,12 +381,6 @@ mesh = SubResource("SphereMesh_282r8")
 surface_material_override/0 = SubResource("ShaderMaterial_1ptrw")
 script = ExtResource("18_elqqx")
 sun_path = NodePath("../../../Sun")
-
-[node name="Earthshine" type="OmniLight3D" parent="SolarSystem/Earth"]
-visible = false
-light_color = Color(0.764073, 0.840415, 1, 1)
-omni_range = 15000.0
-omni_attenuation = 0.25
 
 [node name="Mars" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
@@ -468,7 +463,7 @@ mesh = SubResource("SphereMesh_w33s7")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_6oicq")
 
-[node name="Europa" type="Node3D" parent="SolarSystem/Jupiter"]
+[node name="Europa" type="Node3D" parent="SolarSystem/Jupiter" groups=["Bodies"]]
 editor_description = "EUROPA, long considered a sister moon of Callisto, was colonized similarly for centuries. However, the violent nationalist conflicts of the 2400s led to most settlers emigrating and many colonies being abandoned."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6000.71, 0, -87993)
 script = ExtResource("4_1rgsg")
@@ -485,6 +480,18 @@ visibility_range_end = 10000000.0
 mesh = SubResource("SphereMesh_jcfjd")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_4wqeu")
+
+[node name="Concordia" type="Node3D" parent="SolarSystem/Jupiter/Europa"]
+process_priority = 13
+editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 1455.5971062894096, 0, -1684.281726498666)
+script = ExtResource("4_1rgsg")
+is_station = true
+a = 3000.0
+i = 60.0
+theta0 = 1.3
+
+[node name="Station" parent="SolarSystem/Jupiter/Europa/Concordia" instance=ExtResource("29_2tq45")]
 
 [node name="Ganymede" type="Node3D" parent="SolarSystem/Jupiter"]
 editor_description = "GANYMEDE is the most massive moon in the Sol system. Its relatively high gravity has led to the development of the local healthcare industry, with several large hospitals and military bases located around its equator."

@@ -1,0 +1,342 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy4pv2lytaoh4"]
+
+[ext_resource type="Script" uid="uid://b3r65omb2dcme" path="res://ui/small_screens/data/data_populator.gd" id="1_bfkqr"]
+
+[node name="Data" type="Control"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1408.0
+offset_bottom = -568.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_bfkqr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="StateBox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/StateBox"]
+layout_mode = 2
+text = "STATE"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/StateBox"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SCLK"
+
+[node name="Label2" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5737183s"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label3" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RX"
+
+[node name="Label4" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1350542km"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label5" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RY"
+
+[node name="Label6" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "123578329km"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label7" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RZ"
+
+[node name="Label8" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "7638197km"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label9" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "VX"
+
+[node name="Label10" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "135km/s"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label11" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "VY"
+
+[node name="Label12" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0km/s"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label13" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "VZ"
+
+[node name="Label14" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "14km/s"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label15" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "THR"
+
+[node name="Label16" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.2g"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label17" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "G"
+
+[node name="Label18" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.4g"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label19" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ROTX"
+
+[node name="Label20" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "12"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label21" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ROTY"
+
+[node name="Label22" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "72"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label23" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ROTZ"
+
+[node name="Label24" type="Label" parent="HBoxContainer/StateBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-43"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="NavBox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/NavBox"]
+layout_mode = 2
+text = "NAVCOMP"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/NavBox"]
+layout_mode = 2
+columns = 2
+
+[node name="Label17" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FROM"
+
+[node name="Label18" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1 @ EARTH"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label19" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TO"
+
+[node name="Label20" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2 @ LUNA"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label21" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PROG"
+
+[node name="Label22" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "42%"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label23" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "ETW"
+
+[node name="Label24" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "T+00d00h00m00s"
+horizontal_alignment = 2
+
+[node name="Label25" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "ETE"
+
+[node name="Label26" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "T+00d00h00m00s"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label27" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "R+"
+
+[node name="Label28" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "17km"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label29" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "R×"
+
+[node name="Label30" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "42km"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label31" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "V+"
+
+[node name="Label32" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "12km/s"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label33" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "V×"
+
+[node name="Label34" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1km/s"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label35" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "A+"
+
+[node name="Label36" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.5g"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label37" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "A×"
+
+[node name="Label38" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.03g"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Label39" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "P/I/D"
+
+[node name="Label40" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "87/12/01"
+horizontal_alignment = 2
+clip_text = true
