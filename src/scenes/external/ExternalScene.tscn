@@ -1,6 +1,6 @@
 [gd_scene load_steps=71 format=3 uid="uid://d0x7vyc4qrrc2"]
 
-[ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/scene_controller.gd" id="1_5ri2s"]
+[ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/external/external_scene_controller.gd" id="1_5ri2s"]
 [ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://bodies/Body.cs" id="4_1rgsg"]
 [ext_resource type="Script" uid="uid://sv406c618jxf" path="res://scenes/barycenter.gd" id="4_5kgsd"]
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]
@@ -483,8 +483,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4wqeu")
 
 [node name="Concordia" type="Node3D" parent="SolarSystem/Jupiter/Europa"]
 process_priority = 13
-editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 1455.5971062894096, 0, -1684.281726498666)
+editor_description = "CONCORDIA II is a former European Union colony station, since turned over to private military interest as civilian traffic to the moon below dried up."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1455.5971062894096, 0, -1684.281726498666)
 script = ExtResource("4_1rgsg")
 is_station = true
 a = 3000.0

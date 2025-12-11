@@ -41,8 +41,10 @@ func _input(event):
 		
 		# Pass to ship computer
 		if hit != null:
+			# Get the simulation node that is the frame body
+			var frame_body = ShipData.sim_root.get_node(get_parent().body_path)
 			# Add to waypoints array
-			ShipData.player_ship.waypoints.append({"Frame":get_parent().body_path, "Position":hit})
+			ShipData.player_ship.waypoints.append({"Frame":frame_body, "Position":hit})
 			# Emit waypoints_updated signal to alert nodes of update
 			ShipData.player_ship.waypoints_updated.emit()
 			

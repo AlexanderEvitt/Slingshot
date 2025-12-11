@@ -1,9 +1,10 @@
 extends Node3D
 
-@export var planet_orbits : bool
-@export var zoomable : bool
-
+# Expose what body is selected to navigation
 var selected_body = null
+
+# Get reference to camera
+@onready var cam = get_viewport().get_camera_3d()
 
 func _ready():
 	# Connect the click detector signal
@@ -13,11 +14,8 @@ func _ready():
 		s.input_event.connect(on_selected.bind(body_path))
 
 func _process(_delta):
-	position = -ShipData.player_ship.position
-	# Setting this root to the negative of the ship position ensures the cam is always near the global origin
-	# Should not be necessary (and should have no effect) in a double precision build
-	# But the atmosphere plugin needs this for some reason (jitters otherwise)
-	# Updated to ship position from camera position
+	position = (position - cam.global_position)
+	# Setting this root to the negative of the camera position ensures the cam is always near the global origin
 
 func on_selected(_camera, event, _click_position, _click_normal, _shape_idx, body_path):
 	# Handles mouse clicking on selectable objects

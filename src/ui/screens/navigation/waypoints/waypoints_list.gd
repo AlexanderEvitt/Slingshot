@@ -36,7 +36,7 @@ func update_waypoint():
 		
 		# Update the telemetry of it
 		this_waypoint_row.get_node("Number").text = str(i)
-		this_waypoint_row.get_node("Frame").text = p["Frame"].split("/")[-1]
+		this_waypoint_row.get_node("Frame").text = p["Frame"].name
 		this_waypoint_row.get_node("Distance").text = to_hud_string(p["Position"].length(), "a")
 		
 		# Add it to the tree

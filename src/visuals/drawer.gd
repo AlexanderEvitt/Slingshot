@@ -1,7 +1,7 @@
 class_name Drawer
 extends Node3D
 
-func line(pos: Array, color = Color.WHITE_SMOKE):
+func line(pos: Array, color = Color.WHITE_SMOKE, visible_distance = 0.0):
 	# If there's no positions, make up bogus zero positions
 	if pos == null:
 		pos = [Vector3(0,0,0),Vector3(0,0,0)]
@@ -14,6 +14,11 @@ func line(pos: Array, color = Color.WHITE_SMOKE):
 	# Assign
 	mesh_instance.mesh = immediate_mesh
 	mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	
+	# Add visibility range parameters to do fade out with distance
+	mesh_instance.visibility_range_end = visible_distance
+	mesh_instance.visibility_range_end_margin = 0.25*visible_distance
+	mesh_instance.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
 
 	# Start drawing line along positions
 	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP, material)

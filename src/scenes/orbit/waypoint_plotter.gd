@@ -12,7 +12,7 @@ func _process(_delta):
 	# Add each point to traj
 	var traj = []
 	for x in ShipData.player_ship.waypoints:
-		var body = ShipData.sim_root.get_node(x["Frame"])
+		var body = x["Frame"]
 		# Position is relative to the camera, which is always at the global origin
 		# (position relative to selection) + (position selection relative to system) + (position system relative to camera)
 		var pos = x["Position"] + body.fetch(SystemTime.t) + orbit_root.position # relative to camera position

@@ -1,6 +1,6 @@
 [gd_scene load_steps=62 format=3 uid="uid://1sgfn61bmfrt"]
 
-[ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/scene_controller.gd" id="1_sj5o8"]
+[ext_resource type="Script" uid="uid://micv7ck5c6rj" path="res://scenes/orbit/orbit_scene_controller.gd" id="1_0a2c1"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
 [ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="2_awidn"]
 [ext_resource type="Script" uid="uid://sv406c618jxf" path="res://scenes/barycenter.gd" id="2_d30s2"]
@@ -178,7 +178,7 @@ resource_local_to_scene = true
 radius = 0.04
 
 [node name="OrbitRoot" type="Node3D"]
-script = ExtResource("1_sj5o8")
+script = ExtResource("1_0a2c1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aovhe")
@@ -226,7 +226,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32686.1, 0, 0)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Mercury"
 
-[node name="MercuryPlotter" type="Node3D" parent="SolarSystem/Mercury" groups=["BodyOrbit"]]
+[node name="MercuryPlotter" type="Node3D" parent="SolarSystem/Mercury"]
 script = ExtResource("5_vmpxk")
 color = Color(0.45, 0.28305, 0.2115, 1)
 
@@ -263,7 +263,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13574.2, 0, 0)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Venus"
 
-[node name="VenusPlotter" type="Node3D" parent="SolarSystem/Venus" groups=["BodyOrbit"]]
+[node name="VenusPlotter" type="Node3D" parent="SolarSystem/Venus"]
 script = ExtResource("5_vmpxk")
 color = Color(0.67, 0.482512, 0.1809, 1)
 
@@ -300,7 +300,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 774.29, 0, 0)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Earth"
 
-[node name="EarthPlotter" type="Node3D" parent="SolarSystem/Earth" groups=["BodyOrbit"]]
+[node name="EarthPlotter" type="Node3D" parent="SolarSystem/Earth"]
 script = ExtResource("5_vmpxk")
 color = Color(0.181977, 0.313911, 0.600695, 1)
 
@@ -330,7 +330,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.3)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Earth/Zephyr"
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Zephyr" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Zephyr"]
 script = ExtResource("5_vmpxk")
 color = Color(1, 0.6, 0, 1)
 visible_distance = 200000
@@ -402,7 +402,7 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Luna" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Luna"]
 script = ExtResource("5_vmpxk")
 color = Color(1, 1, 1, 1)
 visible_distance = 2000000
@@ -434,7 +434,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01304, 0, 82446.3)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Earth/Luna/Endurance"
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance"]
 visible = false
 script = ExtResource("5_vmpxk")
 color = Color(1, 0.6, 0, 1)
@@ -503,7 +503,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Mars"
 
-[node name="MarsPlotter" type="Node3D" parent="SolarSystem/Mars" groups=["BodyOrbit"]]
+[node name="MarsPlotter" type="Node3D" parent="SolarSystem/Mars"]
 script = ExtResource("5_vmpxk")
 color = Color(0.539592, 0.205864, 0.196268, 1)
 
@@ -540,7 +540,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 115.063)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Mars/Yugala"
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Mars/Yugala" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="SolarSystem/Mars/Yugala"]
 visible = false
 script = ExtResource("5_vmpxk")
 color = Color(0.41, 0.116167, 0, 1)
@@ -603,7 +603,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Jupiter"
 
-[node name="JupiterPlotter" type="Node3D" parent="SolarSystem/Jupiter" groups=["BodyOrbit"]]
+[node name="JupiterPlotter" type="Node3D" parent="SolarSystem/Jupiter"]
 script = ExtResource("5_vmpxk")
 color = Color(0.607, 0.0604174, 0.245852, 1)
 
@@ -651,7 +651,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Io" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Io"]
 script = ExtResource("5_vmpxk")
 color = Color(1, 0.6, 0, 1)
 visible_distance = 2000000
@@ -698,7 +698,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Callisto" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Callisto"]
 script = ExtResource("5_vmpxk")
 color = Color(0.52549, 0.239216, 0.290196, 1)
 visible_distance = 2000000
@@ -745,7 +745,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Europa" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Europa"]
 script = ExtResource("5_vmpxk")
 color = Color(0, 0.368627, 0, 1)
 visible_distance = 2000000
@@ -844,7 +844,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Ganymede" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Ganymede"]
 script = ExtResource("5_vmpxk")
 color = Color(0.560784, 0.560784, 0.560784, 1)
 visible_distance = 2000000
@@ -880,7 +880,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318113, 0, 0)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Saturn"
 
-[node name="SaturnPlotter" type="Node3D" parent="SolarSystem/Saturn" groups=["BodyOrbit"]]
+[node name="SaturnPlotter" type="Node3D" parent="SolarSystem/Saturn"]
 script = ExtResource("5_vmpxk")
 color = Color(0.405878, 0.319402, 0, 1)
 
@@ -929,7 +929,7 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Saturn/Titan" groups=["BodyOrbit"]]
+[node name="Plotter" type="Node3D" parent="SolarSystem/Saturn/Titan"]
 script = ExtResource("5_vmpxk")
 color = Color(0.890196, 0.643137, 0.25098, 1)
 visible_distance = 2000000
@@ -965,7 +965,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 580869, 0, 0)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Uranus"
 
-[node name="UranusPlotter" type="Node3D" parent="SolarSystem/Uranus" groups=["BodyOrbit"]]
+[node name="UranusPlotter" type="Node3D" parent="SolarSystem/Uranus"]
 script = ExtResource("5_vmpxk")
 color = Color(0.354396, 0.696462, 0.973375, 1)
 
@@ -1002,7 +1002,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 663798, 0, 0)
 script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Neptune"
 
-[node name="NeptunePlotter" type="Node3D" parent="SolarSystem/Neptune" groups=["BodyOrbit"]]
+[node name="NeptunePlotter" type="Node3D" parent="SolarSystem/Neptune"]
 script = ExtResource("5_vmpxk")
 color = Color(0.145, 0.254342, 0.760636, 1)
 
@@ -1039,6 +1039,7 @@ shape = SubResource("SphereShape3D_4ijo1")
 [node name="PlayerShip" type="Node3D" parent="Ships"]
 script = ExtResource("13_xts1l")
 body_path = "Ships/PlayerShip"
+local_positioning = true
 
 [node name="Plotter" type="Node3D" parent="Ships/PlayerShip"]
 script = ExtResource("14_g31x3")
@@ -1064,6 +1065,7 @@ near = 0.01
 far = 10000000000.0
 
 [node name="ClickDetector" type="Area3D" parent="Ships/PlayerShip" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 10
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../CameraRig")
 expandable = true
@@ -1077,18 +1079,6 @@ pixel_size = 0.0001
 billboard = 1
 fixed_size = true
 texture = ExtResource("29_4bect")
-
-[node name="ShipLabel" type="Label3D" parent="Ships/PlayerShip"]
-visible = false
-pixel_size = 0.0003
-offset = Vector2(32, 0)
-billboard = 1
-fixed_size = true
-text = " FV JUNIPER"
-font = ExtResource("4_uugyr")
-font_size = 64
-outline_size = 6
-horizontal_alignment = 0
 
 [node name="WaypointRig" type="Node3D" parent="."]
 script = ExtResource("27_2mw5s")

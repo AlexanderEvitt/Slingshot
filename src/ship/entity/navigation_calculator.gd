@@ -39,17 +39,19 @@ func navigate(dt, gravity):
 	var next_waypoint = waypoints[active_waypoint + 1]
 	
 	# Write the current solar system positions/velocities of the waypoints
-	var from = last_waypoint["Position"] + ShipData.sim_root.get_node(last_waypoint["Frame"]).fetch(SystemTime.t)
-	var to = next_waypoint["Position"] + ShipData.sim_root.get_node(next_waypoint["Frame"]).fetch(SystemTime.t)
-	var from_vel = ShipData.sim_root.get_node(last_waypoint["Frame"]).fetch_velocity(SystemTime.t)
-	var to_vel = ShipData.sim_root.get_node(next_waypoint["Frame"]).fetch_velocity(SystemTime.t)
+	var from = last_waypoint["Position"] + last_waypoint["Frame"].fetch(SystemTime.t)
+	var to = next_waypoint["Position"] + next_waypoint["Frame"].fetch(SystemTime.t)
+	var from_vel = last_waypoint["Frame"].fetch_velocity(SystemTime.t)
+	var to_vel = next_waypoint["Frame"].fetch_velocity(SystemTime.t)
 
 	# Get the course (vector from previous point to next point)
 	var course = (to - from)
+	var course_distance = course.length()
+	var normalized_course = course.normalized()
 	
 	# Get the nearest point along the line
 	# Scalar projection factor t (scalar form of projection position onto from, 0 -> 1)
-	t = (ship.position - from).dot(course) / course.length_squared()
+	t = (ship.position - from).dot(course) / (course_distance * course_distance)
 	# Closest point on the infinite line
 	var closest_point = from + t * course
 	
@@ -76,13 +78,13 @@ func navigate(dt, gravity):
 	
 	# Calculate thrust along line [a3]
 	# Calculate required thrust to hit cornering_velocity at endpoint
-	var remaining_distance = course.length() * (1.0 - t)
+	var remaining_distance = course_distance * (1.0 - t)
 	var required_decel = abs((cornering_velocity**2 - on_course_velocity.length_squared())/(2*remaining_distance))
 	var a3
 	if reverse: # deceleration thrust
-		a3 = -required_decel*course.normalized()
+		a3 = -required_decel*normalized_course
 	else: # acceleration thrust
-		a3 = 0.01*course.normalized()
+		a3 = 0.01*normalized_course
 	# Enable flip if the required deceleration goes over
 	if required_decel > 0.01:
 		reverse = true
@@ -92,7 +94,7 @@ func navigate(dt, gravity):
 	control = control.limit_length(0.05)
 	
 	# Move to next waypoint if near it, disable NAV if at destination
-	var direction = relative_velocity.normalized().dot(course.normalized()) # 1 to -1, alignment of velocity with course
+	var direction = relative_velocity.normalized().dot(normalized_course) # 1 to -1, alignment of velocity with course
 	if t > 1 or (t > 0.9 and direction < 0):
 		if active_waypoint + 2 >= len(waypoints):
 			# Shut off navigation
@@ -111,10 +113,10 @@ func navigate(dt, gravity):
 	# Split control into pointing and throttle command
 	control_throttle = control.length()
 	if control_throttle > 0:
-		control_pointing = control.normalized()
+		control_pointing = normalized_course
 	else:
 		# Point retrocourse at autopilot shutoff
-		control_pointing = -course.normalized()
+		control_pointing = -normalized_course
 	# Don't fire engine if pointing is incorrect
 	var attitude_error = acos(control_pointing.dot(ship.attitude.x)) # radians
 	if attitude_error > 0.087: # 5 degree tolerance

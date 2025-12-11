@@ -18,7 +18,7 @@ emission_texture = SubResource("ViewportTexture_7godr")
 [sub_resource type="ButtonGroup" id="ButtonGroup_qf4pv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4reng"]
-size = Vector3(0.75, 0.015, 0.42)
+size = Vector3(0.753, 0.015, 0.424)
 
 [node name="display" instance=ExtResource("1_7godr")]
 script = ExtResource("2_qf4pv")
