@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ugtufapsikjx"]
+
+[ext_resource type="PackedScene" uid="uid://dvx4bsyvw5le0" path="res://scenes/orbit/koz/wire_cube.glb" id="1_5fqkw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imi3x"]
+shading_mode = 0
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tse3b"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yl1e6"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 1, 0.047058824)
+
+[node name="wire_berth" instance=ExtResource("1_5fqkw")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_imi3x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("BoxMesh_tse3b")
+surface_material_override/0 = SubResource("StandardMaterial3D_yl1e6")

@@ -73,7 +73,7 @@ func _process(_delta):
 	to.text = str(active + 1)
 
 	# Set progress
-	prog.text = str(snapped(100*nav.t, 1)) + "%"
+	prog.text = str(snapped(100*nav.t, 0.01)) + "%"
 
 	# Set enroute times (TBD)
 

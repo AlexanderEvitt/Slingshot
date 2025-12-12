@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=64 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" uid="uid://micv7ck5c6rj" path="res://scenes/orbit/orbit_scene_controller.gd" id="1_0a2c1"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
@@ -25,6 +25,8 @@
 [ext_resource type="Script" uid="uid://xet38inpduig" path="res://bodies/draw_spacecraft_orbit.gd" id="14_g31x3"]
 [ext_resource type="PackedScene" uid="uid://btpxws4tx476f" path="res://scenes/orbit/koz/wire_cube.tscn" id="14_k6kd7"]
 [ext_resource type="Script" uid="uid://dnph6anxcohui" path="res://scenes/orbit/click_detector.gd" id="15_c6xwu"]
+[ext_resource type="Script" uid="uid://ci6gjrxoqgkyw" path="res://bodies/stations/berth_marker.gd" id="15_m0dnk"]
+[ext_resource type="PackedScene" uid="uid://ugtufapsikjx" path="res://scenes/orbit/koz/wire_berth.tscn" id="15_rnymx"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ship/frigate/wireframe/FrigateWireframe.tscn" id="18_lxife"]
 [ext_resource type="Script" uid="uid://c6fhbhu4rnokq" path="res://scenes/orbit/waypoint_rig.gd" id="27_2mw5s"]
 [ext_resource type="Script" uid="uid://bitgjrtr11mkj" path="res://scenes/orbit/waypoint_plotter.gd" id="28_3ag27"]
@@ -389,6 +391,13 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
+[node name="BerthMarker" type="Node3D" parent="SolarSystem/Earth/Zephyr"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9094316366235944, 0, 39.61927700001979)
+script = ExtResource("15_m0dnk")
+
+[node name="wire_berth" parent="SolarSystem/Earth/Zephyr/BerthMarker" instance=ExtResource("15_rnymx")]
+transform = Transform3D(0.07, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.0650000000023283, 0, 0)
+
 [node name="Luna" type="Node3D" parent="SolarSystem/Earth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.9547, 12989.3)
 script = ExtResource("9_2beyu")
@@ -493,6 +502,13 @@ transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
 
 [node name="wire_cube" parent="SolarSystem/Earth/Luna/Endurance/KOZ" instance=ExtResource("14_k6kd7")]
 transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
+
+[node name="BerthMarker" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9094316366235944, 0, 39.61927700001979)
+script = ExtResource("15_m0dnk")
+
+[node name="wire_berth" parent="SolarSystem/Earth/Luna/Endurance/BerthMarker" instance=ExtResource("15_rnymx")]
+transform = Transform3D(0.07, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.0650000000023283, 0, 0)
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
@@ -602,6 +618,13 @@ transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, -4, 0)
 
 [node name="wire_cylinder4" parent="SolarSystem/Mars/Yugala/KOZ" instance=ExtResource("12_5etm5")]
 transform = Transform3D(2.475, 0, 0, 0, 0.415, 0, 0, 0, 3.11, 0, 0.104842, 0)
+
+[node name="BerthMarker" type="Node3D" parent="SolarSystem/Mars/Yugala"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9094316366235944, 0, 39.61927700001979)
+script = ExtResource("15_m0dnk")
+
+[node name="wire_berth" parent="SolarSystem/Mars/Yugala/BerthMarker" instance=ExtResource("15_rnymx")]
+transform = Transform3D(0.07, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.0650000000023283, 0, 0)
 
 [node name="Jupiter" type="Node3D" parent="SolarSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106313, 0, 0)
@@ -824,6 +847,13 @@ transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, -4, 0)
 
 [node name="wire_cylinder4" parent="SolarSystem/Jupiter/Europa/Concordia/KOZ" instance=ExtResource("12_5etm5")]
 transform = Transform3D(2.475, 0, 0, 0, 0.415, 0, 0, 0, 3.11, 0, 0.104842, 0)
+
+[node name="BerthMarker" type="Node3D" parent="SolarSystem/Jupiter/Europa/Concordia"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9094316366235944, 0, 39.61927700001979)
+script = ExtResource("15_m0dnk")
+
+[node name="wire_berth" parent="SolarSystem/Jupiter/Europa/Concordia/BerthMarker" instance=ExtResource("15_rnymx")]
+transform = Transform3D(0.07, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.0650000000023283, 0, 0)
 
 [node name="Ganymede" type="Node3D" parent="SolarSystem/Jupiter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26531.7, 0, 82270.3)
