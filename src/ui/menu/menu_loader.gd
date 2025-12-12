@@ -1,8 +1,8 @@
 extends Node
 
-const INTERIOR_SCENE_PATH : String = "res://scenes/interior/InteriorScene.tscn"
-const PHYSICS_SCENE_PATH : String = "res://scenes/external/ExternalScene.tscn"
-const MENU_SCENE_PATH : String = "res://ui/menu/MenuScene.tscn"
+const INTERIOR_SCENE_PATH : String = "res://scenes/interior/interior_scene.tscn"
+const PHYSICS_SCENE_PATH : String = "res://scenes/simulation/simulation_scene.tscn"
+const MENU_SCENE_PATH : String = "res://ui/menu/menu_scene.tscn"
 
 @onready var menu = $MenuUI
 @onready var loading_bar = menu.loading_bar

@@ -3,14 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="1_i8siu"]
 [ext_resource type="Texture2D" uid="uid://dk713bymep7el" path="res://bodies/photo/EarthNorm.png" id="2_4grjg"]
 [ext_resource type="Texture2D" uid="uid://wxloygaaug3q" path="res://bodies/photo/EarthRough.png" id="3_lxb8n"]
-[ext_resource type="Script" path="res://bodies/rotator.gd" id="4_oib2c"]
+[ext_resource type="Script" uid="uid://c303wtd2a6q3d" path="res://bodies/rotator.gd" id="4_oib2c"]
 [ext_resource type="Texture2D" uid="uid://dggsu48bwuw4l" path="res://bodies/photo/EarthClouds.png" id="5_7ensr"]
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="6_fqrug"]
-[ext_resource type="Shader" path="res://scenes/external/nightlights.gdshader" id="7_x5ylm"]
+[ext_resource type="Shader" uid="uid://w7agyx8ybd7i" path="res://scenes/simulation/nightlights.gdshader" id="7_x5ylm"]
 [ext_resource type="Texture2D" uid="uid://df6jgthy17fmr" path="res://bodies/photo/EarthLights.png" id="8_yvoja"]
 [ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="11_boowo"]
 [ext_resource type="Texture2D" uid="uid://s4i4jbyto3n4" path="res://bodies/photo/LunaNorm.png" id="12_o45j6"]
-[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="16_8u66r"]
+[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="16_8u66r"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_ts1cy"]
 radius = 6371.0

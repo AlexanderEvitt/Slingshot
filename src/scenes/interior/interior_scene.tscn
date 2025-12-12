@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://crjpvll8nr1l0" path="res://ship/entity/ship_audio.gd" id="10_2qs4y"]
 [ext_resource type="AudioStream" uid="uid://bhyw1q27gt2np" path="res://audio/caution.ogg" id="11_7njs8"]
 [ext_resource type="Script" uid="uid://b4yqhxmxhb6wu" path="res://scenes/interior/gravity_applier.gd" id="12_7njs8"]
-[ext_resource type="PackedScene" uid="uid://bkvmuhyyvkeei" path="res://scenes/interior/NavTableScene.tscn" id="12_mjiuk"]
+[ext_resource type="PackedScene" uid="uid://bkvmuhyyvkeei" path="res://scenes/interior/nav_table_scene.tscn" id="12_mjiuk"]
 [ext_resource type="AudioStream" uid="uid://bj5h1vhmxsi4x" path="res://audio/warning.ogg" id="13_oh51y"]
 [ext_resource type="PackedScene" uid="uid://bqxqip7aro08g" path="res://scenes/interior/mug.glb" id="13_qw6n8"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="14_oh51y"]

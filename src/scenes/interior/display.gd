@@ -102,5 +102,5 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 	node_viewport.push_input(event)
 	
 	# Only play sound when mouse button is pressed down (not on move or release)
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
 		audio.play()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_rl157"]
 [ext_resource type="Script" uid="uid://c5861dvxuxslk" path="res://ui/screen_switcher.gd" id="2_bxrle"]
-[ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="3_noksf"]
+[ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/navball_scene.tscn" id="3_noksf"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="4_g0vkg"]
 [ext_resource type="PackedScene" uid="uid://jpb6h7avv8co" path="res://ui/screens/navigation/waypoints/waypoints.tscn" id="4_hqpxh"]
 [ext_resource type="PackedScene" uid="uid://cy4pv2lytaoh4" path="res://ui/small_screens/data/data_screen.tscn" id="5_hqpxh"]

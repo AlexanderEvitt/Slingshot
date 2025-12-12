@@ -1,40 +1,40 @@
 [gd_scene load_steps=71 format=3 uid="uid://d0x7vyc4qrrc2"]
 
-[ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/external/external_scene_controller.gd" id="1_5ri2s"]
-[ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://bodies/Body.cs" id="4_1rgsg"]
-[ext_resource type="Script" uid="uid://sv406c618jxf" path="res://scenes/barycenter.gd" id="4_5kgsd"]
-[ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="4_eafgx"]
-[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="4_n8kbm"]
-[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="5_2nae2"]
-[ext_resource type="Script" uid="uid://ba23dwv2ske7c" path="res://scenes/external/sun_light.gd" id="7_6u2xr"]
-[ext_resource type="Script" uid="uid://c1eedkrj100y" path="res://bodies/planet_collider.gd" id="8_it1pn"]
-[ext_resource type="Texture2D" uid="uid://dk713bymep7el" path="res://bodies/photo/EarthNorm.png" id="9_vu063"]
-[ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/photo/JupiterTrue.jpg" id="11_74p1c"]
-[ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="13_4jafp"]
-[ext_resource type="Texture2D" uid="uid://le10flv78rjl" path="res://bodies/photo/MercuryTrue.jpg" id="13_4pb4k"]
-[ext_resource type="Texture2D" uid="uid://wxloygaaug3q" path="res://bodies/photo/EarthRough.png" id="13_fflf8"]
-[ext_resource type="Texture2D" uid="uid://s4i4jbyto3n4" path="res://bodies/photo/LunaNorm.png" id="14_0kyry"]
-[ext_resource type="Texture2D" uid="uid://b4elvmsivv3oa" path="res://bodies/photo/SaturnTrue.jpg" id="14_eha35"]
-[ext_resource type="Texture2D" uid="uid://dggsu48bwuw4l" path="res://bodies/photo/EarthClouds.png" id="14_t6djw"]
-[ext_resource type="Texture2D" uid="uid://bn8rqk76ahe07" path="res://bodies/photo/VenusTrue.jpg" id="15_k1fbk"]
-[ext_resource type="PackedScene" uid="uid://br774l8co4lju" path="res://bodies/photo/rings.tscn" id="15_qf8i2"]
-[ext_resource type="Shader" uid="uid://w7agyx8ybd7i" path="res://scenes/external/nightlights.gdshader" id="16_dj8m5"]
-[ext_resource type="Texture2D" uid="uid://df6jgthy17fmr" path="res://bodies/photo/EarthLights.png" id="16_q5465"]
-[ext_resource type="Texture2D" uid="uid://blf5ecvkcenvs" path="res://bodies/photo/UranusTrue.jpg" id="16_uf3kr"]
-[ext_resource type="Texture2D" uid="uid://0mbuhbs1qkqu" path="res://bodies/photo/IoTrue.jpg" id="17_gcb48"]
-[ext_resource type="Texture2D" uid="uid://bh21nouyh0k42" path="res://bodies/photo/NeptuneTrue.jpg" id="17_n5xr7"]
-[ext_resource type="Script" uid="uid://c303wtd2a6q3d" path="res://bodies/rotator.gd" id="17_wir2g"]
-[ext_resource type="Script" uid="uid://6mx4lrw1dhww" path="res://scenes/external/nightlights.gd" id="18_elqqx"]
-[ext_resource type="PackedScene" uid="uid://cdxkk5qy7ccnc" path="res://bodies/stations/stations/Endurance.tscn" id="18_ikxh7"]
-[ext_resource type="PackedScene" uid="uid://b0s1bdqqag6dw" path="res://bodies/stations/stations/Zephyr.tscn" id="18_n2nyd"]
-[ext_resource type="Texture2D" uid="uid://bf0o1r3dwo25y" path="res://bodies/photo/CallistoTrue.jpg" id="18_ufqw4"]
-[ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="19_7nri8"]
-[ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="20_a6jdv"]
-[ext_resource type="Texture2D" uid="uid://bdybpcdcv37y" path="res://bodies/photo/MarsTrue.png" id="21_qmkav"]
-[ext_resource type="Texture2D" uid="uid://yfa1thnw2jj0" path="res://bodies/photo/MarsNorm.jpg" id="22_ywee2"]
-[ext_resource type="PackedScene" uid="uid://dxbqssxh6kpdo" path="res://bodies/stations/stations/Yugala.tscn" id="23_vliu8"]
-[ext_resource type="PackedScene" uid="uid://d1bhbnqab3tql" path="res://bodies/stations/stations/Concordia.tscn" id="29_2tq45"]
-[ext_resource type="Script" uid="uid://m2sj0v6o2agd" path="res://scenes/ships_loader.gd" id="35_gsmv1"]
+[ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/simulation/external_scene_controller.gd" id="1_h4u8v"]
+[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="2_xjnot"]
+[ext_resource type="Script" uid="uid://m2sj0v6o2agd" path="res://scenes/ships_loader.gd" id="3_lxg5y"]
+[ext_resource type="Script" uid="uid://sv406c618jxf" path="res://scenes/barycenter.gd" id="4_dnbhy"]
+[ext_resource type="Script" uid="uid://ba23dwv2ske7c" path="res://scenes/simulation/sun_light.gd" id="5_kose2"]
+[ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://bodies/Body.cs" id="6_u7g1e"]
+[ext_resource type="Texture2D" uid="uid://le10flv78rjl" path="res://bodies/photo/MercuryTrue.jpg" id="7_e5o6i"]
+[ext_resource type="Texture2D" uid="uid://bn8rqk76ahe07" path="res://bodies/photo/VenusTrue.jpg" id="8_1fg4q"]
+[ext_resource type="Script" uid="uid://c1eedkrj100y" path="res://bodies/planet_collider.gd" id="9_fbjsd"]
+[ext_resource type="PackedScene" uid="uid://b0s1bdqqag6dw" path="res://bodies/stations/stations/Zephyr.tscn" id="10_pvhad"]
+[ext_resource type="PackedScene" uid="uid://cdxkk5qy7ccnc" path="res://bodies/stations/stations/Endurance.tscn" id="11_7ivjh"]
+[ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="12_4hqcb"]
+[ext_resource type="Texture2D" uid="uid://s4i4jbyto3n4" path="res://bodies/photo/LunaNorm.png" id="13_kq1vd"]
+[ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="14_rkc5v"]
+[ext_resource type="Texture2D" uid="uid://dk713bymep7el" path="res://bodies/photo/EarthNorm.png" id="15_pk42e"]
+[ext_resource type="Texture2D" uid="uid://wxloygaaug3q" path="res://bodies/photo/EarthRough.png" id="16_rfwaf"]
+[ext_resource type="Script" uid="uid://c303wtd2a6q3d" path="res://bodies/rotator.gd" id="17_gp86a"]
+[ext_resource type="Texture2D" uid="uid://dggsu48bwuw4l" path="res://bodies/photo/EarthClouds.png" id="18_3chpo"]
+[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="19_uxj8m"]
+[ext_resource type="Shader" uid="uid://w7agyx8ybd7i" path="res://scenes/simulation/nightlights.gdshader" id="20_wvjoe"]
+[ext_resource type="Texture2D" uid="uid://df6jgthy17fmr" path="res://bodies/photo/EarthLights.png" id="21_7cyl0"]
+[ext_resource type="Script" uid="uid://6mx4lrw1dhww" path="res://scenes/simulation/nightlights.gd" id="22_dkgmi"]
+[ext_resource type="PackedScene" uid="uid://dxbqssxh6kpdo" path="res://bodies/stations/stations/Yugala.tscn" id="23_tf51s"]
+[ext_resource type="Texture2D" uid="uid://bdybpcdcv37y" path="res://bodies/photo/MarsTrue.png" id="24_gar17"]
+[ext_resource type="Texture2D" uid="uid://yfa1thnw2jj0" path="res://bodies/photo/MarsNorm.jpg" id="25_ynenh"]
+[ext_resource type="Texture2D" uid="uid://0mbuhbs1qkqu" path="res://bodies/photo/IoTrue.jpg" id="26_oovxf"]
+[ext_resource type="Texture2D" uid="uid://bf0o1r3dwo25y" path="res://bodies/photo/CallistoTrue.jpg" id="27_4rfal"]
+[ext_resource type="Texture2D" uid="uid://bhnqfg38ugapq" path="res://bodies/photo/EuropaTrue.png" id="28_mmfb1"]
+[ext_resource type="PackedScene" uid="uid://d1bhbnqab3tql" path="res://bodies/stations/stations/Concordia.tscn" id="29_rih2e"]
+[ext_resource type="Texture2D" uid="uid://b7hxlgef16u2g" path="res://bodies/photo/GanymedeTrue.jpg" id="30_ko7vh"]
+[ext_resource type="Texture2D" uid="uid://cyqua1xggrn02" path="res://bodies/photo/JupiterTrue.jpg" id="31_pafif"]
+[ext_resource type="Texture2D" uid="uid://b4elvmsivv3oa" path="res://bodies/photo/SaturnTrue.jpg" id="32_32srj"]
+[ext_resource type="PackedScene" uid="uid://br774l8co4lju" path="res://bodies/photo/rings.tscn" id="33_tdgfb"]
+[ext_resource type="Texture2D" uid="uid://blf5ecvkcenvs" path="res://bodies/photo/UranusTrue.jpg" id="34_qq0rp"]
+[ext_resource type="Texture2D" uid="uid://bh21nouyh0k42" path="res://bodies/photo/NeptuneTrue.jpg" id="35_rfejs"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
 radius = 700000.0
@@ -51,7 +51,7 @@ height = 4880.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmmuk"]
 disable_ambient_light = true
-albedo_texture = ExtResource("13_4pb4k")
+albedo_texture = ExtResource("7_e5o6i")
 
 [sub_resource type="SphereMesh" id="SphereMesh_t6ay8"]
 radius = 6052.0
@@ -59,7 +59,7 @@ height = 12104.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oivmx"]
 disable_ambient_light = true
-albedo_texture = ExtResource("15_k1fbk")
+albedo_texture = ExtResource("8_1fg4q")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6uqj7"]
 
@@ -72,10 +72,10 @@ height = 3480.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qq6b"]
 disable_ambient_light = true
-albedo_texture = ExtResource("13_4jafp")
+albedo_texture = ExtResource("12_4hqcb")
 normal_enabled = true
 normal_scale = 0.1
-normal_texture = ExtResource("14_0kyry")
+normal_texture = ExtResource("13_kq1vd")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cmojb"]
 radius = 1740.0
@@ -88,12 +88,12 @@ rings = 256
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imlac"]
 disable_ambient_light = true
-albedo_texture = ExtResource("4_eafgx")
-roughness_texture = ExtResource("13_fflf8")
+albedo_texture = ExtResource("14_rkc5v")
+roughness_texture = ExtResource("16_rfwaf")
 roughness_texture_channel = 4
 normal_enabled = true
 normal_scale = 3.0
-normal_texture = ExtResource("9_vu063")
+normal_texture = ExtResource("15_pk42e")
 
 [sub_resource type="SphereMesh" id="SphereMesh_282r8"]
 radius = 6380.0
@@ -107,12 +107,12 @@ transparency = 1
 blend_mode = 1
 specular_mode = 2
 disable_ambient_light = true
-albedo_texture = ExtResource("14_t6djw")
+albedo_texture = ExtResource("18_3chpo")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ptrw"]
 render_priority = 0
-shader = ExtResource("16_dj8m5")
-shader_parameter/lights_texture = ExtResource("16_q5465")
+shader = ExtResource("20_wvjoe")
+shader_parameter/lights_texture = ExtResource("21_7cyl0")
 shader_parameter/emission_color = Color(1, 0.74902, 0, 1)
 shader_parameter/sun_dir = Vector3(0, 0, -1)
 
@@ -124,10 +124,10 @@ rings = 64
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_563sj"]
 disable_ambient_light = true
-albedo_texture = ExtResource("21_qmkav")
+albedo_texture = ExtResource("24_gar17")
 normal_enabled = true
 normal_scale = 1.21
-normal_texture = ExtResource("22_ywee2")
+normal_texture = ExtResource("25_ynenh")
 
 [sub_resource type="SphereMesh" id="SphereMesh_fh4a2"]
 radius = 1822.0
@@ -135,7 +135,7 @@ height = 3643.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thbh0"]
 disable_ambient_light = true
-albedo_texture = ExtResource("17_gcb48")
+albedo_texture = ExtResource("26_oovxf")
 
 [sub_resource type="SphereMesh" id="SphereMesh_w33s7"]
 radius = 2410.0
@@ -143,7 +143,7 @@ height = 4821.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6oicq"]
 disable_ambient_light = true
-albedo_texture = ExtResource("18_ufqw4")
+albedo_texture = ExtResource("27_4rfal")
 
 [sub_resource type="SphereMesh" id="SphereMesh_jcfjd"]
 radius = 1561.0
@@ -151,7 +151,7 @@ height = 3122.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wqeu"]
 disable_ambient_light = true
-albedo_texture = ExtResource("19_7nri8")
+albedo_texture = ExtResource("28_mmfb1")
 
 [sub_resource type="SphereMesh" id="SphereMesh_34wev"]
 radius = 2634.0
@@ -159,7 +159,7 @@ height = 5268.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3g57a"]
 disable_ambient_light = true
-albedo_texture = ExtResource("20_a6jdv")
+albedo_texture = ExtResource("30_ko7vh")
 
 [sub_resource type="SphereMesh" id="SphereMesh_ke1qx"]
 radius = 71492.0
@@ -168,7 +168,7 @@ height = 142984.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnura"]
 transparency = 4
 disable_ambient_light = true
-albedo_texture = ExtResource("11_74p1c")
+albedo_texture = ExtResource("31_pafif")
 
 [sub_resource type="SphereMesh" id="SphereMesh_uj08c"]
 radius = 2575.0
@@ -180,7 +180,7 @@ height = 120536.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0p12"]
 disable_ambient_light = true
-albedo_texture = ExtResource("14_eha35")
+albedo_texture = ExtResource("32_32srj")
 
 [sub_resource type="SphereMesh" id="SphereMesh_t3fbd"]
 radius = 25559.0
@@ -191,7 +191,7 @@ rings = 256
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqvh8"]
 transparency = 4
 disable_ambient_light = true
-albedo_texture = ExtResource("16_uf3kr")
+albedo_texture = ExtResource("34_qq0rp")
 
 [sub_resource type="SphereMesh" id="SphereMesh_j27v8"]
 radius = 24764.0
@@ -200,19 +200,19 @@ height = 49528.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnkww"]
 transparency = 4
 disable_ambient_light = true
-albedo_texture = ExtResource("17_n5xr7")
+albedo_texture = ExtResource("35_rfejs")
 
 [node name="SimRoot" type="Node3D"]
-script = ExtResource("1_5ri2s")
+script = ExtResource("1_h4u8v")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("4_n8kbm")
+environment = ExtResource("2_xjnot")
 
 [node name="Ships" type="Node3D" parent="."]
-script = ExtResource("35_gsmv1")
+script = ExtResource("3_lxg5y")
 
 [node name="SolarSystem" type="Node3D" parent="." groups=["Bodies"]]
-script = ExtResource("4_5kgsd")
+script = ExtResource("4_dnbhy")
 GM = 132712000000.0
 body_path = "SolarSystem"
 
@@ -220,7 +220,7 @@ body_path = "SolarSystem"
 process_priority = 13
 editor_description = "SOL is the center of humanity's origin system and a G2V star. Until the last century, the Sol system was home to most of humanity."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1867070)
-script = ExtResource("4_5kgsd")
+script = ExtResource("4_dnbhy")
 body_path = "SolarSystem/Sun"
 
 [node name="SunMesh" type="MeshInstance3D" parent="SolarSystem/Sun"]
@@ -238,13 +238,13 @@ directional_shadow_split_1 = 0.001
 directional_shadow_fade_start = 0.9
 directional_shadow_pancake_size = 5.0
 sky_mode = 1
-script = ExtResource("7_6u2xr")
+script = ExtResource("5_kose2")
 
 [node name="Mercury" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "MERCURY is the smallest planet of the Sol system. Its proximity to Sol itself makes it difficult to survive on and is today only occupied by a few mining outposts."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36082.9, 0, 0)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 a = 57909100.0
 e = 0.206
 i = 0.122
@@ -262,7 +262,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gmmuk")
 process_priority = 13
 editor_description = "VENUS is the second planet of the Sol system. It's harsh surface conditions have stubbed attempts at colonization."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26367.4, 0, 0)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 324859.0
 a = 108208000.0
 e = 0.018
@@ -281,7 +281,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_oivmx")
 [node name="Earth" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "EARTH is the original cradle of humanity and the center of civilization. With one large moon and several stations, over 10 billion people call Earth home."
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 398600.0
 a = 147683000.0
 e = 0.021
@@ -293,28 +293,27 @@ theta0 = 4.687
 [node name="StaticBody3D" type="StaticBody3D" parent="SolarSystem/Earth"]
 process_priority = 13
 physics_material_override = SubResource("PhysicsMaterial_6uqj7")
-script = ExtResource("8_it1pn")
+script = ExtResource("9_fbjsd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/StaticBody3D"]
 process_priority = 13
 shape = SubResource("SphereShape3D_4v3sc")
 
-[node name="Zephyr" type="Node3D" parent="SolarSystem/Earth"]
+[node name="Zephyr" type="Node3D" parent="SolarSystem/Earth" groups=["Stations"]]
 process_priority = 13
 editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 6610.83, 0, 0)
-script = ExtResource("4_1rgsg")
-is_station = true
+script = ExtResource("6_u7g1e")
 a = 42164.0
 theta0 = 3.142
 
-[node name="Station" parent="SolarSystem/Earth/Zephyr" instance=ExtResource("18_n2nyd")]
+[node name="Station" parent="SolarSystem/Earth/Zephyr" instance=ExtResource("10_pvhad")]
 
 [node name="Luna" type="Node3D" parent="SolarSystem/Earth" groups=["Bodies"]]
 process_priority = 13
 editor_description = "LUNA is Earth's sole natural satellite and the gateway to the planets. Almost two billion people live in its domed cities, servicing the numerous ports and dockyards scattered across the regolith."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10121.8, 0, 0)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 4902.8
 a = 387078.0
 e = 0.045
@@ -323,18 +322,17 @@ RAAN = 3.399
 argp = 1.573
 theta0 = 2.226
 
-[node name="Endurance" type="Node3D" parent="SolarSystem/Earth/Luna"]
+[node name="Endurance" type="Node3D" parent="SolarSystem/Earth/Luna" groups=["Stations"]]
 process_priority = 13
 editor_description = "ENDURANCE is the gateway station to Shackleton crater, the largest city on Luna. As the sister station to Zephyr, countless ships make the run between them each cycle."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 2044.07, 0, 0)
-script = ExtResource("4_1rgsg")
-is_station = true
+script = ExtResource("6_u7g1e")
 a = 36618.0
 e = 0.7
 i = 1.571
 argp = 1.571
 
-[node name="Station" parent="SolarSystem/Earth/Luna/Endurance" instance=ExtResource("18_ikxh7")]
+[node name="Station" parent="SolarSystem/Earth/Luna/Endurance" instance=ExtResource("11_7ivjh")]
 
 [node name="LunaMesh" type="MeshInstance3D" parent="SolarSystem/Earth/Luna"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
@@ -346,7 +344,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
 [node name="StaticBody3D" type="StaticBody3D" parent="SolarSystem/Earth/Luna"]
 process_priority = 13
 physics_material_override = SubResource("PhysicsMaterial_6uqj7")
-script = ExtResource("8_it1pn")
+script = ExtResource("9_fbjsd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/Luna/StaticBody3D"]
 process_priority = 13
@@ -358,7 +356,7 @@ visibility_range_end = 10000000.0
 mesh = SubResource("SphereMesh_aom7d")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_imlac")
-script = ExtResource("17_wir2g")
+script = ExtResource("17_gp86a")
 
 [node name="Clouds" type="MeshInstance3D" parent="SolarSystem/Earth/EarthMesh"]
 visibility_range_end = 10000000.0
@@ -366,7 +364,7 @@ mesh = SubResource("SphereMesh_282r8")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
 
-[node name="EarthAtmosphere" parent="SolarSystem/Earth/EarthMesh" instance=ExtResource("5_2nae2")]
+[node name="EarthAtmosphere" parent="SolarSystem/Earth/EarthMesh" instance=ExtResource("19_uxj8m")]
 planet_radius = 6371.0
 atmosphere_height = 40.0
 sun_path = NodePath("../../../Sun/BigSunLight")
@@ -379,14 +377,14 @@ shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 visibility_range_end = 10000000.0
 mesh = SubResource("SphereMesh_282r8")
 surface_material_override/0 = SubResource("ShaderMaterial_1ptrw")
-script = ExtResource("18_elqqx")
+script = ExtResource("22_dkgmi")
 sun_path = NodePath("../../../Sun")
 
 [node name="Mars" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "MARS is the second-most populous planet in the Sol system, owing to early colonization efforts that predate most other planetary colonies by almost a century."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17279.1, 0, 0)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 42828.4
 a = 227941000.0
 e = 0.094
@@ -395,16 +393,15 @@ RAAN = 0.837
 argp = 5.068
 theta0 = 5.873
 
-[node name="Yugala" type="Node3D" parent="SolarSystem/Mars"]
+[node name="Yugala" type="Node3D" parent="SolarSystem/Mars" groups=["Stations"]]
 process_priority = 13
 editor_description = "YUGALA ORBITAL is the largest station in proximity to Mars. It acts as a vital military base providing protection to the inner planets from pirates and thieves."
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -3852.12, 0, 0)
-script = ExtResource("4_1rgsg")
-is_station = true
+script = ExtResource("6_u7g1e")
 a = 42164.0
 theta0 = 3.142
 
-[node name="Station" parent="SolarSystem/Mars/Yugala" instance=ExtResource("23_vliu8")]
+[node name="Station" parent="SolarSystem/Mars/Yugala" instance=ExtResource("23_tf51s")]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
 
 [node name="MarsMesh" type="MeshInstance3D" parent="SolarSystem/Mars"]
@@ -418,7 +415,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_563sj")
 process_priority = 13
 editor_description = "JUPITER is a gas giant and the largest planet of the Sol system. Numerous stations and cities are scattered amongst its moons."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -97771.8, 0, 0)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 126687000.0
 a = 778469000.0
 e = 0.049
@@ -427,10 +424,10 @@ RAAN = 1.77
 argp = 4.787
 theta0 = 1.518
 
-[node name="Io" type="Node3D" parent="SolarSystem/Jupiter"]
+[node name="Io" type="Node3D" parent="SolarSystem/Jupiter" groups=["Bodies"]]
 editor_description = "IO is a highly volcanic moon of Jupiter. The high-radiation environment and active volcanism has precluded attempts at habitation."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29743.1, 0, -84806.8)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 5959.92
 a = 422038.0
 e = 0.005
@@ -445,10 +442,10 @@ mesh = SubResource("SphereMesh_fh4a2")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_thbh0")
 
-[node name="Callisto" type="Node3D" parent="SolarSystem/Jupiter"]
+[node name="Callisto" type="Node3D" parent="SolarSystem/Jupiter" groups=["Bodies"]]
 editor_description = "CALLISTO is an icy moon of Jupiter and the most populous in the system. Low radiation and gravity of over one tenth G have led to significant immigration."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12773.1, 0, -84357.9)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 7179.28
 a = 1882810.0
 e = 0.007
@@ -466,7 +463,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_6oicq")
 [node name="Europa" type="Node3D" parent="SolarSystem/Jupiter" groups=["Bodies"]]
 editor_description = "EUROPA, long considered a sister moon of Callisto, was colonized similarly for centuries. However, the violent nationalist conflicts of the 2400s led to most settlers emigrating and many colonies being abandoned."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6000.71, 0, -87993)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 3202.71
 a = 671245.0
 e = 0.009
@@ -481,22 +478,21 @@ mesh = SubResource("SphereMesh_jcfjd")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_4wqeu")
 
-[node name="Concordia" type="Node3D" parent="SolarSystem/Jupiter/Europa"]
+[node name="Concordia" type="Node3D" parent="SolarSystem/Jupiter/Europa" groups=["Stations"]]
 process_priority = 13
 editor_description = "CONCORDIA II is a former European Union colony station, since turned over to private military interest as civilian traffic to the moon below dried up."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1455.5971062894096, 0, -1684.281726498666)
-script = ExtResource("4_1rgsg")
-is_station = true
+script = ExtResource("6_u7g1e")
 a = 3000.0
 i = 60.0
 theta0 = 1.3
 
-[node name="Station" parent="SolarSystem/Jupiter/Europa/Concordia" instance=ExtResource("29_2tq45")]
+[node name="Station" parent="SolarSystem/Jupiter/Europa/Concordia" instance=ExtResource("29_rih2e")]
 
-[node name="Ganymede" type="Node3D" parent="SolarSystem/Jupiter"]
+[node name="Ganymede" type="Node3D" parent="SolarSystem/Jupiter" groups=["Bodies"]]
 editor_description = "GANYMEDE is the most massive moon in the Sol system. Its relatively high gravity has led to the development of the local healthcare industry, with several large hospitals and military bases located around its equator."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21337.3, 0, -77908.5)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 9887.83
 a = 1070490.0
 e = 0.002
@@ -522,7 +518,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lnura")
 process_priority = 13
 editor_description = "SATURN is a ringed gas giant, with the most cataloged moons of any planet in the known universe. Although Saturn itself is uninhabitable, the rings have welcomed a small ice mining industry."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -345563, 0, 0)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 37931200.0
 a = 1434080000.0
 e = 0.058
@@ -531,10 +527,10 @@ RAAN = 1.96
 argp = 6.019
 theta0 = 0.417
 
-[node name="Titan" type="Node3D" parent="SolarSystem/Saturn"]
+[node name="Titan" type="Node3D" parent="SolarSystem/Saturn" groups=["Bodies"]]
 editor_description = "TITAN, sometimes referred to as the \"jewel of the outer planets,\" is the only moon in the Sol system with a significant atmosphere. The lack of a need for pressure suits on its surface has contributed to an incredible explosion in population."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -78422.6)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 8978.14
 a = 1221970.0
 e = 0.029
@@ -549,7 +545,7 @@ visibility_range_end = 10000000.0
 mesh = SubResource("SphereMesh_uj08c")
 skeleton = NodePath("")
 
-[node name="TitanAtmosphere" parent="SolarSystem/Saturn/Titan" instance=ExtResource("5_2nae2")]
+[node name="TitanAtmosphere" parent="SolarSystem/Saturn/Titan" instance=ExtResource("19_uxj8m")]
 planet_radius = 2575.0
 atmosphere_height = 100.0
 sun_path = NodePath("../../../Sun/BigSunLight")
@@ -566,14 +562,14 @@ mesh = SubResource("SphereMesh_p4pre")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_t0p12")
 
-[node name="rings" parent="SolarSystem/Saturn/SaturnMesh" instance=ExtResource("15_qf8i2")]
+[node name="rings" parent="SolarSystem/Saturn/SaturnMesh" instance=ExtResource("33_tdgfb")]
 transform = Transform3D(67300, 0, 0, 0, 67300, 0, 0, 0, 67300, 0, 0, 0)
 
 [node name="Uranus" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
 editor_description = "URANUS is an ice giant deep in the outer solar system. Very little economic incentive has existed historically to justify colonization this far out, but a few straggling colonial cities have been established, mostly in the ammonia extraction business."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -542088, 0, 0)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 5793940.0
 a = 2889070000.0
 e = 0.05
@@ -589,7 +585,7 @@ mesh = SubResource("SphereMesh_t3fbd")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_fqvh8")
 
-[node name="UranusAtmosphere" parent="SolarSystem/Uranus" instance=ExtResource("5_2nae2")]
+[node name="UranusAtmosphere" parent="SolarSystem/Uranus" instance=ExtResource("19_uxj8m")]
 planet_radius = 25611.5
 atmosphere_height = 100.0
 sun_path = NodePath("../../Sun/BigSunLight")
@@ -602,7 +598,7 @@ shader_params/u_atmosphere_ambient_color = Color(0, 0, 0, 1)
 process_priority = 13
 editor_description = "NEPTUNE is the farthest planet from Sol and has almost no permanent population. A handful of research stations exist to take advantage of the low-noise environment."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -612081, 0, 0)
-script = ExtResource("4_1rgsg")
+script = ExtResource("6_u7g1e")
 GM = 6836530.0
 a = 4516590000.0
 e = 0.013

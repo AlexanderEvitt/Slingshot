@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://b07e4fcvvtdqq"]
 
-[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="1_xv6sl"]
+[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/simulation/external_world.tres" id="1_xv6sl"]
 [ext_resource type="Script" uid="uid://coauq357djn0x" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_bu3jf"]
 [ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="3_mq6p4"]
-[ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/external/external_screen_shader.tres" id="4_w87ht"]
+[ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/simulation/external_screen_shader.tres" id="4_w87ht"]
 [ext_resource type="Script" uid="uid://dqq4m1h7sew1g" path="res://ui/external_shader_settings.gd" id="5_n68xp"]
-[ext_resource type="PackedScene" uid="uid://bpfrq18j1sk54" path="res://scenes/external/stars/stars.tscn" id="6_sghyb"]
-[ext_resource type="Script" uid="uid://dh6w57kuqpd04" path="res://scenes/external/stars/starblur_controller.gd" id="7_0wv60"]
+[ext_resource type="PackedScene" uid="uid://bpfrq18j1sk54" path="res://scenes/simulation/stars/stars.tscn" id="6_sghyb"]
+[ext_resource type="Script" uid="uid://dh6w57kuqpd04" path="res://scenes/simulation/stars/starblur_controller.gd" id="7_0wv60"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_4e2yt"]
 material = ExtResource("4_w87ht")

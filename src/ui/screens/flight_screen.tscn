@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://c6ewf1e7q725g"]
 
-[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="2_iesil"]
+[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/simulation/external_world.tres" id="2_iesil"]
 [ext_resource type="Script" uid="uid://dlycu8e3slcny" path="res://ui/screens/hud/hud.gd" id="3_brmsx"]
 [ext_resource type="PackedScene" uid="uid://dwmguh47arrut" path="res://ship/flight/flight_entity.tscn" id="3_pck3v"]
 [ext_resource type="Theme" uid="uid://cq4okyn8x44n7" path="res://ui/themes/camera.tres" id="4_xevn7"]
-[ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/NavballScene.tscn" id="5_4ex4u"]
+[ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/navball_scene.tscn" id="5_4ex4u"]
 [ext_resource type="PackedScene" uid="uid://4vjxamh38dkk" path="res://ui/screens/hud/attitude_bars.tscn" id="6_0dbx2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ca2ko"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cupcgndqidmw2"]
 
-[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/external/external_world.tres" id="1_ken57"]
-[ext_resource type="Script" uid="uid://dp1i364kt8ybg" path="res://scenes/external/cinema_cam.gd" id="2_anq8f"]
+[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/simulation/external_world.tres" id="1_ken57"]
+[ext_resource type="Script" uid="uid://dp1i364kt8ybg" path="res://scenes/simulation/cinema_cam.gd" id="2_anq8f"]
 
 [node name="CinematicScreen" type="HBoxContainer"]
 anchors_preset = 15

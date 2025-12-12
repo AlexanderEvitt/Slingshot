@@ -35,11 +35,11 @@ func _process(_delta):
 	# Smoothly move to new position
 	var old_zoom = camera.position.z
 	camera.position = Vector3(0, 0, smooth_zoom*zoom_distance + (1.0 - smooth_zoom)*old_zoom)
-			
+	
 	# Move camera back from acceleration
 	# by linearly interpolating between current position and offset by thrust
-	var acceleration = ShipData.player_ship.acceleration
-	position = (Kd)*position + (1.0 - Kd)*Kp*(-acceleration)
+	#var acceleration = ShipData.player_ship.acceleration
+	#position = (Kd)*position + (1.0 - Kd)*Kp*(-acceleration)
 	
 	# Rotate camera to ship attitude if in "Local" mode
 	if camera_mode == "Global":
@@ -52,9 +52,6 @@ func _process(_delta):
 		if Input.is_action_just_pressed("view"):
 			camera_mode = "Global"
 	
-
-
-func _unhandled_input(event):
 	# Set zoom from inputs
 	if viewer.is_visible_in_tree():
 		if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
@@ -78,15 +75,7 @@ func _unhandled_input(event):
 			set_orientation()
 
 	# Right-click rotate
-	if event is InputEventMouseButton and event.button_index == 2:
-		if !r:
-			r = true
-			#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		elif r:
-			r = false
-			#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-	if r:
+	if Input.is_action_pressed("right_click"):
 		set_orientation()
 		
 func set_orientation():

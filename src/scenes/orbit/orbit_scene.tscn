@@ -214,6 +214,7 @@ outline_size = 6
 horizontal_alignment = 0
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Sun" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
@@ -251,6 +252,7 @@ outline_size = 6
 horizontal_alignment = 0
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Mercury" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
@@ -288,6 +290,7 @@ outline_size = 6
 horizontal_alignment = 0
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Venus" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
@@ -364,6 +367,7 @@ transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
 transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/Zephyr" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
@@ -528,6 +532,7 @@ outline_size = 6
 horizontal_alignment = 0
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Mars" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
@@ -667,6 +672,7 @@ fixed_size = true
 texture = ExtResource("2_3t7g4")
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Io" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
@@ -945,6 +951,7 @@ fixed_size = true
 texture = ExtResource("2_3t7g4")
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Saturn/Titan" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
@@ -990,6 +997,7 @@ outline_size = 6
 horizontal_alignment = 0
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Uranus" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
@@ -1027,6 +1035,7 @@ outline_size = 6
 horizontal_alignment = 0
 
 [node name="ClickDetector" type="Area3D" parent="SolarSystem/Neptune" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
 script = ExtResource("15_c6xwu")
 camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true

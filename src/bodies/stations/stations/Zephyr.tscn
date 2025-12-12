@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://bodies/stations/components/station_manager.gd" id="1_hn7g8"]
 [ext_resource type="PackedScene" uid="uid://bty856a1y2vt0" path="res://bodies/stations/components/stump.tscn" id="2_o24in"]
-[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="2_urlyi"]
+[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="2_urlyi"]
 [ext_resource type="PackedScene" uid="uid://cr6y3tpnww4h7" path="res://bodies/stations/components/ring.tscn" id="3_e7nfi"]
 [ext_resource type="PackedScene" uid="uid://bkei6pvqd0x5g" path="res://bodies/stations/components/shipyard.tscn" id="4_goyf3"]
 [ext_resource type="PackedScene" uid="uid://b51mp318qc6wr" path="res://scenes/orbit/koz/wire_sphere.tscn" id="5_psudm"]

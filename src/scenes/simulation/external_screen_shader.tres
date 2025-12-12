@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bmrjquiaa82av"]
 
-[ext_resource type="Shader" uid="uid://4wsd1m8qbrr3" path="res://scenes/external/lens_flare.gdshader" id="1_2yycy"]
+[ext_resource type="Shader" uid="uid://4wsd1m8qbrr3" path="res://scenes/simulation/lens_flare.gdshader" id="1_2yycy"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_v83e3"]
 

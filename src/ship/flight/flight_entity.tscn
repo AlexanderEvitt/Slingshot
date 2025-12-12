@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://dwmguh47arrut"]
 
-[ext_resource type="Script" path="res://ship/flight/flight_entity.gd" id="1_xdcq6"]
+[ext_resource type="Script" uid="uid://bs8erl8nle1lb" path="res://ship/flight/flight_entity.gd" id="1_xdcq6"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="13_uyc1d"]
-[ext_resource type="Script" path="res://scenes/external/hud_visibility.gd" id="14_knlqu"]
+[ext_resource type="Script" uid="uid://cq5dw32840hl2" path="res://scenes/simulation/hud_visibility.gd" id="14_knlqu"]
 [ext_resource type="Texture2D" uid="uid://djyppx76cf4t5" path="res://scenes/attitude/prograde.png" id="16_pxptb"]
-[ext_resource type="Script" path="res://scenes/attitude/prograde_marker.gd" id="17_h17dd"]
+[ext_resource type="Script" uid="uid://bpytqforn4lvc" path="res://scenes/attitude/prograde_marker.gd" id="17_h17dd"]
 [ext_resource type="Texture2D" uid="uid://d28isjwqdor3u" path="res://scenes/attitude/retrograde.png" id="18_vynvg"]
 
 [node name="PlayerShip" type="Node3D"]

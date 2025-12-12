@@ -9,10 +9,6 @@ public partial class Body : Node3D
     [Export]
     public double GM { get; set; } // km^3/s^2
 
-    // Booleans for defining type of object
-    [Export]
-    public bool is_station { get; set; }
-
     // Input orbital elements
     [Export]
     public double a { get; set; } = 384000.0; // semi-major axis, km

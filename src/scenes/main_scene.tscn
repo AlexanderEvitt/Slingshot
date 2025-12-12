@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://n78uivx6mb2"]
+
+[ext_resource type="Script" uid="uid://cp104upqapb6e" path="res://ui/menu/menu_loader.gd" id="1_7ykc4"]
+[ext_resource type="PackedScene" uid="uid://ckg801jn7baa1" path="res://ui/menu/menu_scene.tscn" id="2_pu3yx"]
+[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/simulation/external_world.tres" id="3_gubc5"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_g2dsv"]
+
+[node name="GameRoot" type="Node"]
+script = ExtResource("1_7ykc4")
+
+[node name="MenuUI" parent="." instance=ExtResource("2_pu3yx")]
+slot_button_group = SubResource("ButtonGroup_g2dsv")
+
+[node name="SimulationHolder" type="SubViewport" parent="."]
+world_3d = ExtResource("3_gubc5")
+audio_listener_enable_3d = true
+render_target_update_mode = 4

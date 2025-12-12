@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=4 uid="uid://bpfrq18j1sk54"]
 
-[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/external/external_environment.tres" id="3_4kjkv"]
-[ext_resource type="Script" uid="uid://c13n3mmotbtbi" path="res://scenes/external/stars/startracks.gd" id="4_jwuqs"]
-[ext_resource type="Shader" uid="uid://chh0ov3lkttdk" path="res://scenes/external/stars/starstreaks.gdshader" id="4_tbgki"]
+[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="3_4kjkv"]
+[ext_resource type="Script" uid="uid://c13n3mmotbtbi" path="res://scenes/simulation/stars/startracks.gd" id="4_jwuqs"]
+[ext_resource type="Shader" uid="uid://chh0ov3lkttdk" path="res://scenes/simulation/stars/starstreaks.gdshader" id="4_tbgki"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kl700"]
 _surfaces = [{
