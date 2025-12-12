@@ -36,46 +36,67 @@ extends Control
 @onready var pid = $HBoxContainer/NavBox/GridContainer/Label40
 
 func _process(_delta):
+	# References to ship and nav
+	var ship = ShipData.player_ship
+	var nav = ShipData.player_ship.navigation_calculator
+	
 	# Set time
 	sclk.text = str(snapped(SystemTime.t, 1))
 
 	# Set positions
-	var r = Conversions.ToFrame(ShipData.player_ship.position,SystemTime.t)
+	var r = Conversions.ToFrame(ship.position,SystemTime.t)
 	rx.text = str(snapped(r.x, 1)) + "km"
 	ry.text = str(snapped(r.y, 1)) + "km"
 	rz.text = str(snapped(r.z, 1)) + "km"
 
 	# Set velocities
-	var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
+	var v = Conversions.VelToFrame(ship.velocity,SystemTime.t)
 	vx.text = str(snapped(v.x, 0.1)) + "km/s"
 	vy.text = str(snapped(v.y, 0.1)) + "km/s"
 	vz.text = str(snapped(v.z, 0.1)) + "km/s"
 
 	# Set accelerations
-	var thrust = ShipData.player_ship.thrust_acceleration.length()/0.00981 # in units of G
+	var thrust = ship.thrust_acceleration.length()/0.00981 # in units of G
 	thr.text = str(snapped(thrust, 0.01)) + "g"
-	var gravity = ShipData.player_ship.gravity_acceleration.length()/0.00981 # in units of G
+	var gravity = ship.gravity_acceleration.length()/0.00981 # in units of G
 	g.text = str(snapped(gravity, 0.01)) + "g"
 
 	# Set rotations
-	var euler = ShipData.player_ship.attitude.get_euler()
+	var euler = ship.attitude.get_euler()
 	rotx.text = str(snapped(euler.x, 0.001))
 	roty.text = str(snapped(euler.y, 0.001))
 	rotz.text = str(snapped(euler.z, 0.001))
 
 	# Set waypoints
-	var active = ShipData.player_ship.navigation_calculator.active_waypoint
+	var active = nav.active_waypoint
 	from.text = str(active)
 	to.text = str(active + 1)
 
 	# Set progress
-	prog.text = str(snapped(100*ShipData.player_ship.navigation_calculator.t, 1)) + "%"
+	prog.text = str(snapped(100*nav.t, 1)) + "%"
+
+	# Set enroute times (TBD)
 
 	# Set relative positions
+	rplus.text = str(snapped(nav.remaining_distance, 1)) + "km"
+	rcross.text = str(snapped(nav.p_error.length(), 1)) + "km"
+
+	# Set relative velocities
+	vplus.text = str(snapped(nav.on_course_velocity.length(), 1)) + "km/s"
+	vcross.text = str(snapped(nav.d_error.length(), 0.01)) + "km/s"
+
+	# Set commanded accelerations
+	aplus.text = str(snapped(nav.a3.length()/0.00981, 0.01)) + "G"
+	across.text = str(snapped(nav.a2.length()/0.00981, 0.01)) + "G"
 	
-
-
-
+	# Set PID ratios
+	var p_response = (nav.Kp*nav.scalek)*nav.p_error.length()
+	var i_response = (nav.Ki*nav.scalek)*nav.i_error.length()
+	var d_response = (nav.Kd*nav.scalek)*nav.d_error.length()
+	var p_frac = p_response/(p_response+i_response+d_response)
+	var i_frac = i_response/(p_response+i_response+d_response)
+	var d_frac = d_response/(p_response+i_response+d_response)
+	pid.text = str(snapped(100*p_frac, 1)) + "/" + str(snapped(100*i_frac, 1)) + "/" + str(snapped(100*d_frac, 1))
 
 func format_time(seconds):
 	var signs := "T+"

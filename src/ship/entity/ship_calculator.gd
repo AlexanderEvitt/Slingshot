@@ -95,6 +95,9 @@ func _physics_process(delta):
 
 	# Integrate regularly
 	else:
+		# Update things periodically that don't need to accelerate with time warp
+		navigation_calculator.update_periodically()
+		
 		# Do multiple simulation time steps per run of physics_process
 		var sim_steps_per_physics_tick = clamp(SystemTime.step,1,100)
 		gravity_acceleration = propagator.Acceleration(position,SystemTime.prev_t)

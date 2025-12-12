@@ -4,6 +4,7 @@
 
 [node name="Data" type="Control"]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -1408.0
@@ -260,7 +261,7 @@ clip_text = true
 [node name="Label27" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "R+"
+text = "R-"
 
 [node name="Label28" type="Label" parent="HBoxContainer/NavBox/GridContainer"]
 layout_mode = 2
