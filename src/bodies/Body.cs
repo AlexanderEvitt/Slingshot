@@ -68,10 +68,7 @@ public partial class Body : Node3D
 
     public override void _PhysicsProcess(double delta)
     {
-        // Technically this doesn't influence anything right now
-        // Positions of bodies in external and orbit scene are taken by calling fetch
-        // Positions of bodies for gravity also call fetch
-        // Nothing depends on the positions of the bodies in the main scene being correct
+        // Set the position of the body
         Position = get_local_position(SystemTime.Instance.t);
     }
 

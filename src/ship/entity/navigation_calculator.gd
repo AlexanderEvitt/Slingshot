@@ -100,6 +100,8 @@ func navigate(dt, gravity):
 			# Shut off navigation
 			ship.nav_disc.emit()
 			ship.auto_disc.emit()
+			ship.avionics["navigation"] = false
+			ship.avionics["autopilot"] = false
 			control = Vector3(0,0,0)
 			reverse = false
 			i_error = Vector3(0,0,0)
@@ -113,7 +115,7 @@ func navigate(dt, gravity):
 	# Split control into pointing and throttle command
 	control_throttle = control.length()
 	if control_throttle > 0:
-		control_pointing = normalized_course
+		control_pointing = control.normalized()
 	else:
 		# Point retrocourse at autopilot shutoff
 		control_pointing = -normalized_course

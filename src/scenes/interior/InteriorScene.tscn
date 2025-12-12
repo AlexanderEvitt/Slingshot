@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cy2v2xkwsyqp4"]
+[gd_scene load_steps=21 format=3 uid="uid://cy2v2xkwsyqp4"]
 
 [ext_resource type="PackedScene" uid="uid://p4lgjdfw8o7y" path="res://scenes/interior/interior.glb" id="1_hytfg"]
 [ext_resource type="PackedScene" uid="uid://c7557e6pmwk05" path="res://scenes/interior/display.tscn" id="2_64l87"]
@@ -14,9 +14,6 @@
 [ext_resource type="AudioStream" uid="uid://bj5h1vhmxsi4x" path="res://audio/warning.ogg" id="13_oh51y"]
 [ext_resource type="PackedScene" uid="uid://bqxqip7aro08g" path="res://scenes/interior/mug.glb" id="13_qw6n8"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="14_oh51y"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2qs4y"]
-height = 1.0
 
 [sub_resource type="Environment" id="Environment_s6rcy"]
 background_mode = 1
@@ -86,9 +83,6 @@ anchor_bottom = 0.61
 [node name="RayCast3D" type="RayCast3D" parent="Player" index="1"]
 target_position = Vector3(0, 0, -1)
 collide_with_areas = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" index="2"]
-shape = SubResource("CapsuleShape3D_2qs4y")
 
 [node name="AudioRumble" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("9_j2chi")

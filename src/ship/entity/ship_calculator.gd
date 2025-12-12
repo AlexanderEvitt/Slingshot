@@ -158,8 +158,9 @@ func integrate_normally(dt, prev_gravity):
 	var collision_info = space_state.get_rest_info(params)
 	if collision_info:
 		# Print the thing you just collided with
-		# var collider_id = collision_info["collider_id"]
-		# var collider = instance_from_id(collider_id)
+		var collider_id = collision_info["collider_id"]
+		var collider = instance_from_id(collider_id)
+		print(collider.name)
 		
 		# Get the relative velocity of the ship to the collider
 		var collider_velocity = collision_info.linear_velocity

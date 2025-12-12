@@ -33,6 +33,7 @@ radial_segments = 16
 rings = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
+margin = 0.0
 size = Vector3(0.05843319023733784, 0.015, 0.015)
 
 [node name="PlayerShip" type="CharacterBody3D"]

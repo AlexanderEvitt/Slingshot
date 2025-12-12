@@ -29,7 +29,7 @@ seamless = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_phgne"]
 render_priority = 0
 shader = ExtResource("1_eo5p0")
-shader_parameter/model_height = 16.0
+shader_parameter/model_height = 16.5
 shader_parameter/dissolve_start = 0.0
 shader_parameter/dissolve_length = 1.0
 shader_parameter/gradient_bias = 3.678
