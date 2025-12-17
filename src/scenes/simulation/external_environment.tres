@@ -1,7 +1,17 @@
-[gd_resource type="Environment" format=3 uid="uid://bv1aqa2gbpa6t"]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://bv1aqa2gbpa6t"]
+
+[ext_resource type="Texture2D" uid="uid://bcf8qrayi8fn6" path="res://scenes/simulation/hipp_skybox.png" id="1_iyck2"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4vms0"]
+panorama = ExtResource("1_iyck2")
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_c66ga"]
+sky_material = SubResource("PanoramaSkyMaterial_4vms0")
 
 [resource]
-background_energy_multiplier = 0.0
+background_mode = 2
+sky = SubResource("Sky_c66ga")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.02

@@ -1,7 +1,6 @@
 extends Drawer
 
 @export var color: Color
-@export var slice: bool
 var c = 0
 var n = 100.0
 var positions
@@ -16,17 +15,11 @@ func _process(delta):
 	# Only update when new positions are provided
 	if old_positions != positions:
 		if positions != null:
-			var slicer = positions.size()/500.0 # look for 500 data points roughly
-			slicer = ceil(slicer) # don't the step be zero though
-			
 			# Delete previous line if it exists
 			if line_instance != null:
 				undraw(line_instance)
-			
-			if slice:
-				line_instance = line(positions.slice(0,positions.size(),slicer), color)
-			else:
-				line_instance = line(positions, color)
+
+			line_instance = line(positions, color)
 			draw(self,line_instance)
 			
 			# Set position to spacecraft's position

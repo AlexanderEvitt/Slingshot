@@ -50,7 +50,7 @@ public partial class Propagator : Node3D
 		if ((bool)player_ship.Get("berthed") == false)
 		{
 			// Only refresh trajectory every so often
-			if (c == 0)
+			if (c == 0 && n != 0)
 			{
 				// Reset starting point to current point
 
@@ -61,12 +61,13 @@ public partial class Propagator : Node3D
 				double t = SystemTime.Instance.t;
 				Refresh(t);
 				c = 10;
+
+				// Expose positions for plotting
+				Godot.Collections.Array<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
+				plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
 			}
 			c = c - 1;
 
-			// Expose positions for plotting
-			Godot.Collections.Array<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
-			plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
 
 			// Check if you need to update the gravitating array
 		}

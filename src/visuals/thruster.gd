@@ -14,7 +14,7 @@ var my_torque = 0
 var my_thrust = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _physics_process(_delta: float) -> void:
 	# Start as invisible, make visible if firing
 	visible = false
 	

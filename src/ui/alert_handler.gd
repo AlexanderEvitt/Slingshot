@@ -22,6 +22,21 @@ func _ready():
 	caution_annunciator.button_up.connect(reset_caution)
 	warning_annunciator.button_up.connect(reset_warning)
 
+func _process(_delta: float) -> void:
+	# Repeatedly check for the alarm state and set the button conditions
+	var caution = ShipData.player_ship.avionics["caution"]
+	var warning = ShipData.player_ship.avionics["warning"]
+	if caution:
+		# Turn on caution annunciator
+		caution_annunciator.set_theme_type_variation("Caution")
+	else:
+		caution_annunciator.set_theme_type_variation("")
+	if warning:
+		# Turn on caution annunciator
+		warning_annunciator.set_theme_type_variation("Warning")
+	else:
+		warning_annunciator.set_theme_type_variation("")
+
 ## Functions that make a label of the required type and trip the alarms
 
 func make_info_label():
@@ -31,8 +46,8 @@ func make_info_label():
 	return new_label
 
 func make_caution_label():
-	# Turn on caution annunciator
-	caution_annunciator.set_theme_type_variation("Caution")
+	# Turn on caution
+	ShipData.player_ship.avionics["caution"] = true
 	
 	# Make new caution label
 	var new_label = Label.new()
@@ -41,8 +56,8 @@ func make_caution_label():
 	return new_label
 	
 func make_warning_label():
-	# Turn on warning annunciator
-	warning_annunciator.set_theme_type_variation("Warning")
+	# Turn on warning
+	ShipData.player_ship.avionics["warning"] = true
 	
 	# Make new warning label
 	var new_label = Label.new()
@@ -50,13 +65,13 @@ func make_warning_label():
 	new_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	return new_label
 	
-## Function to turn off the annunciators
+## Function to turn off the alarms
 
 func reset_caution():
-	caution_annunciator.set_theme_type_variation("")
+	ShipData.player_ship.avionics["caution"] = false
 	
 func reset_warning():
-	warning_annunciator.set_theme_type_variation("")
+	ShipData.player_ship.avionics["warning"] = false
 
 ## Function for each type of alert that can be triggered
 

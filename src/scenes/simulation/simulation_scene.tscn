@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=83 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/simulation/external_scene_controller.gd" id="1_h4u8v"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="2_xjnot"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="12_4hqcb"]
 [ext_resource type="Texture2D" uid="uid://s4i4jbyto3n4" path="res://bodies/photo/LunaNorm.png" id="13_kq1vd"]
 [ext_resource type="Texture2D" uid="uid://crf36fc4fwmnf" path="res://bodies/photo/EarthTrue.png" id="14_rkc5v"]
+[ext_resource type="Script" uid="uid://r4iw6gf2ekht" path="res://scenes/simulation/explosion.gd" id="14_vftqf"]
 [ext_resource type="Texture2D" uid="uid://dk713bymep7el" path="res://bodies/photo/EarthNorm.png" id="15_pk42e"]
 [ext_resource type="Texture2D" uid="uid://wxloygaaug3q" path="res://bodies/photo/EarthRough.png" id="16_rfwaf"]
 [ext_resource type="Script" uid="uid://c303wtd2a6q3d" path="res://bodies/rotator.gd" id="17_gp86a"]
@@ -77,6 +78,72 @@ normal_enabled = true
 normal_scale = 0.1
 normal_texture = ExtResource("13_kq1vd")
 
+[sub_resource type="SphereMesh" id="SphereMesh_vftqf"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vftqf"]
+shading_mode = 0
+disable_ambient_light = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(199167330000, 199167330000, 199167330000, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_uhiq1"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_t4lwe"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_b0wiu"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_jcsod"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_to052"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_rckgw"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_65yhh"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_um5xs"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_ll20u"]
+radius = 0.001
+height = 0.001
+radial_segments = 8
+rings = 4
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_cmojb"]
 radius = 1740.0
 
@@ -96,8 +163,8 @@ normal_scale = 3.0
 normal_texture = ExtResource("15_pk42e")
 
 [sub_resource type="SphereMesh" id="SphereMesh_282r8"]
-radius = 6380.0
-height = 12760.0
+radius = 6375.0
+height = 12750.0
 radial_segments = 128
 rings = 64
 
@@ -335,11 +402,81 @@ argp = 1.571
 [node name="Station" parent="SolarSystem/Earth/Luna/Endurance" instance=ExtResource("11_7ivjh")]
 
 [node name="LunaMesh" type="MeshInstance3D" parent="SolarSystem/Earth/Luna"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+transform = Transform3D(0.5030199466302349, 3.0431251579968183e-17, 0.8642748019537049, 0.8642748019537049, -5.292156848981586e-17, -0.5030199466302349, 3.0431251579968183e-17, 1, -5.292156848981586e-17, 0, 0, 0)
 visibility_range_end = 10000000.0
 mesh = SubResource("SphereMesh_6xnwu")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
+
+[node name="Explosion" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1616.221834197093, -169.11933165213722, -634.7723866671082)
+mesh = SubResource("SphereMesh_vftqf")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
+
+[node name="Explosion2" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1504.2757998444376, -610.2763371338168, -634.7723866671082)
+mesh = SubResource("SphereMesh_uhiq1")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
+
+[node name="Explosion3" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1388.8331142917705, -344.7925835434609, -999.4403551516218)
+mesh = SubResource("SphereMesh_t4lwe")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
+
+[node name="Explosion4" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1682.6020349609098, 380.08293011785133, -386.07585153121204)
+mesh = SubResource("SphereMesh_b0wiu")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
+
+[node name="Explosion5" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1731.3221317086172, -169.11933165213725, -50.31757236531701)
+mesh = SubResource("SphereMesh_jcsod")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
+
+[node name="Explosion6" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1693.4209208388293, -34.63365489880047, -436.74344552738364)
+mesh = SubResource("SphereMesh_to052")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
+
+[node name="Explosion7" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1545.2264770505335, 85.44843117791264, -806.8336679785881)
+mesh = SubResource("SphereMesh_rckgw")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
+
+[node name="Explosion8" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1654.2199926321264, -294.39569562964704, -480.3066029449675)
+mesh = SubResource("SphereMesh_65yhh")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
+
+[node name="Explosion9" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1718.3952813172782, -169.11933165213722, -286.113003075156)
+mesh = SubResource("SphereMesh_um5xs")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
+
+[node name="Explosion10" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1647.0924161266612, 158.7310206617975, -592.2640678335514)
+mesh = SubResource("SphereMesh_ll20u")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("14_vftqf")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SolarSystem/Earth/Luna"]
 process_priority = 13

@@ -28,7 +28,9 @@ var avionics = {
 	"attitude_inv" : false,
 	"attitude_stab" : true,
 	"autopilot" : false,
-	"navigation" : false
+	"navigation" : false,
+	"caution" : false,
+	"warning" : false,
 }
 
 # Waypoints

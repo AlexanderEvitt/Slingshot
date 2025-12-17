@@ -41,3 +41,4 @@ shape = SubResource("BoxShape3D_4reng")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("4_4reng")
 volume_db = -20.0
+pitch_scale = 0.5
