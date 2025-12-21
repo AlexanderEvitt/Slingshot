@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@export var collidable = true
+
 # State variables (global frame)
 var acceleration = Vector3(0,0,0)
 var attitude
@@ -161,7 +163,7 @@ func integrate_normally(dt, prev_gravity):
 	
 	# Check for current collisions
 	var collision_info = space_state.get_rest_info(params)
-	if collision_info:
+	if collision_info and collidable:
 		# Print the thing you just collided with
 		var collider_id = collision_info["collider_id"]
 		var collider = instance_from_id(collider_id)

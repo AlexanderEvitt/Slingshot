@@ -402,7 +402,7 @@ argp = 1.571
 [node name="Station" parent="SolarSystem/Earth/Luna/Endurance" instance=ExtResource("11_7ivjh")]
 
 [node name="LunaMesh" type="MeshInstance3D" parent="SolarSystem/Earth/Luna"]
-transform = Transform3D(0.5030199466302349, 3.0431251579968183e-17, 0.8642748019537049, 0.8642748019537049, -5.292156848981586e-17, -0.5030199466302349, 3.0431251579968183e-17, 1, -5.292156848981586e-17, 0, 0, 0)
+transform = Transform3D(0.5030199466302349, 3.0431251579968183e-17, 0.8642748019537049, 0.8642748019537049, -5.2921568489815856e-17, -0.5030199466302349, 3.0431251579968183e-17, 1, -5.2921568489815856e-17, 0, 0, 0)
 visibility_range_end = 10000000.0
 mesh = SubResource("SphereMesh_6xnwu")
 skeleton = NodePath("")
@@ -430,7 +430,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion4" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1682.6020349609098, 380.08293011785133, -386.07585153121204)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1682.6020349609098, 380.08293011785133, -386.075851531212)
 mesh = SubResource("SphereMesh_b0wiu")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
@@ -444,7 +444,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion6" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1693.4209208388293, -34.63365489880047, -436.74344552738364)
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 1693.4209208388293, -34.63365489880047, -436.7434455273837)
 mesh = SubResource("SphereMesh_to052")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")

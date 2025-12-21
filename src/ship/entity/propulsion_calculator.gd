@@ -30,7 +30,7 @@ var power_dot = 0.0
 var power_ddot = 0.0
 var beta = 1.0
 var k = 100.0 # proportional constant
-var c = 50.0 # damping constant
+var c = 100.0 # damping constant
 var exhaust_velocity = 0.0 # exhaust velocity
 var power_limit = 120.0e12 # W
 

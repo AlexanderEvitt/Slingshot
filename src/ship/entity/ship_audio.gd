@@ -19,6 +19,6 @@ func _physics_process(delta: float) -> void:
 	volume_db = smoothed_volume_db
 
 	# Same for pitch scaling
-	var target_pitch_scale = lerp(0.8, 1.2, thrust_ratio)
+	var target_pitch_scale = lerp(0.2, 2.0, thrust_ratio)
 	smoothed_pitch_scale = lerp(smoothed_pitch_scale, target_pitch_scale, 1.0 - exp(-speed * delta))
 	pitch_scale = smoothed_pitch_scale

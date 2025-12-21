@@ -41,6 +41,7 @@ editor_description = "FV JUNIPER is a Hedge-class frigate in service as privatee
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_012ot")
+collidable = false
 
 [node name="AttitudeCalculator" type="Node3D" parent="."]
 transform = Transform3D(-1, 1.22465e-16, 0, -7.4988e-33, -6.12323e-17, 1, 1.22465e-16, 1, 6.12323e-17, 0, 0, 0)
