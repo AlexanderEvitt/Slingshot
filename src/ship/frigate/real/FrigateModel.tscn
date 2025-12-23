@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfwsgcbvelo0t"]
+[gd_scene load_steps=12 format=3 uid="uid://bfwsgcbvelo0t"]
 
 [ext_resource type="PackedScene" uid="uid://c723tonvicthq" path="res://ship/frigate/real/frigate.glb" id="1_p2xcd"]
 [ext_resource type="Texture2D" uid="uid://drvl7m6jpple6" path="res://ship/frigate/external_material/MakedBrick_albedo.png" id="2_c712i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="2_k8wt2"]
 [ext_resource type="Texture2D" uid="uid://dfp5lpn48nk0d" path="res://ship/frigate/external_material/MakedBrick_normal.png" id="3_r1umb"]
 [ext_resource type="Texture2D" uid="uid://bwvdv60c7w7lx" path="res://ship/frigate/external_material/MakedBrick_orm.png" id="4_y1dru"]
+[ext_resource type="Script" uid="uid://2ab66vvabe3x" path="res://ship/frigate/real/turret.gd" id="5_rnp7b"]
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="7_67fpr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylmgo"]
@@ -18,10 +19,35 @@ normal_scale = 0.75
 normal_texture = ExtResource("3_r1umb")
 uv1_scale = Vector3(5, 5, 5)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_jrpwi"]
+top_radius = 2.0
+bottom_radius = 0.25
+height = 3000.0
+radial_segments = 8
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2i45u"]
+shading_mode = 0
+albedo_color = Color(1.8537917, 0, 0, 1)
+
 [node name="frigate" instance=ExtResource("1_p2xcd")]
 
 [node name="Pods" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ylmgo")
+
+[node name="Turret2" parent="." index="4" node_paths=PackedStringArray("mount", "beam")]
+script = ExtResource("5_rnp7b")
+mount = NodePath("Laser2")
+beam = NodePath("Laser2/Beam")
+target = Vector3(100, -8.57, -38.475)
+
+[node name="Laser2" parent="Turret2" index="0"]
+transform = Transform3D(0.9561015084079547, 0.07672687888771008, 0.28281246732797377, -0.07999255720098761, 0.9967954608606582, 4.576525164308791e-19, -0.2819061837073324, -0.02262289246988608, 0.9591752229513727, 0, 0, -1.2832636833190918)
+
+[node name="Beam" type="MeshInstance3D" parent="Turret2/Laser2" index="0"]
+transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, 1500, 0, -1.3169999999954598)
+mesh = SubResource("CylinderMesh_jrpwi")
+surface_material_override/0 = SubResource("StandardMaterial3D_2i45u")
 
 [node name="FinalHull" parent="." index="7"]
 surface_material_override/5 = ExtResource("2_gb527")

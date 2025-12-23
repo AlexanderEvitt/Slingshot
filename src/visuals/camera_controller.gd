@@ -7,6 +7,9 @@ var smooth_zoom := 0.2 # 1.0 is move instantly to new zoom, 0.0 is don't move
 @export var zoom_min := 0.01 # minimum zoom distance
 var zoom_max := 2000000000.0 # maximum zoom distance
 
+# Whether camera always moves with mouse or only on right click
+@export var move_always = false
+
 # Motion of camera constants
 @export var Kd := 0.99 # speed at which camera bounces back (1.0 = never moves)
 @export var Kp := 0.5 # scale of motion from acceleration
@@ -75,7 +78,7 @@ func _process(_delta):
 			set_orientation()
 
 	# Right-click rotate
-	if Input.is_action_pressed("right_click"):
+	if move_always or Input.is_action_pressed("right_click"):
 		set_orientation()
 		
 func set_orientation():

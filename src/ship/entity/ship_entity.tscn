@@ -49,6 +49,7 @@ script = ExtResource("2_7e8cl")
 
 [node name="Propagator" type="Node3D" parent="."]
 script = ExtResource("4_7neml")
+n = 20
 
 [node name="PropulsionCalculator" type="Node3D" parent="."]
 script = ExtResource("5_n5nff")
