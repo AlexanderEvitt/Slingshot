@@ -1,20 +1,21 @@
+class_name AttitudeModule
 extends Node3D
 
-@onready var ship = get_parent()
-var torque = Vector3(0,0,0)
-var max_torque = 0.4
-var angular_velocity = Vector3(0,0,0)
-var commanded_torque = Vector3(0,0,0)
+@onready var ship: PlayerShip = get_parent()
+var torque := Vector3(0,0,0)
+var max_torque := 0.4
+var angular_velocity := Vector3(0,0,0)
+var commanded_torque := Vector3(0,0,0)
 
 # Moment of inertia tensor (assuming diagonal for simplicity)
 var inertia: Vector3 = Vector3(1, 1, 1)  # Modify based on spacecraft geometry
 var inv_inertia: Vector3 = Vector3(1.0 / inertia.x, 1.0 / inertia.y, 1.0 / inertia.z)
 
 
-func update(_dt):
+func update(_dt: float) -> void:
 	# Calculate torque by increasing as you hold the button
 	# Commanded torque is in ship frame
-	var torque_rate = 0.02
+	var torque_rate := 0.02
 	# Add torque if button is held down, set to zero if not
 	if Input.is_action_pressed("down"):
 		commanded_torque.z += -torque_rate
@@ -43,26 +44,26 @@ func update(_dt):
 	torque = transform.basis*commanded_torque
 	
 	# Calculate autopilot response
-	var target
+	var target: Vector3
 	if ship.avionics["autopilot"]:
 		# Calculate target attitude
 		match ship.avionics["attitude_mode"]:
 			"HDG":
 				# HDG is component of velocity normal to radius
-				var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
-				var r = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
-				var v_along_r = (r.dot(v)/r.length_squared())*r.normalized()
+				var v: Vector3 = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
+				var r: Vector3 = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
+				var v_along_r: Vector3 = (r.dot(v)/r.length_squared())*r.normalized()
 				target = v - v_along_r
 			"CRS":
 				target = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
 			"TRG":
 				target = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
 			"NRM":
-				var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
-				var r = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
+				var v: Vector3 = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
+				var r: Vector3 = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
 				target = r.cross(v)
 			"NAV":
-				target = ship.navigation_calculator.control_pointing
+				target = ship.navigation_module.control_pointing
 		
 		# Calculate torque from autopilot
 		if target != null:
@@ -72,7 +73,7 @@ func update(_dt):
 			if ship.avionics["attitude_inv"]:
 				target = -target
 			# Cross product for torque
-			var Kp = 2.0 # control proportional gain
+			var Kp := 2.0 # control proportional gain
 			torque = torque + -Kp*target.cross(ship.attitude.x)
 			
 	# Calculate damping if stabilizers OR autopilot is enabled
@@ -95,32 +96,32 @@ func update(_dt):
 			rotate_object_local(Vector3(0, 1, 0), -PI/2)
 			
 
-func integrate_rotation(applied_torque):
+func integrate_rotation(applied_torque: Vector3) -> void:
 	# Compute angular acceleration using Euler's equations
 	#applied_torque = transform.basis.inverse()*applied_torque
-	var dt = 0.03333
-	var inertia_cross_omega = Vector3(
+	var dt := 0.03333
+	var inertia_cross_omega := Vector3(
 		(inertia.y - inertia.z) * angular_velocity.y * angular_velocity.z,
 		(inertia.z - inertia.x) * angular_velocity.z * angular_velocity.x,
 		(inertia.x - inertia.y) * angular_velocity.x * angular_velocity.y)
 
-	var angular_acceleration = (applied_torque - inertia_cross_omega) * inv_inertia
+	var angular_acceleration: Vector3 = (applied_torque - inertia_cross_omega) * inv_inertia
 
 	# Integrate angular velocity using explicit Euler method
 	angular_velocity += angular_acceleration * dt
 
 	# Convert local angular velocity to a rotation quaternion
 	# Apply rotation using Godot's built-in method
-	var ang_speed = angular_velocity.length()
+	var ang_speed: float = angular_velocity.length()
 	if ang_speed > 0.0:
-		var rotation_axis = angular_velocity.normalized()
-		var ang_vel_quat = Quaternion(rotation_axis, ang_speed * dt)  # Axis-angle representation
+		var rotation_axis: Vector3 = angular_velocity.normalized()
+		var ang_vel_quat := Quaternion(rotation_axis, ang_speed * dt)  # Axis-angle representation
 		transform.basis = Basis(ang_vel_quat) * transform.basis
 		transform = transform.orthonormalized()
 		
 func transform_at(forward: Vector3, up: Vector3) -> Basis:
-	var f = forward.normalized()
-	var r = up.cross(f).normalized()
-	var u = f.cross(r).normalized()
+	var f: Vector3 = forward.normalized()
+	var r: Vector3 = up.cross(f).normalized()
+	var u: Vector3 = f.cross(r).normalized()
 
 	return Basis(r, u, f)

@@ -5,7 +5,7 @@ var smoothed_pitch_scale: float = 1.0
 
 func _physics_process(delta: float) -> void:
 	# Normalize thrust (0.0 to 1.0)
-	var thrust_ratio = clamp(ShipData.player_ship.propulsion_calculator.power / ShipData.player_ship.propulsion_calculator.power_limit, 0.0, 1.0)
+	var thrust_ratio = clamp(ShipData.player_ship.propulsion_module.power / ShipData.player_ship.propulsion_module.power_limit, 0.0, 1.0)
 	# Square root to make values steeper
 	thrust_ratio = sqrt(thrust_ratio)
 

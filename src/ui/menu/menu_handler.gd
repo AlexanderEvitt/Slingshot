@@ -2,17 +2,17 @@ extends Panel
 
 signal startup
 
-@export var loading_bar : Node
-@export var start_button : Node
-@export var startup_panel : Node
+@export var loading_bar : Control
+@export var start_button : LightButton
+@export var startup_panel : Panel
 @export var slot_button_group : ButtonGroup
 
-var slot # slot to load data from
+var slot: int # slot to load data from
 
-func _ready():
+func _ready() -> void:
 	start_button.toggled.connect(_on_startup)
 	
-func _on_startup():
+func _on_startup() -> void:
 	# Emit the startup signal when the start button is toggled
 	startup.emit()
 	# Hide the startup panel

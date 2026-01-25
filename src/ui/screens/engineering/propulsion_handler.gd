@@ -1,50 +1,49 @@
 extends VBoxContainer
 
 # Gauge reference
-@export var power_dial : Node
-@export var ve_dial : Node
-@export var beta_dial : Node
-@export var thrust_dial : Node
+@export var power_dial: Node
+@export var ve_dial: Node
+@export var beta_dial: Node
+@export var thrust_dial: Node
 
 # Tank references
-@export var he_tank_text : Label
-@export var de_tank_text : Label
-@export var hyd_tank_text : Label
+@export var he_tank_text: Label
+@export var de_tank_text: Label
+@export var hyd_tank_text: Label
 
 # Pump slider references
-@export var he_pump : Node
-@export var de_pump : Node
-@export var hyd_pump : Node
+@export var he_pump: Node
+@export var de_pump: Node
+@export var hyd_pump: Node
 
 # Valve references
-@export var he_valve : Node
-@export var de_valve : Node
-@export var hyd_valve : Node
+@export var he_valve: Node
+@export var de_valve: Node
+@export var hyd_valve: Node
 
 # Control button references
-var butttons
-@export var propulsor_button : Button
-@export var reactor_button : Button
-@export var cryo_button : Button
-@export var field_button : Button
-@export var limiter_button : Button
-@export var scram_inhibit_button : Button
+@export var propulsor_button: Button
+@export var reactor_button: Button
+@export var cryo_button: Button
+@export var field_button: Button
+@export var limiter_button: Button
+@export var scram_inhibit_button: Button
 
 # Magnet references
-@export var thermometers : Node
+@export var thermometers: Node
 
 # Side panels
-@export var dosimetry : Node
-@export var endurance : Node
-@onready var he_endurance = endurance.get_node("HeEndurance")
-@onready var de_endurance = endurance.get_node("DeEndurance")
-@onready var hyd_endurance = endurance.get_node("HydEndurance")
+@export var dosimetry: Node
+@export var endurance: Node
+@onready var he_endurance: Control = endurance.get_node("HeEndurance")
+@onready var de_endurance: Control = endurance.get_node("DeEndurance")
+@onready var hyd_endurance: Control = endurance.get_node("HydEndurance")
 
-var prop
+var prop: PropulsionModule
 
-func _ready():
+func _ready() -> void:
 	# Get a shorthand reference to the propulsion system
-	prop = ShipData.player_ship.propulsion_calculator
+	prop = ShipData.player_ship.propulsion_module
 	
 	# Refresh model with control states anytime a button gets pushed
 	propulsor_button.toggled.connect(update_model_with_control_states)
@@ -57,14 +56,14 @@ func _ready():
 	update_model_with_control_states(false)
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	# Assign power to gauge
-	var max_power = 3.0*prop.design_power
+	var max_power := 3.0*prop.design_power
 	power_dial.set_fill(prop.power/max_power, String.num(prop.power*1e-12,0) + " TW")
 	
 	# Assign exhaust velocity to gauge
-	var c = 299792458 # speed of light, m/s
-	var max_ve = 0.1*c
+	var c := 299792458 # speed of light, m/s
+	var max_ve := 0.1*c
 	ve_dial.set_fill(prop.exhaust_velocity/max_ve, String.num(prop.exhaust_velocity/c*100,0) + "%c")
 
 	# Assign beta to beta gauge
@@ -90,13 +89,13 @@ func _process(_delta):
 		hyd_valve.rotation = 0.0
 	
 	# Run pumps
-	var max_he_flow = 5.0
-	var max_de_flow = 3.5
-	var max_hyd_flow = 300.0
-	var flow_coefficient = 1473.0
+	var max_he_flow := 5.0
+	var max_de_flow := 3.5
+	var max_hyd_flow := 300.0
+	var flow_coefficient := 1473.0
 	
 	
-	var he_pump_speed = prop.reactor_mass_flow_he * flow_coefficient
+	var he_pump_speed := prop.reactor_mass_flow_he * flow_coefficient
 	he_pump.set_fill_top(prop.reactor_mass_flow_he/max_he_flow)
 	he_pump.set_fill_bottom(max_he_flow * flow_coefficient)
 	he_pump.set_labels(String.num(3.6*prop.reactor_mass_flow_he,1) + " t/hr", String.num(he_pump_speed,0) + " RPM")

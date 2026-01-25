@@ -18,7 +18,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var thrust = ShipData.player_ship.propulsion_calculator.main_thrust
+	var thrust = ShipData.player_ship.propulsion_module.main_thrust
 	thrust = clamp(thrust,1e-20,1e99)
 	if thrust > 0:
 		visible = true

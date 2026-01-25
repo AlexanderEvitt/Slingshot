@@ -27,9 +27,9 @@ func update_waypoint():
 		var this_waypoint_row = waypoint_row.instantiate()
 		
 		# Set the from/to flag
-		if i == ShipData.player_ship.navigation_calculator.active_waypoint:
+		if i == ShipData.player_ship.navigation_module.active_waypoint:
 			this_waypoint_row.get_node("Flag").text = "FR"
-		elif i == ShipData.player_ship.navigation_calculator.active_waypoint + 1:
+		elif i == ShipData.player_ship.navigation_module.active_waypoint + 1:
 			this_waypoint_row.get_node("Flag").text = "TO"
 		else:
 			this_waypoint_row.get_node("Flag").text = "  "
@@ -46,7 +46,7 @@ func update_waypoint():
 func next_waypoint():
 	if len(ShipData.player_ship.waypoints) > 1:
 		# Update navigation calculator's active_waypoint value with wrapping
-		ShipData.player_ship.navigation_calculator.active_waypoint = (ShipData.player_ship.navigation_calculator.active_waypoint + 1) % (len(ShipData.player_ship.waypoints) - 1)
+		ShipData.player_ship.navigation_module.active_waypoint = (ShipData.player_ship.navigation_module.active_waypoint + 1) % (len(ShipData.player_ship.waypoints) - 1)
 		# Signal an update
 		ShipData.player_ship.waypoints_updated.emit()
 	
@@ -54,7 +54,7 @@ func clear_waypoints():
 	# Wipe all waypoints
 	ShipData.player_ship.waypoints = []
 	# Set the active waypoint to the first one
-	ShipData.player_ship.navigation_calculator.active_waypoint = 0
+	ShipData.player_ship.navigation_module.active_waypoint = 0
 	# Signal an update
 	ShipData.player_ship.waypoints_updated.emit()
 

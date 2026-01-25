@@ -1083,7 +1083,6 @@ local_positioning = true
 [node name="Plotter" type="Node3D" parent="Ships/PlayerShip"]
 script = ExtResource("14_g31x3")
 color = Color(1, 0.690196, 0, 1)
-slice = true
 
 [node name="Pointer" type="Node3D" parent="Ships/PlayerShip"]
 

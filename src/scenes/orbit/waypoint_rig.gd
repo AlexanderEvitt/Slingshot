@@ -1,23 +1,23 @@
 extends Drawer
 
 @export var color: Color
-var line_instance = MeshInstance3D.new()
-var select_mode = false
-var camera_rig # reference to the camera_rig, populated by the selection panel
-var hit # most recent intersection between mouse pointer and plane at selected body
+var line_instance: MeshInstance3D = MeshInstance3D.new()
+var select_mode := false
+var camera_rig: Node3D # reference to the camera_rig, populated by the selection panel
+var hit: Vector3 # most recent intersection between mouse pointer and plane at selected body
 
 
-func _process(_delta):
-	var traj = []
+func _process(_delta: float) -> void:
+	var traj: Array[Vector3] = []
 	traj.append(Vector3(0,0,0))
 	
 	if select_mode:
 		# First get the mouse position in coordinates relative to the selected body
-		var camera = camera_rig.get_node("CameraRotator/Camera3D")
-		var mouse_pos = get_viewport().get_mouse_position()
-		var from = camera.global_position-get_parent().global_position # this is the camera position relative to the selected body
-		var dir = camera.project_ray_normal(mouse_pos)
-		var plane = Plane(Vector3(0,0,1), 0.0) # z=0 plane
+		var camera: Camera3D = camera_rig.get_node("CameraRotator/Camera3D")
+		var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+		var from: Vector3 = camera.global_position - global_position # this is the camera position relative to the selected body
+		var dir: Vector3 = camera.project_ray_normal(mouse_pos)
+		var plane: Plane = Plane(Vector3(0,0,1), 0.0) # z=0 plane
 		hit = plane.intersects_ray(from, dir)
 		
 		if hit != null:
@@ -32,7 +32,7 @@ func _process(_delta):
 		line_instance = line(traj, color)
 		draw(self,line_instance)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Listen for a click that would kick you out of selection mode
 	# and write the last mouse position to the waypoint list
 	if event is InputEventMouseButton and event.button_index == 1 and select_mode == true:
@@ -42,7 +42,7 @@ func _input(event):
 		# Pass to ship computer
 		if hit != null:
 			# Get the simulation node that is the frame body
-			var frame_body = ShipData.sim_root.get_node(get_parent().body_path)
+			var frame_body: Node3D = ShipData.sim_root.get_node(get_parent().body_path)
 			# Add to waypoints array
 			ShipData.player_ship.waypoints.append({"Frame":frame_body, "Position":hit})
 			# Emit waypoints_updated signal to alert nodes of update

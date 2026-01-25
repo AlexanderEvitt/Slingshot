@@ -1,50 +1,51 @@
+class_name PropulsionModule
 extends Node
 
 # Fuel quantity (kg)
-var he_quant = 0.04*4443984
-var de_quant = 0.04*2962656
-var hyd_quant = 0.08*13985432
+var he_quant := 0.04*4443984
+var de_quant := 0.04*2962656
+var hyd_quant := 0.08*13985432
 
 
 # Total thrust applied to vehicle, including thrusters
-var thrust = Vector3(0,0,0) # in ship frame
+var thrust := Vector3(0,0,0) # in ship frame
 # Actual thrust from main engine only
-var main_thrust = 0.0
+var main_thrust := 0.0
 # Maneuvering thrusters acceleration
-var thruster_force = 1e6 # N
+var thruster_force := 1e6 # N
 # Maximum allowable engine acceleration
-var engine_power = 10000.0*0.05 # km/s2
+var engine_power := 10000.0*0.05 # km/s2
 
 # Desired acceleration (km/s2)
-var throttle = 0.0
+var throttle := 0.0
 
 # Constants
-var fusion_energy_density = 3.5897e14 # J/kg
+var fusion_energy_density := 3.5897e14 # J/kg
 
 # Design parameters
-var design_power = 5.0e+13 # W
+var design_power := 5.0e+13 # W
 
 # Reactor power simulation state variables
-var power = 0.0
-var power_dot = 0.0
-var power_ddot = 0.0
-var beta = 1.0
-var k = 100.0 # proportional constant
-var c = 100.0 # damping constant
-var exhaust_velocity = 0.0 # exhaust velocity
-var power_limit = 120.0e12 # W
+var power := 0.0
+var power_dot := 0.0
+var power_ddot := 0.0
+var beta := 1.0
+var k := 100.0 # proportional constant
+var c := 100.0 # damping constant
+var exhaust_velocity := 0.0 # exhaust velocity
+var power_limit := 120.0e12 # W
 
 # Mass flow total and through each pump
-var reactor_mass_flow = 0.0
-var reactor_mass_flow_he = 0.0
-var reactor_mass_flow_de = 0.0
-var propulsor_mass_flow = 0.0 # hydrogen flow
+var reactor_mass_flow := 0.0
+var reactor_mass_flow_he := 0.0
+var reactor_mass_flow_de := 0.0
+var propulsor_mass_flow := 0.0 # hydrogen flow
 
 # Pump flow control variables
-var kp = 1e-8
+var kp := 1e-8
 
 # Required electrical power
-var electrical_power = 1e13 # W
+var electrical_power := 1e13 # W
 
 # State of control system
 var propulsor := false
@@ -55,14 +56,14 @@ var thrust_limiter := true
 var scram_inhibit := true
 
 # Magnet fields and temps
-var fields = [0,0,0,0,0,0]
-var start_temp = 300.0
-var thermal_mass = 1000.0
-var transfer_coefficient = 200.0
-var coolant_temp = 15 # K
-var temps = [start_temp,start_temp,start_temp,start_temp,start_temp,start_temp]
+var fields := [0,0,0,0,0,0]
+var start_temp := 300.0
+var thermal_mass := 1000.0
+var transfer_coefficient := 200.0
+var coolant_temp := 15 # K
+var temps := [start_temp,start_temp,start_temp,start_temp,start_temp,start_temp]
 
-@onready var ship = get_parent()
+@onready var ship: PlayerShip = get_parent()
 
 func update(dt: float) -> void:
 	thrust = Vector3(0,0,0)
@@ -73,7 +74,7 @@ func update(dt: float) -> void:
 	if Input.is_action_pressed("decrement_throttle"):
 		throttle = throttle - 0.001
 	if ship.avionics["navigation"] and ship.avionics["autopilot"]:
-		throttle = ship.navigation_calculator.control_throttle
+		throttle = ship.navigation_module.control_throttle
 	throttle = clamp(throttle,0,engine_power)
 	
 	# Get desired engine parameters

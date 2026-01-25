@@ -1,31 +1,32 @@
+class_name PlayerShip
 extends CharacterBody3D
 
-@export var collidable = true
+@export var collidable := true
 
 # State variables (global frame)
-var acceleration = Vector3(0,0,0)
-var attitude
-var gravity_acceleration = Vector3(0,0,0) # just gravity
-var thrust_acceleration = Vector3(0,0,0) # just thrust (all sources)
+var acceleration := Vector3(0,0,0)
+var attitude: Basis
+var gravity_acceleration := Vector3(0,0,0) # just gravity
+var thrust_acceleration := Vector3(0,0,0) # just thrust (all sources)
 
 # Engine variables
-var torque
-var thrust = Vector3(0,0,0)
+var torque := Vector3(0,0,0)
+var thrust := Vector3(0,0,0)
 
 # Vehicle mass
-var dry_mass = 613280 # kg
-var total_mass = dry_mass # kg (updated by propulsion)
+var dry_mass := 613280.0 # kg
+var total_mass := dry_mass # kg (updated by propulsion)
 
 # Children components
-@onready var attitude_calculator = $AttitudeCalculator
-@onready var navigation_calculator = $NavigationCalculator
-@onready var propulsion_calculator = $PropulsionCalculator
-@onready var propagator = $Propagator
-@onready var plotter = $Plotter
-@onready var pointer = $Pointer
+@onready var attitude_module: AttitudeModule = $AttitudeModule
+@onready var navigation_module: NavigationModule = $NavigationModule
+@onready var propulsion_module: PropulsionModule = $PropulsionModule
+@onready var propagate_module := $PropagateModule
+@onready var plotter := $Plotter
+@onready var pointer := $Pointer
 
 # State of avionics
-var avionics = {
+var avionics := {
 	"attitude_mode" : "",
 	"attitude_inv" : false,
 	"attitude_stab" : true,
@@ -36,7 +37,7 @@ var avionics = {
 }
 
 # Waypoints
-var waypoints = []
+var waypoints: Array[Dictionary] = []
 
 # Signals
 signal auto_disc
@@ -52,7 +53,7 @@ signal berth_updated
 @onready var shape_node: CollisionShape3D = $CollisionShape3D
 
 # Data on where you are docked
-var berthed = true
+var berthed := true
 # Path to station from sim_root (needed to save)
 var station_path : String
 # Nodes of station
@@ -60,59 +61,59 @@ var station : Node # station component (underneath Body.cs)
 var dock : Node
 var berth : Node
 # How far into the berth the docking point is
-var berth_offset = Vector3(0.07,0,0)
+var berth_offset := Vector3(0.07,0,0)
 
 # Tell the selection panel that this isn't a station you can dock with
-var is_station = false
+var is_station := false
 
 
-func _ready():
+func _ready() -> void:
 	# Initialize values
-	attitude = attitude_calculator.transform.basis
+	attitude = attitude_module.transform.basis
 	
 	# Assign to random berth at Zephyr at start
 	if berthed:
 		assign_berth("SolarSystem/Earth/Zephyr/Station")
 		berthed = true
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Update values for this iteration
-	attitude = attitude_calculator.transform.basis
-	torque = attitude_calculator.torque
+	attitude = attitude_module.transform.basis
+	torque = attitude_module.torque
 	
 	# Update attitude for collision shape
 	shape_node.transform.basis = attitude
 	
 	# Update thrust
-	thrust = propulsion_calculator.thrust
+	thrust = propulsion_module.thrust
 	
 	# Update total vehicle mass
-	total_mass = dry_mass + propulsion_calculator.he_quant + propulsion_calculator.de_quant
+	total_mass = dry_mass + propulsion_module.he_quant + propulsion_module.de_quant
 	
 	# Attach ship to dock if docked
 	if berthed:
 		# Move ship with dock
-		var berth_position = station.fetch(SystemTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
+		var berth_position: Vector3 = station.fetch(SystemTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
 		position = berth_position
 		velocity = station.fetch(SystemTime.t) - station.fetch(SystemTime.t - 1.0)
-		attitude_calculator.transform.basis = berth.global_transform.basis
+		attitude_module.transform.basis = berth.global_transform.basis
 
 	# Integrate regularly
 	else:
 		# Update things periodically that don't need to accelerate with time warp
-		navigation_calculator.update_periodically()
+		navigation_module.update_periodically()
 		
 		# Do multiple simulation time steps per run of physics_process
 		var sim_steps_per_physics_tick = clamp(SystemTime.step,1,100)
-		gravity_acceleration = propagator.Acceleration(position,SystemTime.prev_t)
+		gravity_acceleration = propagate_module.Acceleration(position,SystemTime.prev_t)
 		for i in range(sim_steps_per_physics_tick):
 			# Calculate simulation timestep
 			var dt = SystemTime.step*delta/sim_steps_per_physics_tick
 			
 			# Process children processes that need to run with simulation
-			navigation_calculator.update(dt, gravity_acceleration)
-			attitude_calculator.update(dt)
-			propulsion_calculator.update(dt)
+			navigation_module.update(dt, gravity_acceleration)
+			attitude_module.update(dt)
+			propulsion_module.update(dt)
 			
 			integrate_normally(dt, gravity_acceleration)
 			
@@ -133,7 +134,7 @@ func _physics_process(delta):
 	pointer.transform.basis = attitude
 	
 	# Pass plotter position to plotter
-	plotter.positions = propagator.plotted_positions
+	plotter.positions = propagate_module.plotted_positions
 
 func integrate_normally(dt, prev_gravity):
 	# Calculate acceleration on vehicle
@@ -234,9 +235,9 @@ func save():
 		"velocity_x" : velocity.x,
 		"velocity_y" : velocity.y,
 		"velocity_z" : velocity.z,
-		"rotation_x" : attitude_calculator.rotation.x,
-		"rotation_y" : attitude_calculator.rotation.y,
-		"rotation_z" : attitude_calculator.rotation.z,
+		"rotation_x" : attitude_module.rotation.x,
+		"rotation_y" : attitude_module.rotation.y,
+		"rotation_z" : attitude_module.rotation.z,
 		"berthed" : berthed,
 		"station_path" : station_path,
 	}
@@ -249,9 +250,9 @@ func initialize(save_dict):
 	velocity = Vector3(save_dict["velocity_x"],save_dict["velocity_y"],save_dict["velocity_z"])
 	
 	# Attitude info
-	attitude_calculator.rotation.x = save_dict["rotation_x"]
-	attitude_calculator.rotation.y = save_dict["rotation_y"]
-	attitude_calculator.rotation.z = save_dict["rotation_z"]
+	attitude_module.rotation.x = save_dict["rotation_x"]
+	attitude_module.rotation.y = save_dict["rotation_y"]
+	attitude_module.rotation.z = save_dict["rotation_z"]
 	
 	# Docking info
 	assign_berth(save_dict["station_path"])

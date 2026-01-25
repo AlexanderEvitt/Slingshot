@@ -1,47 +1,48 @@
+class_name NavigationModule
 extends Node3D
 
-var control = Vector3(0,0,0) # commanded acceleration
-var control_pointing = Vector3(1,0,0) # normalized direction of control
-var control_throttle = 0 # scalar acceleration of control
+var control := Vector3(0,0,0) # commanded acceleration
+var control_pointing := Vector3(1,0,0) # normalized direction of control
+var control_throttle := 0 # scalar acceleration of control
 
-var active_waypoint = 0
-var waypoints = []
+var active_waypoint := 0
+var waypoints := []
 
 # Scalar projection factor t (scalar form of projection position onto from, 0 -> 1)
-var t = 0.0
+var t := 0.0
 
-var cornering_velocity = 0.0 # target velocity at endpoint, km/s
+var cornering_velocity := 0.0 # target velocity at endpoint, km/s
 
-@export var Kp = 0.00001 # 5,000km max deflection
-@export var Ki = 0.000000001 # Kp/10000
-@export var Kd = 0.05 # 1km/s max deflection
+@export var Kp := 0.00001 # 5,000km max deflection
+@export var Ki := 0.000000001 # Kp/10000
+@export var Kd := 0.05 # 1km/s max deflection
 
 # Persistent navigation data
-var course = Vector3(0,0,0)
-var course_distance = 0.0
-var normalized_course = Vector3(0,0,0)
-var closest_point = Vector3(0,0,0)
-var relative_velocity = Vector3(0,0,0)
-var on_course_velocity = Vector3(0,0,0)
-var from = Vector3(0,0,0)
-var to = Vector3(0,0,0)
-var from_vel = Vector3(0,0,0)
-var to_vel = Vector3(0,0,0)
-var remaining_distance = 0.0
-var p_error = Vector3(0,0,0)
-var i_error = Vector3(0,0,0) # integral error needs to persist between frames
-var d_error = Vector3(0,0,0)
-var a2 = Vector3(0,0,0)
-var a3 = Vector3(0,0,0)
-var scalek = 1.0
+var course := Vector3(0,0,0)
+var course_distance := 0.0
+var normalized_course := Vector3(0,0,0)
+var closest_point := Vector3(0,0,0)
+var relative_velocity := Vector3(0,0,0)
+var on_course_velocity := Vector3(0,0,0)
+var from := Vector3(0,0,0)
+var to := Vector3(0,0,0)
+var from_vel := Vector3(0,0,0)
+var to_vel := Vector3(0,0,0)
+var remaining_distance := 0.0
+var p_error := Vector3(0,0,0)
+var i_error := Vector3(0,0,0) # integral error needs to persist between frames
+var d_error := Vector3(0,0,0)
+var a2 := Vector3(0,0,0)
+var a3 := Vector3(0,0,0)
+var scalek := 1.0
 
 
-@onready var ship = get_parent()
+@onready var ship: PlayerShip = get_parent()
 
-var reverse = false
+var reverse := false
 
 # Run by ship calculator, accelerates with time warp
-func update(dt, gravity):
+func update(dt: float, gravity: Vector3) -> void:
 	# Update waypoints, only navigate if you have two of them or more
 	waypoints = ship.waypoints
 	if waypoints.size() > 1 and SystemTime.step > 0 and ship.avionics["navigation"] and ship.avionics["autopilot"]:
@@ -52,7 +53,7 @@ func update(dt, gravity):
 		control = Vector3(0,0,0)
 		
 # Run by ship calculator, only every physics frame
-func update_periodically():
+func update_periodically() -> void:
 	# Update waypoints, only navigate if you have two of them or more
 	waypoints = ship.waypoints
 	if waypoints.size() > 1 and SystemTime.step > 0 and ship.avionics["navigation"] and ship.avionics["autopilot"]:

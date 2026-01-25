@@ -14,11 +14,11 @@ func _process(_delta):
 	power_gauge.set_fill(power/150,String.num(power,0) + "GW")
 	
 	# Set the sliders
-	#pump_slider.set_fill_top(ShipData.player_ship.propulsion_calculator.he_mp)
-	#pump_slider.set_fill_bottom(ShipData.player_ship.propulsion_calculator.de_mp)
+	#pump_slider.set_fill_top(ShipData.player_ship.propulsion_module.he_mp)
+	#pump_slider.set_fill_bottom(ShipData.player_ship.propulsion_module.de_mp)
 	
-	#temp_slider.set_fill_top(ShipData.player_ship.propulsion_calculator.he_mp/2.0)
-	#temp_slider.set_fill_bottom(ShipData.player_ship.propulsion_calculator.de_mp/2.0)
+	#temp_slider.set_fill_top(ShipData.player_ship.propulsion_module.he_mp/2.0)
+	#temp_slider.set_fill_bottom(ShipData.player_ship.propulsion_module.de_mp/2.0)
 	
-	#fuel_slider.set_fill_top(ShipData.player_ship.propulsion_calculator.he_quant)
-	#fuel_slider.set_fill_bottom(ShipData.player_ship.propulsion_calculator.de_quant)
+	#fuel_slider.set_fill_top(ShipData.player_ship.propulsion_module.he_quant)
+	#fuel_slider.set_fill_bottom(ShipData.player_ship.propulsion_module.de_quant)

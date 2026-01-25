@@ -21,13 +21,18 @@ config/windows_native_icon="res://visuals/logo/windows_icon.ico"
 
 [autoload]
 
-SystemTime="*res://ship/SystemTime.cs"
 Conversions="*res://ship/Conversions.cs"
 ShipData="*res://ship/ship_data.gd"
+SimTime="*res://scenes/sim_time.gd"
 
 [debug]
 
 gdscript/warnings/unused_signal=0
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
 
 [display]
 
@@ -216,5 +221,6 @@ jolt_physics_3d/limits/max_linear_velocity=1000000000.0
 [rendering]
 
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+anti_aliasing/quality/msaa_2d=2
 anti_aliasing/quality/msaa_3d=2
 environment/defaults/default_clear_color=Color(0.117647, 0.117647, 0.156863, 1)

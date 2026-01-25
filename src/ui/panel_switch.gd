@@ -1,8 +1,8 @@
 extends Control
 
 var panels
-var buttons
-var h = 0
+var buttons: Array
+var h: int = 0
 
 var old_panel
 var new_panel
@@ -15,7 +15,7 @@ var transition_time = 0.25
 @export var panels_parent : Node
 
 # Get refs to all the HUDs and buttons
-func _ready():
+func _ready() -> void:
 	panels = panels_parent.get_children()
 	buttons = buttons_parent.get_children()
 	
@@ -31,7 +31,7 @@ func _ready():
 	# Initialize with first panel
 	set_panel(0)
 
-func set_panel(i):
+func set_panel(i: int) -> void:
 	h = i # used for keeping track of which HUD is active
 	
 	# Set all the buttons to be un-toggled except the one just pressed

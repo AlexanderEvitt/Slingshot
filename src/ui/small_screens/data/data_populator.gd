@@ -38,7 +38,7 @@ extends Control
 func _process(_delta):
 	# References to ship and nav
 	var ship = ShipData.player_ship
-	var nav = ShipData.player_ship.navigation_calculator
+	var nav = ShipData.player_ship.navigation_module
 	
 	# Set time
 	sclk.text = str(snapped(SystemTime.t, 1))

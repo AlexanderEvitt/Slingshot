@@ -4,8 +4,8 @@ const INTERIOR_SCENE_PATH : String = "res://scenes/interior/interior_scene.tscn"
 const PHYSICS_SCENE_PATH : String = "res://scenes/simulation/simulation_scene.tscn"
 const MENU_SCENE_PATH : String = "res://ui/menu/menu_scene.tscn"
 
-@onready var menu = $MenuUI
-@onready var loading_bar = menu.loading_bar
+@onready var menu: Control = $MenuUI
+@onready var loading_bar: Control = menu.loading_bar
 
 var loading := false # enables sending updates to loading bar
 
@@ -18,8 +18,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if loading:
 	# Get status of resource loader
-		var a = []
-		var b = []
+		var a := []
+		var b := []
 		ResourceLoader.load_threaded_get_status(INTERIOR_SCENE_PATH,a)
 		ResourceLoader.load_threaded_get_status(PHYSICS_SCENE_PATH,b)
 		loading_bar.anchor_right = (a[0] + b[0])/2.0 # send to progress bar
@@ -27,20 +27,22 @@ func _process(_delta: float) -> void:
 		if (a[0] + b[0])/2.0 == 1.0:
 			initialize()
 
-func _on_startup():
+func _on_startup() -> void:
 	# Start resource loader for both interior and physics
 	ResourceLoader.load_threaded_request(INTERIOR_SCENE_PATH)
 	ResourceLoader.load_threaded_request(PHYSICS_SCENE_PATH)
 	loading = true
 
-func initialize():
+func initialize() -> void:
 	# Load scenes, physics scene first (so ship exists before UI calls)
 	# Finish loading physics scene
-	var physics = ResourceLoader.load_threaded_get(PHYSICS_SCENE_PATH).instantiate()
+	var physics_resource: Resource = ResourceLoader.load_threaded_get(PHYSICS_SCENE_PATH)
+	var physics: Node3D = physics_resource.instantiate()
 	$SimulationHolder.add_child(physics)
 	
 	# Finish loading interior scene
-	var interior = ResourceLoader.load_threaded_get(INTERIOR_SCENE_PATH).instantiate()
+	var interior_resource: Resource = ResourceLoader.load_threaded_get(INTERIOR_SCENE_PATH)
+	var interior = interior_resource.instantiate()
 	add_child(interior)
 	
 	# Delete menu
@@ -51,7 +53,7 @@ func initialize():
 	
 	loading = false
 
-func _go_to_menu():
+func _go_to_menu() -> void:
 	# Load and add menu scene
 	menu = preload(MENU_SCENE_PATH).instantiate()
 	add_child(menu)
