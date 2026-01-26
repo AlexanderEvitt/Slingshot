@@ -14,7 +14,7 @@ var accumulator = 1e99 # so all orbits are calculated in the first frame
 
 func _process(delta):
 	# Only refresh when more time has elapsed than 1 period
-	accumulator += delta*SystemTime.step
+	accumulator += delta*SimTime.step
 	period = this_body.body.period
 	if accumulator > period:
 		refresh_traj()
@@ -24,7 +24,7 @@ func _process(delta):
 	global_position = parent_body.global_position
 
 func refresh_traj():
-	tc = SystemTime.t;
+	tc = SimTime.t;
 	
 	var traj = []
 	

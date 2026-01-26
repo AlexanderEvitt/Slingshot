@@ -41,16 +41,16 @@ func _process(_delta):
 	var nav = ShipData.player_ship.navigation_module
 	
 	# Set time
-	sclk.text = str(snapped(SystemTime.t, 1))
+	sclk.text = str(snapped(SimTime.t, 1))
 
 	# Set positions
-	var r = Conversions.ToFrame(ship.position,SystemTime.t)
+	var r = Conversions.position_inertial_to_body(ship.position,SimTime.t)
 	rx.text = str(snapped(r.x, 1)) + "km"
 	ry.text = str(snapped(r.y, 1)) + "km"
 	rz.text = str(snapped(r.z, 1)) + "km"
 
 	# Set velocities
-	var v = Conversions.VelToFrame(ship.velocity,SystemTime.t)
+	var v = Conversions.velocity_inertial_to_body(ship.velocity,SimTime.t)
 	vx.text = str(snapped(v.x, 0.1)) + "km/s"
 	vy.text = str(snapped(v.y, 0.1)) + "km/s"
 	vz.text = str(snapped(v.z, 0.1)) + "km/s"

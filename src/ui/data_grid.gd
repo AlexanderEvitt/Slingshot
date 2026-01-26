@@ -17,13 +17,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	# Calculate and set altitude
-	var r = Conversions.ToFrame(ShipData.player_ship.position,SystemTime.t)
+	var r = Conversions.position_inertial_to_body(ShipData.player_ship.position,SimTime.t)
 	label2.text = str(snapped(r.length(), 1))
 	
 	# Calculate and set velocity
-	var v = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
+	var v = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
 	label3.text = str(snapped(v.length(), 0.001))
 	
 	# Calculate and set eccentricity
-	var e = Conversions.CalcEccentricity(ShipData.player_ship.position,ShipData.player_ship.velocity,SystemTime.t)
+	var e = Conversions.calc_eccentricity(ShipData.player_ship.position,ShipData.player_ship.velocity,SimTime.t)
 	label4.text = str(snapped(e.length(), 0.001))

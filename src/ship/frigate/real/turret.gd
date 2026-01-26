@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		pass
 	else:
-		target = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
+		target = Conversions.find_body(SimTime.t) - ShipData.player_ship.position
 		if Input.is_action_pressed("fire"):
 			beam.visible = true
 		else:

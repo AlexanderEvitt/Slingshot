@@ -60,8 +60,8 @@ var fields := [0,0,0,0,0,0]
 var start_temp := 300.0
 var thermal_mass := 1000.0
 var transfer_coefficient := 200.0
-var coolant_temp := 15 # K
-var temps := [start_temp,start_temp,start_temp,start_temp,start_temp,start_temp]
+var coolant_temp := 15.0 # K
+var temps: Array[float] = [start_temp,start_temp,start_temp,start_temp,start_temp,start_temp]
 
 @onready var ship: PlayerShip = get_parent()
 
@@ -78,19 +78,19 @@ func update(dt: float) -> void:
 	throttle = clamp(throttle,0,engine_power)
 	
 	# Get desired engine parameters
-	var mass = ship.total_mass
-	var desired_thrust = mass*1000*throttle # (kg)*(km/s) -> N
+	var mass := ship.total_mass
+	var desired_thrust := mass*1000*throttle # (kg)*(km/s) -> N
 	
 	# Simulate engine if time rate is 1
 
 	# Simulate FRC power
 	# Get desired thrust power (linear for now)
-	var thrust_power = design_power*sqrt(throttle/0.01)
+	var thrust_power := design_power*sqrt(throttle/0.01)
 	if thrust_limiter:
 		thrust_power = clamp(thrust_power, 0.0, power_limit)
 	# Add electrical power to thrust power to get steady state power output
-	var steady_power = 0.0
-	var frac_elec = 1.0
+	var steady_power := 0.0
+	var frac_elec := 1.0
 	if reactor:
 		steady_power = thrust_power + electrical_power
 		frac_elec = electrical_power/steady_power # fraction of total power not in thrust
@@ -98,12 +98,12 @@ func update(dt: float) -> void:
 	# Damping decreases with power using stability beta
 	# Loses 90% of its damping by reaching the power limit
 	beta = 1.0 - 0.9*(power/power_limit)
-	var c_current = beta*c
+	var c_current := beta*c
 	
 	# Simulate spring mass damper for instantaneous power of reactor
 	# only if in real time
-	if SystemTime.step == 1:
-		var power_err = power - steady_power
+	if SimTime.step == 1:
+		var power_err := power - steady_power
 		power_ddot = -k*power_err - c_current*power_dot
 		power_dot = power_dot + power_ddot*dt
 		power = power + power_dot*dt
@@ -132,7 +132,7 @@ func update(dt: float) -> void:
 	
 	# Control propulsor mass flow with a proportional control on thrust
 	# Get control signal for propulsor pumps
-	var thrust_err = thrust.length() - desired_thrust
+	var thrust_err := thrust.length() - desired_thrust
 	# Change mass flow by thrust error, only if propulsor enabled
 	if propulsor:
 		propulsor_mass_flow = propulsor_mass_flow - kp*thrust_err
@@ -153,12 +153,12 @@ func update(dt: float) -> void:
 	# Calculate magnetic temperatures
 	# Loop through each magnet
 	for i in 6:
-		var absorbed_power_fraction = randf()*1e-10
-		var effective_mass_flow = exp(-power/power_limit)*reactor_mass_flow
+		var absorbed_power_fraction := randf()*1e-10
+		var effective_mass_flow := exp(-power/power_limit)*reactor_mass_flow
 		# Calculate power of heating from reactor
-		var heating = absorbed_power_fraction*power
-		var cooling = effective_mass_flow*transfer_coefficient*(temps[i] - coolant_temp)
-		var Q = heating - cooling
+		var heating := absorbed_power_fraction*power
+		var cooling := effective_mass_flow*transfer_coefficient*(temps[i] - coolant_temp)
+		var Q := heating - cooling
 		temps[i] = temps[i] + (1/thermal_mass)*Q*dt
 		if temps[i] < 0.0:
 			temps[i] = 0.0

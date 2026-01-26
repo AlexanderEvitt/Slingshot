@@ -1,10 +1,10 @@
 extends Label
 
-var offset = 0 # time to subtract from SystemTime.t
+var offset = 0 # time to subtract from SimTime.t
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	self.text = format_time(SystemTime.t - offset)
+	self.text = format_time(SimTime.t - offset)
 
 func format_time(seconds):
 	var signs := "T+"
@@ -26,4 +26,4 @@ func format_time(seconds):
 	return "%s%02dd%02dh%02dm%02ds" % [signs, days, hours, minutes, secs]
 
 func _on_reset():
-	offset = SystemTime.t
+	offset = SimTime.t

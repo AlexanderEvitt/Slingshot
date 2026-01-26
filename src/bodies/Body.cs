@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class Body : Node3D
 {
     private Node3D parentBody;
@@ -8,6 +9,9 @@ public partial class Body : Node3D
     // Values used by children
     [Export]
     public double GM { get; set; } // km^3/s^2
+
+    // Reference to SimTime singleton
+    public Node simTime;
 
     // Input orbital elements
     [Export]
@@ -36,6 +40,9 @@ public partial class Body : Node3D
 
     public override void _Ready()
     {
+        // Get SimTime node
+        simTime = GetTree().Root.GetNode("SimTime");
+
         parentBody = GetParent<Node3D>();
         double parentMu = (double)parentBody.Get("GM");
 
@@ -65,7 +72,8 @@ public partial class Body : Node3D
     public override void _PhysicsProcess(double delta)
     {
         // Set the position of the body
-        Position = get_local_position(SystemTime.Instance.t);
+        double t = (double)simTime.Get("t");
+        Position = get_local_position(t);
     }
 
     public Godot.Vector3 fetch(double time)
@@ -80,7 +88,7 @@ public partial class Body : Node3D
         // Very low confidence in get_local_velocity due to the approximation of true anomaly right now
         // So using this for the moment
         float dt = 0.01f;
-        return (Godot.Vector3)((fetch(SystemTime.Instance.t) - fetch(SystemTime.Instance.t - dt))/dt);
+        return (Godot.Vector3)((fetch(time) - fetch(time - dt))/dt);
     }
 
     private Godot.Vector3 get_local_position(double time)

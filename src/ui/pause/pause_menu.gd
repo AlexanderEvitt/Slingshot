@@ -46,13 +46,13 @@ func toggle_pause_menu():
 	visible = !visible
 	# Stop time while paused
 	if visible:
-		last_step = SystemTime.i
-		SystemTime.i = 0
+		last_step = SimTime.i
+		SimTime.i = 0
 		# Show mouse
 		last_mouse_mode = Input.get_mouse_mode()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# Start time again when unpausing
 	else:
-		SystemTime.i = last_step
+		SimTime.i = last_step
 		# Take mouse back to last mouse mode
 		Input.set_mouse_mode(last_mouse_mode)

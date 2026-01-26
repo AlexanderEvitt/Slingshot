@@ -49,7 +49,7 @@ func initialize() -> void:
 	remove_child(menu)
 	
 	# Start simulation time running
-	SystemTime.i = 1;
+	SimTime.i = 1;
 	
 	loading = false
 

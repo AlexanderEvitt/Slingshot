@@ -5,16 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-public partial class Propagator : Node3D
+[GlobalClass]
+public partial class PropagateModule : Node3D
 {
 	// Initialize times, positions, velocities lists
-	public Godot.Collections.Array<Node> bodies;
-	public Godot.Collections.Array<Vector3> positions;
-	public Godot.Collections.Array<Vector3> velocities;
-	public Godot.Collections.Array<double> times;
+	public Array<Node> bodies;
+	public Array<Vector3> positions;
+	public Array<Vector3> velocities;
+	public Array<double> times;
 
 	// Initialize array for passing up positions
-	public Godot.Collections.Array<Vector3> plotted_positions;
+	public Array<Vector3> plotted_positions;
 
 	// Initial conditions
 	public Vector3 start_position;
@@ -28,12 +29,22 @@ public partial class Propagator : Node3D
 	public double timescale = 0.15d;
 
 	// Array that holds the list of bodies we consider gravity from
-	public Godot.Collections.Array<Vector3> gravitators;
+	public Array<Vector3> gravitators;
 	// Lowest-hierarchy body we are in proximity to
-	public Godot.Node primary;
+	public Node primary;
+
+	// References to Singletons
+	public Node SimTime;
+	public Node Conversions;
+	public Node ShipData;
 
 	public override void _Ready()
 	{
+		// Get singletons
+		SimTime = GetNode<Node>("/root/SimTime");
+		Conversions = GetNode<Node>("/root/Conversions");
+		ShipData = GetNode<Node>("/root/ShipData");
+
 		// Get planets
 		bodies = GetTree().GetNodesInGroup("Bodies");
 
@@ -41,7 +52,11 @@ public partial class Propagator : Node3D
 		player_ship = GetParent();
 
 		// Initialize the gravitators as being around the Sun
-		primary = Conversions.Instance.sim_root.GetNode("SolarSystem");
+		Node sim_root = (Node)ShipData.Get("sim_root");
+		primary = sim_root.GetNode("SolarSystem");
+
+		// Initialize the plotted_positions
+		plotted_positions = new Array<Vector3>();
 	}
 
 	public override void _Process(double delta)
@@ -58,13 +73,12 @@ public partial class Propagator : Node3D
 				start_velocity = (Vector3)player_ship.Get("velocity");
 
 				// Refresh trajectory
-				double t = SystemTime.Instance.t;
+				double t = (double)SimTime.Get("t");
 				Refresh(t);
 				c = 10;
 
 				// Expose positions for plotting
-				Godot.Collections.Array<Vector3> converted_positions = Conversions.Instance.SubtractBodyMotion(positions, times);
-				plotted_positions = new Godot.Collections.Array<Vector3>(converted_positions);
+				plotted_positions = (Array<Vector3>)Conversions.Call("inertial_to_ship_frame", positions, times);
 			}
 			c = c - 1;
 
@@ -73,7 +87,7 @@ public partial class Propagator : Node3D
 		}
 		else
 		{
-			plotted_positions = null;
+			plotted_positions = new Array<Vector3>();
 		}
 	}
 

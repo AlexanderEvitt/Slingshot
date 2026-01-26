@@ -5,7 +5,6 @@ var player_ship
 func _ready() -> void:
 	# Tell the ShipData global how to reference the planets
 	ShipData.sim_root = get_parent()
-	Conversions.sim_root = get_parent()
 	
 	
 	# Load player ship into scene
@@ -34,8 +33,8 @@ func _ready() -> void:
 			var data = json.data
 			
 			# Disperse data to relevant objects
-			if data["identifier"] == "SystemTime":
-				SystemTime.t = data["t"]
+			if data["identifier"] == "SimTime":
+				SimTime.t = data["t"]
 			if data["identifier"] == "PlayerShip":
 				player_ship.initialize(data)
 	
@@ -51,8 +50,8 @@ func save_game():
 	
 	# Get data from system time
 	var system_time_data = {
-		"identifier" : "SystemTime",
-		"t" : SystemTime.t,
+		"identifier" : "SimTime",
+		"t" : SimTime.t,
 	}
 	save_file.store_line(JSON.stringify(system_time_data))
 	

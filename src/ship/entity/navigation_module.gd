@@ -3,7 +3,7 @@ extends Node3D
 
 var control := Vector3(0,0,0) # commanded acceleration
 var control_pointing := Vector3(1,0,0) # normalized direction of control
-var control_throttle := 0 # scalar acceleration of control
+var control_throttle := 0.0 # scalar acceleration of control
 
 var active_waypoint := 0
 var waypoints := []
@@ -45,7 +45,7 @@ var reverse := false
 func update(dt: float, gravity: Vector3) -> void:
 	# Update waypoints, only navigate if you have two of them or more
 	waypoints = ship.waypoints
-	if waypoints.size() > 1 and SystemTime.step > 0 and ship.avionics["navigation"] and ship.avionics["autopilot"]:
+	if waypoints.size() > 1 and SimTime.step > 0 and ship.avionics["navigation"] and ship.avionics["autopilot"]:
 		# Don't navigate if there's no waypoints or the simulation isn't advancing
 		navigate(dt, gravity)
 
@@ -56,23 +56,25 @@ func update(dt: float, gravity: Vector3) -> void:
 func update_periodically() -> void:
 	# Update waypoints, only navigate if you have two of them or more
 	waypoints = ship.waypoints
-	if waypoints.size() > 1 and SystemTime.step > 0 and ship.avionics["navigation"] and ship.avionics["autopilot"]:
+	if waypoints.size() > 1 and SimTime.step > 0 and ship.avionics["navigation"] and ship.avionics["autopilot"]:
 		# Update waypoints, course info
-		var last_waypoint = waypoints[active_waypoint]
-		var next_waypoint = waypoints[active_waypoint + 1]
+		var last_waypoint: Dictionary = waypoints[active_waypoint]
+		var next_waypoint: Dictionary = waypoints[active_waypoint + 1]
 		
 		# Write the current solar system positions/velocities of the waypoints
-		from = last_waypoint["Position"] + last_waypoint["Frame"].fetch(SystemTime.t)
-		to = next_waypoint["Position"] + next_waypoint["Frame"].fetch(SystemTime.t)
-		from_vel = last_waypoint["Frame"].fetch_velocity(SystemTime.t)
-		to_vel = next_waypoint["Frame"].fetch_velocity(SystemTime.t)
+		var last_frame: Body = last_waypoint["Frame"]
+		var next_frame: Body = next_waypoint["Frame"]
+		from = last_waypoint["Position"] + last_frame.fetch(SimTime.t)
+		to = next_waypoint["Position"] + next_frame.fetch(SimTime.t)
+		from_vel = last_frame.fetch_velocity(SimTime.t)
+		to_vel = next_frame.fetch_velocity(SimTime.t)
 
 		# Get the course (vector from previous point to next point)
 		course = (to - from)
 		course_distance = course.length()
 		normalized_course = course.normalized()
 	
-func navigate(dt, gravity):
+func navigate(dt: float, gravity: Vector3) -> void:
 	# Get the nearest point along the line
 	# Scalar projection factor t (scalar form of projection position onto from, 0 -> 1)
 	t = (ship.position - from).dot(course) / (course_distance * course_distance)
@@ -85,7 +87,7 @@ func navigate(dt, gravity):
 	on_course_velocity = relative_velocity.project(course)
 
 	# Calculate acceleration [a1] in opposition to gravity
-	var a1 = -gravity
+	var a1 := -gravity
 	
 	# Calculate error correction [a2] to move towards course
 	# Vector from ship to closest point (orthogonal to line direction)
@@ -95,8 +97,8 @@ func navigate(dt, gravity):
 	# Velocity error (velocity not in the direction of course)
 	d_error = on_course_velocity - relative_velocity
 	# Sum up, reducing gains with time rate to reduce jitter
-	if SystemTime.step > 100:
-		scalek = 1.0/(log(SystemTime.step/100) + 1)
+	if SimTime.step > 100:
+		scalek = 1.0/(log(SimTime.step/100) + 1)
 	else:
 		scalek = 1.0
 	a2 = (Kp*scalek)*p_error + (Ki*scalek)*i_error + (Kd*scalek)*d_error
@@ -104,7 +106,7 @@ func navigate(dt, gravity):
 	# Calculate thrust along line [a3]
 	# Calculate required thrust to hit cornering_velocity at endpoint
 	remaining_distance = course_distance * (1.0 - t)
-	var required_decel = abs((cornering_velocity**2 - on_course_velocity.length_squared())/(2*remaining_distance))
+	var required_decel := absf((cornering_velocity**2 - on_course_velocity.length_squared())/(2*remaining_distance))
 	if reverse: # deceleration thrust
 		a3 = -required_decel*normalized_course
 	else: # acceleration thrust
@@ -118,7 +120,7 @@ func navigate(dt, gravity):
 	control = control.limit_length(0.05)
 	
 	# Move to next waypoint if near it, disable NAV if at destination
-	var direction = relative_velocity.normalized().dot(normalized_course) # 1 to -1, alignment of velocity with course
+	var direction := relative_velocity.normalized().dot(normalized_course) # 1 to -1, alignment of velocity with course
 	if t > 1 or (t > 0.9 and direction < 0):
 		if active_waypoint + 2 >= len(waypoints):
 			# Shut off navigation
@@ -144,6 +146,6 @@ func navigate(dt, gravity):
 		# Point retrocourse at autopilot shutoff
 		control_pointing = -normalized_course
 	# Don't fire engine if pointing is incorrect
-	var attitude_error = acos(control_pointing.dot(ship.attitude.x)) # radians
+	var attitude_error := acos(control_pointing.dot(ship.attitude.x)) # radians
 	if attitude_error > 0.087: # 5 degree tolerance
 		control_throttle = 0

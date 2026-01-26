@@ -21,9 +21,9 @@ config/windows_native_icon="res://visuals/logo/windows_icon.ico"
 
 [autoload]
 
-Conversions="*res://ship/Conversions.cs"
 ShipData="*res://ship/ship_data.gd"
 SimTime="*res://scenes/sim_time.gd"
+Conversions="*res://scenes/conversions.gd"
 
 [debug]
 

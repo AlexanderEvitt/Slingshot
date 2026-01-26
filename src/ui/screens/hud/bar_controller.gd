@@ -6,7 +6,7 @@ func _process(_delta: float) -> void:
 	var ship_up = ShipData.player_ship.attitude * Vector3(0, 1, 0)
 	var ship_right = ShipData.player_ship.attitude * Vector3(0, 0, 1)
 	var ship_forward = ShipData.player_ship.attitude * Vector3(1, 0, 0)
-	var world_up = (ShipData.player_ship.position - Conversions.FindFrame(SystemTime.t)).normalized()
+	var world_up = (ShipData.player_ship.position - Conversions.find_body(SimTime.t)).normalized()
 	
 	var pitch = PI/2.0 - acos(ship_forward.dot(world_up))
 	var roll = PI/2.0 - acos(ship_right.dot(world_up))

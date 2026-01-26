@@ -10,6 +10,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	origin = Conversions.FindFrame(SystemTime.t)
+	origin = Conversions.find_body(SimTime.t)
 	pointing = origin - ShipData.player_ship.position
 	look_at(pointing,Vector3(0,0,1))

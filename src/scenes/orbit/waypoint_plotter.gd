@@ -15,7 +15,7 @@ func _process(_delta):
 		var body = x["Frame"]
 		# Position is relative to the camera, which is always at the global origin
 		# (position relative to selection) + (position selection relative to system) + (position system relative to camera)
-		var pos = x["Position"] + body.fetch(SystemTime.t) + orbit_root.position # relative to camera position
+		var pos = x["Position"] + body.fetch(SimTime.t) + orbit_root.position # relative to camera position
 		traj.append(pos)
 	
 	# Cull the previous trajectory

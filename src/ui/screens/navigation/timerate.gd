@@ -3,7 +3,7 @@ extends Label
 func _process(_delta):
 	# Process time rate into a string of text
 	# Don't show up if the time rate is real time
-	var step = SystemTime.step
+	var step = SimTime.step
 	if step == 1:
 		visible = false
 	else:

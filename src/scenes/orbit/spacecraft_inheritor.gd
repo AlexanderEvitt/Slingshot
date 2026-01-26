@@ -1,7 +1,7 @@
 extends Node3D
 
-var plotter : Node3D
 @onready var pointer: Node3D = $Pointer
+@onready var plotter: Plotter = ShipData.player_ship.plotter
 
 @export var body_path : String
 
@@ -24,4 +24,4 @@ func _process(_delta: float) -> void:
 		global_position = ShipData.player_ship.global_position
 	
 	if plotter:
-		plotter.positions = ShipData.player_ship.propagate_module.plotted_positions
+		plotter.positions = ShipData.player_ship.propagate_module.get("plotted_positions")

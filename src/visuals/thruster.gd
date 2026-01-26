@@ -7,11 +7,11 @@ extends Node3D
 @export var roll_left : bool
 @export var roll_right : bool
 
-var cutoff = 0.1
-var torque
+var cutoff := 0.1
+var torque: Vector3
 
-var my_torque = 0
-var my_thrust = 0
+var my_torque := 0.0
+var my_thrust := 0.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
@@ -22,7 +22,7 @@ func _physics_process(_delta: float) -> void:
 	record_thrusters()
 	make_thruster_fire()
 
-func record_torque():
+func record_torque() -> void:
 	# Record commanded torque
 	torque = ShipData.player_ship.torque
 	if torque == null:
@@ -42,21 +42,21 @@ func record_torque():
 	if roll_right:
 		my_torque = my_torque + (torque.x)
 
-func record_thrusters():
+func record_thrusters() -> void:
 	# Record translational thruster firings
-	var thrusters = ShipData.player_ship.propulsion_module.thrust - ShipData.player_ship.propulsion_module.main_thrust*Vector3(1,0,0)
+	var thrusters: Vector3 = ShipData.player_ship.propulsion_module.thrust - ShipData.player_ship.propulsion_module.main_thrust*Vector3(1,0,0)
 	if thrusters.length() < 0.001:
 		my_thrust = 0
 	else:
-		var my_thrust_vector = transform.basis.y
+		var my_thrust_vector: Vector3 = transform.basis.y
 		my_thrust = thrusters.dot(my_thrust_vector)/thrusters.length()
 		my_thrust = clamp(-my_thrust,0,1)
 	
-func make_thruster_fire():
+func make_thruster_fire() -> void:
 	# Turn on thruster
-	var fire = (my_torque + 0.5*my_thrust)
+	var fire: float = (my_torque + 0.5*my_thrust)
 
-	var unit = 150*Vector3(1,1,1)
+	var unit: Vector3 = 150*Vector3(1,1,1)
 	if fire > cutoff:
 		visible = true
 		scale = fire*unit

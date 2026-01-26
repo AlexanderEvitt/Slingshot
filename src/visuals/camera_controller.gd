@@ -8,17 +8,17 @@ var smooth_zoom := 0.2 # 1.0 is move instantly to new zoom, 0.0 is don't move
 var zoom_max := 2000000000.0 # maximum zoom distance
 
 # Whether camera always moves with mouse or only on right click
-@export var move_always = false
+@export var move_always := false
 
 # Motion of camera constants
 @export var Kd := 0.99 # speed at which camera bounces back (1.0 = never moves)
 @export var Kp := 0.5 # scale of motion from acceleration
 @export var Ka := 0.1 # speed at which camera moves to new attitude
 
-var camera_mode = "Global" # whether camera moves with ship or stays fixed
+var camera_mode := "Global" # whether camera moves with ship or stays fixed
 
-@onready var camera_rotator = $CameraRotator
-@onready var camera = $CameraRotator/Camera3D
+@onready var camera_rotator: Node3D = $CameraRotator
+@onready var camera: Camera3D = $CameraRotator/Camera3D
 
 # Camera rotation parameters
 var mouse_rotation_speed := 0.0001
@@ -27,16 +27,16 @@ var r := false # whether to allow rotation
 var pitch := 0.0 # start pitch
 var yaw := 0.0 # start yaw
 
-var viewer
+var viewer : Control
 
-func _ready():
+func _ready() -> void:
 	# Get the parent of the viewport, so you can see if the viewport is even visible
 	# If it's not, don't bother moving the camera
 	viewer = get_viewport().get_parent()
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	# Smoothly move to new position
-	var old_zoom = camera.position.z
+	var old_zoom: float = camera.position.z
 	camera.position = Vector3(0, 0, smooth_zoom*zoom_distance + (1.0 - smooth_zoom)*old_zoom)
 	
 	# Move camera back from acceleration
@@ -81,7 +81,7 @@ func _process(_delta):
 	if move_always or Input.is_action_pressed("right_click"):
 		set_orientation()
 		
-func set_orientation():
+func set_orientation() -> void:
 	yaw -= Input.get_last_mouse_velocity().x * mouse_rotation_speed
 	pitch = clamp(pitch - Input.get_last_mouse_velocity().y * mouse_rotation_speed, -1.57, 1.57)
 	

@@ -10,7 +10,7 @@ func _process(_delta: float) -> void:
 		look_at_from_position(offset + thrust_offset, Vector3(0,0,0), Vector3(0,0,1))
 		position = ShipData.player_ship.position + offset + thrust_offset
 		
-		var dt = SystemTime.step*0.03333
+		var dt = SimTime.step*0.03333
 		offset_vel += ShipData.player_ship.acceleration*dt
 		thrust_offset -= offset_vel*dt
 		

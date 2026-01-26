@@ -50,17 +50,17 @@ func update(_dt: float) -> void:
 		match ship.avionics["attitude_mode"]:
 			"HDG":
 				# HDG is component of velocity normal to radius
-				var v: Vector3 = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
-				var r: Vector3 = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
+				var v: Vector3 = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
+				var r: Vector3 = Conversions.find_body(SimTime.t) - ShipData.player_ship.position
 				var v_along_r: Vector3 = (r.dot(v)/r.length_squared())*r.normalized()
 				target = v - v_along_r
 			"CRS":
-				target = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
+				target = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
 			"TRG":
-				target = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
+				target = Conversions.find_body(SimTime.t) - ShipData.player_ship.position
 			"NRM":
-				var v: Vector3 = Conversions.VelToFrame(ShipData.player_ship.velocity,SystemTime.t)
-				var r: Vector3 = Conversions.FindFrame(SystemTime.t) - ShipData.player_ship.position
+				var v: Vector3 = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
+				var r: Vector3 = Conversions.find_body(SimTime.t) - ShipData.player_ship.position
 				target = r.cross(v)
 			"NAV":
 				target = ship.navigation_module.control_pointing
@@ -83,11 +83,11 @@ func update(_dt: float) -> void:
 		torque -= 0.1*(angular_velocity)
 		
 	# Apply torque if in real time
-	if SystemTime.step == 1:
+	if SimTime.step == 1:
 		integrate_rotation(torque)
 		
 	# Disallow rotation if timestep is not 1
-	elif SystemTime.step != 1:
+	elif SimTime.step != 1:
 		angular_velocity = Vector3(0,0,0)
 		
 		# Point at target attitude

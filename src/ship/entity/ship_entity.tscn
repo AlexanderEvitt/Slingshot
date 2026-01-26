@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cc283l37nveuy" path="res://ship/entity/player_ship.gd" id="1_012ot"]
 [ext_resource type="Script" uid="uid://8foh3a4rsbjc" path="res://ship/entity/attitude_module.gd" id="2_7e8cl"]
-[ext_resource type="Script" uid="uid://dm88ls8pwtpcc" path="res://ship/Propagator.cs" id="4_7neml"]
+[ext_resource type="Script" uid="uid://dm88ls8pwtpcc" path="res://ship/PropagateModule.cs" id="4_7neml"]
 [ext_resource type="Script" uid="uid://cg2yyvdpwvc0u" path="res://ship/entity/propulsion_module.gd" id="5_n5nff"]
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="6_2cinc"]
 [ext_resource type="Script" uid="uid://55lrhua7ji4r" path="res://ship/entity/navigation_module.gd" id="6_nvs0w"]
