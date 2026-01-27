@@ -1,6 +1,6 @@
 extends Node3D
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	position = -ShipData.player_ship.position
 	# Setting this root to the negative of the ship position ensures the cam is always near the global origin
 	# Should not be necessary (and should have no effect) in a double precision build

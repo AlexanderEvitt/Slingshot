@@ -1,3 +1,4 @@
+class_name Menu
 extends Panel
 
 signal startup
@@ -19,5 +20,6 @@ func _on_startup() -> void:
 	startup_panel.visible = false
 	
 	# Set save game slot
-	slot = slot_button_group.get_pressed_button().id
+	var save_slot_button := slot_button_group.get_pressed_button() as SaveSlotButton
+	slot = save_slot_button.id
 	ShipData.slot = slot

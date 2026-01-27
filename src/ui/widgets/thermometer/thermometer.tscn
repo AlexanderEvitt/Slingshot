@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://chc5yjtcfsxvt"]
 
 [ext_resource type="Theme" uid="uid://bhtmuml4efphk" path="res://ui/themes/medium_panel.tres" id="1_akhtd"]
-[ext_resource type="Script" path="res://ui/widgets/thermometer/thermometer.gd" id="2_dly02"]
+[ext_resource type="Script" uid="uid://xoxbiupnu830" path="res://ui/widgets/thermometer/thermometer.gd" id="2_dly02"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sjkb"]
 bg_color = Color(1, 1, 1, 1)
@@ -25,7 +25,6 @@ theme_override_constants/margin_top = 20
 [node name="Label" type="Label" parent="UpperText"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "T_M"
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true

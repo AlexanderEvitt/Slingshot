@@ -1,5 +1,6 @@
 extends Node3D
 
+@onready var parent_body: BodyInheritor = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,12 +10,12 @@ func _ready() -> void:
 	on_berth_updated()
 
 # Sets up the berth marker
-func on_berth_updated():
+func on_berth_updated() -> void:
 	# Get new berth from station manager
-	var station = ShipData.player_ship.station
+	var station := ShipData.player_ship.station
 	# Only do this if the station is this one
-	if station.get_parent() == ShipData.sim_root.get_node(get_parent().body_path):
-		var berth = ShipData.player_ship.station.current_berth
+	if station.get_parent() == ShipData.sim_root.get_node(parent_body.body_path):
+		var berth := ShipData.player_ship.station.current_berth
 		
 		# Place berth at appropriate relative transform
 		if berth == null:

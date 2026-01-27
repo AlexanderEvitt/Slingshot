@@ -1,24 +1,24 @@
 extends Node3D
 
-var chamber1
-var chamber2
-var fan
-var pencil
-var design_thrust
+var chamber1: Light3D
+var chamber2: Light3D
+var fan: ShaderMaterial
+var pencil: ShaderMaterial
+var design_thrust := 613280*50 # N
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	fan = get_node("Fan").get_active_material(0)
-	pencil = get_node("Pencil").get_active_material(0)
+func _ready() -> void:
+	# Meshes
+	var fan_mesh: MeshInstance3D = $Fan
+	var pencil_mesh: MeshInstance3D = $Pencil
+	fan = fan_mesh.get_active_material(0)
+	pencil = pencil_mesh.get_active_material(0)
 	chamber1 = get_node("Light")
 	chamber2 = get_node("Light2")
-	
-	design_thrust = 613280*50 # N
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	var thrust = ShipData.player_ship.propulsion_module.main_thrust
+func _process(_delta: float) -> void:
+	var thrust := ShipData.player_ship.propulsion_module.main_thrust
 	thrust = clamp(thrust,1e-20,1e99)
 	if thrust > 0:
 		visible = true

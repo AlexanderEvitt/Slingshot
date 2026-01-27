@@ -5,9 +5,9 @@ extends MeshInstance3D
 
 var current_intensity := 0.0
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("fire"):
-		var delay = randf_range(0.0,10.0)
+		var delay := randf_range(0.0,10.0)
 		await get_tree().create_timer(delay).timeout
 		current_intensity = flash_intensity
 	
@@ -18,7 +18,9 @@ func _process(delta):
 	else:
 		current_intensity = 0.0
 
-func _apply_intensity():
+func _apply_intensity() -> void:
 	# Size sphere
+	@warning_ignore("unsafe_property_access")
 	mesh.radius = current_intensity
+	@warning_ignore("unsafe_property_access")
 	mesh.height = 2*mesh.radius

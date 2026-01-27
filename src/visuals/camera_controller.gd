@@ -1,3 +1,4 @@
+class_name ExternalCameraRig
 extends Node3D
 
 # Zoom parameters

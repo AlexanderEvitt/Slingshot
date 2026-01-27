@@ -246,15 +246,23 @@ func save() -> Dictionary:
 
 # Function that loads from a save file
 func initialize(save_dict: Dictionary) -> void:
-	# State info
-	position = Vector3(save_dict["position_x"],save_dict["position_y"],save_dict["position_z"])
-	velocity = Vector3(save_dict["velocity_x"],save_dict["velocity_y"],save_dict["velocity_z"])
-	
-	# Attitude info
-	attitude_module.rotation.x = save_dict["rotation_x"]
-	attitude_module.rotation.y = save_dict["rotation_y"]
-	attitude_module.rotation.z = save_dict["rotation_z"]
-	
-	# Docking info
-	assign_berth(save_dict["station_path"])
-	berthed = save_dict["berthed"]
+	# Load state data from dictionary
+	var px: float = save_dict.get("position_x", 0.0)
+	var py: float = save_dict.get("position_y", 0.0)
+	var pz: float = save_dict.get("position_z", 0.0)
+
+	var vx: float = save_dict.get("velocity_x", 0.0)
+	var vy: float = save_dict.get("velocity_y", 0.0)
+	var vz: float = save_dict.get("velocity_z", 0.0)
+
+	position = Vector3(px, py, pz)
+	velocity = Vector3(vx, vy, vz)
+
+	attitude_module.rotation.x = save_dict.get("rotation_x", 0.0)
+	attitude_module.rotation.y = save_dict.get("rotation_y", 0.0)
+	attitude_module.rotation.z = save_dict.get("rotation_z", 0.0)
+
+	# Initialize at station from save file
+	var saved_station_path: String = save_dict.get("station_path", NodePath(""))
+	assign_berth(saved_station_path)
+	berthed = save_dict.get("berthed", false)

@@ -75,7 +75,6 @@ size_flags_horizontal = 3
 [node name="Data" parent="." instance=ExtResource("5_hqpxh")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
 offset_right = 0.0
 offset_bottom = 0.0
 

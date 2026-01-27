@@ -1,10 +1,10 @@
 extends VBoxContainer
 
 # Gauge reference
-@export var power_dial: Node
-@export var ve_dial: Node
-@export var beta_dial: Node
-@export var thrust_dial: Node
+@export var power_dial: Dial
+@export var ve_dial: Dial
+@export var beta_dial: Dial
+@export var thrust_dial: Dial
 
 # Tank references
 @export var he_tank_text: Label
@@ -12,14 +12,14 @@ extends VBoxContainer
 @export var hyd_tank_text: Label
 
 # Pump slider references
-@export var he_pump: Node
-@export var de_pump: Node
-@export var hyd_pump: Node
+@export var he_pump: DoubleSlider
+@export var de_pump: DoubleSlider
+@export var hyd_pump: DoubleSlider
 
 # Valve references
-@export var he_valve: Node
-@export var de_valve: Node
-@export var hyd_valve: Node
+@export var he_valve: Control
+@export var de_valve: Control
+@export var hyd_valve: Control
 
 # Control button references
 @export var propulsor_button: Button
@@ -33,11 +33,11 @@ extends VBoxContainer
 @export var thermometers: Node
 
 # Side panels
-@export var dosimetry: Node
-@export var endurance: Node
-@onready var he_endurance: Control = endurance.get_node("HeEndurance")
-@onready var de_endurance: Control = endurance.get_node("DeEndurance")
-@onready var hyd_endurance: Control = endurance.get_node("HydEndurance")
+@export var dosimetry: Label
+@export var endurance: Control
+@onready var he_endurance: Label = endurance.get_node("HeEndurance")
+@onready var de_endurance: Label = endurance.get_node("DeEndurance")
+@onready var hyd_endurance: Label = endurance.get_node("HydEndurance")
 
 var prop: PropulsionModule
 
@@ -100,12 +100,12 @@ func _process(_delta: float) -> void:
 	he_pump.set_fill_bottom(max_he_flow * flow_coefficient)
 	he_pump.set_labels(String.num(3.6*prop.reactor_mass_flow_he,1) + " t/hr", String.num(he_pump_speed,0) + " RPM")
 	
-	var de_pump_speed = prop.reactor_mass_flow_de * flow_coefficient
+	var de_pump_speed := prop.reactor_mass_flow_de * flow_coefficient
 	de_pump.set_fill_top(prop.reactor_mass_flow_de/max_de_flow)
 	de_pump.set_fill_bottom(max_de_flow * flow_coefficient)
 	de_pump.set_labels(String.num(3.6*prop.reactor_mass_flow_de,1) + " t/hr", String.num(de_pump_speed,0) + " RPM")
 	
-	var hyd_pump_speed = prop.propulsor_mass_flow * flow_coefficient
+	var hyd_pump_speed := prop.propulsor_mass_flow * flow_coefficient
 	hyd_pump.set_fill_top(prop.propulsor_mass_flow/max_hyd_flow)
 	hyd_pump.set_fill_bottom(max_hyd_flow * flow_coefficient)
 	hyd_pump.set_labels(String.num(3.6*prop.propulsor_mass_flow,1) + " t/hr", String.num(hyd_pump_speed,0) + " RPM")
@@ -118,28 +118,28 @@ func _process(_delta: float) -> void:
 	
 	# Assign magnetic temperatures
 	for i in 6:
-		var thermometer = thermometers.get_child(i)
-		var max_temp = 300.0
+		var thermometer: Thermometer = thermometers.get_child(i)
+		var max_temp := 300.0
 		thermometer.set_fill(prop.temps[i]/max_temp, String.num(prop.temps[i],0) + " K")
 
 	# Assign dose rate
-	var dose = 60.0 + PI*prop.power/1e15
+	var dose := 60.0 + PI*prop.power/1e15
 	dosimetry.text = String.num(dose, 0)
 	
 	# Assign endurance
 	if prop.reactor_mass_flow > 0.0:
-		he_endurance.text = format_time(-prop.he_quant/prop.reactor_mass_flow_he)
-		de_endurance.text = format_time(-prop.de_quant/prop.reactor_mass_flow_de)
+		he_endurance.text = Conversions.format_time(-prop.he_quant/prop.reactor_mass_flow_he)
+		de_endurance.text = Conversions.format_time(-prop.de_quant/prop.reactor_mass_flow_de)
 	else:
 		he_endurance.text = "NO FLOW"
 		de_endurance.text = "NO FLOW"
 	if prop.propulsor_mass_flow > 0.0:
-		hyd_endurance.text = format_time(-prop.hyd_quant/prop.propulsor_mass_flow)
+		hyd_endurance.text = Conversions.format_time(-prop.hyd_quant/prop.propulsor_mass_flow)
 	else:
 		hyd_endurance.text = "NO FLOW"
 
 # Functions for toggling controls
-func update_model_with_control_states(_new_state):
+func update_model_with_control_states(_new_state: bool) -> void:
 	# Send to propulsion module
 	prop.propulsor = propulsor_button.button_pressed
 	prop.reactor = reactor_button.button_pressed
@@ -147,23 +147,3 @@ func update_model_with_control_states(_new_state):
 	prop.field = field_button.button_pressed
 	prop.thrust_limiter = limiter_button.button_pressed
 	prop.scram_inhibit = scram_inhibit_button.button_pressed
-
-# Formatting times
-func format_time(seconds):
-	var signs := "T+"
-	if seconds < 0:
-		signs = "T-"
-		seconds = abs(seconds)
-
-	# Break down
-	seconds = int(seconds)
-	var days := int(seconds / 86400)
-	var hours := int((seconds % 86400) / 3600)
-	var minutes := int((seconds % 3600) / 60)
-	var secs := int(seconds % 60)
-
-	# Cap days at 99
-	if days > 99:
-		return "LOW FLOW"
-
-	return "%s%02dd%02dh%02dm%02ds" % [signs, days, hours, minutes, secs]

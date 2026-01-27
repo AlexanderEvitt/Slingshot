@@ -1,3 +1,4 @@
+class_name WaypointRig
 extends Drawer
 
 @export var color: Color
@@ -35,16 +36,19 @@ func _process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	# Listen for a click that would kick you out of selection mode
 	# and write the last mouse position to the waypoint list
-	if event is InputEventMouseButton and event.button_index == 1 and select_mode == true:
-		select_mode = false
-		visible = false
-		
-		# Pass to ship computer
-		if hit != null:
-			# Get the simulation node that is the frame body
-			var frame_body: Node3D = ShipData.sim_root.get_node(get_parent().body_path)
-			# Add to waypoints array
-			ShipData.player_ship.waypoints.append({"Frame":frame_body, "Position":hit})
-			# Emit waypoints_updated signal to alert nodes of update
-			ShipData.player_ship.waypoints_updated.emit()
+	if event is InputEventMouseButton:
+		var mouse_event := event as InputEventMouseButton
+		if mouse_event.button_index == 1 and select_mode == true:
+			select_mode = false
+			visible = false
 			
+			# Pass to ship computer
+			if hit != null:
+				# Get the simulation node that is the frame body
+				var selected_body_inheritor: BodyInheritor = get_parent()
+				var frame_body: Node3D = ShipData.sim_root.get_node(selected_body_inheritor.body_path)
+				# Add to waypoints array
+				ShipData.player_ship.waypoints.append({"Frame":frame_body, "Position":hit})
+				# Emit waypoints_updated signal to alert nodes of update
+				ShipData.player_ship.waypoints_updated.emit()
+				

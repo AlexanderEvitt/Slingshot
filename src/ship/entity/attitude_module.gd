@@ -91,7 +91,7 @@ func update(_dt: float) -> void:
 		angular_velocity = Vector3(0,0,0)
 		
 		# Point at target attitude
-		if target != null:
+		if target.length() > 0.0:
 			transform.basis = transform_at(target, Vector3.UP)
 			rotate_object_local(Vector3(0, 1, 0), -PI/2)
 			

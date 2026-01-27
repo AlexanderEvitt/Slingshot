@@ -1,30 +1,29 @@
 extends Node3D
 
-var mat
-var cam
+var mat: ShaderMaterial
+var cam: Camera3D
 var prev_basis: Basis  # Store previous camera basis for rotation calculation
-var damped_angle = 0
-var damped_axis = Vector3(0,0,0)
-var w = 0.9 # blend to use for damping
-var s = 0.1 # scale of angle displacements
+var damped_angle := 0.0
+var damped_axis := Vector3(0,0,0)
+var w := 0.9 # blend to use for damping
+var s := 0.1 # scale of angle displacements
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	mat = get_node("StarTracks").get_active_material(0)
+	var tracks: MeshInstance3D = $StarTracks
+	mat = tracks.get_active_material(0)
 	cam = get_viewport().get_camera_3d()
 	prev_basis = cam.global_transform.basis  # Initialize previous basis
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	# Update camera (as it changes during ready)
 	cam = get_viewport().get_camera_3d()
 	
-	var current_basis = cam.global_transform.basis
-	var rotation_change = current_basis * prev_basis.inverse()
+	var current_basis: Basis = cam.global_transform.basis
+	var rotation_change: Basis = current_basis * prev_basis.inverse()
 	
 	# Extract rotation axis and angle
-	var rotation_axis = rotation_change.get_rotation_quaternion().get_axis()
-	var rotation_angle =  rotation_change.get_rotation_quaternion().get_angle()  # The rotation angle (float, in radians)
+	var rotation_axis: Vector3 = rotation_change.get_rotation_quaternion().get_axis()
+	var rotation_angle: float =  rotation_change.get_rotation_quaternion().get_angle()  # The rotation angle (float, in radians)
 
 	# Damp angle so it winds up and winds down
 	# Only change axis if there's actual rotation
@@ -42,7 +41,7 @@ func _process(_delta: float) -> void:
 	
 	global_transform.basis = Basis()
 
-func bright(angle):
-	var lim = PI/12
-	var b = (lim - angle)/lim
+func bright(angle: float) -> float:
+	var lim := PI/12.0
+	var b := (lim - angle)/lim
 	return clamp(b,0,1)

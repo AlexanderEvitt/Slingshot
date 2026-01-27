@@ -5,15 +5,15 @@ extends MeshInstance3D
 @export var lower_clamp : Node3D
 
 # Whether this clamp is left or right
-@export var rightness = 1
+@export var rightness := 1
 
 # How much/how fast to move the clamps
-var back_off_distance = 1.0/1000.0
-var squeeze_angle = 66.0
-var animation_time = 1.0
+var back_off_distance := 1.0/1000.0
+var squeeze_angle := 66.0
+var animation_time := 1.0
 
 
-func _ready():
+func _ready() -> void:
 	# Connect to signals
 	ShipData.player_ship.rel_clamp.connect(release_clamps)
 	ShipData.player_ship.att_clamp.connect(attach_clamps)
@@ -21,9 +21,9 @@ func _ready():
 	# Start with clamps attached
 	attach_clamps()
 
-func release_clamps():
+func release_clamps() -> void:
 	# Get a tween
-	var tween = get_tree().create_tween()
+	var tween: Tween = get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_parallel(true)
 	
@@ -32,9 +32,9 @@ func release_clamps():
 	tween.tween_property(lower_clamp, "rotation_degrees", Vector3(0,0,0), animation_time)
 	tween.tween_property(upper_clamp, "rotation_degrees", Vector3(0,0,0), animation_time)
 
-func attach_clamps():
+func attach_clamps() -> void:
 	# Get a tween
-	var tween = get_tree().create_tween()
+	var tween: Tween = get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_parallel(true)
 	

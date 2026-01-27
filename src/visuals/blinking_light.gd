@@ -1,10 +1,10 @@
 extends Node3D
 
-var period = 1
-var c = 0
+var period := 1.0
+var c := 0.0
 
-var light
-var emit
+var light: Node3D
+var emit: Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,3 +1,4 @@
+class_name BodyCollider
 extends Node3D
 
 @onready var collider: StaticBody3D = $BerthCollider

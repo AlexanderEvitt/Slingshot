@@ -1,21 +1,21 @@
 extends Drawer
 
 @export var color: Color
-var line_instance = MeshInstance3D.new()
-@onready var orbit_root = get_parent()
+var line_instance := MeshInstance3D.new()
+@onready var orbit_root: Node3D = get_parent()
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	# Move node to where the camera is (global origin)
 	# Lines use graphics that don't have double precision
 	global_position = Vector3(0,0,0)
 	
 	# Add each point to traj
-	var traj = []
+	var traj: Array[Vector3] = []
 	for x in ShipData.player_ship.waypoints:
-		var body = x["Frame"]
+		var body: Body = x["Frame"]
 		# Position is relative to the camera, which is always at the global origin
 		# (position relative to selection) + (position selection relative to system) + (position system relative to camera)
-		var pos = x["Position"] + body.fetch(SimTime.t) + orbit_root.position # relative to camera position
+		var pos: Vector3 = x["Position"] + body.fetch(SimTime.t) + orbit_root.position # relative to camera position
 		traj.append(pos)
 	
 	# Cull the previous trajectory

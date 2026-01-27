@@ -119,3 +119,41 @@ func calc_excess(r: Vector3, v: Vector3, t: float) -> float:
 	var v_exc: float = v_frame.length() - v_esc
 
 	return v_exc
+
+# ------------------------------------------------------------
+# Formatting for outputs
+# ------------------------------------------------------------
+
+# Formatting times
+func format_time(seconds: float) -> String:
+	var signs := "T+"
+	if seconds < 0:
+		signs = "T-"
+		seconds = abs(seconds)
+
+	# Break down
+	var leftover_seconds: int = roundi(seconds)
+	
+	# Format into days
+	@warning_ignore("integer_division")
+	var days := int(leftover_seconds / 86400)
+	leftover_seconds = leftover_seconds % 86400
+	
+	# Format into hours
+	@warning_ignore("integer_division")
+	var hours := int(leftover_seconds / 3600)
+	leftover_seconds = leftover_seconds % 3600
+	
+	# Format into minutes
+	@warning_ignore("integer_division")
+	var minutes := int(leftover_seconds / 60)
+	leftover_seconds = leftover_seconds % 60
+	
+	# Format into seconds
+	var secs := int(leftover_seconds)
+
+	# Cap days at 99
+	if days > 99:
+		return "%s99d23h59m59s" % signs
+
+	return "%s%02dd%02dh%02dm%02ds" % [signs, days, hours, minutes, secs]

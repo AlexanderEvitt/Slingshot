@@ -1,12 +1,11 @@
 extends DirectionalLight3D
 
-var player
+# Points sun from direction of Sun towards player
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+var player: PlayerShip
+
+func _ready() -> void:
 	player = get_parent().get_parent().get_parent().get_node("Ships/PlayerShip")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(_delta: float) -> void:
 	look_at(player.global_position)

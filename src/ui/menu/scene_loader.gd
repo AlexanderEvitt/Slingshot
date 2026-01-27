@@ -4,7 +4,7 @@ const INTERIOR_SCENE_PATH : String = "res://scenes/interior/interior_scene.tscn"
 const PHYSICS_SCENE_PATH : String = "res://scenes/simulation/simulation_scene.tscn"
 const MENU_SCENE_PATH : String = "res://ui/menu/menu_scene.tscn"
 
-@onready var menu: Control = $MenuUI
+@onready var menu: Menu = $MenuUI
 @onready var loading_bar: Control = menu.loading_bar
 
 var loading := false # enables sending updates to loading bar
@@ -36,13 +36,13 @@ func _on_startup() -> void:
 func initialize() -> void:
 	# Load scenes, physics scene first (so ship exists before UI calls)
 	# Finish loading physics scene
-	var physics_resource: Resource = ResourceLoader.load_threaded_get(PHYSICS_SCENE_PATH)
+	var physics_resource: PackedScene = ResourceLoader.load_threaded_get(PHYSICS_SCENE_PATH)
 	var physics: Node3D = physics_resource.instantiate()
 	$SimulationHolder.add_child(physics)
 	
 	# Finish loading interior scene
-	var interior_resource: Resource = ResourceLoader.load_threaded_get(INTERIOR_SCENE_PATH)
-	var interior = interior_resource.instantiate()
+	var interior_resource: PackedScene = ResourceLoader.load_threaded_get(INTERIOR_SCENE_PATH)
+	var interior: Node3D = interior_resource.instantiate()
 	add_child(interior)
 	
 	# Delete menu

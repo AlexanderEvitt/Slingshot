@@ -1,3 +1,4 @@
+class_name PlayerCharacter
 extends Node3D
 
 @export var mouse_sensitivity := 0.0025
@@ -6,10 +7,10 @@ extends Node3D
 @export var move_speed := 3.0
 @export var focus_offset := Vector3(0, 1, 0) # offset relative to collider
 
-@onready var camera = $Camera3D
-@onready var raycast = $RayCast3D
-@onready var crosshair = $Camera3D/Crosshair
-@onready var pause_menu := $Camera3D/PauseMenu
+@onready var camera: Camera3D = $Camera3D
+@onready var raycast: RayCast3D = $RayCast3D
+@onready var crosshair: Control = $Camera3D/Crosshair
+@onready var pause_menu: Control = $Camera3D/PauseMenu
 
 var yaw := 0.0
 var pitch := 0.0
@@ -30,19 +31,22 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	# Move camera with mouse motion
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		yaw -= event.relative.x * mouse_sensitivity
-		pitch -= event.relative.y * mouse_sensitivity
+		var motion_event := event as InputEventMouseMotion
+		yaw -= motion_event.relative.x * mouse_sensitivity
+		pitch -= motion_event.relative.y * mouse_sensitivity
 		pitch = clamp(pitch, deg_to_rad(-pitch_limit), deg_to_rad(pitch_limit))
 		rotation.y = yaw
 		rotation.x = pitch
 
 	# Go into our out of focus mode (focus on display)
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_ESCAPE:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			KEY_F:
-				_on_interact()
+	if event is InputEventKey:
+		var key_event := event as InputEventKey
+		if key_event.pressed:
+			match key_event.keycode:
+				KEY_ESCAPE:
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+				KEY_F:
+					_on_interact()
 
 # Move to display
 func _on_interact() -> void:
@@ -50,15 +54,15 @@ func _on_interact() -> void:
 		# Try to find what the camera is looking at
 		raycast.enabled = true
 		if raycast.is_colliding():
-			var collider = raycast.get_collider()
+			var collider: Node3D = raycast.get_collider()
 			if collider:
 				# Current camera transform
 				start_transform = camera.global_transform
 				# Get new transform
-				var collider_transform = collider.global_transform
-				var offset_position = collider_transform.origin + (collider_transform.basis * focus_offset)
+				var collider_transform: Transform3D = collider.global_transform
+				var offset_position: Vector3 = collider_transform.origin + (collider_transform.basis * focus_offset)
 				# Orientation that looks at the display (rotated by -90 about x)
-				var looking_basis = Basis(Vector3(1,0,0),-PI/2) * collider_transform.basis
+				var looking_basis: Basis = Basis(Vector3(1,0,0),-PI/2) * collider_transform.basis
 				target_transform = Transform3D(looking_basis, offset_position)
 				focusing = true
 				in_transition = true
@@ -80,7 +84,7 @@ func _on_interact() -> void:
 func _physics_process(delta: float) -> void:
 	if in_transition:
 		transition_t += delta * move_speed
-		var t = clamp(transition_t, 0.0, 1.0)
+		var t := clampf(transition_t, 0.0, 1.0)
 		camera.global_transform = camera.global_transform.interpolate_with(target_transform, t)
 
 		if t >= 1.0:

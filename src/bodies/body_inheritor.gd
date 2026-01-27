@@ -1,3 +1,4 @@
+class_name BodyInheritor
 extends Node3D
 
 @export var body_path : String

@@ -4,7 +4,7 @@ extends MeshInstance3D
 @export var mount : MeshInstance3D
 @export var beam : MeshInstance3D
 
-@export var target = Vector3(1,0,0)
+@export var target := Vector3(1,0,0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bcaj67ttyd84r"]
 
-[ext_resource type="Texture2D" uid="uid://c8hxr1i8ii10u" path="res://ui/widgets/circle_gauge/circle_gauge_back.png" id="1_vn35s"]
-[ext_resource type="Texture2D" uid="uid://br8c405n2b38" path="res://ui/widgets/circle_gauge/circle_bar.png" id="2_vmy1o"]
+[ext_resource type="Texture2D" uid="uid://c8hxr1i8ii10u" path="res://ui/widgets/dial/circle_gauge_back.png" id="1_vn35s"]
+[ext_resource type="Texture2D" uid="uid://br8c405n2b38" path="res://ui/widgets/dial/circle_bar.png" id="2_vmy1o"]
 [ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="3_pmqod"]
 
 [node name="Gauge1" type="CenterContainer"]

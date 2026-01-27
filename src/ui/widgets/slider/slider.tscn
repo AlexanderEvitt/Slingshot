@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://14nd8yy5f85e"]
 
-[ext_resource type="Script" path="res://ui/widgets/slider/slider.gd" id="1_pmqkv"]
+[ext_resource type="Script" uid="uid://b6o8sa172ql4d" path="res://ui/widgets/slider/slider.gd" id="1_pmqkv"]
 [ext_resource type="LabelSettings" uid="uid://b5j6mwf5fenb7" path="res://ui/themes/info_label.tres" id="1_q4se0"]
 [ext_resource type="Texture2D" uid="uid://cnvtq4stuilwc" path="res://ui/widgets/slider/slider_bar.png" id="2_gng5j"]
 [ext_resource type="Texture2D" uid="uid://bntgf7isxk720" path="res://ui/widgets/slider/carrot.png" id="3_s1jp2"]
@@ -15,7 +15,6 @@ font_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 
 [node name="PumpSlider" type="VBoxContainer"]
 script = ExtResource("1_pmqkv")
-title = ""
 
 [node name="TopText" type="Label" parent="."]
 visible = false

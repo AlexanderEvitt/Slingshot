@@ -22,7 +22,8 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	# Pass the velocity to the berth (for collider)
 	if current_berth != null and current_berth.get_child(0).name == "berth":
-		current_berth.get_child(0).set_velocity(fetch_velocity(SimTime.t))
+		var body_collider: BodyCollider = current_berth.get_child(0)
+		body_collider.set_velocity(fetch_velocity(SimTime.t))
 
 func update_berth() -> void:
 	# Load the berth meshes

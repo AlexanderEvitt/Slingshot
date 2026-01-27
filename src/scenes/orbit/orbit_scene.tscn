@@ -338,7 +338,6 @@ body_path = "SolarSystem/Earth/Zephyr"
 [node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Zephyr"]
 script = ExtResource("5_vmpxk")
 color = Color(1, 0.6, 0, 1)
-visible_distance = 200000
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Earth/Zephyr"]
 visibility_range_end = 20000.0
@@ -418,7 +417,6 @@ texture = ExtResource("2_3t7g4")
 [node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Luna"]
 script = ExtResource("5_vmpxk")
 color = Color(1, 1, 1, 1)
-visible_distance = 2000000
 
 [node name="Label" type="Label3D" parent="SolarSystem/Earth/Luna"]
 visibility_range_end = 2000000.0
@@ -451,7 +449,6 @@ body_path = "SolarSystem/Earth/Luna/Endurance"
 visible = false
 script = ExtResource("5_vmpxk")
 color = Color(1, 0.6, 0, 1)
-visible_distance = 200000
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Earth/Luna/Endurance"]
 visibility_range_end = 2000.0
@@ -565,7 +562,6 @@ body_path = "SolarSystem/Mars/Yugala"
 visible = false
 script = ExtResource("5_vmpxk")
 color = Color(0.41, 0.116167, 0, 1)
-visible_distance = 200000
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Mars/Yugala"]
 visibility_range_end = 20000.0
@@ -682,7 +678,6 @@ horizontal_alignment = 0
 [node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Io"]
 script = ExtResource("5_vmpxk")
 color = Color(1, 0.6, 0, 1)
-visible_distance = 2000000
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Jupiter/Io"]
 visibility_range_end = 2000.0
@@ -730,7 +725,6 @@ horizontal_alignment = 0
 [node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Callisto"]
 script = ExtResource("5_vmpxk")
 color = Color(0.52549, 0.239216, 0.290196, 1)
-visible_distance = 2000000
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Jupiter/Callisto"]
 visibility_range_end = 2000.0
@@ -777,7 +771,6 @@ horizontal_alignment = 0
 [node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Europa"]
 script = ExtResource("5_vmpxk")
 color = Color(0, 0.368627, 0, 1)
-visible_distance = 2000000
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Jupiter/Europa"]
 visibility_range_end = 2000.0
@@ -883,7 +876,6 @@ horizontal_alignment = 0
 [node name="Plotter" type="Node3D" parent="SolarSystem/Jupiter/Ganymede"]
 script = ExtResource("5_vmpxk")
 color = Color(0.560784, 0.560784, 0.560784, 1)
-visible_distance = 2000000
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Jupiter/Ganymede"]
 visibility_range_end = 2000.0
@@ -968,7 +960,6 @@ horizontal_alignment = 0
 [node name="Plotter" type="Node3D" parent="SolarSystem/Saturn/Titan"]
 script = ExtResource("5_vmpxk")
 color = Color(0.890196, 0.643137, 0.25098, 1)
-visible_distance = 2000000
 
 [node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Saturn/Titan"]
 visibility_range_end = 2000.0

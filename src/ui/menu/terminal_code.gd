@@ -3,11 +3,12 @@ extends Label
 # Max seconds in between text fragments
 @export var n := 100.0
 
-var snippets
-var i = 0
-var done = false
+
+var snippets: PackedStringArray
+var i := 0
+var done := false
 # Controls how many lines are visible on screen
-var max_lines = 50
+var max_lines := 50
 
 func _ready() -> void:
 	# Split text by line
@@ -19,7 +20,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# Wait a random amount of time up to n seconds
 	if !done:
-		var t = n*randf()
+		var t := n*randf()
 		# First five lines are instant
 		if i < 5:
 			t = 0

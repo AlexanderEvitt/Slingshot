@@ -26,10 +26,11 @@ public partial class Body : Node3D
     public double argp { get; set; }           // argument of periapsis, rad
     [Export]
     public double theta0 { get; set; }         // initial true anomaly
+    [Export]
+    public double period { get; set; }             // orbital period
 
     // Persistent values for orbital calculations
     private double M;               // mean anomaly
-    private double period;               // orbital period
     private double p;               // semi-latus rectum
     private double sqrtMuOverP;
     private double c1, c2, c3, c4, c5, c6;

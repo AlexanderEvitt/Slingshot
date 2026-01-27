@@ -1,20 +1,20 @@
 @tool
+class_name Thermometer
 extends Control
 
 @export var label_text : String
-var text_label
-var num_label
-var progress_bar
+var text_label: Label
+var num_label: Label
+var progress_bar: Control
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	text_label = get_node("UpperText/Label")
 	num_label = get_node("LowerText/Label")
 	progress_bar = get_node("Bar/Panel/Panel")
 	
 	text_label.text = label_text
 
-func set_fill(variable,variable_text : String):
+func set_fill(variable: float,variable_text : String) -> void:
 	# Sets the fill of the gauge to variable (0 to 1)
 	# and the text to whatever you input
 	variable = clamp(variable, 0.0, 1.0)

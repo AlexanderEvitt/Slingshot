@@ -1,11 +1,11 @@
 extends Node3D
 
-var v
-var cam
+var v: Vector3
+var cam: Camera3D
 @export var retro : int
-@export var side_check = true
+@export var side_check := true
 
-func _ready():
+func _ready() -> void:
 	cam = get_viewport().get_camera_3d()
 
 

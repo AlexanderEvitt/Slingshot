@@ -11,7 +11,7 @@ signal unpause
 var last_step := 1
 
 # Record last mouse mode so you can return to it when unpausing
-var last_mouse_mode = Input.MOUSE_MODE_CAPTURED
+var last_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_CAPTURED
 
 func _ready() -> void:
 	unpause_button.pressed.connect(_unpause_game)
@@ -24,24 +24,24 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		toggle_pause_menu()
 
-func _unpause_game():
+func _unpause_game() -> void:
 	# Signal screen_switcher.gd to unpause
 	unpause.emit()
 	toggle_pause_menu()
 	
-func _main_menu():
+func _main_menu() -> void:
 	# Tell ShipData to signal going to main menu
 	ShipData.main_menu.emit()
 
-func _quit_game():
+func _quit_game() -> void:
 	# Quit the game by closing everything
 	get_tree().quit()
 	
-func _save_game():
+func _save_game() -> void:
 	# Tell the ShipData singleton to signal everything to save its data
 	ShipData.save.emit()
 
-func toggle_pause_menu():
+func toggle_pause_menu() -> void:
 	# Toggle the pause menu
 	visible = !visible
 	# Stop time while paused

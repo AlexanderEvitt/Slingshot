@@ -1,8 +1,8 @@
 extends MeshInstance3D
 
-var sun
-var cam
-var mat
+var sun: Node3D
+var cam: Camera3D
+var mat: ShaderMaterial
 
 
 # Called when the node enters the scene tree for the first time.

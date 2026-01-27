@@ -1,13 +1,15 @@
 extends Sprite2D
 
-@export var pos = 0.0
+@export var pos := 0.0
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Label1.text = str(pos)
-	$Label2.text = str(pos)
+	var label1: Label = $Label1
+	var label2: Label = $Label2
+	label1.text = str(pos)
+	label2.text = str(pos)
 	
 	position.y = -(1920.0/50.0)*pos/2
 	
 	if pos != 0:
-		$Otherside.visible = false
+		var otherside: Sprite2D = $Otherside
+		otherside.visible = false

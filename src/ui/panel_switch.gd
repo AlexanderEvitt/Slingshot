@@ -1,13 +1,13 @@
 extends Control
 
-var panels
+var panels: Array
 var buttons: Array
 var h: int = 0
 
-var old_panel
-var new_panel
+var old_panel: Control
+var new_panel: Control
 
-var transition_time = 0.25
+var transition_time := 0.25
 
 # Assume all buttons are under buttons_parent
 # w/ 1 layer in between
@@ -20,12 +20,13 @@ func _ready() -> void:
 	buttons = buttons_parent.get_children()
 	
 	# Bind each button to a set_huds function
-	var k = 0
-	for b in buttons:
+	var k := 0
+	for b: Node in buttons:
 		# Swap out for actual button instead of parent of button
 		buttons[k] = b.get_child(0)
 		# Connect signal to change HUD function
-		b.get_child(0).pressed.connect(set_panel.bind(k))
+		var child_button: Button = b.get_child(0)
+		child_button.pressed.connect(set_panel.bind(k))
 		k += 1
 
 	# Initialize with first panel
@@ -36,14 +37,14 @@ func set_panel(i: int) -> void:
 	
 	# Set all the buttons to be un-toggled except the one just pressed
 	# Necessary because the arrow keys won't caues the button to be pressed
-	for b in buttons:
+	for b: Button in buttons:
 		if buttons.find(b,0) == i:
 			b.set_pressed_no_signal(true)
 		else:
 			b.set_pressed_no_signal(false)
 	
 	# Set the correct HUD to be visible
-	for p in panels:
+	for p: Control in panels:
 		if panels.find(p,0) == i:
 			new_panel = p
 		else:
