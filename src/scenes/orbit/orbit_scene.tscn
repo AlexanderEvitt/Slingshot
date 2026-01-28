@@ -1,9 +1,8 @@
-[gd_scene load_steps=64 format=3 uid="uid://1sgfn61bmfrt"]
+[gd_scene load_steps=63 format=3 uid="uid://1sgfn61bmfrt"]
 
 [ext_resource type="Script" uid="uid://micv7ck5c6rj" path="res://scenes/orbit/orbit_scene_controller.gd" id="1_0a2c1"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
 [ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="2_awidn"]
-[ext_resource type="Script" uid="uid://sv406c618jxf" path="res://scenes/barycenter.gd" id="2_d30s2"]
 [ext_resource type="PackedScene" uid="uid://rg5pq75kxwxo" path="res://bodies/wireframe/MercuryWireframe.tscn" id="3_orujh"]
 [ext_resource type="PackedScene" uid="uid://p6o5a3n7q5yl" path="res://bodies/wireframe/VenusWireframe.tscn" id="4_klp4m"]
 [ext_resource type="FontFile" uid="uid://dqyy4mogwg27l" path="res://ui/fonts/Oxanium-Regular.ttf" id="4_uugyr"]
@@ -186,10 +185,11 @@ script = ExtResource("1_0a2c1")
 environment = SubResource("Environment_aovhe")
 
 [node name="SolarSystem" type="Node3D" parent="."]
-script = ExtResource("2_d30s2")
+script = ExtResource("9_2beyu")
+body_path = "SolarSystem"
 
 [node name="Sun" type="Node3D" parent="SolarSystem"]
-script = ExtResource("2_d30s2")
+script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Sun"
 
 [node name="SunMesh" type="MeshInstance3D" parent="SolarSystem/Sun"]
@@ -414,7 +414,7 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Luna"]
+[node name="LunaPlotter" type="Node3D" parent="SolarSystem/Earth/Luna"]
 script = ExtResource("5_vmpxk")
 color = Color(1, 1, 1, 1)
 

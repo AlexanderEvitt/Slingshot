@@ -9,7 +9,7 @@ var period: float
 @onready var this_body_inheritor: BodyInheritor = get_parent()
 @onready var parent_body: Node3D = get_parent().get_parent()
 
-var accumulator := 1e99 # so all orbits are calculated in the first frame
+var accumulator: float = INF # so all orbits are calculated in the first frame
 
 func _process(delta: float) -> void:
 	# Only refresh when more time has elapsed than 1 period

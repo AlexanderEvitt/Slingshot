@@ -1,9 +1,8 @@
-[gd_scene load_steps=83 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=82 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/simulation/external_scene_controller.gd" id="1_h4u8v"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="2_xjnot"]
 [ext_resource type="Script" uid="uid://m2sj0v6o2agd" path="res://scenes/ships_loader.gd" id="3_lxg5y"]
-[ext_resource type="Script" uid="uid://sv406c618jxf" path="res://scenes/barycenter.gd" id="4_dnbhy"]
 [ext_resource type="Script" uid="uid://ba23dwv2ske7c" path="res://scenes/simulation/sun_light.gd" id="5_kose2"]
 [ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://bodies/Body.cs" id="6_u7g1e"]
 [ext_resource type="Texture2D" uid="uid://le10flv78rjl" path="res://bodies/photo/MercuryTrue.jpg" id="7_e5o6i"]
@@ -279,16 +278,17 @@ environment = ExtResource("2_xjnot")
 script = ExtResource("3_lxg5y")
 
 [node name="SolarSystem" type="Node3D" parent="." groups=["Bodies"]]
-script = ExtResource("4_dnbhy")
+script = ExtResource("6_u7g1e")
 GM = 132712000000.0
-body_path = "SolarSystem"
+static_body = true
+a = 0.0
 
 [node name="Sun" type="Node3D" parent="SolarSystem"]
 process_priority = 13
 editor_description = "SOL is the center of humanity's origin system and a G2V star. Until the last century, the Sol system was home to most of humanity."
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1867070)
-script = ExtResource("4_dnbhy")
-body_path = "SolarSystem/Sun"
+script = ExtResource("6_u7g1e")
+static_body = true
+a = 0.0
 
 [node name="SunMesh" type="MeshInstance3D" parent="SolarSystem/Sun"]
 layers = 0

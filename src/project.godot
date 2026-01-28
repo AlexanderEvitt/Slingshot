@@ -220,7 +220,6 @@ jolt_physics_3d/limits/max_linear_velocity=1000000000.0
 
 [rendering]
 
-lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
-anti_aliasing/quality/msaa_2d=2
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
 anti_aliasing/quality/msaa_3d=2
 environment/defaults/default_clear_color=Color(0.117647, 0.117647, 0.156863, 1)

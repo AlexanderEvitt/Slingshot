@@ -7,7 +7,6 @@ extends Node3D
 func fetch(time: float) -> Vector3:
 	return body.fetch(time)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	# Inherit position from main scene
 	position = body.get_local_position(SimTime.t)

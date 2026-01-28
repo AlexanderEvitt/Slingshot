@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Dynamic;
 
 [GlobalClass]
 public partial class Body : Node3D
@@ -12,6 +13,9 @@ public partial class Body : Node3D
 
     // Reference to SimTime singleton
     public Node simTime;
+
+    [Export]
+    public bool static_body { get; set; } = false; // whether body moves at all
 
     // Input orbital elements
     [Export]
@@ -49,6 +53,7 @@ public partial class Body : Node3D
 
         // Orbital constants
         M = 0.0;
+        // Produce the orbital period so orbit plotters can use it
         period = 2.0 * Math.PI * Math.Sqrt(Math.Pow(a, 3.0) / parentMu);
         p = a * (1.0 - Math.Pow(e, 2.0));
         sqrtMuOverP = Math.Sqrt(parentMu / p);
@@ -62,12 +67,10 @@ public partial class Body : Node3D
         c6 = (1223.0 / 960.0) * Math.Pow(e, 6.0);
 
         // Rotation matrices
-        Ri = Basis.Identity.Rotated(new Godot.Vector3(1, 0, 0), (double)i);
-        Rom = Basis.Identity.Rotated(new Godot.Vector3(0, 0, 1), RAAN);
+        Ri = Basis.Identity.Rotated(new Vector3(1, 0, 0), (double)i);
+        Rom = Basis.Identity.Rotated(new Vector3(0, 0, 1), RAAN);
 
         Rcombine = Rom * Ri;
-
-        // Produce the orbital period so orbit plotters can use it
     }
 
     public override void _PhysicsProcess(double delta)
@@ -77,10 +80,10 @@ public partial class Body : Node3D
         Position = get_local_position(t);
     }
 
-    public Godot.Vector3 fetch(double time)
+    public Vector3 fetch(double time)
     {
         // Return the position of the body in the solar system's frame
-        return (Godot.Vector3)parentBody.Call("fetch", time) + get_local_position(time);
+        return (Vector3)parentBody.Call("fetch", time) + get_local_position(time);
     }
 
     public Godot.Vector3 fetch_velocity(double time)
@@ -89,36 +92,44 @@ public partial class Body : Node3D
         // Very low confidence in get_local_velocity due to the approximation of true anomaly right now
         // So using this for the moment
         float dt = 0.01f;
-        return (Godot.Vector3)((fetch(time) - fetch(time - dt))/dt);
+        return (Vector3)((fetch(time) - fetch(time - dt))/dt);
     }
 
-    private Godot.Vector3 get_local_position(double time)
+    private Vector3 get_local_position(double time)
     {
-        // Mean anomaly
-        M = 2.0 * Math.PI * (time / period);
+        if (static_body)
+        {
+            return Position;
+        }
+        else
+        {
+            // Mean anomaly
+            M = 2.0 * Math.PI * (time / period);
 
-        // Approximate true anomaly
-        double theta = theta0 + M
-            + c1 * Math.Sin(M)
-            + c2 * Math.Sin(2 * M)
-            + c3 * Math.Sin(3 * M)
-            + c4 * Math.Sin(4 * M)
-            + c5 * Math.Sin(5 * M)
-            + c6 * Math.Sin(6 * M);
+            // Approximate true anomaly
+            double theta = theta0 + M
+                + c1 * Math.Sin(M)
+                + c2 * Math.Sin(2 * M)
+                + c3 * Math.Sin(3 * M)
+                + c4 * Math.Sin(4 * M)
+                + c5 * Math.Sin(5 * M)
+                + c6 * Math.Sin(6 * M);
 
-        // Radius
-        double r = p / (1.0 + e * Math.Cos(theta));
+            // Radius
+            double r = p / (1.0 + e * Math.Cos(theta));
 
-        // Position in orbital plane
-        Godot.Vector3 rthw = new Godot.Vector3(
-            (double)(r * Math.Cos(theta + argp)),
-            (double)(r * Math.Sin(theta + argp)),
-            0d
-        );
+            // Position in orbital plane
+            Vector3 rthw = new Godot.Vector3(
+                (double)(r * Math.Cos(theta + argp)),
+                (double)(r * Math.Sin(theta + argp)),
+                0d
+            );
 
-        // Rotate into inertial space
-        Godot.Vector3 pos = Rcombine * rthw;
-        return pos;
+            // Rotate into inertial space
+            Vector3 pos = Rcombine * rthw;
+            return pos;
+        }
+
     }
 
     private Godot.Vector3 get_local_velocity(double time)
