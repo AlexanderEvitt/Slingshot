@@ -32,28 +32,14 @@ albedo_color = Color(1.8537917, 0, 0, 1)
 
 [node name="frigate" instance=ExtResource("1_p2xcd")]
 
-[node name="Pods" parent="." index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_ylmgo")
+[node name="FinalHull" parent="." index="0"]
+surface_material_override/4 = ExtResource("2_gb527")
 
-[node name="Turret2" parent="." index="4" node_paths=PackedStringArray("mount", "beam")]
-script = ExtResource("5_rnp7b")
-mount = NodePath("Laser2")
-beam = NodePath("Laser2/Beam")
-target = Vector3(100, -8.57, -38.475)
-
-[node name="Laser2" parent="Turret2" index="0"]
-transform = Transform3D(0.9561015084079547, 0.07672687888771008, 0.28281246732797377, -0.07999255720098761, 0.9967954608606582, 4.576525164308791e-19, -0.2819061837073324, -0.02262289246988608, 0.9591752229513727, 0, 0, -1.2832636833190918)
-
-[node name="Beam" type="MeshInstance3D" parent="Turret2/Laser2" index="0"]
-transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, 1500, 0, -1.3169999999954598)
-mesh = SubResource("CylinderMesh_jrpwi")
-surface_material_override/0 = SubResource("StandardMaterial3D_2i45u")
-
-[node name="FinalHull" parent="." index="7"]
-surface_material_override/5 = ExtResource("2_gb527")
+[node name="InternalTube" parent="." index="9"]
+layers = 2
 
 [node name="ConkLogo" type="Sprite3D" parent="." index="12"]
-transform = Transform3D(5.89646e-17, -0.269626, -0.962965, 1.65098e-17, 0.962965, -0.269626, 1, 0, 6.12323e-17, -10.2921, 6.24429, 0)
+transform = Transform3D(5.89646e-17, -0.269626, -0.962965, 1.65098e-17, 0.962965, -0.269626, 1, 0, 6.12323e-17, -11.441216910538632, 5.912965246589869, 0)
 layers = 2
 pixel_size = 0.003
 axis = 1
@@ -61,7 +47,7 @@ shaded = true
 texture = ExtResource("2_k8wt2")
 
 [node name="Label3D" type="Label3D" parent="." index="13"]
-transform = Transform3D(-1, 0, 1.22465e-16, 9.26646e-17, 0.653804, 0.756664, -8.00679e-17, 0.756664, -0.653804, 21.9794, 4.60836, -3.37579)
+transform = Transform3D(-1, 0, 1.22465e-16, 9.26646e-17, 0.653804, 0.756664, -8.00679e-17, 0.756664, -0.653804, 21.979000000006636, 4.679999999993015, -3.2480000000068685)
 pixel_size = 0.03
 shaded = true
 text = "FV Juniper"
@@ -69,7 +55,7 @@ font = ExtResource("7_67fpr")
 outline_size = 0
 
 [node name="Label3D2" type="Label3D" parent="." index="14"]
-transform = Transform3D(1, 9.26646e-17, -2.02533e-16, 9.26646e-17, 0.653804, 0.756664, 2.02533e-16, -0.756664, 0.653804, 21.979, 4.608, 3.376)
+transform = Transform3D(1, 9.26646e-17, -2.02533e-16, 9.26646e-17, 0.653804, 0.756664, 2.02533e-16, -0.756664, 0.653804, 21.979, 4.679715158688772, 3.2475095203592628)
 pixel_size = 0.03
 shaded = true
 text = "FV Juniper"
@@ -94,5 +80,19 @@ font = ExtResource("7_67fpr")
 font_size = 96
 outline_size = 0
 
-[node name="InternalTube" parent="." index="22"]
-layers = 2
+[node name="Pods" parent="." index="19"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ylmgo")
+
+[node name="Turret2" parent="." index="21" node_paths=PackedStringArray("mount", "beam")]
+script = ExtResource("5_rnp7b")
+mount = NodePath("Laser2")
+beam = NodePath("Laser2/Beam")
+target = Vector3(100, -8.57, -38.475)
+
+[node name="Laser2" parent="Turret2" index="0"]
+transform = Transform3D(0.9561015084079547, 0.07672687888771008, 0.28281246732797377, -0.07999255720098761, 0.9967954608606582, 4.576525164308791e-19, -0.2819061837073324, -0.02262289246988608, 0.9591752229513727, 0, 0, -1.2832636833190918)
+
+[node name="Beam" type="MeshInstance3D" parent="Turret2/Laser2" index="0"]
+transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, 1500, 0, -1.3169999999954598)
+mesh = SubResource("CylinderMesh_jrpwi")
+surface_material_override/0 = SubResource("StandardMaterial3D_2i45u")

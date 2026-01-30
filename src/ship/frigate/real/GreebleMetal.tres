@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://m1hb0r24vw7d"]
+
+[ext_resource type="Texture2D" uid="uid://4hysq3x4hkeb" path="res://ship/frigate/real/frigate_IsoGridNormal.png" id="1_k17wa"]
+
+[resource]
+resource_name = "GreebleMetal"
+cull_mode = 2
+albedo_color = Color(0.63923544, 0.63923544, 0.63923544, 1)
+metallic = 1.0
+roughness = 0.5
+normal_enabled = true
+normal_scale = 0.2
+normal_texture = ExtResource("1_k17wa")

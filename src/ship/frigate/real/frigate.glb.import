@@ -15,9 +15,12 @@ dest_files=["res://.godot/imported/frigate.glb-8accdf4a8dff148c907aca38898fbdb7.
 
 nodes/root_type=""
 nodes/root_name=""
+nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true
@@ -31,38 +34,69 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
 _subresources={
 "materials": {
 "AccentPaint": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://ship/frigate/AccentPaint.tres"
-},
-"BaseBrick": {
-"use_external/enabled": false,
-"use_external/path": "res://ship/frigate/BaseBrick.tres"
 },
 "BasePaint": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://ship/frigate/BasePaint.tres"
+},
+"DarkPaint": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://ship/frigate/real/DarkPaint.tres",
+"use_external/path": "uid://cmooanq4e37gv"
+},
+"GreebleMetal": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://ship/frigate/real/GreebleMetal.tres",
+"use_external/path": "uid://m1hb0r24vw7d"
 },
 "GunMetal": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://ship/frigate/GunMetal.tres"
+},
+"HullBrickTexture": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://ship/frigate/real/HullBrickTexture.tres",
+"use_external/path": "uid://wybap0xpxgy3"
 },
 "LightPaint": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://ship/frigate/LightPaint.tres"
+},
+"NozzleMetal": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://ship/frigate/real/NozzleMetal.tres",
+"use_external/path": "uid://d24g0xq7uwy63"
+},
+"NozzleTubes": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://ship/frigate/real/NozzleTubes.tres",
+"use_external/path": "uid://dsprsigb16u0c"
 },
 "RadarPaint": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://ship/frigate/RadarPaint.tres"
 },
 "SensorGlass": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://ship/frigate/SensorGlass.tres"
 },
 "Windows": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://ship/frigate/Windows.tres"
 }
 }

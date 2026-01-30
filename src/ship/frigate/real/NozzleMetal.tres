@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d24g0xq7uwy63"]
+
+[resource]
+resource_name = "NozzleMetal"
+cull_mode = 2
+albedo_color = Color(0.2666659, 0.18431382, 0.10588241, 1)
+metallic = 1.0
+roughness = 0.5
