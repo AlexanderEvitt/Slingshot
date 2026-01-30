@@ -7,6 +7,9 @@ extends Node3D
 @export var move_speed := 3.0
 @export var focus_offset := Vector3(0, 1, 0) # offset relative to collider
 
+@export var seats: Array[Vector3] = [Vector3(-0.732,-1.107,-2.191)]
+var seat := 0
+
 @onready var camera: Camera3D = $Camera3D
 @onready var raycast: RayCast3D = $RayCast3D
 @onready var crosshair: Control = $Camera3D/Crosshair
@@ -19,8 +22,8 @@ var in_transition := false
 var seated := false
 var focusing := false
 var transition_t := 0.0
-var start_transform: Transform3D
-var target_transform: Transform3D
+var start_transform: Transform3D # transform before going to focus mode
+var target_transform: Transform3D # transform being lerped to
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -47,6 +50,11 @@ func _unhandled_input(event: InputEvent) -> void:
 					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				KEY_F:
 					_on_interact()
+					
+	if Input.is_action_just_pressed("next_seat") and !focusing and !in_transition:
+		seat = (seat + 1) % (len(seats))
+		position = seats[seat]
+		
 
 # Move to display
 func _on_interact() -> void:

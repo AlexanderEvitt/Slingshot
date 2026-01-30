@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cy2v2xkwsyqp4"]
+[gd_scene load_steps=27 format=3 uid="uid://cy2v2xkwsyqp4"]
 
 [ext_resource type="PackedScene" uid="uid://p4lgjdfw8o7y" path="res://scenes/interior/interior.glb" id="1_hytfg"]
 [ext_resource type="PackedScene" uid="uid://c7557e6pmwk05" path="res://scenes/interior/display.tscn" id="2_64l87"]
@@ -36,6 +36,10 @@ sdfgi_energy = 30.0
 glow_blend_mode = 1
 fog_light_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5k5g7"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.015686275)
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qw6n8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7njs8"]
@@ -53,14 +57,12 @@ data = PackedVector3Array(0.2111, 0.2525, -0.2505, 0.12560000000000002, 0.2061, 
 
 [node name="interior" instance=ExtResource("1_hytfg")]
 
-[node name="Node3D4" type="Node3D" parent="." index="0"]
-transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
-
-[node name="Player" type="CharacterBody3D" parent="." index="1"]
+[node name="Player" type="CharacterBody3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7320000000036089, -1.1070000000036089, -2.19100000000617)
 motion_mode = 1
 script = ExtResource("2_kc64s")
 focus_offset = Vector3(0, 0.4, 0)
+seats = Array[Vector3]([Vector3(-0.732, -1.107, -2.191), Vector3(-6.131758754586016, -7.756178441249006, -0.6925900995130068)])
 
 [node name="Camera3D" type="Camera3D" parent="Player" index="0"]
 current = true
@@ -112,27 +114,27 @@ text = "🄵 Interact"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.494880308221372, 0)
 shape = SubResource("CapsuleShape3D_5k5g7")
 
-[node name="AudioWhine" type="AudioStreamPlayer" parent="." index="2"]
+[node name="AudioWhine" type="AudioStreamPlayer" parent="." index="1"]
 stream = ExtResource("5_khf2d")
 volume_db = -80.0
 autoplay = true
 parameters/looping = true
 script = ExtResource("10_2qs4y")
 
-[node name="AudioCaution" type="AudioStreamPlayer" parent="." index="3"]
+[node name="AudioCaution" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("11_7njs8")
 volume_db = -20.0
 parameters/looping = true
 script = ExtResource("8_khf2d")
 
-[node name="AudioWarning" type="AudioStreamPlayer" parent="." index="4"]
+[node name="AudioWarning" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("13_oh51y")
 volume_db = -20.0
 parameters/looping = true
 script = ExtResource("8_khf2d")
 alarm_type = "warning"
 
-[node name="FloorLamp1" type="SpotLight3D" parent="." index="5"]
+[node name="FloorLamp1" type="SpotLight3D" parent="." index="4"]
 transform = Transform3D(5.807282218687412e-17, -0.3170729277528479, -0.948401159049396, 1.9415117303440272e-17, 0.948401159049396, -0.3170729277528479, 1, -8.156787509782406e-33, 6.123233995736767e-17, -1.439375886269413, -2.2769230721279943, -1.2898110757639027)
 light_energy = 2.651
 light_indirect_energy = 16.0
@@ -141,7 +143,7 @@ spot_range = 3.049
 spot_angle = 74.7
 spot_angle_attenuation = 3.2490065
 
-[node name="FloorLamp2" type="SpotLight3D" parent="." index="6"]
+[node name="FloorLamp2" type="SpotLight3D" parent="." index="5"]
 transform = Transform3D(6.123233995736766e-17, -0.03838780908751974, 0.9992629164106214, 0, 0.9992629164106211, 0.03838780908751975, -1, -2.3505753762655366e-18, 6.118720660444583e-17, 1.4389999999984866, -2.277000000001862, -1.2899999999935972)
 light_energy = 8.259
 light_indirect_energy = 16.0
@@ -150,7 +152,7 @@ spot_range = 3.049
 spot_angle = 59.85
 spot_angle_attenuation = 3.2490065
 
-[node name="FloorLamp3" type="SpotLight3D" parent="." index="7"]
+[node name="FloorLamp3" type="SpotLight3D" parent="." index="6"]
 transform = Transform3D(6.118915434586936e-17, 0.03755065517116846, -0.999294725442007, -2.2993144830628648e-18, 0.999294725442007, 0.03755065517116846, 1, 6.162975822039155e-33, 6.123233995736766e-17, -1.439375886269413, -2.2769230721279943, 1.2899999999935972)
 light_energy = 8.259
 light_indirect_energy = 16.0
@@ -159,7 +161,7 @@ spot_range = 3.049
 spot_angle = 59.85
 spot_angle_attenuation = 3.2490065
 
-[node name="FloorLamp4" type="SpotLight3D" parent="." index="8"]
+[node name="FloorLamp4" type="SpotLight3D" parent="." index="7"]
 transform = Transform3D(6.123233995736766e-17, -0.03838780908751974, 0.9992629164106214, 0, 0.9992629164106211, 0.03838780908751975, -1, -2.3505753762655366e-18, 6.118720660444583e-17, 1.4389999999984866, -2.277000000001862, 1.2899999999935972)
 light_energy = 8.259
 light_indirect_energy = 16.0
@@ -168,7 +170,7 @@ spot_range = 3.049
 spot_angle = 59.85
 spot_angle_attenuation = 3.2490065
 
-[node name="Lamp1" type="SpotLight3D" parent="." index="9"]
+[node name="Lamp1" type="SpotLight3D" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, -0.02172763925606219, 0.999763926980944, 0, -0.999763926980944, -0.02172763925606219, -0.721840481107835, -0.25057798194950104, -2.353123022862769)
 light_color = Color(1, 0.8509804, 0.6039216, 1)
 light_energy = 4.299
@@ -176,7 +178,7 @@ shadow_enabled = true
 spot_angle = 30.0
 spot_angle_attenuation = 4.594793
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="10"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="9"]
 environment = SubResource("Environment_s6rcy")
 
 [node name="small_display" parent="Interior/Console/Display1A/Small1" index="0" instance=ExtResource("2_uso82")]
@@ -219,6 +221,20 @@ environment = SubResource("Environment_s6rcy")
 
 [node name="display" parent="Interior/Console/Display2B" index="4" instance=ExtResource("2_64l87")]
 
+[node name="LandingBridge" parent="Interior" index="8"]
+surface_material_override/1 = SubResource("StandardMaterial3D_5k5g7")
+
+[node name="LandingLight" type="SpotLight3D" parent="Interior/LandingBridge" index="1"]
+transform = Transform3D(-0.688805573746875, 0.6888055737468753, 0.22603929558923228, 0.15983391872577646, -0.1598339187257766, 0.9741181842310119, 0.7071067811865475, 0.7071067811865475, 3.1127440399004267e-17, 0.7522111694635178, 0.7777317455499668, -0.6675130007622694)
+light_color = Color(1, 0.8509804, 0.6039216, 1)
+light_energy = 4.299
+shadow_enabled = true
+spot_angle = 30.0
+spot_angle_attenuation = 4.594793
+
+[node name="display" parent="Interior/LandingBridge" index="2" instance=ExtResource("2_64l87")]
+transform = Transform3D(-0.32082789752591895, 0.8202451433119394, 0.4735687542926315, -5.3028761936245333e-17, 0.5000000000000002, -0.8660254037844388, -0.9471375085852626, -0.2778451095001966, -0.16041394876295953, 0.22945053453386866, -0.3239643466134847, -0.1933314336364585)
+
 [node name="Node3D" type="Node3D" parent="Interior/NavTable" index="0"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
@@ -228,11 +244,11 @@ transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 [node name="OrbitRoot" parent="Interior/NavTable/Node3D/Node3D2" index="0" instance=ExtResource("12_mjiuk")]
 transform = Transform3D(0.24435673947168451, 1.5986056016366475e-18, 0.05281840469729558, -0.05281840469729558, 1.4962236316212043e-17, 0.24435673947168451, -1.5986056016366475e-18, -0.25, 1.4962236316212043e-17, 0, 614538.5208191955, 0)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." index="12"]
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.234711098869364, 0)
 light_energy = 0.1
 
-[node name="Mug" type="RigidBody3D" parent="." index="13"]
+[node name="Mug" type="RigidBody3D" parent="." index="12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1551849039550857, -1.288924546392834, -2.5858634546952337)
 physics_material_override = SubResource("PhysicsMaterial_qw6n8")
 gravity_scale = 0.0
@@ -250,7 +266,7 @@ pixel_size = 0.0001
 shaded = true
 texture = ExtResource("14_oh51y")
 
-[node name="StaticInteriorCollider" type="StaticBody3D" parent="." index="14"]
+[node name="StaticInteriorCollider" type="StaticBody3D" parent="." index="13"]
 
 [node name="ConsoleCollision" type="CollisionShape3D" parent="StaticInteriorCollider" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2494319677352903, 0)
@@ -263,3 +279,7 @@ shape = SubResource("ConcavePolygonShape3D_mjiuk")
 [node name="SeatsCollision" type="CollisionShape3D" parent="StaticInteriorCollider" index="2"]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.7301834225654602, -2.498863935470581, -2.191253662109375)
 shape = SubResource("ConcavePolygonShape3D_qw6n8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.131758754586016, -7.756178441249006, -0.6925900995130068)
+skeleton = NodePath("../Interior/LandingBridge")
