@@ -70,7 +70,7 @@ func _on_interact() -> void:
 				var collider_transform: Transform3D = collider.global_transform
 				var offset_position: Vector3 = collider_transform.origin + (collider_transform.basis * focus_offset)
 				# Orientation that looks at the display (rotated by -90 about x)
-				var looking_basis: Basis = Basis(Vector3(1,0,0),-PI/2) * collider_transform.basis
+				var looking_basis: Basis = Basis(collider_transform.basis.x,-PI/2) * collider_transform.basis
 				target_transform = Transform3D(looking_basis, offset_position)
 				focusing = true
 				in_transition = true

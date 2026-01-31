@@ -15,7 +15,6 @@ func _ready() -> void:
 		plotter = $Plotter
 
 func _process(_delta: float) -> void:
-	# Use camera mode to determine whether camera is included in rotation
 	pointer.transform.basis = ShipData.player_ship.attitude
 	
 	if local_positioning:

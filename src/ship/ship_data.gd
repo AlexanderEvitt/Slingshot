@@ -6,6 +6,7 @@ extends Node
 @onready var player_ship: PlayerShip # player ship
 @onready var sim_root: Node3D # root of external scene
 @onready var slot: int = 0 # save game slot
+@onready var sun_angle: Basis
 
 # Game-wide signals
 signal save

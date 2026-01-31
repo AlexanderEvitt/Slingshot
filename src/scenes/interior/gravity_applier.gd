@@ -1,9 +1,11 @@
 extends RigidBody3D
 
+@onready var ship: PlayerShip = ShipData.player_ship
+
 # Apply internal accelerations to rigid body
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	# Convert km/s2 -> m/s2
-	var experienced_acceleration: Vector3 = -1000*mass*ShipData.player_ship.thrust_acceleration
-	# Rotate into interior frame (where x-axis is up)
-	experienced_acceleration = experienced_acceleration.rotated(Vector3(0,0,1), PI/2)
+	var experienced_acceleration: Vector3 = -1000*mass*ship.thrust_acceleration
+	# Rotate into inertial frame
+	experienced_acceleration = ship.attitude * experienced_acceleration
 	state.apply_central_force(experienced_acceleration)

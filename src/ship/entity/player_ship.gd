@@ -7,7 +7,7 @@ extends CharacterBody3D
 var acceleration := Vector3(0,0,0)
 var attitude: Basis
 var gravity_acceleration := Vector3(0,0,0) # just gravity
-var thrust_acceleration := Vector3(0,0,0) # just thrust (all sources)
+var thrust_acceleration := Vector3(0,0,0) # just thrust (all sources, ship frame)
 
 # Engine variables
 var torque := Vector3(0,0,0)
