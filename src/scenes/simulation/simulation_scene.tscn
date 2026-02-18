@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=84 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/simulation/external_scene_controller.gd" id="1_h4u8v"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="2_xjnot"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bn8rqk76ahe07" path="res://bodies/photo/VenusTrue.jpg" id="8_1fg4q"]
 [ext_resource type="Script" uid="uid://c1eedkrj100y" path="res://bodies/planet_collider.gd" id="9_fbjsd"]
 [ext_resource type="PackedScene" uid="uid://b0s1bdqqag6dw" path="res://bodies/stations/stations/Zephyr.tscn" id="10_pvhad"]
+[ext_resource type="Script" uid="uid://bsolx0xsu37i3" path="res://bodies/stations/iss/iss.gd" id="10_uhiq1"]
+[ext_resource type="PackedScene" uid="uid://b7iuq77k13v30" path="res://bodies/stations/iss/ISS_stationary.glb" id="10_vftqf"]
 [ext_resource type="PackedScene" uid="uid://cdxkk5qy7ccnc" path="res://bodies/stations/stations/Endurance.tscn" id="11_7ivjh"]
 [ext_resource type="Texture2D" uid="uid://b7xgdj3pwc6c7" path="res://bodies/photo/LunaTrue.png" id="12_4hqcb"]
 [ext_resource type="Texture2D" uid="uid://s4i4jbyto3n4" path="res://bodies/photo/LunaNorm.png" id="13_kq1vd"]
@@ -36,14 +38,14 @@
 [ext_resource type="Texture2D" uid="uid://blf5ecvkcenvs" path="res://bodies/photo/UranusTrue.jpg" id="34_qq0rp"]
 [ext_resource type="Texture2D" uid="uid://bh21nouyh0k42" path="res://bodies/photo/NeptuneTrue.jpg" id="35_rfejs"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_v7y0l"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkpof"]
+shading_mode = 0
+albedo_color = Color(3.465002, 3.465002, 3.465002, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_uucu6"]
+material = SubResource("StandardMaterial3D_gkpof")
 radius = 700000.0
 height = 1400000.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkpof"]
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 16.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_8fy0r"]
 radius = 2440.0
@@ -286,15 +288,10 @@ a = 0.0
 [node name="Sun" type="Node3D" parent="SolarSystem"]
 process_priority = 13
 editor_description = "SOL is the center of humanity's origin system and a G2V star. Until the last century, the Sol system was home to most of humanity."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4087.900219894363)
 script = ExtResource("6_u7g1e")
 static_body = true
 a = 0.0
-
-[node name="SunMesh" type="MeshInstance3D" parent="SolarSystem/Sun"]
-layers = 0
-mesh = SubResource("SphereMesh_v7y0l")
-skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_gkpof")
 
 [node name="BigSunLight" type="DirectionalLight3D" parent="SolarSystem/Sun"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
@@ -306,6 +303,9 @@ directional_shadow_fade_start = 0.9
 directional_shadow_pancake_size = 5.0
 sky_mode = 1
 script = ExtResource("5_kose2")
+
+[node name="SunMesh" type="MeshInstance3D" parent="SolarSystem/Sun"]
+mesh = SubResource("SphereMesh_uucu6")
 
 [node name="Mercury" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
@@ -375,6 +375,18 @@ a = 42164.0
 theta0 = 3.142
 
 [node name="Station" parent="SolarSystem/Earth/Zephyr" instance=ExtResource("10_pvhad")]
+
+[node name="ISS" type="Node3D" parent="SolarSystem/Earth" groups=["Stations"]]
+process_priority = 13
+editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1719.6610365404483, 4086.332325471606, -5963.690562747096)
+script = ExtResource("6_u7g1e")
+a = 6780.0
+i = 0.909
+
+[node name="ISS_stationary" parent="SolarSystem/Earth/ISS" instance=ExtResource("10_vftqf")]
+transform = Transform3D(-0.0009608508024792484, 0.00023141468254336532, 0.00015235806535375087, 0, 0.0005498974959437956, -0.0008352321497372712, -0.00027706630140633193, -0.0008025334813315247, -0.0005283694502589252, 0, 0, 0)
+script = ExtResource("10_uhiq1")
 
 [node name="Luna" type="Node3D" parent="SolarSystem/Earth" groups=["Bodies"]]
 process_priority = 13
@@ -516,6 +528,14 @@ mesh = SubResource("SphereMesh_282r8")
 surface_material_override/0 = SubResource("ShaderMaterial_1ptrw")
 script = ExtResource("22_dkgmi")
 sun_path = NodePath("../../../Sun")
+
+[node name="Planetshine" type="OmniLight3D" parent="SolarSystem/Earth/EarthMesh"]
+light_color = Color(0.01604867, 0.174155, 0.24819076, 1)
+light_energy = 3.0
+light_size = 5000.0
+light_specular = 0.002
+omni_range = 15000.0
+omni_attenuation = 0.09999999999999964
 
 [node name="Mars" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13

@@ -397,6 +397,61 @@ script = ExtResource("15_m0dnk")
 [node name="wire_berth" parent="SolarSystem/Earth/Zephyr/BerthMarker" instance=ExtResource("15_rnymx")]
 transform = Transform3D(0.07, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.0650000000023283, 0, 0)
 
+[node name="ISS" type="Node3D" parent="SolarSystem/Earth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.00716965386584, 0, 82446.3)
+script = ExtResource("9_2beyu")
+body_path = "SolarSystem/Earth/ISS"
+
+[node name="Plotter" type="Node3D" parent="SolarSystem/Earth/ISS"]
+script = ExtResource("5_vmpxk")
+color = Color(0, 0.79470515, 0.9038228, 1)
+
+[node name="FlatMoonSprite" type="Sprite3D" parent="SolarSystem/Earth/ISS"]
+visibility_range_end = 20000.0
+visibility_range_end_margin = 20000.0
+visibility_range_fade_mode = 1
+modulate = Color(0, 0.79607844, 0.9019608, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("11_lodt7")
+
+[node name="KOZ" type="Node3D" parent="SolarSystem/Earth/ISS"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+
+[node name="wire_cube" parent="SolarSystem/Earth/ISS/KOZ" instance=ExtResource("14_k6kd7")]
+transform = Transform3D(0.109, 0, 0, 0, 0.07, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/ISS" node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+priority = 8
+script = ExtResource("15_c6xwu")
+camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/ISS/ClickDetector"]
+shape = SubResource("SphereShape3D_8k6tq")
+
+[node name="MoonLabel" type="Label3D" parent="SolarSystem/Earth/ISS"]
+visibility_range_end = 200000.0
+visibility_range_end_margin = 200000.0
+visibility_range_fade_mode = 1
+pixel_size = 0.0003
+offset = Vector2(32, 0)
+billboard = 1
+fixed_size = true
+text = "ISS"
+font = ExtResource("4_uugyr")
+font_size = 64
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="BerthMarker" type="Node3D" parent="SolarSystem/Earth/ISS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9094316366235944, 0, 39.61927700001979)
+script = ExtResource("15_m0dnk")
+
+[node name="wire_berth" parent="SolarSystem/Earth/ISS/BerthMarker" instance=ExtResource("15_rnymx")]
+transform = Transform3D(0.07, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.0650000000023283, 0, 0)
+
 [node name="Luna" type="Node3D" parent="SolarSystem/Earth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.9547, 12989.3)
 script = ExtResource("9_2beyu")

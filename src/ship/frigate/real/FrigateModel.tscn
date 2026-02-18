@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfwsgcbvelo0t"]
+[gd_scene load_steps=13 format=3 uid="uid://bfwsgcbvelo0t"]
 
 [ext_resource type="PackedScene" uid="uid://c723tonvicthq" path="res://ship/frigate/real/frigate.glb" id="1_p2xcd"]
 [ext_resource type="Texture2D" uid="uid://drvl7m6jpple6" path="res://ship/frigate/external_material/MakedBrick_albedo.png" id="2_c712i"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://bwvdv60c7w7lx" path="res://ship/frigate/external_material/MakedBrick_orm.png" id="4_y1dru"]
 [ext_resource type="Script" uid="uid://2ab66vvabe3x" path="res://ship/frigate/real/turret.gd" id="5_rnp7b"]
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="7_67fpr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rnp7b"]
+cull_mode = 2
+shading_mode = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylmgo"]
 albedo_color = Color(0.18, 0.18, 0.18, 1)
@@ -33,6 +37,7 @@ albedo_color = Color(1.8537917, 0, 0, 1)
 [node name="frigate" instance=ExtResource("1_p2xcd")]
 
 [node name="FinalHull" parent="." index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_rnp7b")
 surface_material_override/4 = ExtResource("2_gb527")
 
 [node name="InternalTube" parent="." index="9"]
@@ -96,3 +101,6 @@ transform = Transform3D(0.9561015084079547, 0.07672687888771008, 0.2828124673279
 transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, 1500, 0, -1.3169999999954598)
 mesh = SubResource("CylinderMesh_jrpwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_2i45u")
+
+[node name="Viewport" parent="." index="22"]
+surface_material_override/1 = SubResource("StandardMaterial3D_rnp7b")
