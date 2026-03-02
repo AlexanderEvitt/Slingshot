@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://qkdsi850sg5v"]
+
+[ext_resource type="Script" uid="uid://clcy6betwv4h8" path="res://scenes/interior/console_camera.gd" id="1_smbrw"]
+[ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="2_lkkpu"]
+[ext_resource type="PackedScene" uid="uid://boi1ptoe3f73w" path="res://ui/pause/pause_menu.tscn" id="3_bj60k"]
+[ext_resource type="PackedScene" uid="uid://b07e4fcvvtdqq" path="res://ui/screens/external_screen.tscn" id="4_33yo6"]
+[ext_resource type="Script" uid="uid://cpjd3cqgrmw8" path="res://ui/screens/external_popup.gd" id="5_a2fv7"]
+[ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="6_575uu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5k5g7"]
+size = Vector2(231, 130)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_d6n5o"]
+viewport_path = NodePath("../SimViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tnebq"]
+resource_local_to_scene = true
+render_priority = 2
+shading_mode = 0
+disable_ambient_light = true
+albedo_texture = SubResource("ViewportTexture_d6n5o")
+billboard_mode = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5k5g7"]
+radius = 0.2
+height = 1.75
+
+[node name="Player" type="CharacterBody3D"]
+motion_mode = 1
+script = ExtResource("1_smbrw")
+focus_offset = Vector3(0, 0.4, 0)
+seats = Array[Vector3]([Vector3(-0.732, -1.107, -2.191), Vector3(-6.131758754586016, -7.756178441249006, -0.6925900995130068)])
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+current = true
+fov = 60.0
+near = 0.00999999999999999
+far = 150.0
+
+[node name="Crosshair" type="TextureRect" parent="Head/Camera3D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lkkpu")
+expand_mode = 2
+
+[node name="PauseMenu" parent="Head/Camera3D" instance=ExtResource("3_bj60k")]
+visible = false
+anchor_top = 0.39
+anchor_bottom = 0.61
+
+[node name="Background" type="MeshInstance3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
+mesh = SubResource("QuadMesh_5k5g7")
+surface_material_override/0 = SubResource("StandardMaterial3D_tnebq")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+collide_with_areas = true
+
+[node name="ExternalScreen" parent="." instance=ExtResource("4_33yo6")]
+script = ExtResource("5_a2fv7")
+
+[node name="LookLabel" type="Label" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("6_575uu")
+theme_override_font_sizes/font_size = 32
+text = "🄵 Interact"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.494880308221372, 0)
+shape = SubResource("CapsuleShape3D_5k5g7")

@@ -7,6 +7,7 @@ signal startup
 @export var start_button : LightButton
 @export var startup_panel : Panel
 @export var slot_button_group : ButtonGroup
+@export var ship_select : OptionButton
 
 var slot: int # slot to load data from
 
@@ -23,3 +24,6 @@ func _on_startup() -> void:
 	var save_slot_button := slot_button_group.get_pressed_button() as SaveSlotButton
 	slot = save_slot_button.id
 	ShipData.slot = slot
+	
+	# Set ship type
+	ShipData.ship_type = ship_select.selected

@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://wybap0xpxgy3"]
-
-[ext_resource type="Texture2D" uid="uid://bnri4ymvk46yf" path="res://ship/frigate/real/frigate_HullTexture.png" id="1_wgkll"]
-
-[resource]
-resource_name = "HullBrickTexture"
-cull_mode = 2
-albedo_texture = ExtResource("1_wgkll")
-roughness = 0.5

@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dsprsigb16u0c"]
+
+[ext_resource type="Texture2D" uid="uid://07vnm4pjd6rg" path="res://ships/juniper/real/frigate_tubes.png" id="1_clsvp"]
+
+[resource]
+resource_name = "NozzleTubes"
+cull_mode = 2
+albedo_color = Color(0.2658587, 0.18488659, 0.1076539, 1)
+metallic = 1.0
+roughness = 0.5
+normal_enabled = true
+normal_scale = 2.0
+normal_texture = ExtResource("1_clsvp")

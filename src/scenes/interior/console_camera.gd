@@ -7,13 +7,21 @@ extends Node3D
 @export var move_speed := 3.0
 @export var focus_offset := Vector3(0, 1, 0) # offset relative to collider
 
-@export var seats: Array[Vector3] = [Vector3(-0.732,-1.107,-2.191)]
-var seat := 0
-
-@onready var camera: Camera3D = $Camera3D
+# Get children nodes
+@onready var head: Node3D = $Head
+@onready var camera: Camera3D = $Head/Camera3D
 @onready var raycast: RayCast3D = $RayCast3D
-@onready var crosshair: Control = $Camera3D/Crosshair
-@onready var pause_menu: Control = $Camera3D/PauseMenu
+@onready var crosshair: Control = $Head/Camera3D/Crosshair
+@onready var pause_menu: Control = $Head/Camera3D/PauseMenu
+@onready var background: MeshInstance3D = $Head/Camera3D/Background
+
+# Get the viewport that sees the simulation (should be a sibling)
+@onready var sim_viewport: SubViewport = get_parent().get_node("SimViewport")
+
+# Get the list of nodes that the player can snap to
+# This is assigned by the interior model loader
+@onready var viewpoints: Array[Node]
+var seat := 0 # which viewpoint you're attached to
 
 var yaw := 0.0
 var pitch := 0.0
@@ -27,6 +35,13 @@ var target_transform: Transform3D # transform being lerped to
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	# Assign viewport texture to background
+	var background_material: StandardMaterial3D = background.get_active_material(0)
+	var viewport_texture: ViewportTexture = background_material.albedo_texture
+	viewport_texture.viewport_path = get_path_to(sim_viewport)
+	background_material.albedo_texture = viewport_texture
+	background.set_surface_override_material(0, background_material)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if in_transition:
@@ -38,8 +53,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		yaw -= motion_event.relative.x * mouse_sensitivity
 		pitch -= motion_event.relative.y * mouse_sensitivity
 		pitch = clamp(pitch, deg_to_rad(-pitch_limit), deg_to_rad(pitch_limit))
-		rotation.y = yaw
-		rotation.x = pitch
+		head.rotation.y = yaw
+		head.rotation.x = pitch
 
 	# Go into our out of focus mode (focus on display)
 	if event is InputEventKey:
@@ -52,9 +67,16 @@ func _unhandled_input(event: InputEvent) -> void:
 					_on_interact()
 					
 	if Input.is_action_just_pressed("next_seat") and !focusing and !in_transition:
-		seat = (seat + 1) % (len(seats))
-		position = seats[seat]
-		
+		# Move to next seat
+		seat = (seat + 1) % (len(viewpoints))
+		var viewpoint_node: Node3D = viewpoints[seat] as Node3D
+		transform = viewpoint_node.transform
+		# Reset view
+		yaw = 0.0
+		pitch = 0.0
+		pitch = clamp(pitch, deg_to_rad(-pitch_limit), deg_to_rad(pitch_limit))
+		head.rotation.y = yaw
+		head.rotation.x = pitch
 
 # Move to display
 func _on_interact() -> void:

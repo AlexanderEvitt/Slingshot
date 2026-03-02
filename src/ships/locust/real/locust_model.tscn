@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbjaa2xxtek2r"]
+
+[ext_resource type="PackedScene" uid="uid://c3et43qtslf7p" path="res://ships/locust/real/locust.glb" id="1_4t7s3"]
+
+[node name="locust" instance=ExtResource("1_4t7s3")]
+transform = Transform3D(3.749399456654644e-33, 1, -6.123233995736766e-17, -6.123233995736766e-17, 6.123233995736766e-17, 1, 1, 0, 6.123233995736766e-17, 0, 0, 0)

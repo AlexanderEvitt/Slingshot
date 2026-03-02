@@ -7,7 +7,10 @@ func _ready() -> void:
 	ShipData.sim_root = get_parent()
 	
 	# Load player ship into scene
-	player_ship = preload("res://ship/entity/ship_entity.tscn").instantiate()
+	if ShipData.ship_type == 0:
+		player_ship = preload("res://ships/juniper/player_ship.tscn").instantiate()
+	elif ShipData.ship_type == 1:
+		player_ship = preload("res://ships/locust/player_ship.tscn").instantiate()
 	add_child(player_ship)
 	
 	# Load save data if it exists

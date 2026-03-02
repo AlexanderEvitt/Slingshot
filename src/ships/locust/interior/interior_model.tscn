@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmurr5wl7iwew"]
+
+[ext_resource type="PackedScene" uid="uid://cfv0hfg437atb" path="res://ships/locust/interior/interior.glb" id="1_pslqd"]
+[ext_resource type="PackedScene" uid="uid://c7557e6pmwk05" path="res://scenes/interior/props/display.tscn" id="2_s0yar"]
+
+[node name="interior" instance=ExtResource("1_pslqd")]
+
+[node name="display" parent="Console/Display1" index="0" instance=ExtResource("2_s0yar")]
+transform = Transform3D(0.6, 0, 0, 0, 0.5997779036479205, -0.016323795382992667, 0, 0.016323795382992667, 0.5997779036479205, -0.012496067942940225, 0.0069333020240538445, 0.000812895137205949)
+
+[node name="display" parent="Console/Display2" index="0" instance=ExtResource("2_s0yar")]
+transform = Transform3D(0.6, 0, 0, 0, 0.5997779036479206, -0.016323795382992667, 0, 0.016323795382992667, 0.5997779036479206, -0.01249606794294017, 0.006933301652351176, 0.000812898307498866)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.679316030397755, 0.8498658011067612)
+light_energy = 0.5
+spot_range = 1.0
+spot_angle = 33.63
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.001393128741325, 1.0868788427487606)
+light_color = Color(1, 0.9533333, 0.8, 1)
+light_energy = 0.4
+
+[node name="Viewpoint" type="Node3D" parent="." index="6" groups=["Viewpoints"]]
+transform = Transform3D(6.123233995736766e-17, -1, 0, 1, 6.123233995736766e-17, 0, 0, 0, 1, -1.0090000000054715, 11.176999999996042, -0.47599999999511056)
+
+[node name="Viewpoint3" type="Node3D" parent="." index="7" groups=["Viewpoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.575388376057898, 11.176999999996042, 0)

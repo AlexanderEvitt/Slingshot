@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://y6tdkpsu24sm"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://y6tdkpsu24sm"]
 
 [ext_resource type="FontFile" uid="uid://1tccf66eoucs" path="res://ui/fonts/Oxanium-SemiBold.ttf" id="1_xad8u"]
 
@@ -54,6 +54,14 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wtag"]
+bg_color = Color(0.07450981, 0.07450981, 0.09803922, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvw5m"]
 bg_color = Color(0.0745098, 0.0745098, 0.0980392, 1)
 
@@ -89,5 +97,12 @@ Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_xad8u")
 LightBorderSidePanel/base_type = &"Panel"
 LightBorderSidePanel/styles/panel = SubResource("StyleBoxFlat_bx42g")
+OptionButton/styles/focus = SubResource("StyleBoxFlat_0wtag")
+OptionButton/styles/hover = SubResource("StyleBoxFlat_0wtag")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_0wtag")
+OptionButton/styles/pressed = SubResource("StyleBoxFlat_0wtag")
 OverwritePanel/styles/panel = SubResource("StyleBoxFlat_fvw5m")
 Panel/styles/panel = SubResource("StyleBoxFlat_p2op5")
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_0wtag")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_0wtag")
+PopupMenu/styles/separator = null
