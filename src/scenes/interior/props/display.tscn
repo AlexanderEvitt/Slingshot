@@ -42,3 +42,6 @@ shape = SubResource("BoxShape3D_4reng")
 stream = ExtResource("4_4reng")
 volume_db = -20.0
 pitch_scale = 0.5
+
+[node name="Viewpoint" type="Node3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0.39999999999417923, 0)

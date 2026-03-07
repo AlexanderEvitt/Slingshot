@@ -45,3 +45,6 @@ shape = SubResource("BoxShape3D_cqwsr")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("4_3aaae")
 volume_db = -20.0
+
+[node name="Viewpoint" type="Node3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0.19999999999708962, 0)

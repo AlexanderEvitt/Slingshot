@@ -21,7 +21,7 @@ extends Node3D
 # Get the list of nodes that the player can snap to
 # This is assigned by the interior model loader
 @onready var viewpoints: Array[Node]
-var seat := 999 # which viewpoint you're attached to
+var seat := -1 # which viewpoint you're attached to
 
 var yaw := 0.0
 var pitch := 0.0
@@ -30,8 +30,10 @@ var in_transition := false
 var seated := false
 var focusing := false
 var transition_t := 0.0
-var start_transform: Transform3D # transform before going to focus mode
-var target_transform: Transform3D # transform being lerped to
+
+# Holders for the transforms that define looking at screens
+var start_view: Node3D
+var end_view: Node3D
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -82,7 +84,10 @@ func go_to_next_seat() -> void:
 	seat = (seat + 1) % (len(viewpoints))
 	var viewpoint_node: Node3D = viewpoints[seat] as Node3D
 	transform = viewpoint_node.transform
-	# Reset view
+	reset_view()
+	
+func reset_view() -> void:
+	# Reset view to look straight ahead
 	yaw = 0.0
 	pitch = 0.0
 	pitch = clamp(pitch, deg_to_rad(-pitch_limit), deg_to_rad(pitch_limit))
@@ -95,17 +100,13 @@ func _on_interact() -> void:
 		# Try to find what the camera is looking at
 		raycast.enabled = true
 		if raycast.is_colliding():
-			print("Looking")
 			var collider: Node3D = raycast.get_collider()
-			if collider:
-				# Current camera transform
-				start_transform = camera.global_transform
-				# Get new transform
-				var collider_transform: Transform3D = collider.global_transform
-				var offset_position: Vector3 = collider_transform.origin + (collider_transform.basis * focus_offset)
-				# Orientation that looks at the display (rotated by -90 about x)
-				var looking_basis: Basis = Basis(collider_transform.basis.x,-PI/2) * collider_transform.basis
-				target_transform = Transform3D(looking_basis, offset_position)
+			var collider_parent: Node3D = collider.get_parent() # nominally the display
+			if collider and collider_parent.has_node("Viewpoint"):
+				# Start where the head is
+				start_view = head
+				# Go to where the display's viewpoint is
+				end_view = collider_parent.get_node("Viewpoint")
 				focusing = true
 				in_transition = true
 				transition_t = 0.0
@@ -114,8 +115,8 @@ func _on_interact() -> void:
 				crosshair.visible = false
 	else:
 		# Return to original position
-		start_transform = camera.global_transform
-		target_transform = head.global_transform * Transform3D.IDENTITY # reset to camera's default local zero
+		start_view = end_view # start at display viewpoint
+		end_view = head # reset to camera's default local zero
 		focusing = false
 		in_transition = true
 		transition_t = 0.0
@@ -127,7 +128,8 @@ func _physics_process(delta: float) -> void:
 	if in_transition:
 		transition_t += delta * move_speed
 		var t := clampf(transition_t, 0.0, 1.0)
-		camera.global_transform = camera.global_transform.interpolate_with(target_transform, t)
+
+		start_view.global_transform = start_view.global_transform.interpolate_with(end_view.global_transform, t)
 
 		if t >= 1.0:
 			in_transition = false

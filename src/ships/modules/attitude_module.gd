@@ -12,7 +12,7 @@ var inertia: Vector3 = Vector3(1, 1, 1)  # Modify based on spacecraft geometry
 var inv_inertia: Vector3 = Vector3(1.0 / inertia.x, 1.0 / inertia.y, 1.0 / inertia.z)
 
 
-func update(_dt: float) -> void:
+func update(dt: float) -> void:
 	# Calculate torque by increasing as you hold the button
 	# Commanded torque is in ship frame
 	var torque_rate := 0.02
@@ -57,7 +57,7 @@ func update(_dt: float) -> void:
 			"CRS":
 				target = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
 			"TRG":
-				target = Conversions.find_body(SimTime.t) - ShipData.player_ship.position
+				target = Conversions.find_body(SimTime.t - dt) - ShipData.player_ship.position
 			"NRM":
 				var v: Vector3 = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
 				var r: Vector3 = Conversions.find_body(SimTime.t) - ShipData.player_ship.position
