@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://qkdsi850sg5v"]
 
-[ext_resource type="Script" uid="uid://clcy6betwv4h8" path="res://scenes/interior/console_camera.gd" id="1_smbrw"]
+[ext_resource type="Script" uid="uid://clcy6betwv4h8" path="res://scenes/interior/player_character.gd" id="1_smbrw"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="2_lkkpu"]
 [ext_resource type="PackedScene" uid="uid://boi1ptoe3f73w" path="res://ui/pause/pause_menu.tscn" id="3_bj60k"]
 [ext_resource type="PackedScene" uid="uid://b07e4fcvvtdqq" path="res://ui/screens/external_screen.tscn" id="4_33yo6"]
@@ -29,7 +29,6 @@ height = 1.75
 motion_mode = 1
 script = ExtResource("1_smbrw")
 focus_offset = Vector3(0, 0.4, 0)
-seats = Array[Vector3]([Vector3(-0.732, -1.107, -2.191), Vector3(-6.131758754586016, -7.756178441249006, -0.6925900995130068)])
 
 [node name="Head" type="Node3D" parent="."]
 
@@ -64,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 mesh = SubResource("QuadMesh_5k5g7")
 surface_material_override/0 = SubResource("StandardMaterial3D_tnebq")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -1)
 collide_with_areas = true
 
@@ -87,3 +86,5 @@ text = "🄵 Interact"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.494880308221372, 0)
 shape = SubResource("CapsuleShape3D_5k5g7")
+disabled = true
+debug_fill = false

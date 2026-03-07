@@ -10,7 +10,7 @@ extends Node3D
 # Get children nodes
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
-@onready var raycast: RayCast3D = $RayCast3D
+@onready var raycast: RayCast3D = $Head/RayCast3D
 @onready var crosshair: Control = $Head/Camera3D/Crosshair
 @onready var pause_menu: Control = $Head/Camera3D/PauseMenu
 @onready var background: MeshInstance3D = $Head/Camera3D/Background
@@ -21,7 +21,7 @@ extends Node3D
 # Get the list of nodes that the player can snap to
 # This is assigned by the interior model loader
 @onready var viewpoints: Array[Node]
-var seat := 0 # which viewpoint you're attached to
+var seat := 999 # which viewpoint you're attached to
 
 var yaw := 0.0
 var pitch := 0.0
@@ -42,13 +42,17 @@ func _ready() -> void:
 	viewport_texture.viewport_path = get_path_to(sim_viewport)
 	background_material.albedo_texture = viewport_texture
 	background.set_surface_override_material(0, background_material)
+	
+	# Start at 0th seat, must be deferred because viewpoints don't exist until
+	# parent of interior scene adds interior model
+	call_deferred("go_to_next_seat")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if in_transition:
 		return # Ignore input while transitioning
 
 	# Move camera with mouse motion
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and !focusing and !in_transition:
 		var motion_event := event as InputEventMouseMotion
 		yaw -= motion_event.relative.x * mouse_sensitivity
 		pitch -= motion_event.relative.y * mouse_sensitivity
@@ -67,16 +71,23 @@ func _unhandled_input(event: InputEvent) -> void:
 					_on_interact()
 					
 	if Input.is_action_just_pressed("next_seat") and !focusing and !in_transition:
-		# Move to next seat
-		seat = (seat + 1) % (len(viewpoints))
-		var viewpoint_node: Node3D = viewpoints[seat] as Node3D
-		transform = viewpoint_node.transform
-		# Reset view
-		yaw = 0.0
-		pitch = 0.0
-		pitch = clamp(pitch, deg_to_rad(-pitch_limit), deg_to_rad(pitch_limit))
-		head.rotation.y = yaw
-		head.rotation.x = pitch
+		go_to_next_seat()
+		
+	if Input.is_action_pressed("arrow_up"):
+		position = position - 0.1*head.transform.basis.z
+
+# Move to next seat
+func go_to_next_seat() -> void:
+	# Move to next seat
+	seat = (seat + 1) % (len(viewpoints))
+	var viewpoint_node: Node3D = viewpoints[seat] as Node3D
+	transform = viewpoint_node.transform
+	# Reset view
+	yaw = 0.0
+	pitch = 0.0
+	pitch = clamp(pitch, deg_to_rad(-pitch_limit), deg_to_rad(pitch_limit))
+	head.rotation.y = yaw
+	head.rotation.x = pitch
 
 # Move to display
 func _on_interact() -> void:
@@ -84,6 +95,7 @@ func _on_interact() -> void:
 		# Try to find what the camera is looking at
 		raycast.enabled = true
 		if raycast.is_colliding():
+			print("Looking")
 			var collider: Node3D = raycast.get_collider()
 			if collider:
 				# Current camera transform
@@ -103,7 +115,7 @@ func _on_interact() -> void:
 	else:
 		# Return to original position
 		start_transform = camera.global_transform
-		target_transform = global_transform * Transform3D.IDENTITY # reset to camera's default local zero
+		target_transform = head.global_transform * Transform3D.IDENTITY # reset to camera's default local zero
 		focusing = false
 		in_transition = true
 		transition_t = 0.0
