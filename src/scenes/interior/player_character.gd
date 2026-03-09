@@ -129,7 +129,7 @@ func _physics_process(delta: float) -> void:
 		transition_t += delta * move_speed
 		var t := clampf(transition_t, 0.0, 1.0)
 
-		start_view.global_transform = start_view.global_transform.interpolate_with(end_view.global_transform, t)
+		camera.global_transform = start_view.global_transform.interpolate_with(end_view.global_transform, t)
 
 		if t >= 1.0:
 			in_transition = false

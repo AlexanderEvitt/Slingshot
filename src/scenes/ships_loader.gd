@@ -11,6 +11,8 @@ func _ready() -> void:
 		player_ship = preload("res://ships/juniper/player_ship.tscn").instantiate()
 	elif ShipData.ship_type == 1:
 		player_ship = preload("res://ships/locust/player_ship.tscn").instantiate()
+	elif ShipData.ship_type == 2:
+		player_ship = preload("res://ships/springtail/player_ship.tscn").instantiate()
 	add_child(player_ship)
 	
 	# Load save data if it exists

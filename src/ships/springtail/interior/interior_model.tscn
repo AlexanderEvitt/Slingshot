@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjq23008nbnk0"]
+
+[ext_resource type="PackedScene" uid="uid://cnsxa86njxykw" path="res://ships/springtail/interior/interior.glb" id="1_j7w2i"]
+[ext_resource type="PackedScene" uid="uid://c7557e6pmwk05" path="res://scenes/interior/props/display.tscn" id="2_ab3jo"]
+
+[sub_resource type="Gradient" id="Gradient_ab3jo"]
+offsets = PackedFloat32Array(0.23333333, 0.7)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.11372549)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n415q"]
+noise_type = 2
+frequency = 0.048
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5qy0h"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_n415q")
+color_ramp = SubResource("Gradient_ab3jo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ab3jo"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("NoiseTexture2D_5qy0h")
+
+[node name="interior2" instance=ExtResource("1_j7w2i")]
+
+[node name="windows" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ab3jo")
+
+[node name="Viewpoint" type="Node3D" parent="." index="3" groups=["Viewpoints"]]
+transform = Transform3D(6.123233995736766e-17, 0, -1, 0, 1, 0, 1, 0, 6.123233995736766e-17, 0.4736043946460808, 6.516828688032051, -0.3198008391960664)
+
+[node name="Viewpoint2" type="Node3D" parent="." index="4" groups=["Viewpoints"]]
+transform = Transform3D(6.123233995736766e-17, 0, -1, 0, 1, 0, 1, 0, 6.123233995736766e-17, 0.47400000000197906, 6.517000000007101, 0.3200000000069849)
+
+[node name="display" parent="." index="5" instance=ExtResource("2_ab3jo")]
+transform = Transform3D(9.508857454295295e-18, -0.583565876304518, -0.1394663687522556, 3.5487539141360087e-17, 0.1394663687522556, -0.5835658763045177, 0.6, 9.995441882859154e-19, 3.672580449508677e-17, 0.9556841936738403, 6.127628191898527, -0.3200000000069849)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.912667325459035, 0)
+light_color = Color(0.35956967, 0.2709825, 0.2147772, 1)

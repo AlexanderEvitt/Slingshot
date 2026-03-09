@@ -649,11 +649,13 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 selected = 0
 allow_reselect = true
-item_count = 2
+item_count = 3
 popup/item_0/text = "PX-57C Juniper"
 popup/item_0/id = 0
 popup/item_1/text = "TE-24B Locust II"
 popup/item_1/id = 1
+popup/item_2/text = "TX-32A Springtail"
+popup/item_2/id = 2
 
 [node name="Label7" type="Label" parent="StartupPanel/HBoxContainer/Centerfold/MarginContainer/CenterPanel/PanelsHolder/Saves/HBoxContainer2/StartPanel/VBoxContainer/InitPanel"]
 visible = false

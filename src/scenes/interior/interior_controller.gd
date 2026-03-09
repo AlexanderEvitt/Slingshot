@@ -10,7 +10,10 @@ func _ready() -> void:
 	elif ShipData.ship_type == 1:
 		var interior_scene: PackedScene = load("res://ships/locust/interior/interior_model.tscn")
 		add_child(interior_scene.instantiate())
-		
+	elif ShipData.ship_type == 2:
+		var interior_scene: PackedScene = load("res://ships/springtail/interior/interior_model.tscn")
+		add_child(interior_scene.instantiate())
+	
 	# Get all the viewpoint nodes in the model and give them to the player
 	player.viewpoints = get_tree().get_nodes_in_group("Viewpoints")
 
