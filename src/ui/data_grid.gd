@@ -15,13 +15,13 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	# Calculate and set altitude
-	var r := Conversions.position_inertial_to_body(ShipData.player_ship.position,SimTime.t)
+	var r := Conversions.position_inertial_to_body(ShipData.player_ship.system_position,SimTime.t)
 	label2.text = str(snapped(r.length(), 1))
 	
 	# Calculate and set velocity
-	var v := Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
+	var v := Conversions.velocity_inertial_to_body(ShipData.player_ship.system_velocity,SimTime.t)
 	label3.text = str(snapped(v.length(), 0.001))
 	
 	# Calculate and set eccentricity
-	var e := Conversions.calc_eccentricity(ShipData.player_ship.position,ShipData.player_ship.velocity,SimTime.t)
+	var e := Conversions.calc_eccentricity(ShipData.player_ship.system_position,ShipData.player_ship.system_velocity,SimTime.t)
 	label4.text = str(snapped(e.length(), 0.001))

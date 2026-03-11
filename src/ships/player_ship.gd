@@ -138,7 +138,7 @@ func _physics_process(delta: float) -> void:
 	plotter.positions = propagate_module.get("plotted_positions")
 	
 	# Reset floating frame when vehicle strays too far
-	if position.length() > 0.1:
+	if position.length() > 10.0 or velocity.length() > 1.0:
 		ShipData.floating_frame_position = system_position
 		ShipData.floating_frame_velocity = system_velocity
 		ShipData.floating_frame_time = SimTime.t

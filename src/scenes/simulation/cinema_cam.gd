@@ -8,7 +8,7 @@ var offset_vel := Vector3(0,0,0)
 func _process(_delta: float) -> void:
 	if current:
 		look_at_from_position(offset + thrust_offset, Vector3(0,0,0), Vector3(0,0,1))
-		position = ShipData.player_ship.position + offset + thrust_offset
+		position = ShipData.player_ship.system_position + offset + thrust_offset
 		
 		var dt := SimTime.step*0.03333
 		offset_vel += ShipData.player_ship.acceleration*dt

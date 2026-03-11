@@ -14,11 +14,11 @@ func _process(_delta):
 	VGauge.value = 0
 	
 	# Calculate eccentricity
-	var e = Conversions.calc_eccentricity(ShipData.player_ship.position,ShipData.player_ship.velocity,SimTime.t)
+	var e = Conversions.calc_eccentricity(ShipData.player_ship.system_position,ShipData.player_ship.system_velocity,SimTime.t)
 	EGauge.value = clamp(pow(e.length(),0.5)/2,0,1)
 	EGauge.text = str(snapped(e.length(), 0.01))
 	
 	# Calculate excess velocity
-	var v = Conversions.calc_excess(ShipData.player_ship.position,ShipData.player_ship.velocity,SimTime.t)
+	var v = Conversions.calc_excess(ShipData.player_ship.system_position,ShipData.player_ship.system_velocity,SimTime.t)
 	VGauge.value = clamp((v/3)+0.5,0,1)
 	VGauge.text = str(snapped(v, 0.01))

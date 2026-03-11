@@ -50,17 +50,17 @@ func update(dt: float) -> void:
 		match ship.avionics["attitude_mode"]:
 			"HDG":
 				# HDG is component of velocity normal to radius
-				var v: Vector3 = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
-				var r: Vector3 = Conversions.find_body(SimTime.t) - ShipData.player_ship.position
+				var v: Vector3 = Conversions.velocity_inertial_to_body(ShipData.player_ship.system_velocity,SimTime.t)
+				var r: Vector3 = Conversions.find_body(SimTime.t) - ShipData.player_ship.system_position
 				var v_along_r: Vector3 = (r.dot(v)/r.length_squared())*r.normalized()
 				target = v - v_along_r
 			"CRS":
-				target = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
+				target = Conversions.velocity_inertial_to_body(ShipData.player_ship.system_velocity,SimTime.t)
 			"TRG":
-				target = Conversions.find_body(SimTime.t - dt) - ShipData.player_ship.position
+				target = Conversions.find_body(SimTime.t - dt) - ShipData.player_ship.system_position
 			"NRM":
-				var v: Vector3 = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
-				var r: Vector3 = Conversions.find_body(SimTime.t) - ShipData.player_ship.position
+				var v: Vector3 = Conversions.velocity_inertial_to_body(ShipData.player_ship.system_velocity,SimTime.t)
+				var r: Vector3 = Conversions.find_body(SimTime.t) - ShipData.player_ship.system_position
 				target = r.cross(v)
 			"NAV":
 				target = ship.navigation_module.control_pointing

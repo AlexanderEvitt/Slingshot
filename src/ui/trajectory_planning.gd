@@ -16,11 +16,11 @@ func _process(_delta):
 func _on_calculate():
 	# Zeroth order estimate of transfer time
 	var target = Conversions.find_body(SimTime.t)
-	var transfer_dist = target - ShipData.player_ship.position;
+	var transfer_dist = target - ShipData.player_ship.system_position;
 	var transfer_time = 2*sqrt(transfer_dist.length()/0.05)
 	
 	# Calculate properly
-	ShipData.propagator.SMC(ShipData.player_ship.position,Conversions.find_body(SimTime.t + transfer_time), ShipData.player_ship.velocity, SimTime.t)
+	ShipData.propagator.SMC(ShipData.player_ship.system_position,Conversions.find_body(SimTime.t + transfer_time), ShipData.player_ship.system_velocity, SimTime.t)
 
 	# Set the status box to green
 	var new_style = StyleBoxFlat.new()

@@ -8,5 +8,5 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	var sun_dir: Vector3 = (sun_path.position - ShipData.player_ship.position).normalized();
+	var sun_dir: Vector3 = (sun_path.position - ShipData.player_ship.system_position).normalized();
 	mat.set_shader_parameter("sun_dir",sun_dir)

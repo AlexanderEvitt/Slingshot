@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 			draw(self,line_instance)
 			
 			# Set position to spacecraft's position
-			original_traj_pos = ShipData.player_ship.position
+			original_traj_pos = ShipData.player_ship.system_position
 			line_instance.position = Vector3(0,0,0)
 			
 			# Record position of planet
@@ -36,4 +36,4 @@ func _process(delta: float) -> void:
 
 	# Move by how much the ref frame has moved since traj drawn
 	if line_instance != null:
-		line_instance.position -= Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity, SimTime.t)*delta*SimTime.step
+		line_instance.position -= Conversions.velocity_inertial_to_body(ShipData.player_ship.system_velocity, SimTime.t)*delta*SimTime.step

@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 	pointer.transform.basis = ShipData.player_ship.attitude
 	
 	if local_positioning:
-		position = ShipData.player_ship.position
+		position = ShipData.player_ship.system_position
 	else:
 		global_position = ShipData.player_ship.global_position
 	

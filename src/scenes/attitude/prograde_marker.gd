@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if retro != 0:
-		v = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
+		v = Conversions.velocity_inertial_to_body(ShipData.player_ship.system_velocity,SimTime.t)
 		position = retro*v.normalized()/2
 	
 	if side_check:

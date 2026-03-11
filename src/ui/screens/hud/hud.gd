@@ -17,11 +17,11 @@ func _process(_delta: float) -> void:
 	frame_label.text = "FRAME " + frame_name
 	
 	# Calculate and set altitude
-	var r: Vector3 = Conversions.position_inertial_to_body(ShipData.player_ship.position,SimTime.t)
+	var r: Vector3 = Conversions.position_inertial_to_body(ShipData.player_ship.system_position,SimTime.t)
 	altitude_label.text = to_hud_string(r.length(), "h")
 	
 	# Calculate and set velocity
-	var v: Vector3 = Conversions.velocity_inertial_to_body(ShipData.player_ship.velocity,SimTime.t)
+	var v: Vector3 = Conversions.velocity_inertial_to_body(ShipData.player_ship.system_velocity,SimTime.t)
 	velocity_label.text = to_hud_string(v.length(), "v")
 
 func to_hud_string(num: float, prefix: String) -> String:
