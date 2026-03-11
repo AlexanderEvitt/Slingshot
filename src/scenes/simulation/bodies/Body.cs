@@ -74,10 +74,13 @@ public partial class Body : Node3D
     }
 
     public override void _PhysicsProcess(double delta)
-    {
-        // Set the position of the body
-        double t = (double)simTime.Get("t");
-        Position = get_local_position(t);
+    {        
+        if (!static_body)
+        {
+            // Set the position of the body
+            double t = (double)simTime.Get("t");
+            Position = get_local_position(t);
+        }
     }
 
     public Vector3 fetch(double time)
@@ -99,7 +102,7 @@ public partial class Body : Node3D
     {
         if (static_body)
         {
-            return Position;
+            return new Vector3(0, 0, 0);
         }
         else
         {

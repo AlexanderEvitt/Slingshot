@@ -1,6 +1,6 @@
 [gd_scene load_steps=84 format=3 uid="uid://d0x7vyc4qrrc2"]
 
-[ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/simulation/external_scene_controller.gd" id="1_h4u8v"]
+[ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/simulation/simulation_scene_controller.gd" id="1_h4u8v"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="2_xjnot"]
 [ext_resource type="Script" uid="uid://m2sj0v6o2agd" path="res://scenes/ships_loader.gd" id="3_lxg5y"]
 [ext_resource type="Script" uid="uid://ba23dwv2ske7c" path="res://scenes/simulation/sun_light.gd" id="5_kose2"]
@@ -270,8 +270,9 @@ transparency = 4
 disable_ambient_light = true
 albedo_texture = ExtResource("35_rfejs")
 
-[node name="SimRoot" type="Node3D"]
+[node name="SimRoot" type="Node3D" node_paths=PackedStringArray("solar_system")]
 script = ExtResource("1_h4u8v")
+solar_system = NodePath("SolarSystem")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_xjnot")
@@ -385,7 +386,7 @@ a = 6780.0
 i = 0.909
 
 [node name="ISS_stationary" parent="SolarSystem/Earth/ISS" instance=ExtResource("10_vftqf")]
-transform = Transform3D(-0.00096085080247924, 0.0002314146825433644, 0.00015235806535374963, 0, 0.0005498974959437934, -0.0008352321497372642, -0.00027706630140632955, -0.0008025334813315215, -0.0005283694502589209, 0, 0, 0)
+transform = Transform3D(-0.000960850802479219, 0.0002314146825433579, 0.00015235806535374673, 0, 0.0005498974959437779, -0.0008352321497372483, -0.0002770663014063235, -0.000802533481331499, -0.0005283694502589108, 0, 0, 0)
 script = ExtResource("10_uhiq1")
 
 [node name="Luna" type="Node3D" parent="SolarSystem/Earth" groups=["Bodies"]]

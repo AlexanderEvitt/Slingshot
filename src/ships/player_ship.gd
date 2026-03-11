@@ -1,9 +1,10 @@
 class_name PlayerShip
 extends CharacterBody3D
 
-@export var collidable := true
-
-# State variables (global frame)
+# State variables (system frame)
+# position & velocity are in floating reference frame
+var system_position := Vector3(0,0,0)
+var system_velocity := Vector3(0,0,0)
 var acceleration := Vector3(0,0,0)
 var attitude: Basis
 var gravity_acceleration := Vector3(0,0,0) # just gravity
@@ -94,8 +95,8 @@ func _physics_process(delta: float) -> void:
 	if berthed:
 		# Move ship with dock
 		var berth_position: Vector3 = station.fetch(SimTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
-		position = berth_position
-		velocity = station.fetch(SimTime.t) - station.fetch(SimTime.t - 1.0)
+		system_position = berth_position
+		system_velocity = station.fetch(SimTime.t) - station.fetch(SimTime.t - 1.0)
 		attitude_module.transform.basis = berth.global_transform.basis
 
 	# Integrate regularly
@@ -105,7 +106,7 @@ func _physics_process(delta: float) -> void:
 		
 		# Do multiple simulation time steps per run of physics_process
 		var sim_steps_per_physics_tick: float = clamp(SimTime.step,1,100)
-		gravity_acceleration = propagate_module.Acceleration(position,SimTime.prev_t)
+		gravity_acceleration = propagate_module.Acceleration(system_position,SimTime.prev_t)
 		for i in range(sim_steps_per_physics_tick):
 			# Calculate simulation timestep
 			var dt: float = SimTime.step*delta/sim_steps_per_physics_tick
@@ -124,7 +125,7 @@ func _physics_process(delta: float) -> void:
 			rel_clamp.emit()
 		elif !berthed:
 			var berth_position: Vector3 = station.fetch(SimTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
-			var berth_error: float = (berth_position - position).length()
+			var berth_error: float = (berth_position - system_position).length()
 			# Allow docking only within five meters
 			if berth_error < 0.005:
 				berthed = true
@@ -135,6 +136,13 @@ func _physics_process(delta: float) -> void:
 	
 	# Pass plotter position to plotter (it's a C# module)
 	plotter.positions = propagate_module.get("plotted_positions")
+	
+	# Reset floating frame when vehicle strays too far
+	if position.length() > 0.1:
+		ShipData.floating_frame_position = system_position
+		ShipData.floating_frame_velocity = system_velocity
+		ShipData.floating_frame_time = SimTime.t
+		print("Reinit:", position.length(), " ", velocity.length())
 
 func integrate_normally(dt: float, prev_gravity: Vector3) -> void:
 	# Calculate acceleration on vehicle
@@ -142,58 +150,18 @@ func integrate_normally(dt: float, prev_gravity: Vector3) -> void:
 	acceleration = attitude*thrust_acceleration + prev_gravity # current state depends on previous state
 	
 	# Euler integrate for position and velocity
-	velocity = velocity + (acceleration)*dt
-	var motion: Vector3 = velocity * dt
+	system_velocity = system_velocity + (acceleration)*dt
+	var motion: Vector3 = system_velocity * dt
+
+	system_position += motion
 	
-	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
-	
-	# Build a query for our spacecraft's shape
-	var shape: Shape3D = shape_node.shape
-	var params: PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
-	params.shape = shape
-	params.transform = global_transform
-	params.motion = motion
-	params.collide_with_bodies = true
-	params.collide_with_areas = false
-	
-	# Cast the shape forward to detect where it will hit
-	# Returns safe and unsafe proportions of motion
-	# var result = space_state.cast_motion(params)
-	# var safe_proportion = result[0]
-	# print(safe_proportion)
-	
-	# Check for current collisions
-	var collision_info: Dictionary = space_state.get_rest_info(params)
-	if collision_info and collidable:
-		# Print the thing you just collided with
-		var collider_id: int = collision_info["collider_id"]
-		var collider: Node = instance_from_id(collider_id)
-		print(collider.name)
-		
-		# Get the relative velocity of the ship to the collider
-		var collider_velocity: Vector3 = collision_info.linear_velocity
-		var relative_velocity: Vector3 = velocity - collider_velocity
-		
-		# Check that the relative velocity is towards the collider
-		# i.e. opposite the normal
-		var collision_normal: Vector3 = collision_info.normal
-		if relative_velocity.dot(collision_normal) < 0.0:
-			# Reflect velocity about normal of collision
-			var restitution := 0.1
-			var reflected_relative_velocity: Vector3 = restitution*relative_velocity.bounce(collision_normal)
-			
-			# Get change in velocity and add to velocity
-			var dv: Vector3 = reflected_relative_velocity - relative_velocity
-			velocity += dv
-			
-			# Emit signal that you hit something
-			collided.emit()
-		
-	position += motion
+	# Now move ship to new position based on system coordinates
+	position = system_position - ShipData.get_floating_frame_origin()
+	velocity = system_velocity - ShipData.floating_frame_velocity
 
 func fetch(_time: float) -> Vector3:
 	# Return origin of ship frame
-	return position
+	return system_position
 
 func assign_berth(new_station: String) -> void:
 	# Called by selection_panel.gd with the name of the new_station (path to station underneath body)
@@ -230,12 +198,12 @@ func assign_berth(new_station: String) -> void:
 func save() -> Dictionary:
 	var save_dict: Dictionary = {
 		"identifier" : "PlayerShip",
-		"position_x" : position.x,
-		"position_y" : position.y,
-		"position_z" : position.z,
-		"velocity_x" : velocity.x,
-		"velocity_y" : velocity.y,
-		"velocity_z" : velocity.z,
+		"position_x" : system_position.x,
+		"position_y" : system_position.y,
+		"position_z" : system_position.z,
+		"velocity_x" : system_velocity.x,
+		"velocity_y" : system_velocity.y,
+		"velocity_z" : system_velocity.z,
 		"rotation_x" : attitude_module.rotation.x,
 		"rotation_y" : attitude_module.rotation.y,
 		"rotation_z" : attitude_module.rotation.z,
@@ -255,8 +223,8 @@ func initialize(save_dict: Dictionary) -> void:
 	var vy: float = save_dict.get("velocity_y", 0.0)
 	var vz: float = save_dict.get("velocity_z", 0.0)
 
-	position = Vector3(px, py, pz)
-	velocity = Vector3(vx, vy, vz)
+	system_position = Vector3(px, py, pz)
+	system_velocity = Vector3(vx, vy, vz)
 
 	attitude_module.rotation.x = save_dict.get("rotation_x", 0.0)
 	attitude_module.rotation.y = save_dict.get("rotation_y", 0.0)
@@ -266,3 +234,4 @@ func initialize(save_dict: Dictionary) -> void:
 	var saved_station_path: String = save_dict.get("station_path", NodePath(""))
 	assign_berth(saved_station_path)
 	berthed = save_dict.get("berthed", false)
+	print("Initialized!")

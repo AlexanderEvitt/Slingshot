@@ -15,10 +15,10 @@ size = Vector3(0.02666126981785055, 0.015, 0.015)
 
 [node name="PlayerShip" type="CharacterBody3D"]
 editor_description = "FV JUNIPER is a Hedge-class frigate in service as privateer vessel. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
+top_level = true
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_aedrd")
-collidable = false
 
 [node name="AttitudeModule" type="Node3D" parent="."]
 transform = Transform3D(-1, 1.22465e-16, 0, -7.4988e-33, -6.12323e-17, 1, 1.22465e-16, 1, 6.12323e-17, 0, 0, 0)
@@ -37,13 +37,13 @@ script = ExtResource("5_3t7vf")
 [node name="Pointer" type="Node3D" parent="."]
 
 [node name="Plumes" type="Node3D" parent="Pointer"]
-transform = Transform3D(0.13879, 0, 0, 0, 0.13879, 0, 0, 0, 0.13879, -0.0008172136098793144, 0, 0)
+transform = Transform3D(0.13879, 0, 0, 0, 0.13879, 0, 0, 0, 0.13879, -0.00081721360987931, 0, 0)
 
 [node name="Plume" parent="Pointer/Plumes" instance=ExtResource("6_pxive")]
-transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, -0.0012333872361023996, 0, -0.0033273712902275043)
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, -0.00123338723610239, 0, -0.0033273712902275)
 
 [node name="Plume2" parent="Pointer/Plumes" instance=ExtResource("6_pxive")]
-transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, -0.0010000000038417056, 0, 0.0029999999969732016)
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, -0.0010000000038417, 0, 0.0029999999969732)
 
 [node name="Thrusters" type="Node3D" parent="Pointer"]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
@@ -59,7 +59,7 @@ shadow_bias = 0.0
 spot_range = 0.02
 
 [node name="springtail" parent="Pointer" instance=ExtResource("7_uv3fp")]
-transform = Transform3D(6.123233995736762e-20, 0.0009999999999999998, -1.5094937227365554e-51, -0.0009999999999999998, 6.123233995736762e-20, -2.449293598294706e-19, -2.449293598294706e-19, 1.499759782661857e-35, 0.0009999999999999998, 0, 0, 0)
+transform = Transform3D(6.123233995736762e-20, 0.00099999999999999, -1.5094937227365554e-51, -0.00099999999999999, 6.123233995736762e-20, -2.449293598294706e-19, -2.449293598294706e-19, 1.499759782661857e-35, 0.00099999999999999, 0, 0, 0)
 
 [node name="Plotter" type="Node3D" parent="."]
 visible = false
