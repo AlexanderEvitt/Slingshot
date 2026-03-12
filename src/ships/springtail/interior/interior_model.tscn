@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjq23008nbnk0"]
+[gd_scene load_steps=8 format=3 uid="uid://cjq23008nbnk0"]
 
 [ext_resource type="PackedScene" uid="uid://cnsxa86njxykw" path="res://ships/springtail/interior/interior.glb" id="1_j7w2i"]
 [ext_resource type="PackedScene" uid="uid://c7557e6pmwk05" path="res://scenes/interior/props/display.tscn" id="2_ab3jo"]
+[ext_resource type="PackedScene" uid="uid://bfs5avexcwj15" path="res://scenes/interior/props/small_display.tscn" id="3_n415q"]
 
 [sub_resource type="Gradient" id="Gradient_ab3jo"]
 offsets = PackedFloat32Array(0.23333333, 0.7)
@@ -34,8 +35,11 @@ transform = Transform3D(6.123233995736766e-17, 0, -1, 0, 1, 0, 1, 0, 6.123233995
 transform = Transform3D(6.123233995736766e-17, 0, -1, 0, 1, 0, 1, 0, 6.123233995736766e-17, 0.47400000000197906, 6.517000000007101, 0.3200000000069849)
 
 [node name="display" parent="." index="5" instance=ExtResource("2_ab3jo")]
-transform = Transform3D(9.508857454295295e-18, -0.583565876304518, -0.1394663687522556, 3.5487539141360087e-17, 0.1394663687522556, -0.5835658763045177, 0.6, 9.995441882859154e-19, 3.672580449508677e-17, 0.9556841936738403, 6.127628191898527, -0.3200000000069849)
+transform = Transform3D(9.508857454295295e-18, -0.583565876304518, -0.1394663687522556, 3.5487539141360087e-17, 0.1394663687522556, -0.5835658763045177, 0.6, 9.995441882859152e-19, 3.6725804495086766e-17, 0.9556841936738404, 6.127628191898527, -0.3200000000069849)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.912667325459035, 0)
 light_color = Color(0.35956967, 0.2709825, 0.2147772, 1)
+
+[node name="small_display" parent="." index="7" instance=ExtResource("3_n415q")]
+transform = Transform3D(0.9853268539332932, -0.17037653755768742, -0.010140333711124192, -0.01340300995786575, -0.018010506320080322, -0.9997479587306812, 0.17015096309450722, 0.9852144218960397, -0.020029793959582896, 0.5744489516861787, 6.571649842915762, -0.8393047979245523)

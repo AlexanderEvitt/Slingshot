@@ -77,12 +77,12 @@ func update_periodically() -> void:
 func navigate(dt: float, gravity: Vector3) -> void:
 	# Get the nearest point along the line
 	# Scalar projection factor t (scalar form of projection position onto from, 0 -> 1)
-	t = (ship.position - from).dot(course) / (course_distance * course_distance)
+	t = (ship.system_position - from).dot(course) / (course_distance * course_distance)
 	# Closest point on the infinite line
 	closest_point = from + t * course
 	
 	# Get the velocity relative to the line (linear combination of endpoint velocity)
-	relative_velocity = ship.velocity - (t*to_vel + (1.0 - t)*from_vel)
+	relative_velocity = ship.system_velocity - (t*to_vel + (1.0 - t)*from_vel)
 	# Component of that in the direction of course
 	on_course_velocity = relative_velocity.project(course)
 
@@ -91,7 +91,7 @@ func navigate(dt: float, gravity: Vector3) -> void:
 	
 	# Calculate error correction [a2] to move towards course
 	# Vector from ship to closest point (orthogonal to line direction)
-	p_error = closest_point - ship.position
+	p_error = closest_point - ship.system_position
 	# Integral error (integrated position error)
 	i_error = i_error + p_error*dt
 	# Velocity error (velocity not in the direction of course)

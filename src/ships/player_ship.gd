@@ -24,7 +24,6 @@ var total_mass := dry_mass # kg (updated by propulsion)
 @onready var propulsion_module: PropulsionModule = $PropulsionModule
 @onready var propagate_module: PropagateModule = $PropagateModule
 @onready var plotter: Plotter = $Plotter
-@onready var pointer: Node3D = $Pointer
 
 # State of avionics
 var avionics := {
@@ -78,13 +77,6 @@ func _ready() -> void:
 		berthed = true
 
 func _physics_process(delta: float) -> void:
-	# Reset floating frame when vehicle strays too far
-	if position.length() > 1.0 or velocity.length() > 1.0:
-		ShipData.floating_frame_position = system_position
-		ShipData.floating_frame_velocity = system_velocity
-		ShipData.floating_frame_time = SimTime.t
-		#print("Reinit: ", position.length(), " ", velocity.length())
-	
 	# Update values for this iteration
 	attitude = attitude_module.transform.basis
 	torque = attitude_module.torque
@@ -101,10 +93,17 @@ func _physics_process(delta: float) -> void:
 	# Attach ship to dock if docked
 	if berthed:
 		# Move ship with dock
+		# Set system state values, lock position and velocity to these
 		var berth_position: Vector3 = station.fetch(SimTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
 		system_position = berth_position
 		system_velocity = station.fetch(SimTime.t) - station.fetch(SimTime.t - 1.0)
 		attitude_module.transform.basis = berth.global_transform.basis
+		# Fix floating frame to ship every frame
+		ShipData.floating_frame_position = system_position
+		ShipData.floating_frame_velocity = system_velocity
+		ShipData.floating_frame_time = SimTime.t
+		position = Vector3(0,0,0)
+		velocity = Vector3(0,0,0)
 
 	# Integrate regularly
 	else:
@@ -138,11 +137,24 @@ func _physics_process(delta: float) -> void:
 				berthed = true
 				att_clamp.emit()
 				
-	# Pass attitude to pointer
-	pointer.transform.basis = attitude
+	# Set attitude
+	transform.basis = attitude
 	
 	# Pass plotter position to plotter (it's a C# module)
 	plotter.positions = propagate_module.get("plotted_positions")
+
+	# Reset floating frame when vehicle strays too far
+	if position.length() > 1.0 or velocity.length() > 1.0:
+		# Assign new origin coords
+		ShipData.floating_frame_position = system_position
+		ShipData.floating_frame_velocity = system_velocity
+		ShipData.floating_frame_time = SimTime.t
+		print("Reinit: ", position.length(), " ", velocity.length())
+		
+		# Update vehicle coords
+		position = system_position - ShipData.get_floating_frame_origin()
+		velocity = system_velocity - ShipData.floating_frame_velocity
+
 
 func integrate_normally(dt: float, prev_gravity: Vector3) -> void:
 	# Calculate acceleration on vehicle
@@ -150,14 +162,12 @@ func integrate_normally(dt: float, prev_gravity: Vector3) -> void:
 	acceleration = attitude*thrust_acceleration + prev_gravity # current state depends on previous state
 	
 	# Euler integrate for position and velocity
-	system_velocity = system_velocity + (acceleration)*dt
-	var motion: Vector3 = system_velocity * dt
-
-	system_position += motion
+	velocity = velocity + acceleration*dt
+	move_and_slide()#position = position + velocity*dt
 	
-	# Now move ship to new position based on system coordinates
-	position = system_position - ShipData.get_floating_frame_origin()
-	velocity = system_velocity - ShipData.floating_frame_velocity
+	# Update system variables for external use
+	system_position = position + ShipData.get_floating_frame_origin()
+	system_velocity = velocity + ShipData.floating_frame_velocity
 
 func fetch(_time: float) -> Vector3:
 	# Return origin of ship frame
@@ -225,6 +235,8 @@ func initialize(save_dict: Dictionary) -> void:
 
 	system_position = Vector3(px, py, pz)
 	system_velocity = Vector3(vx, vy, vz)
+	position = system_position
+	velocity = system_velocity
 
 	attitude_module.rotation.x = save_dict.get("rotation_x", 0.0)
 	attitude_module.rotation.y = save_dict.get("rotation_y", 0.0)
