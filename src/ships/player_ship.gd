@@ -78,6 +78,13 @@ func _ready() -> void:
 		berthed = true
 
 func _physics_process(delta: float) -> void:
+	# Reset floating frame when vehicle strays too far
+	if position.length() > 1.0 or velocity.length() > 1.0:
+		ShipData.floating_frame_position = system_position
+		ShipData.floating_frame_velocity = system_velocity
+		ShipData.floating_frame_time = SimTime.t
+		#print("Reinit: ", position.length(), " ", velocity.length())
+	
 	# Update values for this iteration
 	attitude = attitude_module.transform.basis
 	torque = attitude_module.torque
@@ -136,13 +143,6 @@ func _physics_process(delta: float) -> void:
 	
 	# Pass plotter position to plotter (it's a C# module)
 	plotter.positions = propagate_module.get("plotted_positions")
-	
-	# Reset floating frame when vehicle strays too far
-	if position.length() > 10.0 or velocity.length() > 1.0:
-		ShipData.floating_frame_position = system_position
-		ShipData.floating_frame_velocity = system_velocity
-		ShipData.floating_frame_time = SimTime.t
-		print("Reinit:", position.length(), " ", velocity.length())
 
 func integrate_normally(dt: float, prev_gravity: Vector3) -> void:
 	# Calculate acceleration on vehicle
