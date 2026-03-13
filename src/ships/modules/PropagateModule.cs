@@ -69,8 +69,8 @@ public partial class PropagateModule : Node3D
 			{
 				// Reset starting point to current point
 
-				start_position = (Vector3)player_ship.Get("position");
-				start_velocity = (Vector3)player_ship.Get("velocity");
+				start_position = (Vector3)player_ship.Get("system_position");
+				start_velocity = (Vector3)player_ship.Get("system_velocity");
 
 				// Refresh trajectory
 				double t = (double)SimTime.Get("t");

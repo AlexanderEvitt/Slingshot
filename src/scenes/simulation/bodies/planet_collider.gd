@@ -1,7 +1,6 @@
 extends StaticBody3D
 
-var prev_pos := Vector3(0,0,0)
+@onready var parent_body: Body = get_parent()
 
-func _phsyics_process(delta: float) -> void:
-	constant_linear_velocity = (global_position - prev_pos)/delta
-	prev_pos = global_position
+func _phsyics_process(_delta: float) -> void:
+	constant_linear_velocity = parent_body.fetch_velocity(SimTime.t) - ShipData.floating_frame_velocity
