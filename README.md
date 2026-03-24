@@ -6,7 +6,7 @@
 
 Slingshot is a 6DOF spaceflight simulator that combines futuristic high-energy fusion propulsion systems with realistic physics. The entire solar system is implemented at real scale.
 
-Demo footage: [YouTube Link](https://youtu.be/2RoTKBjrhYA?si=A5Ma15xtFgd1WDBr)
+Demo footage (extremely old): [YouTube Link](https://youtu.be/2RoTKBjrhYA?si=A5Ma15xtFgd1WDBr)
 
 ![Entering the Jupiter System](planning.png)
 ![Departing from Zephyr Station](proxops.png)
@@ -14,19 +14,19 @@ Demo footage: [YouTube Link](https://youtu.be/2RoTKBjrhYA?si=A5Ma15xtFgd1WDBr)
 
 ## Current Features
 
-- Full solar system of planets and significant moons
+- Full solar system of planets and significant moons at real scale
 - Network of space stations for docking and undocking
-- n-body physics providing a numerically-integrated trajectory (with symplectic integrators and adaptive step size control)
+- n-body physics providing a numerically-integrated trajectory
 - Guidance computer that provides autopilot functionality for interplanetary trips
-- Translation and docking simulation
+- Fusion propulsion system, simulated by advanced numerical models
+- Traversable ship interiors/cockpit fully functional for piloting anywhere in the solar system
 - Cool graphics
 
 ## Development Plan
 
-- (CURRENT) v0.0.1: Interplanetary transport game mode - fly between stations scattered around the solar system to complete missions.
-- v0.0.2: Space combat - defend your ship from pirates and hostile adversaries as you fly around.
-- v0.0.3: Extrasolar flight - addition of other solar systems beyond Sol.
-- v0.0.4: Ship interiors - addition of ship interior.
+- (CURRENT) v0.0.1: Interplanetary transport missions - fly between stations and bases scattered around the solar system to complete missions.
+- v0.0.2: Space combat - intercept hostile craft, avoid surface-to-orbit defences, and defend yourself from your adversaries.
+- v0.0.3: Co-op flight - flying with friends in the cockpit is always more fun.
 - v0.0.5: More pilotable ship types
 
 ## Dev Environment Setup Instructions
