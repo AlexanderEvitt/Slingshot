@@ -14,6 +14,7 @@ extends Node3D
 @onready var crosshair: Control = $Head/Camera3D/Crosshair
 @onready var pause_menu: Control = $Head/Camera3D/PauseMenu
 @onready var background: MeshInstance3D = $Head/Camera3D/Background
+@onready var external_screen: HBoxContainer = $ExternalScreen
 
 # Get the viewport that sees the simulation (should be a sibling)
 @onready var sim_viewport: SubViewport = get_parent().get_node("SimViewport")
@@ -26,9 +27,10 @@ var seat := -1 # which viewpoint you're attached to
 var yaw := 0.0
 var pitch := 0.0
 
-var in_transition := false
-var seated := false
-var focusing := false
+var in_transition := false # moving to viewpoint
+var seated := false # currently unused
+var focusing := false # looking at something
+var periscoping := false # looking into periscope
 var transition_t := 0.0
 
 # Holders for the transforms that define looking at screens
@@ -101,7 +103,7 @@ func _on_interact() -> void:
 		raycast.enabled = true
 		if raycast.is_colliding():
 			var collider: Node3D = raycast.get_collider()
-			var collider_parent: Node3D = collider.get_parent() # nominally the display
+			var collider_parent: Node3D = collider.get_parent() # the focusable object
 			if collider and collider_parent.has_node("Viewpoint"):
 				# Start where the head is
 				start_view = head
@@ -110,19 +112,26 @@ func _on_interact() -> void:
 				focusing = true
 				in_transition = true
 				transition_t = 0.0
-				# Mouse visible, cross hair not
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				crosshair.visible = false
+				# Set periscope if periscope
+				if collider_parent.is_in_group("Periscope"):
+					periscoping = true
+				else:
+					# Turn off mouse if going to display (not periscope)
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		# Return to original position
 		start_view = end_view # start at display viewpoint
 		end_view = head # reset to camera's default local zero
 		focusing = false
 		in_transition = true
+		periscoping = false
 		transition_t = 0.0
 		# Mouse invisible, cross hair visible
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		crosshair.visible = true
+		# Turn off external view
+		external_screen.visible = false
 
 func _physics_process(delta: float) -> void:
 	if in_transition:
@@ -133,3 +142,6 @@ func _physics_process(delta: float) -> void:
 
 		if t >= 1.0:
 			in_transition = false
+			# If periscoping, enable view after transition finished
+			if periscoping:
+				external_screen.visible = true

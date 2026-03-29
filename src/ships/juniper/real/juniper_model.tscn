@@ -99,6 +99,7 @@ transform = Transform3D(0.9561015084079547, 0.07672687888771008, 0.2828124673279
 
 [node name="Beam" type="MeshInstance3D" parent="Turret2/Laser2" index="0"]
 transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, 1500, 0, -1.3169999999954598)
+visible = false
 mesh = SubResource("CylinderMesh_jrpwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_2i45u")
 

@@ -8,13 +8,13 @@ extends MeshInstance3D
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func disabled(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		pass
 	else:
 		target = Conversions.find_body(SimTime.t) - ShipData.player_ship.system_position
 		if Input.is_action_pressed("fire"):
-			beam.visible = true
+			beam.visible = false
 		else:
 			beam.visible = false
 	mount.look_at(target, Vector3(0,1,0))

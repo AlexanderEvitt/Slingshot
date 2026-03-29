@@ -48,10 +48,10 @@ var kp := 1e-8
 var electrical_power := 1e13 # W
 
 # State of control system
-var propulsor := false
-var reactor := false
-var cryo := false
-var field := false
+var propulsor := true
+var reactor := true
+var cryo := true
+var field := true
 var thrust_limiter := true
 var scram_inhibit := true
 
@@ -76,6 +76,7 @@ func update(dt: float) -> void:
 	if ship.avionics["navigation"] and ship.avionics["autopilot"]:
 		throttle = ship.navigation_module.control_throttle
 	throttle = clamp(throttle,0,engine_power)
+	
 	
 	# Get desired engine parameters
 	var mass := ship.total_mass

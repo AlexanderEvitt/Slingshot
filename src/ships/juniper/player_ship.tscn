@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cl2jnao8fn6iy"]
+[gd_scene load_steps=25 format=3 uid="uid://cl2jnao8fn6iy"]
 
 [ext_resource type="Script" uid="uid://cc283l37nveuy" path="res://ships/player_ship.gd" id="1_banjw"]
 [ext_resource type="Script" uid="uid://8foh3a4rsbjc" path="res://ships/modules/attitude_module.gd" id="2_stb5n"]
@@ -11,6 +11,7 @@
 [ext_resource type="Material" uid="uid://d3306785am850" path="res://ships/juniper/real/BasePaint.tres" id="9_x0ifl"]
 [ext_resource type="PackedScene" uid="uid://bfwsgcbvelo0t" path="res://ships/juniper/real/juniper_model.tscn" id="10_3ank2"]
 [ext_resource type="Script" uid="uid://xet38inpduig" path="res://scenes/simulation/bodies/draw_spacecraft_orbit.gd" id="11_afq5u"]
+[ext_resource type="Script" uid="uid://jueht3juf68m" path="res://visuals/impact.gd" id="12_x0ifl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
 margin = 0.0
@@ -35,6 +36,47 @@ bottom_radius = 0.2
 height = 0.4
 radial_segments = 16
 rings = 2
+
+[sub_resource type="Gradient" id="Gradient_4naxx"]
+offsets = PackedFloat32Array(0, 0.5289855, 1)
+colors = PackedColorArray(18.892157, 18.892157, 18.892157, 1, 1, 0.6741667, 0.14999998, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_b6qk2"]
+gradient = SubResource("Gradient_4naxx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gecb8"]
+emission_shape_scale = Vector3(0.001, 0.001, 0.001)
+inherit_velocity_ratio = 1.0
+spread = 25.0
+initial_velocity_min = 0.049999997
+initial_velocity_max = 0.29999998
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_b6qk2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw42m"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="PointMesh" id="PointMesh_5qheq"]
+material = SubResource("StandardMaterial3D_pw42m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x0ifl"]
+direction = Vector3(0, -1, 0)
+spread = 0.5
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4naxx"]
+shading_mode = 0
+albedo_color = Color(5.5149317, 0.9217179, 0.9217179, 1)
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_x0ifl"]
+material = SubResource("StandardMaterial3D_4naxx")
+radius = 0.002
+radial_steps = 5
+sections = 2
+section_length = 0.02
 
 [node name="PlayerShip" type="CharacterBody3D"]
 editor_description = "FV JUNIPER is a Hedge-class frigate in service as privateer vessel. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
@@ -245,7 +287,7 @@ script = ExtResource("8_kphao")
 [node name="Light" type="OmniLight3D" parent="Lights/Beacon"]
 layers = 2
 light_color = Color(1, 0.03, 0.03, 1)
-light_energy = 0.05
+light_energy = 0.01
 omni_range = 0.005
 
 [node name="Emit" type="MeshInstance3D" parent="Lights/Beacon"]
@@ -277,3 +319,36 @@ spot_range = 0.02
 
 [node name="frigate" parent="." instance=ExtResource("10_3ank2")]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="Impact" type="Node3D" parent="."]
+script = ExtResource("12_x0ifl")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Impact"]
+transform = Transform3D(-0.16731940474980525, -0.98590274205632, 0, 0.7060599500249861, -0.11982675929012608, -0.6979404664645404, 0.6881014196794576, -0.11677898339964832, 0.7161557828233043, -0.01142339199235719, 0.00423550917418332, 0.00458452559055678)
+emitting = false
+amount = 10000
+explosiveness = 0.95
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_gecb8")
+draw_pass_1 = SubResource("PointMesh_5qheq")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Impact"]
+transform = Transform3D(0.24063538804241175, 0.3868978256567283, 0.8901711535001421, -0.6470945441251463, 0.7475145530497816, -0.14996880989810474, -0.7234384984123713, -0.539937094003441, 0.4302379266568352, -0.01099999999860301, -0.0040000000008149, -0.00500000000465661)
+emitting = false
+amount = 10000
+explosiveness = 0.95
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_gecb8")
+draw_pass_1 = SubResource("PointMesh_5qheq")
+
+[node name="Gun" type="GPUParticles3D" parent="Impact"]
+transform = Transform3D(0.05892668655287414, -0.08079384637396131, 0, 0.08079384637396131, 0.05892668655287414, 0, 0, 0, 0.0999999999999997, -0.00256853943507804, -0.00823103913293313, 0)
+emitting = false
+amount = 300
+lifetime = 3.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_x0ifl")
+draw_pass_1 = SubResource("TubeTrailMesh_x0ifl")

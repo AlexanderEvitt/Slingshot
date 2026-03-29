@@ -2,7 +2,6 @@
 
 [resource]
 resource_name = "Floodlights"
-cull_mode = 2
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 2.0

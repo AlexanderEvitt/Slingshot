@@ -4,7 +4,6 @@
 
 [resource]
 resource_name = "SmoothConcrete"
-cull_mode = 2
 albedo_texture = ExtResource("1_j2ivj")
 roughness = 0.5
 uv1_scale = Vector3(5, 5, 5)

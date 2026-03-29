@@ -82,7 +82,7 @@ func _physics_process(delta: float) -> void:
 	torque = attitude_module.torque
 	
 	# Update attitude for collision shape
-	shape_node.transform.basis = attitude
+	#shape_node.transform.basis = attitude
 	
 	# Update thrust
 	thrust = propulsion_module.thrust
@@ -149,7 +149,7 @@ func _physics_process(delta: float) -> void:
 		ShipData.floating_frame_position = system_position
 		ShipData.floating_frame_velocity = system_velocity
 		ShipData.floating_frame_time = SimTime.t
-		print("Reinit: ", position.length(), " ", velocity.length())
+		#print("Reinit: ", position.length(), " ", velocity.length())
 		
 		# Update vehicle coords
 		position = system_position - ShipData.get_floating_frame_origin()
@@ -168,6 +168,13 @@ func integrate_normally(dt: float, prev_gravity: Vector3) -> void:
 	# Update system variables for external use
 	system_position = position + ShipData.get_floating_frame_origin()
 	system_velocity = velocity + ShipData.floating_frame_velocity
+	
+	# Print collision data
+	var collision_data: KinematicCollision3D = get_last_slide_collision()
+	if collision_data != null:
+		print("Collided at t=0", SimTime.t)
+		print("	Collider velocity:", collision_data.get_collider_velocity())
+		print("	Relative velocity:", velocity - collision_data.get_collider_velocity())
 
 func fetch(_time: float) -> Vector3:
 	# Return origin of ship frame

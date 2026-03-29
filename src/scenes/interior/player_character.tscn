@@ -68,6 +68,7 @@ target_position = Vector3(0, 0, -1)
 collide_with_areas = true
 
 [node name="ExternalScreen" parent="." instance=ExtResource("4_33yo6")]
+visible = false
 script = ExtResource("5_a2fv7")
 
 [node name="LookLabel" type="Label" parent="."]

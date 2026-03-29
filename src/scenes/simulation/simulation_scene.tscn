@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://d0x7vyc4qrrc2"]
+[gd_scene load_steps=86 format=3 uid="uid://d0x7vyc4qrrc2"]
 
 [ext_resource type="Script" uid="uid://tqkmry266kwd" path="res://scenes/simulation/simulation_scene_controller.gd" id="1_h4u8v"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="2_xjnot"]
@@ -67,14 +67,6 @@ albedo_texture = ExtResource("8_1fg4q")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4v3sc"]
 radius = 6371.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4lwe"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="PointMesh" id="PointMesh_b0wiu"]
-material = SubResource("StandardMaterial3D_t4lwe")
 
 [sub_resource type="SphereMesh" id="SphereMesh_6xnwu"]
 radius = 1740.0
@@ -384,15 +376,8 @@ script = ExtResource("9_fbjsd")
 process_priority = 13
 shape = SubResource("SphereShape3D_4v3sc")
 
-[node name="Zephyr" type="Node3D" parent="SolarSystem/Earth" groups=["Stations"]]
-process_priority = 13
-editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 6610.83, 0, 0)
-script = ExtResource("6_u7g1e")
-a = 42164.0
-theta0 = 3.142
-
-[node name="Station" parent="SolarSystem/Earth/Zephyr" instance=ExtResource("10_pvhad")]
+[node name="Zephyr" parent="SolarSystem/Earth" instance=ExtResource("10_pvhad")]
+transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, -1, 0, 1, 6.123233995736766e-17, 7045.819654655857, 0, 0)
 
 [node name="ISS" type="Node3D" parent="SolarSystem/Earth" groups=["Stations"]]
 process_priority = 13
@@ -403,7 +388,7 @@ a = 6780.0
 i = 0.909
 
 [node name="ISS_stationary" parent="SolarSystem/Earth/ISS" instance=ExtResource("10_vftqf")]
-transform = Transform3D(-0.000960850802479198, 0.00023141468254335166, 0.00015235806535374334, 0, 0.0005498974959437631, -0.0008352321497372299, -0.0002770663014063174, -0.0008025334813314774, -0.0005283694502588992, 0, 0, 0)
+transform = Transform3D(-0.0009608508024791675, 0.00023141468254334605, 0.0001523580653537377, 0, 0.0005498974959437498, -0.0008352321497371989, -0.0002770663014063086, -0.0008025334813314579, -0.0005283694502588795, 0, 0, 0)
 script = ExtResource("10_uhiq1")
 
 [node name="Luna" type="Node3D" parent="SolarSystem/Earth" groups=["Bodies"]]
@@ -419,21 +404,6 @@ RAAN = 3.399
 argp = 1.573
 theta0 = 2.226
 
-[node name="Endurance" type="Node3D" parent="SolarSystem/Earth/Luna" groups=["Stations"]]
-process_priority = 13
-editor_description = "ENDURANCE is the gateway station to Shackleton crater, the largest city on Luna. As the sister station to Zephyr, countless ships make the run between them each cycle."
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 2044.07, 0, 0)
-script = ExtResource("6_u7g1e")
-a = 36618.0
-e = 0.7
-i = 1.571
-argp = 1.571
-
-[node name="Station" parent="SolarSystem/Earth/Luna/Endurance" instance=ExtResource("11_7ivjh")]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/Endurance"]
-mesh = SubResource("PointMesh_b0wiu")
-
 [node name="LunaMesh" type="MeshInstance3D" parent="SolarSystem/Earth/Luna"]
 transform = Transform3D(-0.5947666655061098, -4.9224579209006646e-17, 0.8038983851226119, 0.8038983851226119, -3.641895465758009e-17, 0.5947666655061098, 0, 1, 6.123233995736766e-17, 0, 0, 0)
 visibility_range_end = 10000000.0
@@ -442,7 +412,7 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_5qq6b")
 
 [node name="Explosion" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -3.507816202175806e-33, -3.3990776836172276e-33, 6.123230000000004e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000004e-17, 1612.9759982096975, -169.11933165213713, -630.3852505682507)
+transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -3.507816202175806e-33, -3.3990776836172276e-33, 6.123230000000004e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000004e-17, 1612.9759982096975, -169.1193316521371, -630.3852505682507)
 mesh = SubResource("SphereMesh_vftqf")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
@@ -456,56 +426,56 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion3" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -3.507816202175806e-33, -3.3990776836172276e-33, 6.123230000000004e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000004e-17, 1385.472102689745, -339.54541347585536, -994.8975454147203)
+transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -3.507816202175806e-33, -3.3990776836172276e-33, 6.123230000000004e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000004e-17, 1385.472102689745, -339.54541347585536, -994.8975454147204)
 mesh = SubResource("SphereMesh_t4lwe")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion4" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1.0000000000000004, 2.4625629070555112e-55, -5.884474761706463e-33, -3.3990776836172276e-33, 6.123230000000005e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000005e-17, 1645.7466065001536, 380.08293011785156, -413.8000428655214)
+transform = Transform3D(1.0000000000000004, 2.4625629070555112e-55, -5.884474761706463e-33, -3.3990776836172276e-33, 6.123230000000005e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000005e-17, 1645.7466065001536, 380.0829301178515, -413.8000428655214)
 mesh = SubResource("SphereMesh_b0wiu")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion5" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1.0000000000000002, -5.551115123125783e-17, -2.4200313623401234e-33, 0, 6.123230000000002e-17, 1, -5.551115123125783e-17, -1.0000000000000002, 6.123230000000002e-17, 1730.3955630911205, -169.11933165213722, -51.003096975380686)
+transform = Transform3D(1.0000000000000002, -5.551115123125783e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.551115123125783e-17, -1.0000000000000002, 6.123230000000002e-17, 1730.3955630911205, -169.11933165213722, -51.003096975380686)
 mesh = SubResource("SphereMesh_jcsod")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion6" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -1.1311576426451492e-33, -3.3990776836172276e-33, 6.123230000000003e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000003e-17, 1686.313650096684, -34.63365489880047, -427.1371178637837)
+transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -1.1311576426451487e-33, -3.3990776836172276e-33, 6.123230000000003e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000003e-17, 1686.313650096684, -34.63365489880047, -427.1371178637837)
 mesh = SubResource("SphereMesh_to052")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion7" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1.0000000000000002, -5.551115123125783e-17, -2.4200313623401234e-33, 0, 6.123230000000002e-17, 1, -5.551115123125783e-17, -1.0000000000000002, 6.123230000000002e-17, 1542.4423846868576, 85.44843117791264, -803.0706336913754)
+transform = Transform3D(1.0000000000000002, -5.551115123125783e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.551115123125783e-17, -1.0000000000000002, 6.123230000000002e-17, 1542.4423846868576, 85.44843117791264, -803.0706336913754)
 mesh = SubResource("SphereMesh_rckgw")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion8" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -1.1311576426451492e-33, -3.3990776836172276e-33, 6.123230000000003e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000003e-17, 1645.2664695553513, -294.39569562964704, -486.9308942278676)
+transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -1.1311576426451487e-33, -3.3990776836172276e-33, 6.123230000000003e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000003e-17, 1645.2664695553513, -294.39569562964704, -486.9308942278676)
 mesh = SubResource("SphereMesh_65yhh")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion9" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -1.1311576426451492e-33, -3.3990776836172276e-33, 6.123230000000003e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000003e-17, 1703.7833668995927, -169.11933165213722, -296.923672403148)
+transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -1.1311576426451487e-33, -3.3990776836172276e-33, 6.123230000000003e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000003e-17, 1703.7833668995927, -169.11933165213722, -296.923672403148)
 mesh = SubResource("SphereMesh_um5xs")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion10" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh"]
-transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -1.1311576426451492e-33, -3.3990776836172276e-33, 6.123230000000003e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000003e-17, 1634.2685237517453, 158.73102066179754, -574.9310413391886)
+transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -1.1311576426451487e-33, -3.3990776836172276e-33, 6.123230000000003e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000003e-17, 1634.2685237517453, 158.73102066179754, -574.9310413391886)
 mesh = SubResource("SphereMesh_ll20u")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
@@ -519,6 +489,8 @@ script = ExtResource("9_fbjsd")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/Luna/StaticBody3D"]
 process_priority = 13
 shape = SubResource("SphereShape3D_cmojb")
+
+[node name="Endurance" parent="SolarSystem/Earth/Luna" instance=ExtResource("11_7ivjh")]
 
 [node name="EarthMesh" type="MeshInstance3D" parent="SolarSystem/Earth"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
@@ -571,23 +543,14 @@ RAAN = 0.837
 argp = 5.068
 theta0 = 5.873
 
-[node name="Yugala" type="Node3D" parent="SolarSystem/Mars" groups=["Stations"]]
-process_priority = 13
-editor_description = "YUGALA ORBITAL is the largest station in proximity to Mars. It acts as a vital military base providing protection to the inner planets from pirates and thieves."
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, -3852.12, 0, 0)
-script = ExtResource("6_u7g1e")
-a = 42164.0
-theta0 = 3.142
-
-[node name="Station" parent="SolarSystem/Mars/Yugala" instance=ExtResource("23_tf51s")]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
-
 [node name="MarsMesh" type="MeshInstance3D" parent="SolarSystem/Mars"]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 visibility_range_end = 10000000.0
 mesh = SubResource("SphereMesh_61v7t")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_563sj")
+
+[node name="Yugala" parent="SolarSystem/Mars" instance=ExtResource("23_tf51s")]
 
 [node name="Jupiter" type="Node3D" parent="SolarSystem" groups=["Bodies"]]
 process_priority = 13
@@ -656,16 +619,8 @@ mesh = SubResource("SphereMesh_jcfjd")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_4wqeu")
 
-[node name="Concordia" type="Node3D" parent="SolarSystem/Jupiter/Europa" groups=["Stations"]]
-process_priority = 13
-editor_description = "CONCORDIA II is a former European Union colony station, since turned over to private military interest as civilian traffic to the moon below dried up."
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1455.5971062894096, 0, -1684.281726498666)
-script = ExtResource("6_u7g1e")
-a = 3000.0
-i = 60.0
-theta0 = 1.3
-
-[node name="Station" parent="SolarSystem/Jupiter/Europa/Concordia" instance=ExtResource("29_rih2e")]
+[node name="Concordia" parent="SolarSystem/Jupiter/Europa" instance=ExtResource("29_rih2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1755.8954389984428)
 
 [node name="Ganymede" type="Node3D" parent="SolarSystem/Jupiter" groups=["Bodies"]]
 editor_description = "GANYMEDE is the most massive moon in the Sol system. Its relatively high gravity has led to the development of the local healthcare industry, with several large hospitals and military bases located around its equator."

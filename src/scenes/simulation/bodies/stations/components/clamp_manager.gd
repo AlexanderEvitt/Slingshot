@@ -1,3 +1,4 @@
+class_name Clamp
 extends MeshInstance3D
 
 # References to children
@@ -18,8 +19,9 @@ func _ready() -> void:
 	ShipData.player_ship.rel_clamp.connect(release_clamps)
 	ShipData.player_ship.att_clamp.connect(attach_clamps)
 	
-	# Start with clamps attached
-	attach_clamps()
+	# Start with clamps released by default
+	# Station manager will attach them if needed
+	release_clamps()
 
 func release_clamps() -> void:
 	# Get a tween

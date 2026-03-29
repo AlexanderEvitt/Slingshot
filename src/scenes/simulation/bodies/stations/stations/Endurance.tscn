@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=4 uid="uid://cdxkk5qy7ccnc"]
+[gd_scene load_steps=15 format=4 uid="uid://cdxkk5qy7ccnc"]
 
 [ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://scenes/simulation/bodies/stations/components/station_manager.gd" id="1_5moyy"]
+[ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://scenes/simulation/bodies/Body.cs" id="1_6lb0h"]
 [ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="1_jprih"]
 [ext_resource type="PackedScene" uid="uid://bty856a1y2vt0" path="res://scenes/simulation/bodies/stations/components/stump.tscn" id="2_66665"]
 [ext_resource type="PackedScene" uid="uid://cr6y3tpnww4h7" path="res://scenes/simulation/bodies/stations/components/ring.tscn" id="3_nsi5c"]
@@ -44,48 +45,68 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_a4k8o")
 
-[node name="Station" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4lwe"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.65, 0.65, 0.65, 1)
+
+[sub_resource type="PointMesh" id="PointMesh_b0wiu"]
+material = SubResource("StandardMaterial3D_t4lwe")
+
+[node name="Endurance" type="Node3D" groups=["Stations"]]
+process_priority = 13
+editor_description = "ENDURANCE is the gateway station to Shackleton crater, the largest city on Luna. As the sister station to Zephyr, countless ships make the run between them each cycle."
+script = ExtResource("1_6lb0h")
+a = 36618.0
+e = 0.7
+i = 1.571
+argp = 1.571
+
+[node name="Station" type="Node3D" parent="."]
 script = ExtResource("1_5moyy")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Station"]
 environment = ExtResource("1_jprih")
 
-[node name="stump" parent="." instance=ExtResource("2_66665")]
+[node name="stump" parent="Station" instance=ExtResource("2_66665")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28.774, 0)
 
-[node name="ring1" parent="." instance=ExtResource("3_nsi5c")]
+[node name="ring1" parent="Station" instance=ExtResource("3_nsi5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.76, 0)
 
-[node name="ring2" parent="." instance=ExtResource("3_nsi5c")]
+[node name="ring2" parent="Station" instance=ExtResource("3_nsi5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35.639, 0)
 flip = -1
 
-[node name="shipyard" parent="." instance=ExtResource("4_4614r")]
+[node name="shipyard" parent="Station" instance=ExtResource("4_4614r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38.881, 0)
 
-[node name="DockCenter" type="Node3D" parent="."]
+[node name="DockCenter" type="Node3D" parent="Station"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06236, 40.0464, -0.250167)
 
-[node name="KOZ" type="Node3D" parent="."]
+[node name="KOZ" type="Node3D" parent="Station"]
 visible = false
 
-[node name="wire_sphere" parent="KOZ" instance=ExtResource("5_d3trv")]
+[node name="wire_sphere" parent="Station/KOZ" instance=ExtResource("5_d3trv")]
 transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 55.295, 0, 0, 0)
 
-[node name="wire_cylinder" parent="KOZ" instance=ExtResource("6_beqic")]
+[node name="wire_cylinder" parent="Station/KOZ" instance=ExtResource("6_beqic")]
 transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
 
-[node name="wire_cylinder2" parent="KOZ" instance=ExtResource("6_beqic")]
+[node name="wire_cylinder2" parent="Station/KOZ" instance=ExtResource("6_beqic")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
 
-[node name="wire_cylinder3" parent="KOZ" instance=ExtResource("6_beqic")]
+[node name="wire_cylinder3" parent="Station/KOZ" instance=ExtResource("6_beqic")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
 
-[node name="wire_cube" parent="KOZ" instance=ExtResource("7_ru6bs")]
+[node name="wire_cube" parent="Station/KOZ" instance=ExtResource("7_ru6bs")]
 transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
-[node name="BakedPotato" type="MeshInstance3D" parent="."]
+[node name="BakedPotato" type="MeshInstance3D" parent="Station"]
 transform = Transform3D(26.05, 0, 0, 0, 26.05, 0, 0, 0, 26.05, 0, 0, 0)
 visibility_range_end = 10000000.0
 mesh = SubResource("ArrayMesh_y4kea")
 skeleton = NodePath("")
+
+[node name="LightPrick" type="MeshInstance3D" parent="."]
+mesh = SubResource("PointMesh_b0wiu")

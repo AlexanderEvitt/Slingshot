@@ -3,6 +3,7 @@ using System;
 using System.Dynamic;
 
 [GlobalClass]
+
 public partial class Body : Node3D
 {
     private Node3D parentBody;

@@ -14,8 +14,11 @@ flip_faces = true
 size = Vector2(2, 2)
 
 [node name="ExternalScreen" type="HBoxContainer"]
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ExternalUI" type="SubViewportContainer" parent="."]
 layout_mode = 2
@@ -42,9 +45,9 @@ zoom_distance = 0.1
 [node name="CameraRotator" type="Node3D" parent="ExternalUI/SubViewport/PlayerShip/CameraRig"]
 
 [node name="Camera3D" type="Camera3D" parent="ExternalUI/SubViewport/PlayerShip/CameraRig/CameraRotator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.276423536147513e-50, 0, 0.1)
 current = true
-fov = 50.0
+fov = 45.0
 near = 0.001
 far = 10000000.0
 

@@ -22,12 +22,12 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	# Pass the velocity to the berth (for collider)
 	if current_berth != null and current_berth.get_child(0).name == "berth":
-		var body_collider: BodyCollider = current_berth.get_child(0)
+		var body_collider: Berth = current_berth.get_child(0)
 		body_collider.set_velocity(fetch_velocity(SimTime.t) - ShipData.floating_frame_velocity)
 
 func update_berth() -> void:
 	# Load the berth meshes
-	var full_berth: Node3D = preload("res://scenes/simulation/bodies/stations/components/berth.tscn").instantiate()
+	var full_berth: Berth = preload("res://scenes/simulation/bodies/stations/components/berth.tscn").instantiate()
 	var simplified_berth: Node3D = preload("res://scenes/simulation/bodies/stations/components/simplified_berth.tscn").instantiate()
 
 	# Only run this if the ship's station is this station
@@ -51,6 +51,10 @@ func update_berth() -> void:
 		# Add a berth to the new berth
 		if current_berth != null:
 			current_berth.add_child(full_berth)
+			
+		# Attach clamps if you're already docked
+		if ShipData.player_ship.berthed:
+			full_berth.attach_clamps()
 
 # Fetch the state of the parent body when asked
 func fetch(time: float) -> Vector3:

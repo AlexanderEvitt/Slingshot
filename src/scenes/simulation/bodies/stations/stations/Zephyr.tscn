@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=4 uid="uid://b0s1bdqqag6dw"]
 
 [ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://scenes/simulation/bodies/stations/components/station_manager.gd" id="1_hn7g8"]
+[ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://scenes/simulation/bodies/Body.cs" id="1_ntdx0"]
 [ext_resource type="PackedScene" uid="uid://bty856a1y2vt0" path="res://scenes/simulation/bodies/stations/components/stump.tscn" id="2_o24in"]
-[ext_resource type="Environment" uid="uid://bv1aqa2gbpa6t" path="res://scenes/simulation/external_environment.tres" id="2_urlyi"]
 [ext_resource type="PackedScene" uid="uid://cr6y3tpnww4h7" path="res://scenes/simulation/bodies/stations/components/ring.tscn" id="3_e7nfi"]
 [ext_resource type="PackedScene" uid="uid://bkei6pvqd0x5g" path="res://scenes/simulation/bodies/stations/components/shipyard.tscn" id="4_goyf3"]
 [ext_resource type="PackedScene" uid="uid://b51mp318qc6wr" path="res://scenes/orbit/koz/wire_sphere.tscn" id="5_psudm"]
@@ -44,55 +44,49 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_54jvb")
 
-[node name="Station" type="Node3D"]
+[node name="Zephyr" type="Node3D" groups=["Stations"]]
+process_priority = 13
+editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
+script = ExtResource("1_ntdx0")
+a = 42164.0
+theta0 = 3.142
+
+[node name="Station" type="Node3D" parent="."]
 script = ExtResource("1_hn7g8")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("2_urlyi")
-
-[node name="stump" parent="." instance=ExtResource("2_o24in")]
+[node name="stump" parent="Station" instance=ExtResource("2_o24in")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28.774, 0)
 
-[node name="ring1" parent="." instance=ExtResource("3_e7nfi")]
+[node name="ring1" parent="Station" instance=ExtResource("3_e7nfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.76, 0)
 
-[node name="ring2" parent="." instance=ExtResource("3_e7nfi")]
+[node name="ring2" parent="Station" instance=ExtResource("3_e7nfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35.639, 0)
 flip = -1
 
-[node name="shipyard" parent="." instance=ExtResource("4_goyf3")]
+[node name="shipyard" parent="Station" instance=ExtResource("4_goyf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38.881, 0)
 
-[node name="KOZ" type="Node3D" parent="."]
+[node name="KOZ" type="Node3D" parent="Station"]
 visible = false
 
-[node name="wire_sphere" parent="KOZ" instance=ExtResource("5_psudm")]
+[node name="wire_sphere" parent="Station/KOZ" instance=ExtResource("5_psudm")]
 transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 29.32, 0, 0, 0)
 
-[node name="wire_cylinder" parent="KOZ" instance=ExtResource("6_d8yrx")]
+[node name="wire_cylinder" parent="Station/KOZ" instance=ExtResource("6_d8yrx")]
 transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
 
-[node name="wire_cylinder2" parent="KOZ" instance=ExtResource("6_d8yrx")]
+[node name="wire_cylinder2" parent="Station/KOZ" instance=ExtResource("6_d8yrx")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
 
-[node name="wire_cylinder3" parent="KOZ" instance=ExtResource("6_d8yrx")]
+[node name="wire_cylinder3" parent="Station/KOZ" instance=ExtResource("6_d8yrx")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
 
-[node name="wire_cube" parent="KOZ" instance=ExtResource("7_jhtc2")]
+[node name="wire_cube" parent="Station/KOZ" instance=ExtResource("7_jhtc2")]
 transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
-[node name="Ball" type="MeshInstance3D" parent="."]
+[node name="Ball" type="MeshInstance3D" parent="Station"]
 transform = Transform3D(29.775, 0, 0, 0, 29.775, 0, 0, 0, 29.775, 0, 0, 0)
 visibility_range_end = 10000000.0
 mesh = SubResource("ArrayMesh_77ytm")
 skeleton = NodePath("")
-
-[node name="BigSunLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.66029, 0, 0.751011, 0, 1, 0, -0.751011, 0, -0.66029, 0, 0, 0)
-visible = false
-light_cull_mask = 4294967289
-shadow_enabled = true
-directional_shadow_split_1 = 0.01
-directional_shadow_split_2 = 0.1
-directional_shadow_max_distance = 1000.0
-sky_mode = 1

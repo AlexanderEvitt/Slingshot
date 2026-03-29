@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=4 uid="uid://dxbqssxh6kpdo"]
+[gd_scene load_steps=11 format=4 uid="uid://dxbqssxh6kpdo"]
 
+[ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://scenes/simulation/bodies/Body.cs" id="1_0gn41"]
 [ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://scenes/simulation/bodies/stations/components/station_manager.gd" id="1_6fdwo"]
 [ext_resource type="PackedScene" uid="uid://bty856a1y2vt0" path="res://scenes/simulation/bodies/stations/components/stump.tscn" id="2_j4e1c"]
 [ext_resource type="PackedScene" uid="uid://cr6y3tpnww4h7" path="res://scenes/simulation/bodies/stations/components/ring.tscn" id="3_cwtld"]
@@ -42,53 +43,61 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_mq5qg")
 
-[node name="Station" type="Node3D"]
+[node name="Yugala" type="Node3D" groups=["Stations"]]
+process_priority = 13
+editor_description = "YUGALA ORBITAL is the largest station in proximity to Mars. It acts as a vital military base providing protection to the inner planets from pirates and thieves."
+script = ExtResource("1_0gn41")
+a = 42164.0
+theta0 = 3.142
+
+[node name="Station" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("1_6fdwo")
 berth_path = "round_port/Port/{}/docks/Docks/{}/"
 
-[node name="stump" parent="." instance=ExtResource("2_j4e1c")]
+[node name="stump" parent="Station" instance=ExtResource("2_j4e1c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 0)
 
-[node name="stump2" parent="." instance=ExtResource("2_j4e1c")]
+[node name="stump2" parent="Station" instance=ExtResource("2_j4e1c")]
 transform = Transform3D(1, 0, 0, 0, -1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 7, 0)
 
-[node name="ring1" parent="." instance=ExtResource("3_cwtld")]
+[node name="ring1" parent="Station" instance=ExtResource("3_cwtld")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
-[node name="round_port" parent="." instance=ExtResource("3_trdss")]
+[node name="round_port" parent="Station" instance=ExtResource("3_trdss")]
 
-[node name="ring2" parent="." instance=ExtResource("3_cwtld")]
+[node name="ring2" parent="Station" instance=ExtResource("3_cwtld")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 flip = -1
 
-[node name="KOZ" type="Node3D" parent="."]
+[node name="KOZ" type="Node3D" parent="Station"]
 visible = false
 
-[node name="wire_sphere" parent="KOZ" instance=ExtResource("5_7v3g0")]
+[node name="wire_sphere" parent="Station/KOZ" instance=ExtResource("5_7v3g0")]
 transform = Transform3D(5.5, 0, 0, 0, 5.5, 0, 0, 0, 5.5, 0, -12.49, 0)
 
-[node name="wire_sphere2" parent="KOZ" instance=ExtResource("5_7v3g0")]
+[node name="wire_sphere2" parent="Station/KOZ" instance=ExtResource("5_7v3g0")]
 transform = Transform3D(5.5, 0, 0, 0, 5.5, 0, 0, 0, 5.5, 0, 12.49, 0)
 
-[node name="wire_cylinder" parent="KOZ" instance=ExtResource("6_rgc37")]
+[node name="wire_cylinder" parent="Station/KOZ" instance=ExtResource("6_rgc37")]
 transform = Transform3D(0.5, 0, 0, 0, 12, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="wire_cylinder2" parent="KOZ" instance=ExtResource("6_rgc37")]
+[node name="wire_cylinder2" parent="Station/KOZ" instance=ExtResource("6_rgc37")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 4, 0)
 
-[node name="wire_cylinder3" parent="KOZ" instance=ExtResource("6_rgc37")]
+[node name="wire_cylinder3" parent="Station/KOZ" instance=ExtResource("6_rgc37")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, -4, 0)
 
-[node name="wire_cylinder4" parent="KOZ" instance=ExtResource("6_rgc37")]
+[node name="wire_cylinder4" parent="Station/KOZ" instance=ExtResource("6_rgc37")]
 transform = Transform3D(2.475, 0, 0, 0, 0.415, 0, 0, 0, 3.11, 0, 0.104842, 0)
 
-[node name="Ball" type="MeshInstance3D" parent="."]
+[node name="Ball" type="MeshInstance3D" parent="Station"]
 transform = Transform3D(4.37542, -2.41985, 0, 2.41985, 4.37542, 0, 0, 0, 5, 0, -12.4911, 0)
 visibility_range_end = 10000000.0
 mesh = SubResource("ArrayMesh_4gi2o")
 skeleton = NodePath("")
 
-[node name="Ball2" type="MeshInstance3D" parent="."]
+[node name="Ball2" type="MeshInstance3D" parent="Station"]
 transform = Transform3D(4.37542, -2.41985, 0, 2.08854, 3.77637, 2.52527, -1.22216, -2.20983, 4.31544, 0, 12.49, 0)
 visibility_range_end = 10000000.0
 mesh = SubResource("ArrayMesh_4gi2o")
