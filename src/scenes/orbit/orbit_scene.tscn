@@ -501,7 +501,6 @@ script = ExtResource("9_2beyu")
 body_path = "SolarSystem/Earth/Luna/Endurance"
 
 [node name="Plotter" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance"]
-visible = false
 script = ExtResource("5_vmpxk")
 color = Color(1, 0.6, 0, 1)
 
@@ -538,7 +537,6 @@ outline_size = 6
 horizontal_alignment = 0
 
 [node name="KOZ" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance"]
-transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 
 [node name="wire_sphere" parent="SolarSystem/Earth/Luna/Endurance/KOZ" instance=ExtResource("11_8re0r")]
 transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 55.295, 0, 0, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://b0s1bdqqag6dw"]
+[gd_scene load_steps=14 format=4 uid="uid://b0s1bdqqag6dw"]
 
 [ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://scenes/simulation/bodies/stations/components/station_manager.gd" id="1_hn7g8"]
 [ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://scenes/simulation/bodies/Body.cs" id="1_ntdx0"]
@@ -43,6 +43,14 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_54jvb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4lwe"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.65, 0.65, 0.65, 1)
+
+[sub_resource type="PointMesh" id="PointMesh_8pjhb"]
+material = SubResource("StandardMaterial3D_t4lwe")
 
 [node name="Zephyr" type="Node3D" groups=["Stations"]]
 process_priority = 13
@@ -90,3 +98,6 @@ transform = Transform3D(29.775, 0, 0, 0, 29.775, 0, 0, 0, 29.775, 0, 0, 0)
 visibility_range_end = 10000000.0
 mesh = SubResource("ArrayMesh_77ytm")
 skeleton = NodePath("")
+
+[node name="LightPrick" type="MeshInstance3D" parent="."]
+mesh = SubResource("PointMesh_8pjhb")

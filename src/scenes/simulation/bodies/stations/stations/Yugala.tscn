@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dxbqssxh6kpdo"]
+[gd_scene load_steps=13 format=4 uid="uid://dxbqssxh6kpdo"]
 
 [ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://scenes/simulation/bodies/Body.cs" id="1_0gn41"]
 [ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://scenes/simulation/bodies/stations/components/station_manager.gd" id="1_6fdwo"]
@@ -42,6 +42,14 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_mq5qg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gn41"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.65, 0.65, 0.65, 1)
+
+[sub_resource type="PointMesh" id="PointMesh_s56iw"]
+material = SubResource("StandardMaterial3D_0gn41")
 
 [node name="Yugala" type="Node3D" groups=["Stations"]]
 process_priority = 13
@@ -102,3 +110,11 @@ transform = Transform3D(4.37542, -2.41985, 0, 2.08854, 3.77637, 2.52527, -1.2221
 visibility_range_end = 10000000.0
 mesh = SubResource("ArrayMesh_4gi2o")
 skeleton = NodePath("")
+
+[node name="LightPrick" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.055902197957039e-10, -3.055902197957039e-10, 11.99999999969441)
+mesh = SubResource("PointMesh_s56iw")
+
+[node name="LightPrick2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.055902197957039e-10, -3.055902197957039e-10, -12.00000000030559)
+mesh = SubResource("PointMesh_s56iw")

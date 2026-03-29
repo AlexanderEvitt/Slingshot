@@ -58,7 +58,7 @@ process_priority = 13
 editor_description = "ENDURANCE is the gateway station to Shackleton crater, the largest city on Luna. As the sister station to Zephyr, countless ships make the run between them each cycle."
 script = ExtResource("1_6lb0h")
 a = 36618.0
-e = 0.7
+e = 0.6999999999999978
 i = 1.571
 argp = 1.571
 
