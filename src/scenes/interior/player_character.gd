@@ -12,7 +12,7 @@ extends Node3D
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var raycast: RayCast3D = $Head/RayCast3D
 @onready var crosshair: Control = $Head/Camera3D/Crosshair
-@onready var pause_menu: Control = $Head/Camera3D/PauseMenu
+@onready var pause_menu: Control = $PauseMenu
 @onready var background: MeshInstance3D = $Head/Camera3D/Background
 @onready var external_screen: HBoxContainer = $ExternalScreen
 

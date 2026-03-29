@@ -163,7 +163,10 @@ func integrate_normally(dt: float, prev_gravity: Vector3) -> void:
 	
 	# Euler integrate for position and velocity
 	velocity = velocity + acceleration*dt
-	move_and_slide()#position = position + velocity*dt
+	if SimTime.step == 1.0:
+		move_and_slide()
+	else:
+		position = position + velocity*dt
 	
 	# Update system variables for external use
 	system_position = position + ShipData.get_floating_frame_origin()

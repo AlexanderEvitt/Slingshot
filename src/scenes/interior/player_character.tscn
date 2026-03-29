@@ -53,11 +53,6 @@ grow_vertical = 2
 texture = ExtResource("2_lkkpu")
 expand_mode = 2
 
-[node name="PauseMenu" parent="Head/Camera3D" instance=ExtResource("3_bj60k")]
-visible = false
-anchor_top = 0.39
-anchor_bottom = 0.61
-
 [node name="Background" type="MeshInstance3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 mesh = SubResource("QuadMesh_5k5g7")
@@ -89,3 +84,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.494880308221372, 0)
 shape = SubResource("CapsuleShape3D_5k5g7")
 disabled = true
 debug_fill = false
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_bj60k")]
+visible = false
+anchor_top = 0.39
+anchor_bottom = 0.61
