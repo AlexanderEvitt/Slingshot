@@ -50,7 +50,7 @@ func _process(_delta: float) -> void:
 	rz.text = str(snapped(r.z, 1)) + "km"
 
 	# Set velocities
-	var v: Vector3 = Conversions.velocity_inertial_to_body(ship.velocity,SimTime.t)
+	var v: Vector3 = Conversions.velocity_inertial_to_body(ship.system_velocity,SimTime.t)
 	vx.text = str(snapped(v.x, 0.1)) + "km/s"
 	vy.text = str(snapped(v.y, 0.1)) + "km/s"
 	vz.text = str(snapped(v.z, 0.1)) + "km/s"

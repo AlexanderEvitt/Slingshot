@@ -1,5 +1,5 @@
 class_name PlayerShip
-extends CharacterBody3D
+extends RigidBody3D
 
 # State variables (system frame)
 # position & velocity are in floating reference frame
@@ -9,6 +9,7 @@ var acceleration := Vector3(0,0,0)
 var attitude: Basis
 var gravity_acceleration := Vector3(0,0,0) # just gravity
 var thrust_acceleration := Vector3(0,0,0) # just thrust (all sources, ship frame)
+var force := Vector3(0,0,0) # all forces applied to vehicle
 
 # Engine variables
 var torque := Vector3(0,0,0)
@@ -16,7 +17,6 @@ var thrust := Vector3(0,0,0)
 
 # Vehicle mass
 var dry_mass := 613280.0 # kg
-var total_mass := dry_mass # kg (updated by propulsion)
 
 # Children components
 @onready var attitude_module: AttitudeModule = $AttitudeModule
@@ -49,9 +49,6 @@ signal collided
 signal waypoints_updated
 signal berth_updated
 
-# Collider
-@onready var shape_node: CollisionShape3D = $CollisionShape3D
-
 # Data on where you are docked
 var berthed := true
 # Path to station from sim_root (needed to save)
@@ -66,6 +63,7 @@ var berth_offset := Vector3(0.07,0,0)
 # Tell the selection panel that this isn't a station you can dock with
 var is_station := false
 
+var prev_velocity := Vector3(0,0,0)
 
 func _ready() -> void:
 	# Initialize values
@@ -78,17 +76,15 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Update values for this iteration
-	attitude = attitude_module.transform.basis
+	attitude = transform.basis
 	torque = attitude_module.torque
-	
-	# Update attitude for collision shape
-	#shape_node.transform.basis = attitude
+	#print(system_position.length())
 	
 	# Update thrust
 	thrust = propulsion_module.thrust
 	
 	# Update total vehicle mass
-	total_mass = dry_mass + propulsion_module.he_quant + propulsion_module.de_quant
+	mass = dry_mass + propulsion_module.he_quant + propulsion_module.de_quant
 	
 	# Attach ship to dock if docked
 	if berthed:
@@ -102,8 +98,6 @@ func _physics_process(delta: float) -> void:
 		ShipData.floating_frame_position = system_position
 		ShipData.floating_frame_velocity = system_velocity
 		ShipData.floating_frame_time = SimTime.t
-		position = Vector3(0,0,0)
-		velocity = Vector3(0,0,0)
 
 	# Integrate regularly
 	else:
@@ -122,8 +116,6 @@ func _physics_process(delta: float) -> void:
 			attitude_module.update(dt)
 			propulsion_module.update(dt)
 			
-			integrate_normally(dt, gravity_acceleration)
-			
 		# Dock/undock if key is pressed
 	if Input.is_action_just_pressed("dock"):
 		if berthed:
@@ -133,51 +125,58 @@ func _physics_process(delta: float) -> void:
 			var berth_position: Vector3 = station.fetch(SimTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
 			var berth_error: float = (berth_position - system_position).length()
 			# Allow docking only within five meters
-			if berth_error < 0.005:
+			if berth_error < 5.0:
 				berthed = true
 				att_clamp.emit()
-				
-	# Set attitude
-	transform.basis = attitude
 	
 	# Pass plotter position to plotter (it's a C# module)
 	plotter.positions = propagate_module.get("plotted_positions")
 
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if false and state.get_contact_count() > 0:
+		print("Contacts: ", state.get_contact_count())
+		print("  Position: ", state.get_contact_local_position(0))
+		print("  Normal: ", state.get_contact_local_normal(0))
+		print("  Collider: ", state.get_contact_collider_object(0))
+	gravity_acceleration = propagate_module.Acceleration(system_position,SimTime.prev_t)
+	#print(state.transform.origin.length())
+	force = attitude*(thrust/1000.0) + mass*gravity_acceleration
+	acceleration = force/mass # for ui
+
+	if berthed:
+		state.linear_velocity = Vector3(0,0,0)
+		state.transform.origin = Vector3(0,0,0)
+	elif SimTime.step == 1.0:
+		custom_integrator = false
+		
+		state.apply_central_force(force)
+		state.apply_torque(torque)
+		#print("Integrated!")
+	else:
+		custom_integrator = true
+		# Calculate acceleration on vehicle
+		# Euler integrate position
+		state.linear_velocity = state.linear_velocity + acceleration*SimTime.step*state.step
+		state.transform.origin = state.transform.origin + state.linear_velocity*SimTime.step*state.step
+		# Take target attitude from attitude_module
+		state.transform.basis = attitude
+	
+	# Update system variables for external use
+	system_position = state.transform.origin + ShipData.get_floating_frame_origin()
+	system_velocity = state.linear_velocity + ShipData.floating_frame_velocity
+	
 	# Reset floating frame when vehicle strays too far
-	if position.length() > 1.0 or velocity.length() > 1.0:
+	if state.transform.origin.length() > 1.0 or state.linear_velocity.length() > 1.0:
 		# Assign new origin coords
 		ShipData.floating_frame_position = system_position
 		ShipData.floating_frame_velocity = system_velocity
 		ShipData.floating_frame_time = SimTime.t
-		#print("Reinit: ", position.length(), " ", velocity.length())
 		
 		# Update vehicle coords
-		position = system_position - ShipData.get_floating_frame_origin()
-		velocity = system_velocity - ShipData.floating_frame_velocity
-
-
-func integrate_normally(dt: float, prev_gravity: Vector3) -> void:
-	# Calculate acceleration on vehicle
-	thrust_acceleration = (thrust/1000.0)/total_mass # acceleration from all sources of thrust
-	acceleration = attitude*thrust_acceleration + prev_gravity # current state depends on previous state
-	
-	# Euler integrate for position and velocity
-	velocity = velocity + acceleration*dt
-	if SimTime.step == 1.0:
-		move_and_slide()
-	else:
-		position = position + velocity*dt
-	
-	# Update system variables for external use
-	system_position = position + ShipData.get_floating_frame_origin()
-	system_velocity = velocity + ShipData.floating_frame_velocity
-	
-	# Print collision data
-	var collision_data: KinematicCollision3D = get_last_slide_collision()
-	if collision_data != null:
-		print("Collided at t=0", SimTime.t)
-		print("	Collider velocity:", collision_data.get_collider_velocity())
-		print("	Relative velocity:", velocity - collision_data.get_collider_velocity())
+		state.transform.origin = system_position - ShipData.get_floating_frame_origin()
+		state.linear_velocity = system_velocity - ShipData.floating_frame_velocity
+		print("Reinit: ", state.transform.origin.length(), " ", state.linear_velocity.length())
+		
 
 func fetch(_time: float) -> Vector3:
 	# Return origin of ship frame
@@ -246,7 +245,7 @@ func initialize(save_dict: Dictionary) -> void:
 	system_position = Vector3(px, py, pz)
 	system_velocity = Vector3(vx, vy, vz)
 	position = system_position
-	velocity = system_velocity
+	linear_velocity = system_velocity
 
 	attitude_module.rotation.x = save_dict.get("rotation_x", 0.0)
 	attitude_module.rotation.y = save_dict.get("rotation_y", 0.0)
@@ -256,4 +255,3 @@ func initialize(save_dict: Dictionary) -> void:
 	var saved_station_path: String = save_dict.get("station_path", NodePath(""))
 	assign_berth(saved_station_path)
 	berthed = save_dict.get("berthed", false)
-	print("Initialized!")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cl2jnao8fn6iy"]
+[gd_scene format=3 uid="uid://cl2jnao8fn6iy"]
 
 [ext_resource type="Script" uid="uid://cc283l37nveuy" path="res://ships/player_ship.gd" id="1_banjw"]
 [ext_resource type="Script" uid="uid://8foh3a4rsbjc" path="res://ships/modules/attitude_module.gd" id="2_stb5n"]
@@ -13,9 +13,7 @@
 [ext_resource type="Script" uid="uid://xet38inpduig" path="res://scenes/simulation/bodies/draw_spacecraft_orbit.gd" id="11_afq5u"]
 [ext_resource type="Script" uid="uid://jueht3juf68m" path="res://visuals/impact.gd" id="12_x0ifl"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fdpi8"]
-margin = 0.0
-size = Vector3(0.05843319023733784, 0.015, 0.015)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0ifl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhx50"]
 emission_enabled = true
@@ -78,252 +76,265 @@ radial_steps = 5
 sections = 2
 section_length = 0.02
 
-[node name="PlayerShip" type="CharacterBody3D"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4naxx"]
+points = PackedVector3Array(-24.683578, -3.8583288, -4.0885596, -19.404303, -5.694786, 6.241107, -18.255978, -4.3185215, 4.862685, -23.994728, 8.536678, 0.27239656, -17.797943, -3.8583288, -4.317892, -23.994728, -5.9248824, 6.241107, -17.568565, 5.551177, 0.27239656, -19.404303, -5.694786, -6.1549788, -23.994728, -5.694786, -6.1549788, -19.404303, 8.536678, -0.18626831, -24.683578, 5.551177, 0.27239656, -17.33775, -3.1694775, 3.71481, -24.683578, -3.3995738, 3.9453557, -19.404303, 8.536678, 0.27239656, -23.994728, 8.536678, -0.18626831, -17.33775, -3.1694775, -3.6286817, -17.33775, 5.0924225, -0.18626831, -19.404303, -5.9248824, 6.241107, -23.902474140941447, -5.927878510257902, -5.963362921669358, -17.797943, -4.088425, -4.317892, -23.994728, -5.694786, 6.241107, -24.223385, 8.076486, -0.18626831, -18.945549, -5.4661274, -5.6951003, -24.223385, -5.236031, 5.7812285, -19.490817774499842, -5.7593481901828305, -5.821165463080416, -24.223385, -5.236031, -5.6951003, -18.255978, -4.5471797, 4.862685, -24.223385, 8.076486, 0.27239656, -24.683578, 5.551177, -0.18626831, -23.91367240843015, -5.955445127469876, 5.848466778268382, -18.945549, 7.847827, -0.18626831, -24.683578, -3.6296706, -4.0885596)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x0ifl"]
+points = PackedVector3Array(26.155378, 4.010751, 5.0063105, -6.273629469012466, -3.443999391931909, -7.307678956488059, -6.353671982217522, 3.1677079195215136, -7.353419237295137, -12.702089732542415, 2.524037942239527, 5.235286980592577, 1.836998, -7.509719, 5.646848, 24.234768, -3.0268943, -7.1533804, 1.836998, 7.2111216, -5.8738084, 24.876308, -6.8670506, -1.3930519, 24.876308, 7.2111216, 1.1660917, 24.876308, -3.0268943, 6.92642, -5.686397952876911, 6.753017460584947, 5.288331986835716, -5.768102848737149, -7.098602470352684, -4.947304637443475, 24.234768, 2.729738, -7.7939177, -12.881997702302243, -5.246703905257356, -2.5122588422772583, -12.323270232212305, 5.562209308466228, -2.517755416421391, -7.330083469933523, -2.2239015675834897, 7.0068118361000336, -5.588825202643573, 4.313867811646323, 7.030383050658766, -12.478176165438441, -5.139480806183681, 2.822610856703429, 26.155378, 4.6490955, -4.592733, 26.155378, -6.227265, -2.6726236, 1.836998, -4.947693, 7.5669575, -12.633484987274393, -2.2197264771937624, -5.44295207957347, 22.172802952095598, 2.398443458723705, 6.683159414426388, -6.295353538050781, -7.055637042795653, 4.690458391228462, 26.155378, -4.309348, 5.0063105, 1.836998, 4.6490955, -7.7939177, -12.846348680096305, 4.939989200900834, 2.880128800052691, -5.423002360610411, 6.601541272045843, -5.396745598637245, 0.6436556119717167, 6.374631744367319, 5.558613996357589, -12.36473523672905, 2.476616040953673, -5.367366217707433, -12.343824202884825, -2.770961074758231, 5.1345248076747945, -8.038257994289284, 6.730459605926104, 3.4759585722876984)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x0ifl"]
+height = 0.02
+radius = 0.004
+
+[node name="PlayerShip" type="RigidBody3D" unique_id=1171326679]
 editor_description = "FV JUNIPER is a Hedge-class frigate in service as privateer vessel. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
-collision_layer = 0
-motion_mode = 1
+mass = 613280.0
+physics_material_override = SubResource("PhysicsMaterial_x0ifl")
+gravity_scale = 0.0
+center_of_mass_mode = 1
+can_sleep = false
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+angular_damp = 1.0
 script = ExtResource("1_banjw")
 
-[node name="AttitudeModule" type="Node3D" parent="."]
+[node name="AttitudeModule" type="Node3D" parent="." unique_id=1745240300]
 transform = Transform3D(-1, 1.22465e-16, 0, -7.4988e-33, -6.12323e-17, 1, 1.22465e-16, 1, 6.12323e-17, 0, 0, 0)
 script = ExtResource("2_stb5n")
 
-[node name="PropagateModule" type="Node3D" parent="."]
+[node name="PropagateModule" type="Node3D" parent="." unique_id=537055654]
 script = ExtResource("3_whyg7")
 n = 20
 
-[node name="PropulsionModule" type="Node3D" parent="."]
+[node name="PropulsionModule" type="Node3D" parent="." unique_id=1054886356]
 script = ExtResource("4_emkjj")
 
-[node name="NavigationModule" type="Node3D" parent="."]
+[node name="NavigationModule" type="Node3D" parent="." unique_id=1304022728]
 script = ExtResource("5_4mkdq")
 
-[node name="Plotter" type="Node3D" parent="."]
+[node name="Plotter" type="Node3D" parent="." unique_id=1222984937]
 visible = false
 script = ExtResource("11_afq5u")
 color = Color(1, 0.690196, 0, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00421659555286169, 0, 0)
-shape = SubResource("BoxShape3D_fdpi8")
-
-[node name="Plumes" type="Node3D" parent="."]
+[node name="Plumes" type="Node3D" parent="." unique_id=1759647564]
 transform = Transform3D(0.13879, 0, 0, 0, 0.13879, 0, 0, 0, 0.13879, -0.0290583, 0, 0)
 
-[node name="Plume" parent="Plumes" instance=ExtResource("6_l24nu")]
+[node name="Plume" parent="Plumes" unique_id=8350428 instance=ExtResource("6_l24nu")]
 transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, 0, 0)
 
-[node name="Thrusters" type="Node3D" parent="."]
+[node name="Thrusters" type="Node3D" parent="." unique_id=376407541]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="Thruster1" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster1" parent="Thrusters" unique_id=1794544602 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 23.016, 5.86845, 0)
 down = true
 
-[node name="Thruster2" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster2" parent="Thrusters" unique_id=1018469792 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 21.3994, 5.86845, 0)
 down = true
 
-[node name="Thruster3" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster3" parent="Thrusters" unique_id=1079345375 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, 23.016, 6.08327, 0.711069)
 left = true
 roll_left = true
 
-[node name="Thruster4" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster4" parent="Thrusters" unique_id=522282987 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, 21.3994, 6.08327, 0.711069)
 left = true
 roll_left = true
 
-[node name="Thruster5" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster5" parent="Thrusters" unique_id=1368182524 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, 23.016, 6.08327, -0.711)
 right = true
 roll_right = true
 
-[node name="Thruster6" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster6" parent="Thrusters" unique_id=2032455979 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, 21.3994, 6.08327, -0.711)
 right = true
 roll_right = true
 
-[node name="Thruster7" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster7" parent="Thrusters" unique_id=876147944 instance=ExtResource("7_u2ume")]
 transform = Transform3D(9.18485e-15, 150, 0, -150, 9.18485e-15, 0, 0, 0, 150, 24.3485, 6.08418, 0)
 
-[node name="Thruster8" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster8" parent="Thrusters" unique_id=1795381733 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -150, -1.83697e-14, 0, 1.83697e-14, -150, 23.0036, -5.87698, 3.94772e-05)
 up = true
 
-[node name="Thruster9" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster9" parent="Thrusters" unique_id=1779520185 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -150, -1.83697e-14, 0, 1.83697e-14, -150, 21.4029, -5.87698, 3.94772e-05)
 up = true
 
-[node name="Thruster10" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster10" parent="Thrusters" unique_id=928437157 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, 23.016, -6.07937, -0.71103)
 right = true
 roll_left = true
 
-[node name="Thruster11" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster11" parent="Thrusters" unique_id=1516758059 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, 21.3994, -6.07937, -0.71103)
 right = true
 roll_left = true
 
-[node name="Thruster12" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster12" parent="Thrusters" unique_id=1584395037 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 4.59243e-14, -150, 0, 150, 4.59243e-14, 23.016, -6.07937, 0.711039)
 left = true
 roll_right = true
 
-[node name="Thruster13" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster13" parent="Thrusters" unique_id=403229060 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 4.59243e-14, -150, 0, 150, 4.59243e-14, 21.3994, -6.07937, 0.711039)
 left = true
 roll_right = true
 
-[node name="Thruster14" parent="Thrusters" instance=ExtResource("7_u2ume")]
+[node name="Thruster14" parent="Thrusters" unique_id=721779483 instance=ExtResource("7_u2ume")]
 transform = Transform3D(9.18485e-15, 150, 0, 150, -9.18485e-15, -1.83697e-14, -1.83697e-14, 1.12482e-30, -150, 24.3485, -6.07937, 3.94772e-05)
 
-[node name="Pod1" type="Node3D" parent="Thrusters"]
+[node name="Pod1" type="Node3D" parent="Thrusters" unique_id=857105745]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)
 
-[node name="Thruster1" parent="Thrusters/Pod1" instance=ExtResource("7_u2ume")]
+[node name="Thruster1" parent="Thrusters/Pod1" unique_id=1535410166 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -16.37, 9.20155, 0)
 up = true
 
-[node name="Thruster2" parent="Thrusters/Pod1" instance=ExtResource("7_u2ume")]
+[node name="Thruster2" parent="Thrusters/Pod1" unique_id=1828647930 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, -16.368, 9.04997, 0.144937)
 roll_left = true
 
-[node name="Thruster3" parent="Thrusters/Pod1" instance=ExtResource("7_u2ume")]
+[node name="Thruster3" parent="Thrusters/Pod1" unique_id=1980545682 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, -16.368, 9.05, -0.145)
 roll_right = true
 
-[node name="Thruster4" parent="Thrusters/Pod1" instance=ExtResource("7_u2ume")]
+[node name="Thruster4" parent="Thrusters/Pod1" unique_id=1736276462 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -19.5736, 9.20155, 0)
 up = true
 
-[node name="Thruster5" parent="Thrusters/Pod1" instance=ExtResource("7_u2ume")]
+[node name="Thruster5" parent="Thrusters/Pod1" unique_id=1880730672 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 9.18485e-15, -150, 0, 150, 9.18485e-15, -19.5716, 9.04997, 0.144937)
 roll_left = true
 
-[node name="Thruster6" parent="Thrusters/Pod1" instance=ExtResource("7_u2ume")]
+[node name="Thruster6" parent="Thrusters/Pod1" unique_id=1941031123 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -2.75546e-14, 150, 0, -150, -2.75546e-14, -19.5716, 9.05, -0.145)
 roll_right = true
 
-[node name="Thruster7" parent="Thrusters/Pod1" instance=ExtResource("7_u2ume")]
+[node name="Thruster7" parent="Thrusters/Pod1" unique_id=1815619404 instance=ExtResource("7_u2ume")]
 transform = Transform3D(9.18485e-15, 150, 0, -150, 9.18485e-15, 0, 0, 0, 150, -14.9866, 9.05106, 0)
 
-[node name="Thruster8" parent="Thrusters/Pod1" instance=ExtResource("7_u2ume")]
+[node name="Thruster8" parent="Thrusters/Pod1" unique_id=1437680595 instance=ExtResource("7_u2ume")]
 transform = Transform3D(-2.75546e-14, -150, 0, 150, -2.75546e-14, 0, 0, 0, 150, -20.9412, 9.05106, 0)
 
-[node name="Pod2NR" type="Node3D" parent="Thrusters"]
+[node name="Pod2NR" type="Node3D" parent="Thrusters" unique_id=1722779014]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)
 
-[node name="Thruster1" parent="Thrusters/Pod2NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster1" parent="Thrusters/Pod2NR" unique_id=1470586822 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -16.37, -6.50648, 6.50648)
 down = true
 
-[node name="Thruster2" parent="Thrusters/Pod2NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster2" parent="Thrusters/Pod2NR" unique_id=1957993804 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -16.368, -6.50178, 6.29681)
 roll_left = true
 
-[node name="Thruster3" parent="Thrusters/Pod2NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster3" parent="Thrusters/Pod2NR" unique_id=1700786618 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 106.066, -106.066, 0, 106.066, 106.066, -16.368, -6.29679, 6.50185)
 roll_right = true
 
-[node name="Thruster4" parent="Thrusters/Pod2NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster4" parent="Thrusters/Pod2NR" unique_id=1551098421 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -19.5736, -6.50648, 6.50648)
 down = true
 
-[node name="Thruster5" parent="Thrusters/Pod2NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster5" parent="Thrusters/Pod2NR" unique_id=1618524746 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -19.5716, -6.50178, 6.29681)
 roll_left = true
 
-[node name="Thruster6" parent="Thrusters/Pod2NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster6" parent="Thrusters/Pod2NR" unique_id=396925160 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 106.066, -106.066, 0, 106.066, 106.066, -19.5716, -6.29679, 6.50185)
 roll_right = true
 
-[node name="Thruster7" parent="Thrusters/Pod2NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster7" parent="Thrusters/Pod2NR" unique_id=1811745906 instance=ExtResource("7_u2ume")]
 transform = Transform3D(9.18485e-15, 150, 0, 106.066, -6.49467e-15, -106.066, -106.066, 6.49467e-15, -106.066, -14.9866, -6.40007, 6.40007)
 
-[node name="Thruster8" parent="Thrusters/Pod2NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster8" parent="Thrusters/Pod2NR" unique_id=1763410174 instance=ExtResource("7_u2ume")]
 transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, -106.066, 106.066, -1.9484e-14, -106.066, -20.9412, -6.40007, 6.40007)
 
-[node name="Pod3NR" type="Node3D" parent="Thrusters"]
+[node name="Pod3NR" type="Node3D" parent="Thrusters" unique_id=1769535924]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)
 
-[node name="Thruster1" parent="Thrusters/Pod3NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster1" parent="Thrusters/Pod3NR" unique_id=1945914409 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -16.37, -6.50648, -6.50648)
 down = true
 
-[node name="Thruster2" parent="Thrusters/Pod3NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster2" parent="Thrusters/Pod3NR" unique_id=679633728 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 106.066, 106.066, 0, -106.066, 106.066, -16.368, -6.29681, -6.50178)
 roll_left = true
 
-[node name="Thruster3" parent="Thrusters/Pod3NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster3" parent="Thrusters/Pod3NR" unique_id=1612983100 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -16.368, -6.50185, -6.29679)
 roll_right = true
 
-[node name="Thruster4" parent="Thrusters/Pod3NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster4" parent="Thrusters/Pod3NR" unique_id=1676901692 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -106.066, 106.066, 0, -106.066, -106.066, -19.5736, -6.50648, -6.50648)
 down = true
 
-[node name="Thruster5" parent="Thrusters/Pod3NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster5" parent="Thrusters/Pod3NR" unique_id=185315325 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, 106.066, 106.066, 0, -106.066, 106.066, -19.5716, -6.29681, -6.50178)
 roll_left = true
 
-[node name="Thruster6" parent="Thrusters/Pod3NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster6" parent="Thrusters/Pod3NR" unique_id=91631062 instance=ExtResource("7_u2ume")]
 transform = Transform3D(150, 0, 0, 0, -106.066, -106.066, 0, 106.066, -106.066, -19.5716, -6.50185, -6.29679)
 roll_right = true
 
-[node name="Thruster7" parent="Thrusters/Pod3NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster7" parent="Thrusters/Pod3NR" unique_id=1082823379 instance=ExtResource("7_u2ume")]
 transform = Transform3D(9.18485e-15, 150, 0, 106.066, -6.49467e-15, 106.066, 106.066, -6.49467e-15, -106.066, -14.9866, -6.40007, -6.40007)
 
-[node name="Thruster8" parent="Thrusters/Pod3NR" instance=ExtResource("7_u2ume")]
+[node name="Thruster8" parent="Thrusters/Pod3NR" unique_id=1903629924 instance=ExtResource("7_u2ume")]
 transform = Transform3D(-2.75546e-14, -150, 0, -106.066, 1.9484e-14, 106.066, -106.066, 1.9484e-14, -106.066, -20.9412, -6.40007, -6.40007)
 
-[node name="Lights" type="Node3D" parent="."]
+[node name="Lights" type="Node3D" parent="." unique_id=1715438560]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="Beacon" type="Node3D" parent="Lights"]
+[node name="Beacon" type="Node3D" parent="Lights" unique_id=216300834]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.92943, -7.23529, 0)
 script = ExtResource("8_kphao")
 
-[node name="Light" type="OmniLight3D" parent="Lights/Beacon"]
+[node name="Light" type="OmniLight3D" parent="Lights/Beacon" unique_id=1418255624]
 layers = 2
 light_color = Color(1, 0.03, 0.03, 1)
 light_energy = 0.01
 omni_range = 0.005
 
-[node name="Emit" type="MeshInstance3D" parent="Lights/Beacon"]
+[node name="Emit" type="MeshInstance3D" parent="Lights/Beacon" unique_id=1229519863]
 mesh = SubResource("CylinderMesh_ulwg0")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Lights/Beacon"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Lights/Beacon" unique_id=346540540]
 mesh = SubResource("CylinderMesh_xrp77")
 
-[node name="CompanyLight" type="SpotLight3D" parent="Lights"]
+[node name="CompanyLight" type="SpotLight3D" parent="Lights" unique_id=350692802]
 transform = Transform3D(-0.241701, 0.357635, -0.902041, 0.0925626, 0.933862, 0.345449, 0.965926, -4.16334e-17, -0.258819, -19.9162, 10.8628, 0)
 light_energy = 0.03
 shadow_enabled = true
 shadow_bias = 1.604
 spot_range = 0.02
 
-[node name="ForwardLight" type="SpotLight3D" parent="Lights"]
+[node name="ForwardLight" type="SpotLight3D" parent="Lights" unique_id=2070011991]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 10.9146, 5.23071, -3.7027)
 light_energy = 0.02
 shadow_enabled = true
 shadow_bias = 0.0
 spot_range = 0.02
 
-[node name="ForwardLight2" type="SpotLight3D" parent="Lights"]
+[node name="ForwardLight2" type="SpotLight3D" parent="Lights" unique_id=1245379408]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 10.915, 5.231, 3.703)
 light_energy = 0.02
 shadow_enabled = true
 shadow_bias = 0.0
 spot_range = 0.02
 
-[node name="frigate" parent="." instance=ExtResource("10_3ank2")]
-transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+[node name="frigate" parent="." unique_id=1226568603 instance=ExtResource("10_3ank2")]
+transform = Transform3D(0.00099999999999999, 0, 0, 0, 0.00099999999999999, 0, 0, 0, 0.00099999999999999, 0, 0, 0)
 
-[node name="Impact" type="Node3D" parent="."]
+[node name="Impact" type="Node3D" parent="." unique_id=105933037]
 script = ExtResource("12_x0ifl")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Impact"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Impact" unique_id=1972036479]
 transform = Transform3D(-0.16731940474980525, -0.98590274205632, 0, 0.7060599500249861, -0.11982675929012608, -0.6979404664645404, 0.6881014196794576, -0.11677898339964832, 0.7161557828233043, -0.01142339199235719, 0.00423550917418332, 0.00458452559055678)
 emitting = false
 amount = 10000
@@ -334,7 +345,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_gecb8")
 draw_pass_1 = SubResource("PointMesh_5qheq")
 
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="Impact"]
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Impact" unique_id=1762170571]
 transform = Transform3D(0.24063538804241175, 0.3868978256567283, 0.8901711535001421, -0.6470945441251463, 0.7475145530497816, -0.14996880989810474, -0.7234384984123713, -0.539937094003441, 0.4302379266568352, -0.01099999999860301, -0.0040000000008149, -0.00500000000465661)
 emitting = false
 amount = 10000
@@ -344,7 +355,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_gecb8")
 draw_pass_1 = SubResource("PointMesh_5qheq")
 
-[node name="Gun" type="GPUParticles3D" parent="Impact"]
+[node name="Gun" type="GPUParticles3D" parent="Impact" unique_id=1212778278]
 transform = Transform3D(0.05892668655287414, -0.08079384637396131, 0, 0.08079384637396131, 0.05892668655287414, 0, 0, 0, 0.0999999999999997, -0.00256853943507804, -0.00823103913293313, 0)
 emitting = false
 amount = 300
@@ -352,3 +363,15 @@ lifetime = 3.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_x0ifl")
 draw_pass_1 = SubResource("TubeTrailMesh_x0ifl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=179409958]
+transform = Transform3D(0.000999999999999997, 0, 0, 0, 0.000999999999999997, 0, 0, 0, 0.000999999999999997, -0.0014610822255040033, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_4naxx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1411859016]
+transform = Transform3D(0.000999999999999997, 0, 0, 0, 0.000999999999999997, 0, 0, 0, 0.000999999999999997, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_x0ifl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=869839258]
+transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, -0.023243611206434412, 0, 0)
+shape = SubResource("CylinderShape3D_x0ifl")

@@ -8,16 +8,24 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Slingshot"
 run/main_scene="res://scenes/main_scene.tscn"
-config/features=PackedStringArray("4.5", "C#", "Double Precision", "Forward Plus")
+config/features=PackedStringArray("4.6", "C#", "Double Precision", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0.0745098, 0.0745098, 0.0980392, 1)
 boot_splash/image="res://visuals/logo/splash.png"
 config/icon="res://icon.svg"
 config/windows_native_icon="res://visuals/logo/windows_icon.ico"
+
+[audio]
+
+buses/default_bus_layout="uid://do5qkdwxkajfl"
 
 [autoload]
 
@@ -240,8 +248,10 @@ next_seat={
 [physics]
 
 3d/physics_engine="Jolt Physics"
-jolt_physics_3d/simulation/generate_all_kinematic_contacts=true
-jolt_physics_3d/limits/max_linear_velocity=1000000000.0
+jolt_physics_3d/limits/max_linear_velocity=2000.0
+3d/default_gravity=0.0
+3d/default_linear_damp=0.0
+3d/default_angular_damp=0.0
 
 [rendering]
 

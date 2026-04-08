@@ -4,7 +4,7 @@ extends Node3D
 # Reference to solar system root node SolarSystem
 @export var solar_system : Node3D
 
-func _process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	solar_system.position = -ShipData.get_floating_frame_origin()
 
 func fetch(_time: float) -> Vector3:

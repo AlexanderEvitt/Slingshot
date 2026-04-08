@@ -34,7 +34,6 @@ func _process(delta: float) -> void:
 			child_emitter2.emitting = true
 			
 			# Add torque
-			ShipData.player_ship.attitude_module.integrate_rotation(ShipData.player_ship.attitude*Vector3(0,10,-10))
 			# Kill engine
 			ShipData.player_ship.propulsion_module.throttle = 0.0
 			

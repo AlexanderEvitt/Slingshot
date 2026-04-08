@@ -1,8 +1,9 @@
 class_name Berth
 extends Node3D
 
-@onready var collider: StaticBody3D = $BerthCollider
+@onready var collider: AnimatableBody3D = $BerthCollider
 @export var clamps: Array[Clamp]
+@onready var setup_position: Vector3 = position
 
 func set_velocity(velocity: Vector3) -> void:
 	# Sets the collider velocity

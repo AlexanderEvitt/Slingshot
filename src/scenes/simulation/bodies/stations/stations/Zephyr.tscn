@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://b0s1bdqqag6dw"]
+[gd_scene format=4 uid="uid://b0s1bdqqag6dw"]
 
 [ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://scenes/simulation/bodies/stations/components/station_manager.gd" id="1_hn7g8"]
 [ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://scenes/simulation/bodies/Body.cs" id="1_ntdx0"]
@@ -52,52 +52,52 @@ albedo_color = Color(0.65, 0.65, 0.65, 1)
 [sub_resource type="PointMesh" id="PointMesh_8pjhb"]
 material = SubResource("StandardMaterial3D_t4lwe")
 
-[node name="Zephyr" type="Node3D" groups=["Stations"]]
+[node name="Zephyr" type="Node3D" unique_id=1131218421 groups=["Stations"]]
 process_priority = 13
 editor_description = "ZEPHYR STATION is the largest and most populous station near Earth. Thanks to its position in geostationary orbit, it is the main port for any goods or passengers transiting via Earth."
 script = ExtResource("1_ntdx0")
 a = 42164.0
 theta0 = 3.142
 
-[node name="Station" type="Node3D" parent="."]
+[node name="Station" type="Node3D" parent="." unique_id=1149762888]
 script = ExtResource("1_hn7g8")
 
-[node name="stump" parent="Station" instance=ExtResource("2_o24in")]
+[node name="stump" parent="Station" unique_id=1597884695 instance=ExtResource("2_o24in")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28.774, 0)
 
-[node name="ring1" parent="Station" instance=ExtResource("3_e7nfi")]
+[node name="ring1" parent="Station" unique_id=2060836029 instance=ExtResource("3_e7nfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.76, 0)
 
-[node name="ring2" parent="Station" instance=ExtResource("3_e7nfi")]
+[node name="ring2" parent="Station" unique_id=1426919656 instance=ExtResource("3_e7nfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35.639, 0)
 flip = -1
 
-[node name="shipyard" parent="Station" instance=ExtResource("4_goyf3")]
+[node name="shipyard" parent="Station" unique_id=1503138405 instance=ExtResource("4_goyf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38.881, 0)
 
-[node name="KOZ" type="Node3D" parent="Station"]
+[node name="KOZ" type="Node3D" parent="Station" unique_id=2008938693]
 visible = false
 
-[node name="wire_sphere" parent="Station/KOZ" instance=ExtResource("5_psudm")]
+[node name="wire_sphere" parent="Station/KOZ" unique_id=1658225291 instance=ExtResource("5_psudm")]
 transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 29.32, 0, 0, 0)
 
-[node name="wire_cylinder" parent="Station/KOZ" instance=ExtResource("6_d8yrx")]
+[node name="wire_cylinder" parent="Station/KOZ" unique_id=1122278422 instance=ExtResource("6_d8yrx")]
 transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
 
-[node name="wire_cylinder2" parent="Station/KOZ" instance=ExtResource("6_d8yrx")]
+[node name="wire_cylinder2" parent="Station/KOZ" unique_id=1368420408 instance=ExtResource("6_d8yrx")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
 
-[node name="wire_cylinder3" parent="Station/KOZ" instance=ExtResource("6_d8yrx")]
+[node name="wire_cylinder3" parent="Station/KOZ" unique_id=1452314946 instance=ExtResource("6_d8yrx")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
 
-[node name="wire_cube" parent="Station/KOZ" instance=ExtResource("7_jhtc2")]
+[node name="wire_cube" parent="Station/KOZ" unique_id=1234844760 instance=ExtResource("7_jhtc2")]
 transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
-[node name="Ball" type="MeshInstance3D" parent="Station"]
+[node name="Ball" type="MeshInstance3D" parent="Station" unique_id=2046111476]
 transform = Transform3D(29.775, 0, 0, 0, 29.775, 0, 0, 0, 29.775, 0, 0, 0)
 visibility_range_end = 10000000.0
 mesh = SubResource("ArrayMesh_77ytm")
 skeleton = NodePath("")
 
-[node name="LightPrick" type="MeshInstance3D" parent="."]
+[node name="LightPrick" type="MeshInstance3D" parent="." unique_id=1228522558]
 mesh = SubResource("PointMesh_8pjhb")

@@ -79,7 +79,7 @@ func update(dt: float) -> void:
 	
 	
 	# Get desired engine parameters
-	var mass := ship.total_mass
+	var mass := ship.mass
 	var desired_thrust := mass*1000*throttle # (kg)*(km/s) -> N
 	
 	# Simulate engine if time rate is 1

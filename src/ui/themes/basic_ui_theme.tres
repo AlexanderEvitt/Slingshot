@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://b084uen2ev7hx"]
+[gd_resource type="Theme" format=3 uid="uid://b084uen2ev7hx"]
 
 [ext_resource type="FontFile" uid="uid://1tccf66eoucs" path="res://ui/fonts/Oxanium-SemiBold.ttf" id="1_s5tp7"]
 [ext_resource type="FontFile" uid="uid://dqyy4mogwg27l" path="res://ui/fonts/Oxanium-Regular.ttf" id="2_i14gj"]

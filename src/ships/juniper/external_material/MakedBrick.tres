@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://ddobmiq0l53c"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ddobmiq0l53c"]
 
 [ext_resource type="Texture2D" uid="uid://bnri4ymvk46yf" path="res://ships/juniper/real/frigate_HullTexture.png" id="1_3d303"]
 [ext_resource type="Texture2D" uid="uid://dfp5lpn48nk0d" path="res://ships/juniper/external_material/MakedBrick_normal.png" id="2_p2ljf"]

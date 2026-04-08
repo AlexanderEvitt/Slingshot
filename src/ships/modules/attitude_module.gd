@@ -3,9 +3,11 @@ extends Node3D
 
 @onready var ship: PlayerShip = get_parent()
 var torque := Vector3(0,0,0)
-var max_torque := 0.4
+var max_torque := 5.0
 var angular_velocity := Vector3(0,0,0)
 var commanded_torque := Vector3(0,0,0)
+
+var target_transform: Basis # transform that takes its target from autopilot
 
 # Moment of inertia tensor (assuming diagonal for simplicity)
 var inertia: Vector3 = Vector3(1, 1, 1)  # Modify based on spacecraft geometry
@@ -15,7 +17,7 @@ var inv_inertia: Vector3 = Vector3(1.0 / inertia.x, 1.0 / inertia.y, 1.0 / inert
 func update(dt: float) -> void:
 	# Calculate torque by increasing as you hold the button
 	# Commanded torque is in ship frame
-	var torque_rate := 0.02
+	var torque_rate := 0.5
 	# Add torque if button is held down, set to zero if not
 	if Input.is_action_pressed("down"):
 		commanded_torque.z += -torque_rate
@@ -41,7 +43,7 @@ func update(dt: float) -> void:
 	# Clamp to max allowable torque
 	commanded_torque = commanded_torque.clampf(-max_torque, max_torque)
 	# Convert to global frame
-	torque = transform.basis*commanded_torque
+	torque = ship.attitude*commanded_torque
 	
 	# Calculate autopilot response
 	var target: Vector3
@@ -73,7 +75,7 @@ func update(dt: float) -> void:
 			if ship.avionics["attitude_inv"]:
 				target = -target
 			# Cross product for torque
-			var Kp := 2.0 # control proportional gain
+			var Kp := 200.0 # control proportional gain
 			torque = torque + -Kp*target.cross(ship.attitude.x)
 			
 	# Calculate damping if stabilizers OR autopilot is enabled
@@ -84,7 +86,7 @@ func update(dt: float) -> void:
 		
 	# Apply torque if in real time
 	if SimTime.step == 1:
-		integrate_rotation(torque)
+		ship.apply_torque(torque)
 		
 	# Disallow rotation if timestep is not 1
 	elif SimTime.step != 1:
@@ -92,32 +94,10 @@ func update(dt: float) -> void:
 		
 		# Point at target attitude
 		if target.length() > 0.0:
-			transform.basis = transform_at(target, Vector3.UP)
-			rotate_object_local(Vector3(0, 1, 0), -PI/2)
-			
-
-func integrate_rotation(applied_torque: Vector3) -> void:
-	# Compute angular acceleration using Euler's equations
-	#applied_torque = transform.basis.inverse()*applied_torque
-	var dt := 0.03333
-	var inertia_cross_omega := Vector3(
-		(inertia.y - inertia.z) * angular_velocity.y * angular_velocity.z,
-		(inertia.z - inertia.x) * angular_velocity.z * angular_velocity.x,
-		(inertia.x - inertia.y) * angular_velocity.x * angular_velocity.y)
-
-	var angular_acceleration: Vector3 = (applied_torque - inertia_cross_omega) * inv_inertia
-
-	# Integrate angular velocity using explicit Euler method
-	angular_velocity += angular_acceleration * dt
-
-	# Convert local angular velocity to a rotation quaternion
-	# Apply rotation using Godot's built-in method
-	var ang_speed: float = angular_velocity.length()
-	if ang_speed > 0.0:
-		var rotation_axis: Vector3 = angular_velocity.normalized()
-		var ang_vel_quat := Quaternion(rotation_axis, ang_speed * dt)  # Axis-angle representation
-		transform.basis = Basis(ang_vel_quat) * transform.basis
-		transform = transform.orthonormalized()
+			target_transform = transform_at(target, Vector3.UP)
+			target_transform = target_transform.rotated(Vector3(0, 1, 0), -PI/2)
+		else:
+			target_transform = ship.attitude
 		
 func transform_at(forward: Vector3, up: Vector3) -> Basis:
 	var f: Vector3 = forward.normalized()

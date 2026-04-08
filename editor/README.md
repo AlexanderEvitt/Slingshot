@@ -3,10 +3,12 @@ Slingshot uses Godot v4.5. Because it incorporates both .NET and large world coo
 1. Clone the github ([Getting source](https://docs.godotengine.org/en/4.4/contributing/development/compiling/getting_source.html#doc-getting-source)).
 
 ```
-git clone https://github.com/godotengine/godot.git -b 4.4
+git clone https://github.com/godotengine/godot.git -b 4.6.1-stable
 ```
 
-2. Compile with SCons, both the editor and release templates. ([Compiling for Windows](https://docs.godotengine.org/en/4.4/contributing/development/compiling/compiling_for_windows.html))
+2. Increase the editor view range. In godot/editor/scene/3d/node_3d_editor_plugin.cpp, update line 130, where MAX_Z is defined, to constexpr real_t MAX_Z = 100000000.0;
+
+3. Compile with SCons, both the editor and release templates. ([Compiling for Windows](https://docs.godotengine.org/en/4.4/contributing/development/compiling/compiling_for_windows.html))
 
 ```
 scons platform=windows target=editor module_mono_enabled=yes precision=double
@@ -14,7 +16,7 @@ scons platform=windows target=template_debug module_mono_enabled=yes precision=d
 scons platform=windows target=template_release module_mono_enabled=yes precision=double
 ```
 
-3. Generate the glue. ([Compiling with .NET](https://docs.godotengine.org/en/4.4/contributing/development/compiling/compiling_with_dotnet.html))
+4. Generate the glue. ([Compiling with .NET](https://docs.godotengine.org/en/4.4/contributing/development/compiling/compiling_with_dotnet.html))
 
 ```
 <godot_binary> --headless --generate-mono-glue modules/mono/glue
@@ -22,19 +24,9 @@ scons platform=windows target=template_release module_mono_enabled=yes precision
 bin\godot.windows.editor.double.x86_64.mono.exe --headless --generate-mono-glue modules\mono\glue
 ```
 
-4. Build the managed libraries
+5. Build the managed libraries
 
 ```
 # cd into godot (root folder) first
 python .\modules\mono\build_scripts\build_assemblies.py --godot-output-dir ./bin --push-nupkgs-local C:\Users\alexa\MyLocalNugetSource --precision=double
 ```
-
-
-
-
-
-
-
-n. Create Windows export templates (or other platforms).
-
-
