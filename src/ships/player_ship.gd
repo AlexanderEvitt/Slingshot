@@ -71,12 +71,11 @@ func _ready() -> void:
 	
 	# Assign to random berth at Zephyr at start
 	if berthed:
-		assign_berth("SolarSystem/Earth/Zephyr/Station")
+		assign_berth("SolarSystem/Jupiter/Europa/Concordia/Station")
 		berthed = true
 
 func _physics_process(delta: float) -> void:
 	# Update values for this iteration
-	attitude = transform.basis
 	torque = attitude_module.torque
 	#print(system_position.length())
 	
@@ -88,16 +87,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Attach ship to dock if docked
 	if berthed:
-		# Move ship with dock
-		# Set system state values, lock position and velocity to these
-		var berth_position: Vector3 = station.fetch(SimTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
-		system_position = berth_position
-		system_velocity = station.fetch(SimTime.t) - station.fetch(SimTime.t - 1.0)
-		attitude_module.transform.basis = berth.global_transform.basis
-		# Fix floating frame to ship every frame
-		ShipData.floating_frame_position = system_position
-		ShipData.floating_frame_velocity = system_velocity
-		ShipData.floating_frame_time = SimTime.t
+		pass
 
 	# Integrate regularly
 	else:
@@ -133,11 +123,14 @@ func _physics_process(delta: float) -> void:
 	plotter.positions = propagate_module.get("plotted_positions")
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	if false and state.get_contact_count() > 0:
-		print("Contacts: ", state.get_contact_count())
-		print("  Position: ", state.get_contact_local_position(0))
-		print("  Normal: ", state.get_contact_local_normal(0))
-		print("  Collider: ", state.get_contact_collider_object(0))
+	if state.get_contact_count() > 0:
+		#print("Contacts: ", state.get_contact_count())
+		#print("  Position: ", state.get_contact_local_position(0))
+		#print("  Normal: ", state.get_contact_local_normal(0))
+		#print("  Collider: ", state.get_contact_collider_object(0).constant_linear_velocity)
+		if state.get_contact_collider_object(0).constant_linear_velocity.length() > 0.01:
+			print("Alarm!")
+			print(state.get_contact_collider_object(0).constant_linear_velocity.length())
 	gravity_acceleration = propagate_module.Acceleration(system_position,SimTime.prev_t)
 	#print(state.transform.origin.length())
 	force = attitude*(thrust/1000.0) + mass*gravity_acceleration
@@ -146,11 +139,23 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if berthed:
 		state.linear_velocity = Vector3(0,0,0)
 		state.transform.origin = Vector3(0,0,0)
+		# Move ship with dock
+		# Set system state values, lock position and velocity to these
+		var berth_position: Vector3 = station.fetch(SimTime.t) + (berth.global_position - station.global_position) + berth.global_transform.basis*berth_offset
+		system_position = berth_position
+		system_velocity = station.fetch(SimTime.t) - station.fetch(SimTime.t - 1.0)
+		attitude = berth.global_transform.basis
+		state.transform.basis = attitude
+		# Fix floating frame to ship every frame
+		ShipData.floating_frame_position = system_position
+		ShipData.floating_frame_velocity = system_velocity
+		ShipData.floating_frame_time = SimTime.t
 	elif SimTime.step == 1.0:
 		custom_integrator = false
 		
 		state.apply_central_force(force)
 		state.apply_torque(torque)
+		attitude = state.transform.basis
 		#print("Integrated!")
 	else:
 		custom_integrator = true
@@ -159,11 +164,13 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		state.linear_velocity = state.linear_velocity + acceleration*SimTime.step*state.step
 		state.transform.origin = state.transform.origin + state.linear_velocity*SimTime.step*state.step
 		# Take target attitude from attitude_module
+		attitude = attitude_module.target_transform
 		state.transform.basis = attitude
 	
-	# Update system variables for external use
-	system_position = state.transform.origin + ShipData.get_floating_frame_origin()
-	system_velocity = state.linear_velocity + ShipData.floating_frame_velocity
+	if !berthed:
+		# Update system variables for external use
+		system_position = state.transform.origin + ShipData.get_floating_frame_origin()
+		system_velocity = state.linear_velocity + ShipData.floating_frame_velocity
 	
 	# Reset floating frame when vehicle strays too far
 	if state.transform.origin.length() > 1.0 or state.linear_velocity.length() > 1.0:

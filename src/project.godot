@@ -248,6 +248,9 @@ next_seat={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/penetration_slop=0.0005
+jolt_physics_3d/simulation/speculative_contact_distance=0.002
+jolt_physics_3d/simulation/baumgarte_stabilization_factor=0.1
 jolt_physics_3d/limits/max_linear_velocity=2000.0
 3d/default_gravity=0.0
 3d/default_linear_damp=0.0

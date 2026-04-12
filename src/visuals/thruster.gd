@@ -54,7 +54,7 @@ func record_thrusters() -> void:
 	
 func make_thruster_fire() -> void:
 	# Turn on thruster
-	var fire: float = (my_torque + 0.5*my_thrust)
+	var fire: float = clamp(my_torque + 0.5*my_thrust, 0.0, 1.0)
 
 	var unit: Vector3 = 150*Vector3(1,1,1)
 	if fire > cutoff:

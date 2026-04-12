@@ -393,7 +393,7 @@ a = 6780.0
 i = 0.909
 
 [node name="ISS_stationary" parent="SolarSystem/Earth/ISS" unique_id=677142685 instance=ExtResource("10_vftqf")]
-transform = Transform3D(-0.0009608508024791094, 0.00023141468254333144, 0.0001523580653537305, 0, 0.0005498974959437151, -0.0008352321497371594, -0.00027706630140629187, -0.0008025334813314073, -0.0005283694502588545, 0, 0, 0)
+transform = Transform3D(-0.0009608508024791001, 0.00023141468254333193, 0.00015235806535372718, 0, 0.0005498974959437163, -0.0008352321497371413, -0.00027706630140628916, -0.000802533481331409, -0.0005283694502588431, 0, 0, 0)
 script = ExtResource("10_uhiq1")
 
 [node name="Luna" type="Node3D" parent="SolarSystem/Earth" unique_id=1072884238 groups=["Bodies"]]
@@ -445,7 +445,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion5" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh" unique_id=1498629953]
-transform = Transform3D(1.0000000000000002, -5.5511150000000004e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.5511150000000004e-17, -1.0000000000000002, 6.123230000000002e-17, 1730.3955630911205, -169.11933165213722, -51.003096975380686)
+transform = Transform3D(1.0000000000000002, -5.551115e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.551115e-17, -1.0000000000000002, 6.123230000000002e-17, 1730.3955630911205, -169.11933165213722, -51.003096975380686)
 mesh = SubResource("SphereMesh_jcsod")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
@@ -459,7 +459,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion7" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh" unique_id=1608107907]
-transform = Transform3D(1.0000000000000002, -5.5511150000000004e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.5511150000000004e-17, -1.0000000000000002, 6.123230000000002e-17, 1542.4423846868576, 85.44843117791264, -803.0706336913754)
+transform = Transform3D(1.0000000000000002, -5.551115e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.551115e-17, -1.0000000000000002, 6.123230000000002e-17, 1542.4423846868576, 85.44843117791264, -803.0706336913754)
 mesh = SubResource("SphereMesh_rckgw")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
@@ -760,5 +760,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nnkww")
 
 [node name="Origin" type="MeshInstance3D" parent="." unique_id=343424932]
 top_level = true
+visible = false
 mesh = SubResource("BoxMesh_uhiq1")
 surface_material_override/0 = SubResource("StandardMaterial3D_uhiq1")

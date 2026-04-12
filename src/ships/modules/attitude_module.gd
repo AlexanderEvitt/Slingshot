@@ -3,8 +3,7 @@ extends Node3D
 
 @onready var ship: PlayerShip = get_parent()
 var torque := Vector3(0,0,0)
-var max_torque := 5.0
-var angular_velocity := Vector3(0,0,0)
+var max_torque := 50.0
 var commanded_torque := Vector3(0,0,0)
 
 var target_transform: Basis # transform that takes its target from autopilot
@@ -75,27 +74,28 @@ func update(dt: float) -> void:
 			if ship.avionics["attitude_inv"]:
 				target = -target
 			# Cross product for torque
-			var Kp := 200.0 # control proportional gain
+			var Kp := 100.0 # control proportional gain
 			torque = torque + -Kp*target.cross(ship.attitude.x)
 			
 	# Calculate damping if stabilizers OR autopilot is enabled
 	if ship.avionics["attitude_stab"] or ship.avionics["autopilot"]:
-		torque -= 3*(angular_velocity)
+		torque -= 500.0*(ship.angular_velocity)
 	else:
-		torque -= 0.1*(angular_velocity)
+		torque -= 0.1*(ship.angular_velocity)
 		
 	# Apply torque if in real time
 	if SimTime.step == 1:
+		torque = torque.limit_length(max_torque)
 		ship.apply_torque(torque)
 		
 	# Disallow rotation if timestep is not 1
 	elif SimTime.step != 1:
-		angular_velocity = Vector3(0,0,0)
+		#angular_velocity = Vector3(0,0,0)
 		
 		# Point at target attitude
 		if target.length() > 0.0:
 			target_transform = transform_at(target, Vector3.UP)
-			target_transform = target_transform.rotated(Vector3(0, 1, 0), -PI/2)
+			target_transform = target_transform.rotated(target_transform.y, -PI/2)
 		else:
 			target_transform = ship.attitude
 		

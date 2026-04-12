@@ -9,7 +9,7 @@ extends MeshInstance3D
 @export var rightness := 1
 
 # How much/how fast to move the clamps
-var back_off_distance := 1.0/1000.0
+var back_off_distance := 5.0/1000.0
 var squeeze_angle := 66.0
 var animation_time := 1.0
 

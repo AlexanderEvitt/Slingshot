@@ -14,7 +14,7 @@ func _ready() -> void:
 	if has_node("Plotter"):
 		plotter = $Plotter
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	pointer.transform.basis = ShipData.player_ship.attitude
 	
 	if local_positioning:
