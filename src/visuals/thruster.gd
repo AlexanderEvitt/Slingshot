@@ -27,7 +27,7 @@ func record_torque() -> void:
 	torque = ShipData.player_ship.torque
 	if torque == null:
 		torque = Vector3(0,0,0)
-	torque = ShipData.player_ship.attitude.inverse()*torque
+	torque = ShipData.player_ship.transform.basis.inverse()*torque
 	my_torque = 0
 	if up:
 		my_torque = my_torque + (torque.z)

@@ -164,7 +164,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		state.linear_velocity = state.linear_velocity + acceleration*SimTime.step*state.step
 		state.transform.origin = state.transform.origin + state.linear_velocity*SimTime.step*state.step
 		# Take target attitude from attitude_module
-		attitude = attitude_module.target_transform
+		attitude = Basis(attitude_module.target_attitude)
 		state.transform.basis = attitude
 	
 	if !berthed:
