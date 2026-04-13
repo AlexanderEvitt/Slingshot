@@ -71,13 +71,12 @@ func _ready() -> void:
 	
 	# Assign to random berth at Zephyr at start
 	if berthed:
-		assign_berth("SolarSystem/Jupiter/Europa/Concordia/Station")
+		assign_berth("SolarSystem/Earth/Zephyr/Station")
 		berthed = true
 
 func _physics_process(delta: float) -> void:
 	# Update values for this iteration
 	torque = attitude_module.torque
-	#print(system_position.length())
 	
 	# Update thrust
 	thrust = propulsion_module.thrust
@@ -85,12 +84,8 @@ func _physics_process(delta: float) -> void:
 	# Update total vehicle mass
 	mass = dry_mass + propulsion_module.he_quant + propulsion_module.de_quant
 	
-	# Attach ship to dock if docked
-	if berthed:
-		pass
-
-	# Integrate regularly
-	else:
+	# Only do this if you're free flying
+	if !berthed:
 		# Update things periodically that don't need to accelerate with time warp
 		navigation_module.update_periodically()
 		
@@ -123,14 +118,14 @@ func _physics_process(delta: float) -> void:
 	plotter.positions = propagate_module.get("plotted_positions")
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	if state.get_contact_count() > 0:
+	#if state.get_contact_count() > 0:
 		#print("Contacts: ", state.get_contact_count())
 		#print("  Position: ", state.get_contact_local_position(0))
 		#print("  Normal: ", state.get_contact_local_normal(0))
 		#print("  Collider: ", state.get_contact_collider_object(0).constant_linear_velocity)
-		if state.get_contact_collider_object(0).constant_linear_velocity.length() > 0.01:
-			print("Alarm!")
-			print(state.get_contact_collider_object(0).constant_linear_velocity.length())
+		#if state.get_contact_collider_object(0).constant_linear_velocity.length() > 0.01:
+		#	print("Alarm!")
+		#	print(state.get_contact_collider_object(0).constant_linear_velocity.length())
 	gravity_acceleration = propagate_module.Acceleration(system_position,SimTime.prev_t)
 	#print(state.transform.origin.length())
 	force = attitude*(thrust/1000.0) + mass*gravity_acceleration

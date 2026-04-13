@@ -4,14 +4,14 @@ extends Node3D
 @onready var ship: PlayerShip = get_parent()
 
 var max_torque       := 50.0
-var max_slew_rate    := 0.1   # rad/s, commanded limit (user-facing parameter)
+var max_slew_rate    := 0.5   # rad/s, commanded limit (user-facing parameter)
 
 var target_attitude: Quaternion  # set externally by autopilot modes
 var commanded_torque := Vector3.ZERO
 var torque           := Vector3.ZERO
 
 func update(dt: float) -> void:
-	max_slew_rate = 0.1
+	max_slew_rate = 0.5
 	# Get input body frame torque depending on mode
 	var manual_torque := Vector3.ZERO
 	var ap_torque := Vector3.ZERO
@@ -26,6 +26,8 @@ func update(dt: float) -> void:
 		if tgt_dir != Vector3.ZERO:
 			target_attitude = _attitude_from_forward(tgt_dir)
 		ap_torque = _rate_controller(_slew_rate_command())
+	else:
+		target_attitude = Quaternion(ship.transform.basis)
 
 	# Combine, clamp, and put in global frame
 	torque = manual_torque + ap_torque

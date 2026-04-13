@@ -4,35 +4,42 @@
 [ext_resource type="Shader" uid="uid://qk1eddqysxr1" path="res://visuals/thruster.gdshader" id="1_splox"]
 [ext_resource type="Script" uid="uid://ctn5gqggw2slw" path="res://visuals/thruster.gd" id="3_0ighr"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_0tnad"]
-lightmap_size_hint = Vector2i(4, 4)
-top_radius = 0.018
-bottom_radius = 0.0
-height = 0.05
-radial_segments = 32
-rings = 8
+[sub_resource type="CylinderMesh" id="CylinderMesh_w7vaq"]
+top_radius = 2.7
+bottom_radius = 0.15
+height = 7.5
 cap_top = false
 cap_bottom = false
+
+[sub_resource type="Gradient" id="Gradient_w7vaq"]
+colors = PackedColorArray(0, 0, 0, 1, 0.37413925, 0.37413928, 0.37413922, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7a7bl"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uhois"]
 noise = SubResource("FastNoiseLite_7a7bl")
+color_ramp = SubResource("Gradient_w7vaq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7htbn"]
 render_priority = 0
 shader = ExtResource("1_splox")
 shader_parameter/textured = ExtResource("1_c4cgl")
 shader_parameter/fresnel_factor = 1.0
-shader_parameter/fresnel_amplification = 1.0
-shader_parameter/fresnel_power = 4.0
+shader_parameter/fresnel_amplification = 1.0682499999999968
+shader_parameter/fresnel_power = 9.99999999999997
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_uhois")
 
 [node name="Thruster1" type="Node3D" unique_id=95754837]
 script = ExtResource("3_0ighr")
 
 [node name="Thruster" type="MeshInstance3D" parent="." unique_id=1362754389]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
-mesh = SubResource("CylinderMesh_0tnad")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0559022e-10, 4.184999999706633, -3.0559022e-10)
+mesh = SubResource("CylinderMesh_w7vaq")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_7htbn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=643297411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3947830831589858, 0)
+light_energy = 0.1
+shadow_enabled = true
+omni_range = 0.001

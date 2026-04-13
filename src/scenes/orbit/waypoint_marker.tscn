@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://8lw8agmjuhpa"]
+
+[ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="1_34lnu"]
+
+[node name="Marker1" type="Sprite3D" unique_id=830624135]
+modulate = Color(0.5529412, 0, 0.5529412, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("1_34lnu")
