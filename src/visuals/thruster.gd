@@ -70,5 +70,5 @@ func make_thruster_fire() -> void:
 
 	if fire > cutoff:
 		visible = true
-		light.energy = 0.1*scale
+		light.light_energy = 0.1*fire
 		scale = fire*Vector3.ONE

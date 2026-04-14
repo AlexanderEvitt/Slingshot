@@ -1,14 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0e1osx21d7u2"]
+[gd_scene format=3 uid="uid://d0e1osx21d7u2"]
 
-[ext_resource type="Script" path="res://scenes/attitude/navball.gd" id="2_3fwbi"]
+[ext_resource type="Script" uid="uid://bcwq64wkh8m53" path="res://scenes/attitude/navball.gd" id="2_3fwbi"]
 [ext_resource type="Texture2D" uid="uid://17dclcol0avn" path="res://scenes/attitude/navball_texture.png" id="2_s886u"]
 [ext_resource type="FontFile" uid="uid://dqyy4mogwg27l" path="res://ui/fonts/Oxanium-Regular.ttf" id="3_01gpn"]
 [ext_resource type="Texture2D" uid="uid://djyppx76cf4t5" path="res://scenes/attitude/prograde.png" id="3_mdtrp"]
 [ext_resource type="Texture2D" uid="uid://v2arkm3xh0km" path="res://scenes/attitude/ballbacking.png" id="4_dswt3"]
-[ext_resource type="Script" path="res://scenes/attitude/prograde_marker.gd" id="4_gmmfj"]
+[ext_resource type="Script" uid="uid://bpytqforn4lvc" path="res://scenes/attitude/prograde_marker.gd" id="4_gmmfj"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="5_1wtd5"]
-[ext_resource type="Script" path="res://scenes/attitude/viewpoint.gd" id="5_n4w1u"]
+[ext_resource type="Script" uid="uid://cno626rdym44j" path="res://scenes/attitude/viewpoint.gd" id="5_n4w1u"]
+[ext_resource type="Texture2D" uid="uid://0r82b4frt7cp" path="res://scenes/attitude/dot.png" id="7_dhh2w"]
 [ext_resource type="Texture2D" uid="uid://d28isjwqdor3u" path="res://scenes/attitude/retrograde.png" id="8_63yb2"]
+[ext_resource type="Script" uid="uid://cy6um01qdjgoe" path="res://scenes/attitude/flight_director.gd" id="10_ip1p7"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_cdjrc"]
 
@@ -18,23 +20,23 @@ shading_mode = 0
 albedo_texture = ExtResource("2_s886u")
 uv1_scale = Vector3(-1, 1, 1)
 
-[node name="NavballRoot" type="Node3D"]
+[node name="NavballRoot" type="Node3D" unique_id=1765283724]
 
-[node name="Ball" type="Node3D" parent="."]
+[node name="Ball" type="Node3D" parent="." unique_id=967507184]
 script = ExtResource("2_3fwbi")
 
-[node name="Navball" type="MeshInstance3D" parent="Ball"]
+[node name="Navball" type="MeshInstance3D" parent="Ball" unique_id=941036389]
 transform = Transform3D(1, -1.11022e-16, -8.32667e-17, -8.32667e-17, -6.12323e-17, -1, 1.11022e-16, 1, -6.12323e-17, 0, 0, 0)
 mesh = SubResource("SphereMesh_cdjrc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_4fbac")
 
-[node name="Zeros" type="Node3D" parent="Ball"]
+[node name="Zeros" type="Node3D" parent="Ball" unique_id=1509888301]
 
-[node name="LabelHolder" type="Node3D" parent="Ball/Zeros"]
+[node name="LabelHolder" type="Node3D" parent="Ball/Zeros" unique_id=752085830]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Zeros/LabelHolder"]
+[node name="Label3D" type="Label3D" parent="Ball/Zeros/LabelHolder" unique_id=1627266041]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -46,10 +48,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder2" type="Node3D" parent="Ball/Zeros"]
+[node name="LabelHolder2" type="Node3D" parent="Ball/Zeros" unique_id=352940941]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Zeros/LabelHolder2"]
+[node name="Label3D" type="Label3D" parent="Ball/Zeros/LabelHolder2" unique_id=977332851]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -61,10 +63,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder3" type="Node3D" parent="Ball/Zeros"]
+[node name="LabelHolder3" type="Node3D" parent="Ball/Zeros" unique_id=401919159]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Zeros/LabelHolder3"]
+[node name="Label3D" type="Label3D" parent="Ball/Zeros/LabelHolder3" unique_id=124953650]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -76,10 +78,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder4" type="Node3D" parent="Ball/Zeros"]
+[node name="LabelHolder4" type="Node3D" parent="Ball/Zeros" unique_id=472450911]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Zeros/LabelHolder4"]
+[node name="Label3D" type="Label3D" parent="Ball/Zeros/LabelHolder4" unique_id=1967267065]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -91,13 +93,13 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="Nineties" type="Node3D" parent="Ball"]
+[node name="Nineties" type="Node3D" parent="Ball" unique_id=1539055407]
 transform = Transform3D(6.12323e-17, 1, 0, -1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="LabelHolder" type="Node3D" parent="Ball/Nineties"]
+[node name="LabelHolder" type="Node3D" parent="Ball/Nineties" unique_id=1840382234]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Nineties/LabelHolder"]
+[node name="Label3D" type="Label3D" parent="Ball/Nineties/LabelHolder" unique_id=171157170]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -109,10 +111,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder2" type="Node3D" parent="Ball/Nineties"]
+[node name="LabelHolder2" type="Node3D" parent="Ball/Nineties" unique_id=2000625126]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Nineties/LabelHolder2"]
+[node name="Label3D" type="Label3D" parent="Ball/Nineties/LabelHolder2" unique_id=50669904]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -124,10 +126,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder3" type="Node3D" parent="Ball/Nineties"]
+[node name="LabelHolder3" type="Node3D" parent="Ball/Nineties" unique_id=247998006]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Nineties/LabelHolder3"]
+[node name="Label3D" type="Label3D" parent="Ball/Nineties/LabelHolder3" unique_id=1719559442]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -139,10 +141,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder4" type="Node3D" parent="Ball/Nineties"]
+[node name="LabelHolder4" type="Node3D" parent="Ball/Nineties" unique_id=1971870130]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Nineties/LabelHolder4"]
+[node name="Label3D" type="Label3D" parent="Ball/Nineties/LabelHolder4" unique_id=1299116762]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -154,13 +156,13 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="Oneeighties" type="Node3D" parent="Ball"]
+[node name="Oneeighties" type="Node3D" parent="Ball" unique_id=672184313]
 transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="LabelHolder" type="Node3D" parent="Ball/Oneeighties"]
+[node name="LabelHolder" type="Node3D" parent="Ball/Oneeighties" unique_id=298462495]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Oneeighties/LabelHolder"]
+[node name="Label3D" type="Label3D" parent="Ball/Oneeighties/LabelHolder" unique_id=307610581]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -172,10 +174,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder2" type="Node3D" parent="Ball/Oneeighties"]
+[node name="LabelHolder2" type="Node3D" parent="Ball/Oneeighties" unique_id=1282177241]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Oneeighties/LabelHolder2"]
+[node name="Label3D" type="Label3D" parent="Ball/Oneeighties/LabelHolder2" unique_id=668694197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -187,10 +189,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder3" type="Node3D" parent="Ball/Oneeighties"]
+[node name="LabelHolder3" type="Node3D" parent="Ball/Oneeighties" unique_id=941487600]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Oneeighties/LabelHolder3"]
+[node name="Label3D" type="Label3D" parent="Ball/Oneeighties/LabelHolder3" unique_id=688349697]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -202,10 +204,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder4" type="Node3D" parent="Ball/Oneeighties"]
+[node name="LabelHolder4" type="Node3D" parent="Ball/Oneeighties" unique_id=1453417304]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/Oneeighties/LabelHolder4"]
+[node name="Label3D" type="Label3D" parent="Ball/Oneeighties/LabelHolder4" unique_id=1924390143]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -217,13 +219,13 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="TwoSeventies" type="Node3D" parent="Ball"]
+[node name="TwoSeventies" type="Node3D" parent="Ball" unique_id=1714808451]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="LabelHolder" type="Node3D" parent="Ball/TwoSeventies"]
+[node name="LabelHolder" type="Node3D" parent="Ball/TwoSeventies" unique_id=1320226393]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/TwoSeventies/LabelHolder"]
+[node name="Label3D" type="Label3D" parent="Ball/TwoSeventies/LabelHolder" unique_id=954745203]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -235,10 +237,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder2" type="Node3D" parent="Ball/TwoSeventies"]
+[node name="LabelHolder2" type="Node3D" parent="Ball/TwoSeventies" unique_id=2031941307]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/TwoSeventies/LabelHolder2"]
+[node name="Label3D" type="Label3D" parent="Ball/TwoSeventies/LabelHolder2" unique_id=1893397024]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -250,10 +252,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder3" type="Node3D" parent="Ball/TwoSeventies"]
+[node name="LabelHolder3" type="Node3D" parent="Ball/TwoSeventies" unique_id=931533068]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/TwoSeventies/LabelHolder3"]
+[node name="Label3D" type="Label3D" parent="Ball/TwoSeventies/LabelHolder3" unique_id=641753662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -265,10 +267,10 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="LabelHolder4" type="Node3D" parent="Ball/TwoSeventies"]
+[node name="LabelHolder4" type="Node3D" parent="Ball/TwoSeventies" unique_id=786909741]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
-[node name="Label3D" type="Label3D" parent="Ball/TwoSeventies/LabelHolder4"]
+[node name="Label3D" type="Label3D" parent="Ball/TwoSeventies/LabelHolder4" unique_id=827426428]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -280,23 +282,23 @@ font = ExtResource("3_01gpn")
 font_size = 24
 script = ExtResource("4_gmmfj")
 
-[node name="Viewpoint" type="Node3D" parent="."]
+[node name="Viewpoint" type="Node3D" parent="." unique_id=472391149]
 script = ExtResource("5_n4w1u")
 
-[node name="Camera3D" type="Camera3D" parent="Viewpoint"]
+[node name="Camera3D" type="Camera3D" parent="Viewpoint" unique_id=790690624]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -2, 0, 0)
 projection = 1
 size = 1.1
 far = 10.0
 
-[node name="Backing" type="Sprite3D" parent="Viewpoint"]
+[node name="Backing" type="Sprite3D" parent="Viewpoint" unique_id=1959089054]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 pixel_size = 0.0011
 axis = 0
 render_priority = 2
 texture = ExtResource("4_dswt3")
 
-[node name="Label3D" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D" type="Label3D" parent="Viewpoint/Backing" unique_id=797915300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -307,7 +309,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D2" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D2" type="Label3D" parent="Viewpoint/Backing" unique_id=91424097]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 pixel_size = 0.002
 billboard = 1
@@ -318,7 +320,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D3" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D3" type="Label3D" parent="Viewpoint/Backing" unique_id=409199372]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 pixel_size = 0.002
 billboard = 1
@@ -329,7 +331,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D4" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D4" type="Label3D" parent="Viewpoint/Backing" unique_id=442926367]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 pixel_size = 0.002
 billboard = 1
@@ -340,7 +342,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D5" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D5" type="Label3D" parent="Viewpoint/Backing" unique_id=1537217574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.433, 0.25)
 pixel_size = 0.002
 billboard = 1
@@ -351,7 +353,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D6" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D6" type="Label3D" parent="Viewpoint/Backing" unique_id=1399807733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.433)
 pixel_size = 0.002
 billboard = 1
@@ -362,7 +364,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D7" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D7" type="Label3D" parent="Viewpoint/Backing" unique_id=249596718]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.433, -0.25)
 pixel_size = 0.002
 billboard = 1
@@ -373,7 +375,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D8" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D8" type="Label3D" parent="Viewpoint/Backing" unique_id=1459392269]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -0.433)
 pixel_size = 0.002
 billboard = 1
@@ -384,7 +386,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D9" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D9" type="Label3D" parent="Viewpoint/Backing" unique_id=290824912]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.433)
 pixel_size = 0.002
 billboard = 1
@@ -395,7 +397,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D10" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D10" type="Label3D" parent="Viewpoint/Backing" unique_id=1451516790]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.433, -0.25)
 pixel_size = 0.002
 billboard = 1
@@ -406,7 +408,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D11" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D11" type="Label3D" parent="Viewpoint/Backing" unique_id=775080147]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.433, 0.25)
 pixel_size = 0.002
 billboard = 1
@@ -417,7 +419,7 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="Label3D12" type="Label3D" parent="Viewpoint/Backing"]
+[node name="Label3D12" type="Label3D" parent="Viewpoint/Backing" unique_id=1284880363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0.433)
 pixel_size = 0.002
 billboard = 1
@@ -428,13 +430,13 @@ font = ExtResource("3_01gpn")
 font_size = 24
 outline_size = 0
 
-[node name="CenterMarker" type="Sprite3D" parent="Viewpoint"]
+[node name="CenterMarker" type="Sprite3D" parent="Viewpoint" unique_id=464150070]
 modulate = Color(0.552941, 0, 0.552941, 1)
 pixel_size = 0.002
 axis = 0
-texture = ExtResource("5_1wtd5")
+texture = ExtResource("7_dhh2w")
 
-[node name="ProgradeMarker" type="Sprite3D" parent="."]
+[node name="ProgradeMarker" type="Sprite3D" parent="." unique_id=1678383765]
 modulate = Color(0.552941, 0, 0.552941, 1)
 pixel_size = 0.002
 billboard = 1
@@ -444,7 +446,16 @@ texture = ExtResource("3_mdtrp")
 script = ExtResource("4_gmmfj")
 retro = 1
 
-[node name="RetroMarker" type="Sprite3D" parent="."]
+[node name="FlightDirector" type="Sprite3D" parent="." unique_id=937625100]
+modulate = Color(0.552941, 0, 0.552941, 1)
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+render_priority = 2
+texture = ExtResource("5_1wtd5")
+script = ExtResource("10_ip1p7")
+
+[node name="RetroMarker" type="Sprite3D" parent="." unique_id=78973482]
 modulate = Color(0.552941, 0, 0.552941, 1)
 pixel_size = 0.002
 billboard = 1

@@ -21,13 +21,16 @@ func update(dt: float) -> void:
 	else:
 		manual_torque = max_torque*_read_manual_input()
 
-	if ship.avionics["autopilot"]:
-		var tgt_dir := _resolve_target_direction(dt)
-		if tgt_dir != Vector3.ZERO:
-			target_attitude = _attitude_from_forward(tgt_dir)
-		ap_torque = _rate_controller(_slew_rate_command())
+	# Get target direction
+	var tgt_dir := _resolve_target_direction(dt)
+	if tgt_dir != Vector3.ZERO:
+		target_attitude = _attitude_from_forward(tgt_dir)
 	else:
 		target_attitude = Quaternion(ship.transform.basis)
+
+	if ship.avionics["autopilot"]:
+		ap_torque = _rate_controller(_slew_rate_command())
+		
 
 	# Combine, clamp, and put in global frame
 	torque = manual_torque + ap_torque
