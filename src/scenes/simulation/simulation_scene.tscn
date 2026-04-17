@@ -159,6 +159,7 @@ rings = 256
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imlac"]
 disable_ambient_light = true
 albedo_texture = ExtResource("14_rkc5v")
+roughness = 0.75
 roughness_texture = ExtResource("16_rfwaf")
 roughness_texture_channel = 4
 normal_enabled = true
@@ -363,6 +364,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_oivmx")
 [node name="Earth" type="Node3D" parent="SolarSystem" unique_id=189468555 groups=["Bodies"]]
 process_priority = 13
 editor_description = "EARTH is the original cradle of humanity and the center of civilization. With one large moon and several stations, over 10 billion people call Earth home."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 117284.8642124952)
 script = ExtResource("6_u7g1e")
 GM = 398600.0
 a = 147683000.0
@@ -393,7 +395,7 @@ a = 6780.0
 i = 0.909
 
 [node name="ISS_stationary" parent="SolarSystem/Earth/ISS" unique_id=677142685 instance=ExtResource("10_vftqf")]
-transform = Transform3D(-0.0009608508024790976, 0.00023141468254332843, 0.00015235806535372718, 0, 0.0005498974959437079, -0.0008352321497371413, -0.00027706630140628846, -0.0008025334813313969, -0.0005283694502588431, 0, 0, 0)
+transform = Transform3D(-0.0009608508024790881, 0.00023141468254332572, 0.0001523580653537266, 0, 0.0005498974959437015, -0.000835232149737138, -0.00027706630140628575, -0.0008025334813313874, -0.0005283694502588411, 0, 0, 0)
 script = ExtResource("10_uhiq1")
 
 [node name="Luna" type="Node3D" parent="SolarSystem/Earth" unique_id=1072884238 groups=["Bodies"]]
@@ -445,7 +447,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion5" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh" unique_id=1498629953]
-transform = Transform3D(1.0000000000000002, -5.5511150000000004e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.5511150000000004e-17, -1.0000000000000002, 6.123230000000002e-17, 1730.3955630911205, -169.11933165213722, -51.003096975380686)
+transform = Transform3D(1.0000000000000002, -5.551115e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.551115e-17, -1.0000000000000002, 6.123230000000002e-17, 1730.3955630911205, -169.11933165213722, -51.003096975380686)
 mesh = SubResource("SphereMesh_jcsod")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
@@ -459,7 +461,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("14_vftqf")
 
 [node name="Explosion7" type="MeshInstance3D" parent="SolarSystem/Earth/Luna/LunaMesh" unique_id=1608107907]
-transform = Transform3D(1.0000000000000002, -5.5511150000000004e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.5511150000000004e-17, -1.0000000000000002, 6.123230000000002e-17, 1542.4423846868576, 85.44843117791264, -803.0706336913754)
+transform = Transform3D(1.0000000000000002, -5.551115e-17, -2.4200313623401228e-33, 0, 6.123230000000002e-17, 1, -5.551115e-17, -1.0000000000000002, 6.123230000000002e-17, 1542.4423846868576, 85.44843117791264, -803.0706336913754)
 mesh = SubResource("SphereMesh_rckgw")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
@@ -514,11 +516,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jhh2d")
 
 [node name="EarthAtmosphere" parent="SolarSystem/Earth/EarthMesh" unique_id=1881116891 instance=ExtResource("19_uxj8m")]
 planet_radius = 6370.999999999981
-atmosphere_height = 39.99999999999988
+atmosphere_height = 100.0
 sun_path = NodePath("../../../Sun/BigSunLight")
-shader_params/u_density = 0.12999999999999962
-shader_params/u_scattering_strength = 9.579999999999972
-shader_params/u_scattering_wavelengths = Vector3(650, 540, 440)
+force_fullscreen = true
+shader_params/u_density = 0.15
+shader_params/u_scattering_strength = 0.65
 shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
 
 [node name="Lights" type="MeshInstance3D" parent="SolarSystem/Earth/EarthMesh" unique_id=762900562 node_paths=PackedStringArray("sun_path")]
