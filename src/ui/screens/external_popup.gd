@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 @onready var player: PlayerCharacter = get_parent()
 

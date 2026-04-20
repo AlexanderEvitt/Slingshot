@@ -1,39 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwmguh47arrut"]
+[gd_scene format=3 uid="uid://dwmguh47arrut"]
 
 [ext_resource type="Script" uid="uid://bs8erl8nle1lb" path="res://ships/ghost_ship/ghost_entity.gd" id="1_xdcq6"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="13_uyc1d"]
-[ext_resource type="Script" uid="uid://cq5dw32840hl2" path="res://scenes/simulation/hud_visibility.gd" id="14_knlqu"]
 [ext_resource type="Texture2D" uid="uid://djyppx76cf4t5" path="res://scenes/attitude/prograde.png" id="16_pxptb"]
 [ext_resource type="Script" uid="uid://bpytqforn4lvc" path="res://scenes/attitude/prograde_marker.gd" id="17_h17dd"]
 [ext_resource type="Texture2D" uid="uid://d28isjwqdor3u" path="res://scenes/attitude/retrograde.png" id="18_vynvg"]
 
-[node name="PlayerShip" type="Node3D"]
+[node name="PlayerShip" type="Node3D" unique_id=1598605476]
 editor_description = "FV JUNIPER is a Hedge-class frigate in the Federal Navy. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
 script = ExtResource("1_xdcq6")
 
-[node name="Pointer" type="Node3D" parent="."]
+[node name="Pointer" type="Node3D" parent="." unique_id=116129617]
 
-[node name="FirstCam" type="Camera3D" parent="Pointer"]
+[node name="FirstCam" type="Camera3D" parent="Pointer" unique_id=9657057]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0.00408274, 0.00811089, 0)
 fov = 50.0
 size = 2.0
 near = 0.001
-far = 1e+07
+far = 10000000.0
 
-[node name="CenterMarker" type="Sprite3D" parent="Pointer/FirstCam"]
+[node name="CenterMarker" type="Sprite3D" parent="Pointer/FirstCam" unique_id=1880544963]
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.0639505)
+layers = 524288
 pixel_size = 0.0005
 axis = 0
 no_depth_test = true
 fixed_size = true
 texture = ExtResource("13_uyc1d")
-script = ExtResource("14_knlqu")
 
-[node name="HUD" type="Node3D" parent="."]
+[node name="HUD" type="Node3D" parent="." unique_id=1297875029]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00408274, 0.00811089, 0)
-script = ExtResource("14_knlqu")
 
-[node name="ProgradeMarker" type="Sprite3D" parent="HUD"]
+[node name="ProgradeMarker" type="Sprite3D" parent="HUD" unique_id=1134505630]
+layers = 524288
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true
@@ -44,7 +43,8 @@ script = ExtResource("17_h17dd")
 retro = 1
 side_check = false
 
-[node name="RetroMarker" type="Sprite3D" parent="HUD"]
+[node name="RetroMarker" type="Sprite3D" parent="HUD" unique_id=58574810]
+layers = 524288
 pixel_size = 0.0005
 billboard = 1
 no_depth_test = true

@@ -14,7 +14,7 @@ extends Node3D
 @onready var crosshair: Control = $Head/Camera3D/Crosshair
 @onready var pause_menu: Control = $PauseMenu
 @onready var background: MeshInstance3D = $Head/Camera3D/Background
-@onready var external_screen: HBoxContainer = $ExternalScreen
+@onready var external_screen: Control = $ExternalScreen
 
 # Get the viewport that sees the simulation (should be a sibling)
 @onready var sim_viewport: SubViewport = get_parent().get_node("SimViewport")

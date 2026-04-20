@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://231jhr4hx8d6"]
+[gd_scene format=3 uid="uid://231jhr4hx8d6"]
 
 [ext_resource type="Script" uid="uid://c5861dvxuxslk" path="res://ui/screen_switcher.gd" id="2_bh7rb"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_bmshc"]
+[ext_resource type="PackedScene" uid="uid://b5ulv7oyff00d" path="res://ui/screens/control_screen.tscn" id="4_ckcif"]
 [ext_resource type="PackedScene" uid="uid://c6ewf1e7q725g" path="res://ui/screens/flight_screen.tscn" id="4_l1uqb"]
 [ext_resource type="PackedScene" uid="uid://dpcripo2vb6ip" path="res://ui/screens/engineering/engineering_screen.tscn" id="5_i05jk"]
-[ext_resource type="PackedScene" uid="uid://b07e4fcvvtdqq" path="res://ui/screens/external_screen.tscn" id="6_b2rax"]
 [ext_resource type="PackedScene" uid="uid://d06hakxi1tnc8" path="res://ui/screens/navigation/navigation_screen.tscn" id="7_j2pmq"]
 [ext_resource type="PackedScene" uid="uid://b0akt2w44i68p" path="res://ui/screens/utility_screen.tscn" id="8_76tcd"]
 [ext_resource type="PackedScene" uid="uid://cupcgndqidmw2" path="res://ui/screens/cinematic_screen.tscn" id="9_xulks"]
@@ -15,7 +15,7 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r8b8m"]
 texture = ExtResource("17_adpiv")
 
-[node name="ShipUI" type="Panel"]
+[node name="ShipUI" type="Panel" unique_id=838755761]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,38 +27,35 @@ theme = ExtResource("2_bmshc")
 script = ExtResource("2_bh7rb")
 button_group = ExtResource("27_ytqrm")
 
-[node name="ExternalScreen" parent="." instance=ExtResource("6_b2rax")]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ControlScreen" parent="." unique_id=165783688 instance=ExtResource("4_ckcif")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
-[node name="FlightScreen" parent="." instance=ExtResource("4_l1uqb")]
+[node name="FlightScreen" parent="." unique_id=729173880 instance=ExtResource("4_l1uqb")]
 visible = false
 layout_mode = 1
 
-[node name="EngineeringScreen" parent="." instance=ExtResource("5_i05jk")]
+[node name="EngineeringScreen" parent="." unique_id=176076037 instance=ExtResource("5_i05jk")]
 visible = false
 layout_mode = 1
 
-[node name="NavigationScreen" parent="." instance=ExtResource("7_j2pmq")]
+[node name="NavigationScreen" parent="." unique_id=267527157 instance=ExtResource("7_j2pmq")]
 visible = false
 layout_mode = 1
 
-[node name="UtilityScreen" parent="." instance=ExtResource("8_76tcd")]
+[node name="UtilityScreen" parent="." unique_id=2059504656 instance=ExtResource("8_76tcd")]
 visible = false
 layout_mode = 1
 
-[node name="CinematicScreen" parent="." instance=ExtResource("9_xulks")]
+[node name="CinematicScreen" parent="." unique_id=294077724 instance=ExtResource("9_xulks")]
 visible = false
 layout_mode = 1
 
-[node name="ScreenSelectorPanel" type="Panel" parent="."]
+[node name="ScreenSelectorPanel" type="Panel" parent="." unique_id=735899586]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -67,7 +64,7 @@ anchor_right = 0.75
 anchor_bottom = 0.55
 theme = ExtResource("14_k3rsk")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScreenSelectorPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenSelectorPanel" unique_id=1182755546]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,13 +72,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonHolder" type="GridContainer" parent="ScreenSelectorPanel/HBoxContainer"]
+[node name="ButtonHolder" type="GridContainer" parent="ScreenSelectorPanel/HBoxContainer" unique_id=1170859312]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="FlightButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="FlightButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder" unique_id=1055226763]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -90,15 +87,15 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/FlightButton"]
+[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/FlightButton" unique_id=297094840]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_pressed = true
 button_group = ExtResource("27_ytqrm")
-text = "EXTERNAL"
+text = "CONTROL"
 
-[node name="EngineeringButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="EngineeringButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder" unique_id=1356231027]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -106,14 +103,14 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/EngineeringButton"]
+[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/EngineeringButton" unique_id=975193609]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_group = ExtResource("27_ytqrm")
 text = "FLIGHT"
 
-[node name="ExternalButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="ExternalButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder" unique_id=330027371]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -121,14 +118,14 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/ExternalButton"]
+[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/ExternalButton" unique_id=32375724]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_group = ExtResource("27_ytqrm")
 text = "ENGINEERING"
 
-[node name="NavigationButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="NavigationButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder" unique_id=1306859699]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -137,14 +134,14 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 5
 
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/NavigationButton"]
+[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/NavigationButton" unique_id=214079847]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_group = ExtResource("27_ytqrm")
 text = "NAVIGATION"
 
-[node name="UtilityButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="UtilityButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder" unique_id=273318265]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -153,14 +150,14 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 5
 
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/UtilityButton"]
+[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/UtilityButton" unique_id=1661013500]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_group = ExtResource("27_ytqrm")
 text = "UTILITY"
 
-[node name="CinematicButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder"]
+[node name="CinematicButton" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder" unique_id=1800057666]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -169,26 +166,26 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 5
 
-[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/CinematicButton"]
+[node name="Button" type="Button" parent="ScreenSelectorPanel/HBoxContainer/ButtonHolder/CinematicButton" unique_id=755534888]
 layout_mode = 2
 theme = ExtResource("14_k3rsk")
 toggle_mode = true
 button_group = ExtResource("27_ytqrm")
 text = "CINEMATIC"
 
-[node name="MarginContainer" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ScreenSelectorPanel/HBoxContainer" unique_id=1153226343]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 40
 
-[node name="Label" type="Label" parent="ScreenSelectorPanel/HBoxContainer/MarginContainer"]
+[node name="Label" type="Label" parent="ScreenSelectorPanel/HBoxContainer/MarginContainer" unique_id=978600307]
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("14_k3rsk")
 text = "SCREENS"
 
-[node name="TriangleCutout" type="Panel" parent="ScreenSelectorPanel"]
+[node name="TriangleCutout" type="Panel" parent="ScreenSelectorPanel" unique_id=507593245]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0

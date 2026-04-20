@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://b5ulv7oyff00d"]
+
+[ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="1_qaeiu"]
+[ext_resource type="PackedScene" uid="uid://d0e1osx21d7u2" path="res://scenes/attitude/navball_scene.tscn" id="2_yygqa"]
+[ext_resource type="Texture2D" uid="uid://v2arkm3xh0km" path="res://scenes/attitude/ballbacking.png" id="3_o2msw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5cft"]
+bg_color = Color(0.11764706, 0.11764706, 0.15686275, 1)
+border_width_right = 4
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dy3cb"]
+bg_color = Color(0.39688924, 0.39688927, 0.3968891, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6fpv"]
+bg_color = Color(0.07450981, 0.07450981, 0.09803922, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_detail = 4
+
+[node name="ControlScreen" type="HBoxContainer" unique_id=165783688]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qaeiu")
+
+[node name="Controls" type="Panel" parent="." unique_id=1957368423]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5cft")
+
+[node name="PFD" type="VBoxContainer" parent="." unique_id=1907264788]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PFD" unique_id=1309285859]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="PFD/HBoxContainer" unique_id=1317145678]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="Panel" type="Panel" parent="PFD/HBoxContainer/Panel" unique_id=2143012602]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dy3cb")
+
+[node name="Panel2" type="Panel" parent="PFD/HBoxContainer/Panel" unique_id=2067602300]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w6fpv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PFD/HBoxContainer/Panel/Panel2" unique_id=1511597119]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "1925km/s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PFD/HBoxContainer" unique_id=1608899936]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="PFD/HBoxContainer/SubViewportContainer" unique_id=1647178272]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(593, 538)
+render_target_update_mode = 4
+
+[node name="NavballRoot" parent="PFD/HBoxContainer/SubViewportContainer/SubViewport" unique_id=1765283724 instance=ExtResource("2_yygqa")]
+
+[node name="Panel2" type="Panel" parent="PFD/HBoxContainer" unique_id=734857185]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="Panel" type="Panel" parent="PFD/HBoxContainer/Panel2" unique_id=682509594]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dy3cb")
+
+[node name="Panel2" type="Panel" parent="PFD/HBoxContainer/Panel2" unique_id=234607528]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w6fpv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PFD/HBoxContainer/Panel2/Panel2" unique_id=1041394098]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "1925km/s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PFD" unique_id=39601020]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="PFD/HBoxContainer2" unique_id=1997714284]
+layout_mode = 2
+texture = ExtResource("3_o2msw")
+expand_mode = 3

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dxptfdorrp7mi"]
+[gd_resource type="Theme" format=3 uid="uid://dxptfdorrp7mi"]
 
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="1_xwr2b"]
 [ext_resource type="StyleBox" uid="uid://bhl4tsdr58raf" path="res://ui/widgets/alerts_panel/caution.tres" id="2_6dryd"]

@@ -12,7 +12,7 @@ var torque: Vector3
 var max_torque: float
 var max_thrust: float 
 
-@onready var light = $OmniLight3D
+@onready var light: OmniLight3D = $OmniLight3D
 
 var my_torque := 0.0
 var my_thrust := 0.0

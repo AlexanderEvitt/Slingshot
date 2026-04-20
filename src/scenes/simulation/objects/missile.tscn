@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c8bhsltix8jmk"]
+
+[ext_resource type="Script" uid="uid://cronsq6nxwuik" path="res://scenes/simulation/objects/missile.gd" id="1_7kbnm"]
+[ext_resource type="Script" uid="uid://8tgf0sb5qi7g" path="res://scenes/simulation/objects/detonation.gd" id="2_08n1d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08n1d"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(18.892157, 18.892157, 18.892157, 1)
+
+[sub_resource type="PointMesh" id="PointMesh_7io0x"]
+material = SubResource("StandardMaterial3D_08n1d")
+
+[sub_resource type="SphereMesh" id="SphereMesh_08n1d"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vftqf"]
+shading_mode = 0
+disable_ambient_light = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(199167330000, 199167330000, 199167330000, 1)
+
+[node name="Missile" type="Node3D" unique_id=1700665718]
+top_level = true
+script = ExtResource("1_7kbnm")
+total_thrust = 0.1
+detonation_radius = 0.2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=877822224]
+mesh = SubResource("PointMesh_7io0x")
+
+[node name="Explosion" type="MeshInstance3D" parent="." unique_id=947959559]
+transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -3.507816202175806e-33, -3.3990776836172276e-33, 6.123230000000004e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000004e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_08n1d")
+surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
+script = ExtResource("2_08n1d")
+flash_intensity = 0.15
+decay_rate = 5.0

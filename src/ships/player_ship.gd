@@ -118,16 +118,14 @@ func _physics_process(delta: float) -> void:
 	plotter.positions = propagate_module.get("plotted_positions")
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	#if state.get_contact_count() > 0:
-		#print("Contacts: ", state.get_contact_count())
-		#print("  Position: ", state.get_contact_local_position(0))
-		#print("  Normal: ", state.get_contact_local_normal(0))
-		#print("  Collider: ", state.get_contact_collider_object(0).constant_linear_velocity)
-		#if state.get_contact_collider_object(0).constant_linear_velocity.length() > 0.01:
-		#	print("Alarm!")
-		#	print(state.get_contact_collider_object(0).constant_linear_velocity.length())
+	if state.get_contact_count() > 0 and false:
+		print("Contacts: ", state.get_contact_count())
+		print("  Position: ", state.get_contact_local_position(0))
+		print("  Normal: ", state.get_contact_local_normal(0))
+		@warning_ignore("unsafe_property_access", "unsafe_method_access")
+		print("  Collider: ", 1000.0*(state.get_contact_collider_object(0).constant_linear_velocity - linear_velocity).length())
+	
 	gravity_acceleration = propagate_module.Acceleration(system_position,SimTime.prev_t)
-	#print(state.transform.origin.length())
 	force = attitude*(thrust/1000.0) + mass*gravity_acceleration
 	acceleration = force/mass # for ui
 
@@ -151,7 +149,6 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		state.apply_central_force(force)
 		state.apply_torque(torque)
 		attitude = state.transform.basis
-		#print("Integrated!")
 	else:
 		custom_integrator = true
 		# Calculate acceleration on vehicle
@@ -177,7 +174,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		# Update vehicle coords
 		state.transform.origin = system_position - ShipData.get_floating_frame_origin()
 		state.linear_velocity = system_velocity - ShipData.floating_frame_velocity
-		print("Reinit: ", state.transform.origin.length(), " ", state.linear_velocity.length())
+		#print("Reinit: ", state.transform.origin.length(), " ", state.linear_velocity.length())
 		
 
 func fetch(_time: float) -> Vector3:

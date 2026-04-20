@@ -148,6 +148,7 @@ radial_segments = 8
 rings = 4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cmojb"]
+margin = 0.0
 radius = 1740.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_aom7d"]
@@ -395,7 +396,7 @@ a = 6780.0
 i = 0.909
 
 [node name="ISS_stationary" parent="SolarSystem/Earth/ISS" unique_id=677142685 instance=ExtResource("10_vftqf")]
-transform = Transform3D(-0.0009608508024790881, 0.00023141468254332572, 0.0001523580653537266, 0, 0.0005498974959437015, -0.000835232149737138, -0.00027706630140628575, -0.0008025334813313874, -0.0005283694502588411, 0, 0, 0)
+transform = Transform3D(-0.0009608508024790698, 0.00023141468254332255, 0.00015235806535372445, 0, 0.000549897495943694, -0.0008352321497371262, -0.00027706630140628043, -0.0008025334813313765, -0.0005283694502588336, 0, 0, 0)
 script = ExtResource("10_uhiq1")
 
 [node name="Luna" type="Node3D" parent="SolarSystem/Earth" unique_id=1072884238 groups=["Bodies"]]

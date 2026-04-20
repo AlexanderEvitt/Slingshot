@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bu2j4yalwn3ks"]
+[gd_scene format=3 uid="uid://bu2j4yalwn3ks"]
 
 [ext_resource type="Shader" uid="uid://b7w7d5gy31gtq" path="res://visuals/PlasmaPlume.gdshader" id="1_eo5p0"]
 [ext_resource type="Script" uid="uid://72ku7rvqc56i" path="res://visuals/plume_controller.gd" id="2_y04ml"]
@@ -75,20 +75,20 @@ shader_parameter/fresnel_power = 5.0
 shader_parameter/enable_fresnel = true
 shader_parameter/gradient = SubResource("GradientTexture1D_4m3j0")
 
-[node name="Plume" type="Node3D"]
+[node name="Plume" type="Node3D" unique_id=1784429503]
 script = ExtResource("2_y04ml")
 
-[node name="Fan" type="MeshInstance3D" parent="."]
+[node name="Fan" type="MeshInstance3D" parent="." unique_id=1842758849]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -8, 0, 0)
 mesh = SubResource("CylinderMesh_2hk2m")
 surface_material_override/0 = SubResource("ShaderMaterial_phgne")
 
-[node name="Pencil" type="MeshInstance3D" parent="."]
+[node name="Pencil" type="MeshInstance3D" parent="." unique_id=1541332448]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -4, 0, 0)
 mesh = SubResource("CylinderMesh_n1q1i")
 surface_material_override/0 = SubResource("ShaderMaterial_udyin")
 
-[node name="Light" type="OmniLight3D" parent="."]
+[node name="Light" type="OmniLight3D" parent="." unique_id=1434326006]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 layers = 2
 light_energy = 0.2
@@ -98,7 +98,7 @@ shadow_bias = 0.001
 omni_range = 0.008
 omni_shadow_mode = 0
 
-[node name="Light2" type="OmniLight3D" parent="."]
+[node name="Light2" type="OmniLight3D" parent="." unique_id=449740248]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337524, 0, 0)
 layers = 2
 light_energy = 0.1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1bhbnqab3tql"]
+[gd_scene format=3 uid="uid://d1bhbnqab3tql"]
 
 [ext_resource type="Script" uid="uid://cji5e4fhoho7t" path="res://scenes/simulation/bodies/stations/components/station_manager.gd" id="1_5ddl1"]
 [ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://scenes/simulation/bodies/Body.cs" id="1_roprr"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dclrlvx4upy8x" path="res://scenes/simulation/bodies/stations/components/round_port.tscn" id="4_toxan"]
 [ext_resource type="PackedScene" uid="uid://djhub5hfmxtif" path="res://scenes/orbit/koz/wire_cylinder.tscn" id="6_m412c"]
 [ext_resource type="PackedScene" uid="uid://bvt1477iysnr5" path="res://scenes/simulation/bodies/stations/components/radar.tscn" id="6_r1hnp"]
+[ext_resource type="Script" uid="uid://bdrwp51r80vfg" path="res://scenes/simulation/bodies/stations/stations/missile_launcher.gd" id="7_7yybf"]
+[ext_resource type="PackedScene" uid="uid://c8bhsltix8jmk" path="res://scenes/simulation/objects/missile.tscn" id="8_5raqf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gn41"]
 shading_mode = 0
@@ -15,7 +17,7 @@ albedo_color = Color(0.65, 0.65, 0.65, 1)
 [sub_resource type="PointMesh" id="PointMesh_roprr"]
 material = SubResource("StandardMaterial3D_0gn41")
 
-[node name="Concordia" type="Node3D" groups=["Stations"]]
+[node name="Concordia" type="Node3D" unique_id=1705548071 groups=["Stations"]]
 process_priority = 13
 editor_description = "CONCORDIA II is a former European Union colony station, since turned over to private military interest as civilian traffic to the moon below dried up."
 script = ExtResource("1_roprr")
@@ -23,39 +25,44 @@ a = 3000.0
 i = 60.0
 theta0 = 1.3
 
-[node name="Station" type="Node3D" parent="."]
+[node name="Station" type="Node3D" parent="." unique_id=1492342966]
 script = ExtResource("1_5ddl1")
 berth_path = "round_port/Port/{}/docks/Docks/{}/"
 
-[node name="ring1" parent="Station" instance=ExtResource("3_eo4fm")]
+[node name="ring1" parent="Station" unique_id=492254840 instance=ExtResource("3_eo4fm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
-[node name="round_port" parent="Station" instance=ExtResource("4_toxan")]
+[node name="round_port" parent="Station" unique_id=1497034206 instance=ExtResource("4_toxan")]
 
-[node name="ring2" parent="Station" instance=ExtResource("3_eo4fm")]
+[node name="ring2" parent="Station" unique_id=188872932 instance=ExtResource("3_eo4fm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 flip = -1
 
-[node name="KOZ" type="Node3D" parent="Station"]
+[node name="KOZ" type="Node3D" parent="Station" unique_id=2079538528]
 visible = false
 
-[node name="wire_cylinder" parent="Station/KOZ" instance=ExtResource("6_m412c")]
+[node name="wire_cylinder" parent="Station/KOZ" unique_id=230618528 instance=ExtResource("6_m412c")]
 transform = Transform3D(0.5, 0, 0, 0, 9, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="wire_cylinder2" parent="Station/KOZ" instance=ExtResource("6_m412c")]
+[node name="wire_cylinder2" parent="Station/KOZ" unique_id=611412212 instance=ExtResource("6_m412c")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 4, 0)
 
-[node name="wire_cylinder3" parent="Station/KOZ" instance=ExtResource("6_m412c")]
+[node name="wire_cylinder3" parent="Station/KOZ" unique_id=1768387770 instance=ExtResource("6_m412c")]
 transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, -4, 0)
 
-[node name="wire_cylinder4" parent="Station/KOZ" instance=ExtResource("6_m412c")]
+[node name="wire_cylinder4" parent="Station/KOZ" unique_id=299027671 instance=ExtResource("6_m412c")]
 transform = Transform3D(2.475, 0, 0, 0, 0.415, 0, 0, 0, 3.11, 0, 0.104842, 0)
 
-[node name="radar" parent="Station" instance=ExtResource("6_r1hnp")]
+[node name="radar" parent="Station" unique_id=15519310 instance=ExtResource("6_r1hnp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
-[node name="radar2" parent="Station" instance=ExtResource("6_r1hnp")]
+[node name="radar2" parent="Station" unique_id=1832864385 instance=ExtResource("6_r1hnp")]
 transform = Transform3D(-1, -1.2246467991473532e-16, 0, 1.2246467991473532e-16, -1, 0, 0, 0, 1, 0, -6, 0)
 
-[node name="LightPrick" type="MeshInstance3D" parent="."]
+[node name="MissileLauncher" type="Node3D" parent="Station" unique_id=46575183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.66884574381888, 0)
+script = ExtResource("7_7yybf")
+missile_scene = ExtResource("8_5raqf")
+
+[node name="LightPrick" type="MeshInstance3D" parent="." unique_id=1506720427]
 mesh = SubResource("PointMesh_roprr")
