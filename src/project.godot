@@ -55,6 +55,10 @@ mouse_cursor/custom_image="res://ui/cursor.png"
 
 project/assembly_name="Slingshot"
 
+[global_group]
+
+missiles=""
+
 [input]
 
 time_speed_up={

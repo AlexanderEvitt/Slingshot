@@ -20,11 +20,11 @@ disable_ambient_light = true
 vertex_color_use_as_albedo = true
 albedo_color = Color(199167330000, 199167330000, 199167330000, 1)
 
-[node name="Missile" type="Node3D" unique_id=1700665718]
+[node name="Missile" type="Node3D" unique_id=1700665718 groups=["missiles"]]
 top_level = true
 script = ExtResource("1_7kbnm")
 total_thrust = 0.1
-detonation_radius = 0.2
+detonation_radius = 0.1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=877822224]
 mesh = SubResource("PointMesh_7io0x")
@@ -36,3 +36,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vftqf")
 script = ExtResource("2_08n1d")
 flash_intensity = 0.15
 decay_rate = 5.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Explosion" unique_id=1330617090]
+transform = Transform3D(0.9999999999999996, 3.507816202175804e-33, 2.1479190029278033e-49, -1.3581819661674396e-55, 6.123230000000002e-17, -0.9999999999999996, 3.3990776836172256e-33, 1, 6.123230000000002e-17, 0, 0, 0)
+light_energy = 6.0
+omni_range = 0.3

@@ -14,7 +14,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("fire"):
+	if false:#Input.is_action_pressed("fire"):
 		gun.emitting = true
 	else:
 		gun.emitting = false
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 		child_emitter2.emitting = false
 		elapsed_time = 0.0
 	
-	if Input.is_action_just_released("fire"):
+	if false:#Input.is_action_just_released("fire"):
 		fire_count += 1
 		
 		if fire_count > 5:

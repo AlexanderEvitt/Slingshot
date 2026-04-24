@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cugkt3osvc84h"]
+
+[ext_resource type="Script" uid="uid://bd5igyewtwff6" path="res://scenes/simulation/bodies/chunked_planet/planet_root.gd" id="1_bodeo"]
+
+[node name="Planet" type="Node3D" unique_id=900487164 node_paths=PackedStringArray("lod_target")]
+script = ExtResource("1_bodeo")
+lod_target = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=117342222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1514.6501710339874, 824.4063432038733, -280.42063740909884)

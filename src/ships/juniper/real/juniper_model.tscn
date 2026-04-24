@@ -88,14 +88,13 @@ outline_size = 0
 [node name="Pods" parent="." index="19"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ylmgo")
 
-[node name="Turret2" parent="." index="21" node_paths=PackedStringArray("mount", "beam")]
+[node name="Turret2" parent="." index="21" node_paths=PackedStringArray("cannon")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4319038, 0, -6.9897265)
 script = ExtResource("5_rnp7b")
-mount = NodePath("Laser2")
-beam = NodePath("Laser2/Beam")
-target = Vector3(100, -8.57, -38.475)
+cannon = NodePath("Laser2")
 
 [node name="Laser2" parent="Turret2" index="0"]
-transform = Transform3D(0.9561015084079548, 0.07672687888771008, 0.28281246732797377, -0.07999255720098761, 0.9967954608606582, 4.576525164308791e-19, -0.2819061837073324, -0.02262289246988608, 0.9591752229513728, 0, 0, -1.2832637)
+transform = Transform3D(0.9999999999999762, 0, 0, 0, 0.9999999999999829, 0, 0, 0, 0.999999999999976, 0, 0, -1.2832636999999991)
 
 [node name="Beam" type="MeshInstance3D" parent="Turret2/Laser2" index="0" unique_id=1737041911]
 transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, 1500, 0, -1.3169999999954598)

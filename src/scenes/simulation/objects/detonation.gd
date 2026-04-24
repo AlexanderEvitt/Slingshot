@@ -4,7 +4,9 @@ extends MeshInstance3D
 @export var flash_intensity := 0.1      # Peak multiplier
 @export var decay_rate := 2.0           # Larger = faster decay
 
-var current_intensity := 0.0
+@onready var light: OmniLight3D = $OmniLight3D
+
+var current_intensity := 0.01
 
 func _ready() -> void:
 	_apply_intensity()
@@ -17,8 +19,10 @@ func _process(delta: float) -> void:
 		# Exponential decay
 		current_intensity *= exp(-decay_rate * delta)
 		_apply_intensity()
+		light.visible = true
 	else:
 		current_intensity = 0.0
+		light.visible = false
 
 func _apply_intensity() -> void:
 	# Size sphere
@@ -26,3 +30,5 @@ func _apply_intensity() -> void:
 	mesh.radius = current_intensity
 	@warning_ignore("unsafe_property_access")
 	mesh.height = 2*mesh.radius
+	# Set omni light brightness
+	light.light_energy = 6.0*current_intensity/flash_intensity
