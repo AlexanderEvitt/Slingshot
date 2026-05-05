@@ -94,7 +94,7 @@ script = ExtResource("5_rnp7b")
 cannon = NodePath("Laser2")
 
 [node name="Laser2" parent="Turret2" index="0"]
-transform = Transform3D(0.9999999999999762, 0, 0, 0, 0.9999999999999829, 0, 0, 0, 0.999999999999976, 0, 0, -1.2832636999999991)
+transform = Transform3D(0.9999999999999762, 0, 0, 0, 0.9999999999999828, 0, 0, 0, 0.999999999999976, 0, 0, -1.2832636999999991)
 
 [node name="Beam" type="MeshInstance3D" parent="Turret2/Laser2" index="0" unique_id=1737041911]
 transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, 1500, 0, -1.3169999999954598)

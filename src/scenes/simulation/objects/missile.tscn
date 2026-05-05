@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cronsq6nxwuik" path="res://scenes/simulation/objects/missile.gd" id="1_7kbnm"]
 [ext_resource type="Script" uid="uid://8tgf0sb5qi7g" path="res://scenes/simulation/objects/detonation.gd" id="2_08n1d"]
+[ext_resource type="Texture2D" uid="uid://0r82b4frt7cp" path="res://scenes/attitude/dot.png" id="3_7io0x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08n1d"]
 shading_mode = 0
@@ -41,3 +42,10 @@ decay_rate = 5.0
 transform = Transform3D(0.9999999999999996, 3.507816202175804e-33, 2.1479190029278033e-49, -1.3581819661674396e-55, 6.123230000000002e-17, -0.9999999999999996, 3.3990776836172256e-33, 1, 6.123230000000002e-17, 0, 0, 0)
 light_energy = 6.0
 omni_range = 0.3
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=250974820]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("3_7io0x")

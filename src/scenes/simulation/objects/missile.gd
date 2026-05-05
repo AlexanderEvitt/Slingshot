@@ -17,8 +17,13 @@ var detonation_distance := Vector3.ZERO # where detonation occurs relative to pl
 
 
 func initialize(spawn_pos: Vector3, spawn_vel: Vector3, initial_attitude: Basis) -> void:
+	var v := 0.2*Vector3(
+		randf_range(-1, 1),
+		randf_range(-1, 1),
+		randf_range(-1, 1)
+	)
 	system_position = spawn_pos
-	system_velocity = spawn_vel + (-initial_attitude.y * 0.1)
+	system_velocity = spawn_vel + v#(-initial_attitude.y * 0.5)
 	print("Spawning...")
 	_sync_scene_transform()
 
@@ -37,7 +42,6 @@ func _physics_process(delta: float) -> void:
 		if (system_position - target.system_position).length() <= detonation_radius:
 			print("Detonating...")
 			_detonate()
-			flying = false
 	else:
 		# Fix in frame affixed to player ship
 		global_position = detonation_distance + ShipData.player_ship.global_position
@@ -92,6 +96,7 @@ func _sync_scene_transform() -> void:
 func _detonate() -> void:
 	detonation_distance = global_position - ShipData.player_ship.global_position
 	explosion.trigger()
+	flying = false
 	# Kill object after timer expires
 	await get_tree().create_timer(1.0).timeout
 	queue_free()

@@ -5,7 +5,12 @@ extends Node3D
 @export var elevation_min_deg: float = -10.0
 @export var elevation_max_deg: float = 60.0
 @export var slew_rate_deg: float = 90.0
+@export var sensor_range_km: float = 100.0
 @export var laser_range_km: float = 30.0
+@export var laser_pulse_length: float = 0.1
+@export var cooldown_time: float = 1.0
+
+@onready var cooldown_timer: float = 1.0
 
 @onready var beam: MeshInstance3D = cannon.get_node("Beam")
 
@@ -18,16 +23,18 @@ var el_current: float = 0.0
 func _physics_process(delta: float) -> void:
 	target = _find_nearest_missile()
 	if target == null:
-		target_vector = Vector3(1,0,0)
-		_point_at(target_vector, delta)
+		#target_vector = Vector3(1,0,0)
+		#_point_at(target_vector, delta)
 		beam.visible = false
+		cooldown_timer += -SimTime.step*delta
 	else:
 		target_vector = target.system_position - ShipData.player_ship.system_position
 		_point_at(target_vector.normalized(), delta)
-		if _is_on_target():
+		if _is_on_target() and cooldown_timer < 0.0 and _target_distance(target) < laser_range_km:
 			_fire()
 		else:
 			beam.visible = false
+			cooldown_timer += -SimTime.step*delta
 
 
 func _point_at(offset: Vector3, delta: float) -> void:
@@ -49,24 +56,27 @@ func _pitch_yaw_from_vector(t: Vector3) -> Array[float]:
 
 
 func _is_on_target() -> bool:
-	#print((cannon.global_transform.basis.x.normalized()).dot(target_vector.normalized()))
 	return ((cannon.global_transform.basis.x.normalized()).dot(target_vector.normalized()) > 0.999)
 
 
 func _fire() -> void:
 	beam.visible = true
-	target._detonate()
+	var current_target: Missile = target
+	await get_tree().create_timer(laser_pulse_length).timeout
+	current_target._detonate()
+	cooldown_timer = 1.0
 
+func _target_distance(missile: Missile) -> float:
+	return (missile.system_position - ShipData.player_ship.system_position).length()
 
 func _find_nearest_missile() -> Missile:
 	var nearest: Missile = null
 	var nearest_dist := INF
 	for node in get_tree().get_nodes_in_group("missiles"):
 		var missile := node as Missile
-		if missile == null:
-			continue
-		var dist: float = (missile.system_position - ShipData.player_ship.system_position).length()
-		if dist < nearest_dist and dist < 8.0:
-			nearest_dist = dist
-			nearest = missile
+		if missile != null and missile.flying:
+			var dist: float = _target_distance(missile)
+			if dist < nearest_dist and dist < sensor_range_km:
+				nearest_dist = dist
+				nearest = missile
 	return nearest
