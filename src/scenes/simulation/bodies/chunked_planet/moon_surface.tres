@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dly8qkuwkm1i4"]
+
+[ext_resource type="Texture2D" uid="uid://dfj48vnmm0niy" path="res://scenes/simulation/bodies/chunked_planet/moon_color.png" id="1_0fx1u"]
+
+[resource]
+albedo_texture = ExtResource("1_0fx1u")

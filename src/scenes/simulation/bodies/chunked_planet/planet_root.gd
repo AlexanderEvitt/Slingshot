@@ -17,6 +17,8 @@ const HEIGHTMAP_PATH := "res://scenes/simulation/bodies/chunked_planet/moon_heig
 		if Engine.is_editor_hint():
 			_rebuild()
 
+@export var surface_material: Material
+
 var trees: Array[QuadTreeNode] = []
 var sampler: HeightmapSampler
 
@@ -33,9 +35,9 @@ func _rebuild() -> void:
 	if not sampler.load_from_path(HEIGHTMAP_PATH):
 		push_error("PlanetRoot: heightmap failed to load")
 		return
-	for normal in FACE_NORMALS:
+	for normal: Vector3 in FACE_NORMALS:
 		var root := QuadTreeNode.new()
-		root.init(normal, Vector2.ZERO, 1.0, 0, self, sampler, PLANET_RADIUS, DISPLACEMENT_SCALE)
+		root.init(normal, Vector2.ZERO, 1.0, 0, self, sampler, PLANET_RADIUS, DISPLACEMENT_SCALE, surface_material)
 		root.build()
 		trees.append(root)
 

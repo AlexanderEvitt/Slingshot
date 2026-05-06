@@ -31,7 +31,7 @@ func _dir_to_uv(d: Vector3) -> Vector2:
 	var lon := atan2(d.x, d.z)           # -PI to PI
 	var lat := asin(clamp(d.y, -1.0, 1.0))  # -PI/2 to PI/2
 	var u := (lon / (2.0 * PI)) + 0.5
-	var v := (lat / PI) + 0.5
+	var v := 1.0 - ((lat / PI) + 0.5)  # flip V
 	return Vector2(u, v)
 
 func _sample_bilinear(u: float, v: float) -> float:

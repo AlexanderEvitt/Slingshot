@@ -1,10 +1,29 @@
 class_name QuadTreeNode
 extends RefCounted
 
-const RESOLUTION := 16
+# Number of vertices per edge on each chunk's mesh.
+# Higher = more geometric detail per chunk, but exponentially more triangles.
+# Each chunk produces RESOLUTION^2 * 2 triangles.
+# 64 = 8192 triangles per chunk — a reasonable balance.
+const RESOLUTION := 32
+
+# Maximum quadtree recursion depth.
+# Each level doubles the mesh resolution of the planet surface.
+# At depth N, a chunk covers (radius * 2) / 2^N units of arc.
+# With radius=1737.4 and MAX_DEPTH=12, the smallest chunk is ~0.85 km wide.
 const MAX_DEPTH := 8
-const SPLIT_THRESHOLD := 1.5
-const MERGE_THRESHOLD := 1.0  # must be < SPLIT_THRESHOLD to avoid thrashing
+
+# How aggressively to split. A node splits when:
+#   (chunk_world_size / camera_distance) > SPLIT_THRESHOLD
+# Lower = splits sooner (more detail at greater distance, more expensive).
+# Higher = splits later (less detail, cheaper).
+const SPLIT_THRESHOLD := 0.5
+
+# How aggressively to merge. A node merges when:
+#   (chunk_world_size / camera_distance) < MERGE_THRESHOLD
+# Must be strictly less than SPLIT_THRESHOLD to prevent a node from
+# oscillating between split and merged every frame (hysteresis gap).
+const MERGE_THRESHOLD := 0.2
 
 var face_normal: Vector3
 var axis_a: Vector3
@@ -21,6 +40,8 @@ var sampler: HeightmapSampler
 var radius: float
 var displacement_scale: float
 
+var surface_material: Material
+
 func init(
 	p_face_normal: Vector3,
 	p_local_center: Vector2,
@@ -29,7 +50,8 @@ func init(
 	p_planet_root: Node3D,
 	p_sampler: HeightmapSampler,
 	p_radius: float,
-	p_displacement_scale: float
+	p_displacement_scale: float,
+	p_surface_material: Material
 ) -> void:
 	face_normal = p_face_normal
 	axis_a = Vector3(face_normal.y, face_normal.z, face_normal.x)
@@ -41,6 +63,7 @@ func init(
 	sampler = p_sampler
 	radius = p_radius
 	displacement_scale = p_displacement_scale
+	surface_material = p_surface_material
 
 func is_leaf() -> bool:
 	return children.is_empty()
@@ -80,6 +103,7 @@ func build() -> void:
 	chunk.radius = radius
 	chunk.displacement_scale = displacement_scale
 	chunk.sampler = sampler
+	chunk.surface_material = surface_material
 	planet_root.add_child(chunk)
 
 func split() -> void:
@@ -96,7 +120,7 @@ func split() -> void:
 	for offset in offsets:
 		var child := QuadTreeNode.new()
 		child.init(face_normal, local_center + offset, hs, depth + 1,
-				planet_root, sampler, radius, displacement_scale)
+				planet_root, sampler, radius, displacement_scale, surface_material)
 		child.build()
 		children.append(child)
 

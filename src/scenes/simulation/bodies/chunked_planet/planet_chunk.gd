@@ -2,6 +2,8 @@
 class_name PlanetChunk
 extends Node3D
 
+@export var surface_material: Material
+
 @export var resolution: int = 64:
 	set(v):
 		resolution = v
@@ -53,27 +55,46 @@ func build_mesh(f_normal: Vector3, r: float) -> void:
 	for y in range(resolution):
 		for x in range(resolution):
 			var corners: Array[Vector3] = []
+			var uvs: Array[Vector2] = []
 			for coord in [[x, y], [x+1, y], [x, y+1], [x+1, y+1]]:
-				corners.append(_displaced_vertex(coord[0], coord[1], f_normal, axis_a, axis_b, r))
+				var cube_point := _local(coord[0], coord[1], f_normal, axis_a, axis_b)
+				var unit_dir := cube_point.normalized()
+				uvs.append(_dir_to_uv(unit_dir))
+				corners.append(_displaced_vertex_from_dir(unit_dir, r))
 
-			surface.add_vertex(corners[0])
-			surface.add_vertex(corners[2])
-			surface.add_vertex(corners[1])
-			surface.add_vertex(corners[1])
-			surface.add_vertex(corners[2])
-			surface.add_vertex(corners[3])
+			surface.set_uv(uvs[0]); surface.add_vertex(corners[0])
+			surface.set_uv(uvs[2]); surface.add_vertex(corners[2])
+			surface.set_uv(uvs[1]); surface.add_vertex(corners[1])
+			surface.set_uv(uvs[1]); surface.add_vertex(corners[1])
+			surface.set_uv(uvs[2]); surface.add_vertex(corners[2])
+			surface.set_uv(uvs[3]); surface.add_vertex(corners[3])
 
 	surface.generate_normals()
 	_add_skirts(surface, f_normal, axis_a, axis_b, r)
 	mesh_instance.mesh = surface.commit()
+	
+	if surface_material != null:
+		mesh_instance.material_override = surface_material
 
+# Now just a convenience wrapper used by _add_skirts
 func _displaced_vertex(x: int, y: int, face: Vector3, a: Vector3, b: Vector3, r: float) -> Vector3:
 	var cube_point := _local(x, y, face, a, b)
-	var unit_dir := cube_point.normalized()
+	return _displaced_vertex_from_dir(cube_point.normalized(), r)
+
+# Core displacement logic, used by both build_mesh and _displaced_vertex
+func _displaced_vertex_from_dir(unit_dir: Vector3, r: float) -> Vector3:
 	var height := 0.0
 	if sampler != null:
 		height = sampler.sample(unit_dir)
 	return unit_dir * (r + height * displacement_scale)
+
+# Converts a point on the unit sphere to equirectangular UV
+func _dir_to_uv(unit_dir: Vector3) -> Vector2:
+	var lon := atan2(unit_dir.x, unit_dir.z)
+	var lat := asin(clamp(unit_dir.y, -1.0, 1.0))
+	var u := (lon / (2.0 * PI)) + 0.5
+	var v := 1.0 - ((lat / PI) + 0.5)  # flip V
+	return Vector2(u, v)
 
 func _local(x: int, y: int, face: Vector3, a: Vector3, b: Vector3) -> Vector3:
 	var fx := (float(x) / float(resolution)) * 2.0 - 1.0

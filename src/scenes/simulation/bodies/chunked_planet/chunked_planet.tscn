@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://cugkt3osvc84h"]
 
 [ext_resource type="Script" uid="uid://bd5igyewtwff6" path="res://scenes/simulation/bodies/chunked_planet/planet_root.gd" id="1_bodeo"]
+[ext_resource type="Material" uid="uid://dly8qkuwkm1i4" path="res://scenes/simulation/bodies/chunked_planet/moon_surface.tres" id="2_w2x3w"]
 
 [node name="Planet" type="Node3D" unique_id=900487164 node_paths=PackedStringArray("lod_target")]
 script = ExtResource("1_bodeo")
-lod_target = NodePath("Node3D")
+lod_target = NodePath("Player")
+surface_material = ExtResource("2_w2x3w")
 
-[node name="Node3D" type="Node3D" parent="." unique_id=117342222]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1514.6501710339874, 824.4063432038733, -280.42063740909884)
+[node name="Player" type="Node3D" parent="." unique_id=117342222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 143.79745537034, 1411.04267903351, 1008.9700027598452)
