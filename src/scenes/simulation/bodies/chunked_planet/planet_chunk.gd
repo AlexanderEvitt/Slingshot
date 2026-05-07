@@ -4,7 +4,7 @@ extends Node3D
 
 @export var surface_material: Material
 
-@export var resolution: int = 64:
+@export var resolution: int = 16:
 	set(v):
 		resolution = v
 		if Engine.is_editor_hint() and mesh_instance:
@@ -46,33 +46,43 @@ func build_mesh(f_normal: Vector3, r: float) -> void:
 	if mesh_instance == null:
 		return
 
-	var surface := SurfaceTool.new()
-	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
-
 	var axis_a: Vector3 = Vector3(f_normal.y, f_normal.z, f_normal.x)
 	var axis_b: Vector3 = f_normal.cross(axis_a)
 
+	# Precompute all vertices and UVs once
+	var verts: Array[Vector3] = []
+	var uvs: Array[Vector2] = []
+	verts.resize((resolution + 1) * (resolution + 1))
+	uvs.resize((resolution + 1) * (resolution + 1))
+
+	for y in range(resolution + 1):
+		for x in range(resolution + 1):
+			var cube_point := _local(x, y, f_normal, axis_a, axis_b)
+			var unit_dir := cube_point.normalized()
+			verts[y * (resolution + 1) + x] = _displaced_vertex_from_dir(unit_dir, r)
+			uvs[y * (resolution + 1) + x] = _dir_to_uv(unit_dir)
+
+	var surface := SurfaceTool.new()
+	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+
 	for y in range(resolution):
 		for x in range(resolution):
-			var corners: Array[Vector3] = []
-			var uvs: Array[Vector2] = []
-			for coord in [[x, y], [x+1, y], [x, y+1], [x+1, y+1]]:
-				var cube_point := _local(coord[0], coord[1], f_normal, axis_a, axis_b)
-				var unit_dir := cube_point.normalized()
-				uvs.append(_dir_to_uv(unit_dir))
-				corners.append(_displaced_vertex_from_dir(unit_dir, r))
+			var i00 := y * (resolution + 1) + x
+			var i10 := i00 + 1
+			var i01 := i00 + (resolution + 1)
+			var i11 := i01 + 1
 
-			surface.set_uv(uvs[0]); surface.add_vertex(corners[0])
-			surface.set_uv(uvs[2]); surface.add_vertex(corners[2])
-			surface.set_uv(uvs[1]); surface.add_vertex(corners[1])
-			surface.set_uv(uvs[1]); surface.add_vertex(corners[1])
-			surface.set_uv(uvs[2]); surface.add_vertex(corners[2])
-			surface.set_uv(uvs[3]); surface.add_vertex(corners[3])
+			surface.set_uv(uvs[i00]); surface.add_vertex(verts[i00])
+			surface.set_uv(uvs[i01]); surface.add_vertex(verts[i01])
+			surface.set_uv(uvs[i10]); surface.add_vertex(verts[i10])
+			surface.set_uv(uvs[i10]); surface.add_vertex(verts[i10])
+			surface.set_uv(uvs[i01]); surface.add_vertex(verts[i01])
+			surface.set_uv(uvs[i11]); surface.add_vertex(verts[i11])
 
 	surface.generate_normals()
 	_add_skirts(surface, f_normal, axis_a, axis_b, r)
 	mesh_instance.mesh = surface.commit()
-	
+
 	if surface_material != null:
 		mesh_instance.material_override = surface_material
 
@@ -81,17 +91,18 @@ func _displaced_vertex(x: int, y: int, face: Vector3, a: Vector3, b: Vector3, r:
 	var cube_point := _local(x, y, face, a, b)
 	return _displaced_vertex_from_dir(cube_point.normalized(), r)
 
-# Core displacement logic, used by both build_mesh and _displaced_vertex
 func _displaced_vertex_from_dir(unit_dir: Vector3, r: float) -> Vector3:
-	var height := 0.0
+	var elevation_km := 0.0
 	if sampler != null:
-		height = sampler.sample(unit_dir)
-	return unit_dir * (r + height * displacement_scale)
+		var normalized := sampler.sample(unit_dir)
+		# Undo Godot's normalization, remove +20000 half-meter offset, convert to km
+		elevation_km = (normalized * 65535.0 - 20000.0) * 0.0005
+	return unit_dir * (r + elevation_km * displacement_scale)
 
 # Converts a point on the unit sphere to equirectangular UV
 func _dir_to_uv(unit_dir: Vector3) -> Vector2:
 	var lon := atan2(unit_dir.x, unit_dir.z)
-	var lat := asin(clamp(unit_dir.y, -1.0, 1.0))
+	var lat := asin(clampf(unit_dir.y, -1.0, 1.0))
 	var u := (lon / (2.0 * PI)) + 0.5
 	var v := 1.0 - ((lat / PI) + 0.5)  # flip V
 	return Vector2(u, v)
@@ -117,7 +128,7 @@ func _add_skirts(surface: SurfaceTool, f_normal: Vector3, a: Vector3, b: Vector3
 		{"fixed": "x", "fixed_val": resolution,  "iter": "y", "reverse": false},
 	]
 
-	for edge in edges:
+	for edge: Dictionary in edges:
 		for i in range(resolution):
 			var i0 := i
 			var i1 := i + 1

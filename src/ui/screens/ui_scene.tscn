@@ -28,12 +28,8 @@ script = ExtResource("2_bh7rb")
 button_group = ExtResource("27_ytqrm")
 
 [node name="ControlScreen" parent="." unique_id=165783688 instance=ExtResource("4_ckcif")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+visible = false
+layout_mode = 1
 
 [node name="FlightScreen" parent="." unique_id=729173880 instance=ExtResource("4_l1uqb")]
 visible = false

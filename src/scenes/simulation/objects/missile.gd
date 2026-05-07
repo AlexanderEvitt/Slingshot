@@ -3,7 +3,7 @@ extends Node3D
 
 @export var navigation_constant: float = 4.0
 @export var total_thrust: float = 0.098  # ~10g in km/s²
-@export var detonation_radius: float = 0.05  # km
+@export var detonation_radius: float = 0.2  # km
 @export var max_lifetime_sim: float = 600.0
 @export var damage: float = 25.0
 
@@ -16,7 +16,7 @@ var detonation_distance := Vector3.ZERO # where detonation occurs relative to pl
 @onready var explosion: Explosion = $Explosion
 
 
-func initialize(spawn_pos: Vector3, spawn_vel: Vector3, initial_attitude: Basis) -> void:
+func initialize(spawn_pos: Vector3, spawn_vel: Vector3, _initial_attitude: Basis) -> void:
 	var v := 0.2*Vector3(
 		randf_range(-1, 1),
 		randf_range(-1, 1),

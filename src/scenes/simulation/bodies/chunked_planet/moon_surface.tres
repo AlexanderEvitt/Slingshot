@@ -1,6 +1,12 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://dly8qkuwkm1i4"]
 
 [ext_resource type="Texture2D" uid="uid://dfj48vnmm0niy" path="res://scenes/simulation/bodies/chunked_planet/moon_color.png" id="1_0fx1u"]
+[ext_resource type="Texture2D" uid="uid://s4i4jbyto3n4" path="res://scenes/simulation/bodies/photo/LunaNorm.png" id="2_vclcd"]
 
 [resource]
+disable_ambient_light = true
+albedo_color = Color(0.7539839, 0.75398386, 0.75398386, 1)
 albedo_texture = ExtResource("1_0fx1u")
+normal_enabled = true
+normal_scale = 0.08
+normal_texture = ExtResource("2_vclcd")

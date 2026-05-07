@@ -24,7 +24,7 @@ func _physics_process(_delta: float) -> void:
 	if current_berth != null and current_berth.get_child(0).name == "berth":
 		var body_collider: Berth = current_berth.get_child(0)
 		body_collider.set_velocity(fetch_velocity(SimTime.t) - ShipData.floating_frame_velocity)
-
+	
 func update_berth() -> void:
 	# Load the berth meshes
 	var full_berth: Berth = preload("res://scenes/simulation/bodies/stations/components/berth.tscn").instantiate()

@@ -16,7 +16,7 @@ var zoom_max := 2000000000.0 # maximum zoom distance
 @export var Kp := 0.5 # scale of motion from acceleration
 @export var Ka := 0.1 # speed at which camera moves to new attitude
 
-var camera_mode := "Global" # whether camera moves with ship or stays fixed
+var camera_mode := "Global" # whether camera moves with ship or stays fixed or is surface up
 
 @onready var camera_rotator: Node3D = $CameraRotator
 @onready var camera: Camera3D = $CameraRotator/Camera3D
@@ -53,6 +53,25 @@ func _process(_delta: float) -> void:
 	elif camera_mode == "Local":
 		# Linearly interpolate to ship attitude, with Ka as the weight
 		transform.basis = transform.basis.slerp(ShipData.player_ship.attitude, Ka)
+		if Input.is_action_just_pressed("view"):
+			camera_mode = "Surface"
+	elif camera_mode == "Surface":
+		# Fix to frame where up is outwards in reference frame
+		var up: Vector3 = Conversions.position_inertial_to_body(ShipData.player_ship.system_position, SimTime.t).normalized()
+
+		# Build an orthonormal basis with 'up' as the Y axis
+		# Pick an arbitrary forward vector that isn't parallel to 'up'
+		var forward: Vector3
+		if abs(up.dot(Vector3.FORWARD)) < 0.99:
+			forward = up.cross(Vector3.FORWARD).normalized()
+		else:
+			forward = up.cross(Vector3.RIGHT).normalized()
+		var right: Vector3 = forward.cross(up).normalized()
+
+		# Construct the surface-aligned basis and smoothly interpolate to it
+		var surface_basis := Basis(right, up, -forward)
+		transform.basis = transform.basis.slerp(surface_basis, Ka)
+
 		if Input.is_action_just_pressed("view"):
 			camera_mode = "Global"
 	

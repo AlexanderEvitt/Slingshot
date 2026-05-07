@@ -71,7 +71,7 @@ func _ready() -> void:
 	
 	# Assign to random berth at Zephyr at start
 	if berthed:
-		assign_berth("SolarSystem/Earth/Zephyr/Station")
+		assign_berth("SolarSystem/Earth/Luna/Endurance/Station")
 		berthed = true
 
 func _physics_process(delta: float) -> void:

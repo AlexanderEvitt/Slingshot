@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dbb1ml5chvqww"]
+
+[ext_resource type="Script" uid="uid://bslgbqd0fp2x6" path="res://scenes/simulation/bodies/Body.cs" id="1_37qkx"]
+[ext_resource type="Script" uid="uid://bd5igyewtwff6" path="res://scenes/simulation/bodies/chunked_planet/planet_root.gd" id="5_37qkx"]
+[ext_resource type="Script" uid="uid://c1eedkrj100y" path="res://scenes/simulation/bodies/planet_collider.gd" id="5_x2jk3"]
+[ext_resource type="Material" uid="uid://dly8qkuwkm1i4" path="res://scenes/simulation/bodies/chunked_planet/moon_surface.tres" id="6_qtb7v"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6xnwu"]
+radius = 1740.0
+height = 3480.0
+radial_segments = 256
+rings = 128
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6uqj7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cmojb"]
+margin = 0.0
+radius = 1740.0
+
+[node name="Luna" type="Node3D" unique_id=1914432055 groups=["Bodies"]]
+process_priority = 13
+editor_description = "LUNA is Earth's sole natural satellite and the gateway to the planets. Almost two billion people live in its domed cities, servicing the numerous ports and dockyards scattered across the regolith."
+transform = Transform3D(1, 0, 0, 0, 6.123233995736765e-17, -0.9999999999999999, 0, 0.9999999999999999, 6.123233995736765e-17, 0, 0, 0)
+script = ExtResource("1_37qkx")
+GM = 4902.8
+a = 387078.0
+e = 0.045
+i = 0.092
+RAAN = 3.399
+argp = 1.573
+theta0 = 2.226
+
+[node name="StaticMesh" type="MeshInstance3D" parent="." unique_id=2107627099]
+transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
+visible = false
+visibility_range_end = 10000000.0
+mesh = SubResource("SphereMesh_6xnwu")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("6_qtb7v")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1565881737]
+process_priority = 13
+physics_material_override = SubResource("PhysicsMaterial_6uqj7")
+script = ExtResource("5_x2jk3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=9675386]
+process_priority = 13
+shape = SubResource("SphereShape3D_cmojb")
+
+[node name="ChunkedMesh" type="Node3D" parent="." unique_id=900487164 node_paths=PackedStringArray("lod_target")]
+transform = Transform3D(-0.9370384119054842, 2.1383944049836746e-17, 0.3492263085932219, 2.1383944049836765e-17, 0.9999999999999997, -3.855285366459122e-18, -0.349226308593222, 3.855285366459159e-18, -0.9370384119054839, 0, 0, 0)
+script = ExtResource("5_37qkx")
+lod_target = NodePath("Player")
+surface_material = ExtResource("6_qtb7v")
+enabled_in_editor = null
+
+[node name="Player" type="Node3D" parent="ChunkedMesh" unique_id=117342222]
+transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, -1, 0, 1, 6.123233995736766e-17, 773.7298439086313, 769.6555295815957, -1371.890621006806)
