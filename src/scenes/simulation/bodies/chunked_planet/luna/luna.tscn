@@ -20,7 +20,6 @@ radius = 1740.0
 [node name="Luna" type="Node3D" unique_id=1914432055 groups=["Bodies"]]
 process_priority = 13
 editor_description = "LUNA is Earth's sole natural satellite and the gateway to the planets. Almost two billion people live in its domed cities, servicing the numerous ports and dockyards scattered across the regolith."
-transform = Transform3D(1, 0, 0, 0, 6.123233995736765e-17, -0.9999999999999999, 0, 0.9999999999999999, 6.123233995736765e-17, 0, 0, 0)
 script = ExtResource("1_37qkx")
 GM = 4902.8
 a = 387078.0
@@ -31,7 +30,7 @@ argp = 1.573
 theta0 = 2.226
 
 [node name="StaticMesh" type="MeshInstance3D" parent="." unique_id=2107627099]
-transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
+transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 5.844195801999376, -9.406609391723464, -5.759887041201785e-16)
 visible = false
 visibility_range_end = 10000000.0
 mesh = SubResource("SphereMesh_6xnwu")
@@ -48,11 +47,10 @@ process_priority = 13
 shape = SubResource("SphereShape3D_cmojb")
 
 [node name="ChunkedMesh" type="Node3D" parent="." unique_id=900487164 node_paths=PackedStringArray("lod_target")]
-transform = Transform3D(-0.9370384119054842, 2.1383944049836746e-17, 0.3492263085932219, 2.1383944049836765e-17, 0.9999999999999997, -3.855285366459122e-18, -0.349226308593222, 3.855285366459159e-18, -0.9370384119054839, 0, 0, 0)
+transform = Transform3D(-0.4999999999999998, 0.8660254037844384, 0, -0.8660254037844387, -0.49999999999999956, 0, 0, 0, 0.9999999999999998, 0, 0, 0)
 script = ExtResource("5_37qkx")
 lod_target = NodePath("Player")
 surface_material = ExtResource("6_qtb7v")
-enabled_in_editor = null
 
 [node name="Player" type="Node3D" parent="ChunkedMesh" unique_id=117342222]
 transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, -1, 0, 1, 6.123233995736766e-17, 773.7298439086313, 769.6555295815957, -1371.890621006806)

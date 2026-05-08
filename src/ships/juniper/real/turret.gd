@@ -9,6 +9,7 @@ extends Node3D
 @export var laser_range_km: float = 30.0
 @export var laser_pulse_length: float = 0.1
 @export var cooldown_time: float = 1.0
+@export var left: bool = true # true if left, false if right
 
 @onready var cooldown_timer: float = 1.0
 

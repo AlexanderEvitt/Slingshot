@@ -14,7 +14,7 @@ const HEIGHTMAP_PATH := "res://scenes/simulation/bodies/chunked_planet/moon_heig
 # Number of chunks to build per frame.
 # Higher = faster LOD population but more frame stuttering.
 # Lower = smoother framerate but chunks take longer to appear.
-const BUILDS_PER_FRAME := 24
+const BUILDS_PER_FRAME := 16
 
 @export var lod_target: Node3D:
 	set(v):

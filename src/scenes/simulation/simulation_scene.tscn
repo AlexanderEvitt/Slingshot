@@ -311,7 +311,7 @@ a = 6780.0
 i = 0.909
 
 [node name="ISS_stationary" parent="SolarSystem/Earth/ISS" unique_id=677142685 instance=ExtResource("10_vftqf")]
-transform = Transform3D(-0.0009608508024790607, 0.0002314146825433233, 0.00015235806535372152, 0, 0.0005498974959436958, -0.0008352321497371101, -0.0002770663014062778, -0.0008025334813313791, -0.0005283694502588234, 0, 0, 0)
+transform = Transform3D(-0.000960850802479058, 0.0002314146825433202, 0.00015235806535372152, 0, 0.0005498974959436884, -0.0008352321497371101, -0.000277066301406277, -0.0008025334813313682, -0.0005283694502588234, 0, 0, 0)
 script = ExtResource("10_uhiq1")
 
 [node name="Luna" parent="SolarSystem/Earth" unique_id=1914432055 instance=ExtResource("12_uucu6")]
@@ -319,9 +319,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10121.8, 0, 0)
 
 [node name="Endurance" parent="SolarSystem/Earth/Luna" unique_id=1705548071 instance=ExtResource("11_7ivjh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2000)
-a = 2000.0
+a = 1850.0
 i = 1.5699999999999998
-RAAN = -0.3
+RAAN = -1.3
+theta0 = -0.3
 
 [node name="EarthMesh" type="MeshInstance3D" parent="SolarSystem/Earth" unique_id=1250014751]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)

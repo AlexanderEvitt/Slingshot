@@ -11,19 +11,19 @@ const RESOLUTION := 16
 # Each level doubles the mesh resolution of the planet surface.
 # At depth N, a chunk covers (radius * 2) / 2^N units of arc.
 # With radius=1737.4 and MAX_DEPTH=12, the smallest chunk is ~0.85 km wide.
-const MAX_DEPTH := 10
+const MAX_DEPTH := 8
 
 # How aggressively to split. A node splits when:
 #   (chunk_world_size / camera_distance) > SPLIT_THRESHOLD
 # Lower = splits sooner (more detail at greater distance, more expensive).
 # Higher = splits later (less detail, cheaper).
-const SPLIT_THRESHOLD := 0.2
+const SPLIT_THRESHOLD := 0.5
 
 # How aggressively to merge. A node merges when:
 #   (chunk_world_size / camera_distance) < MERGE_THRESHOLD
 # Must be strictly less than SPLIT_THRESHOLD to prevent a node from
 # oscillating between split and merged every frame (hysteresis gap).
-const MERGE_THRESHOLD := 0.1
+const MERGE_THRESHOLD := 0.3
 
 var face_normal: Vector3
 var axis_a: Vector3

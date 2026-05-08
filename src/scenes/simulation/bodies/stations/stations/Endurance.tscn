@@ -19,12 +19,13 @@ material = SubResource("StandardMaterial3D_0gn41")
 
 [node name="Endurance" type="Node3D" unique_id=1705548071 groups=["Stations"]]
 process_priority = 13
-editor_description = "CONCORDIA II is a former European Union colony station, since turned over to private military interest as civilian traffic to the moon below dried up."
+editor_description = "ENDURANCE is a low Lunar orbit cargo depot and transfer station."
 script = ExtResource("1_6lb0h")
 i = 60.0
 theta0 = 1.3
 
 [node name="Station" type="Node3D" parent="." unique_id=1492342966]
+transform = Transform3D(0.7564702120565608, 0.6540281479195694, 0, -0.6540281479195694, 0.7564702120565608, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_5moyy")
 berth_path = "round_port/Port/{}/docks/Docks/{}/"
 

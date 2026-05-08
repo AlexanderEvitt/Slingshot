@@ -3,9 +3,8 @@ extends Node3D
 
 @export var navigation_constant: float = 4.0
 @export var total_thrust: float = 0.098  # ~10g in km/s²
-@export var detonation_radius: float = 0.2  # km
+@export var detonation_radius: float = 1.0  # km
 @export var max_lifetime_sim: float = 600.0
-@export var damage: float = 25.0
 
 var system_position := Vector3.ZERO
 var system_velocity := Vector3.ZERO
@@ -17,13 +16,8 @@ var detonation_distance := Vector3.ZERO # where detonation occurs relative to pl
 
 
 func initialize(spawn_pos: Vector3, spawn_vel: Vector3, _initial_attitude: Basis) -> void:
-	var v := 0.2*Vector3(
-		randf_range(-1, 1),
-		randf_range(-1, 1),
-		randf_range(-1, 1)
-	)
 	system_position = spawn_pos
-	system_velocity = spawn_vel + v#(-initial_attitude.y * 0.5)
+	system_velocity = spawn_vel
 	print("Spawning...")
 	_sync_scene_transform()
 
@@ -39,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		_integrate(_compute_thrust_vector(), delta)
 
 		var target: PlayerShip = ShipData.player_ship
-		if (system_position - target.system_position).length() <= detonation_radius:
+		if (global_position - target.global_position).length() <= detonation_radius:
 			print("Detonating...")
 			_detonate()
 	else:
