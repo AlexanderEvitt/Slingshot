@@ -55,6 +55,7 @@ near = 0.001
 far = 10000000.0
 
 [node name="ShaderQuad" type="MeshInstance3D" parent="ExternalUI/SubViewport/PlayerShip/CameraRig/CameraRotator/Camera3D" unique_id=14577558]
+visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_4e2yt")
 skeleton = NodePath("../../../../../..")
