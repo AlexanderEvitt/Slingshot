@@ -62,11 +62,11 @@ missiles). The projection is now done once per source per frame on the CPU:
 
 ```gdscript
 func _project_source(world_pos: Vector3) -> Vector3:
-    ...
-    var screen_px := cam.unproject_position(world_pos)
-    var screen_uv := screen_px / vp_size          # 0-1, y=0 at top
-    var ndc_depth := cam.near / linear_depth       # reverse-Z: near=1, far≈0
-    return Vector3(screen_uv.x, screen_uv.y, ndc_depth)
+	...
+	var screen_px := cam.unproject_position(world_pos)
+	var screen_uv := screen_px / vp_size          # 0-1, y=0 at top
+	var ndc_depth := cam.near / linear_depth       # reverse-Z: near=1, far≈0
+	return Vector3(screen_uv.x, screen_uv.y, ndc_depth)
 ```
 
 `ndc_depth = 0.0` is used as a sentinel — it signals "skip this source" and is never produced

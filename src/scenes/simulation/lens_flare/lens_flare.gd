@@ -23,7 +23,7 @@ func _ready() -> void:
 	var my_bit: int = _LF_BITS[_next_lf_bit % _LF_BITS.size()]
 	_next_lf_bit += 1
 	layers = 1 << my_bit
-	for b in _LF_BITS:
+	for b: int in _LF_BITS:
 		cam.cull_mask &= ~(1 << b)
 	cam.cull_mask |= 1 << my_bit
 
@@ -74,6 +74,7 @@ func _process(_delta: float) -> void:
 		var sd := _project_source(p.global_position)
 		screen_uvs.append(Vector2(sd.x, sd.y))
 		ndc_depths.append(sd.z)
+		@warning_ignore("unsafe_call_argument")
 		brightnesses.append(c.apparent)
 		colors.append(Vector3(p.color.r, p.color.g, p.color.b))
 

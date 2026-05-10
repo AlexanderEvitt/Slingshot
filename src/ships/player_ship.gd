@@ -23,6 +23,7 @@ var dry_mass := 613280.0 # kg
 @onready var navigation_module: NavigationModule = $NavigationModule
 @onready var propulsion_module: PropulsionModule = $PropulsionModule
 @onready var propagate_module: PropagateModule = $PropagateModule
+@onready var defense_module: DefenseModule = $DefenseModule
 @onready var plotter: Plotter = $Plotter
 
 # State of avionics
