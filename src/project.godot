@@ -60,6 +60,7 @@ project/assembly_name="Slingshot"
 
 missiles=""
 Pinpricks="Light sources read by lens flare shader"
+Dynamic=""
 
 [input]
 

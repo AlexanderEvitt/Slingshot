@@ -13,6 +13,7 @@ extends Node3D
 
 @onready var cooldown_timer: float = 1.0
 @onready var beam: MeshInstance3D = cannon.get_node("Beam")
+@onready var pinprick: Pinprick = cannon.get_node("Pinprick")
 
 # Assigned each frame by DefenseModule; turret does not select its own target.
 var assigned_target: Missile = null
@@ -33,6 +34,7 @@ func _register() -> void:
 func _physics_process(delta: float) -> void:
 	if assigned_target == null:
 		beam.visible = false
+		pinprick.brightness = 0.0
 		cooldown_timer -= SimTime.step * delta
 	else:
 		target_vector = assigned_target.system_position - ShipData.player_ship.system_position
@@ -41,6 +43,7 @@ func _physics_process(delta: float) -> void:
 			_fire()
 		else:
 			beam.visible = false
+			pinprick.brightness = 0.0
 			cooldown_timer -= SimTime.step * delta
 
 
@@ -68,6 +71,7 @@ func _is_on_target() -> bool:
 
 func _fire() -> void:
 	beam.visible = true
+	pinprick.brightness = 1.0
 	var current_target: Missile = assigned_target
 	await get_tree().create_timer(laser_pulse_length).timeout
 	current_target._detonate()

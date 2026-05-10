@@ -10,7 +10,7 @@ extends Panel
 @onready var request_button: Button = $ScrollContainer/MarginContainer/VBoxContainer/RequestButton
 
 # Get nodes from orbit scene (necessary to reparent them)
-@onready var camera_rig: Node3D = orbit_scene_root.get_node("Ships/PlayerShip/CameraRig")
+@onready var camera_rig: Node3D = orbit_scene_root.get_node("Dynamic/CameraRig")
 @onready var waypoint_rig: WaypointRig = orbit_scene_root.get_node("WaypointRig")
 
 func _ready() -> void:

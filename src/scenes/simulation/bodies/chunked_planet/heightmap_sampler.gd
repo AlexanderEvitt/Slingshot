@@ -17,7 +17,6 @@ func load_from_path(path: String) -> bool:
 	img_width = image.get_width()
 	img_height = image.get_height()
 	raw_data = image.get_data()
-	print("HeightmapSampler: loaded %dx%d format=%d" % [img_width, img_height, image.get_format()])
 	return true
 
 func sample(unit_dir: Vector3) -> float:

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://k452wc4u7ysf"]
+[gd_scene format=3 uid="uid://k452wc4u7ysf"]
 
 [ext_resource type="Script" uid="uid://bs8erl8nle1lb" path="res://ships/ghost_ship/ghost_entity.gd" id="1_fymmc"]
-[ext_resource type="PackedScene" uid="uid://cfjyiueui6yog" path="res://ships/juniper/wireframe/FrigateWireframeModel.tscn" id="2_0ccpd"]
+[ext_resource type="PackedScene" uid="uid://cfjyiueui6yog" path="res://ships/juniper/proxy/FrigateWireframeModel.tscn" id="2_0ccpd"]
 
 [node name="PlayerShip" type="Node3D"]
 editor_description = "FV JUNIPER is a Hedge-class frigate in the Federal Navy. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."

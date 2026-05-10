@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpcripo2vb6ip"]
+[gd_scene format=3 uid="uid://dpcripo2vb6ip"]
 
 [ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_s5c5d"]
 [ext_resource type="PackedScene" uid="uid://cxicwm84uu63x" path="res://ui/screens/engineering/propulsion_screen.tscn" id="2_55hwn"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="2_g4lhf"]
 [ext_resource type="Theme" uid="uid://b084uen2ev7hx" path="res://ui/themes/basic_ui_theme.tres" id="2_incdm"]
 [ext_resource type="Script" uid="uid://dxa3h8undbc7o" path="res://ui/screens/navigation/clock.gd" id="3_ri0wj"]
-[ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ships/juniper/wireframe/FrigateWireframe.tscn" id="4_0f0kw"]
+[ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ships/juniper/proxy/FrigateWireframe.tscn" id="4_0f0kw"]
 [ext_resource type="Script" uid="uid://cw7apltpjymk2" path="res://ui/screens/navigation/timerate.gd" id="4_glkqa"]
 [ext_resource type="Theme" uid="uid://bhtmuml4efphk" path="res://ui/themes/medium_panel.tres" id="9_48ijl"]
 

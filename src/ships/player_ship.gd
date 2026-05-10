@@ -18,6 +18,9 @@ var thrust := Vector3(0,0,0)
 # Vehicle mass
 var dry_mass := 613280.0 # kg
 
+# Orbit proxy scene — set per ship type in the editor.
+@export var orbit_proxy_scene: PackedScene
+
 # Children components
 @onready var attitude_module: AttitudeModule = $AttitudeModule
 @onready var navigation_module: NavigationModule = $NavigationModule
@@ -67,6 +70,7 @@ var is_station := false
 var prev_velocity := Vector3(0,0,0)
 
 func _ready() -> void:
+	add_to_group("Dynamic")
 	# Initialize values
 	attitude = attitude_module.transform.basis
 	
@@ -181,6 +185,10 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 func fetch(_time: float) -> Vector3:
 	# Return origin of ship frame
 	return system_position
+
+
+func get_orbit_rep() -> PackedScene:
+	return orbit_proxy_scene
 
 func assign_berth(new_station: String) -> void:
 	# Called by selection_panel.gd with the name of the new_station (path to station underneath body)

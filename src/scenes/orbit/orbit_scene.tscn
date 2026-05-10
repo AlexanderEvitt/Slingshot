@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://micv7ck5c6rj" path="res://scenes/orbit/orbit_scene_controller.gd" id="1_0a2c1"]
 [ext_resource type="Texture2D" uid="uid://bvbb3uf1kp4ga" path="res://visuals/circle.png" id="2_3t7g4"]
-[ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="2_awidn"]
 [ext_resource type="PackedScene" uid="uid://rg5pq75kxwxo" path="res://scenes/simulation/bodies/wireframe/MercuryWireframe.tscn" id="3_orujh"]
 [ext_resource type="PackedScene" uid="uid://p6o5a3n7q5yl" path="res://scenes/simulation/bodies/wireframe/VenusWireframe.tscn" id="4_klp4m"]
 [ext_resource type="FontFile" uid="uid://dqyy4mogwg27l" path="res://ui/fonts/Oxanium-Regular.ttf" id="4_uugyr"]
@@ -12,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://olsok6qpjvew" path="res://scenes/simulation/bodies/wireframe/MarsWireframe.tscn" id="7_ug63k"]
 [ext_resource type="PackedScene" uid="uid://bmc8fp2kenecv" path="res://scenes/simulation/bodies/wireframe/JupiterWireframe.tscn" id="8_hosp8"]
 [ext_resource type="PackedScene" uid="uid://bgifrw1p56y10" path="res://scenes/simulation/bodies/wireframe/SaturnWireframe.tscn" id="9_1qyms"]
-[ext_resource type="Script" uid="uid://biotnfa17c2e5" path="res://scenes/simulation/bodies/body_inheritor.gd" id="9_2beyu"]
+[ext_resource type="Script" uid="uid://biotnfa17c2e5" path="res://scenes/simulation/bodies/body_proxy.gd" id="9_2beyu"]
 [ext_resource type="PackedScene" uid="uid://2q27idy8fbkr" path="res://scenes/simulation/bodies/wireframe/UranusWireframe.tscn" id="10_girv0"]
 [ext_resource type="PackedScene" uid="uid://b51mp318qc6wr" path="res://scenes/orbit/koz/wire_sphere.tscn" id="11_8re0r"]
 [ext_resource type="PackedScene" uid="uid://d386uc0phqab7" path="res://scenes/simulation/bodies/wireframe/NeptuneWireframe.tscn" id="11_ciut5"]
@@ -20,16 +19,14 @@
 [ext_resource type="PackedScene" uid="uid://djhub5hfmxtif" path="res://scenes/orbit/koz/wire_cylinder.tscn" id="12_5etm5"]
 [ext_resource type="Shader" uid="uid://m8q5t8rpuhox" path="res://scenes/simulation/bodies/wireframe/outline.gdshader" id="12_oiuin"]
 [ext_resource type="Texture2D" uid="uid://bk5dkdinc7gbs" path="res://scenes/simulation/bodies/wireframe/BlankWireframe.png" id="13_kuxx4"]
-[ext_resource type="Script" uid="uid://coauq357djn0x" path="res://scenes/orbit/spacecraft_inheritor.gd" id="13_xts1l"]
-[ext_resource type="Script" uid="uid://xet38inpduig" path="res://scenes/simulation/bodies/draw_spacecraft_orbit.gd" id="14_g31x3"]
 [ext_resource type="PackedScene" uid="uid://btpxws4tx476f" path="res://scenes/orbit/koz/wire_cube.tscn" id="14_k6kd7"]
 [ext_resource type="Script" uid="uid://dnph6anxcohui" path="res://scenes/orbit/click_detector.gd" id="15_c6xwu"]
 [ext_resource type="Script" uid="uid://ci6gjrxoqgkyw" path="res://scenes/simulation/bodies/stations/berth_marker.gd" id="15_m0dnk"]
 [ext_resource type="PackedScene" uid="uid://ugtufapsikjx" path="res://scenes/orbit/koz/wire_berth.tscn" id="15_rnymx"]
-[ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ships/juniper/wireframe/FrigateWireframe.tscn" id="18_lxife"]
+[ext_resource type="Script" uid="uid://dwtkfve65dp7d" path="res://scenes/orbit/dynamic.gd" id="24_wnvcu"]
 [ext_resource type="Script" uid="uid://c6fhbhu4rnokq" path="res://scenes/orbit/waypoint_rig.gd" id="27_2mw5s"]
+[ext_resource type="PackedScene" uid="uid://8iotdeegg5fy" path="res://scenes/orbit/camera_rig.tscn" id="27_ktbma"]
 [ext_resource type="Script" uid="uid://bitgjrtr11mkj" path="res://scenes/orbit/waypoint_plotter.gd" id="28_3ag27"]
-[ext_resource type="Texture2D" uid="uid://d3qgybl45ufxd" path="res://scenes/orbit/ship_symbol.png" id="29_4bect"]
 
 [sub_resource type="Environment" id="Environment_aovhe"]
 background_mode = 1
@@ -56,7 +53,7 @@ radius = 6052.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8k6tq"]
 resource_local_to_scene = true
-radius = 44.0
+radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xbyhg"]
 resource_local_to_scene = true
@@ -174,10 +171,6 @@ radius = 25559.0
 resource_local_to_scene = true
 radius = 24764.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_75n57"]
-resource_local_to_scene = true
-radius = 0.04
-
 [node name="OrbitRoot" type="Node3D" unique_id=1180845463]
 script = ExtResource("1_0a2c1")
 
@@ -215,10 +208,9 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Sun" unique_id=1443767122 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Sun" unique_id=1443767122 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Sun/ClickDetector" unique_id=2120595757]
@@ -253,10 +245,9 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Mercury" unique_id=2056168699 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Mercury" unique_id=2056168699 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Mercury/ClickDetector" unique_id=1532311733]
@@ -291,10 +282,9 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Venus" unique_id=838854266 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Venus" unique_id=838854266 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Venus/ClickDetector" unique_id=551997814]
@@ -363,10 +353,9 @@ transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
 [node name="wire_cube" parent="SolarSystem/Earth/Zephyr/KOZ" unique_id=1174408289 instance=ExtResource("14_k6kd7")]
 transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/Zephyr" unique_id=1893091677 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/Zephyr" unique_id=1893091677 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/Zephyr/ClickDetector" unique_id=546935238]
@@ -414,10 +403,9 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 [node name="wire_cube" parent="SolarSystem/Earth/ISS/KOZ" unique_id=1230676501 instance=ExtResource("14_k6kd7")]
 transform = Transform3D(0.109, 0, 0, 0, 0.07, 0, 0, 0, 0.05, 0, 0, 0)
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/ISS" unique_id=569838680 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/ISS" unique_id=569838680 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/ISS/ClickDetector" unique_id=1143044377]
@@ -479,9 +467,8 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/Luna" unique_id=107737175 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/Luna" unique_id=107737175 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/Luna/ClickDetector" unique_id=1206267193]
@@ -502,9 +489,8 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("11_lodt7")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/Luna/Endurance" unique_id=243435007 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth/Luna/Endurance" unique_id=243435007 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/Luna/Endurance/ClickDetector" unique_id=490531771]
@@ -524,23 +510,6 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="KOZ" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance" unique_id=1978094366]
-
-[node name="wire_sphere" parent="SolarSystem/Earth/Luna/Endurance/KOZ" unique_id=229289215 instance=ExtResource("11_8re0r")]
-transform = Transform3D(29.32, 0, 0, 0, 29.32, 0, 0, 0, 55.295, 0, 0, 0)
-
-[node name="wire_cylinder" parent="SolarSystem/Earth/Luna/Endurance/KOZ" unique_id=1425466116 instance=ExtResource("12_5etm5")]
-transform = Transform3D(0.5, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 33.8273, 0)
-
-[node name="wire_cylinder2" parent="SolarSystem/Earth/Luna/Endurance/KOZ" unique_id=1440359601 instance=ExtResource("12_5etm5")]
-transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 35.6752, 0)
-
-[node name="wire_cylinder3" parent="SolarSystem/Earth/Luna/Endurance/KOZ" unique_id=950224956 instance=ExtResource("12_5etm5")]
-transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 31.7415, 0)
-
-[node name="wire_cube" parent="SolarSystem/Earth/Luna/Endurance/KOZ" unique_id=1086244146 instance=ExtResource("14_k6kd7")]
-transform = Transform3D(1.12, 0, 0, 0, 0.74, 0, 0, 0, 3.245, 0, 39.6863, 0)
-
 [node name="BerthMarker" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance" unique_id=1836512282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9094316366235944, 0, 39.61927700001979)
 script = ExtResource("15_m0dnk")
@@ -548,9 +517,23 @@ script = ExtResource("15_m0dnk")
 [node name="wire_berth" parent="SolarSystem/Earth/Luna/Endurance/BerthMarker" unique_id=1488669406 instance=ExtResource("15_rnymx")]
 transform = Transform3D(0.07, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.0650000000023283, 0, 0)
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth" unique_id=1652912658 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="KOZ" type="Node3D" parent="SolarSystem/Earth/Luna/Endurance" unique_id=915166144]
+transform = Transform3D(0.7564702120565607, 0.6540281479195693, 0, -0.6540281479195693, 0.7564702120565607, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="wire_cylinder" parent="SolarSystem/Earth/Luna/Endurance/KOZ" unique_id=842941644 instance=ExtResource("12_5etm5")]
+transform = Transform3D(0.5, 0, 0, 0, 9, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="wire_cylinder2" parent="SolarSystem/Earth/Luna/Endurance/KOZ" unique_id=1591242716 instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, 4, 0)
+
+[node name="wire_cylinder3" parent="SolarSystem/Earth/Luna/Endurance/KOZ" unique_id=461675536 instance=ExtResource("12_5etm5")]
+transform = Transform3D(4.5, 0, 0, 0, 0.675, 0, 0, 0, 4.5, 0, -4, 0)
+
+[node name="wire_cylinder4" parent="SolarSystem/Earth/Luna/Endurance/KOZ" unique_id=1232980318 instance=ExtResource("12_5etm5")]
+transform = Transform3D(2.475, 0, 0, 0, 0.415, 0, 0, 0, 3.11, 0, 0.104842, 0)
+
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Earth" unique_id=1652912658 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Earth/ClickDetector" unique_id=485900615]
@@ -585,10 +568,9 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Mars" unique_id=1092575571 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Mars" unique_id=1092575571 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Mars/ClickDetector" unique_id=1348820324]
@@ -614,9 +596,8 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("11_lodt7")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Mars/Yugala" unique_id=831396089 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Mars/Yugala" unique_id=831396089 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Mars/Yugala/ClickDetector" unique_id=1079411971]
@@ -730,10 +711,9 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Io" unique_id=643476427 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Io" unique_id=643476427 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Jupiter/Io/ClickDetector" unique_id=1802117456]
@@ -777,9 +757,8 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Callisto" unique_id=263247414 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Callisto" unique_id=263247414 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Jupiter/Callisto/ClickDetector" unique_id=949735569]
@@ -823,9 +802,8 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Europa" unique_id=1773165768 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Europa" unique_id=1773165768 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Jupiter/Europa/ClickDetector" unique_id=783395102]
@@ -846,9 +824,8 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("11_lodt7")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Europa/Concordia" unique_id=2103530256 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Europa/Concordia" unique_id=2103530256 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Jupiter/Europa/Concordia/ClickDetector" unique_id=479716568]
@@ -928,17 +905,15 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Ganymede" unique_id=842912067 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter/Ganymede" unique_id=842912067 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Jupiter/Ganymede/ClickDetector" unique_id=1079006437]
 shape = SubResource("SphereShape3D_lepoe")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter" unique_id=1692092427 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Jupiter" unique_id=1692092427 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Jupiter/ClickDetector" unique_id=1440712526]
@@ -1012,18 +987,16 @@ billboard = 1
 fixed_size = true
 texture = ExtResource("2_3t7g4")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Saturn/Titan" unique_id=817585764 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Saturn/Titan" unique_id=817585764 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Saturn/Titan/ClickDetector" unique_id=1615202089]
 shape = SubResource("SphereShape3D_jkrvl")
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Saturn" unique_id=216591858 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Saturn" unique_id=216591858 groups=["Selectable"]]
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Saturn/ClickDetector" unique_id=1210955690]
@@ -1058,10 +1031,9 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Uranus" unique_id=194142365 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Uranus" unique_id=194142365 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Uranus/ClickDetector" unique_id=989696639]
@@ -1096,59 +1068,19 @@ font_size = 64
 outline_size = 6
 horizontal_alignment = 0
 
-[node name="ClickDetector" type="Area3D" parent="SolarSystem/Neptune" unique_id=1659125298 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
+[node name="ClickDetector" type="Area3D" parent="SolarSystem/Neptune" unique_id=1659125298 groups=["Selectable"]]
 priority = 8
 script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../../../Ships/PlayerShip/CameraRig")
 expandable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolarSystem/Neptune/ClickDetector" unique_id=1844612814]
 shape = SubResource("SphereShape3D_4ijo1")
 
-[node name="Ships" type="Node3D" parent="." unique_id=113893267]
+[node name="Dynamic" type="Node3D" parent="." unique_id=113893267]
+script = ExtResource("24_wnvcu")
 
-[node name="PlayerShip" type="Node3D" parent="Ships" unique_id=1690681197]
-script = ExtResource("13_xts1l")
-body_path = "Ships/PlayerShip"
-local_positioning = true
-
-[node name="Plotter" type="Node3D" parent="Ships/PlayerShip" unique_id=484772627]
-script = ExtResource("14_g31x3")
-color = Color(1, 0.690196, 0, 1)
-
-[node name="Pointer" type="Node3D" parent="Ships/PlayerShip" unique_id=2135305375]
-
-[node name="Ship" parent="Ships/PlayerShip/Pointer" unique_id=208934789 instance=ExtResource("18_lxife")]
-transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
-
-[node name="CameraRig" type="Node3D" parent="Ships/PlayerShip" unique_id=897361471]
-transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
-script = ExtResource("2_awidn")
-
-[node name="CameraRotator" type="Node3D" parent="Ships/PlayerShip/CameraRig" unique_id=1688198884]
-
-[node name="Camera3D" type="Camera3D" parent="Ships/PlayerShip/CameraRig/CameraRotator" unique_id=1349540196]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
-current = true
-fov = 60.0
-near = 0.01
-far = 10000000000.0
-
-[node name="ClickDetector" type="Area3D" parent="Ships/PlayerShip" unique_id=620764340 node_paths=PackedStringArray("camera_rig") groups=["Selectable"]]
-priority = 10
-script = ExtResource("15_c6xwu")
-camera_rig = NodePath("../CameraRig")
-expandable = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ships/PlayerShip/ClickDetector" unique_id=672941818]
-shape = SubResource("SphereShape3D_75n57")
-
-[node name="ShipSprite" type="Sprite3D" parent="Ships/PlayerShip" unique_id=993146790]
-modulate = Color(0.15, 0.5, 0.185, 1)
-pixel_size = 0.0001
-billboard = 1
-fixed_size = true
-texture = ExtResource("29_4bect")
+[node name="CameraRig" parent="Dynamic" unique_id=1107304030 instance=ExtResource("27_ktbma")]
+transform = Transform3D(3.749404893364643e-33, 6.123233995736766e-17, -1, -1, 6.123233995736766e-17, -5.4367099995256295e-39, 6.123233995736766e-17, 1, 6.123233995736766e-17, 0, 0, 0)
 
 [node name="WaypointRig" type="Node3D" parent="." unique_id=1056345971]
 script = ExtResource("27_2mw5s")

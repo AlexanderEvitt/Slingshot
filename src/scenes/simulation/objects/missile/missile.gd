@@ -17,8 +17,20 @@ var coast_elapsed: float = 0.0
 
 var state: State = State.INERT
 var armed: bool = false  # true once target first starts closing
+
+signal detonated  # emitted the moment detonation begins; proxies listen to trigger their own effects
 var detonation_distance := Vector3.ZERO  # detonation position relative to player
 @onready var explosion: Explosion = $Explosion
+
+const ORBIT_PROXY: PackedScene = preload("res://scenes/simulation/objects/missile/missile_proxy.tscn")
+
+
+func _ready() -> void:
+	add_to_group("Dynamic")
+
+
+func get_orbit_rep() -> PackedScene:
+	return ORBIT_PROXY
 
 
 func initialize(spawn_pos: Vector3, spawn_vel: Vector3, _initial_attitude: Basis, bias: Vector3 = Vector3.ZERO) -> void:
@@ -63,6 +75,7 @@ func _physics_process(delta: float) -> void:
 		State.DETONATING:
 			# Fix position in the frame affixed to the player ship
 			global_position = detonation_distance + ShipData.player_ship.global_position
+			system_position = ShipData.player_ship.system_position + detonation_distance
 
 
 func _compute_thrust_vector() -> Vector3:
@@ -115,6 +128,7 @@ func _detonate() -> void:
 	state = State.DETONATING
 	detonation_distance = global_position - ShipData.player_ship.global_position
 	explosion.trigger()
+	detonated.emit()
 	await get_tree().create_timer(1.0).timeout
 	queue_free()
 

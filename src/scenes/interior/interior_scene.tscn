@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://daybx5qcxif1p" path="res://audio/whine.ogg" id="5_khf2d"]
 [ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/simulation/external_world.tres" id="8_ehmfu"]
 [ext_resource type="Script" uid="uid://d1u0jcvp1ctbi" path="res://audio/audio_alarm.gd" id="8_khf2d"]
-[ext_resource type="Script" uid="uid://coauq357djn0x" path="res://scenes/orbit/spacecraft_inheritor.gd" id="9_m4jou"]
+[ext_resource type="Script" uid="uid://coauq357djn0x" path="res://ships/spacecraft_proxy.gd" id="9_m4jou"]
 [ext_resource type="Script" uid="uid://6y64ljwj4tmr" path="res://scenes/interior/camera_substitute.gd" id="10_2foi6"]
 [ext_resource type="Script" uid="uid://crjpvll8nr1l0" path="res://audio/ship_audio.gd" id="10_2qs4y"]
 [ext_resource type="AudioStream" uid="uid://bhyw1q27gt2np" path="res://audio/caution.ogg" id="11_7njs8"]
@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://bj5h1vhmxsi4x" path="res://audio/warning.ogg" id="13_oh51y"]
 [ext_resource type="PackedScene" uid="uid://bqxqip7aro08g" path="res://scenes/interior/mug.glb" id="13_qw6n8"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="14_oh51y"]
-[ext_resource type="Script" uid="uid://cdh0tn0i8v733" path="res://scenes/interior/sun_inheritor.gd" id="25_ehmfu"]
+[ext_resource type="Script" uid="uid://cdh0tn0i8v733" path="res://scenes/interior/sun_proxy.gd" id="25_ehmfu"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_8i22v"]
 material = ExtResource("11_g8t0q")

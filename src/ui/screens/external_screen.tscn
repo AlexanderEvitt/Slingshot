@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b07e4fcvvtdqq"]
 
 [ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/simulation/external_world.tres" id="1_xv6sl"]
-[ext_resource type="Script" uid="uid://coauq357djn0x" path="res://scenes/orbit/spacecraft_inheritor.gd" id="2_bu3jf"]
+[ext_resource type="Script" uid="uid://coauq357djn0x" path="res://ships/spacecraft_proxy.gd" id="2_bu3jf"]
 [ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="3_mq6p4"]
 [ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/simulation/lens_flare/lens_flare.tres" id="4_w87ht"]
 [ext_resource type="Script" uid="uid://dqq4m1h7sew1g" path="res://scenes/simulation/lens_flare/lens_flare.gd" id="5_cwlo4"]

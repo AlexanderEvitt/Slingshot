@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cl2jnao8fn6iy"]
 
 [ext_resource type="Script" uid="uid://cc283l37nveuy" path="res://ships/player_ship.gd" id="1_banjw"]
+[ext_resource type="PackedScene" uid="uid://c1kt0t2q5pxyw" path="res://ships/juniper/proxy/player_ship_proxy.tscn" id="2_b6qk2"]
 [ext_resource type="Script" uid="uid://8foh3a4rsbjc" path="res://ships/modules/attitude_module.gd" id="2_stb5n"]
 [ext_resource type="Script" uid="uid://dm88ls8pwtpcc" path="res://ships/modules/PropagateModule.cs" id="3_whyg7"]
 [ext_resource type="Script" uid="uid://cg2yyvdpwvc0u" path="res://ships/modules/propulsion_module.gd" id="4_emkjj"]
@@ -87,7 +88,7 @@ points = PackedVector3Array(26.155378, 4.010751, 5.0063105, -6.273629469012466, 
 height = 0.02
 radius = 0.004
 
-[node name="PlayerShip" type="RigidBody3D" unique_id=1171326679]
+[node name="PlayerShip" type="RigidBody3D" unique_id=1171326679 groups=["Dynamic"]]
 editor_description = "FV JUNIPER is a Hedge-class frigate in service as privateer vessel. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
 mass = 613280.0
 physics_material_override = SubResource("PhysicsMaterial_x0ifl")
@@ -98,6 +99,7 @@ continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_banjw")
+orbit_proxy_scene = ExtResource("2_b6qk2")
 
 [node name="AttitudeModule" type="Node3D" parent="." unique_id=1745240300]
 transform = Transform3D(-1, 1.22465e-16, 0, -7.4988e-33, -6.12323e-17, 1, 1.22465e-16, 1, 6.12323e-17, 0, 0, 0)

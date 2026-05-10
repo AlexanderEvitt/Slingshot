@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://8iotdeegg5fy"]
+
+[ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="1_hdr87"]
+
+[node name="CameraRig" type="Node3D" unique_id=1107304030]
+transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
+script = ExtResource("1_hdr87")
+
+[node name="CameraRotator" type="Node3D" parent="." unique_id=2064085712]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRotator" unique_id=2027648559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
+current = true
+fov = 60.0
+near = 0.01
+far = 10000000000.0

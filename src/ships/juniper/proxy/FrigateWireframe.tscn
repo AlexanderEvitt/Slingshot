@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dyuel0delkcqp"]
+
+[ext_resource type="PackedScene" uid="uid://cfjyiueui6yog" path="res://ships/juniper/proxy/FrigateWireframeModel.tscn" id="1_stbap"]
+[ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="10_jswew"]
+
+[node name="Ship" type="Node3D" unique_id=1257484275]
+
+[node name="Ship" type="Node3D" parent="." unique_id=369298006]
+
+[node name="frigate_wireframe" parent="Ship" unique_id=1817743869 instance=ExtResource("1_stbap")]
+
+[node name="Plumes" type="Node3D" parent="." unique_id=1122991651]
+transform = Transform3D(138.79, 0, 0, 0, 138.79, 0, 0, 0, 138.79, -29.0583, 0, 0)
+
+[node name="Plume" parent="Plumes" unique_id=1732178222 instance=ExtResource("10_jswew")]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, 0, 0)
+
+[node name="Thrusters" type="Node3D" parent="." unique_id=1004203169]

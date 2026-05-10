@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cp6xn16lqyf4f"]
+
+[ext_resource type="Texture2D" uid="uid://0r82b4frt7cp" path="res://scenes/attitude/dot.png" id="1_3o2fd"]
+[ext_resource type="Script" uid="uid://djovpcpkffttf" path="res://scenes/simulation/objects/missile/missile_proxy.gd" id="1_flvt2"]
+[ext_resource type="Script" uid="uid://dnph6anxcohui" path="res://scenes/orbit/click_detector.gd" id="3_26csk"]
+[ext_resource type="Script" uid="uid://8tgf0sb5qi7g" path="res://scenes/simulation/objects/detonation.gd" id="4_o82sp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o82sp"]
+resource_local_to_scene = true
+radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_dt2da"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqd0n"]
+depth_draw_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(199167330000, 199167330000, 199167330000, 1)
+
+[node name="MissileProxy" type="Node3D" unique_id=57544331]
+editor_description = "SN-43b MISSILES are a class of highly maneuverable, +10g capable anti-ship missiles. Biased proportional navigation and optical/radar/lidar sensor fusion guide them to their target."
+script = ExtResource("1_flvt2")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1412616039]
+modulate = Color(1, 0, 0, 1)
+pixel_size = 0.0005
+billboard = 1
+fixed_size = true
+texture = ExtResource("1_3o2fd")
+
+[node name="ClickDetector" type="Area3D" parent="." unique_id=7122641 groups=["Selectable"]]
+priority = 10
+script = ExtResource("3_26csk")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickDetector" unique_id=608943299]
+shape = SubResource("SphereShape3D_o82sp")
+
+[node name="Explosion" type="MeshInstance3D" parent="." unique_id=1390740739]
+transform = Transform3D(1.0000000000000004, 2.4625629078151566e-55, -3.507816202175806e-33, -3.3990776836172276e-33, 6.123230000000004e-17, 1, -2.081334802647519e-49, -1.0000000000000004, 6.123230000000004e-17, 0, 0, 0)
+mesh = SubResource("SphereMesh_dt2da")
+surface_material_override/0 = SubResource("StandardMaterial3D_aqd0n")
+script = ExtResource("4_o82sp")
+flash_intensity = 0.5
+decay_rate = 5.0

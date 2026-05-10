@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvt1477iysnr5" path="res://scenes/simulation/bodies/stations/components/radar.tscn" id="6_4is4r"]
 [ext_resource type="PackedScene" uid="uid://djhub5hfmxtif" path="res://scenes/orbit/koz/wire_cylinder.tscn" id="6_beqic"]
 [ext_resource type="Script" uid="uid://bdrwp51r80vfg" path="res://scenes/simulation/bodies/stations/stations/missile_launcher.gd" id="7_6lb0h"]
-[ext_resource type="PackedScene" uid="uid://c8bhsltix8jmk" path="res://scenes/simulation/objects/missile.tscn" id="8_cpsyu"]
+[ext_resource type="PackedScene" uid="uid://c8bhsltix8jmk" path="res://scenes/simulation/objects/missile/missile.tscn" id="8_cpsyu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gn41"]
 shading_mode = 0

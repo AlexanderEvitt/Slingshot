@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://c1kt0t2q5pxyw"]
+
+[ext_resource type="Script" uid="uid://coauq357djn0x" path="res://ships/spacecraft_proxy.gd" id="1_kwsl6"]
+[ext_resource type="Script" uid="uid://xet38inpduig" path="res://scenes/simulation/bodies/draw_spacecraft_orbit.gd" id="2_mr7tk"]
+[ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ships/juniper/proxy/FrigateWireframe.tscn" id="3_nqgus"]
+[ext_resource type="Script" uid="uid://dnph6anxcohui" path="res://scenes/orbit/click_detector.gd" id="5_thjbx"]
+[ext_resource type="Texture2D" uid="uid://d3qgybl45ufxd" path="res://scenes/orbit/ship_symbol.png" id="6_cuklx"]
+[ext_resource type="Script" uid="uid://jyvby6supf1m" path="res://ships/juniper/proxy/fake_radar.gd" id="6_mr7tk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_75n57"]
+resource_local_to_scene = true
+radius = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mr7tk"]
+resource_local_to_scene = true
+top_radius = 3.0
+height = 20.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwsl6"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.2758333, 0.20999998, 0.07450981)
+
+[node name="PlayerShip" type="Node3D" unique_id=1354259113]
+script = ExtResource("1_kwsl6")
+
+[node name="Plotter" type="Node3D" parent="." unique_id=1115849695]
+script = ExtResource("2_mr7tk")
+color = Color(1, 0.690196, 0, 1)
+
+[node name="Pointer" type="Node3D" parent="." unique_id=1183270145]
+
+[node name="Ship" parent="Pointer" unique_id=1368611443 instance=ExtResource("3_nqgus")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="ClickDetector" type="Area3D" parent="." unique_id=1484961663 groups=["Selectable"]]
+priority = 10
+script = ExtResource("5_thjbx")
+expandable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickDetector" unique_id=52918875]
+shape = SubResource("SphereShape3D_75n57")
+
+[node name="ShipSprite" type="Sprite3D" parent="." unique_id=896546588]
+modulate = Color(0.15, 0.5, 0.185, 1)
+pixel_size = 0.0001
+billboard = 1
+fixed_size = true
+texture = ExtResource("6_cuklx")
+
+[node name="radar" type="Node3D" parent="." unique_id=92453908]
+script = ExtResource("6_mr7tk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="radar" unique_id=1396433029]
+transform = Transform3D(1, 0, 0, 0, 6.123233995736766e-17, -1, 0, 1, 6.123233995736766e-17, 0, 0, 10)
+mesh = SubResource("CylinderMesh_mr7tk")
+surface_material_override/0 = SubResource("StandardMaterial3D_kwsl6")

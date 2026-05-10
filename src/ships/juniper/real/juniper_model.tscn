@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bwvdv60c7w7lx" path="res://ships/juniper/external_material/MakedBrick_orm.png" id="4_y1dru"]
 [ext_resource type="Script" uid="uid://2ab66vvabe3x" path="res://ships/juniper/real/turret.gd" id="5_rnp7b"]
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="7_67fpr"]
+[ext_resource type="PackedScene" uid="uid://d2sfqmmvaier7" path="res://scenes/simulation/lens_flare/pinprick.tscn" id="9_jdomx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rnp7b"]
 cull_mode = 2
@@ -31,6 +32,7 @@ radial_segments = 8
 rings = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2i45u"]
+depth_draw_mode = 2
 shading_mode = 0
 albedo_color = Color(1.8537917, 0, 0, 1)
 
@@ -101,6 +103,10 @@ visible = false
 mesh = SubResource("CylinderMesh_jrpwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_2i45u")
 
+[node name="Pinprick" parent="Turret1/Laser1" index="1" unique_id=1019657692 instance=ExtResource("9_jdomx")]
+transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, 1.3440939719555733, 0, 1.3169999999954598)
+color = Color(1, 0, 0, 1)
+
 [node name="Turret2" parent="." index="21" node_paths=PackedStringArray("cannon")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4319038, 0, -6.9897265)
 script = ExtResource("5_rnp7b")
@@ -114,6 +120,10 @@ transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 
 visible = false
 mesh = SubResource("CylinderMesh_jrpwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_2i45u")
+
+[node name="Pinprick" parent="Turret2/Laser2" index="1" unique_id=803789492 instance=ExtResource("9_jdomx")]
+transform = Transform3D(6.123233995736766e-17, 1, 0, -1, 6.123233995736766e-17, 0, 0, 0, 1, 1.3439999999973224, 0, -1.3169999999954598)
+color = Color(1, 0, 0, 1)
 
 [node name="Viewport" parent="." index="22"]
 surface_material_override/1 = SubResource("StandardMaterial3D_rnp7b")

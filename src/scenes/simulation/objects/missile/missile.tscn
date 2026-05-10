@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c8bhsltix8jmk"]
 
-[ext_resource type="Script" uid="uid://cronsq6nxwuik" path="res://scenes/simulation/objects/missile.gd" id="1_7kbnm"]
+[ext_resource type="Script" uid="uid://cronsq6nxwuik" path="res://scenes/simulation/objects/missile/missile.gd" id="1_7kbnm"]
 [ext_resource type="Script" uid="uid://8tgf0sb5qi7g" path="res://scenes/simulation/objects/detonation.gd" id="2_08n1d"]
 [ext_resource type="PackedScene" uid="uid://d2sfqmmvaier7" path="res://scenes/simulation/lens_flare/pinprick.tscn" id="4_whmsv"]
 
@@ -17,7 +17,6 @@ resource_local_to_scene = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vftqf"]
 depth_draw_mode = 2
 shading_mode = 0
-disable_ambient_light = true
 vertex_color_use_as_albedo = true
 albedo_color = Color(199167330000, 199167330000, 199167330000, 1)
 
@@ -54,4 +53,5 @@ brightness = 0.1
 color = Color(0.8, 0.6392157, 1, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=874991239]
+visible = false
 mesh = SubResource("CylinderMesh_7io0x")
