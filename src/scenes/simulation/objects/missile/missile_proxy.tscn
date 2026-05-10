@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cp6xn16lqyf4f"]
 
-[ext_resource type="Texture2D" uid="uid://0r82b4frt7cp" path="res://scenes/attitude/dot.png" id="1_3o2fd"]
 [ext_resource type="Script" uid="uid://djovpcpkffttf" path="res://scenes/simulation/objects/missile/missile_proxy.gd" id="1_flvt2"]
+[ext_resource type="Texture2D" uid="uid://bcd1tdsx3u3gy" path="res://scenes/orbit/symbology/hostile.png" id="2_o82sp"]
 [ext_resource type="Script" uid="uid://dnph6anxcohui" path="res://scenes/orbit/click_detector.gd" id="3_26csk"]
 [ext_resource type="Script" uid="uid://8tgf0sb5qi7g" path="res://scenes/simulation/objects/detonation.gd" id="4_o82sp"]
 
@@ -19,15 +19,14 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(199167330000, 199167330000, 199167330000, 1)
 
 [node name="MissileProxy" type="Node3D" unique_id=57544331]
-editor_description = "SN-43b MISSILES are a class of highly maneuverable, +10g capable anti-ship missiles. Biased proportional navigation and optical/radar/lidar sensor fusion guide them to their target."
 script = ExtResource("1_flvt2")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1412616039]
 modulate = Color(1, 0, 0, 1)
-pixel_size = 0.0005
+pixel_size = 0.0001
 billboard = 1
 fixed_size = true
-texture = ExtResource("1_3o2fd")
+texture = ExtResource("2_o82sp")
 
 [node name="ClickDetector" type="Area3D" parent="." unique_id=7122641 groups=["Selectable"]]
 priority = 10

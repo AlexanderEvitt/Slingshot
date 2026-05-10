@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://xet38inpduig" path="res://scenes/simulation/bodies/draw_spacecraft_orbit.gd" id="2_mr7tk"]
 [ext_resource type="PackedScene" uid="uid://dyuel0delkcqp" path="res://ships/juniper/proxy/FrigateWireframe.tscn" id="3_nqgus"]
 [ext_resource type="Script" uid="uid://dnph6anxcohui" path="res://scenes/orbit/click_detector.gd" id="5_thjbx"]
-[ext_resource type="Texture2D" uid="uid://d3qgybl45ufxd" path="res://scenes/orbit/ship_symbol.png" id="6_cuklx"]
+[ext_resource type="Texture2D" uid="uid://d3qgybl45ufxd" path="res://scenes/orbit/symbology/ship_symbol.png" id="6_cuklx"]
 [ext_resource type="Script" uid="uid://jyvby6supf1m" path="res://ships/juniper/proxy/fake_radar.gd" id="6_mr7tk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_75n57"]

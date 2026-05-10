@@ -28,6 +28,7 @@ radial_segments = 12
 rings = 2
 
 [node name="Missile" type="Node3D" unique_id=1700665718 groups=["missiles"]]
+editor_description = "SN-43b MISSILES are a class of highly maneuverable, +10g capable anti-ship missiles. Biased proportional navigation and optical/radar/lidar sensor fusion guide them to their target."
 top_level = true
 script = ExtResource("1_7kbnm")
 detonation_radius = 0.1
