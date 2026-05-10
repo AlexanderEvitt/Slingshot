@@ -2,10 +2,10 @@ class_name MissileLauncher
 extends Node3D
 
 @export var missile_scene: PackedScene
-@export var batch_size: int = 18
+@export var batch_size: int = 8
 @export var kickoff_velocity: float = 0.1
 @export var spread_velocity: float = 0.1
-@export var fire_interval: float = 20.0
+@export var fire_interval: float = 60.0
 @export var stagger_time: float = 0.2  # seconds between each missile in a batch
 
 var time_since_last_fire: float = 0.0
@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	time_since_last_fire += delta
-	if Input.is_action_just_pressed("fire") or time_since_last_fire >= fire_interval:
+	if Input.is_action_just_pressed("fire"):
 		time_since_last_fire = 0.0
 		_queue_batch()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bckiyewewebsj"]
+[gd_scene format=3 uid="uid://bckiyewewebsj"]
 
 [ext_resource type="Script" uid="uid://dvx0t24hxnxsy" path="res://scenes/interior/interior_controller.gd" id="2_jpjm2"]
 [ext_resource type="PackedScene" uid="uid://qkdsi850sg5v" path="res://scenes/interior/player_character.tscn" id="3_2hokl"]
@@ -9,9 +9,9 @@
 [ext_resource type="Script" uid="uid://6y64ljwj4tmr" path="res://scenes/interior/camera_substitute.gd" id="10_2foi6"]
 [ext_resource type="Script" uid="uid://crjpvll8nr1l0" path="res://audio/ship_audio.gd" id="10_2qs4y"]
 [ext_resource type="AudioStream" uid="uid://bhyw1q27gt2np" path="res://audio/caution.ogg" id="11_7njs8"]
-[ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/simulation/external_screen_shader.tres" id="11_g8t0q"]
+[ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/simulation/lens_flare/lens_flare.tres" id="11_g8t0q"]
 [ext_resource type="Script" uid="uid://b4yqhxmxhb6wu" path="res://scenes/interior/gravity_applier.gd" id="12_7njs8"]
-[ext_resource type="Script" uid="uid://dqq4m1h7sew1g" path="res://ui/external_shader_settings.gd" id="12_wen7m"]
+[ext_resource type="Script" uid="uid://dqq4m1h7sew1g" path="res://scenes/simulation/lens_flare/lens_flare.gd" id="12_wen7m"]
 [ext_resource type="AudioStream" uid="uid://bj5h1vhmxsi4x" path="res://audio/warning.ogg" id="13_oh51y"]
 [ext_resource type="PackedScene" uid="uid://bqxqip7aro08g" path="res://scenes/interior/mug.glb" id="13_qw6n8"]
 [ext_resource type="Texture2D" uid="uid://byk3n8kgox5xg" path="res://visuals/logo/conksat.png" id="14_oh51y"]

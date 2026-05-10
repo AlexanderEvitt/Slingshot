@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d2sfqmmvaier7"]
+
+[ext_resource type="Script" uid="uid://bdju6bspa2e6d" path="res://scenes/simulation/lens_flare/pinprick.gd" id="1_6ox1p"]
+
+[node name="Pinprick" type="Node3D" unique_id=1019657692 groups=["Pinpricks"]]
+script = ExtResource("1_6ox1p")
+color = Color(1, 1, 1, 1)

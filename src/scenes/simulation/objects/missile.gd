@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 
 	if flying:
 		_integrate(_compute_thrust_vector(), delta)
-
+		
 		var target: PlayerShip = ShipData.player_ship
 		if (global_position - target.global_position).length() <= detonation_radius:
 			print("Detonating...")

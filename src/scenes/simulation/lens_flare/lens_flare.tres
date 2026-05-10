@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bmrjquiaa82av"]
+
+[ext_resource type="Shader" uid="uid://4wsd1m8qbrr3" path="res://scenes/simulation/lens_flare/lens_flare.gdshader" id="1_2yycy"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_2yycy")
+shader_parameter/source_count = 2
+shader_parameter/source_screen_uv = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/source_ndc_depth = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/source_brightnesses = PackedFloat32Array(1, 0.6, 0, 0, 0, 0, 0, 0)
+shader_parameter/source_colors = PackedVector3Array(1.3, 1.15, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/tint = Vector3(1.3, 1.15, 1)
+shader_parameter/spike_size = 0.315
+shader_parameter/source_spike_size = 0.5
+shader_parameter/blob_size = 128.0
+shader_parameter/source_blob_size = 1024.0
