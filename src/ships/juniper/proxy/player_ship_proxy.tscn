@@ -14,6 +14,7 @@ radius = 0.1
 [sub_resource type="CylinderMesh" id="CylinderMesh_mr7tk"]
 resource_local_to_scene = true
 top_radius = 3.0
+bottom_radius = 0.0
 height = 20.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwsl6"]

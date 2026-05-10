@@ -27,6 +27,7 @@ func _physics_process(delta: float) -> void:
 	for i in range(pending_launches.size() - 1, -1, -1):
 		pending_launches[i][0] -= delta
 		if pending_launches[i][0] <= 0.0:
+			@warning_ignore("unsafe_call_argument")
 			_launch(pending_launches[i][1], pending_launches[i][2])
 			pending_launches.remove_at(i)
 
