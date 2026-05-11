@@ -20,6 +20,7 @@ var dry_mass := 613280.0 # kg
 
 # Orbit proxy scene — set per ship type in the editor.
 @export var orbit_proxy_scene: PackedScene
+@export var camera_views: ShipCameras
 
 # Children components
 @onready var attitude_module: AttitudeModule = $AttitudeModule
@@ -73,6 +74,7 @@ func _ready() -> void:
 	add_to_group("Dynamic")
 	# Initialize values
 	attitude = attitude_module.transform.basis
+	ShipData.ship_ready.emit(self)
 	
 	# Assign to random berth at Zephyr at start
 	if berthed:

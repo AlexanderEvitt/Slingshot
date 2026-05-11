@@ -5,6 +5,7 @@ extends Node
 # Will in the future also track other ships (NPCs)
 @onready var player_ship: PlayerShip # player ship
 @onready var sim_root: Node3D # root of external scene
+var camera_holder: CameraViewController # owns the camera SubViewports
 @onready var slot: int = 0 # save game slot
 @onready var ship_type: int = 0 # which ship model to use
 @onready var sun_angle: Basis
@@ -12,6 +13,7 @@ extends Node
 # Game-wide signals
 signal save
 signal main_menu
+signal ship_ready(ship: PlayerShip)  # emitted by PlayerShip._ready() once the ship is in the tree
 
 # Variables to control floating reference frame, relative to solar system center
 var floating_frame_position: Vector3 = Vector3(0,0,0)

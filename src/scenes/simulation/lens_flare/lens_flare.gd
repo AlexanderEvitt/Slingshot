@@ -7,25 +7,37 @@ var mat: ShaderMaterial
 const SUN_BRIGHTNESS := 0.7
 const MAX_SOURCES := 8  # Must match MAX_SOURCES in lens_flare.gdshader
 
-# Reserve the top 2 render layers (bits 18-19 = layers 19-20) for lens flare quads.
-# Each instance claims one so it is invisible to every other viewport's camera.
-const _LF_BITS := [18, 19]
-static var _next_lf_bit: int = 0
+# Reserve the top 4 render layers (bits 16-19 = layers 17-20) for lens flare quads.
+# Each instance claims one so it is invisible to every other camera sharing this world.
+const _LF_BITS := [16, 17, 18, 19]
+# Keyed by World3D so cameras in separate worlds reuse bits without conflict.
+# Cameras sharing a world each get a unique bit from the pool.
+static var _world_bit_counter: Dictionary = {}
 
 func _ready() -> void:
 	sun = ShipData.sim_root.get_node("SolarSystem/Sun")
-	cam = get_viewport().get_camera_3d()
+	# Bind to the camera this quad is a child of, not whichever happens to be current.
+	# Using get_viewport().get_camera_3d() breaks when multiple cameras share a viewport.
+	cam = get_parent() as Camera3D
 	# Duplicate material so each instance has its own shader parameter set.
 	mat = get_active_material(0).duplicate()
 	set_surface_override_material(0, mat)
-	# Claim a unique render layer and strip all reserved bits from this camera
-	# except ours, so quads from other viewports are invisible here.
-	var my_bit: int = _LF_BITS[_next_lf_bit % _LF_BITS.size()]
-	_next_lf_bit += 1
+	# Claim a unique render layer within this World3D and strip all reserved bits
+	# from this camera except ours, so quads from other cameras are invisible here.
+	var world: World3D = get_viewport().world_3d
+	if not _world_bit_counter.has(world):
+		_world_bit_counter[world] = 0
+	var world_count: int = _world_bit_counter[world]
+	if world_count >= _LF_BITS.size():
+		push_error("LensFlare: more cameras share World3D '%s' than there are reserved layer slots (%d). Increase _LF_BITS." % [world.resource_path, _LF_BITS.size()])
+	var my_bit: int = _LF_BITS[world_count % _LF_BITS.size()]
+	_world_bit_counter[world] = world_count + 1
 	layers = 1 << my_bit
 	for b: int in _LF_BITS:
 		cam.cull_mask &= ~(1 << b)
 	cam.cull_mask |= 1 << my_bit
+	print("LensFlare | quad: %s | cam: %s | bit: %d | cull_mask: %s" % [
+		get_path(), cam.get_path(), my_bit, _bits(cam.cull_mask)])
 
 # Projects a world-space position to screen data for the shader.
 # Returns Vector3(screen_uv.x, screen_uv.y, ndc_depth), or ZERO if behind camera / off-screen.
@@ -45,6 +57,8 @@ func _project_source(world_pos: Vector3) -> Vector3:
 	return Vector3(screen_uv.x, screen_uv.y, ndc_depth)
 
 func _process(_delta: float) -> void:
+	if not cam.current:
+		return  # don't update shader params for a camera that isn't rendering
 	var screen_uvs   := PackedVector2Array()
 	var ndc_depths   := PackedFloat32Array()
 	var brightnesses := PackedFloat32Array()
@@ -83,3 +97,11 @@ func _process(_delta: float) -> void:
 	mat.set_shader_parameter("source_brightnesses", brightnesses)
 	mat.set_shader_parameter("source_colors",       colors)
 	mat.set_shader_parameter("source_count",        screen_uvs.size())
+
+
+# GDScript has no %b format specifier; build a 20-bit binary string manually.
+func _bits(mask: int) -> String:
+	var s: String = ""
+	for i: int in range(19, -1, -1):
+		s += "1" if (mask >> i) & 1 else "0"
+	return s

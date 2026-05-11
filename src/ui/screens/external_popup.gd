@@ -5,4 +5,4 @@ extends Control
 func _ready() -> void:
 	# Tell camera to always move with the mouse
 	@warning_ignore("unsafe_property_access")
-	$ExternalUI/SubViewport/PlayerShip/CameraRig.move_always = true
+	$ExternalUI/SubViewport/GhostShip/CameraRig.move_always = true

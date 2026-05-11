@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://qkdsi850sg5v"]
+[gd_scene format=3 uid="uid://qkdsi850sg5v"]
 
 [ext_resource type="Script" uid="uid://clcy6betwv4h8" path="res://scenes/interior/player_character.gd" id="1_smbrw"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="2_lkkpu"]
 [ext_resource type="PackedScene" uid="uid://boi1ptoe3f73w" path="res://ui/pause/pause_menu.tscn" id="3_bj60k"]
 [ext_resource type="PackedScene" uid="uid://b07e4fcvvtdqq" path="res://ui/screens/external_screen.tscn" id="4_33yo6"]
-[ext_resource type="Script" uid="uid://cpjd3cqgrmw8" path="res://ui/screens/external_popup.gd" id="5_a2fv7"]
 [ext_resource type="FontFile" uid="uid://snyn22t7m35t" path="res://ui/fonts/Oxanium-Bold.ttf" id="6_575uu"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5k5g7"]
@@ -25,20 +24,20 @@ billboard_mode = 1
 radius = 0.2
 height = 1.75
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=342234898]
 motion_mode = 1
 script = ExtResource("1_smbrw")
 focus_offset = Vector3(0, 0.4, 0)
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="." unique_id=222588272]
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1706038054]
 current = true
 fov = 60.0
 near = 0.00999999999999999
 far = 150.0
 
-[node name="Crosshair" type="TextureRect" parent="Head/Camera3D"]
+[node name="Crosshair" type="TextureRect" parent="Head/Camera3D" unique_id=1971072988]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -53,20 +52,19 @@ grow_vertical = 2
 texture = ExtResource("2_lkkpu")
 expand_mode = 2
 
-[node name="Background" type="MeshInstance3D" parent="Head/Camera3D"]
+[node name="Background" type="MeshInstance3D" parent="Head/Camera3D" unique_id=1123675346]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 mesh = SubResource("QuadMesh_5k5g7")
 surface_material_override/0 = SubResource("StandardMaterial3D_tnebq")
 
-[node name="RayCast3D" type="RayCast3D" parent="Head"]
+[node name="RayCast3D" type="RayCast3D" parent="Head" unique_id=416820497]
 target_position = Vector3(0, 0, -1)
 collide_with_areas = true
 
-[node name="ExternalScreen" parent="." instance=ExtResource("4_33yo6")]
+[node name="ExternalScreen" parent="." unique_id=1754482205 instance=ExtResource("4_33yo6")]
 visible = false
-script = ExtResource("5_a2fv7")
 
-[node name="LookLabel" type="Label" parent="."]
+[node name="LookLabel" type="Label" parent="." unique_id=627635724]
 visible = false
 anchors_preset = -1
 anchor_left = 0.5
@@ -79,13 +77,13 @@ theme_override_fonts/font = ExtResource("6_575uu")
 theme_override_font_sizes/font_size = 32
 text = "🄵 Interact"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=567548447]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.494880308221372, 0)
 shape = SubResource("CapsuleShape3D_5k5g7")
 disabled = true
 debug_fill = false
 
-[node name="PauseMenu" parent="." instance=ExtResource("3_bj60k")]
+[node name="PauseMenu" parent="." unique_id=1472600673 instance=ExtResource("3_bj60k")]
 visible = false
 anchor_top = 0.39
 anchor_bottom = 0.61

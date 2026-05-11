@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cc283l37nveuy" path="res://ships/player_ship.gd" id="1_banjw"]
 [ext_resource type="PackedScene" uid="uid://c1kt0t2q5pxyw" path="res://ships/juniper/proxy/player_ship_proxy.tscn" id="2_b6qk2"]
 [ext_resource type="Script" uid="uid://8foh3a4rsbjc" path="res://ships/modules/attitude_module.gd" id="2_stb5n"]
+[ext_resource type="Resource" uid="uid://bewluocw7pdy0" path="res://ships/juniper/juniper_cameras.tres" id="3_gecb8"]
 [ext_resource type="Script" uid="uid://dm88ls8pwtpcc" path="res://ships/modules/PropagateModule.cs" id="3_whyg7"]
 [ext_resource type="Script" uid="uid://cg2yyvdpwvc0u" path="res://ships/modules/propulsion_module.gd" id="4_emkjj"]
 [ext_resource type="Script" uid="uid://55lrhua7ji4r" path="res://ships/modules/navigation_module.gd" id="5_4mkdq"]
@@ -100,6 +101,7 @@ contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_banjw")
 orbit_proxy_scene = ExtResource("2_b6qk2")
+camera_views = ExtResource("3_gecb8")
 
 [node name="AttitudeModule" type="Node3D" parent="." unique_id=1745240300]
 transform = Transform3D(-1, 1.22465e-16, 0, -7.4988e-33, -6.12323e-17, 1, 1.22465e-16, 1, 6.12323e-17, 0, 0, 0)
@@ -116,6 +118,7 @@ script = ExtResource("4_emkjj")
 script = ExtResource("5_4mkdq")
 
 [node name="DefenseModule" type="Node3D" parent="." unique_id=1449671001]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02356072876974034, 0, 0)
 script = ExtResource("6_4naxx")
 
 [node name="Plotter" type="Node3D" parent="." unique_id=1222984937]

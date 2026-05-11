@@ -28,13 +28,6 @@ var r := false # whether to allow rotation
 var pitch := 0.0 # start pitch
 var yaw := 0.0 # start yaw
 
-var viewer : Control
-
-func _ready() -> void:
-	# Get the parent of the viewport, so you can see if the viewport is even visible
-	# If it's not, don't bother moving the camera
-	viewer = get_viewport().get_parent()
-
 func _process(_delta: float) -> void:
 	# Smoothly move to new position
 	var old_zoom: float = camera.position.z
@@ -75,27 +68,25 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("view"):
 			camera_mode = "Global"
 	
-	# Set zoom from inputs
-	if viewer.is_visible_in_tree():
-		if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
-			zoom_distance = zoom_speed*zoom_distance
-		if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):
-			zoom_distance = zoom_distance/zoom_speed
-		zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
-		
-		# Handle arrow keys rotation	
-		if Input.is_action_pressed("mod_up"):
-			pitch = pitch - key_rotation_speed
-			set_orientation()
-		if Input.is_action_pressed("mod_down"):
-			pitch = pitch + key_rotation_speed
-			set_orientation()
-		if Input.is_action_pressed("mod_left"):
-			yaw = yaw - key_rotation_speed
-			set_orientation()
-		if Input.is_action_pressed("mod_right"):
-			yaw = yaw + key_rotation_speed
-			set_orientation()
+	if Input.is_action_pressed("zoom_out") or Input.is_action_just_released("zoom_out"):
+		zoom_distance = zoom_speed*zoom_distance
+	if Input.is_action_pressed("zoom_in") or Input.is_action_just_released("zoom_in"):
+		zoom_distance = zoom_distance/zoom_speed
+	zoom_distance = clamp(zoom_distance, zoom_min, zoom_max)
+	
+	# Handle arrow keys rotation	
+	if Input.is_action_pressed("mod_up"):
+		pitch = pitch - key_rotation_speed
+		set_orientation()
+	if Input.is_action_pressed("mod_down"):
+		pitch = pitch + key_rotation_speed
+		set_orientation()
+	if Input.is_action_pressed("mod_left"):
+		yaw = yaw - key_rotation_speed
+		set_orientation()
+	if Input.is_action_pressed("mod_right"):
+		yaw = yaw + key_rotation_speed
+		set_orientation()
 
 	# Right-click rotate
 	if move_always or Input.is_action_pressed("right_click"):

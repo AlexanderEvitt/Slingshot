@@ -1,10 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6ewf1e7q725g"]
+[gd_scene format=3 uid="uid://c6ewf1e7q725g"]
 
-[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/simulation/external_world.tres" id="2_iesil"]
-[ext_resource type="PackedScene" uid="uid://dwmguh47arrut" path="res://ships/ghost_ship/ghost_entity.tscn" id="3_pck3v"]
 [ext_resource type="PackedScene" uid="uid://ni46dqimptdj" path="res://ui/screens/hud/hud.tscn" id="3_tbpw1"]
 
-[node name="FlightScreen" type="Control"]
+[node name="FlightScreen" type="Control" unique_id=365355593]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="FlightCameraViewer" type="TextureRect" parent="." unique_id=2077270522]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,15 +18,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-world_3d = ExtResource("2_iesil")
-handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
-
-[node name="PlayerShip" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_pck3v")]
-
-[node name="HUD" parent="." instance=ExtResource("3_tbpw1")]
+[node name="HUD" parent="." unique_id=934009995 instance=ExtResource("3_tbpw1")]
 layout_mode = 1

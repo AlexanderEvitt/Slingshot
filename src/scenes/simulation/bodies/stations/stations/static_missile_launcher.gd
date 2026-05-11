@@ -1,4 +1,4 @@
-class_name MissileLauncher
+class_name StaticMissileLauncher
 extends Node3D
 
 @export var missile_scene: PackedScene
@@ -53,5 +53,5 @@ func _random_lateral_bias() -> Vector3:
 func _launch(launch_vel: Vector3, bias: Vector3) -> void:
 	var spawn_pos: Vector3 = station.fetch(SimTime.t) + global_transform.basis * position
 	var missile: Missile = missile_scene.instantiate()
-	add_child(missile)
+	ShipData.sim_root.get_node("Dynamic").add_child(missile)
 	missile.initialize(spawn_pos, launch_vel, global_transform.basis, bias)

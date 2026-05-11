@@ -1,16 +1,7 @@
 [gd_scene format=3 uid="uid://b07e4fcvvtdqq"]
 
-[ext_resource type="World3D" uid="uid://3h48h7cr7qiy" path="res://scenes/simulation/external_world.tres" id="1_xv6sl"]
-[ext_resource type="Script" uid="uid://coauq357djn0x" path="res://ships/spacecraft_proxy.gd" id="2_bu3jf"]
-[ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="3_mq6p4"]
-[ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/simulation/lens_flare/lens_flare.tres" id="4_w87ht"]
-[ext_resource type="Script" uid="uid://dqq4m1h7sew1g" path="res://scenes/simulation/lens_flare/lens_flare.gd" id="5_cwlo4"]
+[ext_resource type="Script" uid="uid://dtv6rb2e1dmop" path="res://ui/screens/external_viewport.gd" id="1_7m6x4"]
 [ext_resource type="PackedScene" uid="uid://ni46dqimptdj" path="res://ui/screens/hud/hud.tscn" id="6_cwlo4"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_4e2yt"]
-material = ExtResource("4_w87ht")
-flip_faces = true
-size = Vector2(2, 2)
 
 [node name="ExternalScreen" type="Control" unique_id=889517206]
 layout_mode = 3
@@ -20,45 +11,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ExternalUI" type="SubViewportContainer" parent="." unique_id=850118676]
-layout_mode = 0
-offset_right = 1916.0
-offset_bottom = 1080.0
+[node name="ExternalViewport" type="TextureRect" parent="." unique_id=1593657779]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="ExternalUI" unique_id=538843757]
-world_3d = ExtResource("1_xv6sl")
-handle_input_locally = false
-size = Vector2i(1916, 1080)
-render_target_update_mode = 4
-
-[node name="PlayerShip" type="Node3D" parent="ExternalUI/SubViewport" unique_id=1921863762]
-script = ExtResource("2_bu3jf")
-body_path = "Ships/PlayerShip"
-
-[node name="Pointer" type="Node3D" parent="ExternalUI/SubViewport/PlayerShip" unique_id=1251162940]
-
-[node name="CameraRig" type="Node3D" parent="ExternalUI/SubViewport/PlayerShip" unique_id=1941941918]
-transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
-script = ExtResource("3_mq6p4")
-zoom_distance = 0.0999999999999997
-
-[node name="CameraRotator" type="Node3D" parent="ExternalUI/SubViewport/PlayerShip/CameraRig" unique_id=1445063629]
-
-[node name="Camera3D" type="Camera3D" parent="ExternalUI/SubViewport/PlayerShip/CameraRig/CameraRotator" unique_id=444674191]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.276423536147513e-50, 0, 0.1)
-cull_mask = 524287
-current = true
-fov = 45.0
-near = 0.001
-far = 10000000.0
-
-[node name="ShaderQuad" type="MeshInstance3D" parent="ExternalUI/SubViewport/PlayerShip/CameraRig/CameraRotator/Camera3D" unique_id=14577558]
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_4e2yt")
-skeleton = NodePath("../../../../../..")
-script = ExtResource("5_cwlo4")
+script = ExtResource("1_7m6x4")
 
 [node name="HUD" parent="." unique_id=1466176810 instance=ExtResource("6_cwlo4")]
 layout_mode = 1

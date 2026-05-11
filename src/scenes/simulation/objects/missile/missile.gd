@@ -15,11 +15,19 @@ var bias_acceleration := Vector3.ZERO  # constant lateral bias set at launch
 var sim_lifetime: float = 0.0
 var coast_elapsed: float = 0.0
 
+# The node this missile is homing on. Defaults to the player ship for enemy missiles;
+# set to a Missile for interceptors. Must expose system_position and system_velocity.
+var target: Node3D = null
+
+# false = enemy missile (counted as a threat by DefenseModule)
+# true  = player-fired interceptor (ignored by DefenseModule threat scan)
+var friendly: bool = false
+
 var state: State = State.INERT
 var armed: bool = false  # true once target first starts closing
 
 signal detonated  # emitted the moment detonation begins; proxies listen to trigger their own effects
-var detonation_distance := Vector3.ZERO  # detonation position relative to player
+var _detonation_offset := Vector3.ZERO  # scene-space offset from player ship at moment of detonation
 @onready var explosion: Explosion = $Explosion
 
 const ORBIT_PROXY: PackedScene = preload("res://scenes/simulation/objects/missile/missile_proxy.tscn")
@@ -27,16 +35,18 @@ const ORBIT_PROXY: PackedScene = preload("res://scenes/simulation/objects/missil
 
 func _ready() -> void:
 	add_to_group("Dynamic")
+	add_to_group("missiles")  # all missiles; DefenseModule filters by friendly flag
 
 
 func get_orbit_rep() -> PackedScene:
 	return ORBIT_PROXY
 
 
-func initialize(spawn_pos: Vector3, spawn_vel: Vector3, _initial_attitude: Basis, bias: Vector3 = Vector3.ZERO) -> void:
+func initialize(spawn_pos: Vector3, spawn_vel: Vector3, _initial_attitude: Basis, bias: Vector3 = Vector3.ZERO, p_target: Node3D = null) -> void:
 	system_position = spawn_pos
 	system_velocity = spawn_vel
 	bias_acceleration = bias
+	target = p_target if p_target != null else ShipData.player_ship
 	_sync_scene_transform()
 
 
@@ -55,14 +65,18 @@ func _physics_process(delta: float) -> void:
 			_integrate(Vector3.ZERO, delta)  # coast on initial velocity
 
 		State.GUIDING:
-			var target: PlayerShip = ShipData.player_ship
-			var r: Vector3 = target.system_position - system_position
+			# If the target was destroyed before we reached it, detonate in place.
+			if not is_instance_valid(target):
+				_detonate()
+				return
+
+			var r: Vector3 = _target_position() - system_position
 			var range_km: float = r.length()
 			var r_hat: Vector3 = r / maxf(range_km, 0.001)
-			var v_rel: Vector3 = target.system_velocity - system_velocity
+			var v_rel: Vector3 = _target_velocity() - system_velocity
 			var v_closing: float = -v_rel.dot(r_hat)  # positive = closing, negative = opening
 
-			# Arm once the missile first starts closing on the target
+			# Arm once the missile first starts closing on the target.
 			if not armed and v_closing > 0.0:
 				armed = true
 
@@ -73,14 +87,14 @@ func _physics_process(delta: float) -> void:
 			_integrate(_compute_thrust_vector(), delta)
 
 		State.DETONATING:
-			# Fix position in the frame affixed to the player ship
-			global_position = detonation_distance + ShipData.player_ship.global_position
-			system_position = ShipData.player_ship.system_position + detonation_distance
+			# Hold position in the frame of the player ship so the explosion
+			# stays visually anchored regardless of the ship's inertial velocity.
+			global_position = ShipData.player_ship.global_position + _detonation_offset
+			system_position = ShipData.player_ship.system_position + _detonation_offset
 
 
 func _compute_thrust_vector() -> Vector3:
-	var target: PlayerShip = ShipData.player_ship
-	var r: Vector3 = target.system_position - system_position
+	var r: Vector3 = _target_position() - system_position
 	var range_km: float = r.length()
 
 	if range_km < 0.001:
@@ -91,7 +105,7 @@ func _compute_thrust_vector() -> Vector3:
 	if system_velocity.length() < 0.001:
 		return r_hat * total_thrust
 
-	var v_rel: Vector3 = target.system_velocity - system_velocity
+	var v_rel: Vector3 = _target_velocity() - system_velocity
 	var v_closing: float = maxf(-v_rel.dot(r_hat), 1.0)  # clamped to avoid PN singularity at rest
 	var omega: Vector3 = r.cross(v_rel) / (range_km * range_km)
 	var a_pn: Vector3 = navigation_constant * v_closing * omega.cross(r_hat)
@@ -101,7 +115,7 @@ func _compute_thrust_vector() -> Vector3:
 	if cmd_mag >= total_thrust:
 		return a_cmd / cmd_mag * total_thrust
 
-	# Use remaining thrust budget to accelerate along the LOS toward the target
+	# Use remaining thrust budget to accelerate along the LOS toward the target.
 	return a_cmd + r_hat * sqrt(total_thrust * total_thrust - cmd_mag * cmd_mag)
 
 
@@ -126,7 +140,7 @@ func _sync_scene_transform() -> void:
 
 func _detonate() -> void:
 	state = State.DETONATING
-	detonation_distance = global_position - ShipData.player_ship.global_position
+	_detonation_offset = global_position - ShipData.player_ship.global_position
 	explosion.trigger()
 	detonated.emit()
 	await get_tree().create_timer(1.0).timeout
@@ -135,3 +149,15 @@ func _detonate() -> void:
 
 func fetch(_time: float) -> Vector3:
 	return system_position
+
+
+# Read system_position/system_velocity off any Node3D that exposes them.
+# Both PlayerShip and Missile do; warning suppression is intentional duck-typing.
+func _target_position() -> Vector3:
+	@warning_ignore("unsafe_property_access")
+	return target.system_position
+
+
+func _target_velocity() -> Vector3:
+	@warning_ignore("unsafe_property_access")
+	return target.system_velocity

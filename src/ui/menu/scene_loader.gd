@@ -1,7 +1,7 @@
 extends Node
 
 const INTERIOR_SCENE_PATH : String = "res://scenes/interior/interior_scene.tscn"
-const PHYSICS_SCENE_PATH : String = "res://scenes/simulation/simulation_scene.tscn"
+const SIMULATION_SCENE_PATH : String = "res://scenes/simulation/simulation_scene.tscn"
 const MENU_SCENE_PATH : String = "res://ui/menu/menu_scene.tscn"
 
 @onready var menu: Menu = $MenuUI
@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 		var a := []
 		var b := []
 		ResourceLoader.load_threaded_get_status(INTERIOR_SCENE_PATH,a)
-		ResourceLoader.load_threaded_get_status(PHYSICS_SCENE_PATH,b)
+		ResourceLoader.load_threaded_get_status(SIMULATION_SCENE_PATH,b)
 		loading_bar.anchor_right = (a[0] + b[0])/2.0 # send to progress bar
 		
 		if (a[0] + b[0])/2.0 == 1.0:
@@ -30,13 +30,13 @@ func _process(_delta: float) -> void:
 func _on_startup() -> void:
 	# Start resource loader for both interior and physics
 	ResourceLoader.load_threaded_request(INTERIOR_SCENE_PATH)
-	ResourceLoader.load_threaded_request(PHYSICS_SCENE_PATH)
+	ResourceLoader.load_threaded_request(SIMULATION_SCENE_PATH)
 	loading = true
 
 func initialize() -> void:
 	# Load scenes, physics scene first (so ship exists before UI calls)
 	# Finish loading physics scene
-	var physics_resource: PackedScene = ResourceLoader.load_threaded_get(PHYSICS_SCENE_PATH)
+	var physics_resource: PackedScene = ResourceLoader.load_threaded_get(SIMULATION_SCENE_PATH)
 	var physics: Node3D = physics_resource.instantiate()
 	$SimulationHolder.add_child(physics)
 	

@@ -154,9 +154,10 @@ mat = get_active_material(0).duplicate()
 set_surface_override_material(0, mat)
 ```
 
-**2. Unique render layers.** Each instance claims one of the two reserved render layers
-(layers 19–20, bits 18–19) and strips the other reserved bits from its camera's cull mask.
-This makes each quad invisible to every camera except its own.
+**2. Unique render layers.** Each instance claims one of the four reserved render layers
+(layers 17–20, bits 16–19) and strips the other reserved bits from its camera's cull mask.
+This makes each quad invisible to every camera except its own. Four slots means up to four
+cameras can share the same World3D and each receive an independent lens flare.
 
 ```gdscript
 layers = 1 << my_bit           # quad visible on this layer only
@@ -164,7 +165,7 @@ cam.cull_mask &= ~all_lf_bits  # camera ignores all lens-flare layers…
 cam.cull_mask |= 1 << my_bit   # …except its own
 ```
 
-Layers 19–20 were chosen because they are the highest available render layers in Godot 4
+Layers 17–20 were chosen because they are the highest available render layers in Godot 4
 (render layers are capped at 20) and are unlikely to be used by anything else in the scene.
 
 ---

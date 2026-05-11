@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ShipCameras" format=3 uid="uid://bewluocw7pdy0"]
+
+[ext_resource type="Script" uid="uid://bqrpew7wxkip8" path="res://ships/ship_cameras.gd" id="1_wu47f"]
+[ext_resource type="PackedScene" uid="uid://dwmguh47arrut" path="res://ships/ghost_ship/ghost_entity.tscn" id="2_pa0rt"]
+
+[resource]
+script = ExtResource("1_wu47f")
+third_person = ExtResource("2_pa0rt")

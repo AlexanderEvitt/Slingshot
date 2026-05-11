@@ -54,5 +54,4 @@ brightness = 0.1
 color = Color(0.8, 0.6392157, 1, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=874991239]
-visible = false
 mesh = SubResource("CylinderMesh_7io0x")

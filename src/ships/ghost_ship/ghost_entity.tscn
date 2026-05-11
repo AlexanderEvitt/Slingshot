@@ -1,12 +1,20 @@
 [gd_scene format=3 uid="uid://dwmguh47arrut"]
 
 [ext_resource type="Script" uid="uid://bs8erl8nle1lb" path="res://ships/ghost_ship/ghost_entity.gd" id="1_xdcq6"]
+[ext_resource type="Script" uid="uid://hyjtt6b8xys" path="res://visuals/camera_controller.gd" id="6_8n57l"]
+[ext_resource type="Material" uid="uid://bmrjquiaa82av" path="res://scenes/simulation/lens_flare/lens_flare.tres" id="7_ks4h4"]
+[ext_resource type="Script" uid="uid://dqq4m1h7sew1g" path="res://scenes/simulation/lens_flare/lens_flare.gd" id="8_p8vos"]
 [ext_resource type="Texture2D" uid="uid://m2ovd8u8s7kd" path="res://scenes/attitude/center.png" id="13_uyc1d"]
 [ext_resource type="Texture2D" uid="uid://djyppx76cf4t5" path="res://scenes/attitude/prograde.png" id="16_pxptb"]
 [ext_resource type="Script" uid="uid://bpytqforn4lvc" path="res://scenes/attitude/prograde_marker.gd" id="17_h17dd"]
 [ext_resource type="Texture2D" uid="uid://d28isjwqdor3u" path="res://scenes/attitude/retrograde.png" id="18_vynvg"]
 
-[node name="PlayerShip" type="Node3D" unique_id=1598605476]
+[sub_resource type="QuadMesh" id="QuadMesh_kcpxe"]
+material = ExtResource("7_ks4h4")
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="GhostShip" type="Node3D" unique_id=1598605476]
 editor_description = "FV JUNIPER is a Hedge-class frigate in the Federal Navy. Although usually relegated to patrol or transport duties, its rack of missile tubes and advanced sensor suite make it a formidable adversary."
 script = ExtResource("1_xdcq6")
 
@@ -27,6 +35,12 @@ axis = 0
 no_depth_test = true
 fixed_size = true
 texture = ExtResource("13_uyc1d")
+
+[node name="ShaderQuad" type="MeshInstance3D" parent="Pointer/FirstCam" unique_id=111617407]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_kcpxe")
+skeleton = NodePath("../../../../../..")
+script = ExtResource("8_p8vos")
 
 [node name="HUD" type="Node3D" parent="." unique_id=1297875029]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00408274, 0.00811089, 0)
@@ -54,3 +68,25 @@ texture = ExtResource("18_vynvg")
 script = ExtResource("17_h17dd")
 retro = -1
 side_check = false
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=1453822415]
+transform = Transform3D(3.7494e-33, 6.12323e-17, -1, -1, 6.12323e-17, 0, 6.12323e-17, 1, 6.12323e-17, 0, 0, 0)
+script = ExtResource("6_8n57l")
+zoom_distance = 0.0999999999999997
+move_always = true
+
+[node name="CameraRotator" type="Node3D" parent="CameraRig" unique_id=1628330685]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/CameraRotator" unique_id=48780378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.276423536147513e-50, 0, 0.1)
+cull_mask = 524287
+current = true
+fov = 45.0
+near = 0.001
+far = 10000000.0
+
+[node name="ShaderQuad" type="MeshInstance3D" parent="CameraRig/CameraRotator/Camera3D" unique_id=1636830529]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_kcpxe")
+skeleton = NodePath("../../../../../..")
+script = ExtResource("8_p8vos")
