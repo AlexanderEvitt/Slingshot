@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cronsq6nxwuik" path="res://scenes/simulation/objects/missile/missile.gd" id="1_7kbnm"]
 [ext_resource type="Script" uid="uid://8tgf0sb5qi7g" path="res://scenes/simulation/objects/detonation.gd" id="2_08n1d"]
+[ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="4_cpr1f"]
 [ext_resource type="PackedScene" uid="uid://d2sfqmmvaier7" path="res://scenes/simulation/lens_flare/pinprick.tscn" id="4_whmsv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08n1d"]
@@ -20,10 +21,15 @@ shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(199167330000, 199167330000, 199167330000, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_687rq"]
+depth_draw_mode = 2
+albedo_color = Color(0.3665946, 0.3665946, 0.36659458, 1)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_7io0x"]
-top_radius = 0.001
-bottom_radius = 0.001
-height = 0.003
+material = SubResource("StandardMaterial3D_687rq")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 3.0
 radial_segments = 12
 rings = 2
 
@@ -53,5 +59,14 @@ omni_range = 0.3
 brightness = 0.1
 color = Color(0.8, 0.6392157, 1, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=874991239]
+[node name="Mesh" type="Node3D" parent="." unique_id=1094011179]
+
+[node name="Mesh" type="MeshInstance3D" parent="Mesh" unique_id=874991239]
+transform = Transform3D(0.0009999999999999998, 0, 0, 0, 6.123233995736765e-20, 0.0009999999999999998, 0, -0.0009999999999999998, 6.123233995736765e-20, 0, 0, 0)
+visibility_range_end = 1.0
 mesh = SubResource("CylinderMesh_7io0x")
+skeleton = NodePath("../..")
+
+[node name="Thruster1" parent="Mesh/Mesh" unique_id=95754837 instance=ExtResource("4_cpr1f")]
+transform = Transform3D(-0.9999999999999994, -1.2246467991473525e-16, 0, 1.2246467991473525e-16, -0.9999999999999994, 0, 0, 0, 0.9999999999999994, 0, -1.1317724075600624, 0)
+script = null

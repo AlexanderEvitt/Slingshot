@@ -8,7 +8,7 @@ extends VBoxContainer
 
 func _process(_delta: float) -> void:
 	# Set the top two circle gauges based on the acceleration and reactor power
-	var acceleration := ShipData.player_ship.acceleration.length()
+	var acceleration := ShipData.player_ship.thrust_acceleration.length()
 	accel_gauge.set_fill(acceleration/0.05,String.num(acceleration/0.00981,1) + "G")
 	var power := 150*acceleration/0.05
 	power_gauge.set_fill(power/150,String.num(power,0) + "GW")

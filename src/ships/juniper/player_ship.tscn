@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bu2j4yalwn3ks" path="res://visuals/PlasmaPlume.tscn" id="6_l24nu"]
 [ext_resource type="PackedScene" uid="uid://drs7rf6n0y5ok" path="res://visuals/Thruster.tscn" id="7_u2ume"]
 [ext_resource type="Script" uid="uid://bjogjpegblg60" path="res://visuals/blinking_light.gd" id="8_kphao"]
+[ext_resource type="PackedScene" uid="uid://c8bhsltix8jmk" path="res://scenes/simulation/objects/missile/missile.tscn" id="9_pw42m"]
 [ext_resource type="Material" uid="uid://d3306785am850" path="res://ships/juniper/real/BasePaint.tres" id="9_x0ifl"]
 [ext_resource type="PackedScene" uid="uid://bfwsgcbvelo0t" path="res://ships/juniper/real/juniper_model.tscn" id="10_3ank2"]
 [ext_resource type="Script" uid="uid://xet38inpduig" path="res://scenes/simulation/bodies/draw_spacecraft_orbit.gd" id="11_afq5u"]
@@ -120,6 +121,7 @@ script = ExtResource("5_4mkdq")
 [node name="DefenseModule" type="Node3D" parent="." unique_id=1449671001]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02356072876974034, 0, 0)
 script = ExtResource("6_4naxx")
+missile_scene = ExtResource("9_pw42m")
 
 [node name="Plotter" type="Node3D" parent="." unique_id=1222984937]
 visible = false
@@ -261,7 +263,7 @@ roll_right = true
 transform = Transform3D(2.4740787059121225e-16, 0.999999999999997, 8.659560562354906e-17, 0.7071067811865454, -1.137114430566025e-16, -0.7071067811865455, -0.7071067811865455, 2.361761229713375e-16, -0.7071067811865454, -14.9866, -6.40007, 6.40007)
 
 [node name="Thruster8" parent="Thrusters/Pod2NR" unique_id=1763410174 instance=ExtResource("7_u2ume")]
-transform = Transform3D(-3.6987255050594725e-16, -0.999999999999997, 8.659560562354906e-17, -0.7071067811865454, 2.0030704868015158e-16, -0.7071067811865455, 0.7071067811865455, -3.2277172859488653e-16, -0.7071067811865454, -20.9412, -6.40007, 6.40007)
+transform = Transform3D(-3.6987255050594725e-16, -0.999999999999997, 8.659560562354906e-17, -0.7071067811865454, 2.0030704868015158e-16, -0.7071067811865455, 0.7071067811865455, -3.227717285948865e-16, -0.7071067811865454, -20.9412, -6.40007, 6.40007)
 
 [node name="Pod3NR" type="Node3D" parent="Thrusters" unique_id=1769535924]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57991, 0, 0)

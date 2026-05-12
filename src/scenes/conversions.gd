@@ -1,7 +1,12 @@
 extends Node
 
+signal frame_changed  # emitted whenever frame_name is reassigned
+
 # Path to the body that the frame is defined by
-var frame_name: String = "SolarSystem/Earth"
+var frame_name: String = "SolarSystem/Earth":
+	set(v):
+		frame_name = v
+		frame_changed.emit()
 
 
 # ------------------------------------------------------------

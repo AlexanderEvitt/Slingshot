@@ -5,7 +5,7 @@ var cam: Camera3D
 var mat: ShaderMaterial
 
 const SUN_BRIGHTNESS := 0.7
-const MAX_SOURCES := 8  # Must match MAX_SOURCES in lens_flare.gdshader
+const MAX_SOURCES := 16  # Must match MAX_SOURCES in lens_flare.gdshader
 
 # Reserve the top 4 render layers (bits 16-19 = layers 17-20) for lens flare quads.
 # Each instance claims one so it is invisible to every other camera sharing this world.

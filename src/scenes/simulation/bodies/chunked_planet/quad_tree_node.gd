@@ -11,7 +11,7 @@ const RESOLUTION := 16
 # Each level doubles the mesh resolution of the planet surface.
 # At depth N, a chunk covers (radius * 2) / 2^N units of arc.
 # With radius=1737.4 and MAX_DEPTH=12, the smallest chunk is ~0.85 km wide.
-const MAX_DEPTH := 8
+const MAX_DEPTH := 1
 
 # How aggressively to split. A node splits when:
 #   (chunk_world_size / camera_distance) > SPLIT_THRESHOLD

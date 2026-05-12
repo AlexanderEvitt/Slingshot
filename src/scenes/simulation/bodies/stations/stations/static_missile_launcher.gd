@@ -2,7 +2,7 @@ class_name StaticMissileLauncher
 extends Node3D
 
 @export var missile_scene: PackedScene
-@export var batch_size: int = 36
+@export var batch_size: int = 20
 @export var kickoff_velocity: float = 0.1  # km/s along launcher up axis
 @export var fire_interval: float = 60.0
 @export var stagger_time: float = 0.2      # seconds between each missile in a batch

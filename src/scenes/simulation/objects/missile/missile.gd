@@ -29,6 +29,7 @@ var armed: bool = false  # true once target first starts closing
 signal detonated  # emitted the moment detonation begins; proxies listen to trigger their own effects
 var _detonation_offset := Vector3.ZERO  # scene-space offset from player ship at moment of detonation
 @onready var explosion: Explosion = $Explosion
+@onready var _mesh: Node3D = $Mesh
 
 const ORBIT_PROXY: PackedScene = preload("res://scenes/simulation/objects/missile/missile_proxy.tscn")
 
@@ -63,6 +64,7 @@ func _physics_process(delta: float) -> void:
 			if coast_elapsed >= coast_time:
 				state = State.GUIDING
 			_integrate(Vector3.ZERO, delta)  # coast on initial velocity
+			_orient_mesh(system_velocity)    # point along travel direction while coasting
 
 		State.GUIDING:
 			# If the target was destroyed before we reached it, detonate in place.
@@ -84,7 +86,9 @@ func _physics_process(delta: float) -> void:
 				_detonate()
 				return
 
-			_integrate(_compute_thrust_vector(), delta)
+			var thrust: Vector3 = _compute_thrust_vector()
+			_integrate(thrust, delta)
+			_orient_mesh(thrust)  # point -Z along thrust vector
 
 		State.DETONATING:
 			# Hold position in the frame of the player ship so the explosion
@@ -138,9 +142,23 @@ func _sync_scene_transform() -> void:
 	global_transform.origin = system_position - ShipData.get_floating_frame_origin()
 
 
+func _orient_mesh(direction: Vector3) -> void:
+	if _mesh == null or direction.length_squared() < 0.000001:
+		return
+	var dir: Vector3 = direction.normalized()
+	var up: Vector3 = Vector3.UP if abs(dir.dot(Vector3.UP)) < 0.99 else Vector3.RIGHT
+	_mesh.look_at(_mesh.global_position + dir, up)
+
+
 func _detonate() -> void:
 	state = State.DETONATING
 	_detonation_offset = global_position - ShipData.player_ship.global_position
+	# Interceptors: if the target missile is within kill radius, detonate it too.
+	if friendly and is_instance_valid(target):
+		var target_missile := target as Missile
+		if target_missile != null and target_missile.state != State.DETONATING:
+			if (target_missile.system_position - system_position).length() <= detonation_radius:
+				target_missile._detonate()
 	explosion.trigger()
 	detonated.emit()
 	await get_tree().create_timer(1.0).timeout

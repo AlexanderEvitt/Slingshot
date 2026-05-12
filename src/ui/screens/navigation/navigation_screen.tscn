@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d06hakxi1tnc8"]
+[gd_scene format=3 uid="uid://d06hakxi1tnc8"]
 
 [ext_resource type="Theme" uid="uid://bq6q5uvxtm357" path="res://ui/themes/middle_background.tres" id="1_oebc5"]
 [ext_resource type="Theme" uid="uid://y6tdkpsu24sm" path="res://ui/themes/dark_panel.tres" id="2_e80r5"]
@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://jpb6h7avv8co" path="res://ui/screens/navigation/waypoints/waypoints.tscn" id="17_gsl3v"]
 [ext_resource type="Script" uid="uid://5jmytanbolh" path="res://ui/screens/navigation/selection_panel.gd" id="19_b130n"]
 
-[node name="NavigationScreen" type="Panel"]
+[node name="NavigationScreen" type="Panel" unique_id=1944017226]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_oebc5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1182341483]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,12 +34,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="Panel" parent="VBoxContainer"]
+[node name="TopBar" type="Panel" parent="VBoxContainer" unique_id=1723247133]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar" unique_id=2132228397]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,29 +47,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="CenterContainer" parent="VBoxContainer/TopBar/HBoxContainer"]
+[node name="MarginContainer" type="CenterContainer" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=2082732044]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
 
-[node name="Label" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer" unique_id=460853288]
 layout_mode = 2
 theme = ExtResource("2_e80r5")
 text = "T+00d00h00m00s"
 script = ExtResource("3_5ygb3")
 
-[node name="MarginContainer2" type="CenterContainer" parent="VBoxContainer/TopBar/HBoxContainer"]
+[node name="MarginContainer2" type="CenterContainer" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1111186177]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="Label" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer2" unique_id=1938958157]
 layout_mode = 2
 theme = ExtResource("2_e80r5")
 text = "×1k"
 script = ExtResource("4_s71s8")
 
-[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/TopBar/HBoxContainer"]
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1795058256]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
@@ -77,12 +77,12 @@ theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ButtonPanel" type="Panel" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer5"]
+[node name="ButtonPanel" type="Panel" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer5" unique_id=577326060]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_e80r5")
 
-[node name="Button" type="Button" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer5/ButtonPanel"]
+[node name="Button" type="Button" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer5/ButtonPanel" unique_id=1297368875]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -97,7 +97,7 @@ theme_override_font_sizes/font_size = 16
 action_mode = 0
 text = "RESET"
 
-[node name="FrameLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer"]
+[node name="FrameLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1697050933]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
@@ -106,12 +106,12 @@ text = "EARTH_CENTER_INERTIAL"
 horizontal_alignment = 2
 script = ExtResource("5_6nun4")
 
-[node name="Control" type="Control" parent="VBoxContainer/TopBar/HBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1610896713]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
 
-[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/TopBar/HBoxContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1253209872]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
@@ -120,12 +120,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ButtonPanel" type="Panel" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer4"]
+[node name="ButtonPanel" type="Panel" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer4" unique_id=1100411276]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_e80r5")
 
-[node name="Button" type="Button" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer4/ButtonPanel"]
+[node name="Button" type="Button" parent="VBoxContainer/TopBar/HBoxContainer/MarginContainer4/ButtonPanel" unique_id=1927678552]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -141,83 +141,83 @@ toggle_mode = true
 action_mode = 0
 text = "MENU"
 
-[node name="MainSection" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MainSection" type="HBoxContainer" parent="VBoxContainer" unique_id=7368618]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Instruments" type="VBoxContainer" parent="VBoxContainer/MainSection"]
+[node name="Instruments" type="VBoxContainer" parent="VBoxContainer/MainSection" unique_id=405969040]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
 script = ExtResource("6_4ln7h")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments" unique_id=1475908329]
 layout_mode = 2
 theme_override_constants/margin_top = 20
 
-[node name="Gauge1" parent="VBoxContainer/MainSection/Instruments/MarginContainer" instance=ExtResource("4_3ikq8")]
+[node name="Gauge1" parent="VBoxContainer/MainSection/Instruments/MarginContainer" unique_id=1178402014 instance=ExtResource("4_3ikq8")]
 layout_mode = 2
 script = ExtResource("5_cykad")
 label_text = "ACC"
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments" unique_id=478938005]
 layout_mode = 2
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Gauge2" parent="VBoxContainer/MainSection/Instruments/MarginContainer2" instance=ExtResource("4_3ikq8")]
+[node name="Gauge2" parent="VBoxContainer/MainSection/Instruments/MarginContainer2" unique_id=1535847622 instance=ExtResource("4_3ikq8")]
 layout_mode = 2
 script = ExtResource("5_cykad")
 label_text = "RP"
 
-[node name="PumpSlider" parent="VBoxContainer/MainSection/Instruments" instance=ExtResource("8_4t4jw")]
+[node name="PumpSlider" parent="VBoxContainer/MainSection/Instruments" unique_id=968330920 instance=ExtResource("8_4t4jw")]
 layout_mode = 2
 top_text = "PUMP SPEEDS"
 bottom_carrot_label_text = "D"
 top_carrot_label_text = "H"
 green_zone_bounds = Vector2(0.2, 0.8)
 
-[node name="TempSlider" parent="VBoxContainer/MainSection/Instruments" instance=ExtResource("8_4t4jw")]
+[node name="TempSlider" parent="VBoxContainer/MainSection/Instruments" unique_id=255695022 instance=ExtResource("8_4t4jw")]
 layout_mode = 2
 top_text = "MAGNET TEMP"
 bottom_carrot_label_text = "D"
 top_carrot_label_text = "H"
 green_zone_bounds = Vector2(0.05, 0.4)
 
-[node name="FuelSlider" parent="VBoxContainer/MainSection/Instruments" instance=ExtResource("8_4t4jw")]
+[node name="FuelSlider" parent="VBoxContainer/MainSection/Instruments" unique_id=542503274 instance=ExtResource("8_4t4jw")]
 layout_mode = 2
 top_text = "FUEL LOAD"
 bottom_carrot_label_text = "D"
 top_carrot_label_text = "H"
 green_zone_bounds = Vector2(0.1, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainSection/Instruments"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainSection/Instruments" unique_id=10849950]
 layout_mode = 2
 theme = ExtResource("2_e80r5")
 
-[node name="Label" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer" unique_id=567081587]
 layout_mode = 2
 size_flags_vertical = 1
 text = "-- ORBIT --"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments/VBoxContainer" unique_id=1546150719]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="DataGrid" type="GridContainer" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer"]
+[node name="DataGrid" type="GridContainer" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer" unique_id=1189979340]
 layout_mode = 2
 columns = 2
 script = ExtResource("10_rnj3v")
 
-[node name="Title2" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid"]
+[node name="Title2" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid" unique_id=330738623]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "ALT"
 label_settings = ExtResource("7_quxj8")
 
-[node name="Data2" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid"]
+[node name="Data2" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid" unique_id=106989593]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1,475"
@@ -225,13 +225,13 @@ label_settings = ExtResource("7_quxj8")
 horizontal_alignment = 2
 clip_text = true
 
-[node name="Title3" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid"]
+[node name="Title3" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid" unique_id=250058759]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "VEL"
 label_settings = ExtResource("7_quxj8")
 
-[node name="Data3" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid"]
+[node name="Data3" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid" unique_id=215432911]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "7.768"
@@ -239,13 +239,13 @@ label_settings = ExtResource("7_quxj8")
 horizontal_alignment = 2
 clip_text = true
 
-[node name="Title4" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid"]
+[node name="Title4" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid" unique_id=73560699]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "ECC"
 label_settings = ExtResource("7_quxj8")
 
-[node name="Data4" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid"]
+[node name="Data4" type="Label" parent="VBoxContainer/MainSection/Instruments/VBoxContainer/MarginContainer/DataGrid" unique_id=1120906758]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0.324"
@@ -253,42 +253,42 @@ label_settings = ExtResource("7_quxj8")
 horizontal_alignment = 2
 clip_text = true
 
-[node name="Navball" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments"]
+[node name="Navball" type="MarginContainer" parent="VBoxContainer/MainSection/Instruments" unique_id=879335552]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.3
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/MainSection/Instruments/Navball"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/MainSection/Instruments/Navball" unique_id=75130481]
 layout_mode = 2
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/MainSection/Instruments/Navball/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/MainSection/Instruments/Navball/SubViewportContainer" unique_id=2141550236]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(200, 200)
 render_target_update_mode = 4
 
-[node name="NavballRoot" parent="VBoxContainer/MainSection/Instruments/Navball/SubViewportContainer/SubViewport" instance=ExtResource("9_5oiv6")]
+[node name="NavballRoot" parent="VBoxContainer/MainSection/Instruments/Navball/SubViewportContainer/SubViewport" unique_id=2124333185 instance=ExtResource("9_5oiv6")]
 
-[node name="Control" type="Control" parent="VBoxContainer/MainSection/Instruments"]
+[node name="Control" type="Control" parent="VBoxContainer/MainSection/Instruments" unique_id=1089373417]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CenterBar" type="VBoxContainer" parent="VBoxContainer/MainSection"]
+[node name="CenterBar" type="VBoxContainer" parent="VBoxContainer/MainSection" unique_id=2058838139]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Map" type="Panel" parent="VBoxContainer/MainSection/CenterBar"]
+[node name="Map" type="Panel" parent="VBoxContainer/MainSection/CenterBar" unique_id=1539137037]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_e80r5")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Map"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Map" unique_id=759148433]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -300,22 +300,20 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/MainSection/CenterBar/Map/MarginContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/MainSection/CenterBar/Map/MarginContainer" unique_id=1649935079]
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/MainSection/CenterBar/Map/MarginContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/MainSection/CenterBar/Map/MarginContainer/SubViewportContainer" unique_id=1143255788]
 own_world_3d = true
 handle_input_locally = false
 physics_object_picking = true
 size = Vector2i(1308, 842)
 render_target_update_mode = 4
 
-[node name="OrbitRoot" parent="VBoxContainer/MainSection/CenterBar/Map/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("10_n4sgr")]
-planet_orbits = true
-zoomable = true
+[node name="OrbitRoot" parent="VBoxContainer/MainSection/CenterBar/Map/MarginContainer/SubViewportContainer/SubViewport" unique_id=809640962 instance=ExtResource("10_n4sgr")]
 
-[node name="Autopilot" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar"]
+[node name="Autopilot" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar" unique_id=863565041]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
@@ -324,72 +322,72 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot" unique_id=476847305]
 layout_mode = 2
 
-[node name="Titles" type="HBoxContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer"]
+[node name="Titles" type="HBoxContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer" unique_id=1146104871]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles" unique_id=2068036280]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 
-[node name="Label" type="Label" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer" unique_id=1501324673]
 layout_mode = 2
 theme = ExtResource("2_e80r5")
 text = "ATTITUDE"
 horizontal_alignment = 1
 
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles"]
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles" unique_id=141339941]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="Label" type="Label" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer3"]
+[node name="Label" type="Label" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer3" unique_id=1841669695]
 layout_mode = 2
 theme = ExtResource("2_e80r5")
 text = "MODS"
 horizontal_alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles" unique_id=2002998290]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="Label" type="Label" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer2" unique_id=1335568995]
 layout_mode = 2
 theme = ExtResource("2_e80r5")
 text = "NAV"
 horizontal_alignment = 1
 
-[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles"]
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles" unique_id=2119245046]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="Label" type="Label" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer4"]
+[node name="Label" type="Label" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer/Titles/MarginContainer4" unique_id=2080903781]
 layout_mode = 2
 theme = ExtResource("2_e80r5")
 text = "AUTOPILOT"
 horizontal_alignment = 1
 
-[node name="ButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer" instance=ExtResource("14_2uuav")]
+[node name="ButtonPanel" parent="VBoxContainer/MainSection/CenterBar/Autopilot/VBoxContainer" unique_id=1855049099 instance=ExtResource("14_2uuav")]
 layout_mode = 2
 
-[node name="RightSidebar" type="VBoxContainer" parent="VBoxContainer/MainSection"]
+[node name="RightSidebar" type="VBoxContainer" parent="VBoxContainer/MainSection" unique_id=1709858792]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
-[node name="Waypoints" parent="VBoxContainer/MainSection/RightSidebar" instance=ExtResource("17_gsl3v")]
+[node name="Waypoints" parent="VBoxContainer/MainSection/RightSidebar" unique_id=2028125665 instance=ExtResource("17_gsl3v")]
 layout_mode = 2
 
-[node name="Alerts" parent="VBoxContainer/MainSection/RightSidebar" instance=ExtResource("16_jw1r5")]
+[node name="Alerts" parent="VBoxContainer/MainSection/RightSidebar" unique_id=1170893944 instance=ExtResource("16_jw1r5")]
 layout_mode = 2
 size_flags_stretch_ratio = 0.3
 
-[node name="Selection" type="MarginContainer" parent="VBoxContainer/MainSection/RightSidebar"]
+[node name="Selection" type="MarginContainer" parent="VBoxContainer/MainSection/RightSidebar" unique_id=322553623]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
@@ -398,16 +396,16 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainSection/RightSidebar/Selection"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainSection/RightSidebar/Selection" unique_id=363747119]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer"]
+[node name="Title" type="Label" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer" unique_id=2122642592]
 layout_mode = 2
 theme = ExtResource("2_e80r5")
 text = "SELECTION"
 horizontal_alignment = 1
 
-[node name="MainPanel" type="Panel" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer" node_paths=PackedStringArray("orbit_scene_root", "about")]
+[node name="MainPanel" type="Panel" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer" unique_id=305896564 node_paths=PackedStringArray("orbit_scene_root", "about")]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_e80r5")
@@ -415,7 +413,7 @@ script = ExtResource("19_b130n")
 orbit_scene_root = NodePath("../../../../CenterBar/Map/MarginContainer/SubViewportContainer/SubViewport/OrbitRoot")
 about = NodePath("ScrollContainer/MarginContainer/VBoxContainer/About")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel" unique_id=293929883]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -425,7 +423,7 @@ grow_vertical = 2
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer" unique_id=1636031682]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -434,12 +432,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer" unique_id=747964379]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="About" type="Label" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="About" type="Label" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer" unique_id=2025844150]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -447,25 +445,25 @@ text = "NULL"
 label_settings = ExtResource("7_quxj8")
 autowrap_mode = 2
 
-[node name="FrameButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="FrameButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1719341396]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 action_mode = 0
 text = "SET FRAME"
 
-[node name="CameraButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="CameraButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer" unique_id=372997523]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 action_mode = 0
 text = "FOCUS VIEW"
 
-[node name="WaypointButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="WaypointButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer" unique_id=640935401]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 action_mode = 0
 text = "ADD WAYPOINT"
 
-[node name="RequestButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="RequestButton" type="Button" parent="VBoxContainer/MainSection/RightSidebar/Selection/VBoxContainer/MainPanel/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1118255407]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 action_mode = 0

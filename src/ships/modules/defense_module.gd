@@ -12,10 +12,11 @@ var turrets: Array[PointDefenseCannon] = []
 @export var fire_rate: float = 3.0               # minimum sim-seconds between launches
 
 @export_group("Interceptor Parameters")
-@export var interceptor_thrust: float = 0.5      # km/s² — needs to catch a fast target
+@export var interceptor_thrust: float = 0.1      # km/s² — needs to catch a fast target
 @export var interceptor_detonation_radius: float = 0.5
-@export var interceptor_coast_time: float = 0.0  # light up immediately
+@export var interceptor_coast_time: float = 0.0  # sim-seconds before motor ignites
 @export var interceptor_lifetime: float = 120.0  # sim-seconds before self-destruct
+@export var interceptor_launch_speed: float = 0.01 # km/s nudge along ship forward at launch
 
 # Tracks which interceptor (value) is assigned to each threat (key).
 # Untyped: typed dict validates freed instances on key iteration and throws.
@@ -76,11 +77,11 @@ func _fire_interceptors(sim_dt: float) -> void:
 	_fire_cooldown = maxf(0.0, _fire_cooldown - sim_dt)
 
 	# Prune entries where the threat or its interceptor is no longer alive.
+	# Check validity before casting — casting a freed object throws unconditionally.
 	var stale: Array = []
 	for threat in _interceptors.keys():
-		@warning_ignore("unsafe_cast")
-		var interceptor: Missile = _interceptors[threat] as Missile
-		if not is_instance_valid(threat) or not is_instance_valid(interceptor):
+		var raw: Variant = _interceptors[threat]
+		if not is_instance_valid(threat) or not is_instance_valid(raw):
 			stale.append(threat)
 	for threat in stale:
 		_interceptors.erase(threat)
@@ -117,13 +118,20 @@ func _launch_interceptor(threat: Missile) -> Missile:
 
 	ShipData.sim_root.get_node("Dynamic").add_child(interceptor)
 
-	# Spawn at the defense module's own system position so the launch point varies
-	# with where the module sits on the ship hull, not always dead-centre.
-	var spawn_pos: Vector3 = global_transform.origin + ShipData.get_floating_frame_origin()
+	# Derive spawn_pos from the ship's current scene-space position rather than
+	# system_position.  system_position is written in _integrate_forces using
+	# get_floating_frame_origin() at that SimTime.t; by the time _physics_process
+	# runs SimTime.t may have advanced, so the round-trip in _sync_scene_transform
+	# (system_pos - get_floating_frame_origin()) would drift by
+	# floating_frame_velocity × ΔSimTime.t — visible at high warp.
+	# Computing from global_position here means both sides of the conversion use
+	# the same floating-frame snapshot and the drift cancels exactly.
+	var spawn_pos: Vector3 = ShipData.player_ship.global_position + ShipData.get_floating_frame_origin()
+	var launch_vel: Vector3 = ShipData.player_ship.system_velocity + (ShipData.player_ship.attitude.x * interceptor_launch_speed)
 	interceptor.initialize(
 		spawn_pos,
-		ShipData.player_ship.system_velocity,
-		global_transform.basis,
+		launch_vel,
+		ShipData.player_ship.attitude,
 		Vector3.ZERO,
 		threat
 	)

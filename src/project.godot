@@ -56,6 +56,10 @@ mouse_cursor/custom_image="res://ui/cursor.png"
 
 project/assembly_name="Slingshot"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/abcmo/Documents/GitHub/Slingshot/test.avi"
+
 [global_group]
 
 missiles=""

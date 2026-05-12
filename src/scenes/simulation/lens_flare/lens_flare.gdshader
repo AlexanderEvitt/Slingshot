@@ -4,7 +4,7 @@
 shader_type spatial;
 render_mode unshaded, fog_disabled, blend_add;
 
-const int MAX_SOURCES = 8;
+const int MAX_SOURCES = 16;
 uniform int source_count = 1;
 uniform vec2 source_screen_uv[MAX_SOURCES];     // screen UV, y=0=top  (PackedVector2Array)
 uniform float source_ndc_depth[MAX_SOURCES];    // reverse-Z depth; 0.0 = skip (PackedFloat32Array)

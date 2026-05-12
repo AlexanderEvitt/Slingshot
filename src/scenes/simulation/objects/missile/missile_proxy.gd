@@ -11,6 +11,7 @@ func set_sim_object(node: Node) -> void:
 	super(node)
 	missile = node as Missile
 	missile.detonated.connect(_on_detonated)
+	sprite.modulate = Color.BLUE if missile.friendly else Color.RED
 
 
 func _on_detonated() -> void:
